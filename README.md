@@ -193,9 +193,8 @@ Labs use free and open-source tools wherever possible; any exception (for exampl
 
 ## The course
 
-Each daily lesson is published on the course blog (link coming with the first public post); every post links to its matching lab directory here.
+Read the daily lessons at https://sandeepbazar.github.io/ai-roadmap-365 — each post explains the concepts behind that day's lab and links back here.
 
 ## License and contributions
 
 © Sandeep Bazar. Lab content is provided for personal learning alongside the course; issues and corrections are welcome via GitHub issues.
-
