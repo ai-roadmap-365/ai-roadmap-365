@@ -48,7 +48,6 @@
   <a href="#released-labs">🧪 Labs</a> ·
   <a href="#getting-started">🚀 Quickstart</a> ·
   <a href="#lab-structure">🔬 Lab anatomy</a> ·
-  <a href="social-media/">📣 The challenge</a> ·
   <a href="#tests-and-validation">✅ Validation</a>
 </p>
 
@@ -75,7 +74,6 @@ systems** — delivered as nine standalone courses that together form one
 | 📖 **Read a lesson** | [sandeepbazar.github.io/ai-roadmap-365](https://sandeepbazar.github.io/ai-roadmap-365/) — the published blog, one page per day |
 | 🧪 **Run a lab** | [`labs/sections/`](labs/sections/) — self-contained, offline, no API keys |
 | 🗺️ **See the plan** | [CURRICULUM.md](CURRICULUM.md) — all 365 days, collapsible |
-| 📣 **Follow along** | [`social-media/`](social-media/) — the daily #365DaysOfAI posts |
 
 **Everything is in this one repository**: the lessons, the labs, the projects,
 the instructor material, the site that renders them, and the validation

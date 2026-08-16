@@ -129,7 +129,12 @@ done
 work="$(mktemp -d)"
 server_pid=""
 cleanup() {
-  if [ -n "${server_pid}" ]; then kill "${server_pid}" >/dev/null 2>&1; fi
+  if [ -n "${server_pid}" ]; then
+    kill "${server_pid}" >/dev/null 2>&1
+    # Reap it quietly: without the wait, bash prints its own "Terminated" line
+    # to stderr after this script has already reported its result.
+    wait "${server_pid}" >/dev/null 2>&1
+  fi
   rm -rf "${work}"
 }
 trap cleanup EXIT
@@ -299,7 +304,8 @@ with Session(engine) as session:
         print("CONSTRAINT enforced=False")
     except IntegrityError as exc:
         session.rollback()
-        print(f"CONSTRAINT enforced=True name={'uq_readings_idempotence' in str(exc)}")
+        first = str(exc).splitlines()[0]
+        print(f"CONSTRAINT enforced=True says={first.split(') ', 1)[1]}")
 
     # And prove the CHECK constraints are real too.
     try:
@@ -322,11 +328,11 @@ engine.dispose()
 PY
 check_grep "the first store inserts the row" "${work}/idempotence.txt" '^FIRST inserted=1 total=1$'
 check_grep "the second store inserts nothing and says so" \
-  "${work}/idempotence.txt" '^SECOND inserted=1? ?0 duplicates=1 total=1$'
+  "${work}/idempotence.txt" '^SECOND inserted=0 duplicates=1 total=1$'
 check_grep "a duplicate INSIDE one batch is caught too" \
   "${work}/idempotence.txt" '^BATCH inserted=0 duplicates=2 total=1$'
 check_grep "the UNIQUE constraint refuses a write that bypasses the application" \
-  "${work}/idempotence.txt" '^CONSTRAINT enforced=True name=True$'
+  "${work}/idempotence.txt" '^CONSTRAINT enforced=True says=UNIQUE constraint failed: readings\.station_id, readings\.reading_id$'
 check_grep "and the humidity CHECK constraint refuses an impossible percentage" \
   "${work}/idempotence.txt" '^CHECK humidity_enforced=True$'
 
@@ -507,7 +513,8 @@ PY
 
   # Point it at nothing at all: no source answers, and that is a failure, not
   # a partial success.
-  (cd "${run_dir}" && "${python_bin}" "${lab_dir}/examples/pipeline.py" \
+  (cd "${run_dir}" && PIPELINE_API_TOKEN="${TOKEN}" "${python_bin}" \
+    "${lab_dir}/examples/pipeline.py" \
     --base-url "http://127.0.0.1:${port}" \
     --sources delta \
     --report-at 2026-08-16T12:00:00Z \
@@ -532,8 +539,8 @@ check_eq "pytest starter exits 0 on the unmodified skeleton" "0" "${starter_stat
 check_grep "one baseline test passes and nine exercises wait" \
   "${work}/starter.txt" '1 passed, 9 skipped'
 
-exercise_markers="$(grep -c '^ *#*:* *EXERCISE [0-9]' "${lab_dir}/starter/stages.py")"
-check_eq "stages.py carries nine numbered exercises" "9" "${exercise_markers}"
+exercise_markers="$(grep -c 'EXERCISE [0-9]' "${lab_dir}/starter/stages.py")"
+check_eq "stages.py carries ten exercise markers (stage 3 has two parts)" "10" "${exercise_markers}"
 named_tests="$(grep -c '^@exercise(' "${lab_dir}/starter/test_stages.py")"
 check_eq "and each has a test that names it" "9" "${named_tests}"
 
