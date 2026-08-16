@@ -79,7 +79,7 @@ def build_parser() -> argparse.ArgumentParser:
         dest="max_age_minutes",
         type=int,
         metavar="N",
-        help="watchdog allowance; exit 2 when the last success is older than this",
+        help="watchdog allowance; exit 3 when the last success is older than this",
     )
     status.add_argument(
         "--explain-config",

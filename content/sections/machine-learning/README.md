@@ -1,0 +1,144 @@
+# Course04 · Machine Learning
+
+> GENERATED navigation — do not edit by hand. Run `npm run generate:section-nav`.
+
+Classical machine learning done properly: models, evaluation, feature work, and the discipline that separates working systems from leaderboard tricks.
+
+**0 of 56 lessons written.** Expand a subsection below to see its days.
+
+<details open>
+<summary><strong>Days 141-147 · Machine Learning Fundamentals</strong> — 0/7 complete</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 141 | What Machine Learning Is and Is Not | — | — | planned |
+| Day 142 | Supervised, Unsupervised, and Reinforcement Learning | — | — | planned |
+| Day 143 | The Machine Learning Workflow | — | — | planned |
+| Day 144 | Train, Validation, and Test Splits | — | — | planned |
+| Day 145 | Overfitting and Underfitting | — | — | planned |
+| Day 146 | Your First Model with scikit-learn | — | — | planned |
+| Day 147 | An End-to-End Classification Exercise | — | — | planned |
+
+**Project:** First End-to-End Model — Train, evaluate, and document a classifier on the iris dataset with a proper train/test protocol and an honest error analysis.
+
+</details>
+
+<details>
+<summary><strong>Days 148-154 · Regression</strong> — 0/7 complete</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 148 | Linear Regression | — | — | planned |
+| Day 149 | Loss Functions and Least Squares | — | — | planned |
+| Day 150 | Multiple and Polynomial Regression | — | — | planned |
+| Day 151 | Regularization: Ridge and Lasso | — | — | planned |
+| Day 152 | Regression Metrics | — | — | planned |
+| Day 153 | Linear Regression from Scratch | — | — | planned |
+| Day 154 | A Complete Regression Project | — | — | planned |
+
+**Project:** House Price Model — Build a regularized regression model on a housing dataset with feature analysis and residual diagnostics.
+
+</details>
+
+<details>
+<summary><strong>Days 155-161 · Classification</strong> — 0/7 complete</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 155 | Logistic Regression | — | — | planned |
+| Day 156 | Decision Boundaries | — | — | planned |
+| Day 157 | k-Nearest Neighbors | — | — | planned |
+| Day 158 | Naive Bayes and Text Classification | — | — | planned |
+| Day 159 | Precision, Recall, ROC, and Choosing Thresholds | — | — | planned |
+| Day 160 | Class Imbalance | — | — | planned |
+| Day 161 | A Complete Classification Project | — | — | planned |
+
+**Project:** Spam Classifier — Build a text spam classifier with proper handling of class imbalance and a precision/recall trade-off analysis.
+
+</details>
+
+<details>
+<summary><strong>Days 162-168 · Trees and Ensembles</strong> — 0/7 complete</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 162 | Decision Trees | — | — | planned |
+| Day 163 | Random Forests | — | — | planned |
+| Day 164 | Gradient Boosting | — | — | planned |
+| Day 165 | XGBoost and LightGBM in Practice | — | — | planned |
+| Day 166 | Hyperparameter Tuning | — | — | planned |
+| Day 167 | Cross-Validation Done Right | — | — | planned |
+| Day 168 | Winning on Tabular Data | — | — | planned |
+
+**Project:** Tabular Challenge — Compete against your own baseline on a tabular dataset: tuned gradient boosting versus a linear model, with a documented comparison.
+
+</details>
+
+<details>
+<summary><strong>Days 169-175 · Features and Support Vector Machines</strong> — 0/7 complete</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 169 | Support Vector Machines | — | — | planned |
+| Day 170 | Feature Scaling and Encoding | — | — | planned |
+| Day 171 | Feature Engineering | — | — | planned |
+| Day 172 | Feature Selection | — | — | planned |
+| Day 173 | scikit-learn Pipelines | — | — | planned |
+| Day 174 | Handling Missing Data | — | — | planned |
+| Day 175 | Features Beat Algorithms | — | — | planned |
+
+**Project:** Feature Engineering Challenge — Improve a fixed model’s performance purely through feature work on a raw dataset, documenting each feature’s measured impact.
+
+</details>
+
+<details>
+<summary><strong>Days 176-182 · Evaluation and Interpretation</strong> — 0/7 complete</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 176 | Choosing the Right Metric | — | — | planned |
+| Day 177 | Learning Curves and Diagnostics | — | — | planned |
+| Day 178 | Interpreting Models: Importances and SHAP | — | — | planned |
+| Day 179 | Fairness and Bias in Models | — | — | planned |
+| Day 180 | Data Leakage | — | — | planned |
+| Day 181 | Baselines and Error Analysis | — | — | planned |
+| Day 182 | Writing a Model Report | — | — | planned |
+
+**Project:** Model Audit Report — Audit a trained model for leakage, fairness, and failure modes, and write a decision-ready model report.
+
+</details>
+
+<details>
+<summary><strong>Days 183-189 · Unsupervised Learning</strong> — 0/7 complete</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 183 | Clustering with k-means | — | — | planned |
+| Day 184 | Hierarchical Clustering and DBSCAN | — | — | planned |
+| Day 185 | Principal Component Analysis | — | — | planned |
+| Day 186 | t-SNE and UMAP | — | — | planned |
+| Day 187 | Anomaly Detection | — | — | planned |
+| Day 188 | Recommender Systems | — | — | planned |
+| Day 189 | A Segmentation Study | — | — | planned |
+
+**Project:** Customer Segmentation — Cluster a customer dataset, reduce it for visualization, name the segments, and defend the number of clusters chosen.
+
+</details>
+
+<details>
+<summary><strong>Days 190-196 · Machine Learning in Practice</strong> — 0/7 complete</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 190 | The ML Project Lifecycle | — | — | planned |
+| Day 191 | Building Datasets and Labeling | — | — | planned |
+| Day 192 | Time Series Forecasting Basics | — | — | planned |
+| Day 193 | Saving and Versioning Models | — | — | planned |
+| Day 194 | Serving a Model over an API | — | — | planned |
+| Day 195 | Monitoring Models in Production | — | — | planned |
+| Day 196 | Section Project: An ML Service | — | — | planned |
+
+**Project:** Section Project: Deployed ML Service — Train, persist, and serve a model behind a FastAPI endpoint with input validation, tests, and a monitoring plan.
+
+</details>
+

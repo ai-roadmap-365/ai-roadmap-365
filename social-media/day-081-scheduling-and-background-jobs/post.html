@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Day 81 / 365 — Scheduling and Background Jobs</title>
+    <meta
+      name="description"
+      content="After this lesson you will be able to choose between an in-process loop, an in-process scheduler, an operating-system scheduler and an external queue by asking what each one survives; read and write cron, launchd and systemd timer schedules including the day-of-month and day-of-week rule that catche"
+    />
+
+    <!-- These tags decide what LinkedIn shows when the link is shared. -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Day 81 / 365 — Scheduling and Background Jobs" />
+    <meta
+      property="og:description"
+      content="After this lesson you will be able to choose between an in-process loop, an in-process scheduler, an operating-system scheduler and an external queue by asking what each one survives; read and write cron, launchd and systemd timer schedules including the day-of-month and day-of-week rule that catche"
+    />
+    <meta
+      property="og:url"
+      content="https://sandeepbazar.github.io/ai-roadmap-365/day-081-scheduling-and-background-jobs"
+    />
+    <meta
+      property="og:image"
+      content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-081-scheduling-and-background-jobs.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="365 Days of AI Mastery" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Day 81 / 365 — Scheduling and Background Jobs" />
+    <meta
+      name="twitter:description"
+      content="After this lesson you will be able to choose between an in-process loop, an in-process scheduler, an operating-system scheduler and an external queue by asking what each one survives; read and write cron, launchd and systemd timer schedules including the day-of-month and day-of-week rule that catche"
+    />
+    <meta
+      name="twitter:image"
+      content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-081-scheduling-and-background-jobs.png"
+    />
+
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      body {
+        margin: 0;
+        background: #0b1220;
+        color: #e2e8f0;
+        font-family:
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          sans-serif;
+        line-height: 1.6;
+      }
+      .wrap {
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 40px 20px 80px;
+      }
+      .badge {
+        display: inline-block;
+        padding: 6px 16px;
+        border-radius: 999px;
+        background: #818cf822;
+        color: #818cf8;
+        font-weight: 800;
+        letter-spacing: 1px;
+        font-size: 14px;
+      }
+      h1 {
+        font-size: clamp(28px, 5vw, 44px);
+        line-height: 1.15;
+        margin: 18px 0 6px;
+        color: #f8fafc;
+      }
+      .sub {
+        color: #94a3b8;
+        margin: 0 0 28px;
+      }
+      img.card {
+        width: 100%;
+        border-radius: 14px;
+        border: 1px solid #1e293b;
+        display: block;
+        margin: 24px 0;
+      }
+      .actions a {
+        display: inline-block;
+        margin: 0 10px 10px 0;
+        padding: 11px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .primary {
+        background: #818cf8;
+        color: #0b1220;
+      }
+      .ghost {
+        border: 1px solid #334155;
+        color: #cbd5e1;
+      }
+      h2 {
+        font-size: 15px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #64748b;
+        margin: 40px 0 10px;
+      }
+      pre {
+        background: #0f172a;
+        border: 1px solid #1e293b;
+        border-radius: 12px;
+        padding: 20px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-size: 15px;
+        color: #e2e8f0;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      button {
+        background: #818cf8;
+        color: #0b1220;
+        border: 0;
+        border-radius: 10px;
+        padding: 11px 20px;
+        font-weight: 700;
+        font-size: 15px;
+        cursor: pointer;
+      }
+      footer {
+        margin-top: 48px;
+        color: #475569;
+        font-size: 14px;
+        border-top: 1px solid #1e293b;
+        padding-top: 20px;
+      }
+      a {
+        color: #818cf8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <span class="badge">DAY 81 / 365</span>
+      <h1>Scheduling and Background Jobs</h1>
+      <p class="sub">
+        After this lesson you will be able to choose between an in-process loop, an in-process
+        scheduler, an operating-system scheduler and an external queue by asking what each one
+        survives; read and write cron, launchd and systemd timer schedules
+      </p>
+
+      <img
+        class="card"
+        src="https://sandeepbazar.github.io/ai-roadmap-365/social/day-081-scheduling-and-background-jobs.png"
+        alt="Day 81 of 365: Scheduling and Background Jobs — the lesson's hero image, which is also what a shared link shows"
+      />
+
+      <div class="actions">
+        <a
+          class="primary"
+          href="https://sandeepbazar.github.io/ai-roadmap-365/day-081-scheduling-and-background-jobs"
+          >Read the lesson</a
+        >
+        <a
+          class="ghost"
+          href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/programming-with-python/day-081-scheduling-and-background-jobs"
+          >Open the lab</a
+        >
+      </div>
+
+      <h2>The post — copy and paste</h2>
+      <pre id="post">
+Day 81 of 365 Days of AI — Scheduling and Background Jobs
+
+Choose between an in-process loop, an in-process scheduler, an operating-system scheduler and an external queue by asking what each one survives.
+
+What today covers:
+→ Explain why a time.sleep loop drifts by the work duration every run
+→ Drive sched.scheduler with an injected time source and delay function so a six-hour schedule runs in microseconds
+→ Read and write five-field cron expressions including lists
+
+The lab is the point: 30 minutes of hands-on work you run yourself, offline, with output you can check against a real captured run.
+
+📖 Lesson (~70 min): https://sandeepbazar.github.io/ai-roadmap-365/day-081-scheduling-and-background-jobs
+🧪 Lab: https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/programming-with-python/day-081-scheduling-and-background-jobs
+
+Course 02 of 9 · Programming with Python
+
+Free, open source, and no prerequisites beyond curiosity.
+
+#AI #365DaysOfAI #LearningInPublic #Python #MachineLearning</pre>
+      <button
+        onclick="
+          navigator.clipboard.writeText(document.getElementById('post').innerText).then(() => {
+            this.textContent = 'Copied';
+            setTimeout(() => (this.textContent = 'Copy post'), 1600);
+          })
+        "
+      >
+        Copy post
+      </button>
+
+      <footer>
+        365 Days of AI · 365 Days of AI Mastery ·
+        <a href="https://sandeepbazar.github.io/ai-roadmap-365"
+          >sandeepbazar.github.io/ai-roadmap-365</a
+        >
+      </footer>
+    </div>
+  </body>
+</html>

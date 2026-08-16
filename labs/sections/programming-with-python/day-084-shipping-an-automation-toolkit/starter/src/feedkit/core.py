@@ -27,8 +27,8 @@ STATE_VERSION = 1
 #: scheduler is the thing that reads them.
 EXIT_OK = 0
 EXIT_FATAL = 1
-EXIT_PARTIAL = 2
-EXIT_LOCKED = 3
+EXIT_PARTIAL = 3
+EXIT_LOCKED = 75
 
 
 @dataclass(frozen=True)

@@ -32,7 +32,7 @@ watchdog:     STALE (allowance 0s)
   links: 2 seen, last success 2026-07-19T13:40:07Z — ok
   notes: 3 seen, last success 2026-07-19T13:40:11Z — ok
   papers: 2 seen, last success 2026-07-19T13:40:11Z — ok
-exit: 2   (non-zero — this is what a watchdog job reads)
+exit: 3   (non-zero — this is what a watchdog job reads)
 
 === status on a toolkit that has never run ===
 $ cd $(mktemp -d) && feedkit status
@@ -40,4 +40,4 @@ last success: never
 last run:     never
 now:          2026-07-19T13:40:13Z
 watchdog:     STALE (allowance 86400s)
-exit: 2
+exit: 3

@@ -301,8 +301,18 @@ else
 fi
 
 # The stronger form: supervise a child process and kill its whole group.
+#
+# The child is a uniquely named symlink to sleep rather than plain `sleep 30`.
+# The orphan check below is a pattern match over the whole process table, so a
+# generic name would match any unrelated process on the machine that happens to
+# be sleeping — the check would then fail for reasons having nothing to do with
+# this lab. The name carries this harness's own pid, so it can only match the
+# child we started.
+probe_name="day081-probe-sleep-$$"
+probe_path="${work_dir}/${probe_name}"
+ln -s "$(command -v sleep)" "${probe_path}"
 sup_start="$(date +%s)"
-(cd "${lab_dir}" && "${python_bin}" examples/supervise.py --timeout 1 -- sleep 30 >/dev/null 2>&1)
+(cd "${lab_dir}" && "${python_bin}" examples/supervise.py --timeout 1 -- "${probe_path}" 30 >/dev/null 2>&1)
 sup_exit=$?
 sup_elapsed=$(( $(date +%s) - sup_start ))
 if [ "${sup_exit}" -eq 124 ] && [ "${sup_elapsed}" -lt 10 ]; then
@@ -310,10 +320,10 @@ if [ "${sup_exit}" -eq 124 ] && [ "${sup_elapsed}" -lt 10 ]; then
 else
   check "supervise.py kills an overrunning child (exit ${sup_exit}, ${sup_elapsed}s)" "no"
 fi
-if pgrep -f "sleep 30" >/dev/null 2>&1; then
-  check "no 'sleep 30' child survived the supervisor" "no"
+if pgrep -f "${probe_name}" >/dev/null 2>&1; then
+  check "no supervised child survived the supervisor" "no"
 else
-  check "no 'sleep 30' child survived the supervisor" "yes"
+  check "no supervised child survived the supervisor" "yes"
 fi
 
 # --------------------------------------------------------------------------

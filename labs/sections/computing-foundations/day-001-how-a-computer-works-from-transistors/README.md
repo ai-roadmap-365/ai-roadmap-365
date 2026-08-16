@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** How a Computer Works: From Transistors to Programs
 - **Day number:** 1 of 365
-- **Lesson article:** published on the course blog (one lesson per day); the article for this day links back to this lab.
+- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-001-how-a-computer-works-from-transistors
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-001-how-a-computer-works-from-transistors` when the site is running.
 <!-- generated-links:end -->

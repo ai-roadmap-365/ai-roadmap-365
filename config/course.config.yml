@@ -1,0 +1,44 @@
+# Central link and repository configuration.
+# This is the ONLY place repository and site URLs are defined.
+# All lesson, lab, and site links are generated from this file plus lesson
+# metadata (see src/lib/links.ts and scripts/lib/links.mjs).
+#
+# The published course. All lesson, lab and site links derive from this
+# file, so changing a URL here regenerates every link in the course.
+#
+# `public_url`, `public_name` and `public_branch` are retained aliases of
+# `url`, `name` and `branch` so existing link helpers keep working.
+
+repository:
+  mode: public
+  owner: sandeepbazar
+  name: ai-roadmap-365
+  url: https://github.com/sandeepbazar/ai-roadmap-365
+  branch: main
+  public_name: ai-roadmap-365
+  public_url: https://github.com/sandeepbazar/ai-roadmap-365
+  public_branch: main
+  site_branch: site
+
+
+website:
+  local_base_url: http://localhost:4321/ai-roadmap-365
+  public_base_url: https://sandeepbazar.github.io/ai-roadmap-365
+  base_path: /ai-roadmap-365
+  port: 4321
+
+course:
+  title: 365 Days of AI Mastery
+  slug: ai-roadmap
+  days: 365
+  weeks: 52
+  language: en
+  author: Sandeep Bazar
+
+# The LinkedIn 365-day challenge. scripts/generate-social.mjs reads this to
+# build one ready-to-paste post per day plus its share card.
+social:
+  challenge_name: 365 Days of AI
+  challenge_tagline: One year. Nine courses. Every day.
+  hashtags: [AI, 365DaysOfAI, LearningInPublic, Python, MachineLearning]
+  author_handle: sandeepbazar

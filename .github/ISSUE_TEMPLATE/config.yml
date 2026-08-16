@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Read the course
+    url: https://sandeepbazar.github.io/ai-roadmap-365/
+    about: Every lesson is published here, one page per day.
+  - name: 💬 Ask a question
+    url: https://github.com/sandeepbazar/ai-roadmap-365/discussions
+    about: Stuck on a lab, or want to talk about an approach? Start here.

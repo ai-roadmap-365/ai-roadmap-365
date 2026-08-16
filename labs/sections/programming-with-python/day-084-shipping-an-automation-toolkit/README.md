@@ -299,7 +299,7 @@ lab starts a background process.
 ## Expected output
 
 The harness ends like this (a real captured run — see
-[`expected-output/test-run.txt`](expected-output/test-run.txt) for all 51 lines):
+[`expected-output/test-run.txt`](expected-output/test-run.txt) for all 75 lines):
 
 ```text
 9. The starter is runnable, and the shipped files behave
@@ -371,9 +371,9 @@ be identical on your machine and which are expected to differ.
 3. `shasum feedkit-state.json` before and after a `--dry-run` gives the same
    hash, and the dry run still reports what it would have collected.
 4. `--sources notes,broken,papers fetch` prints `sources: 2 ok, 1 failed`, a
-   `FAILED: broken:` line, and **exits 2**.
+   `FAILED: broken:` line, and **exits 3**.
 5. `--sources broken fetch` exits 1. Creating `feedkit-state.json.lock` and
-   running `fetch` exits 3 and writes nothing.
+   running `fetch` exits 75 and writes nothing.
 6. `status --explain-config` shows `5 default`, then `10 file` with a config
    file present, then `20 environment` with `FEEDKIT_MAX_ITEMS=20`, then
    `40 flag` with `--max-items 40`.
@@ -382,8 +382,8 @@ be identical on your machine and which are expected to differ.
    which proves the token was genuinely being sent.
 8. The `flaky` source succeeds on `attempt 3`, and the summary says
    `retried: flaky succeeded on attempt 3`.
-9. `status --max-age-minutes 0` prints `STALE` and exits 2; in a fresh
-   directory, `status` prints `last success: never` and exits 2.
+9. `status --max-age-minutes 0` prints `STALE` and exits 3; in a fresh
+   directory, `status` prints `last success: never` and exits 3.
 10. After `pip install -e examples --no-build-isolation --no-deps`,
     `feedkit --version` prints `feedkit 1.0.0` and `feedkit fetch` exits 0.
 11. `pgrep -fl fixture_server.py` finds nothing after the harness finishes.
@@ -432,8 +432,8 @@ is nothing to uninstall there.**
 See [troubleshooting.md](troubleshooting.md). The ones you are most likely to
 meet: `no base URL configured`, which is the toolkit refusing to guess a
 deployment fact; `new entries: 0` when you expected more, which is idempotence
-working; `exit code 2`, which is partial success being honest rather than a
-failure; `exit code 3`, which is a lock file left by a killed run; and a
+working; `exit code 3`, which is partial success being honest rather than a
+failure; `exit code 75`, which is a lock file left by a killed run; and a
 scheduled job that works by hand but does nothing on a schedule, which is
 `PATH`, the working directory, or the environment, in that order of likelihood.
 

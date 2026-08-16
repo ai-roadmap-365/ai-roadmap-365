@@ -23,7 +23,7 @@ difference.
 | First run, three configured sources | `new entries: 7` (3 from notes, 2 from links, 2 from papers) and `exit: 0` |
 | Second run of the same command | `new entries: 0` and `exit: 0` — this is idempotence, and any other number is a bug |
 | `--dry-run` | The state file's bytes are unchanged, the summary still reports what *would* have happened, and `exit: 0` |
-| A run over `notes,broken,papers` | `sources: 2 ok, 1 failed, 3 total`, a `FAILED: broken:` line, and **exit code 2** |
+| A run over `notes,broken,papers` | `sources: 2 ok, 1 failed, 3 total`, a `FAILED: broken:` line, and **exit code 3** |
 | A run over `broken` alone | `exit: 1` |
 | A run while the lock file exists | `exit: 3`, no state written |
 | `feedkit --version` | `feedkit 1.0.0` |

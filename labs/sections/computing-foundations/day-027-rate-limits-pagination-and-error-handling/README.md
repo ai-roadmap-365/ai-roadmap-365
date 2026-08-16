@@ -9,7 +9,7 @@ paginate across pages — collecting results without missing or repeating a row.
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** Rate Limits, Pagination, and Error Handling
 - **Day number:** 27 of 365
-- **Lesson article:** published on the course blog (one lesson per day); the article for this day links back to this lab.
+- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-027-rate-limits-pagination-and-error-handling
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-027-rate-limits-pagination-and-error-handling` when the site is running.
 <!-- generated-links:end -->

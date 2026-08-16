@@ -127,7 +127,7 @@ def test_summary_status(statuses, expected):
 
 def test_exit_codes_distinguish_partial_from_total_success():
     assert core.exit_code_for({"status": "ok"}) == 0
-    assert core.exit_code_for({"status": "partial"}) == 2
+    assert core.exit_code_for({"status": "partial"}) == 3
     assert core.exit_code_for({"status": "failed"}) == 1
 
 

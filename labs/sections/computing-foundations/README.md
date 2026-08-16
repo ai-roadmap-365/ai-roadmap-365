@@ -9,15 +9,15 @@ Hands-on companions to this section's lessons. Each day directory is self-contai
 <details>
 <summary><strong>Days 1-7 · Inside the Machine</strong> — 7/7 complete</summary>
 
-| Day | Lesson | Status |
-| --- | ------ | ------ |
-| Day 001 | [Day 001: How a Computer Works: From Transistors to Programs](./day-001-how-a-computer-works-from-transistors/) | complete |
-| Day 002 | [Day 002: The CPU: Fetch, Decode, Execute](./day-002-the-cpu-fetch-decode-execute/) | complete |
-| Day 003 | [Day 003: Memory Hierarchy: Registers, RAM, and Storage](./day-003-memory-hierarchy-registers-ram-and-storage/) | complete |
-| Day 004 | [Day 004: Binary and Data Representation: Bits, Bytes, and Numbers](./day-004-binary-and-data-representation-bits-bytes/) | complete |
-| Day 005 | [Day 005: Text, Images, and Sound as Data](./day-005-text-images-and-sound-as-data/) | complete |
-| Day 006 | [Day 006: Operating Systems: What They Do and Why](./day-006-operating-systems-what-they-do-and/) | complete |
-| Day 007 | [Day 007: Processes, Threads, and Scheduling](./day-007-processes-threads-and-scheduling/) | complete |
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 001 | [How a Computer Works: From Transistors to Programs](../../../content/sections/computing-foundations/day-001-how-a-computer-works-from-transistors/) | [lab](./day-001-how-a-computer-works-from-transistors/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-001-how-a-computer-works-from-transistors) | complete |
+| Day 002 | [The CPU: Fetch, Decode, Execute](../../../content/sections/computing-foundations/day-002-the-cpu-fetch-decode-execute/) | [lab](./day-002-the-cpu-fetch-decode-execute/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-002-the-cpu-fetch-decode-execute) | complete |
+| Day 003 | [Memory Hierarchy: Registers, RAM, and Storage](../../../content/sections/computing-foundations/day-003-memory-hierarchy-registers-ram-and-storage/) | [lab](./day-003-memory-hierarchy-registers-ram-and-storage/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-003-memory-hierarchy-registers-ram-and-storage) | complete |
+| Day 004 | [Binary and Data Representation: Bits, Bytes, and Numbers](../../../content/sections/computing-foundations/day-004-binary-and-data-representation-bits-bytes/) | [lab](./day-004-binary-and-data-representation-bits-bytes/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-004-binary-and-data-representation-bits-bytes) | complete |
+| Day 005 | [Text, Images, and Sound as Data](../../../content/sections/computing-foundations/day-005-text-images-and-sound-as-data/) | [lab](./day-005-text-images-and-sound-as-data/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-005-text-images-and-sound-as-data) | complete |
+| Day 006 | [Operating Systems: What They Do and Why](../../../content/sections/computing-foundations/day-006-operating-systems-what-they-do-and/) | [lab](./day-006-operating-systems-what-they-do-and/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-006-operating-systems-what-they-do-and) | complete |
+| Day 007 | [Processes, Threads, and Scheduling](../../../content/sections/computing-foundations/day-007-processes-threads-and-scheduling/) | [lab](./day-007-processes-threads-and-scheduling/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-007-processes-threads-and-scheduling) | complete |
 
 **Project:** Annotated Machine Teardown — Inspect your own computer from the command line and produce an annotated one-page architecture diagram of its CPU, memory, storage, and OS, with measured numbers.
 
@@ -26,15 +26,15 @@ Hands-on companions to this section's lessons. Each day directory is self-contai
 <details>
 <summary><strong>Days 8-14 · The Command Line</strong> — 7/7 complete</summary>
 
-| Day | Lesson | Status |
-| --- | ------ | ------ |
-| Day 008 | [Day 008: Meet the Terminal: Shells, Prompts, and Commands](./day-008-meet-the-terminal-shells-prompts-and/) | complete |
-| Day 009 | [Day 009: Navigating the Filesystem: Paths, Files, and Permissions](./day-009-navigating-the-filesystem-paths-files-and/) | complete |
-| Day 010 | [Day 010: Working with Text: cat, grep, sed, and Pipes](./day-010-working-with-text-cat-grep-sed/) | complete |
-| Day 011 | [Day 011: Environment Variables and Shell Configuration](./day-011-environment-variables-and-shell-configuration/) | complete |
-| Day 012 | [Day 012: Shell Scripting: Variables, Loops, and Conditionals](./day-012-shell-scripting-variables-loops-and-conditionals/) | complete |
-| Day 013 | [Day 013: Package Managers: Homebrew, apt, and winget](./day-013-package-managers-homebrew-apt-and-winget/) | complete |
-| Day 014 | [Day 014: Automating Tasks with Shell Scripts and cron](./day-014-automating-tasks-with-shell-scripts-and/) | complete |
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 008 | [Meet the Terminal: Shells, Prompts, and Commands](../../../content/sections/computing-foundations/day-008-meet-the-terminal-shells-prompts-and/) | [lab](./day-008-meet-the-terminal-shells-prompts-and/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-008-meet-the-terminal-shells-prompts-and) | complete |
+| Day 009 | [Navigating the Filesystem: Paths, Files, and Permissions](../../../content/sections/computing-foundations/day-009-navigating-the-filesystem-paths-files-and/) | [lab](./day-009-navigating-the-filesystem-paths-files-and/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-009-navigating-the-filesystem-paths-files-and) | complete |
+| Day 010 | [Working with Text: cat, grep, sed, and Pipes](../../../content/sections/computing-foundations/day-010-working-with-text-cat-grep-sed/) | [lab](./day-010-working-with-text-cat-grep-sed/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-010-working-with-text-cat-grep-sed) | complete |
+| Day 011 | [Environment Variables and Shell Configuration](../../../content/sections/computing-foundations/day-011-environment-variables-and-shell-configuration/) | [lab](./day-011-environment-variables-and-shell-configuration/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-011-environment-variables-and-shell-configuration) | complete |
+| Day 012 | [Shell Scripting: Variables, Loops, and Conditionals](../../../content/sections/computing-foundations/day-012-shell-scripting-variables-loops-and-conditionals/) | [lab](./day-012-shell-scripting-variables-loops-and-conditionals/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-012-shell-scripting-variables-loops-and-conditionals) | complete |
+| Day 013 | [Package Managers: Homebrew, apt, and winget](../../../content/sections/computing-foundations/day-013-package-managers-homebrew-apt-and-winget/) | [lab](./day-013-package-managers-homebrew-apt-and-winget/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-013-package-managers-homebrew-apt-and-winget) | complete |
+| Day 014 | [Automating Tasks with Shell Scripts and cron](../../../content/sections/computing-foundations/day-014-automating-tasks-with-shell-scripts-and/) | [lab](./day-014-automating-tasks-with-shell-scripts-and/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-014-automating-tasks-with-shell-scripts-and) | complete |
 
 **Project:** Personal Automation Script — Write and schedule a shell script that organizes a folder of mixed files by type and date, with logging and a dry-run mode.
 
@@ -43,15 +43,15 @@ Hands-on companions to this section's lessons. Each day directory is self-contai
 <details>
 <summary><strong>Days 15-21 · How the Internet Works</strong> — 7/7 complete</summary>
 
-| Day | Lesson | Status |
-| --- | ------ | ------ |
-| Day 015 | [Day 015: What Happens When You Load a Web Page](./day-015-what-happens-when-you-load-a/) | complete |
-| Day 016 | [Day 016: IP Addresses, DNS, and Routing](./day-016-ip-addresses-dns-and-routing/) | complete |
-| Day 017 | [Day 017: TCP, UDP, and Ports](./day-017-tcp-udp-and-ports/) | complete |
-| Day 018 | [Day 018: HTTP: Requests, Responses, and Methods](./day-018-http-requests-responses-and-methods/) | complete |
-| Day 019 | [Day 019: HTTPS and TLS: Encryption on the Wire](./day-019-https-and-tls-encryption-on-the/) | complete |
-| Day 020 | [Day 020: How Browsers Render: HTML, CSS, and JavaScript](./day-020-how-browsers-render-html-css-and/) | complete |
-| Day 021 | [Day 021: Inspecting Traffic with curl and Developer Tools](./day-021-inspecting-traffic-with-curl-and-developer/) | complete |
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 015 | [What Happens When You Load a Web Page](../../../content/sections/computing-foundations/day-015-what-happens-when-you-load-a/) | [lab](./day-015-what-happens-when-you-load-a/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-015-what-happens-when-you-load-a) | complete |
+| Day 016 | [IP Addresses, DNS, and Routing](../../../content/sections/computing-foundations/day-016-ip-addresses-dns-and-routing/) | [lab](./day-016-ip-addresses-dns-and-routing/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-016-ip-addresses-dns-and-routing) | complete |
+| Day 017 | [TCP, UDP, and Ports](../../../content/sections/computing-foundations/day-017-tcp-udp-and-ports/) | [lab](./day-017-tcp-udp-and-ports/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-017-tcp-udp-and-ports) | complete |
+| Day 018 | [HTTP: Requests, Responses, and Methods](../../../content/sections/computing-foundations/day-018-http-requests-responses-and-methods/) | [lab](./day-018-http-requests-responses-and-methods/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-018-http-requests-responses-and-methods) | complete |
+| Day 019 | [HTTPS and TLS: Encryption on the Wire](../../../content/sections/computing-foundations/day-019-https-and-tls-encryption-on-the/) | [lab](./day-019-https-and-tls-encryption-on-the/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-019-https-and-tls-encryption-on-the) | complete |
+| Day 020 | [How Browsers Render: HTML, CSS, and JavaScript](../../../content/sections/computing-foundations/day-020-how-browsers-render-html-css-and/) | [lab](./day-020-how-browsers-render-html-css-and/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-020-how-browsers-render-html-css-and) | complete |
+| Day 021 | [Inspecting Traffic with curl and Developer Tools](../../../content/sections/computing-foundations/day-021-inspecting-traffic-with-curl-and-developer/) | [lab](./day-021-inspecting-traffic-with-curl-and-developer/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-021-inspecting-traffic-with-curl-and-developer) | complete |
 
 **Project:** Request Journey Map — Trace a real page load end to end with dig, traceroute, curl -v, and browser dev tools, and document every hop and header in a journey diagram.
 
@@ -60,15 +60,15 @@ Hands-on companions to this section's lessons. Each day directory is self-contai
 <details>
 <summary><strong>Days 22-28 · APIs and the Web</strong> — 7/7 complete</summary>
 
-| Day | Lesson | Status |
-| --- | ------ | ------ |
-| Day 022 | [Day 022: What an API Is and Why Everything Has One](./day-022-what-an-api-is-and-why/) | complete |
-| Day 023 | [Day 023: REST Fundamentals: Resources and Verbs](./day-023-rest-fundamentals-resources-and-verbs/) | complete |
-| Day 024 | [Day 024: JSON and Data Serialization](./day-024-json-and-data-serialization/) | complete |
-| Day 025 | [Day 025: API Authentication: Keys, Tokens, and OAuth](./day-025-api-authentication-keys-tokens-and-oauth/) | complete |
-| Day 026 | [Day 026: Webhooks and Event-Driven APIs](./day-026-webhooks-and-event-driven-apis/) | complete |
-| Day 027 | [Day 027: Rate Limits, Pagination, and Error Handling](./day-027-rate-limits-pagination-and-error-handling/) | complete |
-| Day 028 | [Day 028: Consuming a Public API from the Command Line](./day-028-consuming-a-public-api-from-the/) | complete |
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 022 | [What an API Is and Why Everything Has One](../../../content/sections/computing-foundations/day-022-what-an-api-is-and-why/) | [lab](./day-022-what-an-api-is-and-why/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-022-what-an-api-is-and-why) | complete |
+| Day 023 | [REST Fundamentals: Resources and Verbs](../../../content/sections/computing-foundations/day-023-rest-fundamentals-resources-and-verbs/) | [lab](./day-023-rest-fundamentals-resources-and-verbs/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-023-rest-fundamentals-resources-and-verbs) | complete |
+| Day 024 | [JSON and Data Serialization](../../../content/sections/computing-foundations/day-024-json-and-data-serialization/) | [lab](./day-024-json-and-data-serialization/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-024-json-and-data-serialization) | complete |
+| Day 025 | [API Authentication: Keys, Tokens, and OAuth](../../../content/sections/computing-foundations/day-025-api-authentication-keys-tokens-and-oauth/) | [lab](./day-025-api-authentication-keys-tokens-and-oauth/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-025-api-authentication-keys-tokens-and-oauth) | complete |
+| Day 026 | [Webhooks and Event-Driven APIs](../../../content/sections/computing-foundations/day-026-webhooks-and-event-driven-apis/) | [lab](./day-026-webhooks-and-event-driven-apis/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-026-webhooks-and-event-driven-apis) | complete |
+| Day 027 | [Rate Limits, Pagination, and Error Handling](../../../content/sections/computing-foundations/day-027-rate-limits-pagination-and-error-handling/) | [lab](./day-027-rate-limits-pagination-and-error-handling/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-027-rate-limits-pagination-and-error-handling) | complete |
+| Day 028 | [Consuming a Public API from the Command Line](../../../content/sections/computing-foundations/day-028-consuming-a-public-api-from-the/) | [lab](./day-028-consuming-a-public-api-from-the/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-028-consuming-a-public-api-from-the) | complete |
 
 **Project:** Weather Command-Line Dashboard — Build a shell-based dashboard that pulls a free weather API, handles errors and rate limits, and renders a readable daily report.
 
@@ -77,15 +77,15 @@ Hands-on companions to this section's lessons. Each day directory is self-contai
 <details>
 <summary><strong>Days 29-35 · Git and GitHub</strong> — 7/7 complete</summary>
 
-| Day | Lesson | Status |
-| --- | ------ | ------ |
-| Day 029 | [Day 029: Why Version Control Exists](./day-029-why-version-control-exists/) | complete |
-| Day 030 | [Day 030: Git Fundamentals: Repositories, Staging, and Commits](./day-030-git-fundamentals-repositories-staging-and-commits/) | complete |
-| Day 031 | [Day 031: Branching and Merging](./day-031-branching-and-merging/) | complete |
-| Day 032 | [Day 032: Remotes and GitHub](./day-032-remotes-and-github/) | complete |
-| Day 033 | [Day 033: Pull Requests and Code Review](./day-033-pull-requests-and-code-review/) | complete |
-| Day 034 | [Day 034: Undoing Things: Reset, Revert, and Reflog](./day-034-undoing-things-reset-revert-and-reflog/) | complete |
-| Day 035 | [Day 035: Git Workflows for Real Projects](./day-035-git-workflows-for-real-projects/) | complete |
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 029 | [Why Version Control Exists](../../../content/sections/computing-foundations/day-029-why-version-control-exists/) | [lab](./day-029-why-version-control-exists/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-029-why-version-control-exists) | complete |
+| Day 030 | [Git Fundamentals: Repositories, Staging, and Commits](../../../content/sections/computing-foundations/day-030-git-fundamentals-repositories-staging-and-commits/) | [lab](./day-030-git-fundamentals-repositories-staging-and-commits/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-030-git-fundamentals-repositories-staging-and-commits) | complete |
+| Day 031 | [Branching and Merging](../../../content/sections/computing-foundations/day-031-branching-and-merging/) | [lab](./day-031-branching-and-merging/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-031-branching-and-merging) | complete |
+| Day 032 | [Remotes and GitHub](../../../content/sections/computing-foundations/day-032-remotes-and-github/) | [lab](./day-032-remotes-and-github/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-032-remotes-and-github) | complete |
+| Day 033 | [Pull Requests and Code Review](../../../content/sections/computing-foundations/day-033-pull-requests-and-code-review/) | [lab](./day-033-pull-requests-and-code-review/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-033-pull-requests-and-code-review) | complete |
+| Day 034 | [Undoing Things: Reset, Revert, and Reflog](../../../content/sections/computing-foundations/day-034-undoing-things-reset-revert-and-reflog/) | [lab](./day-034-undoing-things-reset-revert-and-reflog/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-034-undoing-things-reset-revert-and-reflog) | complete |
+| Day 035 | [Git Workflows for Real Projects](../../../content/sections/computing-foundations/day-035-git-workflows-for-real-projects/) | [lab](./day-035-git-workflows-for-real-projects/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-035-git-workflows-for-real-projects) | complete |
 
 **Project:** Versioned Notes Repository — Create a GitHub repository for your course notes with branches, a merged pull request, a resolved conflict, and a clean commit history.
 
@@ -94,15 +94,15 @@ Hands-on companions to this section's lessons. Each day directory is self-contai
 <details>
 <summary><strong>Days 36-42 · Systems Foundations: Storage, Observability, and Tooling</strong> — 7/7 complete</summary>
 
-| Day | Lesson | Status |
-| --- | ------ | ------ |
-| Day 036 | [Day 036: Choosing and Configuring a Code Editor](./day-036-choosing-and-configuring-a-code-editor/) | complete |
-| Day 037 | [Day 037: Debuggers, Linters, and Formatters](./day-037-debuggers-linters-and-formatters/) | complete |
-| Day 038 | [Day 038: Regular Expressions](./day-038-regular-expressions/) | complete |
-| Day 039 | [Day 039: Data Storage: Files, Databases, Object Storage, and Caches](./day-039-data-storage-files-databases-object-storage/) | complete |
-| Day 040 | [Day 040: Observability: Logs, Metrics, Traces, and Dashboards](./day-040-observability-logs-metrics-traces-and-dashboards/) | complete |
-| Day 041 | [Day 041: Thinking in Automation: Scripts, Hooks, and Pipelines](./day-041-thinking-in-automation-scripts-hooks-and/) | complete |
-| Day 042 | [Day 042: Section Review: Your Computing Foundations Toolkit](./day-042-section-review-your-computing-foundations-toolkit/) | complete |
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 036 | [Choosing and Configuring a Code Editor](../../../content/sections/computing-foundations/day-036-choosing-and-configuring-a-code-editor/) | [lab](./day-036-choosing-and-configuring-a-code-editor/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-036-choosing-and-configuring-a-code-editor) | complete |
+| Day 037 | [Debuggers, Linters, and Formatters](../../../content/sections/computing-foundations/day-037-debuggers-linters-and-formatters/) | [lab](./day-037-debuggers-linters-and-formatters/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-037-debuggers-linters-and-formatters) | complete |
+| Day 038 | [Regular Expressions](../../../content/sections/computing-foundations/day-038-regular-expressions/) | [lab](./day-038-regular-expressions/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-038-regular-expressions) | complete |
+| Day 039 | [Data Storage: Files, Databases, Object Storage, and Caches](../../../content/sections/computing-foundations/day-039-data-storage-files-databases-object-storage/) | [lab](./day-039-data-storage-files-databases-object-storage/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-039-data-storage-files-databases-object-storage) | complete |
+| Day 040 | [Observability: Logs, Metrics, Traces, and Dashboards](../../../content/sections/computing-foundations/day-040-observability-logs-metrics-traces-and-dashboards/) | [lab](./day-040-observability-logs-metrics-traces-and-dashboards/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-040-observability-logs-metrics-traces-and-dashboards) | complete |
+| Day 041 | [Thinking in Automation: Scripts, Hooks, and Pipelines](../../../content/sections/computing-foundations/day-041-thinking-in-automation-scripts-hooks-and/) | [lab](./day-041-thinking-in-automation-scripts-hooks-and/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-041-thinking-in-automation-scripts-hooks-and) | complete |
+| Day 042 | [Section Review: Your Computing Foundations Toolkit](../../../content/sections/computing-foundations/day-042-section-review-your-computing-foundations-toolkit/) | [lab](./day-042-section-review-your-computing-foundations-toolkit/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-042-section-review-your-computing-foundations-toolkit) | complete |
 
 **Project:** Automated Quality Pipeline — Assemble a small repository where formatting, linting, and a smoke test run automatically on every commit via git hooks, with structured logs you can inspect.
 

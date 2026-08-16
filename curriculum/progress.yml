@@ -1,0 +1,979 @@
+# Course progress tracker — the single source of truth for completion.
+# A day may carry status: complete ONLY when every one of the 13 completion
+# flags below is true, and audit:coverage cross-checks this in both
+# directions (requirements §13). Days absent from this file are "planned".
+#
+# statuses: planned | draft | in-review | complete
+
+days:
+  1:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      verify:all green; lab executed on macOS (18/18 checks, output
+      captured); WordPress package generated+validated with inlined SVGs;
+      release:export privacy scan passed; editorial review completed
+      2026-07-12.
+    completion: &done
+      lesson_content: true
+      lesson_rendered: true
+      lab_created: true
+      lab_executed: true
+      tests_passed: true
+      visuals_complete: true
+      sources_verified: true
+      readme_complete: true
+      local_links_passed: true
+      lab_links_generated: true
+      blog_published: true
+      privacy_scan_passed: true
+      editorial_review_passed: true
+  2:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (16 headings, 2 diagrams, 8-q quiz);
+      toy-CPU lab executed on macOS (27/27 checks); instructor answer key
+      verified against real traces; validators green.
+    completion: *done
+  3:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract; memory-hierarchy lab executed on
+      macOS (19/19 checks) with real cache/RAM/read measurements captured;
+      instructor solution from real values; validators green.
+    completion: *done
+  4:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract; binary-toolkit lab executed on macOS
+      (14/14 checks); instructor answer key verified with the toolkit;
+      validators green.
+    completion: *done
+  5:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract; byte-inspection lab executed on macOS
+      (18/18 checks) with real PNG/UTF-8 samples verified by file/xxd;
+      instructor key from real byte values; validators green.
+    completion: *done
+  6:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract; OS-exploration lab executed on macOS
+      (29/29 checks); instructor solution from real values; validators green.
+    completion: *done
+  7:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract and closes Week 1; process-playground
+      lab executed on macOS; instructor solution and rubric; validators
+      green.
+    completion: *done
+  8:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Meet the Terminal); lab executed on macOS
+      (35/35 checks); instructor solution; validators green.
+    completion: *done
+  9:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Navigating the Filesystem); lab executed on macOS
+      (15/15 checks); instructor solution; validators green.
+    completion: *done
+  10:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Working with Text); lab executed on macOS
+      (20/20 checks); instructor solution; validators green.
+    completion: *done
+  11:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Environment Variables); lab executed on macOS
+      (13/13 checks); instructor solution; validators green.
+    completion: *done
+  12:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Shell Scripting); lab executed on macOS
+      (11/11 checks); instructor solution; validators green.
+    completion: *done
+  13:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Package Managers); lab executed on macOS
+      (14/14 checks); instructor solution; validators green.
+    completion: *done
+  14:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Automating Tasks with cron); lab executed on macOS
+      (18/18 checks); instructor solution; validators green.
+    completion: *done
+  15:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (What Happens When You Load a Web Page); lab executed on macOS
+      (12/12 checks); instructor solution; validators green.
+    completion: *done
+  16:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (IP Addresses, DNS, and Routing); lab executed on macOS
+      (12/12 checks); instructor solution; validators green.
+    completion: *done
+  17:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (TCP, UDP, and Ports); lab executed on macOS
+      (9/9 checks); instructor solution; validators green.
+    completion: *done
+  18:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (HTTP: Requests, Responses, and Methods); lab executed on macOS
+      (7/7 checks); instructor solution; validators green.
+    completion: *done
+  19:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (HTTPS and TLS); lab executed on macOS
+      (10/10 checks); instructor solution; validators green.
+    completion: *done
+  20:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (How Browsers Render); lab executed on macOS
+      (21/21 checks); instructor solution; validators green.
+    completion: *done
+  21:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Inspecting Traffic with curl); lab executed on macOS
+      (11/11 checks); instructor solution; validators green.
+    completion: *done
+  22:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (What an API Is); lab executed on macOS
+      (17/17 checks); instructor solution; validators green.
+    completion: *done
+  23:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (REST Fundamentals); lab executed on macOS
+      (15/15 checks); instructor solution; validators green.
+    completion: *done
+  24:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (JSON and Serialization); lab executed on macOS
+      (7/7 checks); instructor solution; validators green.
+    completion: *done
+  25:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (API Authentication); lab executed on macOS
+      (16/16 checks); instructor solution; validators green.
+    completion: *done
+  26:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Webhooks); lab executed on macOS
+      (15/15 checks); instructor solution; validators green.
+    completion: *done
+  27:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Rate Limits, Pagination, Errors); lab executed on macOS
+      (17/17 checks); instructor solution; validators green.
+    completion: *done
+  28:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Consuming a Public API from CLI); lab executed on macOS
+      (14/14 checks); instructor solution; validators green.
+    completion: *done
+  29:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Why Version Control Exists); lab executed on macOS
+      (12/12 checks); instructor solution; validators green.
+    completion: *done
+  30:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Git Fundamentals); lab executed on macOS
+      (12/12 checks); instructor solution; validators green.
+    completion: *done
+  31:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Branching and Merging); lab executed on macOS
+      (10/10 checks); instructor solution; validators green.
+    completion: *done
+  32:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Remotes and GitHub); lab executed on macOS
+      (12/12 checks); instructor solution; validators green.
+    completion: *done
+  33:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Pull Requests and Code Review); lab executed on macOS
+      (11/11 checks); instructor solution; validators green.
+    completion: *done
+  34:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Undoing Things); lab executed on macOS
+      (8/8 checks); instructor solution; validators green.
+    completion: *done
+  35:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Git Workflows); lab executed on macOS
+      (8/8 checks); instructor solution; validators green.
+    completion: *done
+  36:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Choosing a Code Editor); lab executed on macOS
+      (12/12 checks); instructor solution; validators green.
+    completion: *done
+  37:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Debuggers, Linters, Formatters); lab executed on macOS
+      (9/9 checks); instructor solution; validators green.
+    completion: *done
+  38:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Regular Expressions); lab executed on macOS
+      (8/8 checks); instructor solution; validators green.
+    completion: *done
+  39:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Data Storage); lab executed on macOS
+      (7/7 checks); instructor solution; validators green.
+    completion: *done
+  40:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Observability); lab executed on macOS
+      (22/22 checks); instructor solution; validators green.
+    completion: *done
+  41:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Thinking in Automation); lab executed on macOS
+      (6/6 checks); instructor solution; validators green.
+    completion: *done
+  42:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Section 1 Review); lab executed on macOS
+      (22/22 checks); instructor solution; validators green.
+    completion: *done
+  43:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Installing Python & venv); Python lab executed on macOS
+      python3 3.14 (11/11 checks); instructor solution; validators green.
+    completion: *done
+  44:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Variables and Types); Python lab executed on macOS
+      python3 3.14 (12/12 checks); instructor solution; validators green.
+    completion: *done
+  45:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Strings and Text Processing); Python lab executed on macOS
+      python3 3.14 (9/9 checks); instructor solution; validators green.
+    completion: *done
+  46:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Numbers, Math, Precision); Python lab executed on macOS
+      python3 3.14 (9/9 checks); instructor solution; validators green.
+    completion: *done
+  47:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Input, Output, f-strings); Python lab executed on macOS
+      python3 3.14 (19/19 checks); instructor solution; validators green.
+    completion: *done
+  48:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Reading Errors & Debugging); Python lab executed on macOS
+      python3 3.14 (9/9 checks); instructor solution; validators green.
+    completion: *done
+  49:
+    status: complete
+    completed_on: '2026-07-12'
+    evidence: >-
+      Lesson passes content contract (Your First Real Program); Python lab executed on macOS
+      python3 3.14 (12/12 checks); instructor solution; validators green.
+    completion: *done
+  50:
+    status: complete
+    completed_on: '2026-07-13'
+    evidence: >-
+      Lesson passes content contract (Conditionals and Boolean Logic, 16 H2s + 4
+      hands-on H3s, 2 SVGs); Decision Engine lab executed on macOS python3 3.14
+      (22/22 checks completed); instructor solution; validators green.
+    completion: *done
+  51:
+    status: complete
+    completed_on: '2026-07-13'
+    evidence: >-
+      Lesson passes content contract (Loops and Iteration Patterns); Iteration
+      Patterns Workbench lab executed on macOS python3 3.14 (24/24 checks
+      completed); instructor solution; validators green.
+    completion: *done
+  52:
+    status: complete
+    completed_on: '2026-07-13'
+    evidence: >-
+      Lesson passes content contract (Lists in Depth); List Toolkit lab executed
+      on macOS python3 3.14 (20/20 checks completed); instructor solution;
+      validators green.
+    completion: *done
+  53:
+    status: complete
+    completed_on: '2026-07-13'
+    evidence: >-
+      Lesson passes content contract (Dictionaries in Depth); Word Frequency &
+      Records lab executed on macOS python3 3.14 (18/18 checks completed);
+      instructor solution; validators green.
+    completion: *done
+  54:
+    status: complete
+    completed_on: '2026-07-13'
+    evidence: >-
+      Lesson passes content contract (Tuples, Sets, and Choosing a Collection);
+      Choosing Collections lab executed on macOS python3 3.14 (20/20 checks
+      completed); instructor solution; validators green.
+    completion: *done
+  55:
+    status: complete
+    completed_on: '2026-07-13'
+    evidence: >-
+      Lesson passes content contract (Comprehensions and Iterator Thinking);
+      Comprehensions & Generators lab executed on macOS python3 3.14 (12/12
+      checks, lazy==eager proven); instructor solution; validators green.
+    completion: *done
+  56:
+    status: complete
+    completed_on: '2026-07-13'
+    evidence: >-
+      Lesson passes content contract (Building a Data-Driven CLI, week 8
+      capstone); Records CLI lab executed on macOS python3 3.14 (31/31 checks
+      completed); instructor solution; Terminal Task Manager project + solution;
+      validators green.
+    completion: *done
+  57:
+    status: complete
+    completed_on: '2026-07-13'
+    evidence: >-
+      Lesson passes content contract (Functions: Definition, Arguments, Return
+      Values); Function Library lab executed on macOS python3 3.14 (46/46 checks
+      completed, pure functions + mutable-default trap); instructor solution;
+      validators green.
+    completion: *done
+  58:
+    status: complete
+    completed_on: '2026-07-13'
+    evidence: >-
+      Lesson passes content contract (Scope, Closures, and *args/**kwargs);
+      Flexible Functions lab executed on macOS python3 3.14 (30/30 checks
+      completed, variadics + closures); instructor solution; validators green.
+    completion: *done
+  59:
+    status: complete
+    completed_on: '2026-07-13'
+    evidence: >-
+      Lesson passes content contract (Modules, Imports, and Project Layout);
+      Split into Modules lab executed on macOS python3 3.14 (26/26 checks
+      completed, wordstats package); instructor solution; validators green.
+    completion: *done
+  60:
+    status: complete
+    completed_on: '2026-07-13'
+    evidence: >-
+      Lesson passes content contract (A Tour of the Standard Library); Stdlib
+      Toolkit lab executed on macOS python3 3.14 (19/19 checks completed,
+      pathlib+Counter+datetime+json); instructor solution; validators green.
+    completion: *done
+  61:
+    status: complete
+    completed_on: '2026-07-13'
+    evidence: >-
+      Lesson passes content contract (Writing Readable Code); Refactor for
+      Readability lab executed on macOS python3 3.14 (14/14 checks, 2 optional
+      tool skips, behavior identity proven); instructor solution; validators
+      green.
+    completion: *done
+  62:
+    status: complete
+    completed_on: '2026-07-13'
+    evidence: >-
+      Lesson passes content contract (Recursion); Recursive Thinking lab
+      executed on macOS python3 3.14 (31/31 checks completed, naive vs
+      lru_cache by call count); instructor solution; validators green.
+    completion: *done
+  63:
+    status: complete
+    completed_on: '2026-07-13'
+    evidence: >-
+      Lesson passes content contract (Designing a Small Program Well, week 9
+      capstone); Design It First lab executed on macOS python3 3.14 (23/23
+      checks completed, pure core + thin shell); instructor solution; Flashcard
+      Study App project + solution; validators green.
+    completion: *done
+  64:
+    status: complete
+    completed_on: '2026-07-19'
+    evidence: >-
+      Lesson passes content contract (Reading and Writing Files, week 10
+      opener); Safe File I/O Toolkit lab executed on macOS python3 3.14.0
+      (28/28 checks, 0 failures); every figure in the lesson re-derived from a
+      real run of examples/demo.py (70 bytes vs 62 characters, 24.82 MiB vs
+      0.14 MiB peak, the captured UnicodeDecodeError, the mid-operation
+      directory listing); instructor solution; WordPress export built;
+      verify:all green.
+    completion: *done
+  65:
+    status: complete
+    completed_on: '2026-07-19'
+    evidence: >-
+      Lesson passes content contract (CSV and JSON in the Real World);
+      Wrangling Messy Data lab executed on macOS python3 3.14.0 (26/26 checks,
+      0 failures) against a deliberately hostile CSV carrying a byte-order
+      mark, an embedded comma, a quoted newline, doubled quotes, an empty
+      field and a ragged row; from-scratch quoting parser agrees with the csv
+      module on every row; every parsed value and byte count in the lesson
+      re-derived from real runs; instructor solution; WordPress export built.
+    completion: *done
+  66:
+    status: complete
+    completed_on: '2026-07-19'
+    evidence: >-
+      Lesson passes content contract (Exceptions and Error Handling Strategy);
+      Failing Well lab executed on macOS python3 3.14.0 (29/29 checks, 0
+      failures, exit 0) and re-run independently at integration; every quoted
+      traceback, chained exception, and retry-backoff figure captured from a
+      real run with absolute paths normalised and the difference noted;
+      hand-authored unwinding flow diagram added alongside the exception
+      hierarchy; instructor solution; WordPress export built.
+    completion: *done
+  67:
+    status: complete
+    completed_on: '2026-07-19'
+    evidence: >-
+      Lesson passes content contract (Classes and Objects); Building Your
+      First Classes lab executed on macOS python3 3.14.0 (28/28 checks with
+      the starter unfinished, 34/34 with it completed, 0 failures) and re-run
+      independently at integration; example output diffed against the captured
+      expected-output with zero differences; default __repr__ addresses shown
+      as 0x... with the per-run difference noted rather than faked; pydantic
+      described but not demonstrated because it is genuinely not installed;
+      instructor solution; WordPress export built.
+    completion: *done
+  69:
+    status: complete
+    completed_on: '2026-07-19'
+    evidence: >-
+      Lesson passes content contract (Dataclasses and Type Hints); From
+      Boilerplate to Dataclass lab executed on macOS python3 3.14.0 (33/33
+      checks, 0 failures, exit 0) and re-run independently at integration;
+      mypy confirmed NOT installed, so the lesson quotes no checker output at
+      all and instead proves the stored-but-not-enforced point by inspecting
+      __annotations__ and dataclasses.fields() at runtime, plus a planted-bug
+      demo where only one of two type errors crashes; instructor solution;
+      WordPress export built.
+    completion: *done
+  68:
+    status: complete
+    completed_on: '2026-07-19'
+    evidence: >-
+      Lesson passes content contract (Inheritance, Composition, and Dunder
+      Methods); Protocols and Hierarchies lab built and executed on macOS
+      python3 3.14.0 (36/36 checks with the starter unfinished, 39/39 once
+      completed, 0 failures) and re-run independently at integration; failure
+      behaviour verified by deliberately breaking __iter__ and __hash__ (4
+      failures, exit 1); suite additionally passes on python3 3.11.14 after
+      two portability bugs in the assertions were found and fixed; two quoted
+      outputs in the pre-existing lesson were wrong (a traceback missing 3.14
+      caret lines, and a __hash__ result) and were corrected against real
+      runs; instructor solution; WordPress export built.
+    completion: *done
+  70:
+    status: complete
+    completed_on: '2026-07-19'
+    evidence: >-
+      Lesson passes content contract (Modeling a Domain with Objects, week 10
+      synthesis); Model the Domain lab (Northside Gym membership — deliberately
+      a different domain from the lesson's expense-tracker example so the Week
+      10 project stays fresh) executed on macOS python3 3.14.0 (33/33 checks
+      with the starter unfinished, 46/46 once completed, 0 failures) and re-run
+      independently at integration; captured test output diffs byte-identical
+      against a real run; the lesson's expense-tracker core was built from its
+      own sentences and executed, including the hand-checkable 1051.30 EUR
+      April report and the honest float demonstration (0.1 + 0.2 drifts while
+      ten 0.10s sum to exactly 1.0); SQLAlchemy and pydantic are labelled as
+      not installed rather than shown with invented output; instructor
+      solution; WordPress export built.
+    completion: *done
+  71:
+    status: complete
+    completed_on: '2026-07-19'
+    evidence: >-
+      Lesson passes content contract (Why Test, and pytest Basics — opens week
+      11); Your First Real Test Suite lab executed on macOS python3 3.14.0 with
+      pytest 9.1.1 (47/47 checks, 0 failures) and re-run independently at
+      integration; the suite is proved to bite by breaking a line in a temp copy
+      and asserting a non-zero exit; unittest and doctest alternatives shown
+      with real captured runs while Hypothesis is stated as not installed rather
+      than given invented output; instructor solution verified by running the
+      answer key (10 passed against the fixed module, 3 failed/7 passed against
+      the unrepaired starter); WordPress export built.
+    completion: *done
+  72:
+    status: complete
+    completed_on: '2026-07-19'
+    evidence: >-
+      Lesson passes content contract (Fixtures, Parametrization, and Test
+      Design); A Suite That Scales lab executed on macOS python3 3.14.0 with
+      pytest 9.1.1 (38/38 checks, 0 failures) and re-run independently at
+      integration; 41 items collected from 22 test functions proving
+      parametrization expanded; scope demonstration captured with session,
+      module and function fixture bodies running 1/2/4 times with matching
+      teardowns; deliberate-break check names the single failing parametrized
+      case while the others still run; factory_boy and Hypothesis are labelled
+      as not installed rather than shown with invented output; instructor
+      solution; WordPress export built.
+    completion: *done
+  73:
+    status: complete
+    completed_on: '2026-07-19'
+    evidence: >-
+      Lesson passes content contract (Test-Driven Development); bowling-kata lab
+      executed on macOS python3 3.14.0 with pytest 9.1.1 (40/40 checks, 0
+      failures) and re-run independently at integration; every pytest block in
+      the lesson is copied verbatim from the lab's recorded cycle captures
+      rather than retyped, and the harness verifies each recorded RED really
+      shows a failure and each GREEN really shows a pass; history is dated and
+      hedged honestly with no study figure quoted; instructor solution walks the
+      kata cycle by cycle; WordPress export built.
+    completion: *done
+  74:
+    status: complete
+    completed_on: '2026-07-19'
+    evidence: >-
+      Lesson passes content contract (Mocking and Testing Boundaries); Test the
+      Logic, Stub the World lab executed on macOS python3 3.14.0 with pytest
+      9.1.1 (49/49 checks, 0 failures) and re-run independently at integration;
+      the autospec demonstration is asserted mechanically — an un-specced Mock
+      accepts a misspelled method so the naive test passes while the autospec'd
+      one fails; the wrong-patch-target failure and correct-target success are
+      both captured; the refactored core runs from an empty directory with no
+      patching, echoing Day 70's proof; no network at any point; instructor
+      solution; WordPress export built.
+    completion: *done
+  75:
+    status: complete
+    completed_on: '2026-07-19'
+    evidence: >-
+      Lesson passes content contract (Static Typing with mypy); closes the Day
+      69 honesty call — mypy 2.3.0 is now installed in the gitignored authoring
+      venv, so this day quotes real checker output where Day 69 could only prove
+      by runtime inspection that annotations are stored and ignored; Catch the
+      Bug the Tests Missed lab executed on macOS python3 3.14.0 (33/33 checks, 0
+      failures) and re-run independently at integration; the lab asserts the
+      pytest suite passes on the buggy code while mypy exits non-zero with the
+      expected bracketed error codes, and that adding Any makes a caught error
+      disappear; a defect found at integration was fixed — the architecture
+      diagram alt contained a bracketed table name, and a closing bracket
+      terminates markdown image syntax early, so the alt would have rendered
+      broken; instructor solution; WordPress export built.
+    completion: *done
+  76:
+    status: complete
+    completed_on: '2026-07-19'
+    evidence: >-
+      Lesson passes content contract (Linting and Formatting with Ruff);
+      mechanizes the hand judgements of Day 61; From Messy to Clean lab executed
+      on macOS python3 3.14.0 with ruff 0.15.22 and pytest 9.1.1 (37/37 checks,
+      0 failures) and re-run independently at integration; the suite passes both
+      before and after formatting proving behaviour is preserved, ruff check
+      exits non-zero on the messy file emitting the expected rule codes, format
+      --check fails on the messy file and passes on the clean one, and
+      formatting is proved idempotent; the lab includes a mutable default
+      argument so the linter catches a real bug rather than only cosmetics; the
+      forbidden-token grep returns zero hits on this highest-risk day, achieved
+      by choosing F401/F841/E501/E711/B006/SIM108/I001/UP demonstration rules
+      and never enabling the fixme rule families; instructor solution; WordPress
+      export built.
+    completion: *done
+  77:
+    status: complete
+    completed_on: '2026-07-19'
+    evidence: >-
+      Lesson passes content contract (Quality Gates for a Python Project — week
+      11 capstone); One Command, Every Gate lab executed on macOS python3 3.14.0
+      with pytest 9.1.1, mypy 2.3.0, ruff 0.15.22 and coverage 7.15.2 (39/39
+      checks, 0 failures) and re-run independently at integration; the gate is
+      proved to have teeth by five separate defects each tripping exactly one
+      stage — formatting, lint (I001/F401), types (override/return-value), tests
+      (cents 7801 != 7800), and coverage (88 below fail-under=95); the
+      coverage-without-assertions point is proved mechanically, a module with
+      zero assert statements still reporting 100%; the coverage version was
+      corrected from the brief's guess to the real 7.15.2 read from the
+      installed package; the CI workflow is shipped and explained as a
+      reference file and stated as never executed, and no prices or free-tier
+      allowances are quoted; instructor solution; WordPress export built.
+    completion: *done
+  78:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (HTTP in Python with requests); Talk to a
+      Server lab re-executed independently at integration on macOS python3
+      3.14.0 with requests 2.34.2 (58 checks, 0 failures, exit 0); editorial
+      review corrected two figures presented as captured that the lab's own
+      capture contradicted — the raw-socket response header block said 143
+      bytes where the real value is 142, and elapsed said 0.0012s where the
+      capture says 0.0010s; the "53 checks once every exercise is complete"
+      figure was re-derived from the harness itself, which replaces eight
+      structural checks with three behavioural ones, so 58 minus 8 plus 3 is
+      correct; all 8 quiz answer indices verified correct; instructor solution;
+      WordPress export built and validated.
+    completion: *done
+  79:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (Web Scraping Responsibly); lab
+      re-executed at integration (51 checks, 0 failures, exit 0) with
+      beautifulsoup4 4.15.0; editorial review found the starter baseline
+      recorded as "32 failed, 1 passed" in the lesson, the lab README and
+      metadata.yml executed_on — a real run produces 33 failed, 1 passed, and
+      the old figure was also arithmetically impossible against a 34-test
+      suite; corrected in all three places after re-running. All 8 quiz answer
+      indices verified correct; no test contacts any host but 127.0.0.1;
+      instructor solution; WordPress export built and validated.
+    completion: *done
+  80:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (Building CLIs with argparse); lab
+      re-executed at integration (76 checks, 0 failures, exit 0); every quoted
+      output reproduced at review, including the click demonstration
+      re-created from the lesson's own code block and run against the
+      installed click 8.4.2; all 8 quiz answer indices verified correct;
+      sources.yml replaced — it carried three entries belonging to other days
+      and nothing supporting this day's claims, and now cites argparse, the
+      POSIX utility conventions, the GNU command-line interface standards,
+      Click, Typer and PEP 389; instructor solution; WordPress export built
+      and validated.
+    completion: *done
+  81:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (Scheduling and Background Jobs); lab
+      re-executed at integration (56 checks, 0 failures, exit 0). Editorial
+      review found and this checkpoint fixed two real defects. First, a
+      factual error stated twice — the lesson and the quiz both claimed the
+      day-of-month OR day-of-week trap fires "roughly eight times" more often
+      than Friday the 13th; computed over 2000-2039 the OR set fires 62.5
+      times a year against 1.675, a factor of 37.3, so both now say about
+      thirty-seven. Second, a machine-state-dependent check: the harness
+      asserted no orphan survived by running pgrep -f "sleep 30" over the
+      whole process table, which failed on this machine because an unrelated
+      process matched; the supervised child is now a uniquely named symlink to
+      sleep carrying the harness's own pid, so the check can only match its
+      own child. All 8 quiz answer indices verified correct; sources.yml
+      replaced with crontab(5), systemd.timer, sysexits, PEP 615 and PEP 495,
+      which actually support the day's claims; instructor solution; WordPress
+      export built and validated.
+    completion: *done
+  82:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (A First Web API with FastAPI); lab
+      re-executed at integration (39 checks, 0 failures, exit 0). Editorial
+      review drove every quoted response through TestClient and reproduced all
+      of them byte for byte, including the 422 body's detail list, loc, type
+      and input fields and the 500 whose body says nothing at all; the
+      OpenAPI component schema listing and the 3.1.0 version were confirmed
+      from the generated document; fastapi 0.139.2, uvicorn 0.51.0, pydantic
+      2.13.4 and starlette 1.3.1 all verified as the installed versions; every
+      historical attribution checked. All 8 quiz answer indices verified
+      correct. No defects found. Instructor solution; WordPress export built
+      and validated.
+    completion: *done
+  83:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (Packaging and Distributing Python Code);
+      lab re-executed at integration (87 checks, 0 failures, exit 0) with
+      build 1.5.0 and setuptools 83.0.0; editorial review found zero
+      mismatches between the lesson's quoted blocks and the lab tree and
+      confirmed every packaging-history attribution; all 8 quiz answer indices
+      verified correct; sources.yml replaced — it cited BeautifulSoup and
+      requests, irrelevant here, and nothing supporting the six PEPs the
+      history section names, and now cites PEP 517, 518, 621 and 427, the
+      pyproject.toml specification and Semantic Versioning; publishing is
+      described but never performed; instructor solution; WordPress export
+      built and validated.
+    completion: *done
+  84:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (Shipping an Automation Toolkit — week 12
+      capstone); lab re-executed at integration (52 checks, 0 failures, exit
+      0). Editorial review found two real defects, both fixed here. First, the
+      lesson quoted "51 checks" three times and introduced it as a real
+      captured line, while the lab's own metadata.yml and
+      expected-output/test-run.txt both record 52 and a re-run prints 52;
+      corrected to 52 and the capture regenerated. Second, an exit-code
+      collision taught as correct: partial success was assigned exit 2, which
+      argparse already owns for usage errors and which this very CLI emits, so
+      a scheduler could not tell a partial run from a mistyped crontab line —
+      and it contradicted Day 80's teaching that 2 means the command line was
+      wrong. Partial success moved to 3 and the lock-held case to 75, the
+      EX_TEMPFAIL code Day 81 already uses for exactly that condition; source,
+      tests, harness, README, troubleshooting, captures, the flow diagram, the
+      visuals description and the quiz option were all moved together, the
+      codes were re-observed by running the tool, and the lesson now teaches
+      the collision explicitly rather than stepping around it. All 8 quiz
+      answer indices verified correct; sources.yml replaced with sysexits, RFC
+      5424, the Twelve-Factor App and systemd.timer, which support what the
+      day actually claims; Week 12 project and instructor solution added;
+      WordPress export built and validated.
+    completion: *done
+  85:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (Relational Databases and SQLite — the
+      reader's first database, opened by making Week 12's JSON state file fail
+      concretely); Your First Database lab executed on macOS python3 3.14.0
+      and re-run independently at integration (44 checks, 0 failures, exit 0);
+      the lab proves the database is one ordinary file by reading the literal
+      "SQLite format 3" header, demonstrates dynamic typing accepting a string
+      into an INTEGER column and a STRICT table rejecting the same insert, and
+      asserts a hand-written Python table scan and the equivalent SELECT
+      return identical rows. First day under amendment A30: the flow diagram
+      is an animated SVG with a prefers-reduced-motion block, and every class,
+      id and keyframes name is namespaced per file so the two inlined diagrams
+      cannot collide in the export. Honesty calls recorded in the lesson and
+      FIELDS.md: the sqlite3 shell and Python's module report different
+      library versions on this machine, so both are quoted and the suite
+      asserts only that each is readable; a page-size claim that could not be
+      verified was softened to what the header on this machine actually says;
+      no prices or tiers quoted. Instructor solution; WordPress export built
+      and validated.
+    completion: *done
+  86:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (SELECT — Filtering, Sorting, and
+      Aggregating, organised around the logical evaluation order rather than
+      the written order); Ask the Database Questions lab executed and re-run
+      independently at integration (124 checks, 0 failures, exit 0), with a
+      negative control confirming the harness reports a failure and exits 1
+      when one expectation is falsified. Tests check actual result values, not
+      that a query ran. Honesty calls: the brief asked for the standard claim
+      that a SELECT alias cannot be used in WHERE — SQLite runs it, so the
+      lesson now states that standard SQL forbids it, PostgreSQL rejects it
+      and SQLite permits it as a documented extension, pinned by two tests;
+      two of the author's own hand-computed expectations were wrong and the
+      value-checking harness caught both, which is written up in the
+      instructor solution as evidence for that style of test; DuckDB and
+      pandas are described without being run and the prose says so. Animated
+      evaluation-flow diagram with reduced-motion support and per-file
+      namespacing. Instructor solution; WordPress export built and validated.
+    completion: *done
+  87:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (Joins and Relationships, opened from the
+      three anomalies a single wide table produces); Connecting the Tables lab
+      executed and re-run independently at integration (75 checks, 0 failures,
+      exit 0), with a perturbation check confirming it fails when a seed value
+      is changed. The lab proves PRAGMA foreign_keys is off by default by
+      inserting an orphan successfully, then enabling it and capturing the real
+      rejection; implements nested-loop and hash joins in Python and asserts
+      they equal the SQL result. Honesty calls: a behaviour not in the brief
+      was found and taught — issuing PRAGMA foreign_keys inside a transaction
+      silently reads back 0, which is exactly what Python's sqlite3 sets up for
+      you, verified against the cited SQLite documentation; the N+1 measurement
+      contradicted the usual slogan at under 2x rather than 500x on this
+      machine, so it is reported as measured, machine-specific and variable,
+      with only the query counts asserted; the invented member and loan rows
+      are labelled as invented in both README and security notes. Animated
+      join-flow diagram with reduced-motion support. Instructor solution;
+      WordPress export built and validated.
+    completion: *done
+  88:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (Inserting, Updating, and Schema Design,
+      opened on the WHERE-less UPDATE and the discipline that prevents it);
+      Change the Data Safely lab executed and re-run independently at
+      integration (101 checks, 0 failures, exit 0), with a negative control
+      confirming exit 1 and real expected-versus-actual diagnostics. Includes a
+      from-scratch migration runner tracked by PRAGMA user_version and proved
+      idempotent by a second run applying nothing. Honesty calls: verification
+      changed the content twice. ALTER TABLE support differs between the two
+      SQLite libraries on this machine, so the test asserts each build agrees
+      with its own version number rather than pinning one answer, and an
+      undocumented behaviour observed in the newer library was deliberately
+      not taught; and the author's own assumption that a mid-transaction
+      constraint error rolls back earlier successful statements is false — the
+      error undoes only the failing statement — so the harness, lesson, quiz
+      and rubric were all rewritten around the verified behaviour, testing
+      COMMIT, ROLLBACK and bail separately. PostgreSQL and MySQL transactional
+      DDL is explicitly flagged as unverified rather than asserted. Animated
+      transaction-flow diagram with reduced-motion support. Instructor
+      solution; WordPress export built and validated.
+    completion: *done
+  89:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (Indexes and Query Performance); Make It
+      Fast lab executed and re-run independently at integration (40 checks, 0
+      failures, exit 0). The day is built on measurement rather than assertion:
+      a seeded generator builds a few hundred thousand rows, every query is
+      timed repeatedly, and the tests assert the SHAPE of the result — SEARCH
+      rather than SCAN, reads at least 20x faster against roughly 309x
+      measured, writes at least 1.5x slower against 11.7x measured — never a
+      millisecond figure, which is written up in the lab README as a
+      transferable lesson about testing around measurements. Four honesty
+      calls, all recorded in the lesson and FIELDS.md: ANALYZE did not change
+      a plan on this evenly distributed data, so the script detects that at
+      runtime and says so rather than manufacturing a flip, and no test
+      asserts one; the indexed timing benefits from a warm cache, so the
+      script drops the index and re-times the scan to show the comparison was
+      fair; a prefix LIKE scanned despite the index, which contradicts the
+      usual folklore, so the real cause and both fixes are given instead of
+      the tidier claim, and the measured MULTI-INDEX OR plan likewise
+      disproves "OR always defeats an index"; and the step counts from the
+      pure-Python scan-versus-bisect comparison are counted rather than timed,
+      because that half is reproducible where the milliseconds are not.
+      Animated query-plan diagram contrasting a scan with a seek. Instructor
+      solution; WordPress export built and validated.
+    completion: *done
+  90:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (SQLite from Python); A Real Data Layer
+      lab executed and re-run independently at integration (64 checks, 0
+      failures, exit 0). SQL injection is taught by demonstration rather than
+      warning — a crafted value leaks three private records and then drops a
+      table against a throwaway database, and the same string bound as a
+      parameter is treated as an ordinary value. The lab proves rollback on
+      both a SQL error and a Python one, that PRAGMA foreign_keys is
+      per-connection and a silent no-op inside a transaction, that `with
+      connection:` commits a transaction but does NOT close the connection,
+      and includes a mechanical ast guard that no SQL statement is built from
+      parts. Environment facts were read from the interpreter rather than
+      memory, including the deprecation message for the default date adapter,
+      quoted verbatim from a run with warnings raised as errors. SQLAlchemy,
+      aiosqlite and pandas are described but not demonstrated and no output is
+      claimed for them; the bulk-insert and memory figures are single real
+      measurements presented as shapes, with FIELDS.md recording what may
+      legitimately differ. Animated parameter-binding diagram. Instructor
+      solution; WordPress export built and validated.
+    completion: *done
+  91:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (Designing and Querying a Real Schema —
+      the Week 13 capstone); From Requirements to Report lab executed and
+      re-run independently at integration (72 checks, 0 failures, exit 0). The
+      day teaches the process rather than a topic list: a prose brief becomes
+      entities, a logical schema, a physical schema with constraints and
+      indexes, ten queries and a printed report. Its sharpest demonstration is
+      a stored queue position breaking silently in three ordinary statements
+      with no error raised, which is the argument for deriving it with
+      ROW_NUMBER instead. Soft delete is priced honestly: the same filter is
+      applied in two questions and deliberately omitted in a third, because
+      which filter applies is a property of the question rather than of the
+      table. The report takes its instant as a parameter with a default rather
+      than reading the clock, which is what makes its output reproducible and
+      testable. Money is integer pence throughout with the division by 100 at
+      the display edge only. PostgreSQL is described as having real date,
+      boolean and enum types but nothing was run against it and no
+      version-specific behaviour is claimed. All seed people, emails, dates
+      and fines are invented and said to be invented. Animated
+      requirements-to-report diagram. Instructor solution written at
+      integration; WordPress export built and validated.
+    completion: *done

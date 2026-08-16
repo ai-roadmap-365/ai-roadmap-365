@@ -201,7 +201,7 @@ exercises in order, running the suite against **your** module after each one:
 SCRAPER_MODULE=starter .venv/bin/pytest tests -q
 ```
 
-You start at `32 failed, 1 passed` and finish at `34 passed`.
+You start at `33 failed, 1 passed` and finish at `34 passed`.
 
 Finally, the whole harness:
 

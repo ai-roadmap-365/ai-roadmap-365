@@ -1,0 +1,807 @@
+# 365 Days of AI Mastery — curriculum index
+
+> GENERATED — do not edit by hand. Run `npm run generate:section-nav`.
+
+The complete map of all nine courses: **91 of 365 days complete.** Click a course to expand it, then a subsection, to drill down to individual days — nothing is shown all at once.
+
+<details>
+<summary><h3>Course01 · Computing Foundations — 42/42 complete</h3></summary>
+
+How computers, operating systems, the command line, networks, and developer tooling actually work — the bedrock every AI practitioner builds on.
+
+<details>
+<summary>Days 1-7 · Inside the Machine — 7/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 001 | [How a Computer Works: From Transistors to Programs](content/sections/computing-foundations/day-001-how-a-computer-works-from-transistors/) | [lab](labs/sections/computing-foundations/day-001-how-a-computer-works-from-transistors/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-001-how-a-computer-works-from-transistors) | complete |
+| Day 002 | [The CPU: Fetch, Decode, Execute](content/sections/computing-foundations/day-002-the-cpu-fetch-decode-execute/) | [lab](labs/sections/computing-foundations/day-002-the-cpu-fetch-decode-execute/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-002-the-cpu-fetch-decode-execute) | complete |
+| Day 003 | [Memory Hierarchy: Registers, RAM, and Storage](content/sections/computing-foundations/day-003-memory-hierarchy-registers-ram-and-storage/) | [lab](labs/sections/computing-foundations/day-003-memory-hierarchy-registers-ram-and-storage/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-003-memory-hierarchy-registers-ram-and-storage) | complete |
+| Day 004 | [Binary and Data Representation: Bits, Bytes, and Numbers](content/sections/computing-foundations/day-004-binary-and-data-representation-bits-bytes/) | [lab](labs/sections/computing-foundations/day-004-binary-and-data-representation-bits-bytes/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-004-binary-and-data-representation-bits-bytes) | complete |
+| Day 005 | [Text, Images, and Sound as Data](content/sections/computing-foundations/day-005-text-images-and-sound-as-data/) | [lab](labs/sections/computing-foundations/day-005-text-images-and-sound-as-data/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-005-text-images-and-sound-as-data) | complete |
+| Day 006 | [Operating Systems: What They Do and Why](content/sections/computing-foundations/day-006-operating-systems-what-they-do-and/) | [lab](labs/sections/computing-foundations/day-006-operating-systems-what-they-do-and/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-006-operating-systems-what-they-do-and) | complete |
+| Day 007 | [Processes, Threads, and Scheduling](content/sections/computing-foundations/day-007-processes-threads-and-scheduling/) | [lab](labs/sections/computing-foundations/day-007-processes-threads-and-scheduling/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-007-processes-threads-and-scheduling) | complete |
+
+</details>
+<details>
+<summary>Days 8-14 · The Command Line — 7/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 008 | [Meet the Terminal: Shells, Prompts, and Commands](content/sections/computing-foundations/day-008-meet-the-terminal-shells-prompts-and/) | [lab](labs/sections/computing-foundations/day-008-meet-the-terminal-shells-prompts-and/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-008-meet-the-terminal-shells-prompts-and) | complete |
+| Day 009 | [Navigating the Filesystem: Paths, Files, and Permissions](content/sections/computing-foundations/day-009-navigating-the-filesystem-paths-files-and/) | [lab](labs/sections/computing-foundations/day-009-navigating-the-filesystem-paths-files-and/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-009-navigating-the-filesystem-paths-files-and) | complete |
+| Day 010 | [Working with Text: cat, grep, sed, and Pipes](content/sections/computing-foundations/day-010-working-with-text-cat-grep-sed/) | [lab](labs/sections/computing-foundations/day-010-working-with-text-cat-grep-sed/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-010-working-with-text-cat-grep-sed) | complete |
+| Day 011 | [Environment Variables and Shell Configuration](content/sections/computing-foundations/day-011-environment-variables-and-shell-configuration/) | [lab](labs/sections/computing-foundations/day-011-environment-variables-and-shell-configuration/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-011-environment-variables-and-shell-configuration) | complete |
+| Day 012 | [Shell Scripting: Variables, Loops, and Conditionals](content/sections/computing-foundations/day-012-shell-scripting-variables-loops-and-conditionals/) | [lab](labs/sections/computing-foundations/day-012-shell-scripting-variables-loops-and-conditionals/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-012-shell-scripting-variables-loops-and-conditionals) | complete |
+| Day 013 | [Package Managers: Homebrew, apt, and winget](content/sections/computing-foundations/day-013-package-managers-homebrew-apt-and-winget/) | [lab](labs/sections/computing-foundations/day-013-package-managers-homebrew-apt-and-winget/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-013-package-managers-homebrew-apt-and-winget) | complete |
+| Day 014 | [Automating Tasks with Shell Scripts and cron](content/sections/computing-foundations/day-014-automating-tasks-with-shell-scripts-and/) | [lab](labs/sections/computing-foundations/day-014-automating-tasks-with-shell-scripts-and/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-014-automating-tasks-with-shell-scripts-and) | complete |
+
+</details>
+<details>
+<summary>Days 15-21 · How the Internet Works — 7/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 015 | [What Happens When You Load a Web Page](content/sections/computing-foundations/day-015-what-happens-when-you-load-a/) | [lab](labs/sections/computing-foundations/day-015-what-happens-when-you-load-a/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-015-what-happens-when-you-load-a) | complete |
+| Day 016 | [IP Addresses, DNS, and Routing](content/sections/computing-foundations/day-016-ip-addresses-dns-and-routing/) | [lab](labs/sections/computing-foundations/day-016-ip-addresses-dns-and-routing/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-016-ip-addresses-dns-and-routing) | complete |
+| Day 017 | [TCP, UDP, and Ports](content/sections/computing-foundations/day-017-tcp-udp-and-ports/) | [lab](labs/sections/computing-foundations/day-017-tcp-udp-and-ports/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-017-tcp-udp-and-ports) | complete |
+| Day 018 | [HTTP: Requests, Responses, and Methods](content/sections/computing-foundations/day-018-http-requests-responses-and-methods/) | [lab](labs/sections/computing-foundations/day-018-http-requests-responses-and-methods/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-018-http-requests-responses-and-methods) | complete |
+| Day 019 | [HTTPS and TLS: Encryption on the Wire](content/sections/computing-foundations/day-019-https-and-tls-encryption-on-the/) | [lab](labs/sections/computing-foundations/day-019-https-and-tls-encryption-on-the/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-019-https-and-tls-encryption-on-the) | complete |
+| Day 020 | [How Browsers Render: HTML, CSS, and JavaScript](content/sections/computing-foundations/day-020-how-browsers-render-html-css-and/) | [lab](labs/sections/computing-foundations/day-020-how-browsers-render-html-css-and/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-020-how-browsers-render-html-css-and) | complete |
+| Day 021 | [Inspecting Traffic with curl and Developer Tools](content/sections/computing-foundations/day-021-inspecting-traffic-with-curl-and-developer/) | [lab](labs/sections/computing-foundations/day-021-inspecting-traffic-with-curl-and-developer/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-021-inspecting-traffic-with-curl-and-developer) | complete |
+
+</details>
+<details>
+<summary>Days 22-28 · APIs and the Web — 7/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 022 | [What an API Is and Why Everything Has One](content/sections/computing-foundations/day-022-what-an-api-is-and-why/) | [lab](labs/sections/computing-foundations/day-022-what-an-api-is-and-why/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-022-what-an-api-is-and-why) | complete |
+| Day 023 | [REST Fundamentals: Resources and Verbs](content/sections/computing-foundations/day-023-rest-fundamentals-resources-and-verbs/) | [lab](labs/sections/computing-foundations/day-023-rest-fundamentals-resources-and-verbs/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-023-rest-fundamentals-resources-and-verbs) | complete |
+| Day 024 | [JSON and Data Serialization](content/sections/computing-foundations/day-024-json-and-data-serialization/) | [lab](labs/sections/computing-foundations/day-024-json-and-data-serialization/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-024-json-and-data-serialization) | complete |
+| Day 025 | [API Authentication: Keys, Tokens, and OAuth](content/sections/computing-foundations/day-025-api-authentication-keys-tokens-and-oauth/) | [lab](labs/sections/computing-foundations/day-025-api-authentication-keys-tokens-and-oauth/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-025-api-authentication-keys-tokens-and-oauth) | complete |
+| Day 026 | [Webhooks and Event-Driven APIs](content/sections/computing-foundations/day-026-webhooks-and-event-driven-apis/) | [lab](labs/sections/computing-foundations/day-026-webhooks-and-event-driven-apis/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-026-webhooks-and-event-driven-apis) | complete |
+| Day 027 | [Rate Limits, Pagination, and Error Handling](content/sections/computing-foundations/day-027-rate-limits-pagination-and-error-handling/) | [lab](labs/sections/computing-foundations/day-027-rate-limits-pagination-and-error-handling/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-027-rate-limits-pagination-and-error-handling) | complete |
+| Day 028 | [Consuming a Public API from the Command Line](content/sections/computing-foundations/day-028-consuming-a-public-api-from-the/) | [lab](labs/sections/computing-foundations/day-028-consuming-a-public-api-from-the/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-028-consuming-a-public-api-from-the) | complete |
+
+</details>
+<details>
+<summary>Days 29-35 · Git and GitHub — 7/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 029 | [Why Version Control Exists](content/sections/computing-foundations/day-029-why-version-control-exists/) | [lab](labs/sections/computing-foundations/day-029-why-version-control-exists/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-029-why-version-control-exists) | complete |
+| Day 030 | [Git Fundamentals: Repositories, Staging, and Commits](content/sections/computing-foundations/day-030-git-fundamentals-repositories-staging-and-commits/) | [lab](labs/sections/computing-foundations/day-030-git-fundamentals-repositories-staging-and-commits/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-030-git-fundamentals-repositories-staging-and-commits) | complete |
+| Day 031 | [Branching and Merging](content/sections/computing-foundations/day-031-branching-and-merging/) | [lab](labs/sections/computing-foundations/day-031-branching-and-merging/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-031-branching-and-merging) | complete |
+| Day 032 | [Remotes and GitHub](content/sections/computing-foundations/day-032-remotes-and-github/) | [lab](labs/sections/computing-foundations/day-032-remotes-and-github/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-032-remotes-and-github) | complete |
+| Day 033 | [Pull Requests and Code Review](content/sections/computing-foundations/day-033-pull-requests-and-code-review/) | [lab](labs/sections/computing-foundations/day-033-pull-requests-and-code-review/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-033-pull-requests-and-code-review) | complete |
+| Day 034 | [Undoing Things: Reset, Revert, and Reflog](content/sections/computing-foundations/day-034-undoing-things-reset-revert-and-reflog/) | [lab](labs/sections/computing-foundations/day-034-undoing-things-reset-revert-and-reflog/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-034-undoing-things-reset-revert-and-reflog) | complete |
+| Day 035 | [Git Workflows for Real Projects](content/sections/computing-foundations/day-035-git-workflows-for-real-projects/) | [lab](labs/sections/computing-foundations/day-035-git-workflows-for-real-projects/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-035-git-workflows-for-real-projects) | complete |
+
+</details>
+<details>
+<summary>Days 36-42 · Systems Foundations: Storage, Observability, and Tooling — 7/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 036 | [Choosing and Configuring a Code Editor](content/sections/computing-foundations/day-036-choosing-and-configuring-a-code-editor/) | [lab](labs/sections/computing-foundations/day-036-choosing-and-configuring-a-code-editor/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-036-choosing-and-configuring-a-code-editor) | complete |
+| Day 037 | [Debuggers, Linters, and Formatters](content/sections/computing-foundations/day-037-debuggers-linters-and-formatters/) | [lab](labs/sections/computing-foundations/day-037-debuggers-linters-and-formatters/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-037-debuggers-linters-and-formatters) | complete |
+| Day 038 | [Regular Expressions](content/sections/computing-foundations/day-038-regular-expressions/) | [lab](labs/sections/computing-foundations/day-038-regular-expressions/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-038-regular-expressions) | complete |
+| Day 039 | [Data Storage: Files, Databases, Object Storage, and Caches](content/sections/computing-foundations/day-039-data-storage-files-databases-object-storage/) | [lab](labs/sections/computing-foundations/day-039-data-storage-files-databases-object-storage/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-039-data-storage-files-databases-object-storage) | complete |
+| Day 040 | [Observability: Logs, Metrics, Traces, and Dashboards](content/sections/computing-foundations/day-040-observability-logs-metrics-traces-and-dashboards/) | [lab](labs/sections/computing-foundations/day-040-observability-logs-metrics-traces-and-dashboards/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-040-observability-logs-metrics-traces-and-dashboards) | complete |
+| Day 041 | [Thinking in Automation: Scripts, Hooks, and Pipelines](content/sections/computing-foundations/day-041-thinking-in-automation-scripts-hooks-and/) | [lab](labs/sections/computing-foundations/day-041-thinking-in-automation-scripts-hooks-and/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-041-thinking-in-automation-scripts-hooks-and) | complete |
+| Day 042 | [Section Review: Your Computing Foundations Toolkit](content/sections/computing-foundations/day-042-section-review-your-computing-foundations-toolkit/) | [lab](labs/sections/computing-foundations/day-042-section-review-your-computing-foundations-toolkit/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-042-section-review-your-computing-foundations-toolkit) | complete |
+
+</details>
+
+</details>
+
+<details>
+<summary><h3>Course02 · Programming with Python — 49/56 complete</h3></summary>
+
+From first program to tested, packaged, database-backed applications — the working programming skill AI work demands.
+
+<details>
+<summary>Days 43-49 · Python Setup and First Programs — 7/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 043 | [Installing Python and Virtual Environments](content/sections/programming-with-python/day-043-installing-python-and-virtual-environments/) | [lab](labs/sections/programming-with-python/day-043-installing-python-and-virtual-environments/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-043-installing-python-and-virtual-environments) | complete |
+| Day 044 | [Variables and Types](content/sections/programming-with-python/day-044-variables-and-types/) | [lab](labs/sections/programming-with-python/day-044-variables-and-types/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-044-variables-and-types) | complete |
+| Day 045 | [Strings and Text Processing](content/sections/programming-with-python/day-045-strings-and-text-processing/) | [lab](labs/sections/programming-with-python/day-045-strings-and-text-processing/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-045-strings-and-text-processing) | complete |
+| Day 046 | [Numbers, Math, and Precision](content/sections/programming-with-python/day-046-numbers-math-and-precision/) | [lab](labs/sections/programming-with-python/day-046-numbers-math-and-precision/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-046-numbers-math-and-precision) | complete |
+| Day 047 | [Input, Output, and f-strings](content/sections/programming-with-python/day-047-input-output-and-f-strings/) | [lab](labs/sections/programming-with-python/day-047-input-output-and-f-strings/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-047-input-output-and-f-strings) | complete |
+| Day 048 | [Reading Error Messages and Debugging](content/sections/programming-with-python/day-048-reading-error-messages-and-debugging/) | [lab](labs/sections/programming-with-python/day-048-reading-error-messages-and-debugging/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-048-reading-error-messages-and-debugging) | complete |
+| Day 049 | [Your First Real Program](content/sections/programming-with-python/day-049-your-first-real-program/) | [lab](labs/sections/programming-with-python/day-049-your-first-real-program/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-049-your-first-real-program) | complete |
+
+</details>
+<details>
+<summary>Days 50-56 · Control Flow and Collections — 7/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 050 | [Conditionals and Boolean Logic](content/sections/programming-with-python/day-050-conditionals-and-boolean-logic/) | [lab](labs/sections/programming-with-python/day-050-conditionals-and-boolean-logic/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-050-conditionals-and-boolean-logic) | complete |
+| Day 051 | [Loops: for, while, and Iteration Patterns](content/sections/programming-with-python/day-051-loops-for-while-and-iteration-patterns/) | [lab](labs/sections/programming-with-python/day-051-loops-for-while-and-iteration-patterns/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-051-loops-for-while-and-iteration-patterns) | complete |
+| Day 052 | [Lists in Depth](content/sections/programming-with-python/day-052-lists-in-depth/) | [lab](labs/sections/programming-with-python/day-052-lists-in-depth/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-052-lists-in-depth) | complete |
+| Day 053 | [Dictionaries in Depth](content/sections/programming-with-python/day-053-dictionaries-in-depth/) | [lab](labs/sections/programming-with-python/day-053-dictionaries-in-depth/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-053-dictionaries-in-depth) | complete |
+| Day 054 | [Tuples, Sets, and Choosing a Collection](content/sections/programming-with-python/day-054-tuples-sets-and-choosing-a-collection/) | [lab](labs/sections/programming-with-python/day-054-tuples-sets-and-choosing-a-collection/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-054-tuples-sets-and-choosing-a-collection) | complete |
+| Day 055 | [Comprehensions and Iterator Thinking](content/sections/programming-with-python/day-055-comprehensions-and-iterator-thinking/) | [lab](labs/sections/programming-with-python/day-055-comprehensions-and-iterator-thinking/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-055-comprehensions-and-iterator-thinking) | complete |
+| Day 056 | [Building a Data-Driven CLI](content/sections/programming-with-python/day-056-building-a-data-driven-cli/) | [lab](labs/sections/programming-with-python/day-056-building-a-data-driven-cli/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-056-building-a-data-driven-cli) | complete |
+
+</details>
+<details>
+<summary>Days 57-63 · Functions and Program Design — 7/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 057 | [Functions: Definition, Arguments, and Return Values](content/sections/programming-with-python/day-057-functions-definition-arguments-and-return-values/) | [lab](labs/sections/programming-with-python/day-057-functions-definition-arguments-and-return-values/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-057-functions-definition-arguments-and-return-values) | complete |
+| Day 058 | [Scope, Closures, and *args/**kwargs](content/sections/programming-with-python/day-058-scope-closures-and-args-kwargs/) | [lab](labs/sections/programming-with-python/day-058-scope-closures-and-args-kwargs/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-058-scope-closures-and-args-kwargs) | complete |
+| Day 059 | [Modules, Imports, and Project Layout](content/sections/programming-with-python/day-059-modules-imports-and-project-layout/) | [lab](labs/sections/programming-with-python/day-059-modules-imports-and-project-layout/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-059-modules-imports-and-project-layout) | complete |
+| Day 060 | [A Tour of the Standard Library](content/sections/programming-with-python/day-060-a-tour-of-the-standard-library/) | [lab](labs/sections/programming-with-python/day-060-a-tour-of-the-standard-library/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-060-a-tour-of-the-standard-library) | complete |
+| Day 061 | [Writing Readable Code](content/sections/programming-with-python/day-061-writing-readable-code/) | [lab](labs/sections/programming-with-python/day-061-writing-readable-code/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-061-writing-readable-code) | complete |
+| Day 062 | [Recursion](content/sections/programming-with-python/day-062-recursion/) | [lab](labs/sections/programming-with-python/day-062-recursion/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-062-recursion) | complete |
+| Day 063 | [Designing a Small Program Well](content/sections/programming-with-python/day-063-designing-a-small-program-well/) | [lab](labs/sections/programming-with-python/day-063-designing-a-small-program-well/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-063-designing-a-small-program-well) | complete |
+
+</details>
+<details>
+<summary>Days 64-70 · Files, Errors, and Object-Oriented Python — 7/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 064 | [Reading and Writing Files](content/sections/programming-with-python/day-064-reading-and-writing-files/) | [lab](labs/sections/programming-with-python/day-064-reading-and-writing-files/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-064-reading-and-writing-files) | complete |
+| Day 065 | [CSV and JSON in the Real World](content/sections/programming-with-python/day-065-csv-and-json-in-the-real/) | [lab](labs/sections/programming-with-python/day-065-csv-and-json-in-the-real/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-065-csv-and-json-in-the-real) | complete |
+| Day 066 | [Exceptions and Error Handling Strategy](content/sections/programming-with-python/day-066-exceptions-and-error-handling-strategy/) | [lab](labs/sections/programming-with-python/day-066-exceptions-and-error-handling-strategy/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-066-exceptions-and-error-handling-strategy) | complete |
+| Day 067 | [Classes and Objects](content/sections/programming-with-python/day-067-classes-and-objects/) | [lab](labs/sections/programming-with-python/day-067-classes-and-objects/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-067-classes-and-objects) | complete |
+| Day 068 | [Inheritance, Composition, and Dunder Methods](content/sections/programming-with-python/day-068-inheritance-composition-and-dunder-methods/) | [lab](labs/sections/programming-with-python/day-068-inheritance-composition-and-dunder-methods/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-068-inheritance-composition-and-dunder-methods) | complete |
+| Day 069 | [Dataclasses and Type Hints](content/sections/programming-with-python/day-069-dataclasses-and-type-hints/) | [lab](labs/sections/programming-with-python/day-069-dataclasses-and-type-hints/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-069-dataclasses-and-type-hints) | complete |
+| Day 070 | [Modeling a Domain with Objects](content/sections/programming-with-python/day-070-modeling-a-domain-with-objects/) | [lab](labs/sections/programming-with-python/day-070-modeling-a-domain-with-objects/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-070-modeling-a-domain-with-objects) | complete |
+
+</details>
+<details>
+<summary>Days 71-77 · Testing and Code Quality — 7/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 071 | [Why Test, and pytest Basics](content/sections/programming-with-python/day-071-why-test-and-pytest-basics/) | [lab](labs/sections/programming-with-python/day-071-why-test-and-pytest-basics/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-071-why-test-and-pytest-basics) | complete |
+| Day 072 | [Fixtures, Parametrization, and Test Design](content/sections/programming-with-python/day-072-fixtures-parametrization-and-test-design/) | [lab](labs/sections/programming-with-python/day-072-fixtures-parametrization-and-test-design/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-072-fixtures-parametrization-and-test-design) | complete |
+| Day 073 | [Test-Driven Development](content/sections/programming-with-python/day-073-test-driven-development/) | [lab](labs/sections/programming-with-python/day-073-test-driven-development/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-073-test-driven-development) | complete |
+| Day 074 | [Mocking and Testing Boundaries](content/sections/programming-with-python/day-074-mocking-and-testing-boundaries/) | [lab](labs/sections/programming-with-python/day-074-mocking-and-testing-boundaries/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-074-mocking-and-testing-boundaries) | complete |
+| Day 075 | [Static Typing with mypy](content/sections/programming-with-python/day-075-static-typing-with-mypy/) | [lab](labs/sections/programming-with-python/day-075-static-typing-with-mypy/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-075-static-typing-with-mypy) | complete |
+| Day 076 | [Linting and Formatting with Ruff](content/sections/programming-with-python/day-076-linting-and-formatting-with-ruff/) | [lab](labs/sections/programming-with-python/day-076-linting-and-formatting-with-ruff/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-076-linting-and-formatting-with-ruff) | complete |
+| Day 077 | [Quality Gates for a Python Project](content/sections/programming-with-python/day-077-quality-gates-for-a-python-project/) | [lab](labs/sections/programming-with-python/day-077-quality-gates-for-a-python-project/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-077-quality-gates-for-a-python-project) | complete |
+
+</details>
+<details>
+<summary>Days 78-84 · Python for Automation and the Web — 7/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 078 | [HTTP in Python with requests](content/sections/programming-with-python/day-078-http-in-python-with-requests/) | [lab](labs/sections/programming-with-python/day-078-http-in-python-with-requests/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-078-http-in-python-with-requests) | complete |
+| Day 079 | [Web Scraping Responsibly](content/sections/programming-with-python/day-079-web-scraping-responsibly/) | [lab](labs/sections/programming-with-python/day-079-web-scraping-responsibly/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-079-web-scraping-responsibly) | complete |
+| Day 080 | [Building CLIs with argparse](content/sections/programming-with-python/day-080-building-clis-with-argparse/) | [lab](labs/sections/programming-with-python/day-080-building-clis-with-argparse/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-080-building-clis-with-argparse) | complete |
+| Day 081 | [Scheduling and Background Jobs](content/sections/programming-with-python/day-081-scheduling-and-background-jobs/) | [lab](labs/sections/programming-with-python/day-081-scheduling-and-background-jobs/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-081-scheduling-and-background-jobs) | complete |
+| Day 082 | [A First Web API with FastAPI](content/sections/programming-with-python/day-082-a-first-web-api-with-fastapi/) | [lab](labs/sections/programming-with-python/day-082-a-first-web-api-with-fastapi/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-082-a-first-web-api-with-fastapi) | complete |
+| Day 083 | [Packaging and Distributing Python Code](content/sections/programming-with-python/day-083-packaging-and-distributing-python-code/) | [lab](labs/sections/programming-with-python/day-083-packaging-and-distributing-python-code/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-083-packaging-and-distributing-python-code) | complete |
+| Day 084 | [Shipping an Automation Toolkit](content/sections/programming-with-python/day-084-shipping-an-automation-toolkit/) | [lab](labs/sections/programming-with-python/day-084-shipping-an-automation-toolkit/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-084-shipping-an-automation-toolkit) | complete |
+
+</details>
+<details>
+<summary>Days 85-91 · SQL and Relational Databases — 7/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 085 | [Relational Databases and SQLite](content/sections/programming-with-python/day-085-relational-databases-and-sqlite/) | [lab](labs/sections/programming-with-python/day-085-relational-databases-and-sqlite/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-085-relational-databases-and-sqlite) | complete |
+| Day 086 | [SELECT: Filtering, Sorting, and Aggregating](content/sections/programming-with-python/day-086-select-filtering-sorting-and-aggregating/) | [lab](labs/sections/programming-with-python/day-086-select-filtering-sorting-and-aggregating/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-086-select-filtering-sorting-and-aggregating) | complete |
+| Day 087 | [Joins and Relationships](content/sections/programming-with-python/day-087-joins-and-relationships/) | [lab](labs/sections/programming-with-python/day-087-joins-and-relationships/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-087-joins-and-relationships) | complete |
+| Day 088 | [Inserting, Updating, and Schema Design](content/sections/programming-with-python/day-088-inserting-updating-and-schema-design/) | [lab](labs/sections/programming-with-python/day-088-inserting-updating-and-schema-design/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-088-inserting-updating-and-schema-design) | complete |
+| Day 089 | [Indexes and Query Performance](content/sections/programming-with-python/day-089-indexes-and-query-performance/) | [lab](labs/sections/programming-with-python/day-089-indexes-and-query-performance/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-089-indexes-and-query-performance) | complete |
+| Day 090 | [SQLite from Python](content/sections/programming-with-python/day-090-sqlite-from-python/) | [lab](labs/sections/programming-with-python/day-090-sqlite-from-python/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-090-sqlite-from-python) | complete |
+| Day 091 | [Designing and Querying a Real Schema](content/sections/programming-with-python/day-091-designing-and-querying-a-real-schema/) | [lab](labs/sections/programming-with-python/day-091-designing-and-querying-a-real-schema/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-091-designing-and-querying-a-real-schema) | complete |
+
+</details>
+<details>
+<summary>Days 92-98 · Data Formats and Pipelines — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 092 | Beyond Tables: NoSQL and Key-Value Stores | — | — | planned |
+| Day 093 | ORMs and SQLAlchemy | — | — | planned |
+| Day 094 | Data Validation with pydantic | — | — | planned |
+| Day 095 | Dates, Times, and Time Zones | — | — | planned |
+| Day 096 | Concurrency and async Basics | — | — | planned |
+| Day 097 | Logging and Configuration | — | — | planned |
+| Day 098 | Section Project: A Complete Data Pipeline | — | — | planned |
+
+</details>
+
+</details>
+
+<details>
+<summary><h3>Course03 · Math, Statistics, and Data — 0/42 complete</h3></summary>
+
+The linear algebra, calculus, probability, and data-analysis skills that make machine learning understandable rather than magical.
+
+<details>
+<summary>Days 99-105 · Linear Algebra I: Vectors and Matrices — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 099 | Vectors: Direction, Magnitude, and Meaning | — | — | planned |
+| Day 100 | Matrices and What They Represent | — | — | planned |
+| Day 101 | Matrix Multiplication | — | — | planned |
+| Day 102 | Linear Transformations | — | — | planned |
+| Day 103 | Dot Products and Similarity | — | — | planned |
+| Day 104 | NumPy: Arrays and Vectorized Thinking | — | — | planned |
+| Day 105 | Transforming Images with Matrices | — | — | planned |
+
+</details>
+<details>
+<summary>Days 106-112 · Linear Algebra II and Calculus — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 106 | Eigenvalues and Eigenvectors, Intuitively | — | — | planned |
+| Day 107 | Norms, Distances, and Similarity Measures | — | — | planned |
+| Day 108 | Derivatives: Rates of Change | — | — | planned |
+| Day 109 | Partial Derivatives and Gradients | — | — | planned |
+| Day 110 | The Chain Rule | — | — | planned |
+| Day 111 | Gradient Descent from Scratch | — | — | planned |
+| Day 112 | Visualizing Optimization | — | — | planned |
+
+</details>
+<details>
+<summary>Days 113-119 · Probability and Statistics — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 113 | Probability: Events, Rules, and Intuition | — | — | planned |
+| Day 114 | Random Variables and Distributions | — | — | planned |
+| Day 115 | Bayes’ Theorem | — | — | planned |
+| Day 116 | Descriptive Statistics That Don’t Lie | — | — | planned |
+| Day 117 | Sampling and the Central Limit Theorem | — | — | planned |
+| Day 118 | Hypothesis Tests and Confidence Intervals | — | — | planned |
+| Day 119 | Analyzing an Experiment End to End | — | — | planned |
+
+</details>
+<details>
+<summary>Days 120-126 · pandas and Data Wrangling — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 120 | pandas: Series and DataFrames | — | — | planned |
+| Day 121 | Loading and Inspecting Data | — | — | planned |
+| Day 122 | Selecting and Filtering | — | — | planned |
+| Day 123 | Groupby and Aggregation | — | — | planned |
+| Day 124 | Merging and Reshaping | — | — | planned |
+| Day 125 | Cleaning Messy Data | — | — | planned |
+| Day 126 | A Reproducible Cleaning Pipeline | — | — | planned |
+
+</details>
+<details>
+<summary>Days 127-133 · Data Visualization — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 127 | Why We Visualize, and Choosing the Right Chart | — | — | planned |
+| Day 128 | Matplotlib Fundamentals | — | — | planned |
+| Day 129 | Statistical Plots with seaborn | — | — | planned |
+| Day 130 | Distributions and Relationships | — | — | planned |
+| Day 131 | Time Series Visualization | — | — | planned |
+| Day 132 | Visual Storytelling and Chart Honesty | — | — | planned |
+| Day 133 | Building an EDA Report | — | — | planned |
+
+</details>
+<details>
+<summary>Days 134-140 · Working with Real Data — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 134 | Finding Data: Open Datasets and APIs | — | — | planned |
+| Day 135 | From API to DataFrame | — | — | planned |
+| Day 136 | The Exploratory Data Analysis Process | — | — | planned |
+| Day 137 | Thinking in Features | — | — | planned |
+| Day 138 | Data Ethics, Bias, and Provenance | — | — | planned |
+| Day 139 | Reproducible Notebooks | — | — | planned |
+| Day 140 | Section Project: An Exploratory Study | — | — | planned |
+
+</details>
+
+</details>
+
+<details>
+<summary><h3>Course04 · Machine Learning — 0/56 complete</h3></summary>
+
+Classical machine learning done properly: models, evaluation, feature work, and the discipline that separates working systems from leaderboard tricks.
+
+<details>
+<summary>Days 141-147 · Machine Learning Fundamentals — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 141 | What Machine Learning Is and Is Not | — | — | planned |
+| Day 142 | Supervised, Unsupervised, and Reinforcement Learning | — | — | planned |
+| Day 143 | The Machine Learning Workflow | — | — | planned |
+| Day 144 | Train, Validation, and Test Splits | — | — | planned |
+| Day 145 | Overfitting and Underfitting | — | — | planned |
+| Day 146 | Your First Model with scikit-learn | — | — | planned |
+| Day 147 | An End-to-End Classification Exercise | — | — | planned |
+
+</details>
+<details>
+<summary>Days 148-154 · Regression — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 148 | Linear Regression | — | — | planned |
+| Day 149 | Loss Functions and Least Squares | — | — | planned |
+| Day 150 | Multiple and Polynomial Regression | — | — | planned |
+| Day 151 | Regularization: Ridge and Lasso | — | — | planned |
+| Day 152 | Regression Metrics | — | — | planned |
+| Day 153 | Linear Regression from Scratch | — | — | planned |
+| Day 154 | A Complete Regression Project | — | — | planned |
+
+</details>
+<details>
+<summary>Days 155-161 · Classification — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 155 | Logistic Regression | — | — | planned |
+| Day 156 | Decision Boundaries | — | — | planned |
+| Day 157 | k-Nearest Neighbors | — | — | planned |
+| Day 158 | Naive Bayes and Text Classification | — | — | planned |
+| Day 159 | Precision, Recall, ROC, and Choosing Thresholds | — | — | planned |
+| Day 160 | Class Imbalance | — | — | planned |
+| Day 161 | A Complete Classification Project | — | — | planned |
+
+</details>
+<details>
+<summary>Days 162-168 · Trees and Ensembles — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 162 | Decision Trees | — | — | planned |
+| Day 163 | Random Forests | — | — | planned |
+| Day 164 | Gradient Boosting | — | — | planned |
+| Day 165 | XGBoost and LightGBM in Practice | — | — | planned |
+| Day 166 | Hyperparameter Tuning | — | — | planned |
+| Day 167 | Cross-Validation Done Right | — | — | planned |
+| Day 168 | Winning on Tabular Data | — | — | planned |
+
+</details>
+<details>
+<summary>Days 169-175 · Features and Support Vector Machines — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 169 | Support Vector Machines | — | — | planned |
+| Day 170 | Feature Scaling and Encoding | — | — | planned |
+| Day 171 | Feature Engineering | — | — | planned |
+| Day 172 | Feature Selection | — | — | planned |
+| Day 173 | scikit-learn Pipelines | — | — | planned |
+| Day 174 | Handling Missing Data | — | — | planned |
+| Day 175 | Features Beat Algorithms | — | — | planned |
+
+</details>
+<details>
+<summary>Days 176-182 · Evaluation and Interpretation — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 176 | Choosing the Right Metric | — | — | planned |
+| Day 177 | Learning Curves and Diagnostics | — | — | planned |
+| Day 178 | Interpreting Models: Importances and SHAP | — | — | planned |
+| Day 179 | Fairness and Bias in Models | — | — | planned |
+| Day 180 | Data Leakage | — | — | planned |
+| Day 181 | Baselines and Error Analysis | — | — | planned |
+| Day 182 | Writing a Model Report | — | — | planned |
+
+</details>
+<details>
+<summary>Days 183-189 · Unsupervised Learning — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 183 | Clustering with k-means | — | — | planned |
+| Day 184 | Hierarchical Clustering and DBSCAN | — | — | planned |
+| Day 185 | Principal Component Analysis | — | — | planned |
+| Day 186 | t-SNE and UMAP | — | — | planned |
+| Day 187 | Anomaly Detection | — | — | planned |
+| Day 188 | Recommender Systems | — | — | planned |
+| Day 189 | A Segmentation Study | — | — | planned |
+
+</details>
+<details>
+<summary>Days 190-196 · Machine Learning in Practice — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 190 | The ML Project Lifecycle | — | — | planned |
+| Day 191 | Building Datasets and Labeling | — | — | planned |
+| Day 192 | Time Series Forecasting Basics | — | — | planned |
+| Day 193 | Saving and Versioning Models | — | — | planned |
+| Day 194 | Serving a Model over an API | — | — | planned |
+| Day 195 | Monitoring Models in Production | — | — | planned |
+| Day 196 | Section Project: An ML Service | — | — | planned |
+
+</details>
+
+</details>
+
+<details>
+<summary><h3>Course05 · Deep Learning — 0/42 complete</h3></summary>
+
+Neural networks from first principles to transformers: build them, train them, debug them, and understand the hardware they run on.
+
+<details>
+<summary>Days 197-203 · Neural Network Foundations — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 197 | The Perceptron | — | — | planned |
+| Day 198 | Activation Functions | — | — | planned |
+| Day 199 | Forward Propagation | — | — | planned |
+| Day 200 | Backpropagation | — | — | planned |
+| Day 201 | A Neural Network in Pure NumPy | — | — | planned |
+| Day 202 | PyTorch Tensors | — | — | planned |
+| Day 203 | Training MNIST from Scratch | — | — | planned |
+
+</details>
+<details>
+<summary>Days 204-210 · Training Deep Networks — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 204 | PyTorch: autograd and nn.Module | — | — | planned |
+| Day 205 | Datasets and DataLoaders | — | — | planned |
+| Day 206 | Optimizers: SGD to Adam | — | — | planned |
+| Day 207 | Learning Rate Schedules | — | — | planned |
+| Day 208 | Dropout, Batch Norm, and Regularization | — | — | planned |
+| Day 209 | Debugging Training Runs | — | — | planned |
+| Day 210 | A Disciplined Training Project | — | — | planned |
+
+</details>
+<details>
+<summary>Days 211-217 · Convolutional Networks and Vision — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 211 | Convolutions | — | — | planned |
+| Day 212 | CNN Architectures | — | — | planned |
+| Day 213 | Transfer Learning | — | — | planned |
+| Day 214 | Data Augmentation | — | — | planned |
+| Day 215 | Training a Vision Model End to End | — | — | planned |
+| Day 216 | Beyond Classification: Detection and Segmentation | — | — | planned |
+| Day 217 | Your Own Image Classifier | — | — | planned |
+
+</details>
+<details>
+<summary>Days 218-224 · Sequences and Text — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 218 | Text Preprocessing and Tokenization | — | — | planned |
+| Day 219 | Word Embeddings | — | — | planned |
+| Day 220 | Recurrent Neural Networks | — | — | planned |
+| Day 221 | LSTMs and GRUs | — | — | planned |
+| Day 222 | Sequence-to-Sequence and Early Attention | — | — | planned |
+| Day 223 | Text Classification with Embeddings | — | — | planned |
+| Day 224 | A Sentiment Analysis Project | — | — | planned |
+
+</details>
+<details>
+<summary>Days 225-231 · Transformers — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 225 | “Attention Is All You Need” | — | — | planned |
+| Day 226 | Self-Attention, Step by Step | — | — | planned |
+| Day 227 | The Transformer Architecture | — | — | planned |
+| Day 228 | Encoder Models: BERT and Friends | — | — | planned |
+| Day 229 | Decoder Models: The GPT Family | — | — | planned |
+| Day 230 | Hugging Face Transformers in Practice | — | — | planned |
+| Day 231 | Fine-Tuning a Small Transformer | — | — | planned |
+
+</details>
+<details>
+<summary>Days 232-238 · Training at Scale — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 232 | GPUs and AI Hardware | — | — | planned |
+| Day 233 | Mixed Precision and Performance | — | — | planned |
+| Day 234 | Distributed Training Concepts | — | — | planned |
+| Day 235 | Experiment Tracking | — | — | planned |
+| Day 236 | Quantization and Distillation | — | — | planned |
+| Day 237 | Scaling Laws and What They Bought Us | — | — | planned |
+| Day 238 | Section Project: Reproducing a Paper | — | — | planned |
+
+</details>
+
+</details>
+
+<details>
+<summary><h3>Course06 · LLMs and Generative AI — 0/49 complete</h3></summary>
+
+Large language models as a working material: how they are made, how to prompt and call them, how to ground them with retrieval, customize them, and go multimodal.
+
+<details>
+<summary>Days 239-245 · The LLM Landscape — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 239 | How Large Language Models Are Trained | — | — | planned |
+| Day 240 | Pretraining, Fine-Tuning, and RLHF | — | — | planned |
+| Day 241 | The Model Landscape: Claude, GPT, Gemini, Llama | — | — | planned |
+| Day 242 | Open Weights versus Closed APIs | — | — | planned |
+| Day 243 | Tokens, Context Windows, and Sampling | — | — | planned |
+| Day 244 | Capabilities, Limits, and Hallucination | — | — | planned |
+| Day 245 | Benchmarking Models Yourself | — | — | planned |
+
+</details>
+<details>
+<summary>Days 246-252 · Prompt Engineering — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 246 | Prompting Fundamentals | — | — | planned |
+| Day 247 | System Prompts and Role Design | — | — | planned |
+| Day 248 | Few-Shot Examples and Chain of Thought | — | — | planned |
+| Day 249 | Structured Output: Getting Reliable JSON | — | — | planned |
+| Day 250 | Prompt Patterns and Templates | — | — | planned |
+| Day 251 | Prompt Injection and Safe Prompting | — | — | planned |
+| Day 252 | A Tested Prompt Library | — | — | planned |
+
+</details>
+<details>
+<summary>Days 253-259 · LLM APIs — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 253 | First Calls to the Claude API | — | — | planned |
+| Day 254 | The OpenAI-Compatible Ecosystem | — | — | planned |
+| Day 255 | Streaming Responses | — | — | planned |
+| Day 256 | Tool Use and Function Calling | — | — | planned |
+| Day 257 | Working with Images and Documents | — | — | planned |
+| Day 258 | Cost, Caching, and Rate Limits | — | — | planned |
+| Day 259 | Building a CLI Assistant | — | — | planned |
+
+</details>
+<details>
+<summary>Days 260-266 · Embeddings and Vector Search — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 260 | What Embeddings Are | — | — | planned |
+| Day 261 | Semantic Similarity Search | — | — | planned |
+| Day 262 | Vector Databases | — | — | planned |
+| Day 263 | Chunking Strategies | — | — | planned |
+| Day 264 | Hybrid Search and Rerankers | — | — | planned |
+| Day 265 | Evaluating Retrieval Quality | — | — | planned |
+| Day 266 | Semantic Search over Your Own Notes | — | — | planned |
+
+</details>
+<details>
+<summary>Days 267-273 · Retrieval-Augmented Generation — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 267 | The RAG Architecture | — | — | planned |
+| Day 268 | A Minimal RAG System from Scratch | — | — | planned |
+| Day 269 | RAG over PDFs and Messy Documents | — | — | planned |
+| Day 270 | Citations and Grounded Answers | — | — | planned |
+| Day 271 | Advanced RAG Patterns | — | — | planned |
+| Day 272 | Evaluating RAG Systems | — | — | planned |
+| Day 273 | A Documentation Assistant | — | — | planned |
+
+</details>
+<details>
+<summary>Days 274-280 · Customizing and Running Models — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 274 | Prompting versus RAG versus Fine-Tuning | — | — | planned |
+| Day 275 | Fine-Tuning with LoRA | — | — | planned |
+| Day 276 | Building Fine-Tuning Datasets | — | — | planned |
+| Day 277 | Running Local Models with Ollama | — | — | planned |
+| Day 278 | Quantized Inference and llama.cpp | — | — | planned |
+| Day 279 | Serving Open Models | — | — | planned |
+| Day 280 | Fine-Tune and Serve Your Own Model | — | — | planned |
+
+</details>
+<details>
+<summary>Days 281-287 · Multimodal and Generative Media — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 281 | How Diffusion Models Generate Images | — | — | planned |
+| Day 282 | Image Generation in Practice | — | — | planned |
+| Day 283 | Speech: Recognition and Synthesis | — | — | planned |
+| Day 284 | Video and Music Generation | — | — | planned |
+| Day 285 | Multimodal Models | — | — | planned |
+| Day 286 | Generative AI Ethics and Copyright | — | — | planned |
+| Day 287 | Section Project: A Multimodal Application | — | — | planned |
+
+</details>
+
+</details>
+
+<details>
+<summary><h3>Course07 · AI Engineering: Agents and Applications — 0/42 complete</h3></summary>
+
+Agents, MCP, AI coding tools, evaluation, and full-stack AI applications — engineering AI systems that hold up in production.
+
+<details>
+<summary>Days 288-294 · AI Agents — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 288 | What an AI Agent Is | — | — | planned |
+| Day 289 | The Agent Loop: Reason, Act, Observe | — | — | planned |
+| Day 290 | Designing Tools for Agents | — | — | planned |
+| Day 291 | An Agent from Scratch | — | — | planned |
+| Day 292 | Agent Frameworks and When to Use Them | — | — | planned |
+| Day 293 | Multi-Agent Systems | — | — | planned |
+| Day 294 | Building a Research Agent | — | — | planned |
+
+</details>
+<details>
+<summary>Days 295-301 · The Model Context Protocol — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 295 | What MCP Is and Why It Exists | — | — | planned |
+| Day 296 | Using MCP Servers | — | — | planned |
+| Day 297 | Building an MCP Server | — | — | planned |
+| Day 298 | MCP Resources and Prompts | — | — | planned |
+| Day 299 | Building an MCP Client | — | — | planned |
+| Day 300 | MCP Security | — | — | planned |
+| Day 301 | Your Personal MCP Server | — | — | planned |
+
+</details>
+<details>
+<summary>Days 302-308 · AI Coding Agents — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 302 | The AI Coding Landscape | — | — | planned |
+| Day 303 | Working with a Coding Agent | — | — | planned |
+| Day 304 | Effective Agentic Coding Workflows | — | — | planned |
+| Day 305 | Configuring Agents: Memory, Skills, and Rules | — | — | planned |
+| Day 306 | Reviewing and Trusting AI-Written Code | — | — | planned |
+| Day 307 | Coding Agents in CI and Automation | — | — | planned |
+| Day 308 | Shipping a Feature with an Agent | — | — | planned |
+
+</details>
+<details>
+<summary>Days 309-315 · Evaluation and Reliability — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 309 | Why Evals Are the Real Moat | — | — | planned |
+| Day 310 | Building Evaluation Datasets | — | — | planned |
+| Day 311 | LLM-as-Judge | — | — | planned |
+| Day 312 | Regression Testing for Prompts and Models | — | — | planned |
+| Day 313 | Guardrails and Content Moderation | — | — | planned |
+| Day 314 | Observability and Tracing for AI | — | — | planned |
+| Day 315 | An Evaluation Harness | — | — | planned |
+
+</details>
+<details>
+<summary>Days 316-322 · Full-Stack AI Applications — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 316 | Architecture of an AI Product | — | — | planned |
+| Day 317 | Backend Patterns for LLM Apps | — | — | planned |
+| Day 318 | Chat UX and Streaming Frontends | — | — | planned |
+| Day 319 | Auth, Quotas, and Billing | — | — | planned |
+| Day 320 | Latency and Caching | — | — | planned |
+| Day 321 | Vendor Abstraction and Fallbacks | — | — | planned |
+| Day 322 | A Full-Stack AI Application | — | — | planned |
+
+</details>
+<details>
+<summary>Days 323-329 · Production Retrieval and Pipelines — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 323 | Data Ingestion Pipelines | — | — | planned |
+| Day 324 | Document Processing at Scale | — | — | planned |
+| Day 325 | Keeping Indexes Fresh | — | — | planned |
+| Day 326 | Scaling Retrieval | — | — | planned |
+| Day 327 | Cost Engineering for AI Systems | — | — | planned |
+| Day 328 | Privacy in AI Systems | — | — | planned |
+| Day 329 | Section Project: A Production Assistant | — | — | planned |
+
+</details>
+
+</details>
+
+<details>
+<summary><h3>Course08 · Deployment, MLOps, and Security — 0/21 complete</h3></summary>
+
+Containers, cloud, CI/CD, monitoring, and the security discipline AI systems demand in the real world.
+
+<details>
+<summary>Days 330-336 · Containers and Cloud — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 330 | Docker Fundamentals | — | — | planned |
+| Day 331 | Dockerizing an AI Application | — | — | planned |
+| Day 332 | Docker Compose for Multi-Service Apps | — | — | planned |
+| Day 333 | Kubernetes Concepts | — | — | planned |
+| Day 334 | Cloud Options and Free Tiers | — | — | planned |
+| Day 335 | CI/CD with GitHub Actions | — | — | planned |
+| Day 336 | A Containerized AI Deployment | — | — | planned |
+
+</details>
+<details>
+<summary>Days 337-343 · Operating AI in Production — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 337 | Deploying to a Cloud Service | — | — | planned |
+| Day 338 | GPU Serving and Inference Infrastructure | — | — | planned |
+| Day 339 | Monitoring and Alerting | — | — | planned |
+| Day 340 | Logging and Analytics for AI Features | — | — | planned |
+| Day 341 | Rollouts, A/B Tests, and Feature Flags | — | — | planned |
+| Day 342 | Incidents and Rollbacks | — | — | planned |
+| Day 343 | A Monitored Production Deployment | — | — | planned |
+
+</details>
+<details>
+<summary>Days 344-350 · AI Security and Privacy — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 344 | Threat Modeling AI Systems | — | — | planned |
+| Day 345 | Defending Against Prompt Injection | — | — | planned |
+| Day 346 | Data Privacy and PII Handling | — | — | planned |
+| Day 347 | Model and Supply Chain Security | — | — | planned |
+| Day 348 | AI Governance and Regulation | — | — | planned |
+| Day 349 | Red Teaming Your Own Systems | — | — | planned |
+| Day 350 | Section Project: A Security Review | — | — | planned |
+
+</details>
+
+</details>
+
+<details>
+<summary><h3>Course09 · Capstone — 0/15 complete</h3></summary>
+
+Two weeks to design, build, evaluate, secure, deploy, and present a complete AI application of your own.
+
+<details>
+<summary>Days 351-357 · Capstone Build I: Foundation — 0/7</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 351 | Choosing and Scoping Your Capstone | — | — | planned |
+| Day 352 | Architecture and Design Document | — | — | planned |
+| Day 353 | Data and Retrieval Layer | — | — | planned |
+| Day 354 | Core AI Features | — | — | planned |
+| Day 355 | Agent and Tool Integration | — | — | planned |
+| Day 356 | Tests and Evals for Your Capstone | — | — | planned |
+| Day 357 | Milestone Review and Course Correction | — | — | planned |
+
+</details>
+<details>
+<summary>Days 358-365 · Capstone Build II: Ship It — 0/8</summary>
+
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 358 | Frontend and User Experience | — | — | planned |
+| Day 359 | Deploying Your Capstone | — | — | planned |
+| Day 360 | Monitoring and Cost Controls | — | — | planned |
+| Day 361 | Security Review of Your Capstone | — | — | planned |
+| Day 362 | Documentation and Demo | — | — | planned |
+| Day 363 | Portfolio, Resume, and Sharing Your Work | — | — | planned |
+| Day 364 | Capstone Retrospective | — | — | planned |
+| Day 365 | Graduation: Your AI Roadmap Going Forward | — | — | planned |
+
+</details>
+
+</details>
+

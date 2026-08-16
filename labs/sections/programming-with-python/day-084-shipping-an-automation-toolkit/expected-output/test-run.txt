@@ -1,13 +1,13 @@
 Day 084 — Ship the Toolkit
 
 1. The local fixture server (127.0.0.1, ephemeral port, no internet)
-  ok: the fixture server chose an ephemeral port (59035, not a hard-coded one)
+  ok: the fixture server chose an ephemeral port (59298, not a hard-coded one)
   ok: the fixture server answers /health before any test runs
   ok: the fixture server really requires the token (401 without it)
 
 2. The property suite (pytest over examples/src/feedkit)
   ok: the property suite passes (exit 0)
-  ok: pytest reports: 28 passed in 0.12s
+  ok: pytest reports: 28 passed in 0.11s
   ok: breaking the idempotence rule makes the suite FAIL (exit 1)
   ok: the failing run names the idempotence test
 
@@ -19,7 +19,7 @@ Day 084 — Ship the Toolkit
   ok: --dry-run says plainly that nothing was written
   ok: --dry-run exits 0
   ok: no temporary state files are left behind anywhere
-  ok: partial success exits 2, not 0 (it does not pretend everything worked)
+  ok: partial success exits 3, not 0 (it does not pretend everything worked)
   ok: the failing source is named in the run summary
   ok: the summary counts 2 ok and 1 failed
   ok: the structured log records WHICH source failed, at error level
@@ -47,7 +47,7 @@ Day 084 — Ship the Toolkit
   ok: a toolkit that has never run reports 'never' and exits non-zero
 
 7. Two runs must not overlap
-  ok: a run that finds the lock held exits 3 and does nothing
+  ok: a run that finds the lock held exits 75 and does nothing
   ok: the overlapping run says so in the log
 
 8. The installed console script

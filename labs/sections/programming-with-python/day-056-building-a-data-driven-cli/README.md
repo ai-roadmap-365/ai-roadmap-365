@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** Building a Data-Driven CLI
 - **Day number:** 56 of 365
-- **Lesson article:** published on the course blog (one lesson per day); the article for this day links back to this lab.
+- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-056-building-a-data-driven-cli
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-056-building-a-data-driven-cli` when the site is running.
 <!-- generated-links:end -->

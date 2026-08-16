@@ -23,4 +23,4 @@ requires_network: true
 requires_api_key: false
 estimated_minutes: 30
 last_executed: '2026-07-19'
-executed_on: 'macOS 26.5.1 (Apple Silicon), Python 3.14.0, beautifulsoup4 4.15.0, requests 2.34.2, pytest 9.1.1, bash 3.2.57 — bash tests/run_tests.sh -> 51 checks, 0 failure(s), exit 0; the pytest suite inside it reports 34 passed against examples/ and 32 failed, 1 passed against the unfinished starter. No test contacts any host other than 127.0.0.1.'
+executed_on: 'macOS 26.5.1 (Apple Silicon), Python 3.14.0, beautifulsoup4 4.15.0, requests 2.34.2, pytest 9.1.1, bash 3.2.57 — bash tests/run_tests.sh -> 51 checks, 0 failure(s), exit 0; the pytest suite inside it reports 34 passed against examples/ and 33 failed, 1 passed against the unfinished starter. No test contacts any host other than 127.0.0.1.'

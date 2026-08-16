@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** Text, Images, and Sound as Data
 - **Day number:** 5 of 365
-- **Lesson article:** published on the course blog (one lesson per day); the article for this day links back to this lab.
+- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-005-text-images-and-sound-as-data
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-005-text-images-and-sound-as-data` when the site is running.
 <!-- generated-links:end -->

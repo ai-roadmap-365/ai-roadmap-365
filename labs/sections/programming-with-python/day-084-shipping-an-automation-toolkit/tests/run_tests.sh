@@ -276,10 +276,10 @@ fi
 partial_log="${work_root}/partial.log"
 feedkit --sources notes,broken,papers fetch > "${partial_log}" 2>&1
 partial_exit=$?
-if [ "${partial_exit}" -eq 2 ]; then
-  check "partial success exits 2, not 0 (it does not pretend everything worked)" "yes"
+if [ "${partial_exit}" -eq 3 ]; then
+  check "partial success exits 3, not 0 (it does not pretend everything worked)" "yes"
 else
-  check "partial success exits 2, not 0 (got ${partial_exit})" "no"
+  check "partial success exits 3, not 0 (got ${partial_exit})" "no"
 fi
 if grep -q 'FAILED: broken' "${partial_log}"; then
   check "the failing source is named in the run summary" "yes"
@@ -444,7 +444,7 @@ fi
 stale_log="${work_root}/stale.log"
 feedkit status --max-age-minutes 0 > "${stale_log}" 2>&1
 stale_exit=$?
-if [ "${stale_exit}" -eq 2 ] && grep -q 'STALE' "${stale_log}"; then
+if [ "${stale_exit}" -eq 3 ] && grep -q 'STALE' "${stale_log}"; then
   check "the watchdog exits non-zero when the last success is too old" "yes"
 else
   check "the watchdog exits non-zero when the last success is too old (got ${stale_exit})" "no"
@@ -456,7 +456,7 @@ never_log="${work_root}/never.log"
 (cd "${fresh_dir}" && PYTHONPATH="${lab_dir}/examples/src" "${python_bin}" -m feedkit.cli status \
    > "${never_log}" 2>&1)
 never_exit=$?
-if [ "${never_exit}" -eq 2 ] && grep -q 'last success: never' "${never_log}"; then
+if [ "${never_exit}" -eq 3 ] && grep -q 'last success: never' "${never_log}"; then
   check "a toolkit that has never run reports 'never' and exits non-zero" "yes"
 else
   check "a toolkit that has never run reports 'never' and exits non-zero (got ${never_exit})" "no"
@@ -472,10 +472,10 @@ locked_log="${work_root}/locked.log"
 feedkit fetch > "${locked_log}" 2>&1
 locked_exit=$?
 rm -f "${run_dir}/feedkit-state.json.lock"
-if [ "${locked_exit}" -eq 3 ]; then
-  check "a run that finds the lock held exits 3 and does nothing" "yes"
+if [ "${locked_exit}" -eq 75 ]; then
+  check "a run that finds the lock held exits 75 and does nothing" "yes"
 else
-  check "a run that finds the lock held exits 3 (got ${locked_exit})" "no"
+  check "a run that finds the lock held exits 75 (got ${locked_exit})" "no"
 fi
 if grep -q '"status": "locked"' "${locked_log}"; then
   check "the overlapping run says so in the log" "yes"

@@ -75,7 +75,7 @@ run 72183572: partial
   sources: 2 ok, 1 failed, 3 total
   new entries: 0
   FAILED: broken: HTTP 500 after 3 attempts
-exit: 2   (2 = partial success — not 0, and not 1)
+exit: 3   (3 = partial success — not 0, and not 1)
 
 === 5. Total failure ===
 $ feedkit --sources broken fetch
@@ -100,4 +100,4 @@ run e057d4c4: locked
   sources: 0 ok, 0 failed, 0 total
   new entries: 0
   FAILED: lock: feedkit-state.json.lock exists (held by pid unknown). Another run is in progress, or a previous run was killed. Delete the file only after checking that no such process exists.
-exit: 3   (3 = a run is already in progress)
+exit: 75  (75 = EX_TEMPFAIL: a run is already in progress)

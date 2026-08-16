@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import { allDays } from '../lib/curriculum';
+
+const days = allDays().map((d) => ({
+  number: d.number,
+  dayId: d.dayId,
+  title: d.title,
+  hasContent: d.hasContent,
+  section: d.sectionTitle,
+}));
+---
+
+<Base title="My progress">
+  <h1>My reading progress</h1>
+  <p>
+    Days you have marked as read on this device (stored in your browser only — nothing leaves your
+    laptop). <span id="summary"></span>
+  </p>
+  <ol class="day-list" id="progress-list"></ol>
+
+  <script define:vars={{ days }}>
+    const base = document.querySelector('.brand').getAttribute('href').replace(/\/$/, '');
+    const read = new Set(JSON.parse(localStorage.getItem('ai-roadmap-read-days') ?? '[]'));
+    const list = document.getElementById('progress-list');
+    const summary = document.getElementById('summary');
+    summary.textContent = `${read.size} of ${days.length} days marked read.`;
+    for (const d of days) {
+      const li = document.createElement('li');
+      const num = document.createElement('span');
+      num.className = 'num';
+      num.textContent = `Day ${String(d.number).padStart(3, '0')}`;
+      li.appendChild(num);
+      if (d.hasContent) {
+        const a = document.createElement('a');
+        a.href = `${base}/${d.dayId}`;
+        a.textContent = d.title;
+        li.appendChild(a);
+      } else {
+        const s = document.createElement('span');
+        s.textContent = d.title;
+        li.appendChild(s);
+      }
+      const badge = document.createElement('span');
+      badge.className = read.has(d.number) ? 'badge complete' : 'badge planned';
+      badge.textContent = read.has(d.number) ? 'read' : d.hasContent ? 'unread' : 'not written yet';
+      li.appendChild(badge);
+      list.appendChild(li);
+    }
+  </script>
+</Base>

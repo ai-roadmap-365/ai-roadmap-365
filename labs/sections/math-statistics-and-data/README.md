@@ -9,15 +9,15 @@ Hands-on companions to this section's lessons. Each day directory is self-contai
 <details open>
 <summary><strong>Days 99-105 · Linear Algebra I: Vectors and Matrices</strong> — 0/7 complete</summary>
 
-| Day | Lesson | Status |
-| --- | ------ | ------ |
-| Day 099 | Day 099: Vectors: Direction, Magnitude, and Meaning | planned |
-| Day 100 | Day 100: Matrices and What They Represent | planned |
-| Day 101 | Day 101: Matrix Multiplication | planned |
-| Day 102 | Day 102: Linear Transformations | planned |
-| Day 103 | Day 103: Dot Products and Similarity | planned |
-| Day 104 | Day 104: NumPy: Arrays and Vectorized Thinking | planned |
-| Day 105 | Day 105: Transforming Images with Matrices | planned |
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 099 | Vectors: Direction, Magnitude, and Meaning | — | — | planned |
+| Day 100 | Matrices and What They Represent | — | — | planned |
+| Day 101 | Matrix Multiplication | — | — | planned |
+| Day 102 | Linear Transformations | — | — | planned |
+| Day 103 | Dot Products and Similarity | — | — | planned |
+| Day 104 | NumPy: Arrays and Vectorized Thinking | — | — | planned |
+| Day 105 | Transforming Images with Matrices | — | — | planned |
 
 **Project:** Image Transformer — Use NumPy matrix operations to rotate, scale, and shear images, demonstrating linear transformations visually.
 
@@ -26,15 +26,15 @@ Hands-on companions to this section's lessons. Each day directory is self-contai
 <details>
 <summary><strong>Days 106-112 · Linear Algebra II and Calculus</strong> — 0/7 complete</summary>
 
-| Day | Lesson | Status |
-| --- | ------ | ------ |
-| Day 106 | Day 106: Eigenvalues and Eigenvectors, Intuitively | planned |
-| Day 107 | Day 107: Norms, Distances, and Similarity Measures | planned |
-| Day 108 | Day 108: Derivatives: Rates of Change | planned |
-| Day 109 | Day 109: Partial Derivatives and Gradients | planned |
-| Day 110 | Day 110: The Chain Rule | planned |
-| Day 111 | Day 111: Gradient Descent from Scratch | planned |
-| Day 112 | Day 112: Visualizing Optimization | planned |
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 106 | Eigenvalues and Eigenvectors, Intuitively | — | — | planned |
+| Day 107 | Norms, Distances, and Similarity Measures | — | — | planned |
+| Day 108 | Derivatives: Rates of Change | — | — | planned |
+| Day 109 | Partial Derivatives and Gradients | — | — | planned |
+| Day 110 | The Chain Rule | — | — | planned |
+| Day 111 | Gradient Descent from Scratch | — | — | planned |
+| Day 112 | Visualizing Optimization | — | — | planned |
 
 **Project:** Gradient Descent Visualizer — Implement gradient descent from scratch and animate its path across 2D loss surfaces, including a pathological case.
 
@@ -43,15 +43,15 @@ Hands-on companions to this section's lessons. Each day directory is self-contai
 <details>
 <summary><strong>Days 113-119 · Probability and Statistics</strong> — 0/7 complete</summary>
 
-| Day | Lesson | Status |
-| --- | ------ | ------ |
-| Day 113 | Day 113: Probability: Events, Rules, and Intuition | planned |
-| Day 114 | Day 114: Random Variables and Distributions | planned |
-| Day 115 | Day 115: Bayes’ Theorem | planned |
-| Day 116 | Day 116: Descriptive Statistics That Don’t Lie | planned |
-| Day 117 | Day 117: Sampling and the Central Limit Theorem | planned |
-| Day 118 | Day 118: Hypothesis Tests and Confidence Intervals | planned |
-| Day 119 | Day 119: Analyzing an Experiment End to End | planned |
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 113 | Probability: Events, Rules, and Intuition | — | — | planned |
+| Day 114 | Random Variables and Distributions | — | — | planned |
+| Day 115 | Bayes’ Theorem | — | — | planned |
+| Day 116 | Descriptive Statistics That Don’t Lie | — | — | planned |
+| Day 117 | Sampling and the Central Limit Theorem | — | — | planned |
+| Day 118 | Hypothesis Tests and Confidence Intervals | — | — | planned |
+| Day 119 | Analyzing an Experiment End to End | — | — | planned |
 
 **Project:** A/B Test Analyzer — Analyze a simulated experiment end to end: hypothesis, test statistic, confidence interval, and a plain-language verdict.
 
@@ -60,15 +60,15 @@ Hands-on companions to this section's lessons. Each day directory is self-contai
 <details>
 <summary><strong>Days 120-126 · pandas and Data Wrangling</strong> — 0/7 complete</summary>
 
-| Day | Lesson | Status |
-| --- | ------ | ------ |
-| Day 120 | Day 120: pandas: Series and DataFrames | planned |
-| Day 121 | Day 121: Loading and Inspecting Data | planned |
-| Day 122 | Day 122: Selecting and Filtering | planned |
-| Day 123 | Day 123: Groupby and Aggregation | planned |
-| Day 124 | Day 124: Merging and Reshaping | planned |
-| Day 125 | Day 125: Cleaning Messy Data | planned |
-| Day 126 | Day 126: A Reproducible Cleaning Pipeline | planned |
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 120 | pandas: Series and DataFrames | — | — | planned |
+| Day 121 | Loading and Inspecting Data | — | — | planned |
+| Day 122 | Selecting and Filtering | — | — | planned |
+| Day 123 | Groupby and Aggregation | — | — | planned |
+| Day 124 | Merging and Reshaping | — | — | planned |
+| Day 125 | Cleaning Messy Data | — | — | planned |
+| Day 126 | A Reproducible Cleaning Pipeline | — | — | planned |
 
 **Project:** Messy Dataset Rescue — Take a genuinely messy public dataset and produce a documented, reproducible cleaning notebook with before/after data-quality checks.
 
@@ -77,15 +77,15 @@ Hands-on companions to this section's lessons. Each day directory is self-contai
 <details>
 <summary><strong>Days 127-133 · Data Visualization</strong> — 0/7 complete</summary>
 
-| Day | Lesson | Status |
-| --- | ------ | ------ |
-| Day 127 | Day 127: Why We Visualize, and Choosing the Right Chart | planned |
-| Day 128 | Day 128: Matplotlib Fundamentals | planned |
-| Day 129 | Day 129: Statistical Plots with seaborn | planned |
-| Day 130 | Day 130: Distributions and Relationships | planned |
-| Day 131 | Day 131: Time Series Visualization | planned |
-| Day 132 | Day 132: Visual Storytelling and Chart Honesty | planned |
-| Day 133 | Day 133: Building an EDA Report | planned |
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 127 | Why We Visualize, and Choosing the Right Chart | — | — | planned |
+| Day 128 | Matplotlib Fundamentals | — | — | planned |
+| Day 129 | Statistical Plots with seaborn | — | — | planned |
+| Day 130 | Distributions and Relationships | — | — | planned |
+| Day 131 | Time Series Visualization | — | — | planned |
+| Day 132 | Visual Storytelling and Chart Honesty | — | — | planned |
+| Day 133 | Building an EDA Report | — | — | planned |
 
 **Project:** Exploratory Analysis Report — Produce a narrated EDA report on a real dataset with at least five well-chosen, honestly-scaled charts.
 
@@ -94,15 +94,15 @@ Hands-on companions to this section's lessons. Each day directory is self-contai
 <details>
 <summary><strong>Days 134-140 · Working with Real Data</strong> — 0/7 complete</summary>
 
-| Day | Lesson | Status |
-| --- | ------ | ------ |
-| Day 134 | Day 134: Finding Data: Open Datasets and APIs | planned |
-| Day 135 | Day 135: From API to DataFrame | planned |
-| Day 136 | Day 136: The Exploratory Data Analysis Process | planned |
-| Day 137 | Day 137: Thinking in Features | planned |
-| Day 138 | Day 138: Data Ethics, Bias, and Provenance | planned |
-| Day 139 | Day 139: Reproducible Notebooks | planned |
-| Day 140 | Day 140: Section Project: An Exploratory Study | planned |
+| Day | Lesson | Lab | Blog | Status |
+| --- | --- | --- | --- | --- |
+| Day 134 | Finding Data: Open Datasets and APIs | — | — | planned |
+| Day 135 | From API to DataFrame | — | — | planned |
+| Day 136 | The Exploratory Data Analysis Process | — | — | planned |
+| Day 137 | Thinking in Features | — | — | planned |
+| Day 138 | Data Ethics, Bias, and Provenance | — | — | planned |
+| Day 139 | Reproducible Notebooks | — | — | planned |
+| Day 140 | Section Project: An Exploratory Study | — | — | planned |
 
 **Project:** Section Project: Full Exploratory Study — Choose a public dataset, pose three questions, and deliver a reproducible notebook answering them with cleaned data, statistics, and visuals.
 

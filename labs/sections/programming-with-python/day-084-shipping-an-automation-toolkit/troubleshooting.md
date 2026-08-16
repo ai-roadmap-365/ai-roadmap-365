@@ -78,7 +78,7 @@ Or point at a fresh one for a single run:
 feedkit --state-file /tmp/scratch-state.json fetch
 ```
 
-## `exit code 3` and `another run is in progress`
+## `exit code 75` and `another run is in progress`
 
 A lock file exists next to your state file. Either a run really is in progress,
 or a previous one was killed before it could clean up. Check first, then
@@ -92,7 +92,7 @@ rm -f feedkit-state.json.lock            # only if it is not
 
 Deleting a lock without checking is how two runs end up writing at once.
 
-## `exit code 2` and you thought the run worked
+## `exit code 3` and you thought the run worked
 
 Exit code 2 means **partial success**: some sources succeeded and at least one
 did not. Read the `FAILED:` lines in the summary, which name the source and the
@@ -100,7 +100,7 @@ error. This is deliberate. An automation that exits 0 while quietly dropping a
 source is one you will stop trusting the first time you notice, and you will
 notice long after it started.
 
-The watchdog (`feedkit status --max-age-minutes N`) also exits 2, for the same
+The watchdog (`feedkit status --max-age-minutes N`) also exits 3, for the same
 reason: a non-zero exit is the only thing a scheduler can act on.
 
 ## `feedkit status` says `STALE` immediately after a successful run
