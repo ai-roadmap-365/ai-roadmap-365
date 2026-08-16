@@ -21,7 +21,7 @@ Labs use free and open-source tools wherever possible; any exception (for exampl
 
 ## Released labs
 
-**77 of 365 days released.** Expand a course, then a subsection, to find a lab.
+**88 of 365 days released.** Expand a course, then a subsection, to find a lab.
 
 <details>
 <summary><h3>Course01 · Computing Foundations — 42 lab(s)</h3></summary>
@@ -114,7 +114,7 @@ Labs use free and open-source tools wherever possible; any exception (for exampl
 </details>
 
 <details>
-<summary><h3>Course02 · Programming with Python — 35 lab(s)</h3></summary>
+<summary><h3>Course02 · Programming with Python — 46 lab(s)</h3></summary>
 
 <details>
 <summary>Days 43-49 · Python Setup and First Programs</summary>
@@ -186,10 +186,35 @@ Labs use free and open-source tools wherever possible; any exception (for exampl
 | 77 | [Quality Gates for a Python Project](labs/sections/programming-with-python/day-077-quality-gates-for-a-python-project/README.md) |
 
 </details>
+<details>
+<summary>Days 78-84 · Python for Automation and the Web</summary>
+
+| Day | Lab |
+| --- | --- |
+| 78 | [HTTP in Python with requests](labs/sections/programming-with-python/day-078-http-in-python-with-requests/README.md) |
+| 79 | [Web Scraping Responsibly](labs/sections/programming-with-python/day-079-web-scraping-responsibly/README.md) |
+| 80 | [Building CLIs with argparse](labs/sections/programming-with-python/day-080-building-clis-with-argparse/README.md) |
+| 81 | [Scheduling and Background Jobs](labs/sections/programming-with-python/day-081-scheduling-and-background-jobs/README.md) |
+| 82 | [A First Web API with FastAPI](labs/sections/programming-with-python/day-082-a-first-web-api-with-fastapi/README.md) |
+| 83 | [Packaging and Distributing Python Code](labs/sections/programming-with-python/day-083-packaging-and-distributing-python-code/README.md) |
+| 84 | [Shipping an Automation Toolkit](labs/sections/programming-with-python/day-084-shipping-an-automation-toolkit/README.md) |
+
+</details>
+<details>
+<summary>Days 85-88 · SQL and Relational Databases</summary>
+
+| Day | Lab |
+| --- | --- |
+| 85 | [Relational Databases and SQLite](labs/sections/programming-with-python/day-085-relational-databases-and-sqlite/README.md) |
+| 86 | [SELECT: Filtering, Sorting, and Aggregating](labs/sections/programming-with-python/day-086-select-filtering-sorting-and-aggregating/README.md) |
+| 87 | [Joins and Relationships](labs/sections/programming-with-python/day-087-joins-and-relationships/README.md) |
+| 88 | [Inserting, Updating, and Schema Design](labs/sections/programming-with-python/day-088-inserting-updating-and-schema-design/README.md) |
 
 </details>
 
-77 days released so far; a new day is released with each blog post.
+</details>
+
+88 days released so far; a new day is released with each blog post.
 
 ## The course
 
