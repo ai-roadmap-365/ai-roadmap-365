@@ -73,8 +73,8 @@ sequential execution plus the cost of running a loop.
 ## The one that may legitimately differ in KIND
 
 `race_lost_at_default_interval` is **0** in this capture, across three runs
-at the interpreter's normal 5 ms switch interval — and it was 0 across 22
-further trials during authoring. On a busier machine, a different CPython
+at the interpreter's normal 5 ms switch interval — and it was 0 across 20
+further dedicated trials of the identical configuration during authoring. On a busier machine, a different CPython
 version, or a machine with fewer cores, you may well see it lose increments.
 
 Both outcomes are correct observations, and neither is asserted by the test

@@ -34,13 +34,38 @@ export interface LabBundle {
   security: string | null;
 }
 
+/**
+ * Directories that live inside a lab while you work but are not part of it.
+ *
+ * A lab that needs a third-party package creates a lab-local `.venv`, which
+ * is gitignored — but this walk reads from DISK, not from git, so without
+ * this list the whole installed dependency tree was rendered into the lab
+ * page. Day 093's page reached 53 MB, and the site publish then refused it
+ * because SQLAlchemy's own bundled files contain the string "localhost".
+ */
+const NOT_PART_OF_THE_LAB = new Set([
+  '.venv',
+  'venv',
+  '.env',
+  '__pycache__',
+  '.pytest_cache',
+  '.mypy_cache',
+  '.ruff_cache',
+  'node_modules',
+  '.git',
+  '.DS_Store',
+  'out',
+  'workspace',
+]);
+
 function walk(dir: string, base: string, out: LabFile[]): void {
   for (const entry of readdirSync(dir)) {
+    if (NOT_PART_OF_THE_LAB.has(entry)) continue;
     const full = path.join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) {
       walk(full, base, out);
-    } else {
+    } else if (!entry.endsWith('.pyc')) {
       out.push({ relPath: path.relative(base, full), size: st.size });
     }
   }

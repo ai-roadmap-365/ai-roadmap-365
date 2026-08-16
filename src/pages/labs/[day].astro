@@ -57,12 +57,18 @@ const sourceFiles = lab.files
     lab.metadata && (
       <>
         <h2 id="commands">Commands</h2>
+        {/*
+          A day still being authored can have a metadata.yml without every
+          command list yet. Rendering what is present beats crashing the whole
+          build over one in-flight day; validate:labs is what enforces that a
+          FINISHED day has all three.
+        */}
         <h3>Setup</h3>
-        <pre><code>{lab.metadata.setup_commands.join('\n')}</code></pre>
+        <pre><code>{(lab.metadata.setup_commands ?? []).join('\n')}</code></pre>
         <h3>Run</h3>
-        <pre><code>{lab.metadata.run_commands.join('\n')}</code></pre>
+        <pre><code>{(lab.metadata.run_commands ?? []).join('\n')}</code></pre>
         <h3>Test</h3>
-        <pre><code>{lab.metadata.test_commands.join('\n')}</code></pre>
+        <pre><code>{(lab.metadata.test_commands ?? []).join('\n')}</code></pre>
       </>
     )
   }

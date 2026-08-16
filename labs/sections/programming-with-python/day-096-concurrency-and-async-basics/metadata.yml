@@ -17,6 +17,8 @@ run_commands:
   - python3 examples/04_race.py
   - python3 examples/05_scheduler.py
   - python3 examples/06_timeouts.py
+test_commands:
+  - bash tests/run_tests.sh
 cleanup_commands:
   - find . -type d -name __pycache__ -prune -exec rm -rf -- {} +
   - 'git checkout -- starter/  # optional: reset your work'
