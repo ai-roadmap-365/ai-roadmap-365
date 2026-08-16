@@ -2,7 +2,7 @@
 
 > GENERATED — do not edit by hand. Run `npm run generate:section-nav`.
 
-The complete map of all nine courses: **94 of 365 days complete.** Click a course to expand it, then a subsection, to drill down to individual days — nothing is shown all at once.
+The complete map of all nine courses: **96 of 365 days complete.** Click a course to expand it, then a subsection, to drill down to individual days — nothing is shown all at once.
 
 <details>
 <summary><h3>Course01 · Computing Foundations — 42/42 complete</h3></summary>
@@ -97,7 +97,7 @@ How computers, operating systems, the command line, networks, and developer tool
 </details>
 
 <details>
-<summary><h3>Course02 · Programming with Python — 52/56 complete</h3></summary>
+<summary><h3>Course02 · Programming with Python — 54/56 complete</h3></summary>
 
 From first program to tested, packaged, database-backed applications — the working programming skill AI work demands.
 
@@ -200,15 +200,15 @@ From first program to tested, packaged, database-backed applications — the wor
 
 </details>
 <details>
-<summary>Days 92-98 · Data Formats and Pipelines — 3/7</summary>
+<summary>Days 92-98 · Data Formats and Pipelines — 5/7</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
 | Day 092 | [Beyond Tables: NoSQL and Key-Value Stores](content/sections/programming-with-python/day-092-beyond-tables-nosql-and-key-value/) | [lab](labs/sections/programming-with-python/day-092-beyond-tables-nosql-and-key-value/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-092-beyond-tables-nosql-and-key-value) | complete |
 | Day 093 | [ORMs and SQLAlchemy](content/sections/programming-with-python/day-093-orms-and-sqlalchemy/) | [lab](labs/sections/programming-with-python/day-093-orms-and-sqlalchemy/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-093-orms-and-sqlalchemy) | complete |
 | Day 094 | [Data Validation with pydantic](content/sections/programming-with-python/day-094-data-validation-with-pydantic/) | [lab](labs/sections/programming-with-python/day-094-data-validation-with-pydantic/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-094-data-validation-with-pydantic) | complete |
-| Day 095 | Dates, Times, and Time Zones | — | — | planned |
-| Day 096 | Concurrency and async Basics | — | — | planned |
+| Day 095 | [Dates, Times, and Time Zones](content/sections/programming-with-python/day-095-dates-times-and-time-zones/) | [lab](labs/sections/programming-with-python/day-095-dates-times-and-time-zones/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-095-dates-times-and-time-zones) | complete |
+| Day 096 | [Concurrency and async Basics](content/sections/programming-with-python/day-096-concurrency-and-async-basics/) | [lab](labs/sections/programming-with-python/day-096-concurrency-and-async-basics/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-096-concurrency-and-async-basics) | complete |
 | Day 097 | Logging and Configuration | — | — | planned |
 | Day 098 | Section Project: A Complete Data Pipeline | — | — | planned |
 

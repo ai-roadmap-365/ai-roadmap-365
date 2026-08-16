@@ -6,6 +6,7 @@ import { loadLab, readLabFile } from '../../lib/labs';
 import { loadConfig } from '../../lib/config';
 import { getPublicRepoLabUrl } from '../../lib/links';
 import { renderMarkdown } from '../../lib/markdown';
+import StarCta from '../../components/StarCta.astro';
 
 export function getStaticPaths() {
   return allDays()
@@ -122,5 +123,6 @@ const sourceFiles = lab.files
       </>
     )
   }
+  <StarCta context="lab" />
   </article>
 </Base>

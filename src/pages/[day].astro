@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import PrevNext from '../components/PrevNext.astro';
+import StarCta from '../components/StarCta.astro';
 import Quiz from '../components/Quiz.astro';
 import { loadConfig } from '../lib/config';
 import { getDay, prevNext, loadSidecars, type DayContext } from '../lib/curriculum';
@@ -161,6 +162,8 @@ const usage = labUsageSteps(config, day) as {
         Mark Day {day.number} as read (stored only in this browser)
       </label>
     </p>
+
+    <StarCta />
 
     <PrevNext prev={prev} next={next} />
   </article>

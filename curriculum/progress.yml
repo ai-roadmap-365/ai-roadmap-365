@@ -1066,3 +1066,67 @@ days:
       A bash 3.2 parsing bug found while authoring is fixed and documented
       inline. Instructor solution.
     completion: *done
+  95:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (Dates, Times, and Time Zones); The Hour
+      That Happened Twice lab executed and re-run independently at integration
+      (75 checks, 0 failures, exit 0), and proved non-vacuous — an earlier
+      iteration genuinely reported 4 failures, and the suite carries two
+      built-in negative checks that fail if the resolver's transition dates are
+      moved or a comparison operator is swapped. Environment verified rather
+      than assumed: 598 zones, TZPATH beginning at /usr/share/zoneinfo, and
+      IANA database 2026c. The day's central facts were measured, and
+      measurement corrected the draft three times. A claim that a wall-clock
+      stopwatch reports a negative duration was false for the scenario as
+      written, so a scenario that genuinely produces -1 day, 23:20:00 was
+      added and the prose rewritten to match all four measured rows; Lord
+      Howe's short day was asserted at 23.5 hours before being measured, so it
+      was measured; and a claim that timedelta arithmetic keeps the old offset
+      is wrong — it adds to the wall fields and re-derives the offset — so it
+      was corrected to what the output shows. A fact the brief never mentioned
+      became a quiz question, a glossary entry and a lab assertion: two aware
+      datetimes sharing a tzinfo compare equal across a fold, because they are
+      compared by wall-clock fields with fold ignored. The British
+      year-round-summer-time period is discovered by bisecting the zone
+      database at run time rather than quoted from memory. Python 3.14's
+      %Z behaviour was captured rather than guessed: it parses only UTC and
+      GMT here, rejects BST and EST, and returns a naive datetime even on
+      success. pytz, dateutil, arrow and pendulum are described with no output
+      reproduced. No test reads a clock for a value it asserts on, and the
+      suite checks that property itself. Animated DST-transition diagram.
+      Instructor solution.
+    completion: *done
+  96:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (Concurrency and async Basics); Waiting
+      Versus Computing lab executed and re-run independently at integration (58
+      checks, 0 failures, exit 0), and proved able to fail — removing the lock
+      from the guarded counter makes the suite report that the locked counter
+      lost increments, and exit 1. The day is built on measurement: the same
+      workloads are run sequentially, with threads, with asyncio and with
+      processes, and the tests assert the SHAPE (threads help waiting work,
+      threads do not help computing work, processes do) rather than any
+      duration. Honesty calls, several of which improved the day. The classic
+      unprotected-counter race would NOT reproduce: eight threads and 50,000
+      increments each lost exactly zero across 20 dedicated trials at the
+      default 5ms switch interval on CPython 3.14.0. Rather than fake it, the
+      lab reports that result first, then lowers sys.setswitchinterval to 1
+      microsecond where the same unchanged code loses about 70% every run —
+      and the lesson turns this into its strongest point, that a concurrency
+      bug's visibility is a property of timing rather than of correctness, so
+      you cannot test your way to confidence. Py_GIL_DISABLED was read from the
+      interpreter (0 here) and every GIL claim is scoped to that build, with
+      the suite skipping rather than failing the threads-do-not-help check on a
+      free-threaded build. asyncio on CPU-bound work measured 0.98x, marginally
+      slower than sequential, and is reported as that rather than rounded to
+      "about the same". Two real bugs found while authoring were kept as
+      teaching material: create_task schedules without starting, and a
+      "fixed" deadlock demo that deadlocked on its own barrier. One vacuous
+      check that always printed yes was deleted and replaced with a real
+      assertion. trio, anyio, gevent and Celery are documentation-only.
+      Animated event-loop diagram. Instructor solution.
+    completion: *done

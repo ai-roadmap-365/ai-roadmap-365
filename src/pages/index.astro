@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import StarCta from '../components/StarCta.astro';
 import { loadCurriculum, allDays } from '../lib/curriculum';
 
 const curriculum = loadCurriculum();
@@ -91,6 +92,17 @@ const RING_C = 2 * Math.PI * RING_R;
       <div class="stat"><b>{written}</b><span>lessons written</span></div>
       <div class="stat"><b>{labs}</b><span>labs released</span></div>
     </div>
+
+    {/* A slim animated map of the year, sized to stay above the fold: the
+        nine courses as one path with a marker crossing it. It rests at Day 1,
+        so the still frame reads as a journey about to start. */}
+    <img
+      class="herostrip"
+      src={`${base}/hero-strip.svg`}
+      width="1200"
+      height="120"
+      alt="Nine courses on one path from Day 1 to Day 365: Foundations, Python, Maths, Machine Learning, Deep Learning, LLMs, AI Engineering, Deploy, Capstone"
+    />
   </section>
 
   <section class="wrap section" id="courses">
@@ -136,6 +148,61 @@ const RING_C = 2 * Math.PI * RING_R;
         })
       }
     </div>
+  </section>
+
+  <section class="wrap section" id="journey">
+    <div class="section__head">
+      <h2>The whole year, end to end</h2>
+      <p class="eyebrow">where this takes you</p>
+    </div>
+    <img
+      class="journey"
+      src={`${base}/journey.svg`}
+      width="1200"
+      height="300"
+      alt="The 365-day journey: nine courses on one path, from Computing Foundations on Day 1 through Python, maths, machine learning, deep learning, large language models, AI engineering and deployment, to shipping your own capstone on Day 365"
+    />
+  </section>
+
+  <section class="wrap section">
+    <div class="section__head">
+      <h2>How this works</h2>
+      <p class="eyebrow">what you get each day</p>
+    </div>
+
+    <div class="courses">
+      <article class="course reveal">
+        <div class="course__body">
+          <h3 class="course__title">A lesson you can read in one sitting</h3>
+          <p class="course__sum">
+            Written prose, not slides — with worked examples, a quiz to check yourself, and a
+            glossary of every term it introduces.
+          </p>
+        </div>
+      </article>
+      <article class="course reveal">
+        <div class="course__body">
+          <h3 class="course__title">A lab you actually run</h3>
+          <p class="course__sum">
+            Starter files with numbered exercises, a reference implementation, automated tests that
+            exit zero when you are done, and genuinely captured expected output.
+          </p>
+        </div>
+      </article>
+      <article class="course reveal">
+        <div class="course__body">
+          <h3 class="course__title">Honest progress</h3>
+          <p class="course__sum">
+            Days that are titled but not yet written are marked planned, never dressed up as
+            finished. The counters above are computed from what is actually on disk.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <StarCta />
   </section>
 
   <section class="wrap section" id="curriculum">
@@ -186,40 +253,29 @@ const RING_C = 2 * Math.PI * RING_R;
     }
   </section>
 
-  <section class="wrap section">
-    <div class="section__head">
-      <h2>How this works</h2>
-      <p class="eyebrow">what you get each day</p>
-    </div>
-
-    <div class="courses">
-      <article class="course reveal">
-        <div class="course__body">
-          <h3 class="course__title">A lesson you can read in one sitting</h3>
-          <p class="course__sum">
-            Written prose, not slides — with worked examples, a quiz to check yourself, and a
-            glossary of every term it introduces.
-          </p>
-        </div>
-      </article>
-      <article class="course reveal">
-        <div class="course__body">
-          <h3 class="course__title">A lab you actually run</h3>
-          <p class="course__sum">
-            Starter files with numbered exercises, a reference implementation, automated tests that
-            exit zero when you are done, and genuinely captured expected output.
-          </p>
-        </div>
-      </article>
-      <article class="course reveal">
-        <div class="course__body">
-          <h3 class="course__title">Honest progress</h3>
-          <p class="course__sum">
-            Days that are titled but not yet written are marked planned, never dressed up as
-            finished. The counters above are computed from what is actually on disk.
-          </p>
-        </div>
-      </article>
-    </div>
-  </section>
+  <style>
+    .herostrip {
+    width: 100%;
+    max-width: 1040px;
+    height: auto;
+    display: block;
+    /* Tuned so the strip finishes above the fold on a 900px-tall window,
+       which is where a first-time visitor forms their impression. */
+    margin: 14px auto 0;
+    opacity: 0.95;
+  }
+  @media (max-height: 780px) {
+    .herostrip {
+      margin-top: 8px;
+    }
+  }
+  .journey {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #0b1220;
+    }
+  </style>
 </Base>
