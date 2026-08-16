@@ -1,7 +1,7 @@
 """Nine promises, nine tests. One baseline test that passes before you start.
 
 Each skipped test names the exercise in ``stages.py`` that unblocks it. Do the
-exercise, delete that test's ``@pytest.mark.skip`` line, and run:
+exercise, delete that test's ``@exercise(...)`` decorator, and run:
 
     .venv/bin/pytest starter -q
 """
@@ -10,11 +10,22 @@ from __future__ import annotations
 
 import io
 import json
+import os
 
 import pytest
 
 import fixture_server
 import stages
+
+#: When the harness runs this suite against the completed reference, the skip
+#: marks must not apply — the whole point is to see all ten pass.
+SOLVED = bool(os.environ.get("DAY098_SOLUTION"))
+
+
+def exercise(number: int, what: str):
+    """Skip until the learner has done the exercise; never skip for the key."""
+    return pytest.mark.skipif(not SOLVED, reason=f"Exercise {number} — {what}")
+
 
 SOURCES = ["alpha", "bravo", "charlie"]
 REPORT_AT = "2026-08-16T12:00:00Z"
@@ -55,7 +66,7 @@ def test_the_skeleton_runs_and_reports_its_own_failure(base_url, token):
 # ---------------------------------------------------------------------------
 # Stage 1 — Ingest
 # ---------------------------------------------------------------------------
-@pytest.mark.skip(reason="Exercise 1 — give fetch_source a timeout and retries")
+@exercise(1, "give fetch_source a timeout and retries")
 def test_a_flaky_source_recovers_after_retries(base_url, token):
     fixture_server.reset_flaky_counter()
     result = stages.fetch_source(
@@ -66,7 +77,7 @@ def test_a_flaky_source_recovers_after_retries(base_url, token):
     assert len(result.records) == 4
 
 
-@pytest.mark.skip(reason="Exercise 2 — retry only retryable statuses")
+@exercise(2, "retry only retryable statuses")
 def test_a_wrong_url_is_not_retried(base_url, token):
     result = stages.fetch_source(
         base_url, "delta", token=token, attempts=3, backoff=0.0, sleep=lambda _s: None
@@ -79,7 +90,7 @@ def test_a_wrong_url_is_not_retried(base_url, token):
 # ---------------------------------------------------------------------------
 # Stage 2 — Validate
 # ---------------------------------------------------------------------------
-@pytest.mark.skip(reason="Exercise 3 — collect every bad record instead of raising")
+@exercise(3, "collect every bad record instead of raising")
 def test_validation_collects_rather_than_aborts(base_url, token):
     fixture_server.reset_flaky_counter()
     fetched = {
@@ -95,7 +106,7 @@ def test_validation_collects_rather_than_aborts(base_url, token):
     assert all(r.problems for r in rejected), "a rejection with no reason cannot be fixed"
 
 
-@pytest.mark.skip(reason="Exercise 4 — constrain the model so out-of-range values are rejected")
+@exercise(4, "constrain the model so out-of-range values are rejected")
 def test_out_of_range_values_are_rejected(base_url, token):
     fixture_server.reset_flaky_counter()
     fetched = {
@@ -114,7 +125,7 @@ def test_out_of_range_values_are_rejected(base_url, token):
 # ---------------------------------------------------------------------------
 # Stage 3 — Store
 # ---------------------------------------------------------------------------
-@pytest.mark.skip(reason="Exercise 5 — idempotence key, then insert only what is new")
+@exercise(5, "idempotence key, then insert only what is new")
 def test_running_twice_stores_once(base_url, token, tmp_path):
     fixture_server.reset_flaky_counter()
     url = f"sqlite:///{tmp_path / 'pipeline.db'}"
@@ -130,7 +141,7 @@ def test_running_twice_stores_once(base_url, token, tmp_path):
 # ---------------------------------------------------------------------------
 # Stage 4 — Report
 # ---------------------------------------------------------------------------
-@pytest.mark.skip(reason="Exercise 6 — make the report instant a parameter")
+@exercise(6, "make the report instant a parameter")
 def test_the_report_is_built_at_a_fixed_instant(base_url, token, tmp_path):
     fixture_server.reset_flaky_counter()
     url = f"sqlite:///{tmp_path / 'pipeline.db'}"
@@ -153,7 +164,7 @@ def test_the_report_is_built_at_a_fixed_instant(base_url, token, tmp_path):
 # ---------------------------------------------------------------------------
 # Stage 5 — Observe
 # ---------------------------------------------------------------------------
-@pytest.mark.skip(reason="Exercise 7 — carry the run id on every log line")
+@exercise(7, "carry the run id on every log line")
 def test_every_log_line_carries_the_run_id(base_url, token, tmp_path):
     fixture_server.reset_flaky_counter()
     url = f"sqlite:///{tmp_path / 'pipeline.db'}"
@@ -171,7 +182,7 @@ def test_every_log_line_carries_the_run_id(base_url, token, tmp_path):
     ]
 
 
-@pytest.mark.skip(reason="Exercise 8 — return 3 for partial success")
+@exercise(8, "return 3 for partial success")
 def test_partial_success_gets_its_own_exit_code(base_url, token, tmp_path):
     fixture_server.reset_flaky_counter()
     url = f"sqlite:///{tmp_path / 'pipeline.db'}"
@@ -181,7 +192,7 @@ def test_partial_success_gets_its_own_exit_code(base_url, token, tmp_path):
     )
 
 
-@pytest.mark.skip(reason="Exercise 9 — redact secrets inside the logger")
+@exercise(9, "redact secrets inside the logger")
 def test_no_secret_reaches_the_log(base_url, token, tmp_path):
     fixture_server.reset_flaky_counter()
     url = f"sqlite:///{tmp_path / 'pipeline.db'}"

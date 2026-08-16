@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import importlib
+import os
 import sys
 from pathlib import Path
 
@@ -14,6 +16,12 @@ sys.path.insert(0, str(LAB / "examples"))
 import fixture_server  # noqa: E402
 
 TOKEN = "demo-token-value"
+
+# The test harness runs this same suite twice: once against the skeleton the
+# learner receives, and once against examples/stages_solved.py, so the nine
+# exercises are proved achievable rather than merely asserted to be.
+if os.environ.get("DAY098_SOLUTION"):
+    sys.modules["stages"] = importlib.import_module("stages_solved")
 
 
 @pytest.fixture(scope="session")

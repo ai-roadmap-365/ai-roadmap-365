@@ -88,8 +88,12 @@ def fetch_source(
         try:
             status, payload = _get_json(url, token=token, timeout=timeout)
         except urllib.error.HTTPError as exc:
-            last_status = exc.code
-            body = exc.read().decode("utf-8", errors="replace")
+            # HTTPError is a *file object*. Not closing it leaks a socket, which
+            # in a process that runs once an hour forever is a slow resource
+            # exhaustion bug that nothing warns you about in production.
+            with exc:
+                last_status = exc.code
+                body = exc.read().decode("utf-8", errors="replace")
             try:
                 last_error = str(json.loads(body).get("error", body))
             except (json.JSONDecodeError, AttributeError):

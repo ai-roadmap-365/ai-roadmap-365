@@ -11,18 +11,23 @@
 import { loadConfig } from '../lib/config';
 
 interface Props {
-  /** Slightly different framing on a lab page, where the reader just ran something. */
-  context?: 'lesson' | 'lab';
+  /**
+   * The ask is phrased for where the reader actually is. On the homepage they
+   * have not read anything yet, so "if this lesson was useful" would be
+   * nonsense; on a lab page they have just run something.
+   */
+  context?: 'lesson' | 'lab' | 'home';
 }
 
 const { context = 'lesson' } = Astro.props;
 const config = loadConfig();
 const repo = config.repository.url;
 
-const line =
-  context === 'lab'
-    ? 'If this lab ran and taught you something, a star helps the next person find it.'
-    : 'If this lesson was useful, a star helps the next person find it.';
+const line = {
+  lab: 'If this lab ran and taught you something, a star helps the next person find it.',
+  lesson: 'If this lesson was useful, a star helps the next person find it.',
+  home: 'Like the look of this? A star helps the next person find it.',
+}[context];
 ---
 
 <aside class="starcta">

@@ -13,8 +13,8 @@ Run the skeleton first, before you change anything:
 The one passing test proves the skeleton runs end to end and reports failure —
 because it aborts at the first malformed record. That is exercise 3.
 
-Work in order. After each exercise, delete that exercise's
-``@pytest.mark.skip`` line in ``test_stages.py`` and run pytest again.
+Work in order. After each exercise, delete that exercise's ``@exercise(...)``
+decorator in ``test_stages.py`` and run pytest again.
 """
 
 from __future__ import annotations
@@ -92,7 +92,9 @@ def fetch_source(
             payload = json.loads(response.read().decode("utf-8"))
             return FetchResult(source, True, list(payload.get("records", [])), 1, response.status)
     except urllib.error.HTTPError as exc:
-        body = exc.read().decode("utf-8", errors="replace")
+        # HTTPError is a file object; not closing it leaks a socket.
+        with exc:
+            body = exc.read().decode("utf-8", errors="replace")
         try:
             message = str(json.loads(body).get("error", body))
         except json.JSONDecodeError:
