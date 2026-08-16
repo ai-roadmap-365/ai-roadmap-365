@@ -49,7 +49,8 @@
     "release:site": "node scripts/release/site.mjs",
     "generate:social": "node scripts/generate-social.mjs",
     "generate:hero-images": "python3 scripts/generate_hero_images.py",
-    "release:public": "node scripts/release/public-sync.mjs"
+    "release:public": "node scripts/release/public-sync.mjs",
+    "docs:html": "node scripts/render-private-docs.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

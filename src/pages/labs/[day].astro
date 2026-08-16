@@ -38,14 +38,15 @@ const sourceFiles = lab.files
 ---
 
 <Base title={`Lab · Day ${day.number}: ${day.title}`}>
-  <Breadcrumbs day={day} />
+  <article class="readable">
+    <Breadcrumbs day={day} />
   <h1>Hands-on lab — Day {day.number}: {day.title}</h1>
 
   <div class="callout">
     <ul>
       <li><a href={`${base}/${day.dayId}`}>← Back to the Day {day.number} lesson</a></li>
       <li>
-        <a href={getPublicRepoLabUrl(config, day)}>Open the hands-on files on GitHub</a>
+        <a href={getPublicRepoLabUrl(config, day)} target="_blank" rel="noopener noreferrer">Open the hands-on files on GitHub</a>
         — clone or download them from the public labs repository
       </li>
       <li>Local path in your clone: <code>{`labs/sections/${day.section}/${day.dayId}/`}</code></li>
@@ -115,4 +116,5 @@ const sourceFiles = lab.files
       </>
     )
   }
+  </article>
 </Base>

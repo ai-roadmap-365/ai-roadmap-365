@@ -147,6 +147,60 @@ img {
   padding: 0 22px;
 }
 
+/* -------------------------------------------------------- reading pages --
+ * A lesson or a lab page is a long read, and running it edge to edge makes
+ * the lines too long to track back to the start comfortably. These pages are
+ * constrained to roughly 80% of the viewport and centred, with the usual
+ * max-width still applying on wide screens.
+ *
+ * The constraint is on the page's own container rather than on <main>,
+ * because the landing page's hero and section bands are deliberately
+ * full-bleed and would be inset by a rule on <main>.
+ */
+main > article,
+main > .readable {
+  width: min(80%, var(--maxw));
+  margin-inline: auto;
+}
+
+@media (max-width: 900px) {
+  main > article,
+  main > .readable {
+    width: min(92%, var(--maxw));
+  }
+}
+
+/* Long code lines must scroll INSIDE their own block, never widen the page.
+ * The .prose rule below covers rendered markdown, but a lab page prints file
+ * trees, captured output and whole source files as plain <pre> outside .prose
+ * — those were pushing the document to 2780px on a 1280px screen, so the
+ * whole page scrolled sideways. */
+pre {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+pre code {
+  /* Without this the code box refuses to shrink below its content width and
+   * overflow-x on the parent never engages. */
+  min-width: 0;
+}
+
+/* Images are centred rather than left-aligned: a diagram narrower than the
+ * column looked accidental sitting against the left edge. */
+main > article img,
+main > .readable img,
+.prose img {
+  display: block;
+  margin-inline: auto;
+}
+
+main > article figure,
+main > .readable figure {
+  margin-inline: auto;
+  text-align: center;
+}
+
 /* --------------------------------------------------------------- header -- */
 
 .site-header {

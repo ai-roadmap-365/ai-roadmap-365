@@ -4,7 +4,7 @@
 
 From first program to tested, packaged, database-backed applications — the working programming skill AI work demands.
 
-**49 of 56 lessons written.** Expand a subsection below to see its days.
+**52 of 56 lessons written.** Expand a subsection below to see its days.
 
 <details>
 <summary><strong>Days 43-49 · Python Setup and First Programs</strong> — 7/7 complete</summary>
@@ -126,13 +126,13 @@ From first program to tested, packaged, database-backed applications — the wor
 </details>
 
 <details open>
-<summary><strong>Days 92-98 · Data Formats and Pipelines</strong> — 0/7 complete</summary>
+<summary><strong>Days 92-98 · Data Formats and Pipelines</strong> — 3/7 complete</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
-| Day 092 | Beyond Tables: NoSQL and Key-Value Stores | — | — | planned |
-| Day 093 | ORMs and SQLAlchemy | — | — | planned |
-| Day 094 | Data Validation with pydantic | — | — | planned |
+| Day 092 | [Beyond Tables: NoSQL and Key-Value Stores](./day-092-beyond-tables-nosql-and-key-value/) | [lab](../../../labs/sections/programming-with-python/day-092-beyond-tables-nosql-and-key-value/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-092-beyond-tables-nosql-and-key-value) | complete |
+| Day 093 | [ORMs and SQLAlchemy](./day-093-orms-and-sqlalchemy/) | [lab](../../../labs/sections/programming-with-python/day-093-orms-and-sqlalchemy/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-093-orms-and-sqlalchemy) | complete |
+| Day 094 | [Data Validation with pydantic](./day-094-data-validation-with-pydantic/) | [lab](../../../labs/sections/programming-with-python/day-094-data-validation-with-pydantic/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-094-data-validation-with-pydantic) | complete |
 | Day 095 | Dates, Times, and Time Zones | — | — | planned |
 | Day 096 | Concurrency and async Basics | — | — | planned |
 | Day 097 | Logging and Configuration | — | — | planned |

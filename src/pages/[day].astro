@@ -72,7 +72,7 @@ const usage = labUsageSteps(config, day) as {
       lesson.video_url && (
         <p>
           <strong>
-            <a href={String(lesson.video_url)}>▶ Watch the video for this lesson</a>
+            <a href={String(lesson.video_url)} target="_blank" rel="noopener noreferrer">▶ Watch the video for this lesson</a>
           </strong>{' '}
           — same content, demonstrated on screen.
         </p>
@@ -85,7 +85,7 @@ const usage = labUsageSteps(config, day) as {
         usage.repoUrl && (
           <p>
             <strong>Lab files on GitHub:</strong>{' '}
-            <a href={usage.repoUrl}>{usage.repoUrl}</a>
+            <a href={usage.repoUrl} target="_blank" rel="noopener noreferrer">{usage.repoUrl}</a>
           </p>
         )
       }
@@ -100,7 +100,7 @@ const usage = labUsageSteps(config, day) as {
         }
       </ol>
       <p class="no-print">
-        You can also <a href={getLocalLabUrl(config, day).replace(config.website.local_base_url, base)}>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+        You can also <a href={getLocalLabUrl(config, day).replace(config.website.local_base_url, base)} target="_blank" rel="noopener noreferrer">open the lab as a local page</a> (works offline, shows the file tree and expected output).
       </p>
     </div>
 
@@ -147,7 +147,7 @@ const usage = labUsageSteps(config, day) as {
           <ul>
             {sidecars.sources.sources.map((s) => (
               <li>
-                <a href={s.url}>{s.title}</a> — {s.publisher} (accessed {s.accessed}){s.note ? ` — ${s.note}` : ''}
+                <a href={s.url} target="_blank" rel="noopener noreferrer">{s.title}</a> — {s.publisher} (accessed {s.accessed}){s.note ? ` — ${s.note}` : ''}
               </li>
             ))}
           </ul>

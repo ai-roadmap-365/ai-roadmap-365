@@ -977,3 +977,92 @@ days:
       requirements-to-report diagram. Instructor solution written at
       integration; WordPress export built and validated.
     completion: *done
+  92:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (Beyond Tables — NoSQL and Key-Value
+      Stores); One Domain, Four Shapes lab executed and re-run independently at
+      integration (67 checks, 0 failures, exit 0), and proved able to fail
+      twice — once on a real harness bug found while authoring, once
+      deliberately on a throwaway copy with the document store indexing the
+      wrong expression. The day models one domain in four shapes and only
+      claims what it ran: dbm, SQLite's JSON functions and a from-scratch
+      document store are demonstrated live, while Redis, MongoDB, Cassandra,
+      DynamoDB, Neo4j, CouchDB, HBase and Memcached are described from their
+      documentation with no output reproduced, stated explicitly in the
+      lesson, the lab README and FIELDS.md. Honesty calls: a first draft
+      asserting specific licences for those products was replaced with a
+      pointer to each project's current terms, because the permitted sources
+      did not carry them and licensing in that space has churned; founding
+      years were omitted for the same reason rather than written from memory;
+      the SQLite JSON claim was verified against the project's own changes
+      page (built-ins and the arrow operators arrived in 3.38.0, 2022-02-22);
+      and CAP was verified against the cited source before writing, including
+      Brewer's own 2012 correction of the "pick two of three" summary. The
+      index speed-up measured 88x on one run and 95x on a repeat, so both are
+      printed and the test asserts a 5x floor plus the SCAN-to-SEARCH plan
+      change rather than a millisecond. A real finding became a numbered lab
+      step and a quiz question: an index on json_extract(body, '$.shelf') does
+      NOT serve a query written with the arrow operator, and the plan stays
+      SCAN. Animated partition-choice diagram drawing CAP as the operational
+      choice it is. Instructor solution.
+    completion: *done
+  94:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (Data Validation with pydantic); Guard the
+      Boundary lab executed and re-run independently at integration (62 checks,
+      0 failures, exit 0) with pydantic 2.13.4 and pytest 9.1.1; the gate run
+      reads 12 records, accepts 4 and rejects 8 without raising, which is the
+      day's central pattern — a bad record must not kill a pipeline run. The
+      lesson frames validation as the third member of a family the reader
+      already knows: the type checker before it runs (Day 75), the validator
+      as data arrives (today), the database constraint as data is stored (Day
+      88), stating what each layer catches that the others cannot. Tests
+      assert on a ValidationError's `type` and `loc` and never on `msg`,
+      because the message prose is not a stable API — the same argument Day 82
+      made about a 422 body. Built from scratch first: a validator over
+      __annotations__ that collects ALL errors rather than raising on the
+      first, which is what makes the pydantic version legible afterwards.
+      pydantic-settings is a separate distribution and is deliberately not
+      installed, so it is described with no output reproduced; the same
+      discipline covers attrs, marshmallow, cerberus and jsonschema. All
+      fixture data is obviously invented and said to be invented. Animated
+      validation-flow diagram showing good records coerced through and a bad
+      one stopped with its real error entry. Instructor solution.
+    completion: *done
+  93:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (ORMs and SQLAlchemy); See What the ORM
+      Does lab executed and re-run independently at integration (87 checks, 0
+      failures, exit 0) against SQLAlchemy 2.0.51, and proved able to fail —
+      removing the selectinload reports 2 failures and exits non-zero, caught
+      both by the query-count assertion and by the capture diff. The day never
+      takes the ORM's word for anything: a query-counting listener records
+      every statement emitted and the tests assert on counts rather than
+      timings, which is written up as a transferable testing lesson. A minimal
+      ORM with its own identity map is built from scratch first, so the
+      Session's vocabulary is familiar before SQLAlchemy is opened. Three
+      honesty calls, each of which changed the content. First, the brief's
+      claim that a bulk operation is dramatically fewer statements through
+      Core than through the ORM is FALSE on 2.0.51 — add_all plus one flush
+      and Core insert both cost exactly one cursor execution for 500 rows,
+      because the unit of work batches into an executemany; the real 500-to-1
+      gap is whether the flush sits inside the loop. The lab now tracks cursor
+      executions separately from parameter sets, and finds where Core does win
+      — a bulk UPDATE, where the ORM must SELECT first and builds 1013 Python
+      objects against Core's none. The instructor notes carry an explicit
+      instruction not to "correct" this back toward the folklore. Second, the
+      flush emitted an UPDATE before an INSERT, because the unit of work sorts
+      by table dependency rather than by the order of edits; the real sequence
+      is captured and the animated diagram shows it, with the actual guarantee
+      stated rather than the assumed one. Third, Alembic is not installed and
+      no output is reproduced — and section 1 of the harness asserts it is
+      still absent, so the honesty note fails loudly rather than going stale.
+      A bash 3.2 parsing bug found while authoring is fixed and documented
+      inline. Instructor solution.
+    completion: *done

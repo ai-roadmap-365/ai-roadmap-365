@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
+import { rehypeOpenInNewTab } from './scripts/lib/rehype-open-in-new-tab.mjs';
 
 // Base path and port are fixed by config/course.config.yml (website section).
 // They are duplicated here as literals because Astro needs them before any
@@ -10,6 +11,10 @@ export default defineConfig({
   base: '/ai-roadmap-365',
   trailingSlash: 'ignore',
   integrations: [mdx()],
+  // Links an author wrote inside a lesson open in a new tab so the reader
+  // keeps their place; the site's own prev/next navigation is a component,
+  // not markdown, so it still navigates in place.
+  markdown: { rehypePlugins: [rehypeOpenInNewTab] },
   server: { port: 4321 },
   build: { format: 'directory' },
 });
