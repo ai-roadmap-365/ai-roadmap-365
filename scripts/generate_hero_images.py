@@ -260,7 +260,9 @@ def draw_day(day: dict, out_path: Path, challenge: str, site: str) -> None:
     draw.text((72, 556), site.replace("https://", ""), font=f_meta, fill=hex_rgb("#7dd3fc"))
     draw.text(
         (72, 586),
-        "One lesson and one runnable lab, every day. Free and open source.",
+        # This image is the LinkedIn preview card, so it follows the same
+        # rule as the post text: no open-source framing here.
+        "One lesson and one runnable lab, every day. Free and no prerequisites.",
         font=f_foot,
         fill=(100, 116, 139),
     )

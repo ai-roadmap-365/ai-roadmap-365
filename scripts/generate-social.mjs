@@ -85,6 +85,9 @@ function post(d, lesson, labMeta) {
 
   const lines = [
     `Day ${d.number} of ${challenge} — ${d.title}`,
+    // The second line carries the context every post needs for a reader who
+    // has never seen one before: what the series is and where it goes.
+    `Part of my 365-day AI challenge — from foundations to production, one lesson and one hands-on lab every single day.`,
     '',
     `${first.charAt(0).toUpperCase()}${first.slice(1)}.`,
     '',
@@ -100,13 +103,17 @@ function post(d, lesson, labMeta) {
     );
   }
 
+  // LINK ORDER MATTERS AND IS NOT COSMETIC. LinkedIn builds the preview card
+  // from the LAST link in the post, so the lesson URL goes last — that is the
+  // one with the branded Day N / 365 hero as its og:image. Putting the lab
+  // link last would preview a GitHub directory listing instead.
   lines.push(
-    `📖 Lesson (~${minutes} min): ${url}`,
     `🧪 Lab: ${labUrl}`,
+    `📖 Lesson (~${minutes} min): ${url}`,
     '',
     `Course ${course.id.replace('Course', '')} of 9 · ${course.title}`,
     '',
-    'Free, open source, and no prerequisites beyond curiosity.',
+    'Free and no prerequisites beyond curiosity.',
     '',
     tags,
   );

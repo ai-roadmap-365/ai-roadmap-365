@@ -4,7 +4,7 @@
 
 From first program to tested, packaged, database-backed applications — the working programming skill AI work demands.
 
-**54 of 56 lessons written.** Expand a subsection below to see its days.
+**56 of 56 lessons written.** Expand a subsection below to see its days.
 
 <details>
 <summary><strong>Days 43-49 · Python Setup and First Programs</strong> — 7/7 complete</summary>
@@ -125,8 +125,8 @@ From first program to tested, packaged, database-backed applications — the wor
 
 </details>
 
-<details open>
-<summary><strong>Days 92-98 · Data Formats and Pipelines</strong> — 5/7 complete</summary>
+<details>
+<summary><strong>Days 92-98 · Data Formats and Pipelines</strong> — 7/7 complete</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
@@ -135,8 +135,8 @@ From first program to tested, packaged, database-backed applications — the wor
 | Day 094 | [Data Validation with pydantic](./day-094-data-validation-with-pydantic/) | [lab](../../../labs/sections/programming-with-python/day-094-data-validation-with-pydantic/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-094-data-validation-with-pydantic) | complete |
 | Day 095 | [Dates, Times, and Time Zones](./day-095-dates-times-and-time-zones/) | [lab](../../../labs/sections/programming-with-python/day-095-dates-times-and-time-zones/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-095-dates-times-and-time-zones) | complete |
 | Day 096 | [Concurrency and async Basics](./day-096-concurrency-and-async-basics/) | [lab](../../../labs/sections/programming-with-python/day-096-concurrency-and-async-basics/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-096-concurrency-and-async-basics) | complete |
-| Day 097 | Logging and Configuration | — | — | planned |
-| Day 098 | Section Project: A Complete Data Pipeline | — | — | planned |
+| Day 097 | [Logging and Configuration](./day-097-logging-and-configuration/) | [lab](../../../labs/sections/programming-with-python/day-097-logging-and-configuration/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-097-logging-and-configuration) | complete |
+| Day 098 | [Section Project: A Complete Data Pipeline](./day-098-section-project-a-complete-data-pipeline/) | [lab](../../../labs/sections/programming-with-python/day-098-section-project-a-complete-data-pipeline/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-098-section-project-a-complete-data-pipeline) | complete |
 
 **Project:** Section Project: End-to-End Data Pipeline — Build a pipeline that ingests a public API, validates records with pydantic, stores them in SQLite via SQLAlchemy, and emits a daily report — tested and logged.
 

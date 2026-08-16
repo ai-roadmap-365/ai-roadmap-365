@@ -61,7 +61,7 @@ def main() -> int:
     }
     overrides = {"report_at": REPORT_AT, "window_hours": 12, "sources": "alpha,bravo,charlie"}
     config = load_config(environ=environ, overrides=overrides)
-    # The same resolution with the port replaced by a placeholder, purely so the
+    # The same resolution with the port replaced by a fixed marker, purely so the
     # printed table is identical on every machine. Only base_url differs.
     display_config = load_config(
         environ={**environ, "PIPELINE_BASE_URL": "http://127.0.0.1:<port>"},

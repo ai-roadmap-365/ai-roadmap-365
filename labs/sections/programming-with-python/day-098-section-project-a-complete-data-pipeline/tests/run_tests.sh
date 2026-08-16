@@ -554,24 +554,38 @@ check_grep "all ten tests pass against examples/stages_solved.py" \
 echo
 echo "9. Captured output still matches a live run"
 # ---------------------------------------------------------------------------
+# Compare a capture against a live run. The optional third argument is a sed
+# expression applied to BOTH sides first, for the one capture that legitimately
+# contains a duration: pytest prints "in 0.64s", and asserting on a stopwatch is
+# how a suite becomes flaky on somebody else's machine.
 compare() {
-  local name="$1" live="$2"
+  local name="$1" live="$2" normalise="${3:-}"
   local stored="${lab_dir}/expected-output/${name}"
   checks=$((checks + 1))
   if [ ! -f "${stored}" ]; then
     echo "  FAIL: expected-output/${name} is missing"
     failures=$((failures + 1))
-  elif diff -q "${stored}" "${live}" >/dev/null 2>&1; then
-    echo "  ok: expected-output/${name} matches this run exactly"
   else
-    echo "  FAIL: expected-output/${name} differs from this run"
-    diff "${stored}" "${live}" | head -12 | sed 's/^/        /'
-    failures=$((failures + 1))
+    local a="${work}/cmp-stored-${name}" b="${work}/cmp-live-${name}"
+    if [ -n "${normalise}" ]; then
+      sed "${normalise}" "${stored}" > "${a}"
+      sed "${normalise}" "${live}" > "${b}"
+    else
+      cp "${stored}" "${a}"
+      cp "${live}" "${b}"
+    fi
+    if diff -q "${a}" "${b}" >/dev/null 2>&1; then
+      echo "  ok: expected-output/${name} matches this run"
+    else
+      echo "  FAIL: expected-output/${name} differs from this run"
+      diff "${a}" "${b}" | head -12 | sed 's/^/        /'
+      failures=$((failures + 1))
+    fi
   fi
 }
 compare "demo.txt" "${work}/demo.txt"
 compare "config-provenance.txt" "${work}/provenance.txt"
-compare "starter-progress.txt" "${work}/starter.txt"
+compare "starter-progress.txt" "${work}/starter.txt" 's/ in [0-9.]*s$/ in <duration>/'
 if [ -n "${port}" ]; then
   cat "${work}/cli-stdout.txt" > "${work}/cli-run.txt"
   echo "--- structured log (stderr) ---" >> "${work}/cli-run.txt"

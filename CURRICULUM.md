@@ -2,7 +2,7 @@
 
 > GENERATED — do not edit by hand. Run `npm run generate:section-nav`.
 
-The complete map of all nine courses: **96 of 365 days complete.** Click a course to expand it, then a subsection, to drill down to individual days — nothing is shown all at once.
+The complete map of all nine courses: **98 of 365 days complete.** Click a course to expand it, then a subsection, to drill down to individual days — nothing is shown all at once.
 
 <details>
 <summary><h3>Course01 · Computing Foundations — 42/42 complete</h3></summary>
@@ -97,7 +97,7 @@ How computers, operating systems, the command line, networks, and developer tool
 </details>
 
 <details>
-<summary><h3>Course02 · Programming with Python — 54/56 complete</h3></summary>
+<summary><h3>Course02 · Programming with Python — 56/56 complete</h3></summary>
 
 From first program to tested, packaged, database-backed applications — the working programming skill AI work demands.
 
@@ -200,7 +200,7 @@ From first program to tested, packaged, database-backed applications — the wor
 
 </details>
 <details>
-<summary>Days 92-98 · Data Formats and Pipelines — 5/7</summary>
+<summary>Days 92-98 · Data Formats and Pipelines — 7/7</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
@@ -209,8 +209,8 @@ From first program to tested, packaged, database-backed applications — the wor
 | Day 094 | [Data Validation with pydantic](content/sections/programming-with-python/day-094-data-validation-with-pydantic/) | [lab](labs/sections/programming-with-python/day-094-data-validation-with-pydantic/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-094-data-validation-with-pydantic) | complete |
 | Day 095 | [Dates, Times, and Time Zones](content/sections/programming-with-python/day-095-dates-times-and-time-zones/) | [lab](labs/sections/programming-with-python/day-095-dates-times-and-time-zones/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-095-dates-times-and-time-zones) | complete |
 | Day 096 | [Concurrency and async Basics](content/sections/programming-with-python/day-096-concurrency-and-async-basics/) | [lab](labs/sections/programming-with-python/day-096-concurrency-and-async-basics/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-096-concurrency-and-async-basics) | complete |
-| Day 097 | Logging and Configuration | — | — | planned |
-| Day 098 | Section Project: A Complete Data Pipeline | — | — | planned |
+| Day 097 | [Logging and Configuration](content/sections/programming-with-python/day-097-logging-and-configuration/) | [lab](labs/sections/programming-with-python/day-097-logging-and-configuration/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-097-logging-and-configuration) | complete |
+| Day 098 | [Section Project: A Complete Data Pipeline](content/sections/programming-with-python/day-098-section-project-a-complete-data-pipeline/) | [lab](labs/sections/programming-with-python/day-098-section-project-a-complete-data-pipeline/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-098-section-project-a-complete-data-pipeline) | complete |
 
 </details>
 

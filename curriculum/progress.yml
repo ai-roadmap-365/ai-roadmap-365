@@ -1130,3 +1130,55 @@ days:
       assertion. trio, anyio, gevent and Celery are documentation-only.
       Animated event-loop diagram. Instructor solution.
     completion: *done
+  97:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (Logging and Configuration); Say It Where
+      Someone Will Read It lab executed and re-run independently at
+      integration (86 checks, 0 failures, exit 0). The day teaches the
+      logging module's architecture rather than its API surface — loggers,
+      handlers, formatters and filters as four separate objects, which is what
+      explains the two behaviours that confuse everyone: a message that
+      vanishes because the logger's level and the handler's level both have to
+      pass, and a message that appears twice because of propagation. Both are
+      reproduced and then fixed. The configuration half implements the four
+      layers once, properly, with the provenance of every value printable, and
+      proves a missing environment variable is distinguishable from an empty
+      one. A redacting filter is built and the test asserts the secret's value
+      appears nowhere in the captured log. Logs are captured through a buffer
+      handler rather than by scraping stdout, so the assertions are on parsed
+      structure. structlog, loguru, python-json-logger, pydantic-settings,
+      python-dotenv and dynaconf are described with no output reproduced.
+      Animated config-precedence diagram. Instructor solution.
+    completion: *done
+  98:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (Section Project — A Complete Data
+      Pipeline, the Course02 capstone); The Whole Pipeline lab executed and
+      re-run independently at integration (84 checks, 0 failures, exit 0),
+      stable across four consecutive runs. The day assembles Course02 into one
+      offline pipeline whose five stages each carry a stated promise — ingest
+      with a timeout and selective retry, a validation gate that collects and
+      counts bad records rather than dying on the first, an idempotent store,
+      a report taken at a parameterised instant, and one structured log line
+      per stage with an exit code a scheduler can act on. Running it twice
+      stores once, and that is asserted. Honesty calls: the starter's strict
+      warning filter found a real defect in the author's own code — an
+      HTTPError is a file object, and reading its body without closing it
+      leaks a socket — which was fixed in both the reference and the starter
+      and written up as a found defect rather than a planned teaching point; a
+      flaky byte-comparison against pytest's reported duration was fixed in
+      the HARNESS with a normaliser rather than by weakening the assertion,
+      matching what FIELDS.md already promised; requests is deliberately not
+      used despite Day 78, because one GET with a timeout and one header is
+      what urllib.request already does, with the conditions under which
+      requests earns its place stated plainly; Airflow, Dagster, Prefect and
+      dbt are documentation-only and section 1 of the harness asserts none is
+      importable so the claim cannot go stale; and exit code 0 is unreachable
+      with these fixtures because one source always fails, which is flagged in
+      the rubric rather than left as a gap. Animated pipeline-run diagram.
+      Instructor solution.
+    completion: *done
