@@ -159,8 +159,13 @@ const usage = labUsageSteps(config, day) as {
     <p class="no-print">
       <label>
         <input type="checkbox" id="mark-complete" data-day={day.number} />
-        Mark Day {day.number} as read (stored only in this browser)
+        Mark Day {day.number} as read
       </label>
+      <br />
+      <span class="marknote"
+        >Kept in this browser, no account needed. <a href={`${base}/progress`}>Your progress page</a
+        > turns the whole record into one link you can bookmark or open on another device.</span
+      >
     </p>
 
     <StarCta />
@@ -178,12 +183,21 @@ const usage = labUsageSteps(config, day) as {
       box.addEventListener('change', () => {
         if (box.checked) read.add(dayNum);
         else read.delete(dayNum);
-        localStorage.setItem(key, JSON.stringify([...read]));
+        localStorage.setItem(key, JSON.stringify([...read].sort((a, b) => a - b)));
+        // Ask the browser not to evict this under storage pressure. It may
+        // decline, so nothing on the page depends on the answer.
+        navigator.storage?.persist?.().catch(() => {});
       });
     }
   </script>
 
   <style>
+    .marknote {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 13.5px;
+      color: var(--text-faint);
+    }
     /* The hero carries the day number and the challenge branding, so it is the
        page's opening image and the one a shared link previews. */
     .day-hero {

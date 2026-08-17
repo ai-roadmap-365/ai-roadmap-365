@@ -80,7 +80,8 @@ const rows: [string, string][] = [
 ---
 
 <Base title="Course status (private)">
-  <h1>Course status dashboard</h1>
+  <div class="readable">
+    <h1>Course status dashboard</h1>
   <p class="callout">
     <strong>Private.</strong> This page reads live repository metadata (curriculum, progress
     tracker, on-disk artifacts). It is never included in public exports. Tests-passing and
@@ -90,7 +91,8 @@ const rows: [string, string][] = [
   </p>
   <table>
     <tbody>
-      {rows.map(([label, value]) => <tr><th>{label}</th><td>{value}</td></tr>)}
-    </tbody>
-  </table>
+        {rows.map(([label, value]) => <tr><th>{label}</th><td>{value}</td></tr>)}
+      </tbody>
+    </table>
+  </div>
 </Base>

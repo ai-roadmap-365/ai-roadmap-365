@@ -92,16 +92,25 @@ const RING_C = 2 * Math.PI * RING_R;
       <div class="stat"><b>{written}</b><span>lessons written</span></div>
       <div class="stat"><b>{labs}</b><span>labs released</span></div>
     </div>
+  </section>
 
-    {/* A slim animated map of the year, sized to stay above the fold: the
-        nine courses as one path with a marker crossing it. It rests at Day 1,
-        so the still frame reads as a journey about to start. */}
+  {/* The animated map of the year comes before the course cards: it is the one
+      picture that explains the whole thing, and a visitor should see where the
+      year goes before being asked to pick a course. There used to be a second,
+      slimmer strip inside the hero saying the same thing a few hundred pixels
+      higher — two maps of one journey read as a duplicate, so only this one
+      remains. */}
+  <section class="wrap section" id="journey">
+    <div class="section__head">
+      <h2>The whole year, end to end</h2>
+      <p class="eyebrow">where this takes you</p>
+    </div>
     <img
-      class="herostrip"
-      src={`${base}/hero-strip.svg`}
+      class="journey"
+      src={`${base}/journey.svg`}
       width="1200"
-      height="120"
-      alt="Nine courses on one path from Day 1 to Day 365: Foundations, Python, Maths, Machine Learning, Deep Learning, LLMs, AI Engineering, Deploy, Capstone"
+      height="300"
+      alt="The 365-day journey: nine courses on one path, from Computing Foundations on Day 1 through Python, maths, machine learning, deep learning, large language models, AI engineering and deployment, to shipping your own capstone on Day 365"
     />
   </section>
 
@@ -148,20 +157,6 @@ const RING_C = 2 * Math.PI * RING_R;
         })
       }
     </div>
-  </section>
-
-  <section class="wrap section" id="journey">
-    <div class="section__head">
-      <h2>The whole year, end to end</h2>
-      <p class="eyebrow">where this takes you</p>
-    </div>
-    <img
-      class="journey"
-      src={`${base}/journey.svg`}
-      width="1200"
-      height="300"
-      alt="The 365-day journey: nine courses on one path, from Computing Foundations on Day 1 through Python, maths, machine learning, deep learning, large language models, AI engineering and deployment, to shipping your own capstone on Day 365"
-    />
   </section>
 
   <section class="wrap section">
@@ -254,22 +249,12 @@ const RING_C = 2 * Math.PI * RING_R;
   </section>
 
   <style>
-    .herostrip {
-    width: 100%;
-    max-width: 1040px;
-    height: auto;
-    display: block;
-    /* Tuned so the strip finishes above the fold on a 900px-tall window,
-       which is where a first-time visitor forms their impression. */
-    margin: 14px auto 0;
-    opacity: 0.95;
-  }
-  @media (max-height: 780px) {
-    .herostrip {
-      margin-top: 8px;
+    /* This section leads the page now, so it sits closer to the hero than the
+       standard section rhythm. */
+    #journey {
+      padding-top: 26px;
     }
-  }
-  .journey {
+    .journey {
       width: 100%;
       height: auto;
       display: block;

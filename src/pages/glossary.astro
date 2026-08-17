@@ -14,7 +14,8 @@ entries.sort((a, b) => a.term.localeCompare(b.term));
 ---
 
 <Base title="Glossary">
-  <h1>Glossary</h1>
+  <div class="readable">
+    <h1>Glossary</h1>
   <p>
     Every term defined across the written lessons ({entries.length} terms so far). Each entry links
     to the lesson that introduced it. The glossary grows as lessons are written.
@@ -33,5 +34,6 @@ entries.sort((a, b) => a.term.localeCompare(b.term));
         </>
       ))
     }
-  </dl>
+    </dl>
+  </div>
 </Base>

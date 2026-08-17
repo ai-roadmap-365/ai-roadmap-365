@@ -25,7 +25,8 @@ const groups = section.subsections
 ---
 
 <Base title={section.title}>
-  <p class="crumbs"><a href={`${base}/sections`}>Courses</a> › {section.id}</p>
+  <div class="readable">
+    <p class="crumbs"><a href={`${base}/sections`}>Courses</a> › {section.id}</p>
   <h1>{section.id} · {section.title}</h1>
   <p>{section.summary}</p>
   <p>
@@ -50,7 +51,8 @@ const groups = section.subsections
           <DayList days={g.days} />
           <p><strong>Project:</strong> {g.project.title} — {g.project.summary}</p>
         </details>
-      );
-    })
-  }
+        );
+      })
+    }
+  </div>
 </Base>
