@@ -2,7 +2,7 @@
 
 > GENERATED — do not edit by hand. Run `npm run generate:section-nav`.
 
-The complete map of all nine courses: **110 of 365 days complete.** Click a course to expand it, then a subsection, to drill down to individual days — nothing is shown all at once.
+The complete map of all nine courses: **117 of 365 days complete.** Click a course to expand it, then a subsection, to drill down to individual days — nothing is shown all at once.
 
 <details>
 <summary><h3>Course01 · Computing Foundations — 42/42 complete</h3></summary>
@@ -217,7 +217,7 @@ From first program to tested, packaged, database-backed applications — the wor
 </details>
 
 <details>
-<summary><h3>Course03 · Math, Statistics, and Data — 12/42 complete</h3></summary>
+<summary><h3>Course03 · Math, Statistics, and Data — 19/42 complete</h3></summary>
 
 The linear algebra, calculus, probability, and data-analysis skills that make machine learning understandable rather than magical.
 
@@ -236,7 +236,7 @@ The linear algebra, calculus, probability, and data-analysis skills that make ma
 
 </details>
 <details>
-<summary>Days 106-112 · Linear Algebra II and Calculus — 5/7</summary>
+<summary>Days 106-112 · Linear Algebra II and Calculus — 7/7</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
@@ -245,20 +245,20 @@ The linear algebra, calculus, probability, and data-analysis skills that make ma
 | Day 108 | [Derivatives: Rates of Change](content/sections/math-statistics-and-data/day-108-derivatives-rates-of-change/) | [lab](labs/sections/math-statistics-and-data/day-108-derivatives-rates-of-change/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-108-derivatives-rates-of-change) | complete |
 | Day 109 | [Partial Derivatives and Gradients](content/sections/math-statistics-and-data/day-109-partial-derivatives-and-gradients/) | [lab](labs/sections/math-statistics-and-data/day-109-partial-derivatives-and-gradients/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-109-partial-derivatives-and-gradients) | complete |
 | Day 110 | [The Chain Rule](content/sections/math-statistics-and-data/day-110-the-chain-rule/) | [lab](labs/sections/math-statistics-and-data/day-110-the-chain-rule/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-110-the-chain-rule) | complete |
-| Day 111 | Gradient Descent from Scratch | — | — | planned |
-| Day 112 | Visualizing Optimization | — | — | planned |
+| Day 111 | [Gradient Descent from Scratch](content/sections/math-statistics-and-data/day-111-gradient-descent-from-scratch/) | [lab](labs/sections/math-statistics-and-data/day-111-gradient-descent-from-scratch/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-111-gradient-descent-from-scratch) | complete |
+| Day 112 | [Visualizing Optimization](content/sections/math-statistics-and-data/day-112-visualizing-optimization/) | [lab](labs/sections/math-statistics-and-data/day-112-visualizing-optimization/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-112-visualizing-optimization) | complete |
 
 </details>
 <details>
-<summary>Days 113-119 · Probability and Statistics — 0/7</summary>
+<summary>Days 113-119 · Probability and Statistics — 5/7</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
-| Day 113 | Probability: Events, Rules, and Intuition | — | — | planned |
-| Day 114 | Random Variables and Distributions | — | — | planned |
-| Day 115 | Bayes’ Theorem | — | — | planned |
-| Day 116 | Descriptive Statistics That Don’t Lie | — | — | planned |
-| Day 117 | Sampling and the Central Limit Theorem | — | — | planned |
+| Day 113 | [Probability: Events, Rules, and Intuition](content/sections/math-statistics-and-data/day-113-probability-events-rules-and-intuition/) | [lab](labs/sections/math-statistics-and-data/day-113-probability-events-rules-and-intuition/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-113-probability-events-rules-and-intuition) | complete |
+| Day 114 | [Random Variables and Distributions](content/sections/math-statistics-and-data/day-114-random-variables-and-distributions/) | [lab](labs/sections/math-statistics-and-data/day-114-random-variables-and-distributions/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-114-random-variables-and-distributions) | complete |
+| Day 115 | [Bayes’ Theorem](content/sections/math-statistics-and-data/day-115-bayes-theorem/) | [lab](labs/sections/math-statistics-and-data/day-115-bayes-theorem/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-115-bayes-theorem) | complete |
+| Day 116 | [Descriptive Statistics That Don’t Lie](content/sections/math-statistics-and-data/day-116-descriptive-statistics-that-dont-lie/) | [lab](labs/sections/math-statistics-and-data/day-116-descriptive-statistics-that-dont-lie/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-116-descriptive-statistics-that-dont-lie) | complete |
+| Day 117 | [Sampling and the Central Limit Theorem](content/sections/math-statistics-and-data/day-117-sampling-and-the-central-limit-theorem/) | [lab](labs/sections/math-statistics-and-data/day-117-sampling-and-the-central-limit-theorem/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-117-sampling-and-the-central-limit-theorem) | complete |
 | Day 118 | Hypothesis Tests and Confidence Intervals | — | — | planned |
 | Day 119 | Analyzing an Experiment End to End | — | — | planned |
 

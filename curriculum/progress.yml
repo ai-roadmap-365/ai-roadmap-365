@@ -1586,3 +1586,197 @@ days:
       claim than an approximate one. Animated backward-pass diagram.
       Instructor solution.
     completion: *done
+  111:
+    status: complete
+    completed_on: '2026-08-17'
+    evidence: >-
+      Lesson passes content contract (Gradient Descent from Scratch — the day
+      Week 16's calculus and linear algebra turn out to be one subject).
+      Descent by Hand lab executed and re-run independently at integration (50
+      checks, 0 failures, exit 0, harness's own exit status captured rather
+      than a pipeline's); 24 reference tests pass, the untouched starter
+      reports 1 passed and 20 skipped, and a solved copy kept outside the lab
+      passes all 21. The closed-form claims were re-derived at integration
+      outside the lab's own code: for f = a x^2 / 2 with a = 5 the per-step
+      factor |1 - eta a| gives monotone decrease at eta 0.1, an exact one-step
+      landing at 0.2, alternating-but-converging at 0.35 and divergence at
+      0.45, and with the optimal rate 2/(1+kappa) the steps to 1e-6 run 1, 35,
+      139, 691 for kappa 1, 5, 20, 100 — so the ill-conditioning gap is 691x,
+      not the 5.3x an earlier scheme produced. Two measurements corrected the
+      brief and are reported rather than smoothed over: that rate change, and
+      momentum at beta 0.9 measuring worse than plain descent on this bowl
+      while beta 0.5 won at 34 steps against 122. Divergence overflow captured
+      as a real run (inf at step 3890, nan at 3891). The lab was rebuilt from
+      scratch after a concurrent-writer collision, so every captured output
+      comes from its own final run. scipy, PyTorch and JAX reproduce no output.
+      Animated learning-rate-regimes diagram. Instructor solution.
+    completion: *done
+  112:
+    status: complete
+    completed_on: '2026-08-17'
+    evidence: >-
+      Lesson passes content contract (Visualizing Optimization — you cannot
+      debug what you cannot see). Seeing the Descent lab executed and re-run
+      independently at integration by following the README's own setup, which
+      reproduced its stated versions exactly (numpy 2.5.2, Pillow 12.3.0):
+      31 checks, 0 failures, exit 0 with the harness's own status captured,
+      and no PNG or GIF left behind. 10 reference tests pass; the untouched
+      starter reports 13 skipped and a fully solved copy 13 passed. matplotlib
+      is genuinely absent and the harness asserts its import fails, so the
+      from-scratch build is real: contour maps, paths, loss curves and an
+      animated GIF are drawn with Pillow's ImageDraw, plus an ASCII contour
+      renderer with no dependencies at all, and no matplotlib, Plotly,
+      TensorBoard or Weights & Biases output is reproduced anywhere. The
+      geometric convergence rate is proved from the plot's own coordinates by
+      asserting the log-axis points are collinear, rather than asserted in
+      prose. Two learning-rate-sweep labels were corrected against printed
+      data — a diverging run that has not yet overflowed is not converging.
+      Foreign files from a concurrent-writer collision were deleted rather
+      than merged, and every capture regenerated afterwards. Animated
+      descent-path diagram. Instructor solution.
+    completion: *done
+  113:
+    status: complete
+    completed_on: '2026-08-17'
+    evidence: >-
+      Lesson passes content contract (Probability: Events, Rules, and
+      Intuition — the first probability in the course, opening on de Méré's
+      1650s wager). Probability You Can Count lab executed and re-run
+      independently at integration (57 checks, 0 failures, exit 0); 93
+      reference tests pass and the untouched starter reports 3 passed and 43
+      skipped, with the solved starter reaching 46 passed. The day's headline
+      numbers were re-derived at integration outside the lab's own code: 1 -
+      (5/6)^4 = 671/1296 = 0.5177 is favourable while 1 - (35/36)^24 = 0.4914
+      is not, and the two-dice sum has P(7) = 1/6 with a most-to-least-likely
+      ratio of exactly 6. Exact rational arithmetic with Fraction wherever the
+      answer is rational, so those assertions cannot drift; sampled figures
+      carry tolerances derived from the standard error rather than guessed, and
+      FIELDS.md separates the two. The harness proves it can fail by swapping
+      in a wrong assertion, confirming a non-zero exit, and restoring the file.
+      scipy and pandas reproduce no output and are declared as not installed.
+      The chain-rule naming collision with Day 110 is addressed head-on rather
+      than left for the reader. Animated conditioning diagram. Instructor
+      solution.
+    completion: *done
+  114:
+    status: complete
+    completed_on: '2026-08-17'
+    evidence: >-
+      Lesson passes content contract (Random Variables and Distributions — the
+      step that turns outcomes into numbers you can do arithmetic on).
+      Distributions You Can Sample lab executed and re-run independently at
+      integration (63 checks, 0 failures, exit 0, harness's own exit status
+      captured); 69 reference tests pass and the solved starter reaches 45. The
+      centrepiece claims were re-derived at integration outside the lab's own
+      code, by exact rational enumeration of the 36-outcome dice space with the
+      first die and the sum as a deliberately dependent pair: expectation
+      forgives dependence, E[X+Y] = 21/2 = E[X]+E[Y] exactly, while variance
+      does not, Var[X+Y] = 175/12 against a naive 35/4, the gap closing exactly
+      when the covariance term is included. Jensen's gap equals the variance
+      exactly; the Binomial-to-Poisson maximum pmf gap shrinks monotonically
+      across n = 10, 100, 1000, 10000 at lambda 2; and Uniform(0, 0.5) has
+      density 2 with an integral of 1, which is the misconception the day
+      exists to kill. The max-gap threshold between the hand-written and
+      library exponential samplers is derived from the
+      Dvoretzky-Kiefer-Wolfowitz inequality with the derivation shown, not
+      tuned until the test passed, and was checked across five seeds for
+      flakiness. The harness proves it can fail twice, once through its own
+      built-in self-test and once by hand. A real bash 3.2 quote-tracking quirk
+      was reproduced with a minimal case and fixed rather than worked around
+      blindly. scipy, pandas and matplotlib reproduce no output. Animated
+      inverse-CDF sampling diagram. Instructor solution.
+    completion: *done
+  115:
+    status: complete
+    completed_on: '2026-08-17'
+    evidence: >-
+      Lesson passes content contract (Bayes' Theorem — the law of total
+      probability read backwards, opened on the medical test almost everyone
+      gets wrong). Bayes You Can Trust lab executed and re-run independently at
+      integration (53 checks, 0 failures, exit 0, harness's own exit status
+      captured); 71 reference tests pass, the untouched starter reports 2 passed
+      and 38 skipped, and a solved copy reaches 40. Claims re-derived at
+      integration outside the lab's own code: a 99%-sensitive, 99%-specific
+      test against a 1-in-1000 base rate gives a posterior of exactly 99/1098 =
+      11/122 = 0.090164, not the 0.99 nearly everyone answers; the natural-
+      frequency table gives 99 true positives against 999 false ones out of
+      100,000; and at a prevalence of one half the same test really does give
+      exactly 0.99, which is the sharpest possible demonstration of what a base
+      rate does. The author's own brief carried a wrong figure — it gave
+      500 x ln(0.01) as about -1151.29, which is 500 x ln(0.1); the correct
+      value is -2302.585, confirmed independently at integration. The agent
+      computed it, used the measured value everywhere, and flagged the
+      correction in the lesson, the lab README and metadata.yml rather than
+      quietly patching it. The underflow half of that claim is also asserted:
+      0.01 to the 500th is exactly 0.0 in float64, which is why the classifier
+      works in log space. Naive Bayes is built from scratch with Laplace
+      smoothing, and removing the smoothing is asserted to drive a class
+      probability to exactly zero so one unseen word vetoes every other. The
+      correlated-tests case reports both the correct posterior and the higher
+      one a false independence assumption produces. Harness proved able to fail
+      twice, once by its own self-test and once by hand. scipy, scikit-learn
+      and PyMC reproduce no output. Animated posterior-update diagram.
+      Instructor solution.
+    completion: *done
+  116:
+    status: complete
+    completed_on: '2026-08-17'
+    evidence: >-
+      Lesson passes content contract (Descriptive Statistics That Don't Lie — a
+      summary statistic is a compression, and the only professional question is
+      what it hid). Statistics That Don't Lie lab executed and re-run
+      independently at integration by following the README's own setup: 55
+      checks, 0 failures, exit 0 with the harness's own status captured, and 32
+      reference tests passing. Claims re-derived at integration outside the
+      lab's own code. The 75th percentile of [1,2,3,4,6,8,9,15] takes SEVEN
+      distinct values across NumPy's nine interpolation conventions — linear
+      8.25, lower 8.0, higher 9.0, nearest 8.0, midpoint 8.5, weibull 8.75,
+      median_unbiased 8.5833, normal_unbiased 8.5625, hazen 8.5 — so two tools
+      can report different quartiles for identical data and both be right.
+      Anscombe's published 1973 quartet reproduces exactly: all four sets agree
+      on mean x 9.00, sample variance of x 11.00, mean y 7.50, variance of y
+      about 4.12, correlation 0.816 and the fitted line y = 3.00 + 0.500x, while
+      looking nothing like each other. Bessel's correction is measured rather
+      than asserted: the divide-by-n estimator came in at 0.8005 of the true
+      variance against a predicted (n-1)/n = 0.8000, and divide-by-(n-1) at
+      1.0006. Under 3% contamination the standard deviation inflated 15.10x
+      while the median absolute deviation moved 1.00x. The mean's breakdown
+      point of zero is asserted as exact equality on the median, which does not
+      move at all. Simpson's paradox uses an invented minimal table, declared
+      as invented rather than dressed up with a fabricated clinical citation.
+      Harness proves it can fail through an automated round-trip built into the
+      script. scipy and pandas reproduce no output. Animated
+      same-summary-different-data diagram. Instructor solution.
+    completion: *done
+  117:
+    status: complete
+    completed_on: '2026-08-17'
+    evidence: >-
+      Lesson passes content contract (Sampling and the Central Limit Theorem —
+      the foundation Days 118 and 119 stand on). Sampling You Can Trust lab
+      executed and re-run independently at integration (32 checks, 0 failures,
+      exit 0, harness's own exit status captured); 19 reference tests pass.
+      Claims re-derived at integration outside the lab's own code, on a
+      different seed. The lab's centrepiece holds: measuring the spread of the
+      sample mean by interquartile range from n=10 to n=1000, an exponential
+      population concentrates by a factor of 9.62 against the CLT's predicted
+      10, while a Cauchy population refuses entirely at a factor of 1.01 —
+      averaging a thousand draws is no better than taking one, because infinite
+      variance voids the theorem's condition. The sqrt(n) law reproduced with
+      successive ratios of 2.02, 1.99 and 1.99 as n quadrupled. The day's
+      practical claim is also checkable and checked: an accuracy of 91.4% on 500
+      examples carries a binomial standard error of 1.25 percentage points, so a
+      0.3-point leaderboard margin is 0.24 standard errors and demonstrates
+      nothing. Sampling bias is separated from sampling error and shown not to
+      shrink with n at all, and autocorrelated observations are shown to make
+      the naive standard error understate the truth by a factor of about 2.4, so
+      confidence grows in proportion to the error. Every sampled tolerance was
+      validated across six seeds before being fixed, with observed ranges
+      recorded in code. A two-spike population was reweighted to 80/20 after an
+      equal-weight version proved to have near-zero skewness and failed the
+      monotone-decrease check on some seeds; the reasoning is in-code rather
+      than hidden. Historical attributions were grounded against the cited
+      Dartmouth text rather than asserted from memory. scipy, pandas and
+      matplotlib reproduce no output. Animated CLT diagram carrying the theorem
+      and its condition together. Instructor solution.
+    completion: *done
