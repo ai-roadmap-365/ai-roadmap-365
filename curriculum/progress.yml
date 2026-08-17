@@ -1182,3 +1182,407 @@ days:
       the rubric rather than left as a gap. Animated pipeline-run diagram.
       Instructor solution.
     completion: *done
+  100:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (Matrices and What They Represent — the
+      100th day, and the second of Course03); The Same Numbers, Three Ways lab
+      built first and executed, then re-run independently at integration (41
+      checks, 0 failures, exit 0; pytest examples 41 passed; the untouched
+      starter reports 1 passed and 32 skipped, and 33 passed against a solved
+      copy). The day's organising idea is that a matrix is three things — a
+      table of data, a collection of vectors, and a transformation — and that
+      most confusion comes from not knowing which meaning is in play; the
+      static diagram draws the same 3x4 matrix all three ways. Honesty calls,
+      several of which changed the content. A real false-pass bug was found
+      and fixed: examples/ and starter/ both contain matrix.py, so running
+      bare pytest made eleven unwritten starter exercises PASS against the
+      reference solution — conftest.py in each directory plus a harness check
+      asserting the skip count across a combined run now prevents it, and a
+      troubleshooting claim that this produced a collection error was rewritten
+      because that is not what actually happens. An assertion that `.base is
+      None` proves independence failed on a real run — a copy's reshape has an
+      anonymous base — and rather than delete it the discovery became lab,
+      lesson, glossary and quiz material; verified independently at
+      integration. A fabricated sparse-matrix threshold ("60% zeros") was
+      removed and replaced with a qualitative statement plus "measured rather
+      than guessed". Historical dates were fetched through the MediaWiki
+      section endpoint rather than recalled, and NumPy's own origin dates were
+      omitted because no permitted source states them. Every code block in the
+      lesson is a byte-exact excerpt from expected-output: two paraphrased
+      blocks were replaced with the literal captures. PyTorch, JAX, pandas and
+      SciPy sparse are described with no output reproduced. Animated
+      broadcasting diagram. Instructor solution.
+    completion: *done
+  99:
+    status: complete
+    completed_on: '2026-08-16'
+    evidence: >-
+      Lesson passes content contract (Vectors — Direction, Magnitude, and
+      Meaning; the first day of Course03 and the first mathematics in the
+      course); Vectors You Can Hold lab executed and re-run independently at
+      integration (87 checks, 0 failures, exit 0) with numpy 2.5.2. The day is
+      written for a reader who has done 98 days of programming and no
+      mathematics beyond school arithmetic, so it opens with a row of numbers
+      they have already been using rather than a definition, and every worked
+      number is re-derivable with a pen — the squares, the sum and the root
+      are all shown, and the exact 3-4-5 case is used where an exact answer
+      teaches better than a realistic one. Nine operations are built in pure
+      Python against numbered exercises and each is asserted against NumPy on
+      the same inputs, so agreement is demonstrated rather than promised. The
+      day ends where the course's second half begins: six invented articles
+      with four hand-made numbers each, and a pairwise distance table in which
+      the nearest pair falls out of the arithmetic — making "similar things
+      are near each other" a computable claim. Two secondary threads are
+      load-bearing and recorded as such in the lesson README: normalising the
+      zero vector is undefined and raises rather than returning a plausible
+      wrong answer, and a normalised vector's magnitude is not exactly 1.0, so
+      every float assertion uses a stated tolerance — Day 46 being paid off
+      rather than defensive coding. A case where the L1 and L2 norms rank the
+      same two candidates in opposite orders is computed and explained as a
+      modelling choice rather than one norm being correct. PyTorch, JAX and
+      pandas are described with no output reproduced. Animated
+      vector-operations diagram. Instructor solution and lesson README written
+      at integration.
+    completion: *done
+  101:
+    status: complete
+    completed_on: '2026-08-17'
+    evidence: >-
+      Lesson passes content contract (Matrix Multiplication); Multiply It
+      Yourself lab executed and re-run independently at integration (58 checks,
+      0 failures, exit 0) with numpy 2.5.2. The day refuses to present the
+      multiplication rule as arbitrary: matrix-vector multiplication is taught
+      as a linear combination of the matrix's columns, matrix-matrix as doing
+      that per column, and the shape rule is derived from what the operation
+      does rather than memorised — the inner dimensions match because the
+      second thing must accept what the first produces. Non-commutativity is
+      shown with a concrete pair where both products are defined and
+      different, computed in full. The payoff is one neural-network layer as
+      X @ W + b with a bias broadcast across rows, computed by hand with small
+      numbers, so the reader has done on paper the operation that dominates
+      every model they will train. The elementwise-versus-matrix trap is met
+      deliberately: * and @ are proved to differ on the same operands, with
+      exact shapes and values asserted. Timing compares the nested-loop
+      implementation against NumPy at a size where the gap is unmistakable,
+      and the test asserts only a wide margin rather than any duration.
+      Day 100's false-pass lesson was carried forward: conftest.py in both
+      examples/ and starter/, with a harness check that the skip count is
+      unchanged in a combined run. Animated composition diagram. Instructor
+      solution.
+    completion: *done
+  102:
+    status: complete
+    completed_on: '2026-08-17'
+    evidence: >-
+      Lesson passes content contract (Linear Transformations); Where Do the
+      Basis Vectors Land lab executed and re-run independently at integration
+      (64 checks, 0 failures, exit 0). The day's single organising fact is that
+      the columns of a matrix are where the basis vectors land, so knowing
+      where two arrows go tells you where everything goes — demonstrated by
+      reading a matrix off a picture and a picture off a matrix. Every standard
+      transformation is derived rather than given, including the rotation
+      matrix from where the basis vectors travel, with sine and cosine defined
+      from the unit circle for a reader meeting them for the first time.
+      Linearity is TESTED rather than asserted: it holds for a matrix
+      transform and fails for a function that adds a constant, both asserted —
+      which is the concrete reason a network keeps its bias separate and needs
+      a non-linear activation. The determinant is introduced geometrically as
+      an area factor, with the negative case as a flipped orientation and the
+      zero case as a collapse nothing can undo, and the singular-matrix
+      inverse asserts the exception NumPy actually raises. The day closes on
+      the honest limitation that makes activation functions necessary: a
+      linear transformation always fixes the origin and always maps straight
+      lines to straight lines, so no stack of them can separate data needing a
+      curve. Float comparisons use stated tolerances, including the honest
+      note that a 90-degree rotation does not produce exactly 0.0 for cosine.
+      Animated composition diagram. Instructor solution.
+    completion: *done
+  103:
+    status: complete
+    completed_on: '2026-08-17'
+    evidence: >-
+      Lesson passes content contract (Dot Products and Similarity); Which
+      Question Are You Asking lab executed and re-run independently at
+      integration (49 checks, 0 failures, exit 0; 76 reference tests pass, the
+      untouched starter reports 1 passed and 51 skipped, and 52 pass against a
+      solved copy). The day opens by breaking Day 99's own result — an article
+      and its doubled copy are far apart under Euclidean distance and
+      identical in direction — which is the honest motivation for cosine
+      similarity, computed rather than asserted. Three findings changed the
+      content. First, the reference suite FAILED during authoring on an
+      assertion that a vector's cosine similarity with itself is exactly 1.0:
+      three of the six catalogue articles miss it and one returns
+      1.0000000000000002, which math.acos refuses outright — verified
+      independently at integration. A synthetic example found by grid search
+      was deleted in favour of the real catalogue producing it, and the
+      finding is attributed to the failing test in the lesson, the lab brief
+      and the instructor solution. Second, the commonly quoted sqrt(2/(pi*d))
+      for the mean absolute cosine of random vectors is a large-dimension
+      limit and is 14% wrong at d=2; the exact Gamma-function expression
+      replaced it, reproducing the two hand-checkable cases (2/pi at d=2 and
+      exactly 0.5 at d=3) and matching the measurement within 1.5% throughout,
+      with both columns shown and the discrepancy discussed. Third, the second
+      search query is a near-tie (0.903482 against 0.901082) and is reported as
+      one, with the test asserting a margin band rather than pretending the win
+      was decisive. The claim that angular distance is a metric is stated as
+      known and explicitly NOT proved — one triple is not a proof — while the
+      cosine-distance counter-example is labelled as a proof of the negative.
+      scipy and scikit-learn are described with no output reproduced, and no
+      vector-database product names or prices appear. Animated
+      cosine-versus-Euclidean diagram. Instructor solution.
+    completion: *done
+  104:
+    status: complete
+    completed_on: '2026-08-17'
+    evidence: >-
+      Lesson passes content contract (NumPy — Arrays and Vectorized Thinking);
+      Stop Writing the Loop lab executed and re-run independently at
+      integration (80 checks, 0 failures, exit 0; 107 reference tests pass, the
+      untouched starter reports 1 passed and 70 skipped, and 71 pass against a
+      solved copy). Three findings, two of which corrected the brief itself.
+      First, the brief's memory comparison was WRONG and the wrongness became
+      the lesson's opening: sys.getsizeof on a list of a million ints is
+      8,000,056 against the array's 8,000,000, a ratio of 1.0000, which
+      contradicts the day's own claim — the honest total, counting the 28-byte
+      int objects, is 36,000,056 and 4.50x. Verified independently at
+      integration. Keeping the failed measurement teaches which question was
+      asked, which transfers further than the right number. Second, an
+      unplanned discovery: x ** 0.5 is not np.sqrt, disagreeing on 1,390 of a
+      million values, always by one unit in the last place, because IEEE-754
+      requires a correctly-rounded square root while a general power routine
+      has no such obligation. Reproduced exactly at integration on the quoted
+      value; the tests assert the direction and a bound rather than the count,
+      because the number depends on the libm Python was built against. Third,
+      int8 overflow produces no warning on numpy 2.5.2, and a reference test
+      asserts the ABSENCE of the warning so a future NumPy that starts warning
+      fails the suite rather than letting the page go stale. No dated NumPy
+      history is claimed, because none of the permitted sources carries one;
+      the history section uses what is still visible in the installed software
+      instead. Timings are never asserted — measured 106x to 134x, tests
+      assert above 20x — and one section reports NumPy LOSING to a
+      comprehension on four elements. A latent issue in Day 102's harness was
+      flagged rather than silently touched. Animated vectorised-versus-loop
+      diagram. Instructor solution.
+    completion: *done
+  105:
+    status: complete
+    completed_on: '2026-08-17'
+    evidence: >-
+      Lesson passes content contract (Transforming Images with Matrices — the
+      Week 15 capstone); Rotate It Yourself lab executed and re-run
+      independently at integration (79 checks, 0 failures, exit 0), and
+      verified to pass both WITH a lab-local .venv present and without one,
+      after the sibling-lab defect found the same day. The week's mathematics
+      finally acts on something the reader can see: an image is a matrix, so
+      Days 99-104 apply to it directly. The conceptual core is that you
+      transform the coordinate grid rather than the pixels, and the lab makes
+      the argument by doing it wrong first — forward mapping is implemented and
+      the resulting holes are COUNTED and asserted, so inverse mapping is
+      earned rather than announced. Homogeneous coordinates are introduced for
+      the reason they exist: translation moves the origin, which Day 102 proved
+      a linear map cannot do, so a third coordinate makes it a matrix multiply
+      like everything else. The strongest artifact is the comparison — the
+      reader's own inverse-mapping implementation with nearest-neighbour
+      interpolation agrees with Pillow's Image.transform pixel-for-pixel within
+      a stated tolerance, which settles the output-to-input coefficient
+      convention Day 102 verified and deferred. The honest limit is stated
+      plainly: these are affine transformations, so straight lines stay
+      straight and parallel lines stay parallel — perspective needs a
+      projective transform and lens distortion needs something non-linear. The
+      test image is generated programmatically and deliberately asymmetric, so
+      a flip or a transpose is visibly wrong rather than accidentally correct;
+      generated files are cleaned up. Animated inverse-mapping diagram showing
+      the holes and the fix. Instructor solution.
+    completion: *done
+  106:
+    status: complete
+    completed_on: '2026-08-17'
+    evidence: >-
+      Lesson passes content contract (Eigenvalues and Eigenvectors,
+      Intuitively — the first day of Week 16); The Vectors That Keep Their
+      Direction lab executed and re-run independently at integration (110
+      checks, 0 failures, exit 0; 94 reference tests pass and the untouched
+      starter reports 1 passed and 52 skipped). The day deliberately does not
+      open with the characteristic polynomial, which is where courses lose
+      people: it displays det(A - lambda I) = 0, names it as the thing that
+      loses people, puts it away, and derives it later from Day 102's zero
+      determinant. It opens geometrically instead, applying a matrix to a fan
+      of vectors and showing which come back on their own line. The strongest
+      artifact is PCA in fifteen lines — a 2-D dataset with an obvious
+      elongation, its covariance matrix, and the top eigenvector shown lying
+      along that elongation. Findings, all measured: numpy.linalg.eig
+      CONTRADICTS ITS OWN DOCSTRING, returning complex128 for real matrices
+      with real eigenvalues including the identity — verified independently at
+      integration against eye(2), a real diagonal and an integer matrix — and
+      the docstring is quoted exactly beside the measurement, with a starter
+      exercise asking the reader to predict from the docs first so they feel
+      the gap. The Rayleigh quotient's quadratic convergence is conditional
+      and the lab's own matrix violates the condition: the ratio locks onto
+      2.0000 for the symmetric matrix but settles at 1.0 for a matrix whose
+      eigen-lines meet at 71.57 degrees rather than 90, so the measurement is
+      reported first and the textbook claim restored with its condition
+      attached. Diagonalising a shear fails SILENTLY — numpy.linalg.inv does
+      not raise on a determinant of 2.2e-16 and returns a plausible wrong
+      identity — so the lesson says to check the condition number rather than
+      to expect an exception. Eigenvectors are compared by direction because
+      they are only defined up to sign and scale, and FIELDS.md tells the
+      reader a flipped sign is not a difference. The eig/eigh timing ratio is
+      asserted nowhere; what is asserted beside it is their 1.99e-13
+      agreement. SciPy, PyTorch and scikit-learn reproduce no output. The
+      .venv defect fixed earlier today was verified absent here across three
+      configurations, including a venv deliberately stuffed with caches.
+      Animated power-method diagram. Instructor solution.
+    completion: *done
+  108:
+    status: complete
+    completed_on: '2026-08-17'
+    evidence: >-
+      Lesson passes content contract (Derivatives — Rates of Change; the first
+      calculus in the course, for a reader with none); Watch the Slope Settle
+      lab executed and re-run independently at integration (97 checks, 0
+      failures, exit 0; 178 reference tests pass, the untouched starter reports
+      1 passed and 99 skipped, and 100 pass against a solved copy). The day
+      opens on a speedometer rather than a limit — average speed over an
+      interval against the reading at an instant — and meets the limit as a
+      numerical observation, computing the slope over intervals of 1, 0.1,
+      0.01 and 0.001 and watching it settle before any symbol appears. The
+      from-scratch artifact measures the error of the difference quotient
+      across h from 1e-1 to 1e-14 and finds the U — truncation falling,
+      rounding rising — with the minimum REPORTED and never asserted (measured
+      1.000e-08 forward and 3.162e-06 central against balance predictions of
+      2.107e-08 and 8.733e-06; the tests assert shape, band membership and
+      within-10x of prediction, and FIELDS.md says why a factor of ten is
+      honest rather than a hedge). Honesty calls that changed the content: the
+      error curve is NOT monotone near its minimum — 1e-6 measured worse than
+      both neighbours — so the shape test compares ends against middle and the
+      lesson says plainly that a monotonicity test would demand something
+      untrue; numpy.gradient gives two answers to one question, bit-identical
+      to the from-scratch central difference with scalar spacing and differing
+      with an array of the same evenly spaced coordinates, which was unplanned,
+      kept and asserted both ways, and verified independently at integration; a
+      first draft asserting which value frameworks use for ReLU's derivative
+      at zero was REMOVED because no framework is installed, leaving only that
+      the choice is a convention between 0 and 1 while the central difference
+      returns 0.5, which is neither; and a privacy paragraph asserting a
+      gradient-inversion research result was rewritten because it cannot be
+      cited from the permitted sources. x^4 at zero is a genuine minimum the
+      method cannot see, so the classifier returns undecided and the rubric
+      deducts for answering "minimum" there — being right by accident is scored
+      as wrong. Every tolerance is derived with headroom tabulated, and a
+      reference test asserts none is loose enough to be meaningless. Animated
+      shrinking-interval diagram. Instructor solution.
+    completion: *done
+  107:
+    status: complete
+    completed_on: '2026-08-17'
+    evidence: >-
+      Lesson passes content contract (Norms, Distances, and Similarity
+      Measures); Choose Your Distance on Purpose lab executed and re-run
+      independently at integration (98 checks, 0 failures, exit 0; 105
+      reference tests pass, the untouched starter reports 1 passed and 71
+      skipped, and 72 pass against a solved copy). The day consolidates Days 99
+      and 103 into a way of CHOOSING: it opens with three measures picking
+      three different winners on the same query, none of them wrong, and gives
+      a decision table keyed by the shape of the data rather than by name. The
+      unit "circles" of L1, L2 and L-infinity — a diamond, a circle, a square —
+      are drawn on one set of axes, which is the picture that makes the family
+      click. Honesty calls: the brief was WRONG in implying Mahalanobis would
+      reproduce the standardised ranking, and the measurement was followed
+      instead — standardised Euclidean and Mahalanobis agree that the
+      unusable candidate should be demoted but disagree at the top, because
+      standardising only rescales columns while Mahalanobis also removes the
+      measured 0.7979 correlation, and that distinction is now taught in the
+      lab, the lesson and the content README. Two correct matrix inverses gave
+      two different last bits — exactly 6.0 through the lab's Gauss-Jordan and
+      5.999999999999999 through numpy.linalg.inv, 8.882e-16 apart — and both
+      are printed and asserted against a stated tolerance rather than one
+      being declared right, which became the lab's worked argument for stating
+      tolerances at all. The one randomised result asserts a RANGE (35-75%,
+      measured 54.5% over 2000 seeded catalogues) because NumPy does not
+      guarantee stream stability, with the exact count recorded separately and
+      FIELDS.md saying which claim is durable. SciPy, scikit-learn and every
+      named vector database reproduce no output. History is limited to dates
+      that could be verified, with Menger's coining of "taxicab geometry"
+      hedged rather than dated. Section 6 proves the harness can fail by
+      re-running itself with an expectation inverted, and section 7 greps both
+      implementations to confirm neither imports NumPy, so agreement with
+      numpy.linalg.norm is evidence rather than a tautology. The .venv defect
+      was verified absent across three configurations. Animated
+      scaling-changes-the-answer diagram. Instructor solution.
+    completion: *done
+  109:
+    status: complete
+    completed_on: '2026-08-17'
+    evidence: >-
+      Lesson passes content contract (Partial Derivatives and Gradients);
+      Which Way Is Uphill lab executed and re-run independently at integration
+      (98 checks, 0 failures, exit 0; 271 reference tests pass, the untouched
+      starter reports 1 passed and 205 skipped, 206 pass against a solved copy,
+      and a combined run leaves the skip count unchanged so the import guard is
+      checked rather than trusted). The day builds the sentence the next three
+      depend on — the gradient points uphill and its magnitude is how steep
+      that is — and demonstrates rather than asserts both key facts: stepping
+      along the gradient beats every other direction tried around the circle,
+      and the gradient is perpendicular to the contour, shown by a dot product
+      near zero. Honesty calls: an assertion FAILED and the failure was kept as
+      content — a plane's gradient is constant, but at (1000, -1000) the
+      numerical estimate breaks the lab's own 1e-8 tolerance, so rather than
+      widen the tolerance the lab asserts the breakage and tracks the roundoff
+      bound across seven decades, which became a lesson section and the
+      security note that a tolerance nobody checked is decoration. A test
+      encoding a plausible but false belief was replaced: a finer direction
+      sweep does NOT always give a smaller gap — a 60-direction and a
+      360-direction sweep leave exactly the same 0.4349 degree gap because both
+      grids contain 72 — so the assertion now states the law that is true, that
+      the gap never exceeds half the sampling step. numpy.gradient's edge_order
+      default was found by measurement and asserted in both directions so a
+      future change fails loudly. Prose was corrected to match measurement
+      three times rather than the reverse. A partial fix was REJECTED rather
+      than shipped with a comment overstating it, and the residual issue was
+      escalated: running the README's own pytest command left bytecode that
+      then failed the harness — verified at integration and fixed across all
+      16 affected labs. JAX, PyTorch and SymPy reproduce no output, and no real
+      model's parameter count appears anywhere. Animated steepest-ascent
+      diagram. Instructor solution.
+    completion: *done
+  110:
+    status: complete
+    completed_on: '2026-08-17'
+    evidence: >-
+      Lesson passes content contract (The Chain Rule — the hinge of the
+      calculus arc); Rates Multiply lab executed and re-run independently at
+      integration (120 checks, 0 failures, exit 0, verified after running the
+      README's own pytest command; 235 reference tests pass and the untouched
+      starter reports 2 passed and 163 skipped against 165 fully solved). The
+      day opens on gears rather than notation — if A turns twice per turn of B
+      and B three times per turn of C, then A turns six times per turn of C,
+      and the rates multiplied is the whole idea. Its central artifact is a
+      reverse-mode autodiff engine built from scratch, a Value class recording
+      its children with a backward() that walks the graph applying the chain
+      rule, every gradient verified against Day 108's central difference — the
+      reader writes the core of an autograd engine and checks it numerically.
+      The most valuable finding corrected the brief itself: a test asserting
+      that 40 stacked tanh layers vanish geometrically FAILED, because each
+      tanh pulls its input toward zero where the slope returns to one, so the
+      product decays polynomially rather than exponentially. Measured
+      8.397332e-03 against a constant-factor prediction of 3.149274e-13, ten
+      orders apart; verified independently at integration, where 40 layers
+      left the input at 0.189 with a local rate of 0.965 rather than 0.42. The
+      test now asserts the shape and a contrast case where a genuinely
+      constant factor does collapse, and never the value. A second draft claim
+      also failed: 0.5^50 does NOT vanish — it is exactly four times epsilon
+      and still moves a weight — so the example moved to 0.25^50 with 0.25
+      justified as the sigmoid's measured maximum slope. Two bugs in the
+      author's own test expectations were caught only by solving the starter
+      outside the lab. Negative zero is reported rather than normalised away,
+      and float non-associativity is asserted as a real difference rather than
+      compared with equality. PyTorch, JAX, TensorFlow and SymPy reproduce no
+      output. The network's parameters are deliberately contrived so tanh
+      returns exactly 0.5 and hand and engine can be compared with exact
+      equality; the contrivance is declared openly in the dataset and the
+      lesson, and was kept at integration because an exact match is a stronger
+      claim than an approximate one. Animated backward-pass diagram.
+      Instructor solution.
+    completion: *done

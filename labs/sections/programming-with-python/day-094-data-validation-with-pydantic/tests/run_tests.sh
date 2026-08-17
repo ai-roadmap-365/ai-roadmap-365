@@ -22,6 +22,16 @@ set -u
 export PYTHONDONTWRITEBYTECODE=1
 
 lab_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+# Bytecode left by an EARLIER command is not this run's litter. The README
+# documents `pytest starter -q`, and running it writes .pyc files that would
+# then fail the cleanliness check at the end of this script -- failing the
+# reader for following the instructions. Clearing them here makes that final
+# check measure what it claims to: what THIS run left behind. `.venv` is
+# untouched, because the packages' own bytecode is theirs, not ours.
+find "${lab_dir}" -name '.venv' -prune -o -type d -name '__pycache__' -exec rm -rf {} + 2>/dev/null || true
+find "${lab_dir}" -name '.venv' -prune -o -type d -name '.pytest_cache' -exec rm -rf {} + 2>/dev/null || true
+
 failures=0
 checks=0
 
@@ -430,7 +440,11 @@ echo
 echo "7. The lab left nothing behind"
 # --------------------------------------------------------------------------
 
-for stray in "out" ".venv"; do
+# `.venv` is deliberately NOT in this list. The README tells the reader to
+# create it, and the tool resolution at the top of this file looks inside
+# it — so treating it as litter would fail the lab for following its own
+# setup instructions.
+for stray in "out"; do
   if [ -e "${lab_dir}/${stray}" ]; then
     check "no ${stray}/ left inside the lab after a full run" "no"
   else
@@ -438,7 +452,13 @@ for stray in "out" ".venv"; do
   fi
 done
 
-if find "${lab_dir}" -type d -name '__pycache__' -print -quit 2>/dev/null | grep -q .; then
+# `.venv` is pruned from the searches below. A virtual environment ships the
+# installed packages' own precompiled bytecode -- hundreds of __pycache__
+# directories that came with NumPy or pytest and have nothing to do with
+# whether THIS lab tidied up after itself. Without the prune, following the
+# README's own setup instructions makes this check fail, which reports a
+# problem the reader cannot fix and did not cause.
+if find "${lab_dir}" -name '.venv' -prune -o -type d -name '__pycache__' -print -quit 2>/dev/null | grep -q .; then
   check "no __pycache__ left inside the lab after a full run" "no"
 else
   check "no __pycache__ left inside the lab after a full run" "yes"

@@ -12,9 +12,31 @@ import { generatedLinkBlock } from '../update-links.mjs';
 const r = makeReporter('validate:links');
 const config = loadConfig();
 
+/**
+ * Directories that sit inside a lab while you work but are not lab content.
+ *
+ * A lab that needs a third-party package documents a lab-local `.venv`, which
+ * is gitignored — but this walk reads from DISK, not from git. Without this
+ * list the validator reported NumPy's own bundled LICENSE files as "lab files
+ * containing absolute repository URLs", which is true of the files and says
+ * nothing about the lab.
+ */
+const NOT_LAB_CONTENT = new Set([
+  '.venv',
+  'venv',
+  '__pycache__',
+  '.pytest_cache',
+  '.mypy_cache',
+  '.ruff_cache',
+  'node_modules',
+  '.git',
+  'out',
+]);
+
 function* walkMarkdown(dir) {
   if (!existsSync(dir)) return;
   for (const entry of readdirSync(dir)) {
+    if (NOT_LAB_CONTENT.has(entry)) continue;
     const full = path.join(dir, entry);
     if (statSync(full).isDirectory()) yield* walkMarkdown(full);
     else if (/\.(md|mdx)$/.test(entry)) yield full;

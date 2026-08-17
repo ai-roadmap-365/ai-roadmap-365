@@ -35,6 +35,16 @@ set -u
 export PYTHONDONTWRITEBYTECODE=1
 
 lab_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+# Bytecode left by an EARLIER command is not this run's litter. The README
+# documents `pytest starter -q`, and running it writes .pyc files that would
+# then fail the cleanliness check at the end of this script -- failing the
+# reader for following the instructions. Clearing them here makes that final
+# check measure what it claims to: what THIS run left behind. `.venv` is
+# untouched, because the packages' own bytecode is theirs, not ours.
+find "${lab_dir}" -name '.venv' -prune -o -type d -name '__pycache__' -exec rm -rf {} + 2>/dev/null || true
+find "${lab_dir}" -name '.venv' -prune -o -type d -name '.pytest_cache' -exec rm -rf {} + 2>/dev/null || true
+
 failures=0
 checks=0
 
