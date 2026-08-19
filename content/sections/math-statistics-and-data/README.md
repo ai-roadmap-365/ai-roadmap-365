@@ -4,7 +4,7 @@
 
 The linear algebra, calculus, probability, and data-analysis skills that make machine learning understandable rather than magical.
 
-**19 of 42 lessons written.** Expand a subsection below to see its days.
+**28 of 42 lessons written.** Expand a subsection below to see its days.
 
 <details>
 <summary><strong>Days 99-105 · Linear Algebra I: Vectors and Matrices</strong> — 7/7 complete</summary>
@@ -40,8 +40,8 @@ The linear algebra, calculus, probability, and data-analysis skills that make ma
 
 </details>
 
-<details open>
-<summary><strong>Days 113-119 · Probability and Statistics</strong> — 5/7 complete</summary>
+<details>
+<summary><strong>Days 113-119 · Probability and Statistics</strong> — 7/7 complete</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
@@ -50,31 +50,31 @@ The linear algebra, calculus, probability, and data-analysis skills that make ma
 | Day 115 | [Bayes’ Theorem](./day-115-bayes-theorem/) | [lab](../../../labs/sections/math-statistics-and-data/day-115-bayes-theorem/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-115-bayes-theorem) | complete |
 | Day 116 | [Descriptive Statistics That Don’t Lie](./day-116-descriptive-statistics-that-dont-lie/) | [lab](../../../labs/sections/math-statistics-and-data/day-116-descriptive-statistics-that-dont-lie/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-116-descriptive-statistics-that-dont-lie) | complete |
 | Day 117 | [Sampling and the Central Limit Theorem](./day-117-sampling-and-the-central-limit-theorem/) | [lab](../../../labs/sections/math-statistics-and-data/day-117-sampling-and-the-central-limit-theorem/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-117-sampling-and-the-central-limit-theorem) | complete |
-| Day 118 | Hypothesis Tests and Confidence Intervals | — | — | planned |
-| Day 119 | Analyzing an Experiment End to End | — | — | planned |
+| Day 118 | [Hypothesis Tests and Confidence Intervals](./day-118-hypothesis-tests-and-confidence-intervals/) | [lab](../../../labs/sections/math-statistics-and-data/day-118-hypothesis-tests-and-confidence-intervals/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-118-hypothesis-tests-and-confidence-intervals) | complete |
+| Day 119 | [Analyzing an Experiment End to End](./day-119-analyzing-an-experiment-end-to-end/) | [lab](../../../labs/sections/math-statistics-and-data/day-119-analyzing-an-experiment-end-to-end/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-119-analyzing-an-experiment-end-to-end) | complete |
 
 **Project:** A/B Test Analyzer — Analyze a simulated experiment end to end: hypothesis, test statistic, confidence interval, and a plain-language verdict.
 
 </details>
 
 <details>
-<summary><strong>Days 120-126 · pandas and Data Wrangling</strong> — 0/7 complete</summary>
+<summary><strong>Days 120-126 · pandas and Data Wrangling</strong> — 7/7 complete</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
-| Day 120 | pandas: Series and DataFrames | — | — | planned |
-| Day 121 | Loading and Inspecting Data | — | — | planned |
-| Day 122 | Selecting and Filtering | — | — | planned |
-| Day 123 | Groupby and Aggregation | — | — | planned |
-| Day 124 | Merging and Reshaping | — | — | planned |
-| Day 125 | Cleaning Messy Data | — | — | planned |
-| Day 126 | A Reproducible Cleaning Pipeline | — | — | planned |
+| Day 120 | [pandas: Series and DataFrames](./day-120-pandas-series-and-dataframes/) | [lab](../../../labs/sections/math-statistics-and-data/day-120-pandas-series-and-dataframes/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-120-pandas-series-and-dataframes) | complete |
+| Day 121 | [Loading and Inspecting Data](./day-121-loading-and-inspecting-data/) | [lab](../../../labs/sections/math-statistics-and-data/day-121-loading-and-inspecting-data/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-121-loading-and-inspecting-data) | complete |
+| Day 122 | [Selecting and Filtering](./day-122-selecting-and-filtering/) | [lab](../../../labs/sections/math-statistics-and-data/day-122-selecting-and-filtering/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-122-selecting-and-filtering) | complete |
+| Day 123 | [Groupby and Aggregation](./day-123-groupby-and-aggregation/) | [lab](../../../labs/sections/math-statistics-and-data/day-123-groupby-and-aggregation/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-123-groupby-and-aggregation) | complete |
+| Day 124 | [Merging and Reshaping](./day-124-merging-and-reshaping/) | [lab](../../../labs/sections/math-statistics-and-data/day-124-merging-and-reshaping/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-124-merging-and-reshaping) | complete |
+| Day 125 | [Cleaning Messy Data](./day-125-cleaning-messy-data/) | [lab](../../../labs/sections/math-statistics-and-data/day-125-cleaning-messy-data/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-125-cleaning-messy-data) | complete |
+| Day 126 | [A Reproducible Cleaning Pipeline](./day-126-a-reproducible-cleaning-pipeline/) | [lab](../../../labs/sections/math-statistics-and-data/day-126-a-reproducible-cleaning-pipeline/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-126-a-reproducible-cleaning-pipeline) | complete |
 
 **Project:** Messy Dataset Rescue — Take a genuinely messy public dataset and produce a documented, reproducible cleaning notebook with before/after data-quality checks.
 
 </details>
 
-<details>
+<details open>
 <summary><strong>Days 127-133 · Data Visualization</strong> — 0/7 complete</summary>
 
 | Day | Lesson | Lab | Blog | Status |

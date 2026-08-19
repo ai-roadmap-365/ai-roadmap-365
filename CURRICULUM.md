@@ -2,7 +2,7 @@
 
 > GENERATED — do not edit by hand. Run `npm run generate:section-nav`.
 
-The complete map of all nine courses: **117 of 365 days complete.** Click a course to expand it, then a subsection, to drill down to individual days — nothing is shown all at once.
+The complete map of all nine courses: **126 of 365 days complete.** Click a course to expand it, then a subsection, to drill down to individual days — nothing is shown all at once.
 
 <details>
 <summary><h3>Course01 · Computing Foundations — 42/42 complete</h3></summary>
@@ -217,7 +217,7 @@ From first program to tested, packaged, database-backed applications — the wor
 </details>
 
 <details>
-<summary><h3>Course03 · Math, Statistics, and Data — 19/42 complete</h3></summary>
+<summary><h3>Course03 · Math, Statistics, and Data — 28/42 complete</h3></summary>
 
 The linear algebra, calculus, probability, and data-analysis skills that make machine learning understandable rather than magical.
 
@@ -250,7 +250,7 @@ The linear algebra, calculus, probability, and data-analysis skills that make ma
 
 </details>
 <details>
-<summary>Days 113-119 · Probability and Statistics — 5/7</summary>
+<summary>Days 113-119 · Probability and Statistics — 7/7</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
@@ -259,22 +259,22 @@ The linear algebra, calculus, probability, and data-analysis skills that make ma
 | Day 115 | [Bayes’ Theorem](content/sections/math-statistics-and-data/day-115-bayes-theorem/) | [lab](labs/sections/math-statistics-and-data/day-115-bayes-theorem/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-115-bayes-theorem) | complete |
 | Day 116 | [Descriptive Statistics That Don’t Lie](content/sections/math-statistics-and-data/day-116-descriptive-statistics-that-dont-lie/) | [lab](labs/sections/math-statistics-and-data/day-116-descriptive-statistics-that-dont-lie/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-116-descriptive-statistics-that-dont-lie) | complete |
 | Day 117 | [Sampling and the Central Limit Theorem](content/sections/math-statistics-and-data/day-117-sampling-and-the-central-limit-theorem/) | [lab](labs/sections/math-statistics-and-data/day-117-sampling-and-the-central-limit-theorem/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-117-sampling-and-the-central-limit-theorem) | complete |
-| Day 118 | Hypothesis Tests and Confidence Intervals | — | — | planned |
-| Day 119 | Analyzing an Experiment End to End | — | — | planned |
+| Day 118 | [Hypothesis Tests and Confidence Intervals](content/sections/math-statistics-and-data/day-118-hypothesis-tests-and-confidence-intervals/) | [lab](labs/sections/math-statistics-and-data/day-118-hypothesis-tests-and-confidence-intervals/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-118-hypothesis-tests-and-confidence-intervals) | complete |
+| Day 119 | [Analyzing an Experiment End to End](content/sections/math-statistics-and-data/day-119-analyzing-an-experiment-end-to-end/) | [lab](labs/sections/math-statistics-and-data/day-119-analyzing-an-experiment-end-to-end/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-119-analyzing-an-experiment-end-to-end) | complete |
 
 </details>
 <details>
-<summary>Days 120-126 · pandas and Data Wrangling — 0/7</summary>
+<summary>Days 120-126 · pandas and Data Wrangling — 7/7</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
-| Day 120 | pandas: Series and DataFrames | — | — | planned |
-| Day 121 | Loading and Inspecting Data | — | — | planned |
-| Day 122 | Selecting and Filtering | — | — | planned |
-| Day 123 | Groupby and Aggregation | — | — | planned |
-| Day 124 | Merging and Reshaping | — | — | planned |
-| Day 125 | Cleaning Messy Data | — | — | planned |
-| Day 126 | A Reproducible Cleaning Pipeline | — | — | planned |
+| Day 120 | [pandas: Series and DataFrames](content/sections/math-statistics-and-data/day-120-pandas-series-and-dataframes/) | [lab](labs/sections/math-statistics-and-data/day-120-pandas-series-and-dataframes/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-120-pandas-series-and-dataframes) | complete |
+| Day 121 | [Loading and Inspecting Data](content/sections/math-statistics-and-data/day-121-loading-and-inspecting-data/) | [lab](labs/sections/math-statistics-and-data/day-121-loading-and-inspecting-data/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-121-loading-and-inspecting-data) | complete |
+| Day 122 | [Selecting and Filtering](content/sections/math-statistics-and-data/day-122-selecting-and-filtering/) | [lab](labs/sections/math-statistics-and-data/day-122-selecting-and-filtering/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-122-selecting-and-filtering) | complete |
+| Day 123 | [Groupby and Aggregation](content/sections/math-statistics-and-data/day-123-groupby-and-aggregation/) | [lab](labs/sections/math-statistics-and-data/day-123-groupby-and-aggregation/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-123-groupby-and-aggregation) | complete |
+| Day 124 | [Merging and Reshaping](content/sections/math-statistics-and-data/day-124-merging-and-reshaping/) | [lab](labs/sections/math-statistics-and-data/day-124-merging-and-reshaping/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-124-merging-and-reshaping) | complete |
+| Day 125 | [Cleaning Messy Data](content/sections/math-statistics-and-data/day-125-cleaning-messy-data/) | [lab](labs/sections/math-statistics-and-data/day-125-cleaning-messy-data/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-125-cleaning-messy-data) | complete |
+| Day 126 | [A Reproducible Cleaning Pipeline](content/sections/math-statistics-and-data/day-126-a-reproducible-cleaning-pipeline/) | [lab](labs/sections/math-statistics-and-data/day-126-a-reproducible-cleaning-pipeline/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-126-a-reproducible-cleaning-pipeline) | complete |
 
 </details>
 <details>
