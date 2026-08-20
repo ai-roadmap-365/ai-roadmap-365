@@ -4,7 +4,7 @@
 
 Hands-on companions to this section's lessons. Each day directory is self-contained: open it, follow its README, finish with its tests passing.
 
-**28 of 42 labs written.** Expand a subsection below to see its days.
+**35 of 42 labs written.** Expand a subsection below to see its days.
 
 <details>
 <summary><strong>Days 99-105 · Linear Algebra I: Vectors and Matrices</strong> — 7/7 complete</summary>
@@ -74,24 +74,24 @@ Hands-on companions to this section's lessons. Each day directory is self-contai
 
 </details>
 
-<details open>
-<summary><strong>Days 127-133 · Data Visualization</strong> — 0/7 complete</summary>
+<details>
+<summary><strong>Days 127-133 · Data Visualization</strong> — 7/7 complete</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
-| Day 127 | Why We Visualize, and Choosing the Right Chart | — | — | planned |
-| Day 128 | Matplotlib Fundamentals | — | — | planned |
-| Day 129 | Statistical Plots with seaborn | — | — | planned |
-| Day 130 | Distributions and Relationships | — | — | planned |
-| Day 131 | Time Series Visualization | — | — | planned |
-| Day 132 | Visual Storytelling and Chart Honesty | — | — | planned |
-| Day 133 | Building an EDA Report | — | — | planned |
+| Day 127 | [Why We Visualize, and Choosing the Right Chart](../../../content/sections/math-statistics-and-data/day-127-why-we-visualize-and-choosing-the/) | [lab](./day-127-why-we-visualize-and-choosing-the/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-127-why-we-visualize-and-choosing-the) | complete |
+| Day 128 | [Matplotlib Fundamentals](../../../content/sections/math-statistics-and-data/day-128-matplotlib-fundamentals/) | [lab](./day-128-matplotlib-fundamentals/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-128-matplotlib-fundamentals) | complete |
+| Day 129 | [Statistical Plots with seaborn](../../../content/sections/math-statistics-and-data/day-129-statistical-plots-with-seaborn/) | [lab](./day-129-statistical-plots-with-seaborn/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-129-statistical-plots-with-seaborn) | complete |
+| Day 130 | [Distributions and Relationships](../../../content/sections/math-statistics-and-data/day-130-distributions-and-relationships/) | [lab](./day-130-distributions-and-relationships/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-130-distributions-and-relationships) | complete |
+| Day 131 | [Time Series Visualization](../../../content/sections/math-statistics-and-data/day-131-time-series-visualization/) | [lab](./day-131-time-series-visualization/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-131-time-series-visualization) | complete |
+| Day 132 | [Visual Storytelling and Chart Honesty](../../../content/sections/math-statistics-and-data/day-132-visual-storytelling-and-chart-honesty/) | [lab](./day-132-visual-storytelling-and-chart-honesty/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-132-visual-storytelling-and-chart-honesty) | complete |
+| Day 133 | [Building an EDA Report](../../../content/sections/math-statistics-and-data/day-133-building-an-eda-report/) | [lab](./day-133-building-an-eda-report/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-133-building-an-eda-report) | complete |
 
 **Project:** Exploratory Analysis Report — Produce a narrated EDA report on a real dataset with at least five well-chosen, honestly-scaled charts.
 
 </details>
 
-<details>
+<details open>
 <summary><strong>Days 134-140 · Working with Real Data</strong> — 0/7 complete</summary>
 
 | Day | Lesson | Lab | Blog | Status |

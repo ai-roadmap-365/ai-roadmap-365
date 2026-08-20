@@ -43,10 +43,35 @@ function* walkMarkdown(dir) {
   }
 }
 
+/**
+ * Markdown with fenced code blocks blanked out, so a link-shaped string inside
+ * a code sample is not mistaken for a link. Day 133's lesson shows the source
+ * of a report generator, and the f-string `![{question}]({image})` inside that
+ * fence was reported as a broken relative link to a file named `{image}`.
+ * Blanking preserves line count so nothing else shifts.
+ */
+function withoutFences(text) {
+  let inFence = false;
+  return text
+    .split('\n')
+    .map((line) => {
+      if (/^\s*```/.test(line)) {
+        inFence = !inFence;
+        return '';
+      }
+      return inFence ? '' : line;
+    })
+    .join('\n');
+}
+
 // Relative links and images resolve on disk.
 for (const dir of ['content', 'labs', 'instructor']) {
   for (const file of walkMarkdown(path.join(repoRoot, dir))) {
-    const text = readFileSync(file, 'utf8');
+    // `expected-output/` holds captured artifacts, not navigable documents. A
+    // captured report legitimately references figures the lab cleans up after
+    // itself, and requiring those to exist would force the lab to litter.
+    if (file.includes(`${path.sep}expected-output${path.sep}`)) continue;
+    const text = withoutFences(readFileSync(file, 'utf8'));
     for (const m of text.matchAll(/!?\[[^\]]*\]\(([^)#\s]+)(#[^)\s]*)?\)/g)) {
       const target = m[1];
       if (/^(https?:|mailto:)/.test(target)) continue;

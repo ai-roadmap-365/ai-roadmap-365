@@ -2047,3 +2047,240 @@ days:
       and Great Expectations reproduce no output. Animated pipeline diagram with
       contracts drawn as gates at each boundary. Instructor solution.
     completion: *done
+  127:
+    status: complete
+    completed_on: '2026-08-20'
+    evidence: >-
+      Lesson passes content contract (Why We Visualize, and Choosing the Right
+      Chart — a chart is an argument and the encoding is the claim). Charts That
+      Answer the Question lab executed and re-run independently at integration
+      (19 checks, 0 failures, exit 0, harness's own exit status captured); 17
+      reference tests pass and the untouched starter reports 17 skipped. The
+      hard problem of a visualisation lab is that "looks better" is not
+      testable, so the lab asserts what genuinely is. The square law was
+      measured rather than argued: encoding a doubled value by circle RADIUS
+      renders an area ratio of 3.9503 against an analytic 4, while
+      area-proportional encoding gives 1.9903 against 2 — so radius-scaled
+      bubbles square every ratio in the chart. Colour deficiency was tested, not
+      asserted: under the Machado 2009 severity-1.0 deuteranopia matrix a
+      tab10 red/green pair collapses from a CIE76 distance of 119.7707 to
+      7.3136, retaining 6.1% of its separation, while a colourblind-safe
+      blue/orange pair holds 115.7010 to 116.5144. Those nine matrix
+      coefficients were confirmed at integration against the authors' published
+      table and match exactly. Also measured: viridis luminance rank correlation
+      +1.0000 against tab10's -0.2000, showing categorical palettes destroy
+      ordinal order; a data-ink ratio of 0.3669 decorated against 0.9344 plain;
+      and 10,000 points painting only 6,349 distinct pixels, 36.5% invisible,
+      recovering 244 grey levels under hexbin against 2 when opaque. The
+      harness's own first run genuinely failed because a grep for plt.show was
+      unanchored and matched a docstring promising it is never called — a check
+      measuring prose rather than behaviour. It was anchored and the incident
+      recorded, because it is a better failure story than the deliberate one.
+      The 8% colour-deficiency prevalence could not be confirmed from any
+      allowed source and is framed as a widely reported order of magnitude
+      rather than attributed. A retained-distance fraction slightly above 1.0 is
+      reported as measured rather than clamped to look tidy. scipy is absent so
+      Spearman is written out by hand; Vega-Lite and plotly reproduce no output.
+      Animated chart-choice diagram. Instructor solution.
+    completion: *done
+  128:
+    status: complete
+    completed_on: '2026-08-20'
+    evidence: >-
+      Lesson passes content contract (Matplotlib Fundamentals — matplotlib has
+      two APIs and almost every confusing example online mixes them). Plots You
+      Can Assert On lab executed and re-run independently at integration through
+      the lab-local venv (34 checks, 0 failures, exit 0, harness's own exit
+      status captured); 19 reference tests pass, the untouched starter reports 1
+      passed and 13 skipped, a solved copy 14 passed, and the import guard was
+      confirmed to prevent cross-contamination between the two suites. The day's
+      central honesty point was re-derived independently at integration and
+      holds: setting a log y-scale on a series containing a zero produces NO
+      exception and NO warning at all, because matplotlib warns only when EVERY
+      value is non-positive. The zero simply falls outside a lower axis limit
+      that is strictly above zero, while the underlying artist data still
+      contains it untouched — a silently vanished data point. Confirmed at
+      integration that all-non-positive data raises two warnings reading "Data
+      has no positive values, and therefore cannot be log-scaled", while mixed
+      data raises none. The day's most practical section is that a chart is an
+      object graph and therefore testable: assert on get_xlabel, get_ylim,
+      lines[0].get_xydata and figure counts rather than diffing images, which is
+      the technique the rest of Week 19 relies on. Nothing in this lab is
+      randomly sampled, so FIELDS.md separates values exact everywhere — pixel
+      arithmetic, data round-trips, figure counts — from version-specific ones
+      like exact log limits and file sizes. seaborn is installed but deliberately
+      unused here and deferred to Day 129; plotnine and plotly reproduce no
+      output. Animated two-APIs diagram. Instructor solution.
+    completion: *done
+  129:
+    status: complete
+    completed_on: '2026-08-20'
+    evidence: >-
+      Lesson passes content contract (Statistical Plots with seaborn — the
+      library's power and its confusion come from the same place, that it does
+      statistics for you before it draws). Plots That Say What They Computed lab
+      executed and re-run independently at integration three consecutive times,
+      17 checks and 0 failures with exit 0 each time, harness's own exit status
+      captured; 16 reference tests pass and the untouched starter reports 16
+      skipped. The opening trap was reproduced independently at integration: a
+      barplot's heights are group means, and for a team whose raw scores were
+      90, 88, 92 and 10 the bar sits at 70.0, a value absent from its own data,
+      below a team with lower individual scores because one outlier drags the
+      mean. Three of the four best scores in the table sit under the shorter
+      bar. The lab also establishes that seaborn's default error bar is a
+      bootstrap and therefore random, so unseeded runs differ. That test was
+      genuinely flaky when written as a two-run comparison — with only four
+      observations per group the bootstrap resamples a small discrete space and
+      two runs can coincide — and the agent found this by running the harness
+      ten times rather than once, then rewrote it to draw six unseeded runs and
+      assert they are not all identical, updating the brief, FIELDS.md, metadata
+      and the instructor solution to match rather than leaving stale two-run
+      language. seaborn 0.13.2 passes matplotlib's deprecated vert keyword to
+      ax.bxp on 3.11.1, so every boxplot emits a MatplotlibDeprecationWarning;
+      it is captured verbatim rather than filtered away. pyarrow was left out of
+      requirements after a dry-run install showed it is not a real dependency
+      here. plotnine and Altair reproduce no output. Animated estimator diagram
+      showing what the bar represents and what was discarded. Instructor
+      solution.
+    completion: *done
+  130:
+    status: complete
+    completed_on: '2026-08-20'
+    evidence: >-
+      Lesson passes content contract (Distributions and Relationships — a
+      histogram is not the data, it is one picture of the data, and the bin
+      width is a parameter you chose). Pictures of a Distribution lab executed
+      and re-run independently at integration (16 checks, 0 failures, exit 0,
+      harness's own exit status captured); 9 reference tests pass, untouched
+      starter 9 skipped. The three bin-width rules disagree on identical skewed
+      data — sturges 10, scott 14, Freedman-Diaconis 21 — so the number of bars
+      is a choice, not a property of the sample. The centrepiece is the
+      boxplot's blind spot, built as two constructed samples whose five-number
+      summaries agree to within 0.3 on every quartile — bimodal [10.21, 28.02,
+      40.00, 51.98, 69.79] against unimodal [10.17, 28.06, 40.00, 51.94, 69.83]
+      — while a histogram at the same bin count shows two modes for one and one
+      for the other. Identical boxes, different data. The author's brief was
+      loose about correlation and the agent measured rather than repeating it,
+      confirmed independently at integration: on a SYMMETRIC quadratic both
+      Pearson and Spearman are near zero, +0.0039 and +0.0029, because Spearman
+      measures monotone association and a symmetric parabola is not monotone.
+      Only a fitted quadratic finds it, at R-squared 0.9962. On a monotone
+      branch of the same curve Spearman does recover it at +0.9933. So no
+      coefficient substitutes for the scatter, which is a sharper form of the
+      day's own argument than the brief contained. scipy is absent, so pandas'
+      Spearman raises ModuleNotFoundError and the lab computes it directly as
+      the Pearson correlation of ranks; seaborn's kdeplot was confirmed to work
+      without scipy. plotnine, Altair and scipy's gaussian_kde reproduce no
+      output. Animated bin-width diagram showing a second mode appearing and
+      dissolving. Instructor solution.
+    completion: *done
+  131:
+    status: complete
+    completed_on: '2026-08-20'
+    evidence: >-
+      Lesson passes content contract (Time Series Visualization — time is not
+      just another axis, and the commonest charting mistakes throw its structure
+      away). Time Told Honestly lab executed and re-run independently at
+      integration after following the README's own setup (17 checks, 0 failures,
+      exit 0, harness's own exit status captured); 17 reference tests pass and
+      the untouched starter reports 17 skipped. Two headline claims were
+      re-derived at integration outside the lab's own code and match exactly.
+      Aliasing: a signal of true period 4 days sampled every 5 days produces an
+      observed repeat every 4 samples, a spurious 20-day cycle that exists
+      nowhere in the source — so undersampling does not merely lose detail, it
+      manufactures a trend. And daylight saving: resampling hourly data to daily
+      in a zone that observes it gives 23 hours on 2024-03-10, 25 on 2024-11-03
+      and 24 on an ordinary day, confirmed independently. Also measured: a
+      30-day trailing rolling mean peaks 14 days after the true peak while a
+      centred window has zero offset, so dashboards reporting trailing means
+      show events roughly half a window late; January resampled to mean 16.0,
+      sum 496.0 and last 31.0 from the same 31 rows, three different charts all
+      true; and constant-percentage growth is straight in log space to a
+      log-difference standard deviation of 3.0e-16 against 9.5e-3 for linear
+      growth. The trailing offset is asserted with a 10-to-20-day tolerance
+      rather than the captured 14, because the exact figure depends on the bump
+      shape and not only the window, which is documented rather than pinned.
+      Every number in this lab is deterministic, unlike Day 129's bootstrap, and
+      FIELDS.md says so. tzdata is documented as a fallback for platforms
+      without a system IANA database but deliberately not pinned, since it was
+      not needed for the captured run. seaborn was deliberately unused. Plotly
+      and Bokeh reproduce no output. Animated aliasing diagram. Instructor
+      solution.
+    completion: *done
+  132:
+    status: complete
+    completed_on: '2026-08-20'
+    evidence: >-
+      Lesson passes content contract (Visual Storytelling and Chart Honesty —
+      most misleading charts are made by honest people). Charts That Cannot Lie
+      To You lab executed and re-run independently at integration (59 checks, 0
+      failures, exit 0, harness's own exit status captured); 42 reference tests
+      pass, the untouched starter reports 22 skipped and a solved copy 22
+      passed. Lie factors measured: 1.0000 for a zero-baseline bar pair against
+      2.9412 for the same numbers with the axis truncated to 99-103, where the
+      drawn ratio is exactly 3.0 for a 2% difference; 1.0000 for the same data
+      as a line at any baseline; 4.00 for radius-encoded bubbles whose shown
+      AREA ratio is 16.00; and 3D bars drawing a true ratio of 2 as 2.341 far
+      and 4.204 near, against a flat control of exactly 2.000. THE AUTHOR'S
+      BRIEF WAS MATHEMATICALLY WRONG and the agent refused it rather than
+      implementing it. The brief asked the lab to make two uncorrelated series
+      appear correlated by choosing dual-axis scalings. That is impossible:
+      Pearson correlation is invariant under positive affine transforms and a
+      linear dual axis is exactly such a transform. Confirmed at integration
+      over 2000 random scalings, worst deviation 1.76e-15, and an inverted axis
+      flips a +0.920661 to exactly -0.920661. The agent replaced it with
+      something true and stronger — the SIGN is a free parameter, and the
+      visual tracking gap can be driven from 0.4938 to 0.0147 on unchanged data,
+      with the load-bearing control that the same widening drives a genuinely
+      correlated pair to 0.0046 and an uncorrelated pair to 0.0147, so visual
+      overlap is evidence of nothing. Two of the lab's datasets were
+      deliberately searched for — a seed giving near-zero correlation, and
+      histogram parameters where Sturges and Freedman-Diaconis genuinely
+      disagree, which most settings do not — and both searches are disclosed in
+      the source and FIELDS.md, with the claim narrowed to possible rather than
+      typical. The brief's claim that BI tools default to non-zero baselines was
+      checked against Tableau's documentation and contradicted: an Include zero
+      checkbox exists and clearing it is the deviation, so the folklore was not
+      repeated. JSTOR returns 200 but serves a bot challenge, so the citation
+      was resolved through JSTOR's own metadata endpoint rather than guessed.
+      The harness again caught a bug in itself, a plt.show check matching its own
+      docstrings. Animated baseline diagram. Instructor solution.
+    completion: *done
+  133:
+    status: complete
+    completed_on: '2026-08-20'
+    evidence: >-
+      Lesson passes content contract (Building an EDA Report — Week 19's
+      capstone, on the difference between exploring and communicating). A Report
+      That Argues lab executed and re-run independently at integration through
+      the lab-local venv (42 checks, 0 failures, exit 0, harness's own exit
+      status captured); 9 reference tests pass and the untouched starter reports
+      9 skipped. The lab builds a working report generator that enforces the
+      day's thesis in code: a figure with no stated question is refused, every
+      figure must be referenced, estimates must carry an interval, and 5 of 12
+      candidate figures survived the so-what filter, with the 7 discarded kept
+      as one-line null results so the next reader does not repeat them. Markdown
+      output is byte-identical across runs. The author's brief was wrong about
+      pandas Styler and the agent checked rather than assuming: .style raises
+      AttributeError because it requires jinja2, which is not installed —
+      confirmed independently at integration, along with nbconvert and scipy
+      also being absent. Styler is described from documentation with no output
+      reproduced. The most valuable finding is that the lab's own claim
+      heuristic fails in BOTH directions and the lab asserts both: it passes
+      "revenue doubled in every region" on data where revenue halved, and it
+      REFUSES "revenue tripled in all four regions" because tripled is not on
+      its word list. The agent found the false negative by writing the test and
+      watching it fail, then deliberately kept it rather than adding the word,
+      because a check that cannot judge truth is the point — and the content
+      README forbids fixing it. Two honesty calls inside the generated report
+      itself: a bootstrap interval of -11.6% to -5.1% on six observations per
+      side is flagged as wide in the report's own caveats, and a +47.5% figure
+      driven by one month is printed alongside the +8.0% it becomes without that
+      observation, because quoting the inflated number alone would be exactly
+      the Day 132 failure. PNG byte-identity is claimed only for two runs on one
+      machine, since FreeType rasterisation varies with the font stack. A
+      discrepancy between the flow diagram's general 4/2/1 gate split and the
+      lab's own candidates, which all fall at gate 1, is stated in both the SVG
+      and the prose rather than hidden. Animated figure-lifecycle diagram.
+      Instructor solution.
+    completion: *done

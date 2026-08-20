@@ -2,7 +2,7 @@
 
 > GENERATED — do not edit by hand. Run `npm run generate:section-nav`.
 
-The complete map of all nine courses: **126 of 365 days complete.** Click a course to expand it, then a subsection, to drill down to individual days — nothing is shown all at once.
+The complete map of all nine courses: **133 of 365 days complete.** Click a course to expand it, then a subsection, to drill down to individual days — nothing is shown all at once.
 
 <details>
 <summary><h3>Course01 · Computing Foundations — 42/42 complete</h3></summary>
@@ -217,7 +217,7 @@ From first program to tested, packaged, database-backed applications — the wor
 </details>
 
 <details>
-<summary><h3>Course03 · Math, Statistics, and Data — 28/42 complete</h3></summary>
+<summary><h3>Course03 · Math, Statistics, and Data — 35/42 complete</h3></summary>
 
 The linear algebra, calculus, probability, and data-analysis skills that make machine learning understandable rather than magical.
 
@@ -278,17 +278,17 @@ The linear algebra, calculus, probability, and data-analysis skills that make ma
 
 </details>
 <details>
-<summary>Days 127-133 · Data Visualization — 0/7</summary>
+<summary>Days 127-133 · Data Visualization — 7/7</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
-| Day 127 | Why We Visualize, and Choosing the Right Chart | — | — | planned |
-| Day 128 | Matplotlib Fundamentals | — | — | planned |
-| Day 129 | Statistical Plots with seaborn | — | — | planned |
-| Day 130 | Distributions and Relationships | — | — | planned |
-| Day 131 | Time Series Visualization | — | — | planned |
-| Day 132 | Visual Storytelling and Chart Honesty | — | — | planned |
-| Day 133 | Building an EDA Report | — | — | planned |
+| Day 127 | [Why We Visualize, and Choosing the Right Chart](content/sections/math-statistics-and-data/day-127-why-we-visualize-and-choosing-the/) | [lab](labs/sections/math-statistics-and-data/day-127-why-we-visualize-and-choosing-the/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-127-why-we-visualize-and-choosing-the) | complete |
+| Day 128 | [Matplotlib Fundamentals](content/sections/math-statistics-and-data/day-128-matplotlib-fundamentals/) | [lab](labs/sections/math-statistics-and-data/day-128-matplotlib-fundamentals/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-128-matplotlib-fundamentals) | complete |
+| Day 129 | [Statistical Plots with seaborn](content/sections/math-statistics-and-data/day-129-statistical-plots-with-seaborn/) | [lab](labs/sections/math-statistics-and-data/day-129-statistical-plots-with-seaborn/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-129-statistical-plots-with-seaborn) | complete |
+| Day 130 | [Distributions and Relationships](content/sections/math-statistics-and-data/day-130-distributions-and-relationships/) | [lab](labs/sections/math-statistics-and-data/day-130-distributions-and-relationships/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-130-distributions-and-relationships) | complete |
+| Day 131 | [Time Series Visualization](content/sections/math-statistics-and-data/day-131-time-series-visualization/) | [lab](labs/sections/math-statistics-and-data/day-131-time-series-visualization/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-131-time-series-visualization) | complete |
+| Day 132 | [Visual Storytelling and Chart Honesty](content/sections/math-statistics-and-data/day-132-visual-storytelling-and-chart-honesty/) | [lab](labs/sections/math-statistics-and-data/day-132-visual-storytelling-and-chart-honesty/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-132-visual-storytelling-and-chart-honesty) | complete |
+| Day 133 | [Building an EDA Report](content/sections/math-statistics-and-data/day-133-building-an-eda-report/) | [lab](labs/sections/math-statistics-and-data/day-133-building-an-eda-report/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-133-building-an-eda-report) | complete |
 
 </details>
 <details>
