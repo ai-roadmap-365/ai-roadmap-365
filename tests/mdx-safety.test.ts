@@ -38,18 +38,34 @@ function lessonFiles(dir: string, found: string[] = []): string[] {
  * care about line boundaries, so neither should this.
  */
 function proseLines(src: string): { n: number; text: string }[] {
-  const withoutFences = src.split('\n').reduce<{ lines: string[]; inFence: boolean }>(
-    (acc, raw) => {
-      if (/^\s*```/.test(raw)) {
-        acc.inFence = !acc.inFence;
-        acc.lines.push('');
-      } else {
-        acc.lines.push(acc.inFence ? '' : raw);
+  // CommonMark fence rules, which a naive open/close toggle gets wrong. An
+  // opening fence may carry an info string; a CLOSING fence may not, and must be
+  // at least as long as the one it closes. So inside a ```markdown block, a
+  // nested ```python line is content, not a close — and a toggle desynchronises
+  // from there on, reporting the rest of the file as code.
+  //
+  // Day 139 shipped exactly that: a ```python fence inside a ```markdown fence.
+  // This checker passed it and the site build failed on a dict literal 50 lines
+  // later, because MDX had correctly decided that region was prose.
+  let fence = 0; // 0 = outside, else the backtick count that opened the block
+  const withoutFences = src.split('\n').map((raw) => {
+    const m = raw.match(/^\s*(`{3,})(.*)$/);
+    if (m) {
+      const ticks = m[1].length;
+      const info = m[2].trim();
+      if (fence === 0) {
+        fence = ticks;
+        return '';
       }
-      return acc;
-    },
-    { lines: [], inFence: false },
-  ).lines;
+      // Only a bare fence at least as long as the opener closes the block.
+      if (info === '' && ticks >= fence) {
+        fence = 0;
+        return '';
+      }
+      return ''; // a nested opener: content, but never scanned as prose
+    }
+    return fence === 0 ? raw : '';
+  });
 
   // Blank inline code spans across the whole document, preserving line count so
   // reported line numbers still point at the real source line.

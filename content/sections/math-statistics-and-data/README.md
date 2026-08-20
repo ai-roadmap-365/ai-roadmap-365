@@ -4,7 +4,7 @@
 
 The linear algebra, calculus, probability, and data-analysis skills that make machine learning understandable rather than magical.
 
-**35 of 42 lessons written.** Expand a subsection below to see its days.
+**42 of 42 lessons written.** Expand a subsection below to see its days.
 
 <details>
 <summary><strong>Days 99-105 · Linear Algebra I: Vectors and Matrices</strong> — 7/7 complete</summary>
@@ -91,18 +91,18 @@ The linear algebra, calculus, probability, and data-analysis skills that make ma
 
 </details>
 
-<details open>
-<summary><strong>Days 134-140 · Working with Real Data</strong> — 0/7 complete</summary>
+<details>
+<summary><strong>Days 134-140 · Working with Real Data</strong> — 7/7 complete</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
-| Day 134 | Finding Data: Open Datasets and APIs | — | — | planned |
-| Day 135 | From API to DataFrame | — | — | planned |
-| Day 136 | The Exploratory Data Analysis Process | — | — | planned |
-| Day 137 | Thinking in Features | — | — | planned |
-| Day 138 | Data Ethics, Bias, and Provenance | — | — | planned |
-| Day 139 | Reproducible Notebooks | — | — | planned |
-| Day 140 | Section Project: An Exploratory Study | — | — | planned |
+| Day 134 | [Finding Data: Open Datasets and APIs](./day-134-finding-data-open-datasets-and-apis/) | [lab](../../../labs/sections/math-statistics-and-data/day-134-finding-data-open-datasets-and-apis/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-134-finding-data-open-datasets-and-apis) | complete |
+| Day 135 | [From API to DataFrame](./day-135-from-api-to-dataframe/) | [lab](../../../labs/sections/math-statistics-and-data/day-135-from-api-to-dataframe/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-135-from-api-to-dataframe) | complete |
+| Day 136 | [The Exploratory Data Analysis Process](./day-136-the-exploratory-data-analysis-process/) | [lab](../../../labs/sections/math-statistics-and-data/day-136-the-exploratory-data-analysis-process/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-136-the-exploratory-data-analysis-process) | complete |
+| Day 137 | [Thinking in Features](./day-137-thinking-in-features/) | [lab](../../../labs/sections/math-statistics-and-data/day-137-thinking-in-features/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-137-thinking-in-features) | complete |
+| Day 138 | [Data Ethics, Bias, and Provenance](./day-138-data-ethics-bias-and-provenance/) | [lab](../../../labs/sections/math-statistics-and-data/day-138-data-ethics-bias-and-provenance/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-138-data-ethics-bias-and-provenance) | complete |
+| Day 139 | [Reproducible Notebooks](./day-139-reproducible-notebooks/) | [lab](../../../labs/sections/math-statistics-and-data/day-139-reproducible-notebooks/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-139-reproducible-notebooks) | complete |
+| Day 140 | [Section Project: An Exploratory Study](./day-140-section-project-an-exploratory-study/) | [lab](../../../labs/sections/math-statistics-and-data/day-140-section-project-an-exploratory-study/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-140-section-project-an-exploratory-study) | complete |
 
 **Project:** Section Project: Full Exploratory Study — Choose a public dataset, pose three questions, and deliver a reproducible notebook answering them with cleaned data, statistics, and visuals.
 

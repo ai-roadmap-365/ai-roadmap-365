@@ -51,15 +51,23 @@ function* walkMarkdown(dir) {
  * Blanking preserves line count so nothing else shifts.
  */
 function withoutFences(text) {
-  let inFence = false;
+  // CommonMark: an opening fence may carry an info string, a closing fence may
+  // not and must be at least as long as its opener. A naive toggle treats a
+  // nested ```python inside a ```markdown block as a close and desynchronises
+  // for the rest of the file — which is how a real fence bug reached the build.
+  let fence = 0;
   return text
     .split('\n')
     .map((line) => {
-      if (/^\s*```/.test(line)) {
-        inFence = !inFence;
+      const m = line.match(/^\s*(`{3,})(.*)$/);
+      if (m) {
+        const ticks = m[1].length;
+        const info = m[2].trim();
+        if (fence === 0) fence = ticks;
+        else if (info === '' && ticks >= fence) fence = 0;
         return '';
       }
-      return inFence ? '' : line;
+      return fence === 0 ? line : '';
     })
     .join('\n');
 }

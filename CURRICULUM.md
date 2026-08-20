@@ -2,7 +2,7 @@
 
 > GENERATED — do not edit by hand. Run `npm run generate:section-nav`.
 
-The complete map of all nine courses: **133 of 365 days complete.** Click a course to expand it, then a subsection, to drill down to individual days — nothing is shown all at once.
+The complete map of all nine courses: **140 of 365 days complete.** Click a course to expand it, then a subsection, to drill down to individual days — nothing is shown all at once.
 
 <details>
 <summary><h3>Course01 · Computing Foundations — 42/42 complete</h3></summary>
@@ -217,7 +217,7 @@ From first program to tested, packaged, database-backed applications — the wor
 </details>
 
 <details>
-<summary><h3>Course03 · Math, Statistics, and Data — 35/42 complete</h3></summary>
+<summary><h3>Course03 · Math, Statistics, and Data — 42/42 complete</h3></summary>
 
 The linear algebra, calculus, probability, and data-analysis skills that make machine learning understandable rather than magical.
 
@@ -292,17 +292,17 @@ The linear algebra, calculus, probability, and data-analysis skills that make ma
 
 </details>
 <details>
-<summary>Days 134-140 · Working with Real Data — 0/7</summary>
+<summary>Days 134-140 · Working with Real Data — 7/7</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
-| Day 134 | Finding Data: Open Datasets and APIs | — | — | planned |
-| Day 135 | From API to DataFrame | — | — | planned |
-| Day 136 | The Exploratory Data Analysis Process | — | — | planned |
-| Day 137 | Thinking in Features | — | — | planned |
-| Day 138 | Data Ethics, Bias, and Provenance | — | — | planned |
-| Day 139 | Reproducible Notebooks | — | — | planned |
-| Day 140 | Section Project: An Exploratory Study | — | — | planned |
+| Day 134 | [Finding Data: Open Datasets and APIs](content/sections/math-statistics-and-data/day-134-finding-data-open-datasets-and-apis/) | [lab](labs/sections/math-statistics-and-data/day-134-finding-data-open-datasets-and-apis/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-134-finding-data-open-datasets-and-apis) | complete |
+| Day 135 | [From API to DataFrame](content/sections/math-statistics-and-data/day-135-from-api-to-dataframe/) | [lab](labs/sections/math-statistics-and-data/day-135-from-api-to-dataframe/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-135-from-api-to-dataframe) | complete |
+| Day 136 | [The Exploratory Data Analysis Process](content/sections/math-statistics-and-data/day-136-the-exploratory-data-analysis-process/) | [lab](labs/sections/math-statistics-and-data/day-136-the-exploratory-data-analysis-process/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-136-the-exploratory-data-analysis-process) | complete |
+| Day 137 | [Thinking in Features](content/sections/math-statistics-and-data/day-137-thinking-in-features/) | [lab](labs/sections/math-statistics-and-data/day-137-thinking-in-features/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-137-thinking-in-features) | complete |
+| Day 138 | [Data Ethics, Bias, and Provenance](content/sections/math-statistics-and-data/day-138-data-ethics-bias-and-provenance/) | [lab](labs/sections/math-statistics-and-data/day-138-data-ethics-bias-and-provenance/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-138-data-ethics-bias-and-provenance) | complete |
+| Day 139 | [Reproducible Notebooks](content/sections/math-statistics-and-data/day-139-reproducible-notebooks/) | [lab](labs/sections/math-statistics-and-data/day-139-reproducible-notebooks/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-139-reproducible-notebooks) | complete |
+| Day 140 | [Section Project: An Exploratory Study](content/sections/math-statistics-and-data/day-140-section-project-an-exploratory-study/) | [lab](labs/sections/math-statistics-and-data/day-140-section-project-an-exploratory-study/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-140-section-project-an-exploratory-study) | complete |
 
 </details>
 

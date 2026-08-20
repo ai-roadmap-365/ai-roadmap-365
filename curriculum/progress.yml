@@ -2284,3 +2284,239 @@ days:
       and the prose rather than hidden. Animated figure-lifecycle diagram.
       Instructor solution.
     completion: *done
+  134:
+    status: complete
+    completed_on: '2026-08-20'
+    evidence: >-
+      Lesson passes content contract (Finding Data: Open Datasets and APIs — the
+      dataset you can get is never quite the one you wanted, and the gap is
+      where projects quietly die). Judge the Source Before the Data lab executed
+      and re-run independently at integration (38 checks, 0 failures, exit 0,
+      harness's own exit status captured); 9 reference tests pass and the
+      untouched starter reports 9 skipped. The lab runs fully offline against a
+      stdlib mock HTTP server bound to 127.0.0.1 on an ephemeral port,
+      implementing pagination, a 429 rate limit and an ETag. Confirmed at
+      integration that no lesson or lab file contains the literal
+      localhost-colon-port string that the site publish guard rejects, while 15
+      files legitimately use 127.0.0.1, and that no server process is left
+      listening after the run. Measured from real runs: pagination assembled 25
+      rows across 3 requests; backoff succeeded on attempt 3 against a relenting
+      mock and raised after exactly 3 attempts against a stubborn one; a
+      conditional request cost 92 bytes and then 0 bytes on the ETag hit. The
+      day's centrepiece is the definition trap — two datasets whose
+      unemployment_rate columns are defined differently overlap in range and
+      dtype, so nothing mechanical flags the join, and only a dictionary-aware
+      check rejects it. requests is genuinely absent from this lab's own venv so
+      the client uses urllib.request only, and the lesson distinguishes that
+      from the separate authoring venv where requests does exist rather than
+      blurring the two. Hugging Face datasets reproduces no output. Animated
+      pagination diagram. Instructor solution.
+    completion: *done
+  135:
+    status: complete
+    completed_on: '2026-08-20'
+    evidence: >-
+      Lesson passes content contract (From API to DataFrame — JSON is a tree and
+      a DataFrame is a rectangle, so every ingestion is a lossy flattening).
+      One Row Means One Thing lab executed and re-run independently at
+      integration after following the README's own setup (39 checks, 0 failures,
+      exit 0, harness's own exit status captured); 12 reference tests pass and
+      the untouched starter reports 8 skipped, 8 passed when solved. Runs fully
+      offline against a stdlib mock API on 127.0.0.1 with an ephemeral port, and
+      confirmed at integration to contain no localhost-colon-port string that
+      would fail the site publish guard. The grain trap is measured rather than
+      described: the same nested payload flattened to customer grain gives 3
+      rows and a true total of 1550.0, and to order grain gives 6 rows and an
+      inflated 2650.0, an overcount of 1100.0 from a one-line choice. The day's
+      sharpest measured finding was not in the brief and was reproduced
+      independently at integration: on an EMPTY child list, explode keeps the
+      parent row with NaN while json_normalize with a record_path drops the
+      record entirely. A customer with no orders therefore vanishes silently
+      under one flattening and survives under the other — verified directly,
+      3 rows against 2, with the parent present in one and absent in the other.
+      pandas.read_json was run on the nested payload rather than assumed, and
+      leaves the child column as raw Python lists without error, which is why
+      the lesson calls it too blunt here. pydantic reproduces no output and is
+      described from documentation only. The harness was proved able to fail by
+      swapping a record_path, giving exit 1 with 17 failures, then restored and
+      confirmed byte-identical by diff. Animated ingestion diagram. Instructor
+      solution.
+    completion: *done
+  137:
+    status: complete
+    completed_on: '2026-08-20'
+    evidence: >-
+      Lesson passes content contract (Thinking in Features — a feature encodes a
+      hypothesis about what matters, and the most dangerous ones quietly encode
+      the answer). Features That Do Not Cheat lab executed and re-run
+      independently at integration through the lab-local venv (55 checks, 0
+      failures, exit 0, harness's own exit status captured). Every model is
+      written from scratch in NumPy because scikit-learn is absent, and the
+      harness asserts that absence. Leakage measured as before-and-after pairs:
+      target leakage 1.0000 against an honest 0.6400, a 36-point gap; a
+      group-mean imputer fitted on all data 0.7484 against 0.6662 over 150
+      splits; target encoding all-data 0.6215 against out-of-fold 0.5535; a
+      random split 0.8833 against a time-ordered 0.0667, where the honest number
+      sits BELOW the 0.9333 majority baseline, so the model is confidently wrong
+      rather than merely uninformed. THE AUTHOR'S BRIEF WAS WRONG about the
+      scaler and the agent followed the evidence. Fitting a standardiser on all
+      data did not inflate the score; over 200 splits it scored 0.06 points
+      LOWER. Confirmed independently at integration, where the two scalings gave
+      identical test accuracy to the digit: standardisation is an affine map and
+      a converged logistic regression absorbs it into the weights, so the
+      contamination changes nothing it can use. The agent tried two further
+      target-blind alternatives before accepting the negative result, kept it as
+      the finding, and demonstrated genuine contamination with the non-affine
+      group-mean imputer instead. The rule the day now teaches is better than
+      the one commissioned: a contaminated statistic is worth exactly what that
+      statistic knows. Cyclical encoding asserted exactly, raw distance 23.0
+      between hour 23 and hour 0 against 2 sin(pi/24) on the circle for every
+      adjacent pair with spread below 1e-12. The 81.67-point temporal gap is
+      declared a deliberately sharp construction, and the vocabulary gap is
+      declared configuration-sensitive after measuring eight settings, with the
+      assertion floor set below the shipped result rather than at it. No pricing
+      is quoted for a commercial feature store because none was verified.
+      Animated cyclical-encoding diagram. Instructor solution.
+    completion: *done
+  136:
+    status: complete
+    completed_on: '2026-08-20'
+    evidence: >-
+      Lesson passes content contract (The Exploratory Data Analysis Process —
+      exploration and confirmation are different activities, and the great sin
+      is doing the first and reporting it as the second). Exploration You Can
+      Report lab executed and re-run independently at integration (33 checks, 0
+      failures, exit 0, harness's own exit status captured). Scoped deliberately
+      against Day 133, which owns the report document; this day owns the
+      investigative loop that precedes it. The forking-paths simulation matches
+      theory across three scales, with the exact values confirmed independently
+      at integration: k=5 exact 0.2262 against simulated 0.2355; k=20 exact
+      0.6415 against 0.6595; k=40 exact 0.8715 against 0.8780, each within two
+      standard errors. The holdout centrepiece separates a real finding from a
+      spurious one on the same data: the planted effect gives exploration
+      p=6.66e-16 and confirmation p=2.06e-12 and survives, while the best of 30
+      spurious columns gives exploration p=0.0248 and confirmation p=0.9249 and
+      does not. The agent found and fixed a genuine data-leakage bug in its own
+      fixture: an earlier narrative scan built its second cut from the median of
+      the very outcome column being tested, fabricating effect sizes above d=1.0
+      on data with no true effect. It was rebuilt from an independent column and
+      the incident recorded in metadata and the lab's editing rules rather than
+      quietly corrected. Two parameter choices are disclosed rather than
+      silently tuned: a smaller sample for the narrative exercise because larger
+      ones rarely produced a publishable-looking effect, and a holdout seed
+      taken as the first hit of a 199-seed sweep in which 157 gave the expected
+      qualitative outcome, so it is the first rather than the most flattering.
+      statsmodels, Jupyter and Weights and Biases reproduce no output. Animated
+      forking-paths diagram. Instructor solution.
+    completion: *done
+  138:
+    status: complete
+    completed_on: '2026-08-20'
+    evidence: >-
+      Lesson passes content contract (Data Ethics, Bias, and Provenance — data
+      is not found, it is made, and every decision made in collecting it is
+      still in the file). Bias You Can Measure lab executed and re-run
+      independently at integration (51 checks, 0 failures, exit 0, harness's own
+      exit status captured). Every dataset is synthetic by design, argued rather
+      than excused: no real people, and a constructed population's true
+      composition is known exactly, which is what makes the assertions possible.
+      The centrepiece is Day 117's bias-versus-error distinction with
+      consequences, and it matches an analytic derivation rather than merely
+      looking plausible. With the sampling frame reaching group B at 1% against
+      a true 10% share, predicted bias is 6.0 x (1 - 0.01) = 5.94, and the
+      measured bias runs 5.9459, 5.9384 and 5.9397 at n = 500, 5,000 and 50,000
+      — a spread of 0.0075 across a hundredfold increase — while the standard
+      deviation falls 0.06025 to 0.00524, an 11.5x contraction against a
+      theoretical 10. Confirmed independently at integration: the interval
+      tightens around an answer that never moves. The fairness section
+      demonstrates genuine incompatibility rather than picking a winner: on an
+      integer-exact population with base rates 0.66 and 0.34 and calibration
+      deviation exactly 0.0 in every bin, a single threshold gives parity, TPR
+      and precision gaps of 0.5000, 0.3146 and 0.1210; equalising selection rate
+      drives the parity gap to exactly 0.0000 while precision diverges to
+      0.3333; equalising TPR drives that gap to exactly 0.0000 while parity
+      returns to 0.1160. The lab asserts that no policy satisfies all three and
+      deliberately refuses to assert a preferred criterion, and the rubric awards
+      full marks for any choice that is reasoned and declared. Also measured:
+      pooled slope +1.9785 against true subgroup slopes of -0.9870 and -0.9991,
+      Simpson's paradox with stakes; 2,723 of 5,000 rows unique on three
+      quasi-identifiers falling to 13 after coarsening one field; and a
+      4-anonymous table still disclosing a sensitive attribute through group
+      homogeneity, so the limit of the technique is shown rather than asserted.
+      Fairlearn and AIF360 reproduce no output and the lesson states they compute
+      criteria rather than decide between them; differential privacy is described
+      and not demonstrated. Confidence intervals in the flow diagram are drawn
+      enlarged and the diagram says so in its own caption. Animated
+      frame-versus-population diagram. Instructor solution.
+    completion: *done
+  139:
+    status: complete
+    completed_on: '2026-08-20'
+    evidence: >-
+      Lesson passes content contract (Reproducible Notebooks — a notebook
+      records what you ran, not the order you ran it in, and those are different
+      documents). Notebooks That Reproduce lab executed and re-run independently
+      at integration (16 checks, 0 failures, exit 0, harness's own exit status
+      captured); 12 reference tests pass and the untouched starter reports 3
+      passed and 9 skipped. Everything is executed rather than described:
+      notebooks are built programmatically with nbformat, run headless with
+      nbclient and converted with nbconvert, all pinned in this lab's OWN
+      requirements rather than the shared authoring venv — deliberately, because
+      nbconvert depends on jinja2 and installing it centrally would falsify Day
+      133's shipped claim that DataFrame.style raises without it. The opening
+      failure is measured: a clean run gives execution_count [1, 2, 3] and the
+      answer 30.0, while running the same cells in order 0, 2, 1 gives
+      execution_count [1, 3, 2] and the answer 50.0 — a silently different
+      result with identical code on screen. Two of the author's assumptions were
+      wrong and the agent measured rather than repeating them. The brief's
+      illustrative execution order raises NameError against the lesson's actual
+      cells, so a verified non-crashing order demonstrating the same phenomenon
+      was substituted and the substitution documented. And the brief assumed
+      notebook diff noise comes from execution counts and image blobs; measured
+      directly, both are identical across runs and the only difference is
+      cell.metadata.execution, four wall-clock timestamps that nbclient stamps
+      on every cell. Confirmed independently at integration: execution counts
+      [1, 2, 3] both runs, outputs identical, full JSON not identical, and the
+      differing keys are iopub.execute_input, iopub.status.busy,
+      iopub.status.idle and shell.execute_reply. papermill, Jupyter Lab, Quarto
+      and Colab reproduce no output; parameter injection is done by hand with
+      nbformat and said to be. Animated execution-order diagram. Instructor
+      solution.
+    completion: *done
+  140:
+    status: complete
+    completed_on: '2026-08-20'
+    evidence: >-
+      Lesson passes content contract (Section Project: An Exploratory Study —
+      the day that closes Course03, days 99 to 140). A Study That Holds Together
+      lab executed and re-run independently at integration (81 checks, 0
+      failures, exit 0, harness's own exit status captured); 54 reference tests
+      pass, the untouched starter reports 1 passed and 32 skipped and a solved
+      copy 33 passed, and the import guards were proved. The day ships two
+      things a brief cannot: a worked miniature study carried through the whole
+      arc on a committed 264-row dataset, and check_study, a runnable acceptance
+      harness the learner points at their own study, with 13 one-defect-at-a-time
+      broken fixtures proving each gate fires alone. Exercise 9 removes a single
+      checksum line from a passing study and asserts exactly one failed gate and
+      one finding naming the missing field. Two honesty calls define this day.
+      The uncertainty gate flagged the worked study's OWN report, because the
+      report stated an interval in words — between x and y — that the pattern
+      list did not recognise. That was a false positive in the checker rather
+      than a defect in the report, so the checker was fixed and the report left
+      alone, and the episode became a lesson section, a quiz question and a
+      rubric deduction. And the grain assertion genuinely failed on arrival: the
+      first draft recorded the ingestion contract before cleaning and the
+      harness correctly refused the study, so both numbers are now recorded —
+      violations on arrival and verification after resolution — rather than
+      moving the assertion somewhere it would pass. Nothing is sampled anywhere:
+      no tolerance and no timing assertion, every value fixed by a seed or by
+      arithmetic. PNG digests are declared machine-dependent and only the
+      portable property is asserted, that two builds on one machine agree. The
+      provenance record uses an RFC 2606 invalid domain with a note saying in
+      plain words that the file is generated locally and never fetched, because
+      a provenance record that lied about provenance would be a strange thing to
+      ship in this lesson. The interval is built from math.erf alone; scipy,
+      statsmodels and scikit-learn reproduce no output, and seaborn and Jupyter
+      are deliberately excluded from the lab's pins. Animated acceptance-gate
+      diagram. Instructor solution.
+    completion: *done
