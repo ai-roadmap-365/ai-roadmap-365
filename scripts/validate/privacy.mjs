@@ -7,6 +7,7 @@
  */
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { repoRoot, makeReporter } from '../lib/course.mjs';
 
 const r = makeReporter('validate:privacy');
@@ -60,6 +61,51 @@ for (const dir of ['content', 'labs']) {
     const text = readFileSync(file, 'utf8');
     if (AUTHOR_EMAIL.test(text))
       r.fail(`${path.relative(repoRoot, file)}: contains the author's email address`);
+  }
+}
+
+// A36: nothing derived from the authoring machine may reach published content.
+// The audit that prompted this found only invented usernames, but a captured
+// `uname -a` had carried the machine's hostname into a lesson and its lab.
+// These are computed at run time so the check follows whatever machine is
+// authoring, rather than hard-coding one person's identifiers into the repo.
+{
+  const sh = (cmd, args) => {
+    try {
+      return execFileSync(cmd, args, { encoding: 'utf8' }).trim();
+    } catch {
+      return '';
+    }
+  };
+  const host = sh('hostname', ['-s']);
+  const user = process.env.USER ?? '';
+  const home = process.env.HOME ?? '';
+
+  const identities = [
+    [host, 'the authoring machine hostname'],
+    [user, 'the authoring account name'],
+    [home, 'the authoring home directory'],
+  ].filter(([v]) => v && v.length > 2);
+
+  for (const dir of ['content', 'labs', 'public']) {
+    for (const file of walk(
+      path.join(repoRoot, dir),
+      /\.(md|mdx|txt|ya?ml|py|sh|json|astro|ts|js)$/,
+    )) {
+      if (file.includes(`${path.sep}.venv${path.sep}`)) continue;
+      // The owner's GitHub account name is also the published site and repo
+      // host, so every lesson legitimately contains it inside an https URL.
+      // Strip web URLs before the identity scan: a hostname or home path has
+      // no business inside one, while the account name always does.
+      const body = readFileSync(file, 'utf8').replace(/https?:\/\/\S+/g, '');
+      for (const [value, label] of identities) {
+        if (body.includes(value)) {
+          r.fail(
+            `${path.relative(repoRoot, file)}: contains ${label} — sanitize to <host>, <user> or <repo>`,
+          );
+        }
+      }
+    }
   }
 }
 

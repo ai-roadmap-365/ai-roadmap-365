@@ -15,7 +15,7 @@ Prompt string (echo "$PS1"): (empty in this non-interactive run — try it in yo
 Working directory (pwd): <repo>/labs/sections/computing-foundations/day-008-meet-the-terminal-shells-prompts-and
 Echo demo (echo hello): hello
 Date (date): Sun Jul 12 13:32:42 IST 2026
-User (whoami): sandeepbazar
+User (whoami): you
 
 --- Recent command history (history | tail) ---
     (no history in this non-interactive run — run 'history | tail' in your terminal)

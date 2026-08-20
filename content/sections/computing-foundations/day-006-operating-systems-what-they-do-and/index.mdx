@@ -241,13 +241,13 @@ A real run on a Mac, lightly trimmed for width (your values will differ — that
 
 ```text
 $ uname -a
-Darwin MacBook-Pro 25.5.0 Darwin Kernel Version 25.5.0 [...] RELEASE_ARM64_T6041 arm64
+Darwin <host> 25.5.0 Darwin Kernel Version 25.5.0 [...] RELEASE_ARM64_T6041 arm64
 
 $ uptime
  8:55  up 1 day, 11:35, 1 user, load averages: 2.86 2.40 2.70
 
 $ whoami
-sandeepbazar
+you
 
 $ echo "$SHELL"
 /bin/zsh
@@ -257,8 +257,8 @@ Filesystem        Size    Used   Avail Capacity  iused ifree %iused  Mounted on
 /dev/disk3s1s1   926Gi    13Gi   436Gi     3%     459k  4.3G    0%   /
 
 $ ps aux | sort -k4 -nr | head -2
-sandeepbazar  7792  0.1  2.8 [...] Google Chrome Helper (Renderer) [...]
-sandeepbazar 53508 10.7  2.1 [...] (a terminal program)
+you  7792  0.1  2.8 [...] Google Chrome Helper (Renderer) [...]
+you 53508 10.7  2.1 [...] (a terminal program)
 ```
 
 Read it as a tour of the lesson: `uname` spoke to the kernel (`Darwin`, version 25.5.0, on 64-bit Arm hardware); `uptime` says the kernel has run uninterrupted for a day and a half; `whoami` echoed the security identity the kernel checks on every call; `$SHELL` named the user-space front door; `df` reported the filesystem subsystem (a 926 GiB root volume with 436 GiB free); and `ps` opened the process manager's books — on this machine, browser renderer processes top the memory table, each one a separate isolated process by deliberate OS-level design. On Linux the shape is identical — kernel name `Linux`, distribution details from `cat /etc/os-release`.

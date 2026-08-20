@@ -128,7 +128,7 @@ real captured run:
 ```text
 === Environment Inspection ===
 HOME:  <home>
-USER:  sandeepbazar
+USER:  you
 SHELL: /bin/zsh
 LANG:  C.UTF-8
 PATH directories (one per line):

@@ -122,7 +122,7 @@ Shell process (ps -p $$):
 ...
 Echo demo (echo hello): hello
 Date (date): Sun Jul 12 13:32:42 IST 2026
-User (whoami): sandeepbazar
+User (whoami): you
 ...
 type echo: echo is a shell builtin
 === End of tour ===
