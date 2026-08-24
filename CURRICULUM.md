@@ -2,7 +2,7 @@
 
 > GENERATED — do not edit by hand. Run `npm run generate:section-nav`.
 
-The complete map of all nine courses: **140 of 365 days complete.** Click a course to expand it, then a subsection, to drill down to individual days — nothing is shown all at once.
+The complete map of all nine courses: **141 of 365 days complete.** Click a course to expand it, then a subsection, to drill down to individual days — nothing is shown all at once.
 
 <details>
 <summary><h3>Course01 · Computing Foundations — 42/42 complete</h3></summary>
@@ -309,16 +309,16 @@ The linear algebra, calculus, probability, and data-analysis skills that make ma
 </details>
 
 <details>
-<summary><h3>Course04 · Machine Learning — 0/56 complete</h3></summary>
+<summary><h3>Course04 · Machine Learning — 1/56 complete</h3></summary>
 
 Classical machine learning done properly: models, evaluation, feature work, and the discipline that separates working systems from leaderboard tricks.
 
 <details>
-<summary>Days 141-147 · Machine Learning Fundamentals — 0/7</summary>
+<summary>Days 141-147 · Machine Learning Fundamentals — 1/7</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
-| Day 141 | What Machine Learning Is and Is Not | — | — | planned |
+| Day 141 | [What Machine Learning Is and Is Not](content/sections/machine-learning/day-141-what-machine-learning-is-and-is/) | [lab](labs/sections/machine-learning/day-141-what-machine-learning-is-and-is/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-141-what-machine-learning-is-and-is) | complete |
 | Day 142 | Supervised, Unsupervised, and Reinforcement Learning | — | — | planned |
 | Day 143 | The Machine Learning Workflow | — | — | planned |
 | Day 144 | Train, Validation, and Test Splits | — | — | planned |

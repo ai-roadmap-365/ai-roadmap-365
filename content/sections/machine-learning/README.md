@@ -4,14 +4,14 @@
 
 Classical machine learning done properly: models, evaluation, feature work, and the discipline that separates working systems from leaderboard tricks.
 
-**0 of 56 lessons written.** Expand a subsection below to see its days.
+**1 of 56 lessons written.** Expand a subsection below to see its days.
 
 <details open>
-<summary><strong>Days 141-147 · Machine Learning Fundamentals</strong> — 0/7 complete</summary>
+<summary><strong>Days 141-147 · Machine Learning Fundamentals</strong> — 1/7 complete</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
-| Day 141 | What Machine Learning Is and Is Not | — | — | planned |
+| Day 141 | [What Machine Learning Is and Is Not](./day-141-what-machine-learning-is-and-is/) | [lab](../../../labs/sections/machine-learning/day-141-what-machine-learning-is-and-is/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-141-what-machine-learning-is-and-is) | complete |
 | Day 142 | Supervised, Unsupervised, and Reinforcement Learning | — | — | planned |
 | Day 143 | The Machine Learning Workflow | — | — | planned |
 | Day 144 | Train, Validation, and Test Splits | — | — | planned |

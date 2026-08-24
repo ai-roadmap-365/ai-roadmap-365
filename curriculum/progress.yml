@@ -2520,3 +2520,42 @@ days:
       are deliberately excluded from the lab's pins. Animated acceptance-gate
       diagram. Instructor solution.
     completion: *done
+  141:
+    status: complete
+    completed_on: '2026-08-20'
+    evidence: >-
+      Lesson passes content contract (What Machine Learning Is and Is Not — the
+      first day of Course04, and the reader's first day of machine learning).
+      What the Number Is Not Telling You lab executed and re-run independently
+      at integration (13 checks, 0 failures, exit 0, harness's own exit status
+      captured); 13 reference tests pass and the untouched starter reports 3
+      passed and 10 skipped. The day dismantles accuracy before building
+      anything: 1-NN on coin-flip labels scores train 1.000 and test 0.518,
+      identical between a hand-written NumPy version and scikit-learn, so a
+      flawless score on seen data is shown to be evidence of nothing. Every
+      claim is a measured pair. A three-line rule scores 1.000 where the best of
+      four models reaches 0.9675, which is the day's professional judgement —
+      if you can write the rule, write the rule. A shifted distribution drops a
+      0.948 model to 0.4895, below chance, while the rule holds at 1.000.
+      Extrapolation gives 5-NN a mean absolute error of 0.180 inside the
+      training range and 139.704 outside it, a factor of 774, with its maximum
+      prediction provably bounded by the largest training target. Two
+      "82%-accurate" models both lose to a baseline of exactly 0.900. With a
+      quarter of labels flipped the ceiling is exactly 0.750 and no model
+      exceeds it. And more data lifts a variance-limited model 39.8 points while
+      a noise-limited one gains 2.1. THE AUTHOR'S BRIEF WAS WRONG that 1-NN
+      training accuracy is 1.000 "by construction" and the agent measured the
+      exception rather than hiding it: iris contains exactly one duplicated
+      feature row, positions 101 and 142 at (5.8, 2.7, 5.1, 1.9), both class 2 —
+      so 1.000 holds on real labels but permuting them gives 0.9933333333333333.
+      Confirmed independently at integration, including that this is the only
+      duplicate in the dataset. The exercise therefore asserts only the
+      structural part, below 1.000, since which label lands on each duplicate
+      depends on the NumPy pin. Also honest: the noise-limited model does
+      improve slightly rather than not at all, so the contrast is asserted
+      instead of a false flatness; NumPy's Generator carries no cross-version
+      guarantee, so FIELDS.md separates the four values exact by arithmetic from
+      the twenty-one exact only under the pins; and no cloud AutoML price is
+      quoted because none could be verified. Animated
+      memorise-versus-generalise diagram. Instructor solution.
+    completion: *done
