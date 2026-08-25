@@ -30,6 +30,8 @@ export interface CourseInfo {
   weeks: number;
   language: string;
   author: string;
+  /** Where the author's name links to in the footer. */
+  author_url: string;
 }
 
 export interface CourseConfig {

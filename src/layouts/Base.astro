@@ -156,13 +156,14 @@ const ogImage = new URL(`${base}/${image}`, site).href;
     <footer class="site-footer">
       <div class="inner">
         <span>
-          {config.course.title} · by {config.course.author} · lessons and labs are free to use
+          {config.course.title} · by <a href={config.course.author_url}>{config.course.author}</a> ·
+          lessons and labs are free to use
         </span>
         <nav>
           <a href={config.repository.public_url}>Labs on GitHub</a>
           <a href="https://sandeepbazar.github.io/blogs/">Writing</a>
           <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a>
-          <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a>
+          <a href={config.course.author_url}>LinkedIn</a>
         </nav>
       </div>
     </footer>
