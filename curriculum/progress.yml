@@ -2869,3 +2869,271 @@ days:
       rather than asserted untested. Instructor solution. CPU only; no GPU needed
       or used.
     completion: *done
+  148:
+    status: complete
+    completed_on: '2026-08-27'
+    evidence: >-
+      Lesson passes content contract (Linear Regression — the first day of Week 22
+      and the reader's first regression model). Lab re-run independently at
+      integration (14 checks, 0 failures, exit 0); 16 reference tests pass and the
+      untouched starter reports 4 passed and 12 skipped. Uses
+      load_diabetes(scaled=False) so coefficients carry real units — age in years,
+      bmi, bp — which is what makes "one more unit of BMI is associated with N more
+      units of progression" a sentence anyone can check; the default scaled=True
+      returns columns already mean-centred and unit-norm scaled and is noted as the
+      trap it is. The day owns the one-predictor model completely: geometry,
+      coefficient interpretation, the four assumptions and what each looks like when
+      false, and residual plots as the diagnostic. It measures the exact facts that
+      hold by construction — the least-squares line always passes through the mean of
+      x and the mean of y, and fitted residuals always sum to essentially zero when an
+      intercept is fitted. HONESTY CALLS. FIRST: the curvature demonstration produces
+      an R-squared of 0.852, which is a genuinely good-looking fit despite real missed
+      curvature that only the residual plot reveals; the seeded construction was NOT
+      re-rolled to produce a worse-looking number, and the lesson leans into that
+      discomfort rather than tidying it. SECOND: the slope-recovery ratios are
+      asserted as RANGES (0.25-0.40 and 0.04-0.09) rather than exact values, because
+      they average 200 replications with real sampling noise — the same pattern Day
+      144 used for its temporal distribution. THIRD: the leverage ratio of 26.94
+      depends on both the base dataset's spread and the exact x of the added point,
+      and FIELDS.md says so rather than implying a universal constant. FOURTH: a
+      hand-computed leverage delta was wrong by float rounding (-1.3058 against the
+      true -1.3059), caught by the suite itself and corrected in lesson, lab and
+      metadata. FIFTH: no scipy or statsmodels dependency — standard error, leverage
+      and skewness are hand-written against numpy so the pin set stays at three
+      packages. statsmodels, R's lm() and Excel's LINEST are described from
+      documentation only, with no output reproduced. Two deliberate breaks were
+      performed, one via the harness and one by hand. CPU only; no GPU needed or used.
+    completion: *done
+  149:
+    status: complete
+    completed_on: '2026-08-27'
+    evidence: >-
+      Lesson passes content contract (Loss Functions and Least Squares — the objective
+      function as a CHOICE, and what choosing one decides). Lab re-run independently
+      at integration (14 checks, 0 failures, exit 0); 14 reference tests pass and the
+      untouched starter reports 4 passed and 10 skipped. The day owns the plain loss
+      completely and hands every penalised loss to Day 151. THE INTUITION, MEASURED
+      AND VERIFIED INDEPENDENTLY AT INTEGRATION: on the vector [1, 2, 3, 4, 100] a
+      grid search finds squared error minimised at 22.0000, which is exactly the mean,
+      and absolute error minimised at 3.0000, which is exactly the median. That single
+      pair explains outlier sensitivity better than any argument, because it is the
+      whole mechanism. THE LOAD-BEARING RESULT: the efficiency ranking between OLS and
+      a robust loss genuinely FLIPS between Gaussian and heavy-tailed errors, ratio
+      0.9524 against 1.3957, and BOTH directions are kept in the lesson rather than
+      only the more dramatic heavy-tailed one — which is what makes Gauss-Markov's
+      conditionality concrete rather than recited: best LINEAR UNBIASED estimator,
+      every word load-bearing. HONESTY CALLS. FIRST: under Gaussian errors Huber's mean
+      slope sits very slightly FURTHER from the true 3.0 than OLS's does (2.9977 and
+      2.9984 against 2.998), which is sampling noise in an average of 500 draws rather
+      than bias, and harness check 8 re-confirms both stay within 0.01 of truth at a
+      different replication count rather than the lesson explaining the wobble away.
+      SECOND: the grid-search minimisers are 23.39975 and 5.00005, not exactly the mean
+      and median, because a finite grid has finite resolution; documented in FIELDS.md
+      and troubleshooting.md rather than silently rounded. THIRD: QuantileRegressor
+      needed alpha=0.0 stated explicitly to disable its default L1 penalty — otherwise
+      it would not have been measuring plain absolute error at all — and solver="highs"
+      named rather than left to a version-dependent default; both were verified to
+      exist and converge in scikit-learn 1.9.0 before anything was built on them.
+      FOURTH: historical dates (Legendre 1805, Gauss's 1795 priority claim and 1809
+      publication, Boscovich 1757, Huber 1964) were stated only where cross-checked
+      against the cited sources. CPU only; no GPU needed or used.
+    completion: *done
+  150:
+    status: complete
+    completed_on: '2026-08-27'
+    evidence: >-
+      Lesson passes content contract (Multiple and Polynomial Regression — what changes
+      when there is more than one predictor). Lab re-run independently at integration
+      (14 checks, 0 failures, exit 0); 17 reference tests pass and the untouched starter
+      reports 5 passed and 12 skipped. THE CENTREPIECE IS MULTICOLLINEARITY ON REAL
+      DATA, and the variance inflation factors were recomputed independently at
+      integration and match exactly: age 1.2173, sex 1.2781, bmi 1.5094, bp 1.4594, s1
+      59.2025, s2 39.1934, s3 15.4022, s4 8.8910, s5 10.0760, s6 1.4846. The six serum
+      measurements are genuinely and severely collinear, which makes the diabetes data a
+      far better example than any synthetic one. The day establishes the contrast that
+      matters: correlated predictors give unstable, huge, sign-flipping coefficients
+      while the PREDICTIONS stay fine — so a model can be excellent and its coefficients
+      meaningless. It also measures that a polynomial fit is linear in its parameters by
+      confirming PolynomialFeatures plus LinearRegression reproduces the normal-equation
+      solution on the expanded design matrix, and that standardising changes coefficients
+      while leaving predictions and R-squared identical. HONESTY CALLS. FIRST: the
+      noisy-duplicate result quotes seed 0 concretely for vividness (+0.76 and -1.85) but
+      a second exercise asserts the full ten-seed spread — mean, sd, min and max — as the
+      defensible claim, following Day 144's precedent against cherry-picking a striking
+      draw. SECOND, and sharp: `age` was EXCLUDED from the VIF-versus-instability
+      comparison and the exclusion stated explicitly in both code comment and prose,
+      because its coefficient of variation (4.70) is the LARGEST in the dataset despite
+      its VIF being the LOWEST (1.2173) — its mean coefficient sits near zero, which
+      inflates a ratio without reflecting any collinearity. Silently dropping it to make
+      the correlation look cleaner was the available temptation and was refused. THIRD:
+      Day 145's degree-sweep numbers are cited in a single sentence rather than
+      re-derived, and ridge (Day 151) and adjusted R-squared (Day 152) are named and
+      handed off in one sentence each rather than taught. A deliberate break was
+      performed by hand in addition to the harness's own. CPU only; no GPU needed or used.
+    completion: *done
+  151:
+    status: complete
+    completed_on: '2026-08-27'
+    evidence: >-
+      Lesson passes content contract (Regularization: Ridge and Lasso — what the PENALTY
+      does, and why L1 and L2 differ in kind rather than degree). Lab re-run
+      independently at integration (14 checks, 0 failures, exit 0); 18 reference tests
+      pass and the untouched starter reports 4 passed and 14 skipped. THE SPINE,
+      measured on real data: lasso zeros 0, 1, 3 and 8 of 10 coefficients as alpha rises
+      through 0.001, 0.01, 0.1 and 1.0, while RIDGE ZEROS NOTHING AT ANY ALPHA — the
+      contrast that makes L1 and L2 different in kind. LassoCV picks alpha 0.07874 and
+      keeps sex, bmi, bp, s1, s3 and s5. The constraint-region geometry is drawn as one
+      of the two diagrams: a diamond has corners on the axes and a circle does not, which
+      is WHY one produces exact zeros and the other never can. Day 145's earlier finding
+      that a ridge penalty rescued a model by a factor of 39,588 is cited in a sentence
+      rather than re-derived. SPARSE RECOVERY ON A KNOWN GROUND TRUTH: with 5 informative
+      features of 20, lasso at alpha 1.0 and noise 1.0 recovered the true set exactly,
+      precision 1.0 and recall 1.0. FOUR HONESTY CALLS. FIRST: that success DEGRADES and
+      the degradation is reported — at alpha 80 with noise 30 recall fell to 0.2, and at
+      alpha 80 with noise 10 recall fell to 0.0, meaning too much penalty on noisy data
+      zeroed EVERY genuinely informative feature. Regularisation can fail outright, not
+      merely underperform. SECOND: the near-duplicate exact-zero result is NOT guaranteed
+      at every seed — the two columns correlate at 0.999918 rather than perfectly, and
+      harness check 8 found a seed where the dropped coefficient was 0.0007 rather than
+      bit-exact zero; the cross-seed assertion was loosened to a 20-fold asymmetric split
+      and the reason documented in FIELDS.md, troubleshooting.md and the lesson's editing
+      rules rather than the seed being changed until it looked clean. THIRD: "scaled" is
+      not one convention — StandardScaler (unit variance) and load_diabetes(scaled=True)
+      (unit L2 norm) disagree with each other, keeping 7 features against 3 at the
+      identical nominal alpha, and both differ from raw data's 10. FOURTH, a real API
+      gotcha verified independently at integration: Ridge and ElasticNet DO NOT SHARE AN
+      ALPHA SCALE. Ridge(alpha=0.1) scores R2 0.3690 while ElasticNet(alpha=0.1,
+      l1_ratio=0) scores 0.0555 on identical data, because ElasticNet's objective divides
+      the loss term by n_samples; correcting the scale brings them into agreement. The
+      uncorrected failure is published rather than smoothed over. Ten sources, all
+      verified 200. CPU only; no GPU needed or used.
+    completion: *done
+  152:
+    status: complete
+    completed_on: '2026-08-27'
+    evidence: >-
+      Lesson passes content contract (Regression Metrics — what you REPORT, and why it is
+      not the same choice as what you optimise). Lab re-run independently at integration
+      (14 checks, 0 failures, exit 0); 16 reference tests pass and the untouched starter
+      reports 4 passed and 12 skipped. Day 149 drew the loss-versus-metric line once; this
+      day owns the reporting side completely — RMSE, MAE, MAPE, R-squared and adjusted
+      R-squared. THE HEADLINE, verified independently at integration: train R-squared
+      climbs to 0.7403 on 100 columns of PURE NOISE, and a deliberately bad predictor
+      scores -4.7009 rather than 0. Most readers believe R-squared lives in [0, 1] and
+      means "percent of variance explained"; both halves of that belief are wrong and both
+      are measurable. A GENUINE RANKING INVERSION was found and is the regression
+      counterpart of Day 143's accuracy-versus-recall result: on the identical 100 targets,
+      model A (many small errors) scores RMSE 1.947 and MAE 1.586 while model B (few large
+      errors) scores RMSE 4.4353 and MAE 0.8417 — RMSE prefers A, MAE prefers B, so the
+      metric decides which model ships. THREE HONESTY CALLS, all from measurement beating
+      folklore. FIRST, and unanticipated: ADJUSTED R-SQUARED ITSELF BREAKS DOWN. It
+      correctly punishes the noise columns for a while and then, once the number of
+      predictors approaches the number of rows, rises above the baseline again — so the
+      standard fix for the R-squared trap has its own failure mode. Confirmed
+      independently at integration, where it began exceeding baseline from 50 noise
+      columns onward at 331 training rows. This was reported because it was measured, not
+      because it was expected. SECOND: the widely repeated claim that MAPE penalises
+      over-prediction and under-prediction differently for equal-magnitude errors is FALSE
+      as stated, and was checked rather than repeated — equal-magnitude errors on a fixed
+      true value give identical MAPE in both directions (0.2629 against 0.2629, confirmed
+      independently). The real asymmetry is structural: the worst possible under-prediction
+      is capped at MAPE 1.0 because predictions cannot go below zero, while over-prediction
+      is unbounded and was measured at 10.0 for an eleven-fold over-prediction. The
+      narrower true version is published in place of the loose folklore one. THIRD: the
+      diabetes target has NO physical unit — it is a composite disease-progression score,
+      not mg/dL — and the lesson says so plainly rather than inventing a unit, which
+      matters because RMSE and MAE carry the units of the target. Harness check 8 re-runs
+      the noise climb, the ranking inversion and the outlier direction at seeds the lesson
+      does not quote. CPU only; no GPU needed or used.
+    completion: *done
+  153:
+    status: complete
+    completed_on: '2026-08-27'
+    evidence: >-
+      Lesson passes content contract (Linear Regression from Scratch — build it, and find
+      out what the library was doing for you). Lab re-run independently at integration
+      (14 checks, 0 failures, exit 0); 15 reference tests pass and the untouched starter
+      reports 5 passed and 10 skipped. Ordinary least squares is implemented three ways in
+      NumPy — the normal equations, an lstsq-based solve, and gradient descent — with one
+      made a scikit-learn-compatible estimator, citing Day 146 for why it inherits
+      BaseEstimator rather than re-teaching the API. THE CENTREPIECE IS NUMERICAL REALITY:
+      the textbook formula is not what a good library runs, and the day measures exactly
+      why. On a construction with a near-duplicate column (cond(A'A) = 5.655e+14) and true
+      coefficients [1, 2, 3, 4]: the normal equations return +196747.976 and -196742.975,
+      lstsq returns +207112.776 and -207107.775, and SKLEARN RETURNS 2.501 and 2.501 —
+      because its SVD-based minimum-norm solution splits the weight evenly between the
+      duplicated columns instead of exploding. That three-way contrast connects directly to
+      Day 150's multicollinearity and to Day 145's minimum-norm finding at the
+      interpolation threshold. On well-conditioned diabetes data the from-scratch routes
+      agree with the library closely — max difference 1.2153e-10 for the normal equations
+      and 1.1990e-12 for lstsq, so lstsq is about 101 times closer — and cond(X) = 227.2248
+      against cond(X'X) = 51631.1119 gives a ratio to cond(X) squared of 1.0000000000,
+      which is the precise reason the normal equations lose precision. check_estimator runs
+      52 checks: 48 pass, 2 fail by name (check_n_features_in_after_fitting,
+      check_dtype_object) and 2 skip by name (check_array_api_input,
+      check_regressor_data_not_an_array, both environment conditions), all reported rather
+      than suppressed. FOUR HONESTY CALLS. FIRST: on the dramatic near-singular case,
+      cond(X'X)/cond(X) squared measures 0.9527 rather than 1.0 — the theorem is exact, but
+      computing the smallest singular value of an already near-singular matrix is itself
+      numerically imprecise, so even the verification of the squaring relationship degrades.
+      Reported as measured rather than smoothed to 1.0. SECOND, and the most valuable: the
+      harness's own "holds beyond the quoted seed" check FAILED on first attempt. It had
+      asserted lstsq is always closer to sklearn than the normal equations on any
+      well-conditioned random data; on real runs with cond(X) near 1.3 both routes sit at
+      machine-epsilon noise and the ordering is a coin flip. The CHECK was fixed — narrowed
+      to moderately ill-conditioned constructions with cond in the 15 to 40 range,
+      comparable to diabetes' 227, where the advantage holds reliably across five seeds —
+      rather than the claim being kept and the failure ignored. Recorded as an explicit note
+      in metadata.yml. THIRD: no wall-clock timing appears anywhere in the byte-compared
+      report; the closed-form-versus-gradient-descent comparison uses formula-derived
+      operation counts instead, 54,813 against 64,452,440, about 1176 times. FOURTH:
+      troubleshooting.md originally claimed an exactly-duplicated column raises LinAlgError
+      from np.linalg.solve; direct testing showed it does NOT, because floating-point
+      rounding leaves the matrix just shy of exactly singular, and the file was corrected
+      rather than shipping an unverified claim. CPU only; no GPU needed or used.
+    completion: *done
+  154:
+    status: complete
+    completed_on: '2026-08-27'
+    evidence: >-
+      Lesson passes content contract (A Complete Regression Project — the synthesis day
+      for Week 22, and the regression counterpart of Day 147). Lab re-run independently
+      at integration (15 checks, 0 failures, exit 0); 19 reference tests pass and the
+      untouched starter reports 5 passed and 14 skipped. The day runs the whole week once
+      on load_diabetes(scaled=False): frame and choose the metric before modelling,
+      baseline first, a three-way protocol, a Pipeline so every fitted transform is fitted
+      inside the fold, a model comparison with K counted, exactly ONE test evaluation
+      enforced mechanically, residual diagnostics, and a written verdict carrying an
+      interval. RESIDUAL DIAGNOSTICS ARE WHAT THIS DAY OWNS and they are reported as
+      measured rather than as a textbook expects: residual mean -3.6262 and sd 56.4402; a
+      heteroscedasticity signal of +0.2386 (correlation of fitted value with absolute
+      residual) which is real but modest fanning rather than dramatic; a curvature signal
+      of -0.1278, which is weak; a from-scratch Q-Q normal-probability correlation of
+      0.9901, close to normal even on 111 real test rows; and a worst individual residual
+      of -157.3 at test row 60, where the true value was 52.0 and the prediction 209.3.
+      Prediction-interval coverage came out 0.9459 realised against 0.95 nominal at the
+      headline seed, with a ten-seed check giving a mean of 0.9558 across the range
+      0.9369 to 0.991, reported in FIELDS.md rather than asserted by the harness. SEVEN
+      HONESTY CALLS. FIRST: the verdict came out DISTINGUISHABLE rather than the "cannot
+      distinguish" case the brief flagged as more pedagogically valuable — the winning
+      model's margin over baseline of 13.9071 RMSE points comfortably exceeded its
+      bootstrap interval's lower bound of 5.5852 — and this was reported as measured
+      rather than a seed being hunted that would produce the tidier teaching outcome.
+      SECOND: the heteroscedasticity and curvature signals are reported as neither nothing
+      nor a crisis. THIRD: the fairness-by-target-level ratio came back at 1.0473, nearly
+      flat, and was published as a genuine if undramatic finding rather than re-rolled for
+      something more striking. FOURTH: the prediction-interval half-width is built
+      exclusively from TRAINING out-of-fold residuals and never from test residuals, which
+      avoids the circularity that would otherwise make the coverage figure meaningless.
+      FIFTH, and the right closing note for the week, verified independently at
+      integration: plain OLS scores only 0.1968 CV RMSE points behind the regularized
+      winner despite the severe multicollinearity Day 150 measured at VIFs up to 59.2 —
+      confirmed here at OLS 54.5272 against Ridge 54.4913, a gap of 0.036 — which
+      establishes that coefficient instability and prediction accuracy are different
+      questions and must not be conflated. SIXTH: timing figures in FIELDS.md and
+      metadata.yml were corrected after being measured for real, the initial estimates
+      having been wrong, and no timing appears anywhere in the byte-compared report.
+      SEVENTH: a deliberate break of exercise 5's winner check was performed by hand,
+      confirmed at 2 failures and exit 1 naming the failing test, then restored and
+      re-confirmed green. CPU only; no GPU needed or used.
+    completion: *done

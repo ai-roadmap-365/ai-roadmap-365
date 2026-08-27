@@ -4,7 +4,7 @@
 
 Hands-on companions to this section's lessons. Each day directory is self-contained: open it, follow its README, finish with its tests passing.
 
-**7 of 56 labs written.** Expand a subsection below to see its days.
+**14 of 56 labs written.** Expand a subsection below to see its days.
 
 <details>
 <summary><strong>Days 141-147 · Machine Learning Fundamentals</strong> — 7/7 complete</summary>
@@ -23,24 +23,24 @@ Hands-on companions to this section's lessons. Each day directory is self-contai
 
 </details>
 
-<details open>
-<summary><strong>Days 148-154 · Regression</strong> — 0/7 complete</summary>
+<details>
+<summary><strong>Days 148-154 · Regression</strong> — 7/7 complete</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
-| Day 148 | Linear Regression | — | — | planned |
-| Day 149 | Loss Functions and Least Squares | — | — | planned |
-| Day 150 | Multiple and Polynomial Regression | — | — | planned |
-| Day 151 | Regularization: Ridge and Lasso | — | — | planned |
-| Day 152 | Regression Metrics | — | — | planned |
-| Day 153 | Linear Regression from Scratch | — | — | planned |
-| Day 154 | A Complete Regression Project | — | — | planned |
+| Day 148 | [Linear Regression](../../../content/sections/machine-learning/day-148-linear-regression/) | [lab](./day-148-linear-regression/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-148-linear-regression) | complete |
+| Day 149 | [Loss Functions and Least Squares](../../../content/sections/machine-learning/day-149-loss-functions-and-least-squares/) | [lab](./day-149-loss-functions-and-least-squares/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-149-loss-functions-and-least-squares) | complete |
+| Day 150 | [Multiple and Polynomial Regression](../../../content/sections/machine-learning/day-150-multiple-and-polynomial-regression/) | [lab](./day-150-multiple-and-polynomial-regression/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-150-multiple-and-polynomial-regression) | complete |
+| Day 151 | [Regularization: Ridge and Lasso](../../../content/sections/machine-learning/day-151-regularization-ridge-and-lasso/) | [lab](./day-151-regularization-ridge-and-lasso/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-151-regularization-ridge-and-lasso) | complete |
+| Day 152 | [Regression Metrics](../../../content/sections/machine-learning/day-152-regression-metrics/) | [lab](./day-152-regression-metrics/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-152-regression-metrics) | complete |
+| Day 153 | [Linear Regression from Scratch](../../../content/sections/machine-learning/day-153-linear-regression-from-scratch/) | [lab](./day-153-linear-regression-from-scratch/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-153-linear-regression-from-scratch) | complete |
+| Day 154 | [A Complete Regression Project](../../../content/sections/machine-learning/day-154-a-complete-regression-project/) | [lab](./day-154-a-complete-regression-project/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-154-a-complete-regression-project) | complete |
 
 **Project:** House Price Model — Build a regularized regression model on a housing dataset with feature analysis and residual diagnostics.
 
 </details>
 
-<details>
+<details open>
 <summary><strong>Days 155-161 · Classification</strong> — 0/7 complete</summary>
 
 | Day | Lesson | Lab | Blog | Status |
