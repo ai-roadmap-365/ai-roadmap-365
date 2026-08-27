@@ -1,0 +1,350 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 40: Observability: Logs, Metrics, Traces, and Dashboards · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to explain how a running system reports what it is doing through logs, metrics, and traces, compute a real percentile from raw latencies, and reason about dashboards, alerting, sampling, and cost — the literacy you will reuse to instrument every service you build."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-040-observability-logs-metrics-traces-and-dashboards/"><meta property="og:title" content="Day 40: Observability: Logs, Metrics, Traces, and Dashboards · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to explain how a running system reports what it is doing through logs, metrics, and traces, compute a real percentile from raw latencies, and reason about dashboards, alerting, sampling, and cost — the literacy you will reuse to instrument every service you build."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-040-observability-logs-metrics-traces-and-dashboards/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-040-observability-logs-metrics-traces-and-dashboards.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 40: Observability: Logs, Metrics, Traces, and Dashboards · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 40: Observability: Logs, Metrics, Traces, and Dashboards · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to explain how a running system reports what it is doing through logs, metrics, and traces, compute a real percentile from raw latencies, and reason about dashboards, alerting, sampling, and cost — the literacy you will reuse to instrument every service you build."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-040-observability-logs-metrics-traces-and-dashboards.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+      // Dark is the default regardless of OS preference - this is a dark-first
+      // design. A visitor who picks light with the toggle keeps it. Applied
+      // before first paint so there is no flash of the wrong theme.
+      (() => {
+        let t;
+        try {
+          t = localStorage.getItem('theme');
+        } catch {
+          t = null;
+        }
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+      })();
+    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+<style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
+.starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+365 Days of AI
+</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+Labs
+</a> </header> <main id="main">  <article data-day="40" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>Systems Foundations: Storage, Observability, and Tooling</span>  › 
+Day 40 </p> <h1 data-astro-cid-whrtx2kk>Day 40: Observability: Logs, Metrics, Traces, and Dashboards</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-040-observability-logs-metrics-traces-and-dashboards.png" width="1200" height="630" alt="Day 40 of 365 — Observability: Logs, Metrics, Traces, and Dashboards" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to explain how a running system reports what it is doing through logs, metrics, and traces, compute a real percentile from raw latencies, and reason about dashboards, alerting, sampling, and cost — the literacy you will reuse to instrument every service you build.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Systems Foundations: Storage, Observability, and Tooling</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-040-observability-logs-metrics-traces-and-dashboards" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-040-observability-logs-metrics-traces-and-dashboards</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
+cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-040-observability-logs-metrics-traces-and-dashboards</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/ai-roadmap-365/labs/day-040-observability-logs-metrics-traces-and-dashboards" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Explain the three pillars of observability — logs, metrics, and traces — and the distinct question each one best answers</li><li data-astro-cid-whrtx2kk>Distinguish structured (JSON) logging from plain text and state why structure makes signals answerable at scale</li><li data-astro-cid-whrtx2kk>Identify the three metric types (counter, gauge, histogram) and compute a rate and a p95 percentile from raw values by hand</li><li data-astro-cid-whrtx2kk>Describe how a trace follows one request across services as nested spans sharing a trace ID</li><li data-astro-cid-whrtx2kk>Explain dashboards, alerting on symptoms rather than causes, and SLIs/SLOs at an introductory level</li><li data-astro-cid-whrtx2kk>Distinguish monitoring (predefined questions) from observability (asking new questions), and reason about sampling and telemetry cost</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Day 6 and Day 7 (operating systems and processes) — what a running program and its output are</li><li data-astro-cid-whrtx2kk>Day 14 (logging in automation) — the idea of a program writing records as it runs</li><li data-astro-cid-whrtx2kk>A terminal with bash and python3 (both preinstalled on macOS and Linux)</li></ul> <h2 id="why-this-matters">Why this matters</h2>
+<p>Sooner or later a system you built will misbehave in production — a page that loads in two seconds for you takes thirty for a user in another country, a background job silently stops, a bill arrives triple what you expected. When that happens, you have exactly two options: guess, or look. Observability is the discipline of always being able to look. It is the difference between “I think it might be the database” and “requests to the database jumped from 20 milliseconds to 4 seconds at 14:32, and here are the ten slowest ones.”</p>
+<p>This matters for your path into AI more than almost any other systems topic, because the systems you will build are unusually hard to reason about from the outside. An AI feature can be slow, expensive, and wrong all at once, and none of those failures throws a neat error. A model call that costs a fraction of a cent per request is invisible until you multiply it by a million requests and open the invoice. A response that takes six seconds instead of one drives users away, but only if you measure it. A pipeline that retrieves the wrong documents produces confident, plausible, incorrect answers — the most dangerous failure of all, because nothing crashes. You cannot fix what you cannot see, and you cannot improve what you do not measure.</p>
+<p>The engineers who stay calm during an outage are not smarter than everyone else; they have instrumented their systems so that the answer is already recorded somewhere, waiting to be queried. Today you build the mental model behind that calm: the three kinds of signal every running system can emit, how they combine into dashboards and alerts, and the concrete practice of turning raw events into numbers you can act on. By the end you will have built a tiny observability pipeline by hand, from plain log lines to a percentile latency, so that the tools you meet later are never mysterious.</p>
+<h2 id="the-idea-in-plain-language">The idea in plain language</h2>
+<p>A running program is a black box. From the outside you see inputs going in and results coming out, but the interesting part — what it did, how long each step took, what went wrong — happens invisibly inside. Observability means deliberately making the inside visible by having the program emit signals as it runs, and then collecting and reading those signals.</p>
+<p>There are three classic kinds of signal, often called the three pillars. <strong>Logs</strong> are timestamped records of individual events: “at 14:32:07 a request for user 91 finished in 240 milliseconds.” They are the diary of the system, one line per thing that happened. <strong>Metrics</strong> are numbers measured over time: the count of requests per second, the fraction that failed, the memory in use. Where a log describes one event, a metric summarizes many events into a number you can chart. <strong>Traces</strong> follow a single request as it travels through the system — through the web server, the database, an external service — recording how long each hop took, so you can see exactly where a slow request spent its time.</p>
+<p>None of these is exotic. A log line is just text written to a file. A metric is just counting or timing and reporting the total. A trace is just logs that agree to share an identifier so you can stitch them back together. The skill is not in the machinery; it is in emitting the <em>right</em> signals, in a <em>structured</em> form, and then asking them good questions.</p>
+<h2 id="historical-background">Historical background</h2>
+<p>System logging is nearly as old as multi-user computing itself. On Unix systems the <code>syslog</code> facility, written by Eric Allman in the early 1980s as part of the Sendmail project, gave programs a standard way to record events with a severity level and a category; it became so widespread that it was eventually formalized as an internet standard (RFC 3164, later RFC 5424). For decades, “monitoring” mostly meant scraping those text logs and watching a handful of gauges — CPU, disk, memory — with tools such as MRTG (1995) and later Nagios (1999) sounding an alarm when a threshold was crossed.</p>
+<p>Two shifts changed the picture. First, systems stopped being single machines. Through the 2000s and 2010s, applications were split into many small services running across fleets of servers, so a single user request might touch a dozen programs on a dozen hosts — and no one log file told the whole story. Google’s 2010 paper on <em>Dapper</em>, its internal distributed-tracing system, described how to follow one request across services by propagating a shared identifier, and directly inspired the open-source tracers that followed. Second, the numbers themselves became a first-class product: the Prometheus project, started at SoundCloud in 2012 and later donated to the Cloud Native Computing Foundation, popularized pulling numeric time-series metrics from every service and querying them with a purpose-built language.</p>
+<p>The word <em>observability</em> itself is borrowed from control theory, where Rudolf Kálmán defined it in 1960 as the degree to which a system’s internal state can be inferred from its external outputs. Around 2016–2018 the software industry adopted the term to name the goal these tools were reaching toward, and to distinguish it from older, narrower “monitoring.” In 2019 two competing tracing standards, OpenTracing and OpenCensus, merged into <strong>OpenTelemetry</strong>, giving the field a single vendor-neutral way to emit all three signals. That is the lineage you are stepping into: forty years of making the black box less black.</p>
+<h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
+<p>Observability is a property of a system: the extent to which you can understand what is happening inside it purely from the signals it emits, <em>including questions you did not think to ask in advance</em>. A system is observable if, when something surprising happens, you can investigate it with the data already being collected — without shipping new code, adding a print statement, and waiting for the problem to recur.</p>
+<p>Every word of that carries weight. <em>Purely from emitted signals</em>: you are not attaching a debugger to a live production process; you are reading logs, metrics, and traces it already produces. <em>Questions you did not think to ask in advance</em>: this is the line between observability and mere monitoring, which we return to shortly.</p>
+<p>It is equally important to say what observability is not. It is not a specific product you buy, though many are sold. It is not “having lots of logs” — a firehose of unstructured text you cannot query is noise, not visibility. It is not the same as testing, which checks behavior before release; observability watches behavior after release, in the real world, under real load. And it is not free: every signal costs something to produce, transmit, and store, so a real system is always a deliberate trade-off between how much it can see and how much that sight costs.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Common misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”We have logs, so we’re observable.”</td><td>Unstructured logs you cannot search or aggregate give little insight; structure and metrics are what make signals answerable.</td></tr><tr><td>”Observability is a tool we install.”</td><td>It is a property of the system earned by instrumenting it well; tools help, but bad instrumentation is invisible with any tool.</td></tr><tr><td>”Monitoring and observability are the same thing.”</td><td>Monitoring answers questions you defined in advance; observability lets you ask new questions after the fact.</td></tr><tr><td>”The average response time looks fine, so users are happy.”</td><td>Averages hide the slow tail; the p95 and p99 (the slowest 5% and 1%) are what real users actually feel.</td></tr><tr><td>”More signals are always better.”</td><td>Every signal has a cost; past a point, more data means higher bills and harder searches, not more insight.</td></tr></tbody></table>
+<h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
+<p>The core problem is simple to state and brutal in practice: <strong>production is not your laptop.</strong> In development you have one request at a time, a debugger, and the ability to add a print statement and run it again. In production you have thousands of concurrent users, code you cannot pause, failures that happen once in ten thousand requests, and a problem that vanished by the time anyone looked. The old debugging loop — reproduce, inspect, fix — breaks down when you cannot reproduce and cannot inspect.</p>
+<p>Observability solves this by moving the inspection <em>earlier</em>: you instrument the code once, so that when the rare failure happens, the evidence is already recorded. It solves the <em>scale</em> problem by turning thousands of events into a handful of numbers you can watch on a chart. It solves the <em>distributed</em> problem with traces that reassemble one request’s journey from fragments scattered across many machines. And it solves the <em>human</em> problem of not being able to stare at everything at once, by letting you define alerts that call you only when something crosses a line that matters. In short, it converts “we have no idea why it broke” into “here is exactly what happened, at what time, for which users,” which is the entire game when a system is down and money is leaking.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>Let us walk through each pillar concretely, then see how they feed dashboards and alerts.</p>
+<h3 id="the-three-pillars">The three pillars</h3>
+<p><strong>Logs</strong> are discrete, timestamped events. The single most important practical decision you will make about logs is to emit them <em>structured</em> — as machine-readable key–value data (usually JSON), not free-form prose. Compare these two lines recording the same event:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>Plain text:  2026-07-12 14:32:07 ERROR request for user 91 failed after 4200ms</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Structured:  {&quot;ts&quot;:&quot;2026-07-12T14:32:07Z&quot;,&quot;level&quot;:&quot;ERROR&quot;,&quot;event&quot;:&quot;request_failed&quot;,&quot;user_id&quot;:91,&quot;latency_ms&quot;:4200}</span></span></code></pre>
+<p>Both are readable by a human, but only the second is readable by a machine without fragile text-parsing. With structured logs you can ask “show me every ERROR with <code>latency_ms</code> over 3000” as a precise query; with plain text you are writing regular expressions and hoping the format never changes. Logs also carry a <strong>level</strong> — commonly DEBUG, INFO, WARN, ERROR, and FATAL — so you can record richly but filter to just the serious lines when a system is under stress.</p>
+<p><strong>Metrics</strong> are numeric measurements sampled over time, forming a <em>time-series</em>: a sequence of (timestamp, number) pairs you can chart and aggregate. There are three fundamental shapes, and knowing which to use is half the skill:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric type</th><th>What it measures</th><th>Only goes</th><th>Example</th><th>Typical question</th></tr></thead><tbody><tr><td>Counter</td><td>A running total of events</td><td>Up (resets to 0 on restart)</td><td>Total requests served</td><td>”How many requests per second?” (its rate)</td></tr><tr><td>Gauge</td><td>A value that can rise or fall</td><td>Up or down</td><td>Current memory in use; queue length</td><td>”How full is the queue right now?”</td></tr><tr><td>Histogram</td><td>The distribution of many measured values into buckets</td><td>Up (per bucket)</td><td>Request latencies</td><td>”What is the p95 latency?”</td></tr></tbody></table>
+<p>From a counter you compute a <strong>rate</strong> — the change per second — which is almost always more useful than the raw total; “40 requests per second” tells you more than “18,203,113 requests since Tuesday.” From a histogram you compute <strong>percentiles</strong>. The p95 latency is the value below which 95% of requests fall: if p95 is 800 milliseconds, then 95 of every 100 requests finished faster than that and 5 were slower. Percentiles matter because averages lie about tails — a service can have a 200-millisecond average while one user in twenty waits four seconds, and it is that unlucky twentieth user who complains and churns. The p95 and p99 are the numbers that describe real experience.</p>
+<p><strong>Traces</strong> follow one request end to end. Each unit of work — a database query, a call to another service, a computation — is recorded as a <strong>span</strong>, with a start time, a duration, and a name. Spans nest: the top-level span for the whole request contains child spans for each step, and each of those may contain its own children. Every span in one request shares a <strong>trace ID</strong>, which is how fragments logged on different machines are stitched back into a single timeline. When a request is slow, the trace shows you <em>which span</em> ate the time — the database, the external API, your own code — instead of leaving you to guess. This is the pillar that only distributed systems truly need, and it is exactly the technique invented by Dapper.</p>
+<p><img src="/ai-roadmap-365/_astro/three-pillars.BSrvtFrO_1JMqKY.svg" alt="Diagram: the three pillars of observability — logs, metrics, and traces — feeding dashboards and alerts" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="460"></p>
+<p>Read the diagram left to right: your running services emit all three kinds of signal; a collector gathers them; and they flow into dashboards you watch and alerts that page you. The three pillars are complementary, not competing — you use metrics to notice <em>that</em> something is wrong, traces to find <em>where</em>, and logs to learn <em>why</em>.</p>
+<h3 id="dashboards-alerting-and-service-levels">Dashboards, alerting, and service levels</h3>
+<p>A <strong>dashboard</strong> is a screen of charts built from metrics, giving you the system’s vital signs at a glance: request rate, error rate, latency percentiles, resource use. Dashboards are for humans watching; <strong>alerts</strong> are for humans not watching. An alert is a rule — “page someone if the error rate exceeds 2% for five minutes” — that turns a metric crossing a threshold into a notification.</p>
+<p>The single most valuable rule of alerting is: <strong>alert on symptoms, not causes.</strong> Alert on what the user feels — high error rate, slow responses, orders not completing — rather than on internal conditions like high CPU that may or may not actually be hurting anyone. A busy server is fine if requests are still fast; paging an engineer at 3 a.m. because CPU hit 80% while everything worked perfectly is how teams learn to ignore their alerts. This connects to the practice of <strong>SLIs and SLOs</strong>. A Service Level Indicator (SLI) is a precise measurement of user experience — say, the percentage of requests that succeed in under 300 milliseconds. A Service Level Objective (SLO) is the target you commit to for that indicator — say, 99.9% over each 30-day window. SLOs give alerting a principled basis: you page when you are at risk of missing the objective that represents real user happiness, not when an arbitrary internal number twitches.</p>
+<h2 id="an-everyday-analogy">An everyday analogy</h2>
+<p>Picture the intensive care unit of a hospital. A patient in the ICU is a running system you must keep healthy without being able to see inside them directly, and the staff have exactly the three pillars.</p>
+<p>The <strong>vital-signs monitor</strong> beside the bed — the beeping screen tracing heart rate, blood pressure, and oxygen saturation second by second — is <strong>metrics</strong>: numbers sampled continuously over time, charted so a trend is obvious at a glance. The heart-rate line is a gauge; the running count of breaths is a counter; the spread of blood-pressure readings over the night is a distribution you could take percentiles of. The nurse does not read every individual heartbeat; she watches the shape of the lines.</p>
+<p>The <strong>patient’s chart</strong> — the timestamped notes each nurse and doctor writes (“14:32, administered 5mg, patient stable”) — is <strong>logs</strong>: discrete, timestamped events, a diary of what happened and when. When something goes wrong, you read the chart to reconstruct the story, which is exactly why a well-kept, consistently formatted chart (structured logs) beats a pile of illegible sticky notes (unstructured text).</p>
+<p>Following <strong>one patient’s journey</strong> through admission, the emergency room, imaging, surgery, and recovery — with the time spent in each department recorded — is a <strong>trace</strong>: one request moving through many services, each stop a span, so you can see that the four-hour ordeal was mostly two hours waiting for an imaging slot. The nurses’ station with its wall of monitors is the <strong>dashboard</strong>, and the alarm that beeps when oxygen drops below a threshold is an <strong>alert</strong> — and notice the hospital sets that alarm on the <em>symptom</em> (oxygen falling, which endangers the patient) rather than on some internal cause that might be harmless. Keep this ICU in mind and the whole field falls into place.</p>
+<h2 id="examples-in-practice">Examples in practice</h2>
+<p>Let us make metrics concrete by computing a percentile the way the tools do internally. Suppose ten requests finished with these latencies, in milliseconds:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>120, 95, 210, 180, 4200, 130, 160, 90, 175, 140</span></span></code></pre>
+<p>The <strong>average</strong> is (120 + 95 + 210 + 180 + 4200 + 130 + 160 + 90 + 175 + 140) ÷ 10 = 5500 ÷ 10 = <strong>550 ms</strong>, which sounds alarming — but it is a lie caused entirely by the single 4200 ms outlier. Nine of ten requests were faster than 210 ms. This is why we prefer percentiles. To find the <strong>p95</strong>, first sort the values:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>90, 95, 120, 130, 140, 160, 175, 180, 210, 4200</span></span>
+<span class="line"><span> 1   2    3    4    5    6    7    8    9    10</span></span></code></pre>
+<p>With the common “nearest-rank” method, the p95 is the value at rank ⌈0.95 × 10⌉ = ⌈9.5⌉ = rank 10, which is <strong>4200 ms</strong>, and the p50 (the median) is at rank ⌈0.50 × 10⌉ = 5, which is <strong>140 ms</strong>. Read together, they tell the true story: a typical request takes about 140 ms (p50), but the slowest 5% can take 4200 ms (p95). No single number could have told you both the normal case and the painful tail; that is the whole reason percentiles exist. In the lab you will compute exactly this over a larger set of latencies your own program emits.</p>
+<p>A trace makes the <em>inside</em> of one slow request visible in the same concrete way. The diagram below shows a single request drawn as a trace: one parent span for the whole request, and nested child spans for each step it took, each labelled with the time it consumed.</p>
+<p><img src="/ai-roadmap-365/_astro/trace-spans.XU01VEXw_1CHiN3.svg" alt="Flowchart: one request drawn as a trace of nested spans across services, with the time spent in each step" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="400"></p>
+<p>The child spans sit inside the parent on the timeline, and their durations account for the parent’s total — here the database query is clearly the step to investigate. This is precisely the picture the lab reconstructs from plain log lines at the end of the exercise.</p>
+<p>Now a real-world sketch of the three pillars working together during an incident. Users report the site feels slow. You glance at the <strong>dashboard</strong> and see the p95 latency metric has climbed from 200 ms to 3 seconds while the error rate is still near zero — so requests are succeeding but crawling. That is metrics telling you <em>that</em> something is wrong. You open a <strong>trace</strong> of one slow request and see that of its 3 seconds, 2.8 were spent inside a single database-query span — so now you know <em>where</em>. You filter the structured <strong>logs</strong> to that query and find every slow one carries <code>&quot;missing_index&quot;: true</code> — so now you know <em>why</em>. Metrics, then traces, then logs: notice, locate, explain. Without the instrumentation, all three of those steps would have been guesswork.</p>
+<h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
+<p><strong>Security.</strong> Logs are a security asset and a security liability at once. They are your audit trail — who did what, when — and often the only record of an intrusion. But logs are also where secrets leak: a careless line that records a full request may capture a password, an API key, or a session token in plain text, and that log may then be shipped to a third-party service and retained for a year. The rule is absolute: never log credentials, tokens, or full request bodies without scrubbing. Treat your logs as sensitive data, because they are.</p>
+<p><strong>Privacy.</strong> Because logs and traces record real user activity, they routinely contain personal data — email addresses, IP addresses, identifiers, sometimes message content. That brings them under privacy regulations and data-retention rules. Responsible instrumentation means logging identifiers rather than raw personal data where possible, setting retention limits, and being able to delete a user’s records on request. Observability that quietly builds a permanent dossier on every user is a liability, not an asset.</p>
+<p><strong>Performance.</strong> Instrumentation is not free at runtime: writing a log line, incrementing a counter, and starting a span all cost a little time and memory. Usually this overhead is negligible and worth it many times over, but in a hot loop that runs a million times a second, logging every iteration can dominate the work itself. The craft is to instrument at the right granularity — per request, not per byte.</p>
+<p><strong>Scalability.</strong> A single busy service can produce gigabytes of logs an hour, and a fleet of them can overwhelm any storage you throw at it. This is why high-volume systems <strong>sample</strong>: they keep, say, one trace in a hundred rather than all of them, trading completeness for affordability while still preserving the statistical shape. Metrics scale far better than logs here, because a metric summarizes a million events into a few numbers rather than a million lines — which is why the first thing to reach for at scale is usually a metric, not a log.</p>
+<p><strong>Cost.</strong> All of the above meet in the invoice. Ingesting, indexing, and retaining telemetry is one of the larger line items in many production budgets, and it is entirely possible to spend more observing a system than running it. Good teams treat their telemetry bill as a first-class engineering concern: they sample aggressively, set sane retention, prefer cheap metrics over expensive logs for high-volume signals, and periodically delete dashboards and alerts no one reads.</p>
+<h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
+<p>The good news for anyone starting out is that a complete, production-grade observability stack can be assembled entirely from free, open-source parts. Here are the leading tools, what each is for, and when to reach for it.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool</th><th>Pillar</th><th>What it does and when to use it</th><th>Cost</th></tr></thead><tbody><tr><td>Structured logging (JSON)</td><td>Logs</td><td>Not a product but a practice: have every service emit logs as JSON key–value lines. Do this from day one; it costs nothing and makes every later tool more useful.</td><td>Free (built into every language)</td></tr><tr><td>Prometheus</td><td>Metrics</td><td>Pulls numeric time-series from your services and stores them; query with its PromQL language. Reach for it when you need to chart rates, gauges, and percentiles.</td><td>Free, open source</td></tr><tr><td>Grafana</td><td>Dashboards</td><td>Turns metrics (from Prometheus and many other sources) into shared dashboards and drives alerting. Use it when humans need to watch the numbers.</td><td>Free, open source (paid hosted tiers exist)</td></tr><tr><td>OpenTelemetry</td><td>Traces and all signals</td><td>The vendor-neutral standard and libraries for emitting logs, metrics, and traces the same way everywhere. Instrument with it so you are never locked to one vendor.</td><td>Free, open source</td></tr><tr><td>ELK stack (Elasticsearch, Logstash, Kibana)</td><td>Logs</td><td>Collects, indexes, and searches large volumes of logs with a powerful query UI. Choose it when you need deep, fast search over structured logs.</td><td>Free, open source (paid hosted tiers exist)</td></tr><tr><td>Grafana Loki</td><td>Logs</td><td>A lighter, cheaper log store that indexes only labels rather than full text, pairing naturally with Grafana and Prometheus. Choose it when log-storage cost is the constraint.</td><td>Free, open source</td></tr></tbody></table>
+<p>Commercial platforms — the hosted, all-in-one services — bundle these capabilities with polished interfaces, managed storage, and support, and they save you from operating the plumbing yourself. Their trade-off is cost that scales with data volume, which is exactly the bill discussed above. A sensible path is to learn and prototype on the free stack, understand what each signal costs you, and only then decide whether a paid platform’s convenience is worth its price for your scale.</p>
+<h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>Monitoring</td><td>Observability</td><td>Monitoring watches predefined questions (“is CPU over 90%?”); observability lets you ask new questions after the fact (“why were requests from region X slow last Tuesday?”)</td></tr><tr><td>Logs</td><td>Metrics</td><td>A log is one detailed event; a metric is many events summarized into a number over time — logs explain, metrics quantify</td></tr><tr><td>Metrics</td><td>Traces</td><td>Metrics aggregate across all requests; a trace follows one request in detail across services</td></tr><tr><td>Average</td><td>Percentile (p95/p99)</td><td>An average is pulled around by outliers and hides the tail; a percentile describes what a given fraction of users actually experience</td></tr><tr><td>Dashboard</td><td>Alert</td><td>A dashboard is for a human actively looking; an alert notifies a human who is not looking</td></tr><tr><td>SLI</td><td>SLO</td><td>An SLI is the measurement of user experience; an SLO is the target you commit that measurement to meet</td></tr></tbody></table>
+<p>The pairing to hold onto is <em>monitoring versus observability</em>. Monitoring is asking questions you wrote down in advance and watching their answers — necessary, but limited to failures you predicted. Observability is the richer property that, because you emit enough well-structured signal, you can investigate failures you never imagined when you wrote the code. Every unfamiliar outage is a question you did not think to ask in advance, which is precisely why the distinction is the heart of the field.</p>
+<h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
+<p>Instrument for observability whenever a system runs unattended and its failures cost something — which is essentially every production service. The moment code leaves your laptop and starts serving real users, “add a print statement and rerun it” stops working, and pre-recorded signals become the only way to understand it. Reach hardest for observability when systems are distributed (traces become indispensable), when failures are rare and intermittent (you cannot reproduce them, so you must have already recorded them), and when cost or latency is user-visible (you must measure to manage them).</p>
+<p>Know equally when restraint is wise. A throwaway script you run once by hand needs no telemetry pipeline; a <code>print</code> is fine. Do not instrument every line — signal at the granularity of meaningful units of work, not every variable assignment, or you drown the real signal and inflate the bill. And resist the urge to build dashboards and alerts you will never look at: an alert no one trusts is worse than no alert, because it trains everyone to ignore the screen. The professional stance is to instrument deliberately — enough to answer the questions that will actually arise, structured well enough to answer new ones, and no more than you will pay for and read.</p>
+<p>The bridge to your AI work is direct, and you will cross it many times later in this course. AI systems must be observable for reasons ordinary software can ignore, because they fail in ways ordinary software does not: they are slow in bursts, they cost real money per request, and they can be confidently wrong without any error at all. So the signals you will track on an AI feature are the same three pillars wearing new labels — <strong>latency</strong> (how long each model call took, watched at p95 not average), <strong>cost</strong> (tokens consumed per request, a counter you turn into a running bill), <strong>error and retry rates</strong> (a metric on failed or refused calls), and <strong>quality</strong> (a measurement of whether the output was actually good, the AI equivalent of an SLI). And when an AI application chains several steps — retrieve some documents, call a model, call it again, use a tool — following that single request through its steps, timing each one, is not a new idea you will have to learn from scratch: it is exactly distributed tracing, spans and all, which you built the intuition for today. When you later instrument an AI pipeline, you will be applying this lesson, not a new one.</p>
+<h2 id="knowledge-check">Knowledge check</h2>
+<p>Try these from memory before looking back:</p>
+<ol>
+<li>Name the three pillars of observability and, in one sentence each, say what kind of signal each provides and the question it best answers.</li>
+<li>A colleague says their service is healthy because its average response time is 200 ms. Explain why the p95 might tell a very different story, and why you would trust the p95 more.</li>
+<li>Give the difference between a counter, a gauge, and a histogram, with one example metric of each.</li>
+<li>Explain the difference between monitoring and observability, and why an unfamiliar production incident tends to require the latter.</li>
+<li>State the rule “alert on symptoms, not causes” and give one example of a good symptom-based alert and one bad cause-based alert.</li>
+</ol>
+<h2 id="hands-on-exercise">Hands-on exercise</h2>
+<p>Time to build the three pillars with your own hands, from nothing but plain log lines. In the Day 40 lab you will run a small shell program that behaves like a tiny web service: it does some work, emits <strong>structured JSON logs</strong> (each with a timestamp, a level, an event name, and a <code>latency_ms</code> field, including deliberate ERROR lines), and then you derive <strong>metrics</strong> from those logs — total requests, the error rate, and the p95 latency computed as a real percentile — print them as a tiny text <strong>dashboard</strong>, and finally emit and reconstruct a <strong>trace</strong> of nested spans for one request. Everything comes from plain logs, so you can see there is no magic in any of the pillars.</p>
+<p>Open a terminal in the lab directory and run the finished reference first to see the whole pipeline:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">bash</span><span style="color:#9ECBFF"> examples/observe.sh</span></span></code></pre>
+<p>This writes a structured log file, computes the metrics, prints the dashboard, and shows a reconstructed trace. Then open <code>starter/observe.sh</code> and complete its four numbered exercises — emit a structured log line, count the errors, compute the error rate, and compute the p95 latency — and run it the same way. When your version prints a dashboard with a plausible error rate and a numeric p95, check your work with the tests.</p>
+<h3 id="expected-output">Expected output</h3>
+<p>A typical run of the reference prints something like this (your exact numbers vary because the workload is randomized, but the shape is fixed):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>=== Observability Dashboard ===</span></span>
+<span class="line"><span>Total requests:   50</span></span>
+<span class="line"><span>Errors:           6</span></span>
+<span class="line"><span>Error rate:       12.00%</span></span>
+<span class="line"><span>p95 latency (ms): 812</span></span>
+<span class="line"><span>p50 latency (ms): 168</span></span>
+<span class="line"><span>=== Trace: request abc123 ===</span></span>
+<span class="line"><span>  span total_request        812 ms</span></span>
+<span class="line"><span>    span validate_input      12 ms</span></span>
+<span class="line"><span>    span db_query           540 ms</span></span>
+<span class="line"><span>    span call_service       248 ms</span></span>
+<span class="line"><span>=== End of dashboard ===</span></span></code></pre>
+<p>Read it top to bottom: the first block is metrics derived from the logs — a counter (total requests), an error count and the error rate computed from it, and two percentiles from the latency histogram. The second block is a trace: the total request span and its three nested child spans, whose durations add up to the parent, so you can see the <code>db_query</code> span dominated this request’s time.</p>
+<h3 id="validate-your-work">Validate your work</h3>
+<p>You are done when you can check every box:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> Your program wrote a log file whose lines are valid JSON, each with <code>ts</code>, <code>level</code>, <code>event</code>, and <code>latency_ms</code>.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> The dashboard prints a total request count matching the number of log lines for requests.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> The error count equals the number of <code>&quot;level&quot;:&quot;ERROR&quot;</code> lines, and the error rate is that count divided by the total, as a percentage.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> The p95 latency prints as a single number that is at or above the p50.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> The trace shows nested spans whose child durations are consistent with the parent total.</li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><strong><code>python3: command not found</code>.</strong> The percentile step uses <code>python3</code>, which ships with macOS and nearly every Linux distribution; if it is missing, install it from your package manager (for example <code>sudo apt install python3</code> on Debian/Ubuntu).</li>
+<li><strong>The p95 looks wrong or is empty.</strong> You are probably feeding it the whole log line instead of just the numeric <code>latency_ms</code> value — extract the number first (the starter shows the <code>grep</code>/<code>sed</code> step) and make sure you sorted numerically, not as text.</li>
+<li><strong>The error rate is always 0.</strong> Your error count is matching nothing; confirm you are searching for the exact string <code>&quot;level&quot;:&quot;ERROR&quot;</code> as it appears in the log file, quotes included.</li>
+<li><strong><code>Permission denied</code>.</strong> Run the script through bash explicitly — <code>bash starter/observe.sh</code> — rather than executing the file directly.</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<ul>
+<li><strong>Averaging instead of taking a percentile.</strong> The mean latency is dominated by a few slow requests and hides the tail; always report p95/p99 alongside (or instead of) the average, exactly as the worked example showed.</li>
+<li><strong>Parsing unstructured logs.</strong> If your log lines are prose, you end up writing brittle regular expressions; emit JSON from the start so every field is addressable.</li>
+<li><strong>Counting the total wrong.</strong> Make sure your “total requests” counts request-completion lines only, not every line in the file (span lines and the header are not requests).</li>
+</ul>
+<h2 id="practice-assignment">Practice assignment</h2>
+<p>Open <code>starter/observability-worksheet.md</code> in the lab and fill it in from a real run of your completed script. Record your total requests, your error rate, and your p95 latency, and then write the one thing a dashboard should <strong>alert</strong> on for this service and why — phrased as a symptom the user would feel, not an internal cause, with a concrete threshold (for example, “page if the error rate stays above 5% for five minutes, because that means one user in twenty is seeing failures”). Then, in three or four sentences, explain which of the three pillars you would consult first if this service suddenly felt slow, and what each pillar would tell you next. Keep the worksheet; it is the template you will reuse when you instrument a real service later.</p>
+<h2 id="extension-challenge">Extension challenge</h2>
+<p>Extend the pipeline one step further into real observability practice. First, add the <strong>p99</strong> latency to your dashboard alongside the p95, and note in the worksheet how far apart they are — a large gap between p95 and p99 means a small number of requests are dramatically slower than the rest, which is often the most important thing to investigate. Second, add a new structured field to each log line — a fake <code>region</code> such as <code>&quot;us&quot;</code> or <code>&quot;eu&quot;</code> — and then compute the error rate <em>per region</em>, so you can answer a question you did not build the dashboard to answer in advance (“are errors concentrated in one region?”). That last step is the essence of observability rather than mere monitoring: because your logs were structured, you could slice them a new way after the fact, without changing the running program at all. Write two or three sentences on how this differs from a fixed dashboard, and why structured logging is what made it possible.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. What are the three pillars of observability? </strong> </p> <ol type="A"> <li>Firewalls, backups, and load balancers</li><li>Logs, metrics, and traces</li><li>Testing, staging, and production</li><li>CPU, memory, and disk</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Logs, metrics, and traces </p> <p>The three pillars are logs (timestamped events), metrics (numbers over time), and traces (one request followed across services). Together they let you notice, locate, and explain a problem.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. Why is structured (JSON) logging generally preferred over plain-text logging? </strong> </p> <ol type="A"> <li>It uses less disk space than plain text in every case</li><li>It is the only format that operating systems can write</li><li>Its fields are machine-readable, so you can query them precisely instead of writing fragile text-parsing rules</li><li>It hides sensitive data automatically</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Its fields are machine-readable, so you can query them precisely instead of writing fragile text-parsing rules </p> <p>Structured logs record events as machine-readable key-value data, so you can ask precise questions like &quot;every ERROR with latency_ms over 3000&quot; without brittle regular expressions over free-form text.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. Which metric type is best suited to measuring a value that can rise and fall, such as the current length of a queue? </strong> </p> <ol type="A"> <li>A counter</li><li>A gauge</li><li>A histogram</li><li>A trace</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> A gauge </p> <p>A gauge measures a value that can go up or down at any moment, such as current memory in use or queue length. A counter only ever increases, and a histogram records the distribution of many measured values.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. A service has an average response time of 550 ms, but its p50 is 140 ms and its p95 is 4200 ms. What does this most likely indicate? </strong> </p> <ol type="A"> <li>The average is the most trustworthy number to report</li><li>Every request is consistently slow at around 550 ms</li><li>A typical request is fast (140 ms), but a small tail of requests is very slow, and that tail is pulling the average up</li><li>The percentiles were computed incorrectly</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> A typical request is fast (140 ms), but a small tail of requests is very slow, and that tail is pulling the average up </p> <p>The median (p50) of 140 ms shows typical requests are fast, while the p95 of 4200 ms reveals a slow tail. The average is dragged upward by those few outliers, which is exactly why percentiles describe real user experience better than an average.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. In distributed tracing, what is a span? </strong> </p> <ol type="A"> <li>The total number of servers a system runs on</li><li>A single unit of work within a request, with a start time, a duration, and a name, nested under a parent span</li><li>The gap in time between two separate requests</li><li>A log line that contains no timestamp</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> A single unit of work within a request, with a start time, a duration, and a name, nested under a parent span </p> <p>A span records one unit of work — a database query, a service call, a computation — with its start, duration, and name. Spans nest under a parent span and all share a trace ID, so one request can be reassembled across many machines.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. What is the key difference between monitoring and observability? </strong> </p> <ol type="A"> <li>Monitoring is free while observability always requires paid tools</li><li>Monitoring watches questions defined in advance; observability lets you ask new questions after the fact from the signals already collected</li><li>Observability only applies to hardware, monitoring only to software</li><li>They are two names for exactly the same thing</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Monitoring watches questions defined in advance; observability lets you ask new questions after the fact from the signals already collected </p> <p>Monitoring answers predefined questions (&quot;is CPU over 90%?&quot;). Observability is the richer property that, because you emit enough well-structured signal, you can investigate failures you never anticipated when you wrote the code.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. What does the guidance &quot;alert on symptoms, not causes&quot; mean? </strong> </p> <ol type="A"> <li>Only send alerts about hardware failures</li><li>Alert on internal conditions like high CPU rather than on user-facing behavior</li><li>Alert on what the user actually feels — errors or slow responses — rather than on internal conditions that may be harmless</li><li>Never set up any alerts, because they are always noise</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Alert on what the user actually feels — errors or slow responses — rather than on internal conditions that may be harmless </p> <p>Good alerts fire on symptoms the user experiences, such as a high error rate or slow responses, not on internal causes like high CPU that may not be hurting anyone. Alerting on harmless causes trains teams to ignore their alerts.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. Why do high-volume systems often sample their traces, keeping only a fraction of them? </strong> </p> <ol type="A"> <li>Because traces are inaccurate unless sampled</li><li>Because storing and processing every trace can cost more than running the system itself, and a sample still preserves the overall statistical shape</li><li>Because sampling makes the system run faster for users</li><li>Because traces are illegal to store in full</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Because storing and processing every trace can cost more than running the system itself, and a sample still preserves the overall statistical shape </p> <p>Telemetry has a real cost to ingest, index, and retain. Keeping, say, one trace in a hundred trades completeness for affordability while still preserving the statistical picture — one of the central cost trade-offs in observability.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>observability</strong> </dt> <dd data-astro-cid-whrtx2kk>The extent to which you can understand what is happening inside a running system purely from the signals it emits, including questions you did not think to ask in advance.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>log</strong> </dt> <dd data-astro-cid-whrtx2kk>A timestamped record of a single event that happened in a system, such as a request completing or an error occurring — the diary of the system, one line per event.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>structured logging</strong> </dt> <dd data-astro-cid-whrtx2kk>The practice of emitting each log entry as machine-readable key-value data (usually JSON) rather than free-form prose, so its fields can be queried precisely.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>metric</strong> </dt> <dd data-astro-cid-whrtx2kk>A numeric measurement sampled over time, forming a time-series of (timestamp, value) pairs that can be charted and aggregated across many events.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>counter</strong> </dt> <dd data-astro-cid-whrtx2kk>A metric that only ever increases (resetting to zero on restart), such as the total number of requests served; its rate of change per second is usually what you chart.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>gauge</strong> </dt> <dd data-astro-cid-whrtx2kk>A metric that can rise and fall over time, such as current memory in use or the length of a queue right now.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>histogram</strong> </dt> <dd data-astro-cid-whrtx2kk>A metric that records the distribution of many measured values into buckets, such as request latencies, from which percentiles like the p95 are computed.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>percentile</strong> </dt> <dd data-astro-cid-whrtx2kk>A value below which a given fraction of measurements fall; the p95 latency is the value below which 95% of requests finished, describing the slow tail that averages hide.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>trace</strong> </dt> <dd data-astro-cid-whrtx2kk>A record of a single request as it travels through a system, reassembled from many spans that share one trace identifier, showing where the time was spent.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>span</strong> </dt> <dd data-astro-cid-whrtx2kk>One unit of work within a trace — a database query, a service call, a computation — with a start time, a duration, and a name, nested under a parent span.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>dashboard</strong> </dt> <dd data-astro-cid-whrtx2kk>A screen of charts built from metrics that shows a system&#39;s vital signs at a glance, such as request rate, error rate, and latency percentiles, for a human who is actively watching.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>alert</strong> </dt> <dd data-astro-cid-whrtx2kk>A rule that turns a metric crossing a threshold into a notification for a human who is not watching, best configured to fire on user-facing symptoms rather than internal causes.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>SLO</strong> </dt> <dd data-astro-cid-whrtx2kk>A Service Level Objective: a target you commit to for a measurement of user experience, such as 99.9% of requests succeeding in under 300 ms over a 30-day window, giving alerting a principled basis.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Observability_(software)" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Observability (software)</a> — Wikipedia (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://opentelemetry.io/docs/what-is-opentelemetry/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>What is OpenTelemetry?</a> — OpenTelemetry (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://sre.google/sre-book/monitoring-distributed-systems/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Monitoring Distributed Systems (Site Reliability Engineering)</a> — Google (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://prometheus.io/docs/introduction/overview/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Prometheus — Overview</a> — Prometheus (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Log_file" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Log file</a> — Wikipedia (accessed 2026-07-12) </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="40" data-astro-cid-whrtx2kk>
+Mark Day 40 as read
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+      surfaces for someone searching for one — it costs you a click and it is genuinely how people
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+★ Star on GitHub
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-039-data-storage-files-databases-object-storage" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 39</span> <span class="pn__title" data-astro-cid-oerjsknp>Data Storage: Files, Databases, Object Storage, and Caches</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-041-thinking-in-automation-scripts-hooks-and" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 41 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Thinking in Automation: Scripts, Hooks, and Pipelines</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+      // Progressive enhancement only: the theme falls back to dark and every
+      // .reveal element is visible by default (the hidden start state exists
+      // only inside a prefers-reduced-motion: no-preference query).
+      (() => {
+        const toggle = document.getElementById('theme');
+        if (toggle) {
+          toggle.addEventListener('click', () => {
+            const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+            document.documentElement.dataset.theme = next;
+            try {
+              localStorage.setItem('theme', next);
+            } catch {
+              /* private mode */
+            }
+          });
+        }
+
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const items = document.querySelectorAll('.reveal');
+        if (items.length && !reduced && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry, i) => {
+                if (!entry.isIntersecting) return;
+                entry.target.style.transitionDelay = `${Math.min(i * 50, 240)}ms`;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.06 },
+          );
+          items.forEach((el) => io.observe(el));
+        } else {
+          items.forEach((el) => el.classList.add('is-in'));
+        }
+      })();
+    </script> </body> </html>

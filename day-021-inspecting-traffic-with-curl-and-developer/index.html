@@ -1,0 +1,411 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 21: Inspecting Traffic with curl and Developer Tools · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to see any HTTP request and response on the wire — with curl and browser Developer Tools — and follow a systematic decision tree to diagnose exactly where a failed request went wrong."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-021-inspecting-traffic-with-curl-and-developer/"><meta property="og:title" content="Day 21: Inspecting Traffic with curl and Developer Tools · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to see any HTTP request and response on the wire — with curl and browser Developer Tools — and follow a systematic decision tree to diagnose exactly where a failed request went wrong."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-021-inspecting-traffic-with-curl-and-developer/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-021-inspecting-traffic-with-curl-and-developer.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 21: Inspecting Traffic with curl and Developer Tools · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 21: Inspecting Traffic with curl and Developer Tools · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to see any HTTP request and response on the wire — with curl and browser Developer Tools — and follow a systematic decision tree to diagnose exactly where a failed request went wrong."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-021-inspecting-traffic-with-curl-and-developer.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+      // Dark is the default regardless of OS preference - this is a dark-first
+      // design. A visitor who picks light with the toggle keeps it. Applied
+      // before first paint so there is no flash of the wrong theme.
+      (() => {
+        let t;
+        try {
+          t = localStorage.getItem('theme');
+        } catch {
+          t = null;
+        }
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+      })();
+    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+<style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
+.starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+365 Days of AI
+</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+Labs
+</a> </header> <main id="main">  <article data-day="21" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>How the Internet Works</span>  › 
+Day 21 </p> <h1 data-astro-cid-whrtx2kk>Day 21: Inspecting Traffic with curl and Developer Tools</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-021-inspecting-traffic-with-curl-and-developer.png" width="1200" height="630" alt="Day 21 of 365 — Inspecting Traffic with curl and Developer Tools" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to see any HTTP request and response on the wire — with curl and browser Developer Tools — and follow a systematic decision tree to diagnose exactly where a failed request went wrong.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>How the Internet Works</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-021-inspecting-traffic-with-curl-and-developer" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-021-inspecting-traffic-with-curl-and-developer</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
+cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-021-inspecting-traffic-with-curl-and-developer</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/ai-roadmap-365/labs/day-021-inspecting-traffic-with-curl-and-developer" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Use curl to inspect a full request and response with -v, and read the request (&gt;), response header (&lt;), and connection (*) lines</li><li data-astro-cid-whrtx2kk>Apply the essential curl flags — -I, -L, -H, -X, -d, -w, -o, -s, --resolve — each to reveal or control one named part of an HTTP exchange</li><li data-astro-cid-whrtx2kk>Read the Developer Tools Network tab: interpret the Status, Type, Size, Time, and Waterfall columns and drill into a single request&#39;s headers, payload, and timing</li><li data-astro-cid-whrtx2kk>Follow a redirect chain with -L and read status codes deliberately, distinguishing 2xx success from 4xx client errors and 5xx server errors</li><li data-astro-cid-whrtx2kk>Walk a systematic failed-request decision tree — DNS, connection, TLS, status, body — naming the tool that answers each gate</li><li data-astro-cid-whrtx2kk>Choose the right inspection tool for a task, comparing curl, HTTPie, Postman, Wireshark, and mitmproxy on when each earns its place</li><li data-astro-cid-whrtx2kk>Reproduce a failing API call outside your own code with curl to isolate whether the fault is yours or the server&#39;s</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Days 15-20: how a page loads, IP/DNS/routing, TCP/UDP/ports, HTTP methods, and HTTPS/TLS</li><li data-astro-cid-whrtx2kk>A terminal with curl (preinstalled on macOS and Linux) and any modern web browser</li><li data-astro-cid-whrtx2kk>Comfort running commands in a terminal (Days 8-14)</li></ul> <h2 id="why-this-matters">Why this matters</h2>
+<p>For a week you have followed a request across the internet: what happens when you load a page, then IP addresses and DNS and routing, then TCP and UDP and ports, then HTTP, then the TLS handshake that makes it HTTPS, and finally the browser turning bytes into pixels. All of that machinery is invisible while it works. The moment it stops working — a page that will not load, an API that answers with a cryptic number, a login that silently fails — you need to make it visible again. Today you learn to do exactly that: to see the request and the response on the wire, byte for byte, and to reason from what you see to what is broken.</p>
+<p>This is the difference between guessing and knowing. When you eventually call a hosted model endpoint from your own code and it answers <code>401 Unauthorized</code>, or <code>429 Too Many Requests</code>, or <code>500 Internal Server Error</code>, or returns text that your program cannot parse, you have two choices. You can stare at your source code and rearrange it hopefully, or you can reproduce the exact request outside your program, read the exact response, and fix the one thing that is actually wrong. The engineers who debug fastest reach for the second path every time, and the tool they reach for is almost always <code>curl</code>: one command that sends any request you can describe and shows you everything that comes back.</p>
+<p>The stakes are concrete. A misread status code sends you rewriting working code for an hour when the real problem was a missing header. A request you cannot reproduce outside your application is a bug you cannot isolate, which means a bug you cannot reliably fix. Time, in debugging, is mostly the time you spend not knowing where the problem is. The tools in this lesson collapse that time by letting you look. This is the practical capstone of the whole networking category: everything you learned about how a request travels, you will now learn to observe and diagnose.</p>
+<h2 id="the-idea-in-plain-language">The idea in plain language</h2>
+<p>Two families of tools let you inspect network traffic, and you will use both constantly.</p>
+<p>The first is <code>curl</code>, a command-line program that makes a single HTTP request and prints the result. You type a command, <code>curl</code> sends the request you described, and the response comes back to your terminal. Because you control every detail — the URL, the method, the headers, the body — and because you see every detail of what returns, <code>curl</code> is the most precise way to ask “what does the server actually do when I send exactly this?” There is no browser, no framework, and no application code in the way to hide or change anything.</p>
+<p>The second is your browser’s Developer Tools, and specifically its Network tab. A modern web page makes dozens or hundreds of requests — the HTML, then stylesheets, images, fonts, and a stream of background API calls. The Network tab records every one of them as it happens and lets you click any single request to see its method, its status, its headers, its timing, and its response body. Where <code>curl</code> is a scalpel for one request you compose by hand, the Network tab is a flight recorder for everything a real page actually did.</p>
+<p>Underneath both is a single skill: reading a request and its response as a structured object with named parts, and knowing which part to check when something is wrong. Was the hostname even found? Did the connection open? Did the encryption succeed? What status number came back? Was the body the shape you expected? A failed request is never just “broken”; it failed at one specific stage, and naming that stage is most of the fix. The tools show you the stages. This lesson teaches you to read them.</p>
+<h2 id="historical-background">Historical background</h2>
+<p><code>curl</code> began in 1996 as a small utility named <code>httpget</code>, written by the Swedish developer Daniel Stenberg, who wanted a command-line way to fetch currency-exchange rates for an internet relay chat bot. It was renamed <code>curl</code> — for “client for URLs” — in 1998, and it has been maintained continuously ever since, with Stenberg still its lead developer nearly three decades later. Under the hood sits <code>libcurl</code>, a reusable transfer library first released in 2000, which is now embedded in an astonishing range of software: cars, televisions, phones, printers, game consoles, and the runtimes of most programming languages. When some other program makes an HTTP request, there is a very good chance <code>libcurl</code> is doing the actual work. Few pieces of software are so widely deployed and so little noticed.</p>
+<p>Browser developer tools have a shorter, faster history. In the early 2000s, web developers debugged by inserting alerts and reloading endlessly. Firebug, a Firefox extension released in 2006 by Joe Hewitt, changed that by adding an inspector, a console, and a network monitor directly in the browser. Its ideas were so obviously right that every major browser built them in: Chrome shipped its Developer Tools with the browser’s first release in 2008, and today Chrome, Firefox, Safari, and Edge all ship a Network panel that descends directly from Firebug’s. The web platform standardized much of what these panels report, so the columns you will read — status, type, size, time — mean the same thing across browsers.</p>
+<p>The theme across both histories is that the web was built to be inspectable. HTTP is a text-based protocol whose messages a human can read; the browser is required to fetch resources over that protocol; and the tooling that grew up around it exposes those messages rather than hiding them. That openness is not an accident. It is why the network can be debugged at all, and it is why the same two tools have stayed useful across twenty-five years of change on the web.</p>
+<h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
+<p>Traffic inspection is the practice of observing the actual HTTP messages exchanged between a client and a server — the real request that left your machine and the real response that came back — instead of inferring them from application behavior. <code>curl</code> is a client that composes and sends one such message on demand and prints what returns. Developer Tools is an observer that records the messages a browser already sent and lets you replay and read them. Both answer the same question: not “what do I think happened?” but “what actually crossed the wire?”</p>
+<p>It is worth being clear about what these tools are not. They are not a fix; they are a light. <code>curl</code> does not repair a broken server, and the Network tab does not correct your code — they only let you see precisely enough to know what to change. They are also not a general packet sniffer: <code>curl</code> and Developer Tools work at the level of HTTP requests and responses, the layer you will spend nearly all your debugging time in, not at the level of individual TCP or IP packets. A separate class of tools, discussed later, drops down to the raw packets when you truly need to. And traffic inspection is not testing: a passing <code>curl</code> command tells you the server answered correctly once, from your machine, right now — not that it will for every input, every user, and every load. Inspection tells you what is; testing tells you what holds.</p>
+<h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
+<p>Every tool here exists to answer one recurring, expensive question: <em>when a request does not do what I expected, what exactly went wrong?</em> Without inspection you are reduced to symptoms — “the page is blank,” “the app shows an error,” “it works on my machine” — and symptoms rarely point at causes. A blank page might be a failed request, a wrong status, a valid response your code mishandled, or a resource blocked by the browser. Each has a different fix, and you cannot tell them apart from the symptom alone.</p>
+<p><code>curl</code> solves the reproduction problem. A bug you can only trigger by clicking through an entire application is slow to investigate and easy to misattribute. Reduce it to a single <code>curl</code> command and you have isolated it: the command either reproduces the failure or it does not, and either answer is progress. If <code>curl</code> succeeds where your program fails, the fault is in your program, not the server. If <code>curl</code> fails the same way, you can now vary one thing at a time — one header, one field, one URL — until the response changes, and the thing you changed is the cause. This is the core discipline of debugging: shrink the failing case until only the cause remains.</p>
+<p>Developer Tools solves the observation problem for real pages. Modern web applications are too complex to reason about from the outside; a single click may fire a dozen background requests, and any one of them can be the culprit. The Network tab makes that hidden conversation visible, in order, with timing, so you can find the one slow, failed, or malformed request among the many that succeeded. Together the two tools turn “it is broken” into “this request, at this stage, returned this — here is why,” which is the sentence every fix begins with.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>At its heart, inspecting traffic means composing a request from its named parts and reading a response by its named parts. Let us build up <code>curl</code> from the pieces, then look at how Developer Tools presents the same pieces for a whole page.</p>
+<h3 id="the-anatomy-of-a-curl-command">The anatomy of a curl command</h3>
+<p>Type <code>curl https://example.com</code> and, with no options, <code>curl</code> makes a GET request and prints the response body to your terminal. Everything else is controlled by flags that add to or reveal parts of the exchange. The single most important flag for debugging is <code>-v</code> (verbose), which prints the entire conversation: the lines beginning with <code>&gt;</code> are the request <code>curl</code> sent, the lines beginning with <code>&lt;</code> are the response headers the server returned, and lines beginning with <code>*</code> are <code>curl</code>’s own notes about resolving the host, opening the connection, and completing the TLS handshake. In one command you see all the networking layers from the past week laid out in order.</p>
+<p><img src="/ai-roadmap-365/_astro/curl-anatomy.Cno_l8Qt_Z20bsHT.svg" alt="Diagram: the anatomy of a curl command, each flag labelled with its job, and the request and response it produces" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="500"></p>
+<p>The other flags each control one named part of the exchange. The table below lists the ones you will use daily; the lesson’s lab exercises every one of them against a real server.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Flag</th><th>What it does</th><th>Why you reach for it</th></tr></thead><tbody><tr><td><code>-v</code></td><td>Verbose: prints the full request (<code>&gt;</code>), response headers (<code>&lt;</code>), and connection notes (<code>*</code>)</td><td>The default debugging view — see everything at once</td></tr><tr><td><code>-I</code></td><td>Fetch headers only (a HEAD request); prints the status line and response headers</td><td>Check status and headers without downloading the body</td></tr><tr><td><code>-L</code></td><td>Follow redirects to the final destination</td><td>A <code>301</code>/<code>302</code> is not the answer; <code>-L</code> chases it to the real one</td></tr><tr><td><code>-H</code></td><td>Set a request header, e.g. <code>-H &quot;Accept: application/json&quot;</code></td><td>Servers change their answer based on the headers you send</td></tr><tr><td><code>-X</code></td><td>Set the HTTP method, e.g. <code>-X POST</code> or <code>-X DELETE</code></td><td>Exercise methods a browser will not send for you</td></tr><tr><td><code>-d</code></td><td>Send a request body, e.g. <code>-d &#39;{&quot;q&quot;:&quot;hi&quot;}&#39;</code>; implies POST</td><td>Reproduce the exact payload your code sends</td></tr><tr><td><code>-w</code></td><td>Write out chosen variables after transfer, e.g. <code>-w &quot;%{http_code}&quot;</code></td><td>Extract just the status, or a full timing breakdown</td></tr><tr><td><code>-o</code> / <code>-s</code></td><td>Write the body to a file (<code>-o</code>) or silence the progress meter (<code>-s</code>)</td><td>Keep output clean when you only care about status or timing</td></tr><tr><td><code>--resolve</code></td><td>Force a hostname to a specific IP for this request</td><td>Test a new server before DNS points to it</td></tr></tbody></table>
+<p>Two more capabilities matter often. The <code>-w</code> flag reads timing variables that <code>curl</code> measures for every transfer: <code>time_namelookup</code> (DNS resolution), <code>time_connect</code> (TCP connection established), <code>time_appconnect</code> (TLS handshake complete), <code>time_starttransfer</code> (first byte of the response, often called time to first byte), and <code>time_total</code>. Printing these turns <code>curl</code> into a stopwatch that tells you <em>which stage</em> was slow, not merely that something was. And <code>curl</code> handles cookies with <code>-c</code> to save them to a file and <code>-b</code> to send them back, letting you reproduce a session that a plain request would not have.</p>
+<h3 id="reading-the-devtools-network-tab">Reading the DevTools Network tab</h3>
+<p>Open Developer Tools (in Chrome, press F12 or Command-Option-I on a Mac; the equivalents in Firefox, Safari, and Edge are nearly identical) and select the Network tab, then reload the page. Every request the page makes appears as a row, and the columns describe each one. The table below names the columns you will read most.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Column</th><th>What it tells you</th><th>What to watch for</th></tr></thead><tbody><tr><td>Name</td><td>The resource requested (file or endpoint)</td><td>Find the specific request you care about</td></tr><tr><td>Status</td><td>The HTTP status code returned</td><td>Red rows are <code>4xx</code>/<code>5xx</code> failures; look here first</td></tr><tr><td>Type</td><td>The kind of resource (document, script, fetch, image, font)</td><td>Filter to <code>Fetch/XHR</code> to see only API calls</td></tr><tr><td>Initiator</td><td>What caused the request (which script or page)</td><td>Trace a mystery request back to the code that fired it</td></tr><tr><td>Size</td><td>Bytes transferred, and whether it was served from cache</td><td>A surprisingly large or uncached download</td></tr><tr><td>Time</td><td>How long the request took end to end</td><td>The slow request in a slow page</td></tr><tr><td>Waterfall</td><td>A timeline bar showing each request’s timing phases</td><td>Where the time actually went across all requests</td></tr></tbody></table>
+<p>Click any row and a detail pane opens with sub-tabs: Headers shows the request and response headers and the status; Payload shows the request body you sent; Response (or Preview) shows the body that came back; and Timing breaks the single request into the same phases <code>curl -w</code> reports — DNS, connecting, TLS, waiting for the first byte, and downloading. The waterfall on the right assembles all of these into one picture of the page, so a long bar or a late-starting request jumps out. A filter box at the top narrows the list; typing a word matches by name, and the type buttons (<code>Fetch/XHR</code>, <code>JS</code>, <code>CSS</code>, <code>Img</code>) hide everything else so you can focus on, say, only the API calls your application made.</p>
+<h3 id="a-systematic-method-for-a-failed-request">A systematic method for a failed request</h3>
+<p><img src="/ai-roadmap-365/_astro/debug-decision-tree.DsDXzmNw_1aRjuH.svg" alt="Flowchart: a troubleshooting decision tree for a failed request, from DNS to connection to TLS to status code to body" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="620"></p>
+<p>The decision tree above turns “the request failed” into a short, ordered set of yes/no questions, each with a tool that answers it. Did the hostname resolve to an IP? If not, the problem is DNS — check the name for typos and confirm it resolves. Did the TCP connection open? If not, the server may be down, or a port or firewall is blocking you. Did the TLS handshake succeed? If not, the certificate is expired, untrusted, or mismatched. Did a response come back, and with what status? A <code>2xx</code> means success; a <code>4xx</code> means <em>you</em> sent something wrong (wrong URL, missing authentication, bad input); a <code>5xx</code> means the <em>server</em> failed handling an otherwise valid request. Only once you have a <code>2xx</code> do you ask the last question: is the body the shape you expected — valid, complete, parseable? Walking these gates in order means you never rewrite your request-sending code to fix a problem that was actually in DNS, and you never blame the server for a <code>4xx</code> that your own request caused.</p>
+<h2 id="an-everyday-analogy">An everyday analogy</h2>
+<p>Think of an HTTP request as a parcel you send through a courier, and the response as the delivery outcome that comes back. When a parcel goes missing, you do not tear apart your whole shipping operation at random; you check the tracking history stage by stage.</p>
+<p><code>curl -v</code> is that full tracking history printed for a single parcel: the <code>*</code> lines are the courier’s internal notes — <em>address looked up, sorting facility reached, security checkpoint cleared</em> — and the <code>&gt;</code> and <code>&lt;</code> lines are the shipping label you wrote and the delivery receipt that came back. The status code is the receipt’s outcome stamp: <code>200</code> is “delivered,” <code>404</code> is “no such address,” <code>401</code> is “recipient refused — no valid identification,” <code>429</code> is “too many parcels, come back later,” and <code>500</code> is “the depot caught fire while handling your perfectly valid parcel.” A redirect (<code>301</code>/<code>302</code>) is a “recipient has moved — forwarding to a new address” slip, and <code>curl -L</code> is you saying “follow the forwarding slips until the parcel actually arrives” rather than stopping at the first one.</p>
+<p>The Developer Tools Network tab, by contrast, is the dispatcher’s board for <em>every</em> parcel your operation sent today: hundreds of rows, each with its destination, its outcome stamp, its weight, and how long it took, with a timeline showing which went out when. When customers complain the whole shipment is late, you scan the board for the one red row or the one bar that stretches far past the others. And the decision tree is the dispatcher’s laminated checklist: address valid? facility reached? checkpoint cleared? receipt stamp? contents correct? You run it top to bottom, and the first “no” is where the parcel — and your investigation — stopped. The analogy holds all the way down because the web really was built like a postal system with named stages, which is exactly why it can be traced.</p>
+<h2 id="examples-in-practice">Examples in practice</h2>
+<p>Start with the most useful single command. Running <code>curl -v https://example.com</code> and reading the connection notes shows the networking week in one screen:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>* Host example.com:443 was resolved.</span></span>
+<span class="line"><span>* IPv4: 104.20.23.154, 172.66.147.243</span></span>
+<span class="line"><span>*   Trying 104.20.23.154:443...</span></span>
+<span class="line"><span>* Connected to example.com (104.20.23.154) port 443</span></span>
+<span class="line"><span>* ALPN: server accepted h2</span></span>
+<span class="line"><span>* SSL connection using TLSv1.3 / AEAD-CHACHA20-POLY1305-SHA256</span></span>
+<span class="line"><span>* Server certificate:</span></span>
+<span class="line"><span>*  subject: CN=example.com</span></span>
+<span class="line"><span>*  SSL certificate verify ok.</span></span>
+<span class="line"><span>&gt; GET / HTTP/2</span></span>
+<span class="line"><span>&gt; Host: example.com</span></span>
+<span class="line"><span>&gt; User-Agent: curl/8.7.1</span></span>
+<span class="line"><span>&gt; Accept: */*</span></span>
+<span class="line"><span>&gt;</span></span>
+<span class="line"><span>&lt; HTTP/2 200</span></span>
+<span class="line"><span>&lt; content-type: text/html</span></span></code></pre>
+<p>Read it as the decision tree in action: the host resolved (DNS is fine), the connection opened (TCP is fine), the certificate verified (TLS is fine), and the status is <code>200</code> (success). If any line had failed, that line would be exactly where to look.</p>
+<p>Next, follow a redirect. <code>curl -IL https://httpbin.org/redirect/1</code> requests headers only and follows the forwarding slip. You see two status blocks: first <code>HTTP/2 302</code> with a <code>location: /get</code> header, then <code>HTTP/2 200</code> after <code>curl</code> follows it to the real destination. Without <code>-L</code>, you would stop at the <code>302</code> and wrongly conclude the endpoint returned no data — a classic misread.</p>
+<p>Now confirm what you actually sent. The service at <code>https://httpbin.org/headers</code> echoes back the request headers it received, so <code>curl -H &quot;Accept: application/json&quot; https://httpbin.org/headers</code> returns:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>{</span></span>
+<span class="line"><span>  &quot;headers&quot;: {</span></span>
+<span class="line"><span>    &quot;Accept&quot;: &quot;application/json&quot;,</span></span>
+<span class="line"><span>    &quot;Host&quot;: &quot;httpbin.org&quot;,</span></span>
+<span class="line"><span>    &quot;User-Agent&quot;: &quot;curl/8.7.1&quot;</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>This is how you verify that a header you <em>think</em> you are sending is really going out — invaluable when an API behaves as if it never received your authentication or content-type header.</p>
+<p>Read status codes deliberately. <code>curl -o /dev/null -s -w &quot;%{http_code}\n&quot; https://httpbin.org/status/404</code> throws away the body, silences the progress meter, and prints just <code>404</code> — a clean way to check a status in a script. Point it at <code>/status/500</code> and you will get a <code>5xx</code> code (httpbin’s error endpoints are themselves subject to gateway hiccups under load, so you may see <code>500</code>, <code>502</code>, <code>503</code>, or <code>504</code> — all of which tell the same story: the failure is the server’s, not your request’s).</p>
+<p>Finally, measure where time goes. A timing breakdown for a real site:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>curl -o /dev/null -s -w &quot;dns:%{time_namelookup} connect:%{time_connect} tls:%{time_appconnect} ttfb:%{time_starttransfer} total:%{time_total}\n&quot; https://example.com</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>dns:0.003577 connect:0.015769 tls:0.034880 ttfb:0.048609 total:0.048788</span></span></code></pre>
+<p>The numbers are seconds. DNS took under four milliseconds, the connection was open by sixteen milliseconds, TLS finished at thirty-five, and the first byte arrived at forty-nine — so nearly all the time here was the TLS handshake and the round trip to the server, not the download. When a request feels slow, this one line tells you which stage to blame.</p>
+<p>Here is the payoff you will feel most often. When you call a hosted model endpoint and your program reports a failure, reproduce it with <code>curl</code>: send the same URL, the same <code>-H</code> headers, and the same <code>-d</code> body, and read the status and response. A <code>401</code> means your credentials or authentication header are wrong or missing; a <code>429</code> means you are sending requests too fast and must slow down or back off; a <code>400</code> means your request body is malformed — often invalid JSON or a missing field, which the response body will usually name; and a <code>500</code> means the server erred on a request it accepted. Reading the exact code and the exact error message from <code>curl</code> — outside your application, with nothing in the way — is the fastest route from “my code does not work” to “here is the one thing to change.”</p>
+<h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
+<h3 id="security">Security</h3>
+<p>Traffic inspection is the primary way you confirm that security is actually working — that HTTPS negotiated a modern protocol, that a certificate verified, that an authentication header is present and a session cookie is set with sensible flags. But the same visibility cuts both ways. A verbose trace or a Network-tab export contains real secrets: authentication tokens, cookies, and personal data all appear in plain text once you can read the request. Treat that output as sensitive. Never paste a raw <code>-v</code> dump or a saved network log into a public forum, issue tracker, or chat without first redacting the <code>Authorization</code> header, cookies, and anything that identifies a person. The tools that let you see the traffic let everyone you share the output with see it too.</p>
+<h3 id="privacy">Privacy</h3>
+<p>Because inspection reveals every field that crosses the wire, it also reveals how much a page discloses about its user — third-party requests, tracking identifiers in query strings, and cookies sent to domains other than the one you visited. Learning to read the Network tab is, incidentally, learning to audit what a site tells others about you. For your own work, the discipline is to send only what a request needs and to keep captured traffic — which may contain user data — out of logs and screenshots that outlive their usefulness.</p>
+<h3 id="performance">Performance</h3>
+<p>Every timing breakdown in this lesson is a performance measurement. <code>curl -w</code> and the DevTools waterfall answer the first question of any slow experience — <em>where does the time actually go?</em> — with data instead of a guess. The stages you measured (DNS, connect, TLS, first byte, download) are exactly the levers you can pull: a slow DNS points at resolver configuration, a slow first byte points at the server or the network path, and a large download points at an unoptimized or uncached resource. Measuring before optimizing is the whole game, and these tools are how you measure.</p>
+<h3 id="scalability">Scalability</h3>
+<p>A single <code>curl</code> command inspects one request, but the same command scripted in a loop becomes a crude load probe, and the <code>-w</code> variables become a stream of measurements you can average. This is not a substitute for real load-testing tools, but it scales your understanding: the same request you debugged by hand can be fired a thousand times to see whether latency holds or the error rate climbs. The Network tab, meanwhile, scales your view of a single complex page, showing how request count and total transfer size grow as an application does — the raw ingredients of how well it will scale to more content and more users.</p>
+<h3 id="cost">Cost</h3>
+<p>Many services, including hosted model endpoints, bill per request or per unit of data. Being able to see exactly which requests fire, how large they are, and how often they repeat is direct cost control: a runaway retry loop or a request fetching far more data than it needs is money leaking, and the Network tab makes the leak visible. Debugging with <code>curl</code> against free public test endpoints, rather than against a metered production service, also keeps the cost of learning at zero — which is exactly what this lesson’s lab does.</p>
+<h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
+<p><code>curl</code> and browser Developer Tools will cover the vast majority of your inspection needs, but it is worth knowing the neighbouring tools and when each earns its place.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool</th><th>Type</th><th>Best for</th><th>Cost</th></tr></thead><tbody><tr><td><code>curl</code></td><td>Free, open source</td><td>Scripting and reproducing any single request precisely</td><td>Free</td></tr><tr><td>Browser Developer Tools</td><td>Free, built in</td><td>Observing everything a real page does, with timing</td><td>Free</td></tr><tr><td>HTTPie</td><td>Free, open source</td><td>The same job as <code>curl</code> with friendlier syntax and colour</td><td>Free</td></tr><tr><td>Postman</td><td>Freemium (commercial)</td><td>Organizing, saving, and sharing many requests in a team</td><td>Free tier; paid plans</td></tr><tr><td>Wireshark</td><td>Free, open source</td><td>Inspecting raw packets below the HTTP layer</td><td>Free</td></tr><tr><td>mitmproxy</td><td>Free, open source</td><td>Watching all traffic from an app or phone as a proxy</td><td>Free</td></tr></tbody></table>
+<p><strong>HTTPie</strong> is a command-line HTTP client built for humans: <code>http GET httpbin.org/headers Accept:application/json</code> does what the earlier <code>curl</code> command did, with coloured, formatted output and a syntax that reads like the request itself. Choose it when you want readable ad-hoc requests at the terminal; choose <code>curl</code> when you want a command that is installed everywhere and scripts cleanly. <strong>Postman</strong> is a graphical application for building and saving requests into shareable collections, with environments for switching between servers; reach for it when you are exploring a large API as a team and want to keep a library of example requests, rather than retyping <code>curl</code> commands. Its trade-off is weight and a login where <code>curl</code> is instant and local.</p>
+<p><strong>Wireshark</strong> works a full layer below everything else here: it captures raw network packets, so it can show the individual TCP segments and the DNS queries themselves, not just the assembled HTTP messages. You reach for it rarely — when you suspect the problem is beneath HTTP, in the connection or the packets — and it is overkill for ordinary request debugging. <strong>mitmproxy</strong> sits between an application and the internet as a proxy and records every request that passes through, which makes it the tool of choice for seeing what a mobile app or a program you did not write is actually sending. Both are powerful and free; both are more than you need for the day-to-day work of reading a request and its response, which <code>curl</code> and Developer Tools handle completely.</p>
+<h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td><code>curl</code></td><td>Developer Tools Network tab</td><td><code>curl</code> composes one request you control; the Network tab records every request a real page made</td></tr><tr><td><code>curl</code></td><td>HTTPie</td><td>Same purpose; <code>curl</code> is ubiquitous and script-friendly, HTTPie is friendlier to read and type</td></tr><tr><td><code>curl</code> / DevTools</td><td>Wireshark</td><td>The former read assembled HTTP messages; Wireshark reads raw packets below HTTP</td></tr><tr><td>Traffic inspection</td><td>Automated testing</td><td>Inspection shows what happened once, now; testing asserts what must hold every time</td></tr><tr><td><code>4xx</code> status</td><td><code>5xx</code> status</td><td><code>4xx</code> means your request was wrong; <code>5xx</code> means the server failed a valid request</td></tr><tr><td><code>-I</code> (headers only)</td><td><code>-v</code> (verbose)</td><td><code>-I</code> shows just the response headers; <code>-v</code> shows the whole request and response conversation</td></tr></tbody></table>
+<h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
+<p>Reach for <code>curl</code> the instant a request fails in code you wrote: reproduce it outside your program to learn whether the fault is yours or the server’s, then vary one thing at a time until the response changes. Reach for it whenever you need to confirm exactly what you are sending or receiving — a header, a body, a status, a redirect chain — because <code>curl</code> shows the literal bytes with nothing in between. And reach for it in scripts, where <code>-w</code> and <code>-s</code> and <code>-o</code> let you extract a single value like the status code for an automated check.</p>
+<p>Reach for Developer Tools whenever the thing you are debugging is a real page in a real browser: a blank screen, a slow load, a form that will not submit, an image that will not appear. The Network tab shows you the one failed or slow request among the many, with the timing and headers to explain it, in the exact context the browser produced it. For anything a user experiences in a browser, it is the first place to look.</p>
+<p>Know when to leave these tools in the box. They inspect one request, or one page’s requests, at one moment — they are not a monitoring system that watches production continuously, not a load test that proves behavior under stress, and not a fix in themselves. When you need to know that something keeps working for everyone over time, you need monitoring and automated tests, not a manual <code>curl</code>. And when the problem is genuinely below HTTP — in the packets, the connection, or the network hardware — descend to Wireshark rather than squinting at a <code>curl</code> trace. The professional habit is to inspect first to locate the problem precisely, then choose the right tool for the fix.</p>
+<h2 id="knowledge-check">Knowledge check</h2>
+<p>Try these from memory before looking back:</p>
+<ol>
+<li>In the output of <code>curl -v</code>, what do the lines beginning with <code>&gt;</code>, <code>&lt;</code>, and <code>*</code> each represent?</li>
+<li>You request a URL and get back a <code>301</code>. What does <code>curl -L</code> do about it, and why would omitting it mislead you?</li>
+<li>Walk the failed-request decision tree in order, naming what has failed at each gate: DNS, connection, TLS, status, body.</li>
+<li>An API call from your code returns <code>429</code>. What does that status mean, and what is the appropriate response?</li>
+<li>What is the essential difference between what <code>curl</code> shows you and what the Developer Tools Network tab shows you?</li>
+</ol>
+<h2 id="hands-on-exercise">Hands-on exercise</h2>
+<p>Time to inspect real traffic. In this exercise — worked through in full in the Day 21 lab directory — you will use <code>curl</code> against two public test servers, <code>https://httpbin.org</code> (a service that echoes requests and returns any status you ask for) and <code>https://example.com</code>, to see each part of a request and response and to read status codes deliberately. <code>curl</code> is preinstalled on macOS and Linux, so open your terminal and run each command.</p>
+<p>First, see a full conversation, reading the connection notes as the networking stages:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -v</span><span style="color:#9ECBFF"> https://example.com</span></span></code></pre>
+<p>Next, follow a redirect to its real destination, printing headers only:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -IL</span><span style="color:#9ECBFF"> https://httpbin.org/redirect/1</span></span></code></pre>
+<p>Confirm exactly which headers you sent, using the echo endpoint:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -H</span><span style="color:#9ECBFF"> &quot;Accept: application/json&quot;</span><span style="color:#9ECBFF"> https://httpbin.org/headers</span></span></code></pre>
+<p>Read a status code cleanly, throwing away the body:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -o</span><span style="color:#9ECBFF"> /dev/null</span><span style="color:#79B8FF"> -s</span><span style="color:#79B8FF"> -w</span><span style="color:#9ECBFF"> &quot;HTTP %{http_code}\n&quot;</span><span style="color:#9ECBFF"> https://httpbin.org/status/404</span></span></code></pre>
+<p>Measure where the time goes on a real request:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -o</span><span style="color:#9ECBFF"> /dev/null</span><span style="color:#79B8FF"> -s</span><span style="color:#79B8FF"> -w</span><span style="color:#9ECBFF"> &quot;dns:%{time_namelookup} connect:%{time_connect} tls:%{time_appconnect} ttfb:%{time_starttransfer} total:%{time_total}\n&quot;</span><span style="color:#9ECBFF"> https://example.com</span></span></code></pre>
+<h3 id="expected-output">Expected output</h3>
+<p>The commands print, respectively: a full verbose trace whose <code>*</code> lines show the host resolving, the connection opening, and the certificate verifying, ending in <code>&lt; HTTP/2 200</code>; two status blocks for the redirect, a <code>302</code> with a <code>location</code> header followed by a <code>200</code>; a small JSON object echoing back the <code>Accept: application/json</code> header you sent; the single line <code>HTTP 404</code>; and a timing line such as <code>dns:0.003577 connect:0.015769 tls:0.034880 ttfb:0.048609 total:0.048788</code> (your numbers will differ). The lab’s <code>expected-output/</code> directory holds a real captured run of every command.</p>
+<h3 id="validate-your-work">Validate your work</h3>
+<p>You are done when you can check every box:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> You can point at the line in <code>curl -v</code> that shows the TLS certificate verifying.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You saw two status codes for the redirect and can explain why <code>-L</code> produced the second.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> The headers endpoint echoed back the <code>Accept</code> header you set with <code>-H</code>.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You read <code>HTTP 404</code> as the exact status of the deliberate not-found request.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can name which stage (DNS, connect, TLS, or transfer) took the most time in your timing line.</li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><strong><code>curl: (6) Could not resolve host</code>.</strong> DNS failed — usually a typo in the hostname or no internet connection. Check the URL and your connection; this is the first gate of the decision tree.</li>
+<li><strong>The redirect shows only one status block.</strong> You omitted <code>-L</code>. Add it so <code>curl</code> follows the <code>location</code> header to the final response.</li>
+<li><strong><code>/status/500</code> returns <code>502</code>, <code>503</code>, or <code>504</code> instead of <code>500</code>.</strong> That is httpbin’s own gateway responding under load. Any <code>5xx</code> makes the same teaching point: the failure is the server’s, not your request’s. Retry, or use <code>/status/404</code> for a deterministic code.</li>
+<li><strong>The timing numbers are all <code>0.000000</code>.</strong> You are likely offline or hitting a cached local resolver; confirm you have network access and are requesting a real remote URL.</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<ul>
+<li><strong>Stopping at a redirect.</strong> Reading a <code>301</code>/<code>302</code> as “the server returned nothing.” It returned a forwarding address; use <code>-L</code> to follow it.</li>
+<li><strong>Confusing <code>4xx</code> and <code>5xx</code>.</strong> A <code>4xx</code> means fix <em>your</em> request (URL, auth, body); a <code>5xx</code> means the server failed. Rewriting your request to fix a <code>5xx</code>, or blaming the server for a <code>4xx</code>, both waste time.</li>
+<li><strong>Forgetting <code>-o /dev/null</code> when you only want the status or timing.</strong> Without it, the whole body prints and buries the one line you care about.</li>
+</ul>
+<h2 id="practice-assignment">Practice assignment</h2>
+<p>Open the debugging worksheet in the starter directory of the Day 21 lab and complete it for real requests. Using <code>curl</code>, record three things: a full redirect chain you followed (the intermediate status and <code>location</code>, then the final status), the timing breakdown for a site of your choice with a sentence naming the slowest stage, and the status code that <code>https://httpbin.org/status/503</code> returns. Then write one short paragraph diagnosing a failure of your own invention — pick a status code (<code>401</code>, <code>404</code>, <code>429</code>, or <code>500</code>), state which gate of the decision tree it corresponds to, and describe the single next step you would take to fix it. Keep the worksheet; the reasoning it builds is the reasoning you will use every time a request misbehaves.</p>
+<h2 id="extension-challenge">Extension challenge</h2>
+<p>Go one step further and reproduce a small end-to-end exchange, then watch it two ways. First, send a POST with a JSON body and read it echoed back:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -X</span><span style="color:#9ECBFF"> POST</span><span style="color:#79B8FF"> -H</span><span style="color:#9ECBFF"> &quot;Content-Type: application/json&quot;</span><span style="color:#79B8FF"> -d</span><span style="color:#9ECBFF"> &#39;{&quot;day&quot;:21,&quot;topic&quot;:&quot;inspection&quot;}&#39;</span><span style="color:#9ECBFF"> https://httpbin.org/post</span></span></code></pre>
+<p>Read the response: httpbin returns an object whose <code>json</code> field contains exactly what you sent and whose <code>headers</code> field shows the <code>Content-Type</code> you set — proof that your method, header, and body all arrived as intended. Now open your browser’s Developer Tools, go to the Network tab, and load any web page; find a single <code>Fetch/XHR</code> request, click it, and locate the same parts you just controlled by hand — the request method, the headers, the response body, and the Timing sub-tab with its DNS, connect, TLS, and waiting phases. Seeing that the row in the Network tab and the <code>curl</code> command describe the <em>same</em> request from two angles is the moment the whole networking category clicks into place: the request you traced in theory across seven lessons is a concrete, inspectable object, and you now have the tools to see it. This capstone feeds directly into the category project, the Request Journey Map, where you will document a single real request from address lookup to rendered pixels using exactly these instruments.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. In the output of `curl -v`, what do lines beginning with `&gt;` represent? </strong> </p> <ol type="A"> <li>The response headers the server returned</li><li>The request headers curl sent to the server</li><li>curl&#39;s own notes about resolving and connecting</li><li>The body of the downloaded page</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> The request headers curl sent to the server </p> <p>In verbose output, `&gt;` marks the request curl sent, `&lt;` marks the response headers that came back, and `*` marks connection notes (DNS, TCP, TLS). Reading the three prefixes separately is the core skill of a verbose trace.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. You request a URL and get back a `302`. What does adding `-L` do? </strong> </p> <ol type="A"> <li>It prints the response body instead of only the headers</li><li>It retries the request until the server returns a 200</li><li>It follows the redirect in the location header to the final destination</li><li>It logs the request to a file for later inspection</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> It follows the redirect in the location header to the final destination </p> <p>A `301`/`302` is a forwarding address, not the final answer. `-L` tells curl to follow the `location` header to the real destination; without it you stop at the redirect and may wrongly conclude the endpoint returned nothing.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. An API call from your code returns `429 Too Many Requests`. What does it mean? </strong> </p> <ol type="A"> <li>The server crashed while handling your valid request</li><li>The URL does not exist on the server</li><li>Your credentials are missing or invalid</li><li>You are sending requests too fast and should slow down or back off</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> You are sending requests too fast and should slow down or back off </p> <p>`429` is a `4xx` client error meaning you have exceeded a rate limit. The fix is on your side: reduce request frequency or add a back-off delay, not rewrite the server or the endpoint.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. Which flag makes curl print only the response headers using a HEAD request? </strong> </p> <ol type="A"> <li>`-I`</li><li>`-d`</li><li>`-X`</li><li>`-o`</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> `-I` </p> <p>`-I` fetches headers only (a HEAD request) and prints the status line and response headers without downloading the body — useful for checking status and headers quickly.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. In the failed-request decision tree, what does a `5xx` status code tell you compared with a `4xx`? </strong> </p> <ol type="A"> <li>`5xx` means DNS failed; `4xx` means TLS failed</li><li>`5xx` means the server failed handling a valid request; `4xx` means your request was wrong</li><li>`5xx` is always a temporary problem; `4xx` is always permanent</li><li>They mean the same thing and can be treated identically</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> `5xx` means the server failed handling a valid request; `4xx` means your request was wrong </p> <p>A `4xx` means the client sent something wrong — bad URL, missing authentication, malformed body — so fix your request. A `5xx` means the server erred on a request it accepted. Blaming the wrong side wastes debugging time.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. Which curl option lets you print a custom value such as the status code after a transfer? </strong> </p> <ol type="A"> <li>`-s`</li><li>`-H`</li><li>`-w`</li><li>`-L`</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> `-w` </p> <p>`-w` (write-out) prints chosen variables after the transfer, such as `%{http_code}` for the status or timing variables like `%{time_total}`. Combined with `-o /dev/null` and `-s`, it extracts just the value you want.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. In the Developer Tools Network tab, which filter shows only the API calls a page made? </strong> </p> <ol type="A"> <li>The `Img` filter</li><li>The `CSS` filter</li><li>The `Doc` filter</li><li>The `Fetch/XHR` filter</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> The `Fetch/XHR` filter </p> <p>The `Fetch/XHR` type filter hides documents, scripts, styles, and images, leaving only the background data requests (the API calls) so you can focus on the request you are debugging.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. When would you reach for Wireshark instead of curl or the Network tab? </strong> </p> <ol type="A"> <li>When you want to save and share a collection of requests with a team</li><li>When you suspect the problem is below HTTP, in the raw packets or the connection itself</li><li>When you want friendlier, coloured output for an ad-hoc request</li><li>When you need to follow a redirect to its final destination</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> When you suspect the problem is below HTTP, in the raw packets or the connection itself </p> <p>Wireshark captures raw network packets, a full layer below the assembled HTTP messages that curl and the Network tab read. You reach for it in the rarer cases where the fault is beneath HTTP — in the TCP segments, the DNS queries, or the connection.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>curl</strong> </dt> <dd data-astro-cid-whrtx2kk>A command-line program that makes a single HTTP request you describe and prints the response, giving you precise control over and full visibility into one exchange.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>verbose mode</strong> </dt> <dd data-astro-cid-whrtx2kk>curl&#39;s `-v` option, which prints the entire conversation: the request sent (lines starting with &gt;), the response headers (lines starting with &lt;), and connection notes (lines starting with *).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>header</strong> </dt> <dd data-astro-cid-whrtx2kk>A named field of metadata attached to an HTTP request or response, such as Accept, Content-Type, or Authorization, that carries information alongside the body.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>redirect</strong> </dt> <dd data-astro-cid-whrtx2kk>A response (status 301 or 302) that points the client to a different URL via a location header rather than returning the content directly; `curl -L` follows it to the final destination.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>DevTools</strong> </dt> <dd data-astro-cid-whrtx2kk>A browser&#39;s built-in Developer Tools: a panel for inspecting a page&#39;s structure, console, performance, and network activity, opened with F12 or Command-Option-I.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Network tab</strong> </dt> <dd data-astro-cid-whrtx2kk>The Developer Tools panel that records every request a page makes, showing each one&#39;s status, type, size, timing, and full headers and body.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>waterfall</strong> </dt> <dd data-astro-cid-whrtx2kk>A timeline view in the Network tab where each request is a horizontal bar showing when it started and how long each phase took, making slow or late requests easy to spot.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>payload</strong> </dt> <dd data-astro-cid-whrtx2kk>The body of a request or response — the actual data being sent or returned — as distinct from the headers that describe it.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>User-Agent</strong> </dt> <dd data-astro-cid-whrtx2kk>A request header identifying the client software making the request; curl sends a value like `curl/8.7.1`, while a browser sends a long string naming itself and its version.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>httpie</strong> </dt> <dd data-astro-cid-whrtx2kk>A free, open-source command-line HTTP client, an alternative to curl designed for human readability with coloured, formatted output and a simpler syntax.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>proxy</strong> </dt> <dd data-astro-cid-whrtx2kk>An intermediary that sits between a client and a server and relays their traffic; a debugging proxy such as mitmproxy records every request that passes through it, revealing what an application is sending.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>status code</strong> </dt> <dd data-astro-cid-whrtx2kk>A three-digit number in an HTTP response signalling the outcome: 2xx success, 3xx redirection, 4xx a client (request) error, and 5xx a server error.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>time to first byte</strong> </dt> <dd data-astro-cid-whrtx2kk>The elapsed time from sending a request to receiving the first byte of the response, reported by curl as `time_starttransfer` and by the Network tab in a request&#39;s Timing sub-tab.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://curl.se/docs/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>curl Documentation</a> — curl / Daniel Stenberg (accessed 2026-07-12) — The official documentation for curl, including the manual page for every flag used in this lesson. </li><li data-astro-cid-whrtx2kk> <a href="https://everything.curl.dev/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Everything curl</a> — Daniel Stenberg (accessed 2026-07-12) — The book-length, freely available guide to curl and libcurl by its lead developer. </li><li data-astro-cid-whrtx2kk> <a href="https://developer.chrome.com/docs/devtools/network" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Inspect network activity — Chrome DevTools</a> — Google (accessed 2026-07-12) — Official reference for the Network tab: columns, filters, timing, and the waterfall. </li><li data-astro-cid-whrtx2kk> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>HTTP overview</a> — MDN Web Docs (accessed 2026-07-12) — Background on HTTP messages, methods, headers, and status codes. </li><li data-astro-cid-whrtx2kk> <a href="https://httpbin.org/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>httpbin — HTTP Request &amp; Response Service</a> — Kenneth Reitz (accessed 2026-07-12) — The public test service the lab uses to echo requests and return chosen status codes. </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="21" data-astro-cid-whrtx2kk>
+Mark Day 21 as read
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+      surfaces for someone searching for one — it costs you a click and it is genuinely how people
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+★ Star on GitHub
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-020-how-browsers-render-html-css-and" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 20</span> <span class="pn__title" data-astro-cid-oerjsknp>How Browsers Render: HTML, CSS, and JavaScript</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-022-what-an-api-is-and-why" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 22 →</span> <span class="pn__title" data-astro-cid-oerjsknp>What an API Is and Why Everything Has One</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+      // Progressive enhancement only: the theme falls back to dark and every
+      // .reveal element is visible by default (the hidden start state exists
+      // only inside a prefers-reduced-motion: no-preference query).
+      (() => {
+        const toggle = document.getElementById('theme');
+        if (toggle) {
+          toggle.addEventListener('click', () => {
+            const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+            document.documentElement.dataset.theme = next;
+            try {
+              localStorage.setItem('theme', next);
+            } catch {
+              /* private mode */
+            }
+          });
+        }
+
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const items = document.querySelectorAll('.reveal');
+        if (items.length && !reduced && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry, i) => {
+                if (!entry.isIntersecting) return;
+                entry.target.style.transitionDelay = `${Math.min(i * 50, 240)}ms`;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.06 },
+          );
+          items.forEach((el) => io.observe(el));
+        } else {
+          items.forEach((el) => el.classList.add('is-in'));
+        }
+      })();
+    </script> </body> </html>

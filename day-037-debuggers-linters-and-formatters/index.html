@@ -1,0 +1,433 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 37: Debuggers, Linters, and Formatters · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to explain what debuggers, linters, and formatters each do, choose the right one for a given problem, and run a real quality pipeline — syntax check, lint, and format check — over a broken script."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-037-debuggers-linters-and-formatters/"><meta property="og:title" content="Day 37: Debuggers, Linters, and Formatters · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to explain what debuggers, linters, and formatters each do, choose the right one for a given problem, and run a real quality pipeline — syntax check, lint, and format check — over a broken script."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-037-debuggers-linters-and-formatters/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-037-debuggers-linters-and-formatters.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 37: Debuggers, Linters, and Formatters · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 37: Debuggers, Linters, and Formatters · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to explain what debuggers, linters, and formatters each do, choose the right one for a given problem, and run a real quality pipeline — syntax check, lint, and format check — over a broken script."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-037-debuggers-linters-and-formatters.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+      // Dark is the default regardless of OS preference - this is a dark-first
+      // design. A visitor who picks light with the toggle keeps it. Applied
+      // before first paint so there is no flash of the wrong theme.
+      (() => {
+        let t;
+        try {
+          t = localStorage.getItem('theme');
+        } catch {
+          t = null;
+        }
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+      })();
+    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+<style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
+.starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+365 Days of AI
+</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+Labs
+</a> </header> <main id="main">  <article data-day="37" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>Systems Foundations: Storage, Observability, and Tooling</span>  › 
+Day 37 </p> <h1 data-astro-cid-whrtx2kk>Day 37: Debuggers, Linters, and Formatters</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-037-debuggers-linters-and-formatters.png" width="1200" height="630" alt="Day 37 of 365 — Debuggers, Linters, and Formatters" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to explain what debuggers, linters, and formatters each do, choose the right one for a given problem, and run a real quality pipeline — syntax check, lint, and format check — over a broken script.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Systems Foundations: Storage, Observability, and Tooling</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-037-debuggers-linters-and-formatters" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-037-debuggers-linters-and-formatters</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
+cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-037-debuggers-linters-and-formatters</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/ai-roadmap-365/labs/day-037-debuggers-linters-and-formatters" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Explain the distinct job of a formatter, a linter, and a type checker, and state which one changes your code&#39;s layout</li><li data-astro-cid-whrtx2kk>Describe the core debugger controls — breakpoints, stepping (over, into, out), inspecting state, watch expressions, and the call stack — and what each reveals</li><li data-astro-cid-whrtx2kk>Decide when to reach for a debugger versus logging, based on whether a bug is reproducible and where it occurs</li><li data-astro-cid-whrtx2kk>Understand static analysis: how a linter catches bugs and bad patterns without running the code, and why passing lint is not the same as being correct</li><li data-astro-cid-whrtx2kk>Name the leading free tools for shell, JavaScript, and Python (ShellCheck, ESLint, Prettier, Ruff, Black, flake8) and say when to use each</li><li data-astro-cid-whrtx2kk>Explain how these tools fit an editor and a CI pipeline, and why catching issues earlier is cheaper</li><li data-astro-cid-whrtx2kk>Run bash -n, a lint pass, and a formatting check over a flawed script and interpret each finding</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Day 36 (a configured code editor) and comfort running commands in a terminal</li><li data-astro-cid-whrtx2kk>Basic shell scripting from Week 2 (variables, if-tests, running a .sh file)</li></ul> <h2 id="why-this-matters">Why this matters</h2>
+<p>Yesterday you set up a code editor. Today you meet the three tools that stand between your code and the two questions every professional asks of it: <em>is it correct?</em> and <em>is it consistent?</em> Debuggers, linters, and formatters answer those questions faster and more reliably than you ever could by rereading the file. They are the difference between staring at a screen wondering why a program misbehaves and watching, line by line, exactly what it does — and between a codebase that reads like one careful author wrote it and one that reads like a shouting match about tabs versus spaces.</p>
+<p>This matters for your AI goal in a very direct, money-and-time way. When you start assembling AI systems, most of your effort will not be writing brand-new logic; it will be reading, reviewing, and repairing code — some of it yours, much of it produced quickly and needing a careful second pass. A linter reads that code without running it and flags the mistakes a tired human skims past: a variable used before it is set, a comparison that will silently fail, a shell script that breaks the moment a filename contains a space. A formatter rewrites the whole file to one house style in a fraction of a second, so nobody wastes a code review arguing about layout. And when something still goes wrong at runtime — the model loads the wrong config, the data pipeline produces empty batches — a debugger lets you freeze the program mid-run and inspect its insides, instead of sprinkling print statements and guessing.</p>
+<p>The concrete payoff is that these tools catch problems <em>early</em>, and early is cheap. A bug a linter flags while you type costs seconds; the same bug caught by a colleague in review costs an afternoon; caught in production, at 2 a.m., during a training run that has already burned real GPU-hours, it costs far more. Today you learn what each tool does, when to reach for it, and how they chain together into a quality pipeline that runs on your machine and again automatically on every change. By the end you will have linted and formatted a real (deliberately broken) script with your own hands.</p>
+<h2 id="the-idea-in-plain-language">The idea in plain language</h2>
+<p>Think of three distinct jobs, each done by a different kind of tool.</p>
+<p>A <strong>formatter</strong> rewrites your code’s <em>appearance</em> — indentation, spacing, line breaks, quote style — into one consistent layout, without changing what the code does. You save the file; the formatter reflows it. It never asks your opinion, which is exactly the point: it ends every debate about style by making style automatic and identical for everyone on the team.</p>
+<p>A <strong>linter</strong> reads your code <em>without running it</em> and reports likely mistakes and bad patterns: a variable you defined but never used, a condition that can never be true, an unquoted value that will misbehave, a function called with the wrong number of arguments. This reading-without-running is called <strong>static analysis</strong> — “static” because the program sits still on disk rather than executing. A linter is a tireless proofreader who has memorized thousands of ways code commonly goes wrong.</p>
+<p>A <strong>debugger</strong> is for when the code <em>does</em> run but behaves wrongly. It lets you pause a running program at a chosen line — a <strong>breakpoint</strong> — and then look around: inspect the current value of every variable, walk the chain of function calls that led here (the <strong>call stack</strong>), and advance one line at a time to watch exactly where reality diverges from your expectation. It replaces the crude habit of adding print statements everywhere with a live, interactive window into the machine.</p>
+<p>A fourth tool, the <strong>type checker</strong>, sits between the linter and the debugger: it verifies, again without running the code, that the <em>kinds</em> of values fit together — that you are not passing a piece of text where a number is required, or reading a field off something that might be missing. Together these four form a pipeline: format so it reads cleanly, lint and type-check so obvious errors are gone before it ever runs, and debug the subtler problems that only appear in motion.</p>
+<h2 id="historical-background">Historical background</h2>
+<p>The word “lint” is not a metaphor invented by programmers for fun; it comes from an actual program. In 1978, Stephen C. Johnson at Bell Labs — the same lab that had produced the transistor three decades earlier — wrote a tool called <code>lint</code> to examine C source code for bugs and non-portable constructs that the C compiler of the day let slide. He named it after the bits of fluff a clothes dryer’s lint trap catches: small, individually harmless, collectively worth removing. The name stuck so thoroughly that “to lint” and “a linter” are now ordinary verbs and nouns across every language, most of which never touch C.</p>
+<p>Debuggers are older still, and so is the folklore around the word “bug.” Engineers had used “bug” for a fault in machinery since at least the nineteenth century, and Thomas Edison used it in that sense in the 1870s. The most famous anecdote comes from 1947, when operators of the Harvard Mark II computer found a moth trapped in a relay, removed it, and taped it into the logbook with the note “first actual case of bug being found.” The moth did not coin the term, but it perfectly captured it. Interactive debuggers — programs that let you halt another program and inspect it — grew up alongside time-sharing systems in the 1960s and matured into the graphical, breakpoint-driven tools you use today.</p>
+<p>Automatic formatting arrived later and won its argument decisively only in the 2010s. Earlier “pretty-printers” existed, but they were optional and configurable, which meant teams still argued about the configuration. The turning point was tools that were deliberately <em>opinionated</em> — offering few or no options — so there was nothing left to argue about. Go shipped <code>gofmt</code> with the language in 2009 and made a single canonical style non-negotiable; the JavaScript formatter Prettier, first released in 2017, brought the same philosophy to the wider world. The lesson the industry learned is that the value of a formatter comes precisely from <em>removing</em> choices, not offering them.</p>
+<h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
+<p>A debugger is a program that controls the execution of another program: it can start it, stop it at specified points, read and sometimes change its memory, and resume it. It is <em>not</em> a bug-finder in the sense of telling you where your logic is wrong — it shows you what the program is actually doing, and you supply the judgment about what is wrong. A debugger with no hypothesis to test is just a slow way to watch code run.</p>
+<p>A linter is a static-analysis tool that inspects source code against a set of rules and reports violations. It is <em>not</em> a guarantee of correctness: it catches <em>patterns</em> known to be error-prone, not every possible mistake. A program can pass every lint rule and still be completely wrong, and a linter will occasionally flag something you did on purpose (a “false positive”). It is a smoke detector, not a fire marshal.</p>
+<p>A formatter rewrites code’s layout while preserving its behavior exactly. It is <em>not</em> a linter and does not judge correctness — it will happily format a program that is broken. Keeping these straight matters, because their failure modes differ.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Common misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”A debugger finds bugs for me.”</td><td>It shows you the program’s live state; you still diagnose the fault. Its power is observation, not diagnosis.</td></tr><tr><td>”Linting means my code is correct.”</td><td>Linting catches known bad patterns, not logic errors. Passing lint means “no obvious smells,” not “works.&quot;</td></tr><tr><td>&quot;A formatter and a linter do the same thing.”</td><td>A formatter changes layout only; a linter judges patterns and can change meaning if you apply its fixes.</td></tr><tr><td>”Print statements are just as good as a debugger.”</td><td>Prints show a few values at fixed points; a debugger lets you inspect <em>anything</em> live and change what you look at without editing code.</td></tr><tr><td>”These tools are for big teams, not beginners.”</td><td>They help beginners most, catching the mistakes you don’t yet know to look for and teaching you as they explain each one.</td></tr></tbody></table>
+<h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
+<p>Each tool exists because a specific kind of human failure is predictable and expensive. Formatters exist because humans are inconsistent and easily provoked into arguing about consistency. Two programmers will indent differently, break lines differently, and quote strings differently, and when their code meets in one file the differences show up as noise in every review — noise that hides the changes that actually matter. A formatter deletes this entire category of problem by making layout a settled, automatic fact.</p>
+<p>Linters exist because humans skim. The eye slides past a variable named <code>resluts</code>, a comparison that uses assignment by accident, an unquoted shell variable that will shatter on the first path with a space. These mistakes are individually obvious once pointed out and collectively responsible for a huge share of real defects. A linter never skims: it applies the same thousands of checks to every line, every time, at a speed no reviewer can match.</p>
+<p>Debuggers exist because the gap between what code <em>says</em> and what it <em>does</em> is where the hardest bugs live, and that gap is invisible in the source. When a program’s behavior surprises you, reading the code again often just re-confirms your wrong mental model. A debugger breaks the loop by showing you the ground truth — the real value in that variable, the real path the program took — so you reason from evidence instead of assumption. Type checkers exist for a related reason: a large class of bugs are simple mismatches of kind (text where a number was meant, a missing value read as if present), and catching those before the program runs is far cheaper than discovering them mid-execution.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>Let’s take each tool in turn, then see how they fit an editor and a continuous-integration (CI) system.</p>
+<h3 id="how-a-linter-and-formatter-read-your-code">How a linter and formatter read your code</h3>
+<p>A formatter and a linter both begin the same way: they <em>parse</em> your source into a structured, tree-shaped representation of its meaning, called an abstract syntax tree. Parsing means reading the raw characters and recognizing their grammar — “this is a function definition, this is its body, this is an <code>if</code> whose condition is a comparison.” Once the code is a tree rather than a wall of text, the tools can work on structure instead of guessing with text search.</p>
+<p>A <strong>formatter</strong> throws away your original spacing entirely and prints the tree back out according to fixed rules: this much indentation per level, a line break here, single quotes there. Because it regenerates the layout from the meaning, the result is identical no matter how messy the input was — that is why a formatter is deterministic and why running it twice changes nothing the second time.</p>
+<p>A <strong>linter</strong> walks the same tree looking for shapes that match its rules. A rule like “no unused variables” is, concretely, “find every variable declaration, then check whether any later node reads it; if not, report the declaration.” Some linters go further with <strong>data-flow analysis</strong>, tracing how values move through the program to catch a variable used before it is assigned, or a branch that can never execute. The output is a list of findings, each with a file, a line, and a short message naming the rule.</p>
+<p><img src="/ai-roadmap-365/_astro/quality-pipeline.DeQIoBbj_ZvqP4k.svg" alt="Flow diagram: the code-quality pipeline from writing to committing, catching issues earlier where they are cheaper to fix" loading="lazy" decoding="async" fetchpriority="auto" width="820" height="340"></p>
+<p>Read the pipeline left to right. You <strong>write</strong> code; a <strong>formatter</strong> makes it consistent on save; a <strong>linter</strong> flags bad patterns; a <strong>type checker</strong> confirms the kinds of values line up; a <strong>debugger</strong> helps you resolve the runtime problems that survive all of the above; and only then do you <strong>commit</strong>. The arrow beneath carries the whole moral of the day: a defect caught at the left edge costs seconds, and the same defect caught at the right edge — or past it, in production — costs orders of magnitude more. Every tool in the chain is a bet that moving detection leftward saves time and money, and it is a bet that pays.</p>
+<h3 id="how-a-debugger-controls-a-running-program">How a debugger controls a running program</h3>
+<p>A debugger works by inserting itself between your program and the machine. When you set a breakpoint on a line, the debugger arranges for the program to stop when execution reaches it — historically by temporarily replacing that instruction with a special “trap” that hands control back to the debugger. While the program is paused, its entire state is frozen and available for inspection.</p>
+<p>The controls you will use every day are few:</p>
+<ul>
+<li>A <strong>breakpoint</strong> pauses execution at a chosen line. You can make it <em>conditional</em> — “stop here only when <code>count</code> is zero” — so you skip the thousand uninteresting iterations and stop on the one that matters.</li>
+<li><strong>Stepping</strong> advances the paused program in small increments. <strong>Step over</strong> runs the next line and stops again, treating a function call as a single step. <strong>Step into</strong> descends into that called function to watch it line by line. <strong>Step out</strong> finishes the current function and stops at the line that called it.</li>
+<li><strong>Inspecting state</strong> shows the current value of every variable in scope. A <strong>watch expression</strong> is a value you ask the debugger to keep re-evaluating and displaying as you step, so you can watch a single quantity evolve.</li>
+<li>The <strong>call stack</strong> is the ordered list of function calls that led to the current line — who called whom, all the way down. When a program stops deep inside a helper, the call stack tells you how it got there, and you can click up and down it to inspect each caller’s variables.</li>
+</ul>
+<p><img src="/ai-roadmap-365/_astro/debugger-anatomy.CK8Q-Ulz_Z1xGtcl.svg" alt="Architecture diagram: the anatomy of a debugger session, showing the paused program, breakpoint, call stack, variables panel, and step controls" loading="lazy" decoding="async" fetchpriority="auto" width="820" height="470"></p>
+<p>The diagram lays out a paused session. The source panel shows a red breakpoint marker and a highlighted current line; the call stack panel lists the chain of calls with the current function on top; the variables panel shows each name and its live value; and the step controls — continue, step over, step into, step out — drive execution forward. This is the whole instrument. Everything else a debugger offers is a refinement of <em>stop here, look at this, move forward by that much.</em></p>
+<h3 id="how-they-fit-an-editor-and-ci">How they fit an editor and CI</h3>
+<p>These tools live in two places, and both matter. In your <strong>editor</strong>, they run continuously as you type: the formatter reflows on save, the linter underlines problems in place, the type checker flags mismatches, and the debugger attaches to a running program with a click. This is the fast, private feedback loop — mistakes surface in seconds, before anyone else sees them.</p>
+<p>In <strong>CI</strong> — an automated system that runs checks on a shared server every time code is pushed — the <em>same</em> linters and formatters run again, this time as a gate. CI re-formats and re-lints and, if anything is out of line, refuses the change until it is fixed. The editor loop is a courtesy to you; the CI loop is a guarantee to everyone else that nothing unformatted or lint-failing ever lands. Running identical tools in both places is deliberate: what you see locally is exactly what the gate enforces.</p>
+<h2 id="an-everyday-analogy">An everyday analogy</h2>
+<p>Imagine preparing a manuscript for publication at a serious press. Four people touch it, each with a distinct job, and they map cleanly onto today’s tools.</p>
+<p>First the <strong>typesetter</strong> applies the house style: consistent margins, one space after each period, curly quotes throughout, chapters starting on the right-hand page. The typesetter does not judge whether the book is <em>good</em> — only that it <em>looks</em> uniform. Hand in a chapter typed in five different fonts and it comes back in one. That is your formatter: it never touches meaning, only appearance, and it makes every page look like the same hand set it.</p>
+<p>Next the <strong>copyeditor</strong> reads for problems without staging the play in their head: a character introduced twice, a pronoun with no clear antecedent, a sentence that contradicts an earlier one, a word that is almost certainly a typo. The copyeditor works statically — reading the page, not performing it — and marks each issue with a note. That is your linter: static analysis, a checklist of known problems, a finding for each.</p>
+<p>Then the <strong>continuity editor</strong> checks that references line up: a character called a doctor in chapter one is not a lawyer in chapter nine, and every mention of a place matches. That is your type checker, confirming the <em>kinds</em> of things agree before the story is set in motion.</p>
+<p>Finally, when a scene still reads wrong despite clean copy, an editor sits beside the author and reads the passage <em>aloud together</em>, ready to stop at any sentence — “wait, here, what did you mean the character to be feeling?” — back up, and go forward one line at a time, examining exactly what is on the page at that moment. That live, pause-anywhere, inspect-anything reading is your debugger. Scribbling a note in the margin to check later is a print statement; stopping the read to look closely, together, at one exact moment is the debugger’s power.</p>
+<h2 id="examples-in-practice">Examples in practice</h2>
+<p>Here is a real shell script with three classic mistakes — the kind you will meet again in today’s lab:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D">#!/bin/bash</span></span>
+<span class="line"><span style="color:#E1E4E8">name</span><span style="color:#F97583">=</span><span style="color:#FFAB70">$1</span></span>
+<span class="line"><span style="color:#E1E4E8">greeting</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;Hello there&quot;</span></span>
+<span class="line"><span style="color:#F97583">if</span><span style="color:#E1E4E8"> [ $name </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> &quot;admin&quot;</span><span style="color:#E1E4E8"> ]; </span><span style="color:#F97583">then</span></span>
+<span class="line"><span style="color:#79B8FF">  echo</span><span style="color:#9ECBFF"> &quot;Welcome, boss&quot;</span></span>
+<span class="line"><span style="color:#F97583">fi</span></span>
+<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;Hi, </span><span style="color:#E1E4E8">$name</span><span style="color:#9ECBFF">&quot;</span></span></code></pre>
+<p>Read it as a linter would. First, <code>greeting</code> is assigned but never used — dead code that hints at an unfinished edit. Second, <code>$name</code> is <em>unquoted</em> on the <code>if</code> line: if you run the script with no argument, <code>$name</code> expands to nothing and the test becomes <code>[ = &quot;admin&quot; ]</code>, which is a syntax error; if the argument contains a space, the test breaks into multiple words and misbehaves. Third, single-bracket <code>[ ]</code> is the old, fragile test command, where unquoted empty values cause exactly these failures; the modern double-bracket <code>[[ ]]</code> handles them safely. A shell linter flags all three in under a second, each with a message and a line number. None of these is a syntax error the shell would refuse outright — the script “runs” — which is precisely why a linter earns its keep: it catches what merely running the code does not.</p>
+<p>Now the same script through a <strong>formatter</strong>: the layout would be normalized (consistent indentation, spacing around the brackets, a blank line policy), but note what a formatter would <em>not</em> do — it would not fix the unquoted variable or the unused assignment, because those are <em>behavior</em> and <em>pattern</em> issues, not layout. This is the division of labor in action: the formatter makes it neat; the linter makes it sound.</p>
+<p>Finally, imagine this script were longer and behaved wrongly at runtime — it printed “Welcome, boss” for the wrong user. Rereading might not reveal why. In a debugger you would set a breakpoint on the <code>if</code> line, run the script with a test argument, and inspect the live value of <code>name</code> at that exact moment. Seeing <code>name</code> hold <code>&quot; admin&quot;</code> with a stray leading space — invisible in the source — would explain the whole mystery in one look. That is the difference between guessing and seeing.</p>
+<h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
+<p><strong>Security.</strong> Linters are a frontline security tool. Many catch dangerous patterns directly — a shell script that uses an unquoted variable an attacker could stuff with extra commands, code that builds a database query by pasting user input into a string. Specialized security linters (a practice called static application security testing) scan specifically for such patterns. Catching an injection flaw as a lint warning while you type is immeasurably cheaper than discovering it after a breach.</p>
+<p><strong>Privacy.</strong> These tools run locally and read only the files you point them at; the debugger and linter in your editor do not phone home with your source. That is worth verifying for any tool you adopt, because your code — and any secrets carelessly embedded in it — is sensitive. A good practice these tools enable is a linter rule that flags hard-coded credentials before they are ever committed.</p>
+<p><strong>Performance.</strong> Formatters and linters must be fast enough to run on every save without breaking your concentration, which is why the newest generation is written in fast systems languages and can check thousands of files in seconds. Debuggers have a different cost: a program runs noticeably slower under a debugger, and heavily used breakpoints add overhead, so you debug a focused scenario rather than a full production load.</p>
+<p><strong>Scalability.</strong> The real scaling story is CI. On a large project with many contributors, the only way to keep a codebase consistent and lint-clean is to enforce it automatically on every change; no amount of reviewer diligence scales to thousands of commits. Running the same formatter and linter in CI that everyone runs locally is what lets a large team’s code keep reading as though one careful person wrote it.</p>
+<p><strong>Cost.</strong> The economics are the whole point of the pipeline diagram: the cost of a defect grows by orders of magnitude the later it is caught. A lint warning costs seconds; a bug found in review costs a person an afternoon; a bug found in production can cost outages, wasted compute, and lost trust. Every one of these tools is a mechanism for shifting detection earlier, and because they are free, the return is nearly all upside.</p>
+<h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
+<p>The essential tools in this space are overwhelmingly free and open source. Here are the leading ones, what they do, and when to reach for each.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool</th><th>Job</th><th>Language</th><th>When to use it</th><th>Cost</th></tr></thead><tbody><tr><td>ShellCheck</td><td>Linter</td><td>Shell / Bash</td><td>On every shell script — it catches quoting, test, and portability bugs that silently break scripts</td><td>Free, open source</td></tr><tr><td>ESLint</td><td>Linter</td><td>JavaScript / TypeScript</td><td>The standard JS linter; configurable rules for bugs and style</td><td>Free, open source</td></tr><tr><td>Prettier</td><td>Formatter</td><td>JS, CSS, HTML, and more</td><td>When you want layout settled automatically with near-zero configuration</td><td>Free, open source</td></tr><tr><td>Ruff</td><td>Linter (+ formatter)</td><td>Python</td><td>A very fast, all-in-one Python linter and formatter; increasingly the default</td><td>Free, open source</td></tr><tr><td>Black</td><td>Formatter</td><td>Python</td><td>The opinionated Python formatter that ended most style debates</td><td>Free, open source</td></tr><tr><td>flake8</td><td>Linter</td><td>Python</td><td>A long-standing, widely taught Python linter</td><td>Free, open source</td></tr><tr><td>Debug Adapter Protocol (DAP)</td><td>Debugger interface</td><td>Any (via adapters)</td><td>The shared protocol that lets one editor debug many languages</td><td>Free, open standard</td></tr></tbody></table>
+<p>A few notes on choosing. <strong>ShellCheck</strong> is the one you will use today: point it at any <code>.sh</code> file and it explains, with a code and a link, exactly what is fragile and why. For <strong>Python</strong>, the modern default is increasingly <strong>Ruff</strong>, which rolls linting and formatting into one fast tool, though the long-established pairing of <strong>flake8</strong> (lint) with <strong>Black</strong> (format) is still everywhere and worth recognizing. For <strong>JavaScript</strong>, the near-universal pairing is <strong>ESLint</strong> (lint) with <strong>Prettier</strong> (format) — ESLint judges patterns, Prettier owns layout, and keeping the two jobs separate avoids conflicts. For <strong>debuggers</strong>, most languages ship one (Python’s is built in), and modern editors talk to all of them through the <strong>Debug Adapter Protocol</strong>, a shared standard so a single debugger user interface can drive many languages. Commercial options exist — richer profilers, enterprise security scanners, integrated development environments with advanced debuggers — but for everything in this lesson, the free tools are the standard the professionals actually use.</p>
+<h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+<p>It is easy to blur these tools together; the differences are what make them useful.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Aspect</th><th>Linter</th><th>Formatter</th><th>Type checker</th></tr></thead><tbody><tr><td>Runs the code?</td><td>No (static)</td><td>No (static)</td><td>No (static)</td></tr><tr><td>Changes your code?</td><td>Only if you apply its fixes</td><td>Yes — rewrites layout</td><td>No — reports only</td></tr><tr><td>What it catches</td><td>Bad patterns, likely bugs</td><td>Inconsistent style</td><td>Mismatched kinds of values</td></tr><tr><td>Can it be wrong?</td><td>Yes — false positives happen</td><td>No — it only reflows layout</td><td>Rarely, but can be over-strict</td></tr><tr><td>Typical verdict</td><td>”This looks risky&quot;</td><td>&quot;This is now consistent&quot;</td><td>&quot;These types don’t fit”</td></tr></tbody></table>
+<p>And the sharpest distinction of all — the linter family versus the debugger:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>Linter / formatter / type checker</th><th>Debugger</th></tr></thead><tbody><tr><td>When it works</td><td>Before the code runs (static)</td><td>While the code runs (dynamic)</td></tr><tr><td>What it needs</td><td>Just the source on disk</td><td>A running program and a scenario</td></tr><tr><td>What it finds</td><td>Broad classes of known problems</td><td>The specific cause of one live problem</td></tr><tr><td>Effort</td><td>Automatic, on every file</td><td>Interactive, aimed at one bug</td></tr><tr><td>Best at</td><td>Preventing whole categories of mistakes</td><td>Explaining a mystery you can reproduce</td></tr></tbody></table>
+<p>The takeaway: static tools cast a wide, cheap, automatic net to prevent common failures; a debugger is a precise, hands-on instrument for the one stubborn failure that slipped through. You want both, at different moments.</p>
+<h3 id="debugger-versus-logging">Debugger versus logging</h3>
+<p>Since you will constantly weigh “should I add a print statement or open a debugger?”, here is the trade-off head to head:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>Print / logging</th><th>Debugger</th></tr></thead><tbody><tr><td>Setup</td><td>Edit code, add a print, re-run</td><td>Set a breakpoint, run under the debugger</td></tr><tr><td>What you see</td><td>Only the values you thought to print</td><td>Any variable, live, and you can change your mind</td></tr><tr><td>Time travel</td><td>Re-run to see more</td><td>Step forward, inspect the call stack, back up a frame</td></tr><tr><td>Good for</td><td>Rare or hard-to-reproduce events; production; long-running jobs</td><td>A reproducible bug you can trigger on demand</td></tr><tr><td>Leaves a trace</td><td>A permanent log line (useful later)</td><td>Nothing persists after the session</td></tr></tbody></table>
+<p>Neither wins outright. Reach for the debugger when you can reproduce a bug on demand and want to explore. Reach for logging when the problem is rare, happens in production where you cannot attach a debugger, or when you want a durable record of what happened. Experienced developers use both fluidly.</p>
+<h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
+<p>Run a <strong>formatter</strong> always and everywhere — on every file, on every save, with no exceptions. Its whole value comes from being universal and automatic; a formatter used “sometimes” just adds a new inconsistency. Configure it once for the project and forget it.</p>
+<p>Run a <strong>linter</strong> on everything too, but treat its findings as advice, not gospel. Fix the true positives promptly; for the occasional false positive, use the linter’s mechanism to suppress that one rule on that one line, with a brief note explaining why — never disable a whole rule across the project to silence a single complaint you don’t understand. The linter is a colleague worth listening to, not a tyrant.</p>
+<p>Reach for a <strong>debugger</strong> when you have a bug you can <em>reproduce</em> and your mental model of the code has failed you — when rereading the source keeps confirming an assumption that must be false. The debugger’s superpower is turning assumption into evidence. Do <em>not</em> reach for it as a substitute for thinking: a debugger with no hypothesis is an aimless tour of a running program. And do not use it where logging fits better — for rare production events or long unattended jobs, a well-placed log line is the right tool. The professional habit is to prevent with static tools, observe with logs, and investigate with the debugger, choosing by the shape of the problem in front of you.</p>
+<p>For your AI work, this habit compounds. A great deal of the code you will handle — from configuration to data-loading to model glue — will arrive quickly and need a rigorous second pass, and generated code is no exception: it is often plausible-looking and subtly wrong in exactly the ways a linter is built to catch. Running a formatter and linter over any code before you trust it turns “looks fine” into “checked,” makes the whole codebase read consistently regardless of who or what produced each line, and lets CI enforce that standard on every single change. When something still misbehaves at runtime — the config loads the wrong path, the batch comes back empty — the debugger is how you find out why by looking, not guessing. These three tools are not busywork around the real work of building AI systems; on a serious project, they <em>are</em> a large part of how the real work gets done correctly.</p>
+<h2 id="knowledge-check">Knowledge check</h2>
+<p>Try these from memory before looking back:</p>
+<ol>
+<li>In one sentence each, state the distinct job of a formatter, a linter, and a debugger, and say which one changes the layout of your code.</li>
+<li>Explain the difference between “step over” and “step into” when debugging, and describe a moment you would want each.</li>
+<li>A shell script passes the shell’s own syntax check (<code>bash -n</code>) but a linter still complains about an unquoted variable. How can both be true, and why does the linter’s complaint matter?</li>
+<li>Your program prints “Welcome, boss” for the wrong user, and you can reproduce it every time. Would you reach for logging or a debugger, and what would you inspect first?</li>
+<li>Why do teams run the <em>same</em> linter and formatter in CI that developers already run locally, instead of trusting the local runs alone?</li>
+</ol>
+<h2 id="hands-on-exercise">Hands-on exercise</h2>
+<p>Time to run these tools on real, broken code. In the Day 37 lab you will take a deliberately flawed shell script and put it through a small quality gate: a syntax check, a lint pass with ShellCheck, and a formatting check — the same layered pipeline this lesson describes, in miniature.</p>
+<p>From the lab directory, first look at the flawed sample and confirm the shell itself accepts it:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">cat</span><span style="color:#9ECBFF"> examples/samples/buggy.sh</span></span>
+<span class="line"><span style="color:#B392F0">bash</span><span style="color:#79B8FF"> -n</span><span style="color:#9ECBFF"> examples/samples/buggy.sh</span></span></code></pre>
+<p><code>bash -n</code> reads the script and checks its <em>syntax</em> without running it — the shell’s own tiny built-in linter. A clean script produces no output and exits 0. Now run the full quality check the lab provides:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">bash</span><span style="color:#9ECBFF"> examples/quality_check.sh</span><span style="color:#9ECBFF"> examples/samples/buggy.sh</span></span></code></pre>
+<p>This script runs the syntax check, then runs ShellCheck on the sample <em>if ShellCheck is installed</em> — and if it is not, it says so clearly and describes what ShellCheck would catch, rather than failing. Finally it does a simple, editor-agnostic formatting check with <code>grep</code>, flagging trailing whitespace and stray tabs. Read every line of its output against the lesson: which findings are <em>syntax</em>, which are <em>lint</em> (pattern) issues, and which are <em>formatting</em>?</p>
+<h3 id="expected-output">Expected output</h3>
+<p>Running the quality check on the buggy sample, on a machine <strong>without</strong> ShellCheck installed, produces output of this shape (captured from a real run):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>=== Quality check: examples/samples/buggy.sh ===</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[1/3] Syntax check (bash -n)...</span></span>
+<span class="line"><span>  ok: script is syntactically valid.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[2/3] Lint check (shellcheck)...</span></span>
+<span class="line"><span>  SKIP: shellcheck is not installed on this machine.</span></span>
+<span class="line"><span>        Install it (free) to catch bugs like:</span></span>
+<span class="line"><span>        - SC2086: unquoted $variable may word-split or glob</span></span>
+<span class="line"><span>        - SC2034: variable appears unused</span></span>
+<span class="line"><span>        - using [ ] where [[ ]] is safer</span></span>
+<span class="line"><span>        See requirements/README.md for install instructions.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[3/3] Formatting check (trailing whitespace / tabs)...</span></span>
+<span class="line"><span>  FAIL: found 1 line(s) with trailing whitespace.</span></span>
+<span class="line"><span>    13:echo &quot;Hi, $name&quot;   </span></span>
+<span class="line"><span>  FAIL: found 1 line(s) containing tab indentation.</span></span>
+<span class="line"><span>    14:	echo &quot;all done&quot;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Summary: syntax OK; lint skipped (shellcheck absent); formatting issues found.</span></span></code></pre>
+<p>On a machine <em>with</em> ShellCheck installed, step 2 instead prints ShellCheck’s real findings (SC2086, SC2034, and the test-command warning) with line numbers. Either way the script exits 0 — it is a report, not a gate that stops your work. Your values may differ slightly if you edit the sample.</p>
+<h3 id="validate-your-work">Validate your work</h3>
+<p>You are done when you can check every box:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> You ran <code>bash -n</code> on the sample and can say whether it reported a syntax error.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You ran <code>examples/quality_check.sh</code> and read all three sections of its output.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can name at least one issue the syntax check catches and one the formatting check catches.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can name at least one issue ShellCheck catches (or <em>would</em> catch, if it is not installed on your machine).</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You completed the four numbered exercises in <code>starter/quality_check.sh</code>.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You filled in <code>starter/quality-worksheet.md</code> with one syntax issue, one lint issue, and one formatting issue.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>bash tests/run_tests.sh</code> passes (final line reports 0 failures).</li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><strong><code>bash -n</code> printed nothing.</strong> That is success — no output and exit 0 means the syntax is valid. Check the exit code with <code>echo $?</code> if you want confirmation.</li>
+<li><strong><code>shellcheck: command not found</code>.</strong> ShellCheck is optional. The lab’s quality check detects its absence and degrades gracefully; you lose only the lint step. To gain it, see <code>requirements/README.md</code> (install is free — <code>brew install shellcheck</code> on macOS, <code>apt install shellcheck</code> on Debian/Ubuntu).</li>
+<li><strong>The formatting check flags nothing on your own script.</strong> Good — that means no trailing whitespace or tabs. To see it fire, add a space at the end of a line and re-run.</li>
+<li><strong><code>Permission denied</code> running a script.</strong> Run it through bash explicitly, e.g. <code>bash examples/quality_check.sh ...</code>, rather than <code>./</code>.</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<ul>
+<li><strong>Assuming “it runs” means “it’s fine.”</strong> The buggy sample runs without a syntax error, yet ShellCheck flags real bugs in it. Running is a low bar; passing the linter is a higher one.</li>
+<li><strong>Expecting the formatter check to fix quoting.</strong> The formatting step only looks at whitespace and tabs — layout. The quoting and unused-variable problems are the linter’s department, not the formatter’s. Keep the two jobs straight.</li>
+<li><strong>Silencing a warning instead of understanding it.</strong> If a check flags something, read the message and the rule before you suppress it. The point is to learn what is fragile, not to make the report quiet.</li>
+</ul>
+<h2 id="practice-assignment">Practice assignment</h2>
+<p>Open <code>starter/quality-worksheet.md</code> in the lab and complete it for the buggy sample. Record, with line numbers: one issue that <code>bash -n</code> catches (you may need to introduce a syntax error to see it fire, then undo it), one issue that ShellCheck catches or would catch (name the SC code if you have ShellCheck installed; otherwise describe the bug from the lesson), and one formatting issue the whitespace check reports. Then write one short paragraph (4–6 sentences) explaining, in your own words, why a script can pass the syntax check yet still be full of the bugs a linter finds — tie it back to the difference between “the shell can parse this” and “this will behave correctly.” Keep the worksheet; it is the seed of the Week 6 project, in which formatting and linting run automatically on every commit.</p>
+<h2 id="extension-challenge">Extension challenge</h2>
+<p>Install ShellCheck (it is free and open source: <code>brew install shellcheck</code> on macOS, <code>sudo apt install shellcheck</code> on Debian/Ubuntu) and re-run the lab’s quality check on the buggy sample. Read ShellCheck’s real output and look up two of the rule codes it reports (for example <code>SC2086</code> and <code>SC2034</code>) — each code links to a wiki page explaining the bug and the fix. Then fix the sample: quote the variables, remove or use the unused variable, and switch the fragile <code>[ ]</code> test to <code>[[ ]]</code>. Re-run the quality check and confirm ShellCheck now reports nothing. Finally, add a trailing space to one line on purpose and watch the formatting check catch it while ShellCheck stays silent — a concrete demonstration that the formatter and the linter police different things. Write two or three sentences on what each tool did and did not catch, and why that division of labor is exactly what you want.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. Which tool rewrites your code&#39;s layout — indentation, spacing, quote style — without changing what the code does? </strong> </p> <ol type="A"> <li>A debugger</li><li>A formatter</li><li>A linter</li><li>A type checker</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> A formatter </p> <p>A formatter regenerates the layout from the code&#39;s meaning, producing one consistent style while leaving behavior untouched. It does not judge correctness — a broken program is formatted just as happily as a correct one.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. What does it mean that a linter performs &quot;static analysis&quot;? </strong> </p> <ol type="A"> <li>It analyzes the program only after it has finished running</li><li>It inspects the source code without running it, matching it against rules for known bad patterns</li><li>It measures how fast the program runs</li><li>It formats the code so it never changes again</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> It inspects the source code without running it, matching it against rules for known bad patterns </p> <p>&quot;Static&quot; means the program sits still on disk rather than executing. A linter parses the source and checks it against rules — unused variables, unquoted values, unreachable branches — catching likely bugs before the code ever runs.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. In a debugger, what is the difference between &quot;step over&quot; and &quot;step into&quot; at a line that calls a function? </strong> </p> <ol type="A"> <li>&quot;Step over&quot; skips the line entirely; &quot;step into&quot; runs it twice</li><li>&quot;Step over&quot; runs the called function as a single step and stops after it; &quot;step into&quot; descends into that function to watch it line by line</li><li>They are two names for the same command</li><li>&quot;Step over&quot; restarts the program; &quot;step into&quot; ends it</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> &quot;Step over&quot; runs the called function as a single step and stops after it; &quot;step into&quot; descends into that function to watch it line by line </p> <p>Step over treats a function call as one step, running it and stopping at the next line in the current function. Step into descends into the called function so you can debug its inner lines. Step out then finishes a function and returns to its caller.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. A shell script passes `bash -n` (the syntax check) but ShellCheck still reports an unquoted variable. How can both be true? </strong> </p> <ol type="A"> <li>The syntax check is broken and should be ignored</li><li>Syntax being valid only means the shell can parse the script; a linter additionally flags patterns that parse fine but behave incorrectly, like an unquoted variable that breaks on spaces</li><li>ShellCheck is wrong because valid syntax means correct behavior</li><li>The script must be run first for either check to apply</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Syntax being valid only means the shell can parse the script; a linter additionally flags patterns that parse fine but behave incorrectly, like an unquoted variable that breaks on spaces </p> <p>`bash -n` only confirms the shell can parse the script. An unquoted variable is perfectly valid syntax but a real bug — it word-splits or breaks on empty or spaced values. The linter catches this class of behavioral problem that a syntax check cannot.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. What does the call stack show you when a debugger pauses deep inside a helper function? </strong> </p> <ol type="A"> <li>The list of every variable in the program</li><li>The ordered chain of function calls that led to the current line — who called whom</li><li>A history of every keystroke you have typed</li><li>The formatted version of the source file</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> The ordered chain of function calls that led to the current line — who called whom </p> <p>The call stack is the sequence of active function calls, with the current function on top and its caller beneath, all the way down. It tells you how execution reached this point, and you can move up and down it to inspect each caller&#39;s variables.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. When is logging (a print statement) usually a better choice than an interactive debugger? </strong> </p> <ol type="A"> <li>When you can reproduce a bug on demand and want to explore it</li><li>For a rare event, a problem in production where you cannot attach a debugger, or when you want a durable record of what happened</li><li>Never — a debugger is always better</li><li>Only when the code has no functions</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> For a rare event, a problem in production where you cannot attach a debugger, or when you want a durable record of what happened </p> <p>A debugger shines for reproducible bugs you can trigger and explore live. Logging wins for rare or hard-to-reproduce events, production systems where attaching a debugger is impractical, and cases where you want a permanent trace to consult later.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. Which statement about formatters and linters is correct? </strong> </p> <ol type="A"> <li>A formatter judges whether your code is correct; a linter only changes spacing</li><li>A formatter changes only layout; a linter flags patterns and likely bugs, and can occasionally produce false positives</li><li>Both tools run the program to see what it does</li><li>They are interchangeable and do exactly the same thing</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> A formatter changes only layout; a linter flags patterns and likely bugs, and can occasionally produce false positives </p> <p>The division of labor is the key idea: a formatter owns appearance (layout only), while a linter judges patterns and likely bugs. A linter can occasionally flag something you did on purpose — a false positive — which a formatter, being purely mechanical about layout, cannot.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. Why do teams run the same linter and formatter in CI that developers already run locally? </strong> </p> <ol type="A"> <li>CI runs are faster than local runs, so local runs are pointless</li><li>The local run is a courtesy to the developer; the CI run is a guarantee to everyone else that nothing unformatted or lint-failing ever lands, and it scales past what reviewers can check by hand</li><li>CI uses entirely different rules to catch different bugs</li><li>It is required only for projects written in C</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> The local run is a courtesy to the developer; the CI run is a guarantee to everyone else that nothing unformatted or lint-failing ever lands, and it scales past what reviewers can check by hand </p> <p>The editor loop gives you fast private feedback, but only an automated CI gate guarantees that every change — across many contributors and thousands of commits — meets the standard. Running identical tools in both places means what you see locally is exactly what the gate enforces.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>debugger</strong> </dt> <dd data-astro-cid-whrtx2kk>A tool that controls the execution of another program — starting it, pausing it at chosen points, and letting you inspect its live state — so you can watch exactly what the code does rather than guess.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>breakpoint</strong> </dt> <dd data-astro-cid-whrtx2kk>A marker on a line that tells the debugger to pause the program when execution reaches it; a conditional breakpoint pauses only when a condition you specify is true.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>step over</strong> </dt> <dd data-astro-cid-whrtx2kk>A debugger command that runs the next line and stops again, treating any function call on that line as a single step rather than descending into it.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>step into</strong> </dt> <dd data-astro-cid-whrtx2kk>A debugger command that descends into a function being called so you can watch its inner lines execute one at a time; its counterpart, step out, finishes the current function and returns to its caller.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>call stack</strong> </dt> <dd data-astro-cid-whrtx2kk>The ordered chain of function calls that led to the currently executing line — who called whom, with the current function on top — which you can navigate to inspect each caller&#39;s variables.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>watch expression</strong> </dt> <dd data-astro-cid-whrtx2kk>A value or expression you ask the debugger to re-evaluate and display continuously as you step, so you can watch a single quantity change over the course of execution.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>linter</strong> </dt> <dd data-astro-cid-whrtx2kk>A static-analysis tool that reads source code without running it and reports likely bugs and bad patterns, such as unused variables or unquoted values, each with a file, line, and message.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>static analysis</strong> </dt> <dd data-astro-cid-whrtx2kk>Examining a program by reading its source code while it sits still on disk — without executing it — to find problems; the opposite of dynamic analysis, which observes a running program.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>formatter</strong> </dt> <dd data-astro-cid-whrtx2kk>A tool that rewrites code&#39;s layout — indentation, spacing, line breaks, quote style — into one consistent style while leaving behavior unchanged; running it twice changes nothing the second time.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>type checker</strong> </dt> <dd data-astro-cid-whrtx2kk>A static tool that verifies the kinds of values fit together — that text is not passed where a number is required, or a possibly-missing value read as if present — without running the code.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>ShellCheck</strong> </dt> <dd data-astro-cid-whrtx2kk>A free, open-source linter for shell and Bash scripts that flags quoting, test-command, and portability bugs, each tagged with a rule code (such as SC2086) linking to an explanation.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Debug Adapter Protocol (DAP)</strong> </dt> <dd data-astro-cid-whrtx2kk>A shared, open standard that lets a single editor debugging interface drive debuggers for many different languages through language-specific adapters.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>continuous integration (CI)</strong> </dt> <dd data-astro-cid-whrtx2kk>An automated system that runs checks — such as formatting and linting — on a shared server every time code is pushed, refusing changes that fail, so standards are enforced on every commit.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Lint_(software)" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Lint (software)</a> — Wikipedia (accessed 2026-07-12) — History and definition of linting, from the original 1978 Bell Labs tool onward. </li><li data-astro-cid-whrtx2kk> <a href="https://www.shellcheck.net/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>ShellCheck</a> — ShellCheck (accessed 2026-07-12) — The free, open-source shell-script linter used in this lesson&#39;s lab. </li><li data-astro-cid-whrtx2kk> <a href="https://prettier.io/docs/en/index.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Prettier — What is Prettier?</a> — Prettier (accessed 2026-07-12) — The opinionated formatter whose philosophy of removing choices is discussed here. </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Debugger" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Debugger</a> — Wikipedia (accessed 2026-07-12) — Overview of debuggers, breakpoints, stepping, and the history of the term. </li><li data-astro-cid-whrtx2kk> <a href="https://missing.csail.mit.edu/2020/debugging-profiling/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Missing Semester of Your CS Education — Debugging and Profiling</a> — MIT (accessed 2026-07-12) — A practical treatment of debugging, logging, and static-analysis tools. </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="37" data-astro-cid-whrtx2kk>
+Mark Day 37 as read
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+      surfaces for someone searching for one — it costs you a click and it is genuinely how people
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+★ Star on GitHub
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-036-choosing-and-configuring-a-code-editor" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 36</span> <span class="pn__title" data-astro-cid-oerjsknp>Choosing and Configuring a Code Editor</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-038-regular-expressions" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 38 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Regular Expressions</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+      // Progressive enhancement only: the theme falls back to dark and every
+      // .reveal element is visible by default (the hidden start state exists
+      // only inside a prefers-reduced-motion: no-preference query).
+      (() => {
+        const toggle = document.getElementById('theme');
+        if (toggle) {
+          toggle.addEventListener('click', () => {
+            const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+            document.documentElement.dataset.theme = next;
+            try {
+              localStorage.setItem('theme', next);
+            } catch {
+              /* private mode */
+            }
+          });
+        }
+
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const items = document.querySelectorAll('.reveal');
+        if (items.length && !reduced && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry, i) => {
+                if (!entry.isIntersecting) return;
+                entry.target.style.transitionDelay = `${Math.min(i * 50, 240)}ms`;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.06 },
+          );
+          items.forEach((el) => io.observe(el));
+        } else {
+          items.forEach((el) => el.classList.add('is-in'));
+        }
+      })();
+    </script> </body> </html>

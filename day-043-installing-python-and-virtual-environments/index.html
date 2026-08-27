@@ -1,0 +1,395 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 43: Installing Python and Virtual Environments · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will have a working Python you can run from the terminal, and you will be able to create, activate, and reproduce an isolated virtual environment for any project — the foundation every reproducible AI project stands on."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-043-installing-python-and-virtual-environments/"><meta property="og:title" content="Day 43: Installing Python and Virtual Environments · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will have a working Python you can run from the terminal, and you will be able to create, activate, and reproduce an isolated virtual environment for any project — the foundation every reproducible AI project stands on."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-043-installing-python-and-virtual-environments/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-043-installing-python-and-virtual-environments.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 43: Installing Python and Virtual Environments · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 43: Installing Python and Virtual Environments · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will have a working Python you can run from the terminal, and you will be able to create, activate, and reproduce an isolated virtual environment for any project — the foundation every reproducible AI project stands on."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-043-installing-python-and-virtual-environments.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+      // Dark is the default regardless of OS preference - this is a dark-first
+      // design. A visitor who picks light with the toggle keeps it. Applied
+      // before first paint so there is no flash of the wrong theme.
+      (() => {
+        let t;
+        try {
+          t = localStorage.getItem('theme');
+        } catch {
+          t = null;
+        }
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+      })();
+    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+<style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
+.starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+365 Days of AI
+</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+Labs
+</a> </header> <main id="main">  <article data-day="43" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/programming-with-python">Programming with Python</a>  ›  <span>Python Setup and First Programs</span>  › 
+Day 43 </p> <h1 data-astro-cid-whrtx2kk>Day 43: Installing Python and Virtual Environments</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-043-installing-python-and-virtual-environments.png" width="1200" height="630" alt="Day 43 of 365 — Installing Python and Virtual Environments" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will have a working Python you can run from the terminal, and you will be able to create, activate, and reproduce an isolated virtual environment for any project — the foundation every reproducible AI project stands on.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Programming with Python</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Python Setup and First Programs</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/programming-with-python/day-043-installing-python-and-virtual-environments" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/programming-with-python/day-043-installing-python-and-virtual-environments</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
+cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/programming-with-python/day-043-installing-python-and-virtual-environments</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/ai-roadmap-365/labs/day-043-installing-python-and-virtual-environments" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Explain why Python is the dominant language for AI work: readability, a huge library ecosystem, and its role as a glue language</li><li data-astro-cid-whrtx2kk>Describe how Python runs code through the interpreter, distinguish a script from the REPL, and know why the course uses python3 rather than python</li><li data-astro-cid-whrtx2kk>Install Python by at least one method (python.org, an OS package manager, or pyenv for multiple versions) and use which python to confirm which interpreter runs</li><li data-astro-cid-whrtx2kk>Explain what a virtual environment is and why isolating each project&#39;s packages prevents global pollution and version conflicts</li><li data-astro-cid-whrtx2kk>Create, activate, and deactivate a virtual environment with python -m venv, and install packages into it with pip</li><li data-astro-cid-whrtx2kk>Capture a project&#39;s dependencies in a requirements.txt file and recreate the same environment elsewhere, connecting isolation to reproducible AI work</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Course 1 fluency: comfort with the terminal, PATH (Day 11), and package managers (Day 13)</li><li data-astro-cid-whrtx2kk>A computer running macOS, Linux, or Windows with permission to open a terminal and install software</li></ul> <h2 id="why-this-matters">Why this matters</h2>
+<p>This is the first day of Course 2, and it is the day you get a working Python — the language you will write in for the rest of this course and almost certainly for the rest of your work in AI. Nearly every AI tool you have heard of is used through Python: the libraries that load data, the frameworks that train and run models, the small scripts that glue an experiment together. Before you can write a single line of that, two boring-sounding things have to be true: Python must be installed and runnable from your terminal, and each project must keep its own set of add-on libraries separate from every other project. Get these two things right today and the next 300 days are smooth. Get them wrong and you will fight your own machine for weeks.</p>
+<p>The stakes are concrete, not abstract. Picture two projects: one needs version 1.5 of a data library, another needs version 2.1 of the same library, and the two versions are not compatible. If both projects share one global pile of packages, installing what the second project needs quietly breaks the first — and you discover this only when yesterday’s working code suddenly throws errors. That single failure mode is behind a huge share of “it worked on my machine, why not on yours?” frustration. It costs hours of debugging, and in a team it costs everyone’s hours at once.</p>
+<p>Here is the payoff you are building toward. Every serious AI project is, underneath, a specific version of Python plus a pinned list of libraries at exact versions. When you can reproduce that combination on any machine, your results become reproducible too — the same code, the same packages, the same output. Reproducibility is the floor that all trustworthy AI work stands on, and it starts with the humble skill you learn today: installing Python and giving each project its own isolated environment.</p>
+<h2 id="the-idea-in-plain-language">The idea in plain language</h2>
+<p>There are really two ideas here, and they fit together.</p>
+<p>The first idea is the <strong>interpreter</strong>. Python is a language, but “Python” is also the name of the program that reads your code and does what it says. That program is called the interpreter, usually run from the terminal as <code>python3</code>. You can hand it a file full of code and it runs the whole file, top to bottom. Or you can start it with no file and it gives you a live prompt where you type one line, see the result, type another — this interactive mode is called the REPL, for read-eval-print loop. Same interpreter, two ways to feed it code.</p>
+<p>The second idea is the <strong>virtual environment</strong>. Out of the box, Python comes with a large standard library, but real work needs extra libraries that other people wrote and published. You install those with a tool called <code>pip</code>. The problem is <em>where</em> they get installed. If every library goes into one shared, global location, all your projects are forced to agree on one version of everything — which, as we just saw, they often cannot. A virtual environment (a “venv”) solves this by giving one project its own private folder of installed packages, walled off from the rest of the system. Activate the venv and <code>python</code> and <code>pip</code> quietly point at that private folder instead of the global one. Deactivate it and you are back to normal. Each project gets its own clean, named workspace, and the projects never step on each other.</p>
+<p>Everything else today — how to install Python, how to make and use a venv, what <code>requirements.txt</code> is for — is detail hanging off those two ideas.</p>
+<h2 id="historical-background">Historical background</h2>
+<p>Python was created by the Dutch programmer Guido van Rossum, who began working on it in December 1989 and released the first version to the public in 1991. He named it not after the snake but after the British comedy troupe Monty Python’s Flying Circus, which is why Python culture has always leaned toward readable, slightly playful examples rather than dense formality. From the start the language prized clarity: code that a human can read almost like English, with meaning carried by indentation rather than braces and semicolons.</p>
+<p>For years two major versions coexisted, and this history still shapes the commands you type. Python 2.0 arrived in 2000. Python 3.0, a deliberately backward-incompatible cleanup of the language, was released on 3 December 2008. Because Python 3 broke some Python 2 code, the world took over a decade to move across, and during that long overlap many systems shipped <em>both</em> — with <code>python</code> meaning the old Python 2 and <code>python3</code> meaning the new one. Python 2 finally reached its official end of life on 1 January 2020, and today “Python” means Python 3. But the naming scar remains: on many machines <code>python3</code> is the safe, unambiguous command, which is why this course uses it.</p>
+<p>The tools for isolating projects grew up alongside the language. Early on there was no built-in way to keep projects’ packages apart, so in 2007 Ian Bicking released a third-party tool called <code>virtualenv</code> that created isolated environments by hand. The idea proved so essential that a slimmed-down version was folded into Python itself: the <code>venv</code> module became part of the standard library in Python 3.3 (2012), described in a design document known as PEP 405. Package installation followed a similar path — the installer that became <code>pip</code> appeared around 2008, the Python Package Index (PyPI), the public warehouse of shared libraries, launched in 2003, and since Python 3.4 (2014) a fresh Python install comes with <code>pip</code> already included. So the whole toolkit you use today — interpreter, <code>venv</code>, <code>pip</code>, PyPI — was assembled piece by piece over two decades in response to real pain.</p>
+<h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
+<p>A <strong>Python installation</strong> is the interpreter program plus its standard library, sitting somewhere on your disk and reachable from your terminal. A <strong>virtual environment</strong> is not a second copy of Python and not a virtual machine or container — it is a lightweight folder that mostly contains links back to your real Python, plus its own private place to install packages and a small script that, when “activated,” rewires your shell so <code>python</code> and <code>pip</code> resolve to that folder. That is the whole trick.</p>
+<p>Because these words get muddled, it helps to say plainly what each is not.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>It is often confused with…</th><th>…but actually</th></tr></thead><tbody><tr><td>A virtual environment vs. a virtual machine</td><td>A venv is just a folder redirecting <code>python</code>/<code>pip</code>; a virtual machine emulates a whole computer. A venv is tiny and instant.</td></tr><tr><td>A venv vs. a container (like Docker)</td><td>A container packages an entire operating system and its files; a venv isolates only Python packages, within your existing OS.</td></tr><tr><td><code>pip</code> vs. Python itself</td><td>Python is the interpreter that runs code; <code>pip</code> is a separate program that downloads and installs libraries into wherever Python is looking.</td></tr><tr><td>Installing a package globally vs. into a venv</td><td>Global installs are shared by every project and cause version clashes; a venv keeps each project’s packages private.</td></tr><tr><td><code>python</code> vs. <code>python3</code></td><td>On many systems these differ (or one is missing). <code>python3</code> is the explicit, portable way to name Python 3.</td></tr></tbody></table>
+<p>Keep one more distinction clear: a virtual environment isolates <em>packages</em>, not Python versions. All your venvs typically share one base interpreter. If you need two different <em>versions</em> of Python — say 3.11 for one project and 3.13 for another — that is a separate job, handled by a version manager like <code>pyenv</code>, which we meet shortly.</p>
+<h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
+<p>Virtual environments exist to solve one stubborn conflict: different projects want different, sometimes incompatible, versions of the same libraries — and a single computer, with one global pile of packages, cannot satisfy them all at once.</p>
+<p>Before venvs, you had exactly one place where packages lived. Installing a new library, or upgrading one, changed that shared place for <em>every</em> project on the machine. Upgrade a library because Project B needs the new features, and Project A — which depended on the old behavior — silently breaks. Worse, some system utilities on macOS and Linux are themselves written in Python and rely on specific package versions; installing over them can damage the operating system’s own tools. The result was a machine where no project’s dependencies were ever safe from any other’s.</p>
+<p>The venv fixes this by making isolation the default. Each project gets a private environment, so “install this library at this version” affects only the project you are working on. Two immediate benefits follow. First, <strong>no global pollution</strong>: your system Python stays pristine, and experiments in one project cannot harm another or the OS. Second, <strong>reproducibility</strong>: because a project’s exact dependencies live in one clearly named place, you can write them down (in a <code>requirements.txt</code> file) and recreate the same environment on another machine or another day. That second benefit is the quiet hero of the whole course — it is what turns “it works on my machine” into “it works on any machine.”</p>
+<h2 id="how-it-works">How it works</h2>
+<p>Let’s walk from a bare interpreter up to a fully isolated project, in the order you will actually do it.</p>
+<h3 id="the-interpreter-and-the-two-ways-to-run-code">The interpreter and the two ways to run code</h3>
+<p>When you type <code>python3</code> in a terminal and press Return with no filename, you land at the REPL — a prompt (<code>&gt;&gt;&gt;</code>) where you type one expression, the interpreter evaluates it, prints the result, and waits for the next line. It is the fastest way to try something small. Type <code>exit()</code> to leave.</p>
+<p>When you instead run <code>python3 hello.py</code>, the interpreter reads the whole file and executes it from top to bottom, printing whatever the code tells it to. Scripts are how real programs are stored and shared; the REPL is your scratchpad.</p>
+<p><img src="/ai-roadmap-365/_astro/python-run.DC9iLfSu_1BvU0B.svg" alt="Diagram: how Python runs a script through the interpreter, and the read-eval-print loop of the REPL" loading="lazy" decoding="async" fetchpriority="auto" width="720" height="460"></p>
+<p>Both paths flow through the same interpreter. A script hands it an entire file at once; the REPL hands it one line at a time. Nothing else differs.</p>
+<h3 id="finding-which-python-you-are-running">Finding which Python you are running</h3>
+<p>On Day 11 you learned about <code>PATH</code> — the ordered list of folders your shell searches to turn a typed command into a program on disk. That idea matters now, because you may have several Pythons installed (one from the OS, one from python.org, one from a version manager) and only one of them answers when you type <code>python3</code>. To see which, run <code>which python3</code> (macOS and Linux) — it prints the full path of the interpreter that will run. Run <code>python3 --version</code> to see its version number. When something behaves strangely, “which Python am I actually using?” is nearly always the first question to ask, and <code>which</code> answers it.</p>
+<h3 id="creating-and-using-a-virtual-environment">Creating and using a virtual environment</h3>
+<p>The built-in <code>venv</code> module makes an environment in one command. Suppose your project folder is <code>myproject</code>. Inside it you run <code>python3 -m venv .venv</code> — the <code>-m venv</code> part means “run the standard-library module named venv,” and <code>.venv</code> is the folder it creates to hold the environment. (The leading dot is just a convention that keeps it tidy and easy to ignore in listings; any name works.)</p>
+<p>Creating the environment does not turn it on. To use it you <strong>activate</strong> it, which edits your current shell so <code>python</code> and <code>pip</code> point inside <code>.venv</code>:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Task</th><th>macOS / Linux (bash or zsh)</th><th>What it does</th></tr></thead><tbody><tr><td>Create the environment</td><td><code>python3 -m venv .venv</code></td><td>Builds a <code>.venv</code> folder with a private packages area</td></tr><tr><td>Activate it</td><td><code>source .venv/bin/activate</code></td><td>Rewires this shell so <code>python</code>/<code>pip</code> mean the venv’s</td></tr><tr><td>Confirm it worked</td><td><code>which python</code></td><td>Should now print a path ending in <code>.venv/bin/python</code></td></tr><tr><td>Install a package</td><td><code>pip install &lt;name&gt;</code></td><td>Installs into the venv only, never globally</td></tr><tr><td>Freeze exact versions</td><td><code>pip freeze &gt; requirements.txt</code></td><td>Writes every installed package and its version to a file</td></tr><tr><td>Recreate elsewhere</td><td><code>pip install -r requirements.txt</code></td><td>Installs exactly those pinned versions</td></tr><tr><td>Turn it off</td><td><code>deactivate</code></td><td>Restores your shell to the normal, global Python</td></tr></tbody></table>
+<p>Once activated, your prompt usually shows the environment’s name in parentheses, like <code>(.venv)</code>, so you always know it is on. Now <code>pip install requests</code> puts the <code>requests</code> library <em>inside</em> <code>.venv</code> and nowhere else. When you are done, <code>deactivate</code> returns you to normal — the environment still exists on disk, ready to activate again next time.</p>
+<p><img src="/ai-roadmap-365/_astro/venv-isolation.B87miwyW_2toCsU.svg" alt="Diagram: one shared Python with two projects that each keep their own packages in separate virtual environments" loading="lazy" decoding="async" fetchpriority="auto" width="720" height="470"></p>
+<h3 id="pip-pypi-and-requirementstxt">pip, PyPI, and requirements.txt</h3>
+<p><code>pip</code> is Python’s package installer, and by default it downloads from the Python Package Index (PyPI) — a huge public repository of open-source libraries, the same kind of package manager idea you met on Day 13, now specialized for Python. <code>pip install pandas</code> asks PyPI for the <code>pandas</code> package, downloads it, and drops it into the active environment.</p>
+<p>The final piece is writing your dependencies down. <code>pip freeze</code> lists every installed package with its exact version, like <code>requests==2.32.3</code>. Redirect that to a file — <code>pip freeze &gt; requirements.txt</code> — and you have a precise recipe for the environment. Anyone (including future you) can then run <code>pip install -r requirements.txt</code> in a fresh venv and get the identical set of packages. This one file is how a project’s environment travels from machine to machine unchanged.</p>
+<h2 id="an-everyday-analogy">An everyday analogy</h2>
+<p>Think of your computer as a shared <strong>workshop</strong>, and the base Python installation as the workshop’s power and workbenches — always there, used by everyone. Each project you take on is a job that needs its own particular set of tools at particular settings.</p>
+<p>Without virtual environments, everyone works off one giant shared pegboard of tools. If your birdhouse job needs a saw set one way and your bookshelf job needs the same saw set another way, you are constantly readjusting the one saw and hoping you remember the setting — and the moment a coworker “improves” it for their job, yours is silently ruined. This is the global-packages problem exactly: one shared pile, endless collisions.</p>
+<p>A virtual environment is a <strong>rolling tool cart, labeled for one job</strong>. When you start the birdhouse project, you wheel up its cart and stock it with precisely the tools and settings that job needs. Activating the venv is wheeling that cart to your bench; every tool you now reach for is the birdhouse cart’s version. The bookshelf project has its own cart with its own saw at its own setting, and the two never interfere — even though both plug into the same shared workshop power (the one base Python). Deactivating is wheeling the cart back to storage; the cart and its tools are untouched, ready for tomorrow. And <code>requirements.txt</code> is the packing list taped to the cart: read it, and you can restock an identical cart in any workshop in the world. The analogy holds all the way down because a venv really is just a labeled container of tools that redirects which “saw” you grab.</p>
+<h2 id="examples-in-practice">Examples in practice</h2>
+<p>Let’s make it concrete with a short, real session. First, confirm the interpreter and try the REPL:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ python3 --version</span></span>
+<span class="line"><span>Python 3.14.0</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ python3</span></span>
+<span class="line"><span>&gt;&gt;&gt; 2 + 2</span></span>
+<span class="line"><span>4</span></span>
+<span class="line"><span>&gt;&gt;&gt; &quot;AI&quot;.lower()</span></span>
+<span class="line"><span>&#39;ai&#39;</span></span>
+<span class="line"><span>&gt;&gt;&gt; exit()</span></span></code></pre>
+<p>The <code>&gt;&gt;&gt;</code> lines are the REPL: you type, it evaluates, it prints. Now create and use an environment for a project:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ mkdir myproject &amp;&amp; cd myproject</span></span>
+<span class="line"><span>$ python3 -m venv .venv</span></span>
+<span class="line"><span>$ which python</span></span>
+<span class="line"><span>/usr/bin/python            # still the global Python — not activated yet</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ source .venv/bin/activate</span></span>
+<span class="line"><span>(.venv) $ which python</span></span>
+<span class="line"><span>/Users/you/myproject/.venv/bin/python    # now inside the venv</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>(.venv) $ python -c &quot;import sys; print(sys.prefix)&quot;</span></span>
+<span class="line"><span>/Users/you/myproject/.venv               # confirms isolation</span></span></code></pre>
+<p>That <code>sys.prefix</code> line is the proof of isolation: <code>sys.prefix</code> is where Python thinks its environment lives, and after activation it points inside <code>.venv</code>. Install something and record it:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>(.venv) $ pip install requests</span></span>
+<span class="line"><span>(.venv) $ pip freeze &gt; requirements.txt</span></span>
+<span class="line"><span>(.venv) $ cat requirements.txt</span></span>
+<span class="line"><span>requests==2.32.3</span></span>
+<span class="line"><span>...</span></span>
+<span class="line"><span>(.venv) $ deactivate</span></span>
+<span class="line"><span>$ which python</span></span>
+<span class="line"><span>/usr/bin/python            # back to normal</span></span></code></pre>
+<p>The whole story of the day lives in that transcript: an interpreter you can talk to, an environment you create, activate to redirect <code>python</code>/<code>pip</code>, install into privately, freeze into a recipe, and deactivate when done. In today’s lab you will run exactly this flow yourself — offline, no downloads required — and watch <code>which python</code> and <code>sys.prefix</code> change to prove the isolation is real.</p>
+<h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
+<p><strong>Security.</strong> Installing packages means running other people’s code, so the source matters. <code>pip</code> pulls from PyPI, which is open to anyone, so occasional malicious or typo-squatted packages appear (a fake <code>reqeusts</code> hoping you mistype <code>requests</code>). Install only packages you mean to, prefer well-known ones, and pin exact versions in <code>requirements.txt</code> so an attacker cannot slip a bad update in under a name you already trust. Because a venv keeps installs project-local, a suspect package is at least confined to that project rather than your whole system.</p>
+<p><strong>Privacy.</strong> A virtual environment is local and offline once built — creating it, as today’s lab shows, needs no network at all. Nothing about your code or data leaves the machine simply by making an environment. The privacy questions come later, from the <em>packages</em> you add and what they phone home; the environment itself is inert.</p>
+<p><strong>Performance.</strong> Virtual environments add essentially no runtime cost — activation just changes some path settings, and code inside a venv runs exactly as fast as it would globally. The real performance benefit is human: minutes to recreate a known-good environment instead of hours untangling a broken global one.</p>
+<p><strong>Scalability.</strong> This is where the day pays off across a whole team and across servers. When every project pins its dependencies, a new teammate goes from empty machine to working setup with one <code>pip install -r requirements.txt</code>. The same file drives automated build servers and deployment. Isolation is what lets one machine host dozens of projects with contradictory requirements without any of them colliding.</p>
+<p><strong>Cost.</strong> Everything here is free and open source — the interpreter, <code>venv</code>, <code>pip</code>, and PyPI cost nothing. The cost avoided is engineer time: reproducible environments are the cheapest insurance you will ever buy against the expensive, morale-draining “works on my machine” bug hunt.</p>
+<h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
+<p>The built-in <code>venv</code> plus <code>pip</code> is the standard, always-available baseline, and it is what this course uses. But you should know the neighboring tools and when each earns its place. All of the following are free.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool</th><th>What it does</th><th>When to choose it</th></tr></thead><tbody><tr><td><code>venv</code> + <code>pip</code> (built in)</td><td>Creates one isolated package environment; installs from PyPI</td><td>The default. Always present, nothing to learn twice, works everywhere. Start here.</td></tr><tr><td><code>virtualenv</code></td><td>The original third-party environment creator; a bit faster and more configurable than <code>venv</code></td><td>Legacy projects or when you need its extra options; for most people <code>venv</code> is enough now</td></tr><tr><td><code>pyenv</code></td><td>Installs and switches between multiple <em>Python versions</em> on one machine</td><td>When different projects need different Python versions (e.g. 3.11 vs 3.13). Pairs with <code>venv</code>, doesn’t replace it</td></tr><tr><td><code>uv</code></td><td>A very fast, modern tool that manages Python versions, environments, and packages together</td><td>When install speed matters or you want one tool for versions + packages; increasingly popular</td></tr><tr><td><code>poetry</code></td><td>Manages dependencies, environments, and packaging with a single project file and a lock file</td><td>When you are building a library to publish, or want stricter, lock-file-based dependency resolution</td></tr><tr><td><code>conda</code></td><td>A separate package and environment manager, strong with scientific and compiled libraries</td><td>Data-science and numerical work where non-Python dependencies are painful with pip; common in research</td></tr></tbody></table>
+<p>The honest summary: learn <code>venv</code> + <code>pip</code> first because it is universal and teaches the concepts cleanly. Reach for <code>pyenv</code> the day you need two Python versions, and look at <code>uv</code> or <code>poetry</code> once you are comfortable and want speed or reproducibility guarantees. <code>conda</code> lives in its own world and is worth knowing if your work leans heavily numerical. None of them changes the mental model you built today; they just automate more of it.</p>
+<h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>Virtual environment</td><td>Global (system) Python</td><td>A venv isolates a project’s packages; the global install is shared by everything and prone to version clashes</td></tr><tr><td><code>venv</code></td><td><code>pyenv</code></td><td><code>venv</code> isolates <em>packages</em> for one Python; <code>pyenv</code> installs and switches between different <em>Python versions</em></td></tr><tr><td><code>pip</code></td><td>PyPI</td><td><code>pip</code> is the installer program; PyPI is the online repository it downloads packages from</td></tr><tr><td>Script (<code>python3 file.py</code>)</td><td>REPL (<code>python3</code>)</td><td>A script runs a whole file at once; the REPL runs one typed line at a time, interactively</td></tr><tr><td><code>python</code></td><td><code>python3</code></td><td>Historically <code>python</code> could mean Python 2; <code>python3</code> explicitly names Python 3 and is portable</td></tr><tr><td><code>requirements.txt</code></td><td>An installed venv</td><td>The file is a text recipe of versions; the venv is the actual folder of installed packages built from it</td></tr></tbody></table>
+<h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
+<p>Create a virtual environment for <strong>every</strong> real project — that is the professional default, and it costs one command. The moment a project needs even one library from PyPI, it should have its own venv so that library, at its exact version, is captured and isolated. Any code you intend to keep, share, hand to a teammate, or run again next month belongs in a venv with a <code>requirements.txt</code> beside it. In this course, every project from here on will start this way.</p>
+<p>There are a few honest exceptions. If you are only using Python’s standard library and never installing anything, a venv adds little (though it still costs nothing to make one, and habits are worth keeping). The REPL for a ten-second calculation needs no environment. And for throwaway one-liners you will never run again, ceremony is optional. But the failure mode is almost always <em>too few</em> environments, not too many: the beginner mistake is installing everything globally “just to try it,” then discovering months later that two projects have quietly poisoned each other’s dependencies. When in doubt, make the venv.</p>
+<p>The connection to your AI goal is direct and worth stating plainly. Every AI project you build or clone will be a specific Python version plus a pinned list of libraries — the training framework, the data tools, the model runtime — at exact versions that were tested to work together. That combination lives in a virtual environment and is written down in a requirements file. When you can recreate it faithfully, your experiments become reproducible: the same code and the same environment give the same result, on your laptop today and on a server next year. Almost every “it works on my machine” mystery in AI work turns out to be a Python-environment problem — a missing package, a mismatched version, the wrong interpreter. The unglamorous skill you learned today is therefore the foundation the glamorous work rests on. Master it now and you will never have to think about it again.</p>
+<h2 id="knowledge-check">Knowledge check</h2>
+<p>Try these from memory before looking back:</p>
+<ol>
+<li>In one or two sentences each, explain the difference between the Python <em>interpreter</em> and a <em>virtual environment</em>.</li>
+<li>Your teammate can run a project fine, but on your machine it crashes with “module not found.” Give the most likely cause and the file that would fix it.</li>
+<li>What does <code>source .venv/bin/activate</code> actually change about your shell, and how can you confirm it worked?</li>
+<li>Explain why installing packages globally is risky, using the two-projects-need-different-versions example.</li>
+<li>When would you reach for <code>pyenv</code> rather than <code>venv</code>, and why are they not competitors?</li>
+</ol>
+<h2 id="hands-on-exercise">Hands-on exercise</h2>
+<p>Time to prove the isolation is real on your own machine. In this exercise — worked through in full in today’s lab directory — you will create a virtual environment, activate it, and watch <code>which python</code> and <code>sys.prefix</code> move inside it, then clean up. It requires no downloads and no network.</p>
+<p>Open your terminal and run each command, watching what changes:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">python3</span><span style="color:#79B8FF"> --version</span></span></code></pre>
+<p>Confirms Python 3 is installed and prints its version. If this fails, install Python first (see the lab’s requirements file).</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">mkdir</span><span style="color:#9ECBFF"> venv-demo</span><span style="color:#E1E4E8"> &amp;&amp; </span><span style="color:#79B8FF">cd</span><span style="color:#9ECBFF"> venv-demo</span></span>
+<span class="line"><span style="color:#B392F0">python3</span><span style="color:#79B8FF"> -m</span><span style="color:#9ECBFF"> venv</span><span style="color:#9ECBFF"> .venv</span></span></code></pre>
+<p>Creates a project folder and builds a virtual environment named <code>.venv</code> inside it. This step is entirely offline.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">which</span><span style="color:#9ECBFF"> python</span></span>
+<span class="line"><span style="color:#79B8FF">source</span><span style="color:#9ECBFF"> .venv/bin/activate</span></span>
+<span class="line"><span style="color:#79B8FF">which</span><span style="color:#9ECBFF"> python</span></span></code></pre>
+<p>Run <code>which python</code> before and after activating. Before, it points at the global Python; after, it points inside <code>.venv/bin</code> — visible proof the environment is active.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">python</span><span style="color:#79B8FF"> -c</span><span style="color:#9ECBFF"> &quot;import sys; print(sys.prefix)&quot;</span></span></code></pre>
+<p>Prints where Python thinks its environment lives. While the venv is active, this path ends in <code>.venv</code>, confirming isolation.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">deactivate</span></span>
+<span class="line"><span style="color:#79B8FF">cd</span><span style="color:#9ECBFF"> ..</span><span style="color:#E1E4E8"> &amp;&amp; </span><span style="color:#B392F0">rm</span><span style="color:#79B8FF"> -rf</span><span style="color:#9ECBFF"> venv-demo</span></span></code></pre>
+<p>Turns the environment off and removes the demo folder, leaving nothing behind.</p>
+<h3 id="expected-output">Expected output</h3>
+<p>A typical run (your paths will differ — that is the point):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ python3 --version</span></span>
+<span class="line"><span>Python 3.14.0</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ python3 -m venv .venv</span></span>
+<span class="line"><span>$ which python</span></span>
+<span class="line"><span>/opt/homebrew/bin/python3        # global, before activation</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ source .venv/bin/activate</span></span>
+<span class="line"><span>(.venv) $ which python</span></span>
+<span class="line"><span>/Users/you/venv-demo/.venv/bin/python    # now inside the venv</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>(.venv) $ python -c &quot;import sys; print(sys.prefix)&quot;</span></span>
+<span class="line"><span>/Users/you/venv-demo/.venv               # isolation confirmed</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>(.venv) $ deactivate</span></span>
+<span class="line"><span>$</span></span></code></pre>
+<p>Line by line: the version confirms Python 3; <code>which python</code> shows the global interpreter before activation and the venv’s interpreter after; <code>sys.prefix</code> points inside <code>.venv</code>, which is the definition of “the environment is isolated”; and <code>deactivate</code> returns you to normal, with the <code>(.venv)</code> prompt marker disappearing.</p>
+<h3 id="validate-your-work">Validate your work</h3>
+<p>You are done when you can check every box:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> <code>python3 --version</code> prints a 3.x version.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>python3 -m venv .venv</code> created a <code>.venv</code> folder (list it with <code>ls .venv</code>).</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>which python</code> printed a <em>different</em> path before and after activation.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> After activation, <code>sys.prefix</code> ended in your <code>.venv</code> path.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Your prompt showed <code>(.venv)</code> while active and lost it after <code>deactivate</code>.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> After cleanup, the <code>venv-demo</code> folder is gone (<code>ls</code> shows no <code>venv-demo</code>).</li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><strong><code>python3: command not found</code>.</strong> Python is not installed or not on your <code>PATH</code>. See the lab’s <code>requirements/README.md</code>: macOS and most Linux ship it, or install via your OS package manager (Day 13) or python.org.</li>
+<li><strong><code>source: no such file</code> or activate not found.</strong> You are not in the folder that contains <code>.venv</code>, or the venv did not build. Confirm with <code>ls .venv/bin/</code> — you should see an <code>activate</code> file. On Windows the path is <code>.venv\Scripts\activate</code> instead.</li>
+<li><strong><code>which python</code> looks the same after activating.</strong> The activation did not take effect in this shell. Re-run <code>source .venv/bin/activate</code> in the <em>same</em> terminal window; activation only affects the shell you run it in.</li>
+<li><strong>Prompt shows no <code>(.venv)</code> marker.</strong> Some shells suppress it, but the environment can still be active — trust <code>which python</code> and <code>sys.prefix</code> over the prompt text.</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<ul>
+<li><strong>Installing packages globally by forgetting to activate.</strong> If you <code>pip install</code> before activating, the package lands in the global Python and pollutes it. Always confirm <code>(.venv)</code> (or <code>which python</code>) first.</li>
+<li><strong>Committing the <code>.venv</code> folder to version control.</strong> The environment is large, machine-specific, and rebuildable; commit the <em><code>requirements.txt</code></em> instead and add <code>.venv</code> to <code>.gitignore</code>.</li>
+<li><strong>Confusing <code>python</code> with <code>python3</code>.</strong> Inside an active venv, <code>python</code> is correct and points at the venv. Outside one, prefer <code>python3</code> to avoid an accidental Python 2. When unsure, run <code>which python</code>.</li>
+</ul>
+<h2 id="practice-assignment">Practice assignment</h2>
+<p>Open the worksheet in the starter directory of today’s lab (<code>starter/venv-worksheet.md</code>) and complete it for your machine. Record: your <code>python3 --version</code> output; the full path that <code>which python</code> prints <em>before</em> activation and <em>after</em> activation; and the <code>sys.prefix</code> value while the venv is active. Then, in one short paragraph (4–6 sentences), explain in your own words what activation changed and why <code>sys.prefix</code> pointing inside <code>.venv</code> proves the project’s packages are isolated from the global Python. Keep the worksheet — the next lessons build directly on this environment.</p>
+<h2 id="extension-challenge">Extension challenge</h2>
+<p>Go one step further and make a <em>reproducible</em> environment recipe using only the standard library, so no network is needed. With your venv active, run <code>pip freeze</code> — on a brand-new venv it prints little or nothing, which is itself informative: a fresh environment starts empty except for the installer. Now create a <code>requirements.txt</code> by hand containing a single commented line documenting your Python version, for example <code># built and tested with Python 3.14</code>, and add a note that this project uses only the standard library. Then, from memory, write down the exact command a teammate would run inside a fresh venv to install from your file (<code>pip install -r requirements.txt</code>) and explain, in two or three sentences, why pinning exact versions in that file — the way real AI projects do with <code>==</code> version markers — is what makes an environment reproducible across machines and across time. You have now practiced, in miniature, the exact discipline that keeps professional AI experiments repeatable.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. What is the Python &quot;interpreter&quot;? </strong> </p> <ol type="A"> <li>A website that translates Python into other programming languages</li><li>The program (run as python3) that reads your code and executes it</li><li>A file that lists which packages a project needs</li><li>The folder where installed packages are stored</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> The program (run as python3) that reads your code and executes it </p> <p>Python is both a language and the program that runs code written in it. That program is the interpreter, usually invoked as python3, and it can run a whole script file or accept lines interactively in the REPL.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. What is the difference between running a script and using the REPL? </strong> </p> <ol type="A"> <li>A script runs an entire file at once; the REPL evaluates one typed line at a time interactively</li><li>A script needs a virtual environment but the REPL does not</li><li>The REPL runs faster because it skips the interpreter</li><li>Scripts use python3 while the REPL uses a completely different program</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> A script runs an entire file at once; the REPL evaluates one typed line at a time interactively </p> <p>Both feed the same interpreter. Handing it a file (python3 hello.py) runs the whole file top to bottom; starting python3 with no file gives the REPL — read, evaluate, print, loop — where you type one line at a time.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. Why does this course prefer the command python3 over python? </strong> </p> <ol type="A"> <li>python3 runs three times faster than python</li><li>python is only available on Windows</li><li>On many systems python historically meant Python 2, while python3 explicitly and portably names Python 3</li><li>python cannot create virtual environments</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> On many systems python historically meant Python 2, while python3 explicitly and portably names Python 3 </p> <p>During the long overlap between Python 2 and Python 3, many machines shipped both, with python meaning the old Python 2. python3 removes the ambiguity and works portably across systems.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. What problem does a virtual environment primarily solve? </strong> </p> <ol type="A"> <li>It makes Python code run faster at runtime</li><li>It lets different projects keep their own package versions so they do not conflict in one shared global location</li><li>It encrypts your source code for security</li><li>It replaces the need to install Python at all</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> It lets different projects keep their own package versions so they do not conflict in one shared global location </p> <p>Without isolation, all projects share one global pile of packages, so one project needing a different version of a library breaks another. A venv gives each project a private package folder, ending those collisions.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. After running source .venv/bin/activate, how can you confirm the environment is active? </strong> </p> <ol type="A"> <li>Restart the computer and check again</li><li>Run which python and see a path ending in .venv/bin/python (and often a (.venv) prompt marker)</li><li>Check that the file requirements.txt exists</li><li>Run python3 --version and confirm it prints 3.x</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Run which python and see a path ending in .venv/bin/python (and often a (.venv) prompt marker) </p> <p>Activation rewires the current shell so python and pip point inside the venv. which python then prints a path inside .venv, and most shells also show a (.venv) marker in the prompt. sys.prefix pointing inside .venv is the definitive proof.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. What is the relationship between pip and PyPI? </strong> </p> <ol type="A"> <li>They are two names for the same program</li><li>pip is the online repository and PyPI is the installer</li><li>pip is the installer program; PyPI (the Python Package Index) is the online repository it downloads packages from</li><li>PyPI is a virtual environment manager and pip creates environments</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> pip is the installer program; PyPI (the Python Package Index) is the online repository it downloads packages from </p> <p>pip is the tool that installs packages, and by default it fetches them from PyPI, the public online index of open-source Python libraries — the Python-specific version of the package-manager idea from Day 13.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. What does a requirements.txt file give you? </strong> </p> <ol type="A"> <li>A backup copy of your source code</li><li>A text recipe of the exact packages and versions, so the same environment can be recreated elsewhere</li><li>A faster interpreter for large projects</li><li>Automatic activation of the virtual environment</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> A text recipe of the exact packages and versions, so the same environment can be recreated elsewhere </p> <p>pip freeze writes every installed package and its exact version to requirements.txt. Running pip install -r requirements.txt in a fresh venv rebuilds the identical set of packages, which is what makes an environment reproducible across machines and time.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. You need Python 3.11 for one project and Python 3.13 for another on the same machine. Which tool is designed for that? </strong> </p> <ol type="A"> <li>venv, by creating two environments</li><li>pip, by installing both versions</li><li>pyenv, which installs and switches between multiple Python versions</li><li>requirements.txt, by listing both versions</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> pyenv, which installs and switches between multiple Python versions </p> <p>A venv isolates packages but shares one base interpreter. Switching between different Python versions is a separate job handled by a version manager like pyenv, which installs and selects among multiple Python versions and pairs with venv rather than replacing it.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>interpreter</strong> </dt> <dd data-astro-cid-whrtx2kk>The program (run as python3) that reads Python code and executes it, either from a whole script file or one line at a time in the REPL.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>REPL</strong> </dt> <dd data-astro-cid-whrtx2kk>The read-eval-print loop: Python&#39;s interactive prompt (&gt;&gt;&gt;), where you type one line, it evaluates and prints the result, then waits for the next line.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>script</strong> </dt> <dd data-astro-cid-whrtx2kk>A file of Python code, run all at once with python3 filename.py, as opposed to typing lines interactively in the REPL.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>virtual environment</strong> </dt> <dd data-astro-cid-whrtx2kk>A lightweight, isolated folder that gives one project its own private set of installed packages, kept separate from the global Python and from other projects.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>venv</strong> </dt> <dd data-astro-cid-whrtx2kk>Python&#39;s built-in module for creating virtual environments, used as python3 -m venv .venv; also a common name for the environment folder it creates.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>activate</strong> </dt> <dd data-astro-cid-whrtx2kk>To turn on a virtual environment (source .venv/bin/activate), which rewires the current shell so python and pip point inside that environment; deactivate turns it off.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>pip</strong> </dt> <dd data-astro-cid-whrtx2kk>Python&#39;s package installer: the tool that downloads and installs libraries into whichever environment is active, by default from PyPI.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>PyPI</strong> </dt> <dd data-astro-cid-whrtx2kk>The Python Package Index, the public online repository of open-source Python libraries that pip downloads from by default.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>package</strong> </dt> <dd data-astro-cid-whrtx2kk>A reusable library of Python code, published on PyPI and installed with pip, that adds functionality beyond the standard library.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>dependency</strong> </dt> <dd data-astro-cid-whrtx2kk>A package that a project needs in order to run; a project&#39;s dependencies (and their exact versions) are what a virtual environment isolates and requirements.txt records.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>requirements.txt</strong> </dt> <dd data-astro-cid-whrtx2kk>A plain-text file listing a project&#39;s packages and their exact versions, used with pip install -r requirements.txt to recreate the same environment elsewhere.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>pyenv</strong> </dt> <dd data-astro-cid-whrtx2kk>A tool that installs and switches between multiple versions of Python on one machine; it manages Python versions and pairs with venv, which manages packages.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>standard library</strong> </dt> <dd data-astro-cid-whrtx2kk>The large set of modules that ships with Python itself, available without installing anything from PyPI.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://docs.python.org/3/library/venv.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>venv — Creation of virtual environments</a> — Python Software Foundation (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://docs.python.org/3/installing/index.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Installing Python Modules</a> — Python Software Foundation (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://docs.python.org/3/tutorial/index.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Python Tutorial</a> — Python Software Foundation (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://realpython.com/python-virtual-environments-a-primer/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Python Virtual Environments: A Primer</a> — Real Python (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Python_(programming_language)" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Python (programming language)</a> — Wikipedia (accessed 2026-07-12) </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="43" data-astro-cid-whrtx2kk>
+Mark Day 43 as read
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+      surfaces for someone searching for one — it costs you a click and it is genuinely how people
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+★ Star on GitHub
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-042-section-review-your-computing-foundations-toolkit" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 42</span> <span class="pn__title" data-astro-cid-oerjsknp>Section Review: Your Computing Foundations Toolkit</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-044-variables-and-types" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 44 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Variables and Types</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+      // Progressive enhancement only: the theme falls back to dark and every
+      // .reveal element is visible by default (the hidden start state exists
+      // only inside a prefers-reduced-motion: no-preference query).
+      (() => {
+        const toggle = document.getElementById('theme');
+        if (toggle) {
+          toggle.addEventListener('click', () => {
+            const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+            document.documentElement.dataset.theme = next;
+            try {
+              localStorage.setItem('theme', next);
+            } catch {
+              /* private mode */
+            }
+          });
+        }
+
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const items = document.querySelectorAll('.reveal');
+        if (items.length && !reduced && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry, i) => {
+                if (!entry.isIntersecting) return;
+                entry.target.style.transitionDelay = `${Math.min(i * 50, 240)}ms`;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.06 },
+          );
+          items.forEach((el) => io.observe(el));
+        } else {
+          items.forEach((el) => el.classList.add('is-in'));
+        }
+      })();
+    </script> </body> </html>

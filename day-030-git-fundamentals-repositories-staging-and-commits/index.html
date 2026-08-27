@@ -1,0 +1,386 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 30: Git Fundamentals: Repositories, Staging, and Commits · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to turn any folder into a Git repository and move your work deliberately through the three areas — working directory, staging area, and repository — with git add and git commit, read state with git status and history with git log, keep secrets out with .gitignore, and explain exactly what a commit is and why its hash makes history trustworthy."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-030-git-fundamentals-repositories-staging-and-commits/"><meta property="og:title" content="Day 30: Git Fundamentals: Repositories, Staging, and Commits · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to turn any folder into a Git repository and move your work deliberately through the three areas — working directory, staging area, and repository — with git add and git commit, read state with git status and history with git log, keep secrets out with .gitignore, and explain exactly what a commit is and why its hash makes history trustworthy."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-030-git-fundamentals-repositories-staging-and-commits/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-030-git-fundamentals-repositories-staging-and-commits.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 30: Git Fundamentals: Repositories, Staging, and Commits · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 30: Git Fundamentals: Repositories, Staging, and Commits · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to turn any folder into a Git repository and move your work deliberately through the three areas — working directory, staging area, and repository — with git add and git commit, read state with git status and history with git log, keep secrets out with .gitignore, and explain exactly what a commit is and why its hash makes history trustworthy."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-030-git-fundamentals-repositories-staging-and-commits.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+      // Dark is the default regardless of OS preference - this is a dark-first
+      // design. A visitor who picks light with the toggle keeps it. Applied
+      // before first paint so there is no flash of the wrong theme.
+      (() => {
+        let t;
+        try {
+          t = localStorage.getItem('theme');
+        } catch {
+          t = null;
+        }
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+      })();
+    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+<style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
+.starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+365 Days of AI
+</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+Labs
+</a> </header> <main id="main">  <article data-day="30" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>Git and GitHub</span>  › 
+Day 30 </p> <h1 data-astro-cid-whrtx2kk>Day 30: Git Fundamentals: Repositories, Staging, and Commits</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-030-git-fundamentals-repositories-staging-and-commits.png" width="1200" height="630" alt="Day 30 of 365 — Git Fundamentals: Repositories, Staging, and Commits" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to turn any folder into a Git repository and move your work deliberately through the three areas — working directory, staging area, and repository — with git add and git commit, read state with git status and history with git log, keep secrets out with .gitignore, and explain exactly what a commit is and why its hash makes history trustworthy.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Git and GitHub</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-030-git-fundamentals-repositories-staging-and-commits" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-030-git-fundamentals-repositories-staging-and-commits</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
+cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-030-git-fundamentals-repositories-staging-and-commits</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/ai-roadmap-365/labs/day-030-git-fundamentals-repositories-staging-and-commits" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Initialise a repository with git init and describe the role of the hidden .git directory</li><li data-astro-cid-whrtx2kk>Explain Git&#39;s three areas — working directory, staging area (index), and repository — and the git add / git commit flow between them</li><li data-astro-cid-whrtx2kk>Read git status output (including the ??, A, and M short codes) to say which area holds a file&#39;s current content</li><li data-astro-cid-whrtx2kk>Describe what a commit really is: a snapshot plus author, message, and parent, identified by a content-derived hash, and how commits link into a chain that HEAD points into</li><li data-astro-cid-whrtx2kk>Use .gitignore to keep files (especially secrets) untracked, and use git diff and git log to inspect changes and history</li><li data-astro-cid-whrtx2kk>Connect clean commits to reproducible, reviewable experiments when versioning code, notebooks, prompts, and configuration</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Day 29: why version control exists</li><li data-astro-cid-whrtx2kk>A terminal and Git installed (git --version prints a 2.x version)</li><li data-astro-cid-whrtx2kk>Comfort creating and editing text files from the command line (Days 1 and 8-12)</li></ul> <h2 id="why-this-matters">Why this matters</h2>
+<p>Every serious project you will ever build — a script, a website, a machine-learning experiment — changes constantly, and most of those changes are you fixing something you broke ten minutes ago. Without a way to record where you were, you work in fear: fear of deleting the one line that mattered, fear of an edit that “worked yesterday,” fear of overwriting a colleague’s file. Git removes that fear. It lets you save a labelled snapshot of your whole project at any moment, compare any two moments, and walk back to a known-good state in seconds. Yesterday’s lesson argued <em>why</em> version control exists; today you learn the tool that runs the world’s software, and you build the mental model that makes every later Git command obvious instead of magical.</p>
+<p>The stakes are concrete. An experiment that produced a good result last Tuesday is worthless if you cannot say exactly which code, which settings, and which data produced it — Git is how you pin that down. A change that quietly broke your program is hard to find unless you can see precisely what changed and when — <code>git diff</code> and <code>git log</code> are how you see it. And a secret key pasted into a file and shared with the world is a real, expensive accident — <code>.gitignore</code> is your first line of defence. These are not abstractions; they are the difference between a project you can trust and a pile of files you are afraid to touch.</p>
+<p>This is <em>the</em> foundational Git lesson, so we go slowly and build the model precisely. Get the three areas and the anatomy of a commit right today, and branching, merging, remotes, and pull requests — the next several days — will click into place, because every one of them is a variation on the ideas you learn now.</p>
+<h2 id="the-idea-in-plain-language">The idea in plain language</h2>
+<p>A <strong>repository</strong> (or “repo”) is a project folder that Git is watching. When you turn an ordinary folder into a repository, Git creates one hidden sub-folder inside it called <code>.git</code>, and that folder is the repository’s memory: it stores the complete history of every saved version of your project. Delete <code>.git</code> and you are left with just the current files and no history; keep it, and you can travel through time.</p>
+<p>The heart of Git is a flow between three places. Your <strong>working directory</strong> is the set of files you see and edit on disk right now — the live, messy, in-progress version. The <strong>staging area</strong> (also called the <strong>index</strong>) is a holding area where you assemble exactly the changes you want to save next. The <strong>repository</strong> is the permanent, ordered history of snapshots you have chosen to keep. You move work along this line with two commands: <code>git add</code> copies changes from the working directory into the staging area, and <code>git commit</code> records everything staged as a new permanent snapshot in the repository.</p>
+<p>Why the middle step? Because it lets you be deliberate. You might edit five files while chasing a bug but only want to save the two that represent one clean fix. The staging area is where you compose that clean snapshot before committing it. A <strong>commit</strong>, then, is not a diff and not just “a save” — it is a full snapshot of your tracked files at one instant, wrapped with who made it, when, a message saying why, and a link to the commit that came before. Git gives each commit a unique fingerprint called a <strong>hash</strong>, and a special pointer called <strong>HEAD</strong> always marks the commit you are currently standing on.</p>
+<h2 id="historical-background">Historical background</h2>
+<p>Git is young for something so ubiquitous. It was created in April 2005 by Linus Torvalds, the same engineer who started the Linux kernel in 1991. For years the kernel project had used a commercial distributed version-control system called BitKeeper under a free-of-charge licence. In April 2005 that arrangement broke down — the free licence was withdrawn after a dispute over efforts to reverse-engineer BitKeeper’s protocols — and the kernel, one of the largest collaborative software projects in the world, suddenly had no version-control tool that met its needs.</p>
+<p>Torvalds wanted something with three properties existing free tools lacked at the scale he needed: speed, a fully distributed design (every developer holds the complete history, with no single central server that everyone depends on), and strong protection against accidental or malicious corruption of history. He began writing Git on 3 April 2005; within days it was hosting its own source code, and by June 2005 the kernel’s 2.6.12 release was managed with it. On 26 July 2005 Torvalds handed maintenance to Junio Hamano, who has led the project ever since.</p>
+<p>Two design choices from those first weeks still define Git. First, it is <strong>content-addressed</strong>: every object — every file version, every snapshot, every commit — is named by a cryptographic hash of its contents (historically the SHA-1 algorithm, with newer Git also supporting SHA-256). Change one byte anywhere and the name changes, which is what makes Git history tamper-evident. Second, it is <strong>distributed</strong>: your clone is a full repository, not a thin view of a server’s, so you can commit, branch, and inspect history entirely offline. The name? Torvalds, with characteristic humour, called it “git” — British slang for an unpleasant person — and joked that he names his projects after himself. Within a few years, hosting services built around Git turned it into the default way the software world collaborates.</p>
+<h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
+<p>Git is a <strong>distributed version-control system</strong>: a program that records the history of a set of files as a sequence of snapshots and lets any number of people work on copies of that history independently. Every word matters. <em>Version-control</em>: its job is remembering versions, not editing files. <em>Distributed</em>: each copy is complete and self-sufficient. <em>Snapshots</em>: Git conceptually stores the whole state of your project at each commit, not a list of edits — an important difference from some older tools.</p>
+<p>It helps just as much to be clear about what Git is not. Git is not a backup service, though it feels like one — it lives inside your project and, until you copy it elsewhere, a disk failure takes your history with it. Git is not the same thing as a hosting website; the tool runs entirely on your own machine, and the popular sites that host repositories are a separate layer you will meet in a few days. Git is not automatic — it saves a snapshot only when you tell it to commit, so a commit is a decision, not a background process. And a commit is not a diff: although Git can <em>show</em> you the difference between two commits, each commit records a complete snapshot, and the differences are computed on demand.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Common misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”Editing a file changes its history.”</td><td>Editing changes only your working directory; history changes only when you <code>git commit</code>.</td></tr><tr><td>”A commit saves the files I have open.”</td><td>A commit saves exactly what is <strong>staged</strong>; unstaged edits are left out.</td></tr><tr><td>”Git and the hosting website are the same thing.”</td><td>Git is a local tool; hosting sites are an optional, separate layer added later.</td></tr><tr><td>”A commit stores just what changed.”</td><td>A commit records a full snapshot of tracked files, plus author, message, and parent.</td></tr><tr><td>”Deleting a file removes it from history.”</td><td>Past commits still contain it; history must be rewritten to truly erase it.</td></tr></tbody></table>
+<h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
+<p>Before distributed version control, teams typically shared one central server that held the authoritative history, and developers checked files out and back in. That model has real weaknesses: you often need a network connection to do anything meaningful, the central server is a single point of failure, and operations like branching can be slow and heavyweight enough that people avoid them. For a globally distributed project the size of the Linux kernel, with thousands of contributors sending changes, those frictions were fatal.</p>
+<p>Git solves a stack of concrete problems at once. It answers <em>“what did this project look like last Tuesday?”</em> by keeping every committed snapshot. It answers <em>“what exactly changed, and who changed it?”</em> by recording an author, a timestamp, and a message on every commit, and by computing precise differences on demand. It answers <em>“can I try something risky without losing my safe version?”</em> by making commits cheap and history immutable, so there is always a known-good point to return to. It answers <em>“how do many people work on the same code without overwriting each other?”</em> by giving everyone a full copy they reconcile deliberately. And because each snapshot is named by a hash of its contents, it answers <em>“has this history been tampered with?”</em> for free. Today’s slice of that — repositories, staging, and commits — is the part you use dozens of times a day; the rest of the week builds on it.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>Let’s assemble the model piece by piece, then watch a file travel through it.</p>
+<h3 id="the-three-areas">The three areas</h3>
+<p>A Git project has three areas, and almost everything you do is moving content between them. This is the single most important picture in the lesson.</p>
+<p><img src="/ai-roadmap-365/_astro/three-areas.CYHv8R3O_Z1HIp5g.svg" alt="Diagram: Git's three areas — working directory, staging area, and repository — with the commands that move a file between them" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="420"></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Area</th><th>What lives there</th><th>How content arrives</th></tr></thead><tbody><tr><td>Working directory</td><td>The real files on disk you edit right now</td><td>You create or edit files with any editor</td></tr><tr><td>Staging area (index)</td><td>The exact set of changes to include in the next commit</td><td><code>git add &lt;file&gt;</code> copies changes here</td></tr><tr><td>Repository (<code>.git</code>)</td><td>The permanent, ordered history of committed snapshots</td><td><code>git commit</code> records what is staged</td></tr></tbody></table>
+<p>Read the flow left to right. You edit files in the <strong>working directory</strong>. When a change is ready to save, <code>git add</code> promotes it to the <strong>staging area</strong>, where you assemble precisely the snapshot you intend. When the staged snapshot is what you want, <code>git commit</code> writes it permanently into the <strong>repository</strong> and clears the staging area for the next round. Two commands, three areas — that is the entire engine.</p>
+<h3 id="reading-state-with-git-status">Reading state with git status</h3>
+<p>Because content sits in different areas, you need a way to see where everything is. <code>git status</code> is that window; run it constantly. Its short form, <code>git status --short</code> (or <code>-s</code>), prints a two-column code before each file name. The left column describes the staging area; the right column describes the working directory:</p>
+<ul>
+<li><code>??</code> — untracked: Git sees the file but is not yet recording it.</li>
+<li><code>A </code> — a new file that is staged (in the index), ready to commit.</li>
+<li><code> M</code> — a tracked file modified in the working directory but not yet staged.</li>
+<li><code>M </code> — a tracked file whose modification is already staged.</li>
+</ul>
+<p>A file can even be modified in both columns at once (<code>MM</code>) if you staged one change and then edited it again — proof that the staging area and the working directory are genuinely separate.</p>
+<h3 id="what-a-commit-really-is">What a commit really is</h3>
+<p>When you commit, Git stores a <strong>snapshot</strong> of every tracked file (internally as a “tree” of the project’s contents) and wraps it in a small record called a commit object. That object contains a reference to the snapshot, the <strong>author</strong> and the time, your <strong>message</strong>, and — crucially — the hash of the <strong>parent</strong> commit, the one that came just before. Git then hashes all of that together to produce the commit’s own identifier: a 40-character hexadecimal <strong>hash</strong> (you usually see the first 7, like <code>712412c</code>).</p>
+<p><img src="/ai-roadmap-365/_astro/commit-anatomy.B5Z0elXh_120Pm.svg" alt="Diagram: the anatomy of a Git commit — snapshot, author, message, and parent hash — and how commits link into a chain" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="440"></p>
+<p>Because each commit names its parent, commits form a chain reaching back to the first one (which has no parent). And because the hash is computed from the snapshot <em>plus</em> the parent’s hash <em>plus</em> the metadata, you cannot alter any past commit without changing its hash — and every commit after it — so the history is tamper-evident by construction. <strong>HEAD</strong> is a pointer to the commit you are currently on, normally the newest one on your branch; when you make a new commit, HEAD advances to it. That is why two people committing identical file contents still get different hashes: the author, the timestamp, and the parent all feed the fingerprint.</p>
+<h3 id="ignoring-files-with-gitignore">Ignoring files with .gitignore</h3>
+<p>Not everything in a project folder belongs in history: build outputs, downloaded dependencies, editor temp files, and — most importantly — secrets like API keys. A file named <code>.gitignore</code> at the root of the repository lists patterns of paths Git should not track. A line reading <code>secret.key</code> tells Git to leave that file untracked forever; a line reading <code>*.log</code> ignores every file ending in <code>.log</code>. Ignored files simply never show up in <code>git status</code> as candidates to add, so you cannot commit them by accident. One caveat that trips up beginners: <code>.gitignore</code> only affects files Git is <em>not already tracking</em>. If you committed a secret first and added the ignore rule after, the file stays tracked until you explicitly remove it.</p>
+<h3 id="seeing-changes-and-history">Seeing changes and history</h3>
+<p>Two commands let you inspect what the areas hold. <code>git diff</code> shows differences line by line: with no arguments it compares your <strong>working directory against the staging area</strong> (the edits you have not staged yet); <code>git diff --staged</code> compares the <strong>staging area against the last commit</strong> (what you are about to commit). <code>git log</code> walks the commit chain from HEAD backward, printing each commit’s hash, author, date, and message; <code>git log --oneline</code> condenses each to a single line — the fastest way to read history. Together, <code>status</code>, <code>diff</code>, and <code>log</code> answer “where is everything, what changed, and how did we get here?”</p>
+<h2 id="an-everyday-analogy">An everyday analogy</h2>
+<p>Think of Git as a photographer building a bound photo album of a project as it grows.</p>
+<p>Your <strong>working directory</strong> is the room you are photographing: furniture gets moved, props come and go, and at any instant it is simply however you last left it. The <strong>staging area</strong> is the shot you are composing in the viewfinder — you arrange exactly what you want in frame, leaving the clutter off to the side, before you press the button. <code>git add</code> is placing an item into the frame; <code>git commit</code> is pressing the shutter, which produces one permanent photograph and adds it to the album. The album itself is the <strong>repository</strong>: an ordered sequence of photographs you can flip back through forever.</p>
+<p>Each photograph carries a caption on its back: who took it, when, a note on <em>why</em> this shot was worth keeping (the commit <strong>message</strong>), and a reference to the photo taken just before it (the <strong>parent</strong>). Flip to any page and you can see the whole scene at that moment — a photo is a <strong>snapshot</strong>, not a list of what moved since the last one. A sticky bookmark marks the page you are looking at now; that is <strong>HEAD</strong>. <code>git status</code> is glancing between the room, the viewfinder, and the last photo to see what differs. <code>git diff</code> is holding the current room up against the last photograph to spot exactly what moved. And <code>.gitignore</code> is your standing rule that certain things — the messy cables, your private notes — never appear in any photograph, no matter how the room is arranged.</p>
+<p>The analogy holds all the way down, and it explains the discipline: a good album is not a burst of random photos but a deliberate series of meaningful, captioned moments. That is exactly what a good commit history is, and the staging area is the viewfinder that makes the deliberation possible.</p>
+<h2 id="examples-in-practice">Examples in practice</h2>
+<p>Here is the full flow as you would type it, with the state after each step. Start by turning a folder into a repository:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> init</span></span></code></pre>
+<p>Git creates the hidden <code>.git</code> directory; the folder is now a repository with an empty history. Create a file and check the state:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;notes for day 30&quot;</span><span style="color:#F97583"> &gt;</span><span style="color:#9ECBFF"> notes.txt</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> status</span><span style="color:#79B8FF"> --short</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>?? notes.txt</span></span></code></pre>
+<p>The <code>??</code> says <code>notes.txt</code> is untracked — it exists in the working directory, but Git is not recording it. Stage it, then look again:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> notes.txt</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> status</span><span style="color:#79B8FF"> --short</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>A  notes.txt</span></span></code></pre>
+<p>The <code>A</code> in the left column means the file is now staged in the index, ready to be committed. Record the snapshot with a message:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> commit</span><span style="color:#79B8FF"> -m</span><span style="color:#9ECBFF"> &quot;Add notes.txt with initial notes&quot;</span></span></code></pre>
+<p>Git writes a commit object and prints its short hash (for example <code>fa3f66b</code>). Now edit the file and inspect the unstaged change:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;a second line, added later&quot;</span><span style="color:#F97583"> &gt;&gt;</span><span style="color:#9ECBFF"> notes.txt</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> diff</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>diff --git a/notes.txt b/notes.txt</span></span>
+<span class="line"><span>index 841d9f2..47a4a5f 100644</span></span>
+<span class="line"><span>--- a/notes.txt</span></span>
+<span class="line"><span>+++ b/notes.txt</span></span>
+<span class="line"><span>@@ -1 +1,2 @@</span></span>
+<span class="line"><span> notes for day 30</span></span>
+<span class="line"><span>+a second line, added later</span></span></code></pre>
+<p>The line beginning with <code>+</code> is what you added; the unmarked line is unchanged context. Stage and commit again, and you have two snapshots. Now protect a secret:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;secret.key&quot;</span><span style="color:#F97583"> &gt;</span><span style="color:#9ECBFF"> .gitignore</span></span>
+<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;PRETEND-API-KEY-do-not-commit&quot;</span><span style="color:#F97583"> &gt;</span><span style="color:#9ECBFF"> secret.key</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> .gitignore</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> commit</span><span style="color:#79B8FF"> -m</span><span style="color:#9ECBFF"> &quot;Add .gitignore to exclude secret.key&quot;</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> status</span><span style="color:#79B8FF"> --short</span></span></code></pre>
+<p><code>git status</code> prints nothing for <code>secret.key</code> — it is ignored, so it can never be staged by accident, even though it sits right there in the folder. Finally, read the history:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> log</span><span style="color:#79B8FF"> --oneline</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>945beab Add .gitignore to exclude secret.key</span></span>
+<span class="line"><span>712412c Append a second line to notes.txt</span></span>
+<span class="line"><span>fa3f66b Add notes.txt with initial notes</span></span></code></pre>
+<p>Three commits, newest first, each a captioned photograph in the album. A word on messages, because they are the captions your future self reads: write them in the imperative mood (“Add”, “Fix”, “Remove”), summarise <em>why</em> in the first line (kept under about 50 characters), and add detail in a following paragraph when the change deserves it. <code>git commit</code> with no <code>-m</code> opens your editor for exactly this fuller message. The AI connection is direct: when you version an experiment, a message like “Lower learning rate to 3e-4 to stop loss spiking” is the note that lets you — or a reviewer — understand a result three weeks later. This lesson’s lab walks the whole sequence above in a throwaway repository so you can watch each state change yourself.</p>
+<h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
+<h3 id="security">Security</h3>
+<p>Git’s content-addressing gives you tamper-evidence for free: because every commit’s hash depends on its full contents and its parent’s hash, silently rewriting old history is impossible without every later hash changing visibly. But that same permanence is a double-edged sword for secrets. Anything you commit lives in history even after you delete the file in a later commit, so a leaked credential is not fixed by removing it going forward — it must be scrubbed by rewriting history and, in practice, rotated (revoked and reissued) because it may already be exposed. The lesson: keep secrets out of commits in the first place, which is exactly what <code>.gitignore</code> is for.</p>
+<h3 id="privacy">Privacy</h3>
+<p>Every commit records an author name and email and a timestamp, so a repository’s history is also a detailed record of who did what and when. That is invaluable for accountability and useless-to-harmful when you would rather not broadcast a personal email address or your daily working hours. It is worth deciding deliberately what identity you commit under, especially before a repository becomes visible to others.</p>
+<h3 id="performance">Performance</h3>
+<p>Git is fast because it is local: committing, diffing, and reading history touch only files on your own disk, with no network round-trip. Snapshots are stored efficiently — identical file contents are stored once and referenced by hash, and Git compresses its objects — so a long history of a normal codebase stays compact. The performance caveat is large binary files: because Git snapshots whole files, a big file that changes often bloats history, since each version is stored in full. Source code, notebooks, configuration, and prompts version beautifully; multi-gigabyte model weights and datasets usually do not, and are better handled by tools built for large files or by storing them outside the repository and versioning a pointer.</p>
+<h3 id="scalability">Scalability</h3>
+<p>The distributed design scales to enormous teams precisely because there is no mandatory central bottleneck: everyone commits locally and reconciles when they choose. Git comfortably handles projects with hundreds of thousands of commits and thousands of contributors. Where it strains is repositories stuffed with large binaries or millions of files; those are solvable with additional tooling, but plain Git is happiest with text.</p>
+<h3 id="cost">Cost</h3>
+<p>Git itself is free and open-source, and running it locally costs nothing. The costs that appear later are about <em>hosting</em> shared copies and storing large artifacts — but the core skill you are learning today has no price attached and runs on any machine.</p>
+<h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
+<p>Two kinds of “alternatives” are worth separating: other version-control systems, and other ways to <em>drive</em> Git. For version control itself, Git so dominates modern practice that learning it is the right default, but it has relatives.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool</th><th>Type</th><th>What it offers</th><th>Cost</th></tr></thead><tbody><tr><td>Git (command line)</td><td>Free, open source</td><td>The tool itself; every feature, scriptable, universal</td><td>Free</td></tr><tr><td>VS Code Git integration</td><td>Free</td><td>A visual view of status, staging, diffs, and commits inside your editor</td><td>Free</td></tr><tr><td>lazygit / tig</td><td>Free, open source</td><td>Fast terminal UIs (TUIs) over Git — stage, commit, and browse history with keystrokes</td><td>Free</td></tr><tr><td>gitk / git gui</td><td>Free, ships with Git</td><td>A basic graphical history browser and commit tool built into Git</td><td>Free</td></tr><tr><td>Mercurial</td><td>Free, open source</td><td>Another distributed version-control system, similar model, different commands</td><td>Free</td></tr><tr><td>Subversion (SVN)</td><td>Free, open source</td><td>An older centralized system; a single server holds history</td><td>Free</td></tr></tbody></table>
+<p>For <em>driving</em> Git, the command line is the ground truth — every graphical tool is ultimately issuing the same commands, and knowing the CLI means no interface can confuse you. <strong>VS Code’s</strong> built-in Source Control panel is excellent for beginners: it lists changed files, lets you stage them by clicking a <code>+</code>, shows a side-by-side diff, and takes a commit message in a box — a gentle way to <em>see</em> the three areas while you learn. <strong>lazygit</strong> and <strong>tig</strong> are terminal UIs for people who live in the shell and want to stage individual chunks and scroll history faster than typing each command; both are free and open source. <strong>gitk</strong> and <strong>git gui</strong> ship with Git itself for a quick visual history browse. A sound approach: learn the CLI first so the model is solid, then adopt a graphical or TUI helper for speed. All of these are free; none is required to do anything Git can do.</p>
+<h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>Working directory</td><td>Staging area</td><td>The working directory is your live files; the staging area is the curated snapshot for the next commit</td></tr><tr><td><code>git add</code></td><td><code>git commit</code></td><td><code>add</code> moves changes into staging; <code>commit</code> records staged changes permanently into history</td></tr><tr><td>Commit</td><td>Snapshot</td><td>A snapshot is the file contents at an instant; a commit is that snapshot plus author, message, and parent</td></tr><tr><td>Git</td><td>A hosting website</td><td>Git is a local tool that manages history; a hosting site is a separate place to share copies of it</td></tr><tr><td>Git (distributed)</td><td>Subversion (centralized)</td><td>In Git every clone is a full repository; in Subversion the authoritative history lives on one server</td></tr><tr><td><code>git diff</code></td><td><code>git log</code></td><td><code>diff</code> shows line-by-line changes between areas or commits; <code>log</code> lists the sequence of commits</td></tr></tbody></table>
+<h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
+<p>Reach for Git essentially always: for any project with more than a throwaway file, initialise a repository on day one, before there is history worth losing. Use it the moment you are about to try something risky — a commit is a safety net you can return to. Use it whenever you want to answer “what changed?”, “when did this break?”, or “what produced this result?”, and use it the instant more than one person touches the same files. For versioning code, notebooks, configuration files, small datasets, documentation, and the text of experiments, Git is the right tool with essentially no downside.</p>
+<p>Know the edges too. Git is a poor fit for large binary blobs that change often — multi-gigabyte model checkpoints, video, huge datasets — because it stores each version in full; for those, version a small pointer or manifest in Git and keep the heavy files in storage designed for them. Do not commit secrets, ever; <code>.gitignore</code> them before the first <code>add</code>. Do not treat a repository as your only backup, since it is not offsite until you copy it elsewhere. And do not let perfect commit discipline paralyse you — messy early commits are fine while you learn; the habit that matters is committing often, with honest messages. The AI thread ties it together: as you begin training and evaluating models, your code, your configuration, your prompts, and your notebooks are exactly the text Git was built to version. A clean commit history is what makes an experiment reproducible — “this commit, this config, this data” — and reviewable, so that a good result is a record you can defend rather than a lucky run you cannot recreate. Master these three areas today and that discipline is already within reach.</p>
+<h2 id="knowledge-check">Knowledge check</h2>
+<p>Try these from memory before looking back:</p>
+<ol>
+<li>Name Git’s three areas in order, and the command that moves content from each one to the next.</li>
+<li>You edit two files but only want to save one in your next commit. Which area lets you do that, and what command puts just that file there?</li>
+<li>Explain, in your own words, why two people who commit files with identical contents still end up with different commit hashes.</li>
+<li>A teammate committed a real API key last week and has since deleted the file in a newer commit. Are they safe? Explain what history retains and what they must actually do.</li>
+<li>What does <code>git status</code> show as the code for a brand-new, never-added file, and what does that code mean about which area holds it?</li>
+</ol>
+<h2 id="hands-on-exercise">Hands-on exercise</h2>
+<p>Time to drive the model yourself. In this exercise — worked through fully in the Day 30 lab directory — you create a throwaway repository, walk a file through all three areas, and watch each state change. Every command is local; nothing touches the network or your global Git settings. Open a terminal and, in a scratch folder you do not mind deleting, run each command and read its output before moving on:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> init</span></span>
+<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;notes for day 30&quot;</span><span style="color:#F97583"> &gt;</span><span style="color:#9ECBFF"> notes.txt</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> status</span><span style="color:#79B8FF"> --short</span></span></code></pre>
+<p>You should see <code>?? notes.txt</code> — untracked, living only in the working directory. Stage and confirm:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> notes.txt</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> status</span><span style="color:#79B8FF"> --short</span></span></code></pre>
+<p>Now <code>A  notes.txt</code> — staged in the index. Commit it, then edit and inspect the change:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> commit</span><span style="color:#79B8FF"> -m</span><span style="color:#9ECBFF"> &quot;Add notes.txt with initial notes&quot;</span></span>
+<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;a second line, added later&quot;</span><span style="color:#F97583"> &gt;&gt;</span><span style="color:#9ECBFF"> notes.txt</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> diff</span></span></code></pre>
+<p>The diff shows one added line marked <code>+</code>. Stage, commit again, then add a <code>.gitignore</code> and prove it works:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> notes.txt</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> commit</span><span style="color:#79B8FF"> -m</span><span style="color:#9ECBFF"> &quot;Append a second line to notes.txt&quot;</span></span>
+<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;secret.key&quot;</span><span style="color:#F97583"> &gt;</span><span style="color:#9ECBFF"> .gitignore</span></span>
+<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;PRETEND-API-KEY&quot;</span><span style="color:#F97583"> &gt;</span><span style="color:#9ECBFF"> secret.key</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> .gitignore</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> commit</span><span style="color:#79B8FF"> -m</span><span style="color:#9ECBFF"> &quot;Add .gitignore to exclude secret.key&quot;</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> status</span><span style="color:#79B8FF"> --short</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> log</span><span style="color:#79B8FF"> --oneline</span></span></code></pre>
+<p>If you configured Git for the first time, it may ask for your identity; set it once with <code>git config --global user.name &quot;Your Name&quot;</code> and <code>git config --global user.email &quot;you@example.com&quot;</code>.</p>
+<h3 id="expected-output">Expected output</h3>
+<p>A typical <code>git log --oneline</code> at the end (your hashes will differ — that is the whole point):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>945beab Add .gitignore to exclude secret.key</span></span>
+<span class="line"><span>712412c Append a second line to notes.txt</span></span>
+<span class="line"><span>fa3f66b Add notes.txt with initial notes</span></span></code></pre>
+<p>Three commits, newest first. The final <code>git status --short</code> prints nothing for <code>secret.key</code>: it is ignored, so it never even appears as a candidate to stage. Each hash is a fingerprint of that commit’s snapshot, author, time, and parent, so no two runs — and no two learners — produce the same hashes.</p>
+<h3 id="validate-your-work">Validate your work</h3>
+<p>You are done when you can check every box:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> <code>git init</code> created a <code>.git</code> directory (confirm with <code>ls -a</code>).</li>
+<li class="task-list-item"><input type="checkbox" disabled/> A new file showed as <code>??</code> (untracked) before you added it.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> After <code>git add</code>, the same file showed as <code>A </code> (staged).</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>git diff</code> showed your second edit as an added (<code>+</code>) line before you staged it.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>git log --oneline</code> lists three commits, newest first.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>secret.key</code> never appeared in <code>git status</code> after you ignored it.</li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><strong>“Please tell me who you are” on commit.</strong> Git needs an identity for the author field. Set it once: <code>git config --global user.name &quot;Your Name&quot;</code> and <code>git config --global user.email &quot;you@example.com&quot;</code>, then commit again.</li>
+<li><strong><code>nothing to commit, working tree clean</code>.</strong> You did not stage anything — <code>git commit</code> only records what is in the staging area. Run <code>git status</code>, <code>git add</code> the change, then commit. This is the most common beginner surprise.</li>
+<li><strong><code>secret.key</code> still shows in <code>git status</code>.</strong> It was tracked before you ignored it, or the pattern does not match. Run <code>git check-ignore -v secret.key</code> to see which rule applies (or that none does); untrack an already-tracked file with <code>git rm --cached secret.key</code>.</li>
+<li><strong><code>git diff</code> prints nothing.</strong> Either there is no unstaged change (you already staged it — try <code>git diff --staged</code>) or you edited a file Git is not tracking.</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<ul>
+<li><strong>Committing without staging.</strong> Editing a file does not schedule it for the next commit; you must <code>git add</code> it first. Expecting <code>git commit</code> to save open files is the classic error.</li>
+<li><strong>Committing everything blindly.</strong> Reaching for <code>git add .</code> (which stages <em>all</em> changes) without reading <code>git status</code> first sweeps in temp files, debug scraps, and sometimes secrets. Look before you add.</li>
+<li><strong>No <code>.gitignore</code>.</strong> Without one, junk and credentials get committed by accident. Add a <code>.gitignore</code> for secrets and build artifacts before your first <code>git add</code>.</li>
+</ul>
+<h2 id="practice-assignment">Practice assignment</h2>
+<p>Open <code>starter/git-worksheet.md</code> in the Day 30 lab and complete it for a real run of the lab’s script. Record, for <code>notes.txt</code>, the <code>git status</code> code at each of the five moments the worksheet lists and which area held the newest content; copy your two commit short hashes and note which commit HEAD points at after the run; and write down what <code>.gitignore</code> excluded and whether that file ever appeared in <code>git status</code>. Then write one paragraph (4–6 sentences) explaining, in your own words, why the staging area exists — what you can do with it that you could not do if <code>git commit</code> simply saved every changed file automatically. Keep the worksheet; the branching lesson builds on this same repository model.</p>
+<h2 id="extension-challenge">Extension challenge</h2>
+<p>Look inside a commit. In a throwaway repository with at least two commits, run:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> cat-file</span><span style="color:#79B8FF"> -p</span><span style="color:#9ECBFF"> HEAD</span></span></code></pre>
+<p>This prints the raw commit object HEAD points to. Find its four parts: the <code>tree</code> line (the snapshot of your files), the <code>parent</code> line (the previous commit’s hash — the first commit has none), the <code>author</code> line (name, email, timestamp), and, after a blank line, your commit message. You are seeing the exact anatomy this lesson described, in Git’s own storage. Then run <code>git cat-file -p HEAD~1</code> to inspect the parent and confirm its hash matches the <code>parent</code> line of HEAD — the chain, verified with your own eyes. Finally, in two or three sentences, explain why changing the message of an old commit would change not only that commit’s hash but every hash after it, and why that property is what makes a Git history trustworthy.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. What does running git init do to an ordinary folder? </strong> </p> <ol type="A"> <li>It uploads the folder to a hosting website automatically</li><li>It creates a hidden .git directory, turning the folder into a repository that can record history</li><li>It commits every file in the folder immediately</li><li>It deletes any files Git does not recognise</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> It creates a hidden .git directory, turning the folder into a repository that can record history </p> <p>git init creates the hidden .git directory, which is the repository&#39;s memory. The folder is now a repository with an empty history; nothing is committed or uploaded until you tell Git to do so.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. Which command moves a change from the working directory into the staging area? </strong> </p> <ol type="A"> <li>git commit</li><li>git log</li><li>git add</li><li>git status</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> git add </p> <p>git add copies changes from the working directory into the staging area (the index), where you assemble the exact snapshot for the next commit. git commit then records what is staged.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. In git status --short, what does the code ?? in front of a file name mean? </strong> </p> <ol type="A"> <li>The file is staged and ready to commit</li><li>The file is tracked and modified but not staged</li><li>The file is untracked — Git sees it but is not recording it yet</li><li>The file has a merge conflict</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> The file is untracked — Git sees it but is not recording it yet </p> <p>?? marks an untracked file: it exists in the working directory, but Git is not yet recording its history. Running git add on it stages it, after which status shows A instead.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. What is a Git commit, precisely? </strong> </p> <ol type="A"> <li>A list of only the lines that changed since the last save</li><li>A snapshot of the tracked files plus author, timestamp, message, and the parent commit&#39;s hash, identified by its own hash</li><li>A backup copy stored on a remote server</li><li>A temporary draft that disappears when you close the terminal</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> A snapshot of the tracked files plus author, timestamp, message, and the parent commit&#39;s hash, identified by its own hash </p> <p>A commit records a full snapshot of the tracked files, wrapped with the author, time, message, and the parent commit&#39;s hash, and Git hashes all of that into the commit&#39;s own identifier. It is not merely a diff, a backup, or a draft.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. Why do two people who commit files with identical contents still get different commit hashes? </strong> </p> <ol type="A"> <li>Git assigns hashes at random</li><li>The hash is computed from the snapshot plus the author, timestamp, and parent, which differ between the two commits</li><li>Hashes depend on the operating system, not the commit</li><li>They do not — identical contents always produce identical hashes</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> The hash is computed from the snapshot plus the author, timestamp, and parent, which differ between the two commits </p> <p>A commit&#39;s hash is a fingerprint of its full contents: the snapshot AND the author, timestamp, and parent hash. Since at least those metadata differ, the hashes differ even when the file bytes match.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. A teammate committed a secret API key last week, then deleted the file in a newer commit. Are they safe? </strong> </p> <ol type="A"> <li>Yes — deleting the file removes it from the whole repository</li><li>Yes — commits older than a day are automatically purged</li><li>No — the key still lives in the earlier commit; history must be rewritten and the key rotated</li><li>No — but only if the repository was shared online</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> No — the key still lives in the earlier commit; history must be rewritten and the key rotated </p> <p>Deleting a file in a new commit does not erase it from earlier commits; the key remains in history. Truly removing it requires rewriting history, and because it may already be exposed, the key should be rotated (revoked and reissued).</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. What is the purpose of a .gitignore file? </strong> </p> <ol type="A"> <li>To list the files Git should commit automatically</li><li>To store your commit messages</li><li>To list patterns of paths Git should not track, so they never get staged or committed by accident</li><li>To encrypt sensitive files inside the repository</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> To list patterns of paths Git should not track, so they never get staged or committed by accident </p> <p>.gitignore lists path patterns Git should leave untracked — build outputs, temp files, and especially secrets. Ignored files never appear as candidates to add, so they cannot be committed by accident. Note it only affects files not already tracked.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. With no arguments, what does git diff compare? </strong> </p> <ol type="A"> <li>The working directory against the staging area (your unstaged changes)</li><li>The staging area against the last commit</li><li>Two different branches</li><li>Your repository against a remote server</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> The working directory against the staging area (your unstaged changes) </p> <p>Plain git diff shows what is changed in the working directory but not yet staged. To see what is staged and about to be committed, use git diff --staged, which compares the staging area against the last commit.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>repository</strong> </dt> <dd data-astro-cid-whrtx2kk>A project folder that Git is tracking, together with the hidden .git directory that stores its complete history of committed snapshots.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>working directory</strong> </dt> <dd data-astro-cid-whrtx2kk>The live files on disk that you see and edit right now — the in-progress version of the project, before anything is staged or committed.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>staging area</strong> </dt> <dd data-astro-cid-whrtx2kk>A holding area where you assemble exactly the changes to include in the next commit; git add puts changes here. Also called the index.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>index</strong> </dt> <dd data-astro-cid-whrtx2kk>Git&#39;s internal name for the staging area — the list of changes prepared for the next commit.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>commit</strong> </dt> <dd data-astro-cid-whrtx2kk>A permanent, recorded snapshot of the tracked files at one instant, wrapped with an author, timestamp, message, and the parent commit&#39;s hash, and identified by its own hash.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>snapshot</strong> </dt> <dd data-astro-cid-whrtx2kk>The complete state of every tracked file at the moment of a commit; Git stores snapshots rather than lists of edits, and computes differences on demand.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>hash</strong> </dt> <dd data-astro-cid-whrtx2kk>A commit&#39;s unique identifier — a long hexadecimal fingerprint computed from the commit&#39;s full contents (snapshot, author, time, message, and parent); usually shown as the first seven characters.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>HEAD</strong> </dt> <dd data-astro-cid-whrtx2kk>A pointer to the commit you are currently on, normally the newest commit on your branch; it advances to each new commit you make.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>parent</strong> </dt> <dd data-astro-cid-whrtx2kk>The commit that came just before a given commit; the parent reference is what links commits into a chain reaching back to the first commit.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>.gitignore</strong> </dt> <dd data-astro-cid-whrtx2kk>A file listing path patterns Git should not track, so build outputs, temp files, and secrets never get staged or committed by accident.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>git add</strong> </dt> <dd data-astro-cid-whrtx2kk>The command that copies changes from the working directory into the staging area, marking them for inclusion in the next commit.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>git commit</strong> </dt> <dd data-astro-cid-whrtx2kk>The command that records everything currently staged as a new permanent snapshot in the repository, with a message describing the change.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>git status</strong> </dt> <dd data-astro-cid-whrtx2kk>The command that reports which files are untracked, staged, or modified — the window that tells you which area holds each file&#39;s current content.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>distributed version control</strong> </dt> <dd data-astro-cid-whrtx2kk>A model, used by Git, in which every clone is a full copy of the repository and its history, so you can commit and inspect history without a central server.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Git Basics — Recording Changes to the Repository (Pro Git)</a> — Chacon &amp; Straub / Pro Git (accessed 2026-07-12) — The canonical walkthrough of the working directory, staging area, and committing. </li><li data-astro-cid-whrtx2kk> <a href="https://git-scm.com/docs/git-commit" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>git-commit Documentation</a> — Git (accessed 2026-07-12) — Official reference for what git commit records and its options. </li><li data-astro-cid-whrtx2kk> <a href="https://git-scm.com/docs/git-add" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>git-add Documentation</a> — Git (accessed 2026-07-12) — Official reference for staging changes into the index. </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Git" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Git</a> — Wikipedia (accessed 2026-07-12) — History of Git&#39;s creation in 2005 and its distributed, content-addressed design. </li><li data-astro-cid-whrtx2kk> <a href="https://missing.csail.mit.edu/2020/version-control/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Missing Semester — Version Control (Git)</a> — MIT (accessed 2026-07-12) — A concise, model-first treatment of Git&#39;s internals and everyday use. </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="30" data-astro-cid-whrtx2kk>
+Mark Day 30 as read
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+      surfaces for someone searching for one — it costs you a click and it is genuinely how people
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+★ Star on GitHub
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-029-why-version-control-exists" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 29</span> <span class="pn__title" data-astro-cid-oerjsknp>Why Version Control Exists</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-031-branching-and-merging" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 31 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Branching and Merging</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+      // Progressive enhancement only: the theme falls back to dark and every
+      // .reveal element is visible by default (the hidden start state exists
+      // only inside a prefers-reduced-motion: no-preference query).
+      (() => {
+        const toggle = document.getElementById('theme');
+        if (toggle) {
+          toggle.addEventListener('click', () => {
+            const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+            document.documentElement.dataset.theme = next;
+            try {
+              localStorage.setItem('theme', next);
+            } catch {
+              /* private mode */
+            }
+          });
+        }
+
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const items = document.querySelectorAll('.reveal');
+        if (items.length && !reduced && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry, i) => {
+                if (!entry.isIntersecting) return;
+                entry.target.style.transitionDelay = `${Math.min(i * 50, 240)}ms`;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.06 },
+          );
+          items.forEach((el) => io.observe(el));
+        } else {
+          items.forEach((el) => el.classList.add('is-in'));
+        }
+      })();
+    </script> </body> </html>

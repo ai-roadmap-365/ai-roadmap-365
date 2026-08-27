@@ -1,0 +1,400 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 16: IP Addresses, DNS, and Routing · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to explain how a machine is addressed, how a name is turned into that address by DNS, and how packets are routed to it — and to diagnose the two most common &#34;can't reach the server&#34; failures by hand with dig, ping, and traceroute."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-016-ip-addresses-dns-and-routing/"><meta property="og:title" content="Day 16: IP Addresses, DNS, and Routing · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to explain how a machine is addressed, how a name is turned into that address by DNS, and how packets are routed to it — and to diagnose the two most common &#34;can't reach the server&#34; failures by hand with dig, ping, and traceroute."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-016-ip-addresses-dns-and-routing/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-016-ip-addresses-dns-and-routing.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 16: IP Addresses, DNS, and Routing · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 16: IP Addresses, DNS, and Routing · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to explain how a machine is addressed, how a name is turned into that address by DNS, and how packets are routed to it — and to diagnose the two most common &#34;can't reach the server&#34; failures by hand with dig, ping, and traceroute."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-016-ip-addresses-dns-and-routing.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+      // Dark is the default regardless of OS preference - this is a dark-first
+      // design. A visitor who picks light with the toggle keeps it. Applied
+      // before first paint so there is no flash of the wrong theme.
+      (() => {
+        let t;
+        try {
+          t = localStorage.getItem('theme');
+        } catch {
+          t = null;
+        }
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+      })();
+    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+<style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
+.starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+365 Days of AI
+</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+Labs
+</a> </header> <main id="main">  <article data-day="16" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>How the Internet Works</span>  › 
+Day 16 </p> <h1 data-astro-cid-whrtx2kk>Day 16: IP Addresses, DNS, and Routing</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-016-ip-addresses-dns-and-routing.png" width="1200" height="630" alt="Day 16 of 365 — IP Addresses, DNS, and Routing" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to explain how a machine is addressed, how a name is turned into that address by DNS, and how packets are routed to it — and to diagnose the two most common &quot;can&#39;t reach the server&quot; failures by hand with dig, ping, and traceroute.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>How the Internet Works</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-016-ip-addresses-dns-and-routing" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-016-ip-addresses-dns-and-routing</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
+cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-016-ip-addresses-dns-and-routing</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/ai-roadmap-365/labs/day-016-ip-addresses-dns-and-routing" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Describe IPv4 dotted-quad and IPv6 addresses, the IPv4 address-exhaustion story, and why IPv6 was created</li><li data-astro-cid-whrtx2kk>Distinguish public from private address ranges (10.x, 172.16.x, 192.168.x) and the loopback 127.0.0.1, and read CIDR notation at an intuitive level</li><li data-astro-cid-whrtx2kk>Explain the DNS hierarchy — root, TLD, and authoritative servers — and the role of recursive resolvers, caching, and TTL</li><li data-astro-cid-whrtx2kk>Identify the common DNS record types (A, AAAA, CNAME, MX, TXT) and explain why a CNAME requires a second lookup</li><li data-astro-cid-whrtx2kk>Explain how packets are routed hop by hop between routers and, at a high level, how BGP and autonomous systems stitch networks together</li><li data-astro-cid-whrtx2kk>Use dig, nslookup, traceroute, whois, and ping to resolve names, inspect records, and trace the path to a host</li><li data-astro-cid-whrtx2kk>Diagnose whether a connection failure is a naming (DNS) problem or a reachability (routing) problem</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Day 15 — What Happens When You Load a Web Page (the end-to-end request overview this lesson zooms into)</li><li data-astro-cid-whrtx2kk>Comfort running commands in a terminal (Days 8–14)</li><li data-astro-cid-whrtx2kk>A computer with a network connection and the dig/traceroute tools (installation covered in the lab)</li></ul> <h2 id="why-this-matters">Why this matters</h2>
+<p>Yesterday you traced what happens when a web page loads. Today you zoom in on the first thing that has to work before any of that can happen: the network has to find the machine you are talking to and carry your data to it. Every API call you will ever make — to a hosted model service, a database, a payment gateway — begins by turning a name like <code>api.example.com</code> into a numeric address, then shoving bytes across a chain of machines until they arrive. When that pipeline is healthy you never think about it. When it breaks, nothing above it works, and the error messages are famously unhelpful.</p>
+<p>This is not abstract plumbing. The single most common production incident in a networked service is “I can’t reach the server,” and the overwhelming majority of those turn out to be one of two things: a name resolved to the wrong address (or no address), or packets could not find a route to the destination. Engineers who can tell those two failures apart in thirty seconds save hours; engineers who cannot end up restarting servers that were never broken. The difference is a working mental model of addressing, naming, and routing — exactly what you build today.</p>
+<p>There is money in it too. When you deploy a service and point a domain at it, you are editing DNS records, and a wrong record or a long cache lifetime can make a fix invisible for hours. When your requests are mysteriously slow, the cause is often extra network hops or a distant server, which you can see directly. By the end of this lesson you will be able to interrogate the naming and routing system by hand — the same commands professionals reach for first — and read what it tells you.</p>
+<h2 id="the-idea-in-plain-language">The idea in plain language</h2>
+<p>Every device on a network has a numeric label called an <strong>IP address</strong> — its location on the network, the way a street address locates a building. To send data to a machine, you need its IP address; a name like <code>example.com</code> is a convenience for humans, not something the network itself understands.</p>
+<p>The system that turns human-friendly names into IP addresses is the <strong>Domain Name System (DNS)</strong>. It is a giant, distributed directory: you ask “what is the address for <code>example.com</code>?” and, after a short lookup that may hop through several servers, you get a number back. DNS is organized as a hierarchy — a small number of <em>root</em> servers know where to find the servers for <code>.com</code>, <code>.org</code>, and every other top-level domain; those in turn know where to find the servers responsible for individual domains like <code>example.com</code>; and those <em>authoritative</em> servers hold the actual answer. To keep this fast, answers are cached — remembered for a while — at every level.</p>
+<p>Once you have an address, your data still has to physically get there, and the destination is almost never directly connected to you. <strong>Routing</strong> is the process by which specialized machines called <strong>routers</strong> pass your data, packet by packet, from one network to the next — each router looking at the destination address and forwarding the packet one hop closer, like a letter moving from post office to post office until it reaches the right town. No single machine knows the whole path; each just knows the next step. Addressing tells you <em>where</em>, DNS tells you the address for a <em>name</em>, and routing gets you <em>there</em>. Those three ideas, together, are how any machine on the internet finds and reaches any other.</p>
+<h2 id="historical-background">Historical background</h2>
+<p>In the early days of the ARPANET — the 1970s precursor to the internet — there were few enough machines that every computer kept a single file, <code>HOSTS.TXT</code>, listing every host’s name and address. The file was maintained centrally at the Stanford Research Institute’s Network Information Center and downloaded by everyone. This worked until it didn’t: as the network grew, a single hand-edited file that everyone had to fetch became a bottleneck and a single point of failure. Names collided, updates lagged, and the download traffic itself grew unsustainable.</p>
+<p>In 1983, Paul Mockapetris designed the Domain Name System to replace it, described in RFCs 882 and 883 (later revised into the still-current RFCs 1034 and 1035). His key move was to make naming <em>hierarchical and delegated</em>: instead of one authority for all names, responsibility is divided at each dot, so the operator of <code>example.com</code> can manage their own names without asking anyone’s permission, and the system scales to billions of names. It is one of the most successful distributed systems ever built, and it has run continuously for over forty years.</p>
+<p>Addressing has its own history. The internet’s addresses, <strong>IPv4</strong>, were standardized in 1981 (RFC 791) with 32-bit addresses — about 4.3 billion of them. In 1981 that seemed limitless. It was not. By the early 1990s the explosive growth of the internet made exhaustion a visible threat, and two responses emerged. The short-term fix, <strong>CIDR</strong> (Classless Inter-Domain Routing, 1993), and private addressing with <strong>NAT</strong> stretched the existing space by using it more efficiently and letting many devices share one public address. The long-term fix, <strong>IPv6</strong> (first specified in 1998, RFC 2460, now RFC 8200), widened addresses to 128 bits — an almost unimaginably large space. The prediction came true: the central pool of unallocated IPv4 addresses ran out when IANA handed its last five large blocks to the regional registries in February 2011, and the regional registries emptied over the following years. We now live in a long transition, with IPv4 and IPv6 running side by side.</p>
+<h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
+<p>An <strong>IP address</strong> is a numeric identifier for a network interface, used by routers to deliver packets. It is <em>not</em> a permanent name for a device or a person: addresses are frequently reassigned, shared behind NAT, and changed when you move networks. An IPv4 address is written as four numbers 0–255 separated by dots (a “dotted quad”), such as <code>93.184.216.34</code>; each number is one <strong>octet</strong> (8 bits), and the four together make 32 bits. An IPv6 address is written as eight groups of four hexadecimal digits separated by colons, such as <code>2606:2800:220:1:248:1893:25c8:1946</code>, with rules for abbreviating runs of zeros.</p>
+<p><strong>DNS</strong> is a naming and lookup system, <em>not</em> a routing system and <em>not</em> a security system by itself. It maps names to records — most commonly addresses — but it does nothing to move your data or to prove that the server you reach is authentic (that is the job of TLS, which you will meet next). A DNS answer can be stale, cached, or (without extra protections) spoofed.</p>
+<p><strong>Routing</strong> is the forwarding of packets between networks by routers, <em>not</em> the same thing as the wire or radio link that carries a single hop. Routing decides the <em>path</em>; the physical layer moves bits across each individual segment of that path. And a <strong>router</strong> is not a magic box that knows the whole internet — it holds a routing table of destinations and next hops, and for anything it does not specifically know, it forwards toward a default route “upstream.” The whole system works precisely because no participant needs global knowledge.</p>
+<h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
+<p>These three mechanisms exist to solve three different scaling problems, and it is worth keeping them separate.</p>
+<p>Addressing solves <em>identity at scale</em>: for one machine to send data to another across independently operated networks, there must be a globally agreed way to name a destination that any router can interpret. A flat list would not scale, so IP addresses are structured so that the leading bits identify a network and the trailing bits identify a host within it — which is what lets routers make decisions about huge groups of addresses at once instead of memorizing every machine.</p>
+<p>DNS solves <em>human memorability and indirection</em>. People cannot remember <code>93.184.216.34</code>, but more importantly, tying services to raw addresses would make the internet rigid: you could never move a service to a new machine, spread it across many machines, or fail over to a backup without every user editing the address they use. DNS adds a layer of indirection — a stable name that you can repoint at will — which is the quiet foundation of nearly all modern deployment, load balancing, and content delivery.</p>
+<p>Routing solves <em>reachability without central control</em>. There is no master map of the internet and no central switchboard. Networks are operated by tens of thousands of independent organizations, and routing protocols let them advertise “you can reach these addresses through me” to their neighbors, so that a workable path emerges from local decisions. This decentralization is why the internet has no off switch and why it survives the failure of any single link or router.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>Follow one request through the whole machine. You type <code>example.com</code> into a program and hit enter. Three things must happen in order: resolve the name to an address, then route packets to that address, and the routers along the way must know how to reach it.</p>
+<h3 id="resolving-a-name-with-dns">Resolving a name with DNS</h3>
+<p>Your computer does not usually talk to the DNS hierarchy directly. It asks a <strong>resolver</strong> — a <strong>recursive resolver</strong>, typically run by your ISP or a public provider like <code>1.1.1.1</code> or <code>8.8.8.8</code> — to do the legwork and return a final answer. The resolver walks the hierarchy on your behalf:</p>
+<ol>
+<li><strong>Root.</strong> If it has nothing cached, the resolver asks one of the <strong>root servers</strong>: “who handles <code>.com</code>?” The root does not know <code>example.com</code>, but it knows the servers for the <code>.com</code> <strong>top-level domain (TLD)</strong> and refers the resolver to them. (There are 13 named root server identities, <code>a</code> through <code>m</code>, each actually a globally distributed fleet.)</li>
+<li><strong>TLD.</strong> The resolver asks a <code>.com</code> TLD server: “who handles <code>example.com</code>?” The TLD server refers it to the <strong>authoritative name servers</strong> for that domain — the ones the domain’s owner designated.</li>
+<li><strong>Authoritative.</strong> The resolver asks an authoritative server for <code>example.com</code> directly, and <em>that</em> server returns the actual record — for instance, an <strong>A record</strong> giving the IPv4 address.</li>
+<li><strong>Answer and cache.</strong> The resolver hands the address back to your computer and remembers it. Every step’s answer carries a <strong>TTL</strong> (time to live) in seconds; until it expires, the resolver serves the cached answer instead of repeating the walk, which is why the second lookup of a name is nearly instant.</li>
+</ol>
+<p><img src="/ai-roadmap-365/_astro/dns-resolution.9_FPrKgu_Z2svYzD.svg" alt="Flowchart: a resolver walking the DNS hierarchy from root to TLD to authoritative server, with caching" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="470"></p>
+<p>DNS answers come in typed <strong>records</strong>, and knowing the common ones is everyday knowledge for anyone who deploys a service:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Record</th><th>Purpose</th><th>Example value</th></tr></thead><tbody><tr><td>A</td><td>Maps a name to an IPv4 address</td><td><code>93.184.216.34</code></td></tr><tr><td>AAAA</td><td>Maps a name to an IPv6 address</td><td><code>2606:2800:220:1:248:1893:25c8:1946</code></td></tr><tr><td>CNAME</td><td>Alias: “this name is really that name”</td><td><code>www.example.com → example.com</code></td></tr><tr><td>MX</td><td>Mail exchange: where email for the domain goes</td><td><code>10 mail.example.com</code></td></tr><tr><td>TXT</td><td>Arbitrary text, used for verification and policy</td><td><code>&quot;v=spf1 include:_spf.example.com ~all&quot;</code></td></tr><tr><td>NS</td><td>Delegates the domain to its authoritative servers</td><td><code>a.iana-servers.net</code></td></tr><tr><td>TTL</td><td>Not a record type but a field on every record: how long it may be cached</td><td><code>3600</code> (one hour)</td></tr></tbody></table>
+<p>A <strong>CNAME</strong> is worth dwelling on because it confuses beginners: it does not point to an address, it points to <em>another name</em>, and the resolver must then look that name up too. This is how you point <code>www.example.com</code> at <code>example.com</code>, or a custom domain at a hosting provider’s name, without hard-coding an address that might change.</p>
+<h3 id="routing-packets-to-the-address">Routing packets to the address</h3>
+<p>Now the resolver has returned <code>93.184.216.34</code>, and your machine must deliver packets there. Your computer compares the destination to its own network: if the address is on your <strong>local network</strong> it can be delivered directly, but almost always it is not, so your computer sends the packet to its <strong>default gateway</strong> — the router that connects your network to the rest of the internet (in a home, that is your Wi-Fi router).</p>
+<p>From there the packet <strong>hops</strong> from router to router. Each router reads the destination address, consults its <strong>routing table</strong> to decide the best next hop toward that destination, and forwards the packet on — then forgets about it. The packet may cross a dozen or more routers, operated by several different companies, before arriving. No router plans the whole route; each makes one local decision.</p>
+<p><img src="/ai-roadmap-365/_astro/ip-routing.rzM6reyO_Z1DA9cz.svg" alt="Diagram: a packet hopping across routers and autonomous systems from a source computer to a destination server" loading="lazy" decoding="async" fetchpriority="auto" width="780" height="420"></p>
+<p>How do routers in different companies agree on which way is “toward” a destination? The internet is divided into <strong>autonomous systems (AS)</strong> — large networks under single administrative control, each with a number (an ASN), such as an ISP, a university, or a cloud provider. Between autonomous systems, routers run the <strong>Border Gateway Protocol (BGP)</strong>, in which each AS advertises to its neighbors which blocks of addresses it can reach. These advertisements propagate, and every router builds a picture of which neighbor to hand a packet to for any given destination block. BGP is the glue that stitches tens of thousands of independent networks into one internet — and, because it runs largely on trust between operators, a bad advertisement (accidental or malicious) can misroute traffic for a whole region, an event you will occasionally see in the news as a “BGP leak.”</p>
+<p>You can watch the hops yourself with <strong>traceroute</strong>. It exploits a field in every IP packet called the <strong>TTL</strong> (here meaning “hop limit,” a different TTL from the DNS one): each router decrements it, and when it hits zero the router discards the packet and sends back an error. Traceroute sends packets with a hop limit of 1, then 2, then 3, and so on; each elicits an error from the router that far along the path, revealing the routers one by one.</p>
+<h2 id="an-everyday-analogy">An everyday analogy</h2>
+<p>Think of the postal system, and keep it in mind for the rest of the lesson.</p>
+<p>An <strong>IP address</strong> is a precise street address: “12 Oak Street, Springfield.” It is what actually gets a letter delivered — unglamorous, purely functional, and reassigned when tenants move. A <strong>domain name</strong> is the name on the mailbox, “The Ramirez Family”: easy to remember, but the postal service does not route by it.</p>
+<p><strong>DNS</strong> is the directory that turns a name into a street address. You do not personally phone every records office; you ask a helpful clerk — the <strong>resolver</strong> — “where do the Ramirezes live?” If the clerk does not know, they work down a hierarchy: a national office knows which regional office covers each state, the regional office knows the town, and the town clerk has the actual street address. The clerk then writes it on a sticky note and keeps it for a while — the <strong>cache</strong> with its <strong>TTL</strong> — so the next person asking gets an instant answer. If the family moves and the sticky note has not expired yet, the clerk keeps giving the old address: exactly why a DNS change can take time to take effect everywhere.</p>
+<p><strong>Routing</strong> is the mail network moving your letter. Your local post office does not know the route to Springfield; it just knows to send anything not local to the regional sorting center. That center forwards toward the destination region, which forwards to the destination town’s office, which delivers to Oak Street. Each office makes one decision — “what is the next hop toward this address?” — and no office holds the entire national map. The independent regional carriers negotiating which routes they will carry are the <strong>autonomous systems</strong> running <strong>BGP</strong>. And <strong>traceroute</strong> is like sending a series of letters stamped “return to sender after passing through N offices,” so each office along the route mails one back to you, letting you reconstruct the whole path.</p>
+<p>The analogy holds all the way down, with one honest caveat: unlike a physical letter, your data is split into many <strong>packets</strong> that may each take a different route and arrive out of order, to be reassembled at the destination — a resilience trick a single physical letter cannot manage.</p>
+<h2 id="examples-in-practice">Examples in practice</h2>
+<p>Let’s make it concrete with the exact tools professionals use. Each is free and preinstalled or one package away on macOS and Linux.</p>
+<p><strong><code>dig</code> — the DNS workbench.</strong> Choose <code>dig</code> (domain information groper) when you want to see precisely what DNS returns, including record types and TTLs. It is the tool DNS professionals live in. To ask for the IPv4 address of a name:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">dig</span><span style="color:#9ECBFF"> +short</span><span style="color:#9ECBFF"> A</span><span style="color:#9ECBFF"> example.com</span></span></code></pre>
+<p>The <code>+short</code> flag strips everything but the answer. Drop it and you get the full response — the question, the answer with its TTL, and which server replied — which is what you want when debugging. To see the whole delegation chain from the root down, <code>dig +trace example.com</code> performs the recursive walk itself and prints every referral, turning the hierarchy from an abstraction into something you can read line by line.</p>
+<p><strong><code>nslookup</code> — the everywhere alternative.</strong> Choose <code>nslookup</code> when you are on a machine without <code>dig</code>, especially Windows, where it is the built-in DNS tool. It answers the same basic question:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">nslookup</span><span style="color:#9ECBFF"> example.com</span></span></code></pre>
+<p>It prints the resolver it used (“Server”) and the addresses it got. It is less precise than <code>dig</code> for reading TTLs and record details, but it is universally available, which is exactly when you will reach for it.</p>
+<p><strong><code>ping</code> — is it reachable, and how far?</strong> Choose <code>ping</code> to check whether a host responds at all and to get a rough round-trip time. It sends small ICMP “echo request” probes and times the replies:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">ping</span><span style="color:#79B8FF"> -c</span><span style="color:#79B8FF"> 4</span><span style="color:#9ECBFF"> example.com</span></span></code></pre>
+<p>The <code>-c 4</code> sends four probes then stops (omit it on Windows, where the default is four; use <code>-n 4</code> there instead). Note that some hosts deliberately ignore pings, so “no reply” means “not reachable <em>or</em> not answering pings” — a distinction that trips up beginners.</p>
+<p><strong><code>traceroute</code> — where do the packets go?</strong> Choose <code>traceroute</code> when a host is slow or unreachable and you want to see the path and where it breaks:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">traceroute</span><span style="color:#9ECBFF"> example.com</span></span></code></pre>
+<p>Each line is one hop — one router — with its address and the round-trip time to it. On Windows the command is <code>tracert</code>. It may print <code>* * *</code> for hops that decline to respond; that is normal and does not by itself mean failure.</p>
+<p><strong><code>whois</code> — who owns this name or address?</strong> Choose <code>whois</code> to look up registration details for a domain or an IP block — registrar, name servers, and the responsible organization:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">whois</span><span style="color:#9ECBFF"> example.com</span></span></code></pre>
+<p>None of these tools cost anything, and none require an account. Paid and hosted equivalents exist — DNS-monitoring dashboards, managed traceroute-from-many-locations services, commercial IP-intelligence APIs — and they add scheduling, history, and worldwide vantage points, but every one of them is built on exactly the queries above, which you can run yourself for free.</p>
+<h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
+<h3 id="security">Security</h3>
+<p>DNS was designed in a trusting era, and its openness is a liability. Because a plain DNS answer is not authenticated, an attacker who can inject a forged reply can send you to the wrong address — the basis of <strong>cache poisoning</strong> and many phishing attacks. Mitigations exist: <strong>DNSSEC</strong> cryptographically signs records so tampering is detectable, and <strong>DNS over HTTPS/TLS</strong> encrypts the query so it cannot be read or altered in transit. Routing has an analogous weakness: BGP largely trusts what neighbors advertise, so a false route can hijack traffic, which is why route-origin validation is slowly being deployed. The lesson for anyone deploying a service: correct DNS and routing are necessary but not sufficient for trust — you still need TLS on top to prove the server is who it claims to be.</p>
+<h3 id="privacy">Privacy</h3>
+<p>Your DNS queries are a log of everywhere you go, and by default they travel in the clear to your resolver, who can see and record them. Choosing a resolver is therefore a privacy decision, and encrypted DNS keeps queries from anyone between you and that resolver. Addresses leak information too: your public IP address reveals your rough geographic location and your ISP, which is why services can geolocate you and why privacy tools route your traffic through intermediaries to present a different address.</p>
+<h3 id="performance">Performance</h3>
+<p>Naming and routing both cost time before any real work happens. A cold DNS lookup that has to walk the hierarchy can add tens to hundreds of milliseconds; a cached one is nearly free — which is the whole point of TTLs and caching. Routing distance matters too: every hop and every mile adds latency, so a server physically far from your users is slower no matter how fast the server is. This is why content delivery networks place copies of content in many locations and use DNS to send each user to a nearby one — performance engineering that is, at bottom, clever use of the two systems in this lesson.</p>
+<h3 id="scalability-and-cost">Scalability and cost</h3>
+<p>DNS scales through hierarchy and caching: no server holds the whole namespace, and caching absorbs the vast majority of queries near the user. Routing scales through address aggregation — routers reason about blocks of addresses (CIDR), not individual machines — and through the AS structure that lets the internet grow without any component needing global knowledge. The costs are mostly indirect: DNS hosting is cheap or free for small domains, IPv4 addresses have become a genuinely scarce and traded commodity (a real line item for anyone needing many public addresses), and the operational cost of a <em>misconfiguration</em> — a wrong record, a too-long TTL that freezes a mistake in place — is often far higher than any bill.</p>
+<h2 id="subnets-and-cidr-briefly">Subnets and CIDR, briefly</h2>
+<p>You will keep meeting one more idea: how addresses are grouped. A <strong>subnet</strong> is a contiguous block of addresses that share a leading prefix and are treated as one local network. <strong>CIDR notation</strong> writes such a block as an address followed by a slash and a number — <code>192.168.1.0/24</code> — where the number says how many leading bits are fixed as the network part. A <code>/24</code> fixes 24 of the 32 bits, leaving 8 for hosts, so it contains 2⁸ = 256 addresses (<code>192.168.1.0</code> through <code>192.168.1.255</code>). A <code>/16</code> fixes 16 bits and holds 2¹⁶ = 65,536 addresses; each smaller number after the slash doubles the block. This is exactly how routers summarize: “everything in <code>93.184.216.0/24</code> goes this way” is one routing-table entry standing in for 256 addresses.</p>
+<p>Not all addresses are public. Some ranges are reserved as <strong>private</strong>, usable inside a home or company network but never routed on the public internet; a router performs <strong>NAT</strong> to let many private devices share one public address. And one address is special: <code>127.0.0.1</code> (the <strong>loopback</strong>) always means “this very machine.”</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Range (CIDR)</th><th>Kind</th><th>Where it is used</th></tr></thead><tbody><tr><td><code>10.0.0.0/8</code></td><td>Private (RFC 1918)</td><td>Large internal networks; ~16.7 million addresses</td></tr><tr><td><code>172.16.0.0/12</code></td><td>Private (RFC 1918)</td><td>Medium internal networks</td></tr><tr><td><code>192.168.0.0/16</code></td><td>Private (RFC 1918)</td><td>Home and small-office networks (e.g. <code>192.168.1.1</code>)</td></tr><tr><td><code>127.0.0.0/8</code></td><td>Loopback</td><td>The local machine itself; <code>127.0.0.1</code> is “here”</td></tr><tr><td>Everything else routable</td><td>Public</td><td>Globally reachable, assigned by registries</td></tr></tbody></table>
+<p>If you inspect an address and it falls in one of the private ranges, you know immediately that it is not reachable from outside its own network — a distinction that explains a great many “it works on my machine but not from the server” mysteries.</p>
+<h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
+<p>“Alternatives” here means the different resolvers and tools you can choose, and the trade-offs between them.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Option</th><th>Type</th><th>What it offers</th><th>Cost</th></tr></thead><tbody><tr><td>Your ISP’s default resolver</td><td>Bundled</td><td>Works out of the box; your ISP sees your queries</td><td>Free</td></tr><tr><td>Cloudflare <code>1.1.1.1</code>, Google <code>8.8.8.8</code>, Quad9 <code>9.9.9.9</code></td><td>Public resolvers</td><td>Fast, global, often with privacy or filtering options</td><td>Free</td></tr><tr><td><code>dig</code> / <code>nslookup</code> / <code>host</code></td><td>Command-line tools</td><td>Direct, precise DNS queries from your own machine</td><td>Free / open source</td></tr><tr><td>BIND, Unbound, Knot</td><td>Open-source DNS servers</td><td>Run your own resolver or authoritative server</td><td>Free / open source</td></tr><tr><td>Managed DNS (Cloudflare, Route 53, NS1, and others)</td><td>Commercial hosting</td><td>Authoritative hosting with health checks, geo-routing, dashboards</td><td>Free tier to paid</td></tr><tr><td>IP-intelligence and DNS-monitoring APIs</td><td>Commercial</td><td>Bulk geolocation, ownership, uptime history, alerting</td><td>Paid</td></tr></tbody></table>
+<p>For learning and for most debugging, the free command-line tools and a public resolver are all you need. Managed DNS earns its price when you run real services and want failover, global routing, and change history without operating servers yourself.</p>
+<h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>IP address</td><td>Domain name</td><td>The address is the machine’s numeric location; the name is a human label that DNS maps to an address</td></tr><tr><td>DNS</td><td>Routing</td><td>DNS finds the <em>address</em> for a name; routing carries packets <em>to</em> that address</td></tr><tr><td>A record</td><td>CNAME record</td><td>An A record gives an actual IP address; a CNAME points to another name that must itself be resolved</td></tr><tr><td>IPv4</td><td>IPv6</td><td>IPv4 is 32-bit (~4.3 billion addresses, nearly exhausted); IPv6 is 128-bit (effectively unlimited)</td></tr><tr><td>Public IP</td><td>Private IP</td><td>A public address is globally routable; a private address (<code>10.x</code>, <code>192.168.x</code>) works only inside its own network</td></tr><tr><td>Router</td><td>Resolver</td><td>A router forwards packets between networks; a resolver answers DNS name lookups</td></tr></tbody></table>
+<h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
+<p>Reach for this mental model the instant a networked thing “can’t connect.” The disciplined first question is always: <em>does the name resolve?</em> Run <code>dig +short A the-host</code>. If you get no address or a surprising one, the problem is DNS — a missing record, a typo, a stale cache, a wrong TTL — and no amount of restarting the server will help. If the name resolves correctly but you still cannot connect, the problem is reachability: use <code>ping</code> and <code>traceroute</code> to see whether packets get to the destination and where they stop. Separating “wrong address” from “can’t reach the address” is the highest-leverage debugging habit in all of networking, and these two commands settle it in under a minute.</p>
+<p>Reach for it when you deploy: pointing a domain at a new service is a DNS edit, and knowing records and TTLs lets you plan a change (lower the TTL beforehand so the switch propagates fast) instead of being surprised by one. Reach for it when you evaluate performance, because latency you cannot explain often lives in the network path, not your code.</p>
+<p>Know when to leave it alone, too. Most of the time DNS and routing simply work, and second-guessing them wastes effort — do not blame the network before you have evidence. Application bugs, expired credentials, firewalls, and full disks masquerade as “connection” problems constantly. The professional habit is to <em>check</em> the name-and-route layer quickly and definitively with the tools above, and then, once it is ruled in or out, move on to the layer that actually holds the fault.</p>
+<p>Finally, the connection to your larger goal. Every service you call over the network — a hosted model’s API endpoint, a vector database, an object store full of training data — is reached by exactly this pipeline: its hostname resolves through DNS to an address, and your packets route there hop by hop. When you deploy a model service of your own and give it a public name, you are creating DNS records for it; when a client reports it “can’t reach the server,” you now know the first two things to check and the exact commands to check them with. The naming and routing you learned today are the ground floor that everything else in networked software stands on.</p>
+<h2 id="knowledge-check">Knowledge check</h2>
+<p>Try these from memory before looking back:</p>
+<ol>
+<li>In one sentence each, state what IP addressing, DNS, and routing are individually responsible for.</li>
+<li>Walk the four steps a recursive resolver takes to resolve a name it has never seen, naming root, TLD, and authoritative servers.</li>
+<li>Explain the difference between an A record and a CNAME record, and why a CNAME requires a second lookup.</li>
+<li>You run <code>dig +short A myapp.example.com</code> and get an address in <code>10.0.0.0/8</code>. Why can a user on the public internet not reach that service, and what does the private range tell you?</li>
+<li>A service “can’t be reached.” Describe, in order, the two commands you would run first and how each answer redirects your search.</li>
+</ol>
+<h2 id="hands-on-exercise">Hands-on exercise</h2>
+<p>Time to query the real naming and routing system. In this exercise — completed in full in the Day 16 lab directory — you will resolve a name to its addresses, read its mail record, and trace the path to it, then record what you found. Everything uses a public domain (<code>example.com</code>) reserved for exactly this kind of documentation and testing, so you are not probing anyone’s private systems.</p>
+<p>Open your terminal and run each command:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">dig</span><span style="color:#9ECBFF"> +short</span><span style="color:#9ECBFF"> A</span><span style="color:#9ECBFF"> example.com</span></span></code></pre>
+<p>Prints the IPv4 address(es) the name resolves to — the “street address” DNS returned.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">dig</span><span style="color:#9ECBFF"> +short</span><span style="color:#9ECBFF"> AAAA</span><span style="color:#9ECBFF"> example.com</span></span></code></pre>
+<p>Prints the IPv6 address(es), if the name has any — the same destination in the newer, larger address format.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">dig</span><span style="color:#9ECBFF"> MX</span><span style="color:#9ECBFF"> example.com</span></span></code></pre>
+<p>Prints the mail-exchange record: where email for the domain would be delivered. (<code>example.com</code> may return an empty or placeholder answer — that itself is a valid, informative result.)</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">traceroute</span><span style="color:#9ECBFF"> example.com</span></span></code></pre>
+<p>Prints the routers your packets pass through on the way to the destination, one hop per line. It can take a while and may show <code>* * *</code> for hops that stay silent; that is normal.</p>
+<p>On Windows, use <code>nslookup example.com</code> for the address lookups and <code>tracert example.com</code> for the path; the outputs read the same way.</p>
+<h3 id="expected-output">Expected output</h3>
+<p>A representative run (your addresses and hops will differ — that is expected):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ dig +short A example.com</span></span>
+<span class="line"><span>93.184.216.34</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ dig +short AAAA example.com</span></span>
+<span class="line"><span>2606:2800:220:1:248:1893:25c8:1946</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ dig MX example.com</span></span>
+<span class="line"><span>;; ANSWER SECTION:</span></span>
+<span class="line"><span>example.com.   3600   IN   MX   0 .</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ traceroute example.com</span></span>
+<span class="line"><span>traceroute to example.com (93.184.216.34), 30 hops max</span></span>
+<span class="line"><span> 1  192.168.1.1   3.1 ms</span></span>
+<span class="line"><span> 2  10.0.0.1      9.4 ms</span></span>
+<span class="line"><span> 3  * * *</span></span>
+<span class="line"><span> ...</span></span>
+<span class="line"><span> 9  93.184.216.34  74.2 ms</span></span></code></pre>
+<p>Reading it: the A record is the IPv4 address; the AAAA record is the same destination in IPv6. The MX answer here uses the special “null MX” (<code>0 .</code>), a valid record meaning the domain accepts no mail. In the traceroute, hop 1 is your own router (a private <code>192.168.x</code> address), the middle hops are your ISP and transit networks, some decline to answer (<code>* * *</code>), and the final line is the destination — the total hop count is how many routers your packets crossed.</p>
+<h3 id="validate-your-work">Validate your work</h3>
+<p>You are done when you can check every box:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> You captured at least one IPv4 (A) address for the site.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You checked whether the site has an IPv6 (AAAA) address and recorded the result.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You recorded the MX answer (an address, a null MX, or “none”).</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You ran traceroute and counted the hops to the destination.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can say whether each address you saw is public or private (does it fall in <code>10.x</code>, <code>172.16–31.x</code>, or <code>192.168.x</code>?).</li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><strong><code>dig: command not found</code>.</strong> Install it (<code>brew install bind</code> on macOS if missing; <code>sudo apt install dnsutils</code> on Debian/Ubuntu), or use <code>nslookup</code>, which is preinstalled almost everywhere.</li>
+<li><strong><code>traceroute: command not found</code> (Linux).</strong> Install it with <code>sudo apt install traceroute</code> (Debian/Ubuntu) or <code>sudo dnf install traceroute</code> (Fedora). On Windows the command is <code>tracert</code>, already present.</li>
+<li><strong>traceroute hangs or shows only <code>* * *</code>.</strong> Many networks rate-limit or block the probes; this is normal and not a failure. Let it run to the hop limit, or press Ctrl+C to stop early — you still learn where it got.</li>
+<li><strong>An empty answer from <code>dig MX</code>.</strong> That is a real answer: the domain may have no MX record, or a null MX. Record “none” rather than treating it as an error.</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<ul>
+<li><strong>Confusing an A record with a CNAME.</strong> If <code>dig A somename</code> returns another <em>name</em> rather than an address in the answer, you are looking at a CNAME chain; follow it with another lookup. A records end in addresses; CNAMEs end in names.</li>
+<li><strong>Reading <code>* * *</code> as “broken.”</strong> Silent hops are routers choosing not to reply; the path still works if the final line reaches the destination.</li>
+<li><strong>Assuming no ping reply means down.</strong> Hosts often ignore pings on purpose. Confirm with a different signal (an actual connection, or a successful DNS + traceroute) before concluding a host is offline.</li>
+<li><strong>Forgetting caching.</strong> If you change a record and the old value keeps coming back, you are seeing a cached answer that has not hit its TTL yet — wait it out or query an authoritative server directly.</li>
+</ul>
+<h2 id="practice-assignment">Practice assignment</h2>
+<p>Open the DNS worksheet in the starter directory of the Day 16 lab and fill it in completely, using the commands above against <code>example.com</code> (and, if you like, one more site of your choice): record the A record IPv4 address, whether an AAAA record exists, the MX answer, and the number of hops traceroute took to reach the destination. Then write one short paragraph (4–6 sentences) narrating what happened when you looked the name up — from your request, to the resolver walking root → TLD → authoritative, to the address coming back and your packets hopping to it — using your own captured numbers. State explicitly whether the final address is public or private and how you can tell.</p>
+<h2 id="extension-challenge">Extension challenge</h2>
+<p>Go one layer deeper into the hierarchy. Run <code>dig +trace example.com</code> and watch the resolver walk from the root servers down to the authoritative servers, printing every referral — find the line where a root server hands off to the <code>.com</code> servers, and the line where a <code>.com</code> server hands off to the authoritative servers for the domain. Then run <code>dig NS example.com</code> to see just the authoritative name servers, and <code>whois example.com</code> to see who is registered as responsible for the name. Finally, pick any public address you saw today and classify it: is it IPv4 or IPv6, is it public or private, and — using <code>whois &lt;address&gt;</code> — which organization’s block does it belong to? Write three or four sentences connecting what you found to the three responsibilities from this lesson: the name you started with, the address DNS returned, and the path routing would take to reach it. You have just performed, by hand, the exact lookups that every networked program does invisibly before its real work begins.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. What is an IP address, and what is it primarily used for? </strong> </p> <ol type="A"> <li>A human-friendly name that the network routes traffic by directly</li><li>A numeric identifier for a network interface that routers use to deliver packets</li><li>A permanent serial number burned into a device at the factory</li><li>A password that authenticates a machine to the network</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> A numeric identifier for a network interface that routers use to deliver packets </p> <p>An IP address is a numeric location on the network that routers use to forward packets. It is not a permanent device identity — addresses are reassigned, shared behind NAT, and change when a device moves networks.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. A recursive resolver has never seen a name before. Which order does it query the DNS hierarchy? </strong> </p> <ol type="A"> <li>Authoritative server, then TLD server, then root server</li><li>TLD server, then root server, then authoritative server</li><li>Root server, then TLD server, then authoritative server</li><li>It asks all three at once and takes the fastest reply</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Root server, then TLD server, then authoritative server </p> <p>The resolver asks a root server which servers handle the TLD (e.g. .com), then asks a TLD server which servers are authoritative for the domain, then asks an authoritative server for the actual record. Each step returns a referral until the last one returns the answer.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. What is the key difference between an A record and a CNAME record? </strong> </p> <ol type="A"> <li>An A record maps a name to an IP address; a CNAME points to another name that must itself be resolved</li><li>An A record is for IPv4 and a CNAME is for IPv6</li><li>A CNAME maps a name to an IP address; an A record points to another name</li><li>They are identical; CNAME is just an older spelling of A</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> An A record maps a name to an IP address; a CNAME points to another name that must itself be resolved </p> <p>An A record ends in an actual IPv4 address. A CNAME is an alias that points to a different name, so the resolver must perform a second lookup on that name to eventually reach an address. (AAAA is the record type for IPv6 addresses.)</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. Which of these addresses is a private address that cannot be reached from the public internet? </strong> </p> <ol type="A"> <li>93.184.216.34</li><li>8.8.8.8</li><li>192.168.1.10</li><li>1.1.1.1</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> 192.168.1.10 </p> <p>192.168.0.0/16 is one of the RFC 1918 private ranges (along with 10.0.0.0/8 and 172.16.0.0/12), usable only inside a local network. The other three are public, globally routable addresses.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. What does the TTL on a DNS record control? </strong> </p> <ol type="A"> <li>How many routers a packet may cross before being discarded</li><li>How long a resolver may serve the answer from cache before looking it up again</li><li>The maximum size in bytes of the DNS response</li><li>How many times the record may be queried per second</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> How long a resolver may serve the answer from cache before looking it up again </p> <p>A DNS record&#39;s TTL (time to live) is how many seconds a resolver may cache and reuse the answer before it must re-query. This is why the second lookup of a name is fast, and why a record change can take time to take effect everywhere.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. Why was IPv6 created? </strong> </p> <ol type="A"> <li>IPv4 was too slow to route packets quickly enough</li><li>IPv4 could not represent domain names, only numbers</li><li>IPv6 replaced DNS with a simpler naming scheme</li><li>IPv4&#39;s 32-bit address space (~4.3 billion addresses) was being exhausted</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> IPv4&#39;s 32-bit address space (~4.3 billion addresses) was being exhausted </p> <p>IPv4 has 32-bit addresses — about 4.3 billion — which the growth of the internet exhausted (the central pool ran out in 2011). IPv6 uses 128-bit addresses, an effectively unlimited space, and now runs alongside IPv4.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. How does a router decide where to send a packet? </strong> </p> <ol type="A"> <li>It knows the complete path to every machine on the internet in advance</li><li>It asks a central internet switchboard for directions</li><li>It reads the destination address, consults its routing table for the best next hop, forwards the packet, and forgets it</li><li>It sends the packet to every neighbor and lets them sort it out</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> It reads the destination address, consults its routing table for the best next hop, forwards the packet, and forgets it </p> <p>Each router makes one local decision: it reads the destination IP, looks up the best next hop in its routing table, and forwards the packet one step closer. No router holds a map of the whole internet — a workable path emerges from many local decisions.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. A service &quot;can&#39;t be reached.&quot; You run `dig +short A the-host` and get a correct, expected IP address. What does this tell you? </strong> </p> <ol type="A"> <li>The problem is definitely inside the application code</li><li>The DNS record is wrong and must be fixed first</li><li>Nothing useful; the command cannot help diagnose connection issues</li><li>DNS resolution is working, so the fault is more likely reachability (routing/firewall) or the service itself — check with ping and traceroute</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> DNS resolution is working, so the fault is more likely reachability (routing/firewall) or the service itself — check with ping and traceroute </p> <p>A correct resolution rules out DNS as the cause. The next step is to test reachability with ping and traceroute to see whether packets get to the destination and where they stop. Separating &quot;wrong address&quot; from &quot;can&#39;t reach the address&quot; is the core networking-debugging habit.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>IP address</strong> </dt> <dd data-astro-cid-whrtx2kk>A numeric identifier for a network interface that routers use to deliver packets; a machine&#39;s location on the network, not a permanent name for a device.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>IPv4</strong> </dt> <dd data-astro-cid-whrtx2kk>The original internet addressing scheme using 32-bit addresses (about 4.3 billion), written as four numbers 0–255 separated by dots, such as 93.184.216.34.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>IPv6</strong> </dt> <dd data-astro-cid-whrtx2kk>The newer addressing scheme using 128-bit addresses, written as eight groups of hexadecimal digits, created because the IPv4 space was exhausted.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>subnet</strong> </dt> <dd data-astro-cid-whrtx2kk>A contiguous block of addresses that share a leading prefix and are treated as one local network.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>CIDR</strong> </dt> <dd data-astro-cid-whrtx2kk>Classless Inter-Domain Routing notation, which writes an address block as an address plus a slash and a number of fixed leading bits, such as 192.168.1.0/24 (256 addresses).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>private IP</strong> </dt> <dd data-astro-cid-whrtx2kk>An address in a reserved range (10.0.0.0/8, 172.16.0.0/12, or 192.168.0.0/16) that works only inside a local network and is never routed on the public internet.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>loopback</strong> </dt> <dd data-astro-cid-whrtx2kk>The special address 127.0.0.1, which always means &quot;this very machine&quot;; part of the 127.0.0.0/8 range.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>DNS</strong> </dt> <dd data-astro-cid-whrtx2kk>The Domain Name System, a distributed, hierarchical directory that maps human-friendly names to records such as IP addresses.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>resolver</strong> </dt> <dd data-astro-cid-whrtx2kk>A recursive resolver is a server that performs the full DNS lookup on your behalf — walking root, TLD, and authoritative servers — and returns and caches the final answer.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>A record</strong> </dt> <dd data-astro-cid-whrtx2kk>A DNS record that maps a name to an IPv4 address; the AAAA record is its IPv6 equivalent.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>CNAME</strong> </dt> <dd data-astro-cid-whrtx2kk>A DNS record that aliases one name to another name, which the resolver must then look up in turn, rather than pointing directly to an address.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>MX record</strong> </dt> <dd data-astro-cid-whrtx2kk>A DNS mail-exchange record specifying which server receives email for a domain, with a priority number.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>TTL</strong> </dt> <dd data-astro-cid-whrtx2kk>Time to live: on a DNS record, how many seconds a resolver may cache the answer; on an IP packet, the hop limit that traceroute exploits.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>router</strong> </dt> <dd data-astro-cid-whrtx2kk>A machine that forwards packets between networks, reading each packet&#39;s destination address and sending it to the best next hop from its routing table.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>BGP</strong> </dt> <dd data-astro-cid-whrtx2kk>The Border Gateway Protocol, by which autonomous systems advertise to their neighbors which address blocks they can reach, stitching independent networks into one internet.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>autonomous system</strong> </dt> <dd data-astro-cid-whrtx2kk>A large network under a single administrative control (an ISP, university, or cloud provider), identified by an AS number and exchanging routes with others via BGP.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>traceroute</strong> </dt> <dd data-astro-cid-whrtx2kk>A tool that reveals the routers along the path to a host by sending packets with increasing hop limits so each router in turn reports back.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Domain_Name_System" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Domain Name System</a> — Wikipedia (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/IP_address" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>IP address</a> — Wikipedia (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://developer.mozilla.org/en-US/docs/Glossary/DNS" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>How DNS works</a> — MDN Web Docs (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://hpbn.co/primer-on-latency-and-bandwidth/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>High Performance Browser Networking — Primer on Latency and Bandwidth</a> — Ilya Grigorik (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://www.cloudflare.com/learning/dns/what-is-dns/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Cloudflare Learning — What is DNS?</a> — Cloudflare (accessed 2026-07-12) </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="16" data-astro-cid-whrtx2kk>
+Mark Day 16 as read
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+      surfaces for someone searching for one — it costs you a click and it is genuinely how people
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+★ Star on GitHub
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-015-what-happens-when-you-load-a" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 15</span> <span class="pn__title" data-astro-cid-oerjsknp>What Happens When You Load a Web Page</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-017-tcp-udp-and-ports" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 17 →</span> <span class="pn__title" data-astro-cid-oerjsknp>TCP, UDP, and Ports</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+      // Progressive enhancement only: the theme falls back to dark and every
+      // .reveal element is visible by default (the hidden start state exists
+      // only inside a prefers-reduced-motion: no-preference query).
+      (() => {
+        const toggle = document.getElementById('theme');
+        if (toggle) {
+          toggle.addEventListener('click', () => {
+            const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+            document.documentElement.dataset.theme = next;
+            try {
+              localStorage.setItem('theme', next);
+            } catch {
+              /* private mode */
+            }
+          });
+        }
+
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const items = document.querySelectorAll('.reveal');
+        if (items.length && !reduced && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry, i) => {
+                if (!entry.isIntersecting) return;
+                entry.target.style.transitionDelay = `${Math.min(i * 50, 240)}ms`;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.06 },
+          );
+          items.forEach((el) => io.observe(el));
+        } else {
+          items.forEach((el) => el.classList.add('is-in'));
+        }
+      })();
+    </script> </body> </html>

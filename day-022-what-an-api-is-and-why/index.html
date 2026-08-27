@@ -1,0 +1,390 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 22: What an API Is and Why Everything Has One · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to explain what an API is as a contract between programs, name the parts of a request and response, and call several free public web APIs with curl — the exact skill that lets you reach a hosted model over HTTP."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-022-what-an-api-is-and-why/"><meta property="og:title" content="Day 22: What an API Is and Why Everything Has One · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to explain what an API is as a contract between programs, name the parts of a request and response, and call several free public web APIs with curl — the exact skill that lets you reach a hosted model over HTTP."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-022-what-an-api-is-and-why/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-022-what-an-api-is-and-why.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 22: What an API Is and Why Everything Has One · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 22: What an API Is and Why Everything Has One · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to explain what an API is as a contract between programs, name the parts of a request and response, and call several free public web APIs with curl — the exact skill that lets you reach a hosted model over HTTP."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-022-what-an-api-is-and-why.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+      // Dark is the default regardless of OS preference - this is a dark-first
+      // design. A visitor who picks light with the toggle keeps it. Applied
+      // before first paint so there is no flash of the wrong theme.
+      (() => {
+        let t;
+        try {
+          t = localStorage.getItem('theme');
+        } catch {
+          t = null;
+        }
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+      })();
+    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+<style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
+.starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+365 Days of AI
+</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+Labs
+</a> </header> <main id="main">  <article data-day="22" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>APIs and the Web</span>  › 
+Day 22 </p> <h1 data-astro-cid-whrtx2kk>Day 22: What an API Is and Why Everything Has One</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-022-what-an-api-is-and-why.png" width="1200" height="630" alt="Day 22 of 365 — What an API Is and Why Everything Has One" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to explain what an API is as a contract between programs, name the parts of a request and response, and call several free public web APIs with curl — the exact skill that lets you reach a hosted model over HTTP.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>APIs and the Web</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-022-what-an-api-is-and-why" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-022-what-an-api-is-and-why</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
+cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-022-what-an-api-is-and-why</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/ai-roadmap-365/labs/day-022-what-an-api-is-and-why" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Define an API as a contract and interface between two programs, and state what it hides (the implementation) versus what it exposes (the requests it accepts and responses it returns)</li><li data-astro-cid-whrtx2kk>Distinguish the kinds of APIs — library, operating-system, and web — and explain why web APIs over HTTP are the kind that connect programs across the network</li><li data-astro-cid-whrtx2kk>Name the five parts of an HTTP API request (method, path/endpoint, parameters, headers, body) and the parts of a response (status code, headers, body), and say what each contributes</li><li data-astro-cid-whrtx2kk>Call the free public JSONPlaceholder, httpbin, and Open Notify ISS APIs with curl and read the JSON responses</li><li data-astro-cid-whrtx2kk>Read API documentation well enough to find an endpoint, its parameters, and an example request/response</li><li data-astro-cid-whrtx2kk>Explain the public/partner/internal framing of an API as a product, and reason about the security, privacy, performance, scalability, and cost implications of calling a remote API</li><li data-astro-cid-whrtx2kk>Connect APIs to AI practice: explain why every hosted model is reached through a web API and why request-shaping, rate limits, and per-call cost matter</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Days 15-21 (the networking category): URLs, DNS, TCP/ports, and especially HTTP requests, responses, methods, and status codes</li><li data-astro-cid-whrtx2kk>Day 21 comfort with curl (running a request and reading the output)</li><li data-astro-cid-whrtx2kk>A computer running macOS or Linux with curl and python3 (both preinstalled) and internet access</li></ul> <h2 id="why-this-matters">Why this matters</h2>
+<p>For three weeks you have learned how one machine talks to another: IP addresses and DNS find the right computer, TCP carries the bytes, HTTP wraps them in requests and responses, and TLS keeps them private. That was the plumbing. Today you learn what flows through the pipe on purpose — the <em>contract</em> two programs agree on so one can ask the other to do work. That contract is an API, and it is the single most important idea standing between you and building with modern AI.</p>
+<p>Here is the concrete stake. Every hosted model you will ever use — the large language models behind today’s assistants, the image generators, the speech-to-text services — lives on someone else’s computers, in a data center you will never enter. You do not download the model; you <em>call</em> it. The way you call it is a web API: your program sends an HTTP request containing your text, and the service sends back an HTTP response containing the model’s answer. If you cannot read an API’s documentation, form a correct request, and interpret the response, you cannot use a hosted model at all — no matter how brilliant the model is. Understanding APIs is not a side topic on the road to AI; it is the on-ramp.</p>
+<p>The consequences are as practical as they get. When your first program that calls a model returns <code>401 Unauthorized</code>, you will know it is an authentication problem in the request, not a broken model. When it returns <code>429</code>, you will know you are calling too fast and being rate-limited — and that each of those calls may cost real money. When the response comes back as a wall of JSON, you will know how to pull the one field you need out of it. This week (days 22–28) turns you from someone who has <em>heard</em> of APIs into someone who can read one, call one, and reason about one. Today opens that door.</p>
+<h2 id="the-idea-in-plain-language">The idea in plain language</h2>
+<p>An <strong>API</strong> — an Application Programming Interface — is a defined way for one program to ask another program to do something. It is an <em>interface</em>: a boundary with an agreed set of things you can ask for and an agreed shape for the answers you get back. The word “contract” captures it best. One side promises, “If you send me a request that looks exactly like <em>this</em>, I will do <em>that</em> and send you back a response that looks exactly like <em>this</em>.” The other side relies on that promise. Neither side needs to know how the other is built inside.</p>
+<p>That last point is the whole magic. When you call an API, you do not see the other program’s code, its database, its language, or its servers. You see only the interface — the set of requests it accepts and responses it returns. The complicated machinery is hidden behind the contract. This is the same layering idea from Day 1, where each level of a computer hides the details of the one below. An API is that hiding drawn as a clean line between two programs: everything the caller is allowed to depend on is on the line; everything else is private.</p>
+<p>APIs come in a few flavors, and the distinction matters. Some are <em>library</em> APIs — the functions a chunk of code on your own machine exposes to the rest of your program. Some are <em>operating-system</em> APIs — the calls a program makes to ask the OS to open a file or send network data (you met the OS as the “kitchen manager” on Day 6). But the kind this week is about, and the kind that connects you to AI, is the <strong>web API</strong>: a program on another computer that you reach over HTTP, exactly the protocol you learned on Day 18. A web API turns a whole service — a weather database, a payment system, a language model — into something your program can talk to with the same request/response conversation your browser already uses.</p>
+<h2 id="historical-background">Historical background</h2>
+<p>The idea of a defined interface between software parts is nearly as old as software itself. In the 1960s and 70s, as programs grew too large for one person to hold in their head, programmers learned to split code into modules that talked to each other only through published <strong>procedure calls</strong> — a named operation with agreed inputs and outputs. The British computer scientist David Parnas argued influentially in 1972 that modules should hide their internal decisions behind such interfaces, so that changing the inside of one module would not break the others. That principle — <em>information hiding</em> — is the intellectual root of every API you will ever use.</p>
+<p>Through the 1980s and 90s, operating systems shipped ever-larger APIs so that application programmers could reach the screen, the disk, and the network without writing hardware code. The term “API” in this era almost always meant a <em>local</em> interface: functions your program linked against and called in the same machine. The web changed the scale of the idea. After Tim Berners-Lee’s World Wide Web made HTTP and URLs universal in the early 1990s, people realized the same request/response mechanism that fetched web pages for humans could fetch <em>data</em> for programs.</p>
+<p>The 2000s were when web APIs became a product category. Salesforce launched a web API for its service in 2000; eBay and Amazon followed, letting other companies build on top of their systems. In 2000, Roy Fielding’s doctoral dissertation described <strong>REST</strong>, an architectural style that fit web APIs naturally to HTTP’s methods and URLs — the subject of tomorrow’s lesson. The next decade brought an “API economy”: companies such as Stripe (payments), Twilio (messaging), and Google Maps (location) built entire businesses whose product <em>was</em> an API. By the 2020s, calling a remote service over an HTTP API had become the default way software is assembled — including the way every application reaches a hosted AI model. The line from Parnas’s 1972 modules to a modern model endpoint is unbroken: define the interface, hide the implementation, let others build on the promise.</p>
+<h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
+<p>An API is a <strong>contract and an interface</strong>, not a program you run and not a place you visit. Precisely: it is the agreed set of operations one piece of software exposes to another, together with the exact shape of the inputs each operation expects and the outputs it returns. For a web API, “operation” means an HTTP request to a specific address, and “shape” means the method, the parameters, the headers, and the format of the request and response bodies. The API is the <em>specification</em> of that exchange; the running service behind it is a separate thing that <em>implements</em> the API.</p>
+<p>Keeping these apart prevents real confusion. The API is not the server — the server is the machine and code that fulfills requests; the API is the promise about what requests it honors. The API is not the data — the data is what comes back; the API is the agreed way to ask for it. And an API is not the same as a user interface: a user interface (UI) is built for a human to click and read, while an API is built for a <em>program</em> to call and parse. The same weather service often offers both — a website for people and an API for software — over the very same underlying system.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Common misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”An API is a kind of program I install.”</td><td>It is a <em>contract</em> describing how to talk to a program; the program lives elsewhere and you send it requests.</td></tr><tr><td>”The API and the server are the same thing.”</td><td>The server implements the API; the API is the published promise about what the server accepts and returns.</td></tr><tr><td>”Calling an API means screen-scraping a website.”</td><td>A web API returns structured data (usually JSON) meant for programs — no HTML parsing, no guessing at page layout.</td></tr><tr><td>”APIs are only for big companies.”</td><td>Anything from a two-line script to a global service can expose or consume an API; many are free and public.</td></tr><tr><td>”If I know one API I know them all.”</td><td>Every API defines its own endpoints, parameters, and formats — which is exactly why documentation exists and must be read.</td></tr></tbody></table>
+<h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
+<p>APIs exist to solve one recurring problem: <strong>how do two independently built programs cooperate without one having to understand the other’s insides?</strong> Without a defined interface, every integration would require each program to reach into the other’s code and data — brittle, insecure, and impossible to maintain as either side changes. A contract fixes this. As long as both sides honor the agreed request and response shapes, either can be rewritten, moved to a new server, or scaled up, and the other never notices. The interface absorbs the change. This is <em>decoupling</em>, and it is why large software systems can be built by separate teams, separate companies, even separate generations of engineers.</p>
+<p>Web APIs add a second, world-sized benefit: <strong>reuse of capability you could never build yourself.</strong> You cannot maintain a global map, a bank’s payment rails, a fleet of GPUs running a frontier model, or a satellite that tracks the space station overhead. But a program you write in an afternoon can <em>use</em> all of those, because each is exposed as an API. You send a request; the specialist service does the hard part; you get an answer. This is the “API economy” in one sentence: complex capabilities become callable building blocks. Your path into AI runs straight through this idea — you will not train a giant model on your laptop, but you will call one over its API and build something real on top of it, exactly the way a small program today calls a mapping service or a payment processor.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>A web API works by giving a service an <strong>address you can send requests to</strong>, agreeing on the <strong>shape of those requests</strong>, and promising a <strong>shape for the responses</strong>. Let us build up each part, then watch one full exchange.</p>
+<h3 id="the-endpoint-an-address-for-an-operation">The endpoint: an address for an operation</h3>
+<p>An <strong>endpoint</strong> is a specific URL that a web API answers at, usually standing for one resource or operation. If you understood URLs on Day 15, an endpoint is just a URL a program calls instead of a browser. For the free JSONPlaceholder API, <code>https://jsonplaceholder.typicode.com/todos/1</code> is an endpoint that returns to-do item number 1; <code>https://jsonplaceholder.typicode.com/users/1</code> is an endpoint that returns user number 1. The path after the host names <em>what you are asking about</em> — a “to-do”, a “user” — and often an identifier. An API is, in large part, a well-organized set of endpoints.</p>
+<p><img src="/ai-roadmap-365/_astro/api-contract.R1LG6VMo_Z1HIp5g.svg" alt="Diagram: two programs and the API contract between them, with a request going in and a response coming out" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="420"></p>
+<p>Read the diagram as a boundary. On the left is your program, the <strong>client</strong> — it wants something done. On the right is the service, the <strong>server</strong> — it can do it. Between them runs the API: the single defined line across which requests pass one way and responses pass back the other. The client depends only on that line; the server’s database, language, and machinery stay private behind it. Every web API is a version of this picture.</p>
+<h3 id="the-request-method-path-parameters-headers-and-body">The request: method, path, parameters, headers, and body</h3>
+<p>A <strong>request</strong> is what the client sends. From Day 18 you already know its parts; here is how they serve an API.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Part of the request</th><th>What it carries</th><th>Example</th></tr></thead><tbody><tr><td>Method</td><td>The verb — what kind of operation</td><td><code>GET</code> (read), <code>POST</code> (create)</td></tr><tr><td>Path (endpoint)</td><td>Which resource or operation</td><td><code>/users/1</code></td></tr><tr><td>Query parameters</td><td>Options that refine the request</td><td><code>?_limit=5</code></td></tr><tr><td>Headers</td><td>Metadata about the request</td><td><code>Accept: application/json</code></td></tr><tr><td>Body (payload)</td><td>Data sent <em>with</em> the request</td><td><code>{&quot;title&quot;:&quot;Learn APIs&quot;}</code></td></tr></tbody></table>
+<p>The <strong>method</strong> says what you want done: <code>GET</code> to read data, <code>POST</code> to create it, and (from Day 18) <code>PUT</code>, <code>PATCH</code>, and <code>DELETE</code> for updating and removing. The <strong>path</strong> names the resource. <strong>Parameters</strong> refine the request — the query string <code>?userId=1</code> after a path filters the results, the way options on an order narrow it down. <strong>Headers</strong> carry metadata: <code>Accept: application/json</code> says “please answer in JSON,” and (next week) an <code>Authorization</code> header carries the key that proves who you are. The <strong>body</strong>, or <strong>payload</strong>, is data you send along with a request — for a <code>POST</code> that creates something, the body describes the thing to create, almost always as JSON.</p>
+<h3 id="the-response-status-headers-and-body">The response: status, headers, and body</h3>
+<p>A <strong>response</strong> is what the server sends back. It carries a <strong>status code</strong> (Day 18’s <code>200</code>, <code>404</code>, <code>401</code>, <code>429</code>, <code>500</code>) that tells your program at a glance whether the request succeeded, headers describing the answer (<code>Content-Type: application/json</code>), and a <strong>body</strong> — the actual data, again almost always JSON. <strong>JSON</strong> (JavaScript Object Notation) is a simple, text-based format of nested keys and values that both humans and programs can read; it is the near-universal language of web APIs, and you will read a lot of it this week.</p>
+<p><img src="/ai-roadmap-365/_astro/api-request-response.BTR4b_5Q_120Pm.svg" alt="Flowchart: a client sends a request to an endpoint, the server processes it and returns a response" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="440"></p>
+<p>Follow the flow left to right and back. Your client builds a request — method, endpoint, any parameters and body — and sends it over HTTP. The server receives it, does its private work (perhaps reading a database or running a model), and builds a response — a status code plus a body. The response travels back over the same connection. One request, one response: the same conversation your browser has with every web page, now carried out by <em>your program</em> to fetch <em>structured data</em> instead of a page to display.</p>
+<h3 id="reading-the-documentation">Reading the documentation</h3>
+<p>Because every API defines its own endpoints, parameters, and formats, you cannot guess your way through one — you read its <strong>documentation</strong>, the human-written guide that lists each endpoint, the parameters it accepts, an example request, and an example response. Reading API docs is a core skill: find the endpoint that returns what you want, note its method and required parameters, copy the example request, run it, and compare your response to the documented one. Good docs include a runnable example for exactly this reason. Half of using a new API is learning to read its documentation quickly.</p>
+<h2 id="an-everyday-analogy">An everyday analogy</h2>
+<p>Picture a restaurant. You are seated at a table — you are the <strong>client</strong>, the one who wants something done. Out of sight is the <strong>kitchen</strong> — the <strong>server</strong>, where the real work happens. You are never allowed to walk into the kitchen, and you do not need to: between you and it stands a <strong>waiter</strong> holding a <strong>menu</strong>. That waiter-and-menu is the <strong>API</strong>.</p>
+<p>The menu is the contract. It lists exactly what you may order (the <strong>endpoints</strong>), and for each dish it names the choices you can make — rare or well-done, no onions, extra sauce (the <strong>parameters</strong>). You place an <strong>order</strong> in the agreed form: the dish plus your choices (the <strong>request</strong>). You cannot order something not on the menu, and you must specify your choices the way the menu allows — that is the contract keeping both sides sane. The waiter carries your order to the kitchen, and some time later returns with either a plate of food (a <strong>response</strong> with a <code>200</code> status and a body) or a message: “we’re out of salmon” (a <code>404</code>), or “the kitchen is overwhelmed, please wait” (a <code>429</code>), or “the oven broke” (a <code>500</code>).</p>
+<p>The beauty is everything the menu hides. You have no idea who is cooking, what brand of stove they use, whether the kitchen was remodeled last week, or how many other tables they are serving. None of it is your concern, because the menu is a <em>promise</em> about what you can order and what you will get back — not a description of the kitchen. The restaurant can hire a new chef, buy new equipment, or move the kitchen to another floor, and as long as the menu still means the same thing, your order still works. That is precisely what a good API gives two programs: a stable menu across which one can order work from the other, with all the machinery kept politely in the back. Keep this restaurant in mind and almost every API idea this week will feel familiar.</p>
+<h2 id="examples-in-practice">Examples in practice</h2>
+<p>The best way to feel what an API is, is to call one. Here are three free, public APIs that need no account and no key — you can run every command below in your terminal today, and the Day 22 lab automates all three.</p>
+<p><strong>JSONPlaceholder</strong> is a free fake REST API that serves realistic sample data — perfect for practice because nothing you do can break it. Ask it for to-do item number 1:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#9ECBFF"> https://jsonplaceholder.typicode.com/todos/1</span></span></code></pre>
+<p>The endpoint <code>/todos/1</code> returns the JSON body:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="json"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;userId&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;id&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;title&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;delectus aut autem&quot;</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;completed&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">false</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>That is a complete API exchange: a <code>GET</code> request to an endpoint, a <code>200</code> response, a JSON body with named fields. Change the path to <code>/users/1</code> and the same API returns a user’s name, email, and address instead — a different resource at a different endpoint on the same service.</p>
+<p><strong>httpbin</strong> is a free service that echoes your request back to you, which makes it ideal for <em>seeing</em> what you sent. Call its <code>/get</code> endpoint with a query parameter:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#9ECBFF"> &quot;https://httpbin.org/get?course=365-days-of-ai&amp;day=22&quot;</span></span></code></pre>
+<p>The response body contains an <code>&quot;args&quot;</code> object showing the parameters it received (<code>course</code> and <code>day</code>) and a <code>&quot;headers&quot;</code> object showing the headers your request carried. It is a mirror for requests — send anything and watch exactly how the server saw it.</p>
+<p><strong>Open Notify</strong> publishes a free API with the current location of the International Space Station. Note it is served over plain HTTP:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#9ECBFF"> http://api.open-notify.org/iss-now.json</span></span></code></pre>
+<p>The response reports the station’s latitude and longitude <em>right now</em>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="json"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;timestamp&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1783860022</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;iss_position&quot;</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">    &quot;latitude&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;7.5179&quot;</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    &quot;longitude&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;59.8046&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;message&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;success&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Run it twice a minute apart and the numbers change, because a real satellite is really moving. That is the payoff of an API: with one line, your program reaches a live capability it could never build — here, a spacecraft-tracking system. To make the JSON easier to read, pipe any of these through <code>python3 -m json.tool</code>, which pretty-prints it with indentation; the lab does this for you.</p>
+<h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
+<h3 id="security">Security</h3>
+<p>Because an API is a doorway into a service, it is also an attack surface, and most of an API’s security lives in the request. Public APIs like the three above accept anyone; most real APIs require an <strong>API key</strong> or token in an <code>Authorization</code> header to prove who is calling — which is why next week’s lessons treat authentication so carefully. The key rule you can adopt today: an API key is a secret, like a password. Never paste one into a public forum, a screenshot, or a URL you share, and never send secrets to an echo service like httpbin, which reflects everything back. Whoever holds your key can call the API <em>as you</em>, on your bill.</p>
+<h3 id="privacy">Privacy</h3>
+<p>Every API call sends data to someone else’s computer. When you call a service, you are handing it whatever is in your request — the text you want summarized, the address you want mapped, the file you want scanned — and it will pass through their servers and possibly their logs. For a to-do demo this is nothing; for real user data or a private document sent to a hosted model, it is a decision with legal and ethical weight. The discipline is to know what each call transmits and to send only what the task needs.</p>
+<h3 id="performance">Performance</h3>
+<p>An API call is a network round trip, so everything from Day 17’s latency applies: a local function call takes nanoseconds, but a web API call takes tens to hundreds of milliseconds because the request must physically travel to another computer and back. That makes <em>how many calls you make</em> a performance question. Fetching one thing per call in a loop of a thousand items means a thousand round trips; a well-designed API lets you ask for many at once, or filter with parameters so you fetch only what you need. Reading response times, and reducing the number of calls, is real engineering work.</p>
+<h3 id="scalability">Scalability</h3>
+<p>APIs are how services scale to millions of callers. Because the interface hides the implementation, the provider can run one server or ten thousand behind the same endpoint, and callers never know. That same decoupling lets <em>you</em> scale: your small program leans on the provider’s enormous infrastructure through a stable line. It is also why providers enforce <strong>rate limits</strong> — a cap on how many requests you may make per minute — returning <code>429</code> when you exceed them, so that no single caller can overwhelm the shared service.</p>
+<h3 id="cost">Cost</h3>
+<p>Free public APIs exist for learning, but most production APIs cost money, usually metered per request or per unit of work. A hosted model typically bills per amount of text processed, so <em>every call has a price</em>, and a runaway loop is a runaway bill. This is the direct sequel to Day 1’s lesson that computation is physical and therefore costs real resources: when you call someone else’s computers, you are renting their electricity, memory, and hardware by the request. Counting your calls is counting your costs.</p>
+<h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
+<p>“Alternatives” here means the different <em>kinds</em> of APIs you will meet and the ways to work with them, since an API is a concept rather than a single product.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Option</th><th>Type</th><th>What it offers</th><th>Cost</th></tr></thead><tbody><tr><td>JSONPlaceholder, httpbin, Open Notify</td><td>Free public APIs</td><td>No-key endpoints for learning and testing</td><td>Free</td></tr><tr><td><code>curl</code></td><td>Free, open-source tool</td><td>Call any web API from the terminal (you used it on Day 21)</td><td>Free</td></tr><tr><td>Postman / Insomnia</td><td>Commercial + free tiers</td><td>Graphical clients for exploring and testing APIs</td><td>Free tier; paid plans</td></tr><tr><td>REST APIs over HTTP</td><td>Open architectural style</td><td>The dominant web-API style — resources and HTTP verbs (Day 23)</td><td>Free to use</td></tr><tr><td>GraphQL</td><td>Open query language</td><td>One endpoint where the client specifies exactly which fields it wants</td><td>Free to use</td></tr><tr><td>Language HTTP libraries (<code>requests</code>, <code>fetch</code>)</td><td>Free, open source</td><td>Call APIs from inside Python, JavaScript, and other languages</td><td>Free</td></tr><tr><td>Commercial service APIs (maps, payments, hosted models)</td><td>Commercial</td><td>Specialist capabilities exposed as callable services</td><td>Metered per request/usage</td></tr></tbody></table>
+<p>For learning, everything you need is free: <code>curl</code> plus the three public APIs above cover this entire week’s ideas at zero cost. Reach for a graphical client like Postman when an API grows complex enough that you want to save and organize many requests. Move to a language library when you are ready to call APIs from inside a real program instead of the terminal — the step this course builds toward.</p>
+<h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>API</td><td>UI (user interface)</td><td>An API is built for programs to call and parse; a UI is built for humans to click and read</td></tr><tr><td>API</td><td>Web API</td><td>”API” is the general idea of a program interface; a web API is the specific kind reached over HTTP across the network</td></tr><tr><td>API</td><td>Server</td><td>The server is the running machine and code; the API is the published contract for how to talk to it</td></tr><tr><td>Endpoint</td><td>API</td><td>An endpoint is one address/operation; the API is the whole set of endpoints and their rules</td></tr><tr><td>Library (local) API</td><td>Web API</td><td>A library API is called in the same process in nanoseconds; a web API is called over the network in milliseconds</td></tr><tr><td>API</td><td>Protocol (HTTP)</td><td>HTTP is the general transport rulebook; an API defines the specific requests and responses a <em>particular service</em> accepts over it</td></tr></tbody></table>
+<p>The most useful pairing to hold onto is API versus web API. Every function your code calls exposes an API in the broad sense — an agreed way to invoke it. This week’s focus is the narrow, powerful case: a web API, reached over HTTP, across the network, to a service on another computer. When someone says “the API” for a hosted model, they mean its web API — the endpoints, request shapes, and response shapes you send HTTP requests to.</p>
+<h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
+<p>Reach for a web API whenever your program needs a capability or data that lives outside it and someone already offers over HTTP: current weather, a map, a payment, a translation, the space station’s position, or a hosted model’s answer. Reach for one when you want to connect two systems without wiring into each other’s internals — the API’s stable contract is exactly the clean seam that lets each side change freely. And reach for the <em>idea</em> of an API whenever you design your own software: defining a small, clear interface between parts, and hiding the rest, is the habit that keeps large programs maintainable, straight from Parnas’s 1972 insight.</p>
+<p>Know when not to. If the work is purely local and fast — arithmetic, reading a file on your own disk, transforming data already in memory — a web API is the wrong tool: you would add a network round trip, a dependency on someone else’s uptime, and possibly a bill, to do something your own machine can do in microseconds. If you call an external API in a tight loop over many items, stop and check whether it offers a bulk or filtered endpoint, because thousands of round trips are slow and, when metered, expensive. And never treat an unstable third-party API as if it cannot fail: networks drop, services return <code>500</code>, and rate limits return <code>429</code>, so any program that depends on a remote API must handle those responses rather than assume success. Use APIs for what lives beyond your program; keep local work local.</p>
+<h2 id="knowledge-check">Knowledge check</h2>
+<p>Try these from memory before looking back:</p>
+<ol>
+<li>In one sentence, explain what an API is using the word “contract,” and say what it hides.</li>
+<li>Name the five parts of an HTTP API request and say what each contributes.</li>
+<li>Using the restaurant analogy, map the waiter, the menu, an order with special requests, and a “we’re out of salmon” reply to their API terms.</li>
+<li>Give the exact <code>curl</code> command to fetch user number 1 from JSONPlaceholder, and describe the shape of what comes back.</li>
+<li>A friend’s program gets <code>429</code> from a paid API inside a loop. Explain what <code>429</code> means, why the loop caused it, and two things they could change.</li>
+</ol>
+<h2 id="hands-on-exercise">Hands-on exercise</h2>
+<p>Time to call real services. In this exercise — automated in full in the Day 22 lab — you will use <code>curl</code> to call three free public APIs from your terminal and read each response. Every command needs a network connection; if you are offline, connect first.</p>
+<p>Open your terminal and run each command by typing it and pressing Return. First, fetch a single to-do from JSONPlaceholder:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#9ECBFF"> https://jsonplaceholder.typicode.com/todos/1</span></span></code></pre>
+<p>This sends a <code>GET</code> request to the <code>/todos/1</code> endpoint and prints the JSON body. Now fetch a user from the same API, piping the output through Python to pretty-print it:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#9ECBFF"> https://jsonplaceholder.typicode.com/users/1</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> python3</span><span style="color:#79B8FF"> -m</span><span style="color:#9ECBFF"> json.tool</span></span></code></pre>
+<p>The <code>-s</code> flag silences curl’s progress meter, and <code>python3 -m json.tool</code> indents the JSON so the nested <code>address</code> and <code>company</code> objects are readable. Next, watch httpbin echo your request back, including a query parameter you set:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#9ECBFF"> &quot;https://httpbin.org/get?course=365-days-of-ai&amp;day=22&quot;</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> python3</span><span style="color:#79B8FF"> -m</span><span style="color:#9ECBFF"> json.tool</span></span></code></pre>
+<p>Look for the <code>&quot;args&quot;</code> object — it shows <code>course</code> and <code>day</code>, the parameters the server received. Finally, ask Open Notify where the space station is right now:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#9ECBFF"> http://api.open-notify.org/iss-now.json</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> python3</span><span style="color:#79B8FF"> -m</span><span style="color:#9ECBFF"> json.tool</span></span></code></pre>
+<p>Read the <code>latitude</code> and <code>longitude</code> inside <code>iss_position</code>. Run it again a minute later and the numbers will have changed.</p>
+<h3 id="expected-output">Expected output</h3>
+<p>A real run of the first and last commands (your ISS numbers and timestamp will differ — the station is moving):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ curl https://jsonplaceholder.typicode.com/todos/1</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>  &quot;userId&quot;: 1,</span></span>
+<span class="line"><span>  &quot;id&quot;: 1,</span></span>
+<span class="line"><span>  &quot;title&quot;: &quot;delectus aut autem&quot;,</span></span>
+<span class="line"><span>  &quot;completed&quot;: false</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ curl -s http://api.open-notify.org/iss-now.json | python3 -m json.tool</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    &quot;timestamp&quot;: 1783860022,</span></span>
+<span class="line"><span>    &quot;iss_position&quot;: {</span></span>
+<span class="line"><span>        &quot;latitude&quot;: &quot;7.5179&quot;,</span></span>
+<span class="line"><span>        &quot;longitude&quot;: &quot;59.8046&quot;</span></span>
+<span class="line"><span>    },</span></span>
+<span class="line"><span>    &quot;message&quot;: &quot;success&quot;</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>The JSONPlaceholder to-do is always the same fixed sample; the ISS response changes every time because it reports live data. Both are complete API exchanges: a <code>GET</code> to an endpoint, a <code>200</code> status, and a JSON body with named fields you can read.</p>
+<h3 id="validate-your-work">Validate your work</h3>
+<p>You are done when you can check every box:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> You fetched <code>todos/1</code> and can state its <code>title</code> and whether it is <code>completed</code>.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You fetched <code>users/1</code> and can name one field from it (for example, the user’s <code>name</code> or <code>email</code>).</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You called httpbin’s <code>/get</code> and found your <code>course</code> and <code>day</code> parameters echoed in the <code>&quot;args&quot;</code> object.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You called the ISS API and read the current <code>latitude</code> and <code>longitude</code>.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can point at each response and identify it as JSON with named fields.</li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><strong><code>curl: (6) Could not resolve host</code>.</strong> Your machine cannot reach the internet (DNS failed, Day 16). Check your connection and try again; every command here needs network access.</li>
+<li><strong>The JSON prints as one long unindented line.</strong> That is the raw body — pipe it through <code>python3 -m json.tool</code> to pretty-print it. If Python reports an error instead, the API likely returned a non-JSON error page; check the URL for a typo.</li>
+<li><strong>httpbin times out or returns a <code>503</code>.</strong> It is a shared free service and is sometimes overloaded. Wait a minute and retry; a <code>503</code> is itself a real, valid server response worth recognizing.</li>
+<li><strong>The ISS command “fails” with an <code>https</code> typo.</strong> Open Notify’s ISS endpoint is served over plain <code>http://</code>, not <code>https://</code>. Use the URL exactly as written.</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<ul>
+<li><strong>Confusing the API with the data.</strong> The JSON that comes back is the <em>data</em>; the API is the agreed way you asked for it (the method, endpoint, and parameters). Change the endpoint and the same API hands you different data.</li>
+<li><strong>Forgetting the quotes around a URL with parameters.</strong> A URL containing <code>&amp;</code> must be quoted in the shell (<code>&quot;...?course=x&amp;day=22&quot;</code>), or the shell treats <code>&amp;</code> as “run in background” and the request breaks.</li>
+<li><strong>Assuming every API needs a key.</strong> These three are deliberately open. Many real APIs do require a key — but do not add authentication where none is asked for, and never invent a key.</li>
+</ul>
+<h2 id="practice-assignment">Practice assignment</h2>
+<p>Open the API worksheet in the starter directory of the Day 22 lab and fill it in completely by calling the three APIs. Record: the exact <code>title</code> of to-do number 1 from JSONPlaceholder; one field of your choice from user number 1 (name the field and its value); and the ISS’s <code>latitude</code> and <code>longitude</code> at the moment you run the command, with a rough note of the time. Then write one short paragraph (4–6 sentences) explaining, in the restaurant analogy, which part of each call was the menu, the order, and the plate that came back — and note which of the three responses was live data and how you could tell. Keep the worksheet; later lessons build directly on these same APIs.</p>
+<h2 id="extension-challenge">Extension challenge</h2>
+<p>Go one step past reading and start <em>inspecting</em> the exchange. Re-run the JSONPlaceholder call with curl’s <code>-i</code> flag, which includes the response headers above the body:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -i</span><span style="color:#9ECBFF"> https://jsonplaceholder.typicode.com/todos/1</span></span></code></pre>
+<p>Find the status line (<code>HTTP/2 200</code>), the <code>Content-Type: application/json</code> header that declares the body’s format, and any header describing rate limits or caching. Then use the <code>-w</code> flag from Day 21 to measure how long the call took:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -o</span><span style="color:#9ECBFF"> /dev/null</span><span style="color:#79B8FF"> -s</span><span style="color:#79B8FF"> -w</span><span style="color:#9ECBFF"> &#39;status:%{http_code} total:%{time_total}s\n&#39;</span><span style="color:#9ECBFF"> https://jsonplaceholder.typicode.com/todos/1</span></span></code></pre>
+<p>Compare that time — tens or hundreds of milliseconds — with the nanoseconds a local calculation takes, and write two or three sentences on why the number of API calls a program makes is a performance and cost decision, not just a correctness one. Finally, using only the parameter idea from this lesson, fetch just the to-dos belonging to user 1 by adding a query parameter: <code>https://jsonplaceholder.typicode.com/todos?userId=1</code>. You have just filtered a request with a parameter — the same move that, next week, lets you ask a real service for exactly the data you need and nothing more.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. What is the best short description of an API? </strong> </p> <ol type="A"> <li>A program you download and install to speed up your computer</li><li>A contract that defines how one program can ask another to do something, hiding the second program&#39;s internals</li><li>The physical server that stores a website&#39;s data</li><li>A visual dashboard that humans click to use a service</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> A contract that defines how one program can ask another to do something, hiding the second program&#39;s internals </p> <p>An API is an Application Programming Interface: an agreed contract describing the requests one program accepts and the responses it returns, while hiding how it is implemented. The server, the data, and a human dashboard are all different things.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. Which kind of API is reached over HTTP across the network and is the focus of this week? </strong> </p> <ol type="A"> <li>A library API</li><li>An operating-system (system-call) API</li><li>A web API</li><li>A hardware API</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> A web API </p> <p>A web API is a service on another computer that you call over HTTP, using the same request/response conversation your browser uses. Library and operating-system APIs are local — called within one machine — rather than across the network.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. In a web API request, what is the endpoint? </strong> </p> <ol type="A"> <li>The status code the server sends back</li><li>The specific URL the API answers at, usually standing for one resource or operation</li><li>The secret key that proves who is calling</li><li>The JSON data returned in the response body</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> The specific URL the API answers at, usually standing for one resource or operation </p> <p>An endpoint is a specific URL a web API answers at, such as /todos/1 or /users/1. The path names what you are asking about; the status code and body are parts of the response, not the endpoint.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. Which list correctly names parts of an HTTP API request? </strong> </p> <ol type="A"> <li>Status code, headers, and body</li><li>Method, path, parameters, headers, and body</li><li>Latitude, longitude, and timestamp</li><li>Client, server, and network</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Method, path, parameters, headers, and body </p> <p>A request carries a method (the verb), a path/endpoint, query parameters that refine it, headers of metadata, and an optional body (payload). Status code, headers, and body describe the response, not the request.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. You run `curl https://jsonplaceholder.typicode.com/todos/1` and get back `{&quot;userId&quot;:1,&quot;id&quot;:1,&quot;title&quot;:&quot;delectus aut autem&quot;,&quot;completed&quot;:false}`. What did you just do? </strong> </p> <ol type="A"> <li>Installed the JSONPlaceholder service on your computer</li><li>Made a GET request to an endpoint and received a JSON response body</li><li>Sent a secret API key to authenticate yourself</li><li>Changed the data stored on the server</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Made a GET request to an endpoint and received a JSON response body </p> <p>This is a complete API exchange: a GET request to the /todos/1 endpoint returns a 200 response whose JSON body has named fields. Nothing was installed, no key was sent, and GET only reads — it does not change server data.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. Why does API documentation exist and need to be read for each new API? </strong> </p> <ol type="A"> <li>Because every API defines its own endpoints, parameters, and response formats that you cannot guess</li><li>Because APIs are illegal to use without reading a legal notice first</li><li>Because documentation is the program that runs the API</li><li>Because all APIs are identical, so one manual covers them all</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> Because every API defines its own endpoints, parameters, and response formats that you cannot guess </p> <p>Each API defines its own set of endpoints, the parameters they accept, and the shape of their responses, so you read the docs to find the right endpoint and copy a working example. Documentation is a guide, not the running service, and APIs are not interchangeable.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. A paid API returns HTTP 429 when your program calls it rapidly in a loop. What does that mean and why did it happen? </strong> </p> <ol type="A"> <li>The server crashed; there is nothing you can do</li><li>You are being rate-limited for making too many requests too fast; slow down or batch your calls</li><li>Your request body was malformed; fix the JSON</li><li>The endpoint URL was misspelled; correct the path</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> You are being rate-limited for making too many requests too fast; slow down or batch your calls </p> <p>429 Too Many Requests signals a rate limit — a cap on requests per period that shared services enforce so no caller overwhelms them. A tight loop trips it; the fixes are to slow down, batch, or fetch fewer times. A malformed body is 400 and a bad path is usually 404.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. What does it mean to describe an API &quot;as a product&quot; with public, partner, and internal audiences? </strong> </p> <ol type="A"> <li>The API is sold in physical stores</li><li>The same interface idea can be opened to anyone (public), shared with select companies (partner), or used only inside one organization (internal)</li><li>Only public APIs are real APIs; partner and internal ones are fakes</li><li>A product API cannot be reached over HTTP</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> The same interface idea can be opened to anyone (public), shared with select companies (partner), or used only inside one organization (internal) </p> <p>Organizations treat APIs as products with different audiences: public APIs are open to any developer, partner APIs are shared with specific companies under agreement, and internal APIs connect a company&#39;s own systems. All are the same technical idea aimed at different callers.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>API</strong> </dt> <dd data-astro-cid-whrtx2kk>An Application Programming Interface: a defined contract by which one program asks another to do something, exposing the requests it accepts and responses it returns while hiding how it works inside.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>web API</strong> </dt> <dd data-astro-cid-whrtx2kk>An API reached over HTTP across the network — a service on another computer your program calls with requests and reads responses from, instead of a local function.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>endpoint</strong> </dt> <dd data-astro-cid-whrtx2kk>A specific URL that a web API answers at, usually standing for one resource or operation, such as /todos/1 or /users/1.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>request</strong> </dt> <dd data-astro-cid-whrtx2kk>What a client sends to an API: a method (verb), a path/endpoint, optional query parameters, headers, and an optional body.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>response</strong> </dt> <dd data-astro-cid-whrtx2kk>What the server sends back: a status code indicating the outcome, headers describing the answer, and a body carrying the data (usually JSON).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>payload</strong> </dt> <dd data-astro-cid-whrtx2kk>The data carried in the body of a request or response — for example the JSON describing a thing to create in a POST, or the data returned in a response.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>parameter</strong> </dt> <dd data-astro-cid-whrtx2kk>A value that refines a request, most often a query parameter appended after the path (such as ?userId=1) to filter or configure what the API returns.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>client</strong> </dt> <dd data-astro-cid-whrtx2kk>The program that initiates an API call — it builds and sends the request and reads the response. Your curl command or your program is the client.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>server</strong> </dt> <dd data-astro-cid-whrtx2kk>The machine and code that receives requests and fulfills them, implementing the API behind the contract while keeping its database and internals private.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>REST</strong> </dt> <dd data-astro-cid-whrtx2kk>A widely used architectural style for web APIs, described by Roy Fielding in 2000, that maps operations onto HTTP methods and resource URLs (covered in depth on Day 23).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>documentation</strong> </dt> <dd data-astro-cid-whrtx2kk>The human-written guide to an API that lists each endpoint, the parameters it accepts, and example requests and responses — what you read to learn how to call a new API.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>JSON</strong> </dt> <dd data-astro-cid-whrtx2kk>JavaScript Object Notation, a simple text format of nested keys and values that is the near-universal way web APIs format their request and response bodies.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>rate limit</strong> </dt> <dd data-astro-cid-whrtx2kk>A cap a service places on how many requests a caller may make per period; exceeding it returns HTTP 429 so that no single caller can overwhelm the shared service.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>API key</strong> </dt> <dd data-astro-cid-whrtx2kk>A secret token a caller sends (usually in an Authorization header) to prove who they are; like a password, it must never be shared publicly or sent to an echo service.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Introduction" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Introduction to web APIs</a> — MDN Web Docs (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/API" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>API</a> — Wikipedia (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Web_API" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Web API</a> — Wikipedia (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>HTTP overview</a> — MDN Web Docs (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://jsonplaceholder.typicode.com/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>JSONPlaceholder — Free fake REST API</a> — JSONPlaceholder (accessed 2026-07-12) </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="22" data-astro-cid-whrtx2kk>
+Mark Day 22 as read
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+      surfaces for someone searching for one — it costs you a click and it is genuinely how people
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+★ Star on GitHub
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-021-inspecting-traffic-with-curl-and-developer" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 21</span> <span class="pn__title" data-astro-cid-oerjsknp>Inspecting Traffic with curl and Developer Tools</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-023-rest-fundamentals-resources-and-verbs" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 23 →</span> <span class="pn__title" data-astro-cid-oerjsknp>REST Fundamentals: Resources and Verbs</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+      // Progressive enhancement only: the theme falls back to dark and every
+      // .reveal element is visible by default (the hidden start state exists
+      // only inside a prefers-reduced-motion: no-preference query).
+      (() => {
+        const toggle = document.getElementById('theme');
+        if (toggle) {
+          toggle.addEventListener('click', () => {
+            const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+            document.documentElement.dataset.theme = next;
+            try {
+              localStorage.setItem('theme', next);
+            } catch {
+              /* private mode */
+            }
+          });
+        }
+
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const items = document.querySelectorAll('.reveal');
+        if (items.length && !reduced && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry, i) => {
+                if (!entry.isIntersecting) return;
+                entry.target.style.transitionDelay = `${Math.min(i * 50, 240)}ms`;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.06 },
+          );
+          items.forEach((el) => io.observe(el));
+        } else {
+          items.forEach((el) => el.classList.add('is-in'));
+        }
+      })();
+    </script> </body> </html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 9: Navigating the Filesystem: Paths, Files, and Permissions · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to move confidently through the filesystem tree, describe any location as an absolute or relative path, create and reshape files and directories from the command line, and read and set the read/write/execute permissions that decide who may do what."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-009-navigating-the-filesystem-paths-files-and/"><meta property="og:title" content="Day 9: Navigating the Filesystem: Paths, Files, and Permissions · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to move confidently through the filesystem tree, describe any location as an absolute or relative path, create and reshape files and directories from the command line, and read and set the read/write/execute permissions that decide who may do what."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-009-navigating-the-filesystem-paths-files-and/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-009-navigating-the-filesystem-paths-files-and.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 9: Navigating the Filesystem: Paths, Files, and Permissions · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 9: Navigating the Filesystem: Paths, Files, and Permissions · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to move confidently through the filesystem tree, describe any location as an absolute or relative path, create and reshape files and directories from the command line, and read and set the read/write/execute permissions that decide who may do what."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-009-navigating-the-filesystem-paths-files-and.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+      // Dark is the default regardless of OS preference - this is a dark-first
+      // design. A visitor who picks light with the toggle keeps it. Applied
+      // before first paint so there is no flash of the wrong theme.
+      (() => {
+        let t;
+        try {
+          t = localStorage.getItem('theme');
+        } catch {
+          t = null;
+        }
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+      })();
+    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+<style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
+.starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+365 Days of AI
+</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+Labs
+</a> </header> <main id="main">  <article data-day="9" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>The Command Line</span>  › 
+Day 9 </p> <h1 data-astro-cid-whrtx2kk>Day 9: Navigating the Filesystem: Paths, Files, and Permissions</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-009-navigating-the-filesystem-paths-files-and.png" width="1200" height="630" alt="Day 9 of 365 — Navigating the Filesystem: Paths, Files, and Permissions" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to move confidently through the filesystem tree, describe any location as an absolute or relative path, create and reshape files and directories from the command line, and read and set the read/write/execute permissions that decide who may do what.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>The Command Line</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-009-navigating-the-filesystem-paths-files-and" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-009-navigating-the-filesystem-paths-files-and</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
+cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-009-navigating-the-filesystem-paths-files-and</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/ai-roadmap-365/labs/day-009-navigating-the-filesystem-paths-files-and" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Describe the filesystem as a single tree rooted at / and explain the meaning of the special path symbols /, ., .., and ~</li><li data-astro-cid-whrtx2kk>Write both an absolute path and a relative path to the same file, and explain how each depends (or does not depend) on the working directory</li><li data-astro-cid-whrtx2kk>Navigate and inspect the tree with pwd, cd, and ls (including the -l, -a, and -la flags) and read every field of an ls -l listing</li><li data-astro-cid-whrtx2kk>Create, copy, move, and remove files and directories with mkdir, touch, cp, mv, and rm, and explain why rm -rf is dangerous and how to use it safely</li><li data-astro-cid-whrtx2kk>Decode a permission string such as -rwxr-xr-- into user/group/other read/write/execute, and translate between the rwx form and octal notation like 754</li><li data-astro-cid-whrtx2kk>Use chmod to make a file executable and explain, with chown and the execute bit, why permissions matter for security and for turning a data file into a runnable script</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>A computer running macOS or Linux (or Windows with WSL) and the ability to open a terminal</li><li data-astro-cid-whrtx2kk>Days 1 to 8 of this course, including first contact with the command line</li></ul> <h2 id="why-this-matters">Why this matters</h2>
+<p>Almost everything you will do on the path to a career in AI passes through the filesystem. A dataset is a folder of files. A trained model is a file — sometimes one enormous file, sometimes a directory of them. Your code, your notebooks, your configuration, your logs, the virtual environment that pins your library versions: all files, arranged in a tree of directories. The command line you met in the last lessons is powerful precisely because it lets you move through that tree and act on it with a few keystrokes. If you cannot navigate the filesystem fluently, every other skill in this course runs uphill.</p>
+<p>The consequences of not knowing this are concrete and daily. A script fails with <code>No such file or directory</code> because you ran it from the wrong place and its relative path pointed at nothing. A download lands in a folder you cannot find, so you re-download it three times and fill your disk. A tutorial says “run <code>chmod +x train.sh</code>” and, without today’s lesson, that instruction is a magic spell rather than a precise change you understand. Worst of all, someone in a hurry pastes a <code>rm -rf</code> command they did not read and erases hours of work with no undo. Permission errors, in particular, are not an occasional nuisance — they are a part of daily practice, and the practitioners who resolve them in seconds rather than hours are simply the ones who know what the permission bits mean.</p>
+<p>Today you build that fluency. You will learn how the filesystem is shaped, how to describe any location two different ways, how to move around and reshape the tree from the keyboard, and how the small grid of read/write/execute permissions decides who may do what. By the end, <code>/</code>, <code>~</code>, <code>..</code>, and a string like <code>-rwxr-xr--</code> will read as plainly as street signs.</p>
+<h2 id="the-idea-in-plain-language">The idea in plain language</h2>
+<p>A filesystem is how a computer organizes files so that both you and the operating system can find them again. Rather than dumping every file into one giant pile, the system arranges them into a tree of <strong>directories</strong> (the same thing Windows and graphical tools call “folders”). A directory can hold files and can hold other directories, which hold more files and directories, and so on — a branching structure with no fixed depth.</p>
+<p>Every tree needs a starting point, and on macOS and Linux there is exactly one: the <strong>root directory</strong>, written as a single forward slash, <code>/</code>. Everything on the machine lives somewhere underneath <code>/</code>. To point at any specific file, you write a <strong>path</strong> — a sequence of directory names separated by slashes that spells out the route from some starting point down to the file, like <code>/home/alice/projects/data/notes.txt</code>.</p>
+<p>There are two ways to write that route. An <strong>absolute path</strong> always starts at the root <code>/</code> and gives the full route from the top, so it means the same thing no matter where you are standing. A <strong>relative path</strong> starts from wherever you currently are — your <strong>working directory</strong> — and gives directions from there. Both can name the same file; they are two ways of describing one location, exactly as “1600 Pennsylvania Avenue” and “three doors down on the left” can point at the same house.</p>
+<p>Finally, files and directories carry <strong>permissions</strong>: a small set of rules recording who is allowed to read them, change them, or run them. Those rules are why you can share a computer safely, why some files run as programs and others do not, and why so many first-day errors say <code>Permission denied</code>. Paths tell you <em>where</em> something is; permissions tell you <em>what you are allowed to do</em> with it. Master both and the filesystem stops being a place you get lost in.</p>
+<h2 id="historical-background">Historical background</h2>
+<p>The tree-of-directories idea feels obvious now, but it had to be invented. Early computers stored files in flat lists or rigid, shallow schemes with no real nesting. The breakthrough came with <strong>Unix</strong>, developed at Bell Labs starting in 1969 by Ken Thompson, Dennis Ritchie, and colleagues. Unix introduced a <strong>hierarchical filesystem</strong>: a single tree, one root, directories that could nest arbitrarily, and — crucially — the principle that <em>everything is a file</em>. Not just documents, but devices, and even directories themselves, were things you could name with a path and operate on with the same handful of commands. That uniformity is why the tools you learn today are so few and so general.</p>
+<p>Unix also brought the multi-user permission model you will meet later in this lesson. Because a single Unix machine was shared by many people at once, the system needed to keep one user from reading or clobbering another’s files. The answer — an owner, a group, and three permissions (read, write, execute) for each — was in place by the 1970s and has survived, almost unchanged, into every Mac and Linux server running today. When you type <code>chmod</code>, you are using a command whose name and behavior are roughly fifty years old.</p>
+<p>As Unix spread and fragmented into many variants, the details of <em>which</em> directories should exist and what belongs in them began to drift. To bring order, the Linux community published the <strong>Filesystem Hierarchy Standard</strong> (first released in 1994, evolving since), which specifies the conventional meaning of top-level directories: <code>/bin</code> for essential programs, <code>/etc</code> for configuration, <code>/home</code> for users’ personal directories, <code>/usr</code> for most installed software, and so on. This is why a Linux server you have never touched still feels familiar — the map is standardized. macOS, built on a Unix foundation (via BSD and the Mach kernel), follows the same core model with its own conventions layered on top, such as <code>/Users</code> in place of <code>/home</code>. The commands and concepts in this lesson work on both.</p>
+<h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
+<p>A filesystem is the operating system’s scheme for <strong>naming, organizing, and controlling access to</strong> stored data. Three verbs, three things to keep straight. <em>Naming</em>: every file and directory has a name, and a path is a chain of those names. <em>Organizing</em>: the names are arranged in a single tree so that any item has exactly one place and one route to it from the root. <em>Controlling access</em>: each item records who owns it and who may do what, so the same tree can be shared safely by many users and programs.</p>
+<p>It helps to be equally clear about what the filesystem is <em>not</em>. It is not the physical disk. The disk stores raw blocks of bytes; the filesystem is the organizing layer the operating system lays <em>over</em> those blocks so that “the file at <code>/home/alice/notes.txt</code>” means something. It is not the same as memory — files live in storage and survive a reboot, which is exactly why you save your work to a file rather than trusting it to RAM. A directory is not a container that physically holds its files the way a box holds objects; it is really a list that maps names to the files’ actual locations, which is why moving a file can be near-instant even when the file is huge. And a path is not the file — it is a <em>name for</em> the file. Two different paths can even point at the very same underlying file, an idea we return to when we meet symbolic links.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Common misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”Folders physically contain their files.”</td><td>A directory is a list mapping names to file locations; the file’s data lives elsewhere on the disk.</td></tr><tr><td>”The path is the file.”</td><td>A path is a name for a file; the same file can have more than one path (see symbolic links).</td></tr><tr><td>”Uppercase and lowercase names are the same.”</td><td>On Linux, <code>Data</code> and <code>data</code> are different files; macOS is usually case-insensitive but case-preserving — assume case matters.</td></tr><tr><td>”Deleting a file at the command line sends it to the Trash.”</td><td><code>rm</code> unlinks the file immediately with no Trash and no undo — this is why it must be used carefully.</td></tr><tr><td>”I need to be an administrator to change my own files.”</td><td>Your own files are yours; <code>sudo</code> is for system-wide changes, not for editing files you already own.</td></tr></tbody></table>
+<h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
+<p>The hierarchical filesystem solves a scaling problem. A computer with ten files could keep them in a single flat list; a computer with ten million cannot. Nesting turns an unmanageable pile into a searchable structure: related files sit together in a directory, directories group into larger themes, and any item is reachable by a short, human-readable route. The same structure that lets <em>you</em> find a file lets <em>programs</em> find each other’s data reliably, which is what makes a large software system possible at all.</p>
+<p>The permission model solves a different problem: <strong>sharing without chaos</strong>. The moment more than one person — or more than one program — uses a machine, you need a way to say “this file is mine to change; you may only look,” or “this configuration is off-limits to ordinary users.” Permissions encode exactly that, at the level of every individual file and directory. They are the reason a stray program running as you cannot quietly rewrite the operating system, and the reason a shared server can host many users’ projects side by side. They also solve a smaller but constant problem: distinguishing a plain data file from a file that is meant to be <em>run</em> as a program. That distinction is the <strong>execute</strong> permission, and it is why making a script runnable is a permission change rather than a rename.</p>
+<p>Put together, paths and permissions answer the two questions the operating system asks about every access, thousands of times a second: <em>where is this thing</em>, and <em>is this user allowed to do this to it</em>. Everything in the rest of this lesson is a tool for answering those two questions deliberately instead of by trial and error.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>Let’s walk the tree from the root down, then learn the commands that move through it, reshape it, and set its permissions.</p>
+<h3 id="the-shape-of-the-tree">The shape of the tree</h3>
+<p>At the very top sits the root, <code>/</code>. Directly under it are the conventional top-level directories described in the history section — <code>/bin</code>, <code>/etc</code>, <code>/home</code> (or <code>/Users</code> on macOS), <code>/usr</code>, and a handful of others. Under <code>/home</code> sits one directory per user; yours is your <strong>home directory</strong>, the place you start when you open a terminal and the place all your personal work lives. Because typing <code>/home/alice</code> (or <code>/Users/alice</code>) constantly would be tedious, the shell gives it a shorthand: the tilde, <code>~</code>, always means “my home directory.” So <code>~/projects/data</code> and <code>/home/alice/projects/data</code> are the same place for user alice.</p>
+<p><img src="/ai-roadmap-365/_astro/filesystem-tree.BwH5x1ts_ZoGyxE.svg" alt="Diagram: a filesystem tree rooted at slash, showing an absolute and a relative path to the same file" loading="lazy" decoding="async" fetchpriority="auto" width="720" height="520"></p>
+<p>Read the diagram from the top. The single root <code>/</code> branches into <code>bin</code>, <code>etc</code>, <code>home</code>, and <code>usr</code>. Inside <code>home</code> are the users <code>alice</code> and <code>bob</code>; alice’s directory is what <code>~</code> expands to. Descending through <code>projects</code> and <code>data</code> reaches the file <code>notes.txt</code>. Notice the two routes drawn to that one file: the <strong>absolute path</strong> <code>/home/alice/projects/data/notes.txt</code>, which starts at the root and is valid from anywhere, and the <strong>relative path</strong> <code>data/notes.txt</code>, which is only meaningful when your working directory is <code>projects</code>. Same file, two names.</p>
+<p>Four special path symbols do most of the navigational work, and they are worth memorizing:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Symbol</th><th>Meaning</th></tr></thead><tbody><tr><td><code>/</code></td><td>The root directory (at the start of a path) or the separator between names (in the middle)</td></tr><tr><td><code>.</code></td><td>”Here” — the current working directory</td></tr><tr><td><code>..</code></td><td>”One level up” — the parent of the current directory</td></tr><tr><td><code>~</code></td><td>Your home directory</td></tr></tbody></table>
+<p>So from inside <code>projects</code>, the path <code>..</code> means <code>alice</code>, <code>../..</code> means <code>home</code>, and <code>./data</code> means the same as <code>data</code> — the leading <code>./</code> just says “starting from here,” which becomes important when you run a script by name.</p>
+<h3 id="finding-out-where-you-are-and-moving-around">Finding out where you are, and moving around</h3>
+<p>Three commands cover all ordinary navigation. <strong><code>pwd</code></strong> (“print working directory”) answers “where am I right now?” by printing the absolute path of your current location — your anchor whenever you feel lost. <strong><code>cd</code></strong> (“change directory”) moves you: <code>cd projects</code> steps down into a subdirectory, <code>cd ..</code> steps up to the parent, <code>cd ~</code> (or plain <code>cd</code>) jumps home, <code>cd /</code> goes to the root, and <code>cd -</code> returns to the previous directory you were in. <strong><code>ls</code></strong> (“list”) shows what a directory contains.</p>
+<p><code>ls</code> earns its keep through its flags — the single-letter options that change what it shows. Bare <code>ls</code> prints names in columns. Add flags to see more:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Command</th><th>What it does</th></tr></thead><tbody><tr><td><code>pwd</code></td><td>Print the absolute path of the current working directory</td></tr><tr><td><code>cd DIR</code></td><td>Change the working directory to <code>DIR</code> (absolute or relative path)</td></tr><tr><td><code>cd ..</code></td><td>Move up to the parent directory</td></tr><tr><td><code>cd ~</code> or <code>cd</code></td><td>Return to your home directory</td></tr><tr><td><code>ls</code></td><td>List the names in the current directory</td></tr><tr><td><code>ls -l</code></td><td>Long listing: permissions, owner, size, and modification date for each item</td></tr><tr><td><code>ls -a</code></td><td>Show all entries, <strong>including hidden ones</strong> whose names start with a dot</td></tr><tr><td><code>ls -la</code></td><td>Combine both: a long listing that includes hidden files</td></tr><tr><td><code>ls -lh</code></td><td>Long listing with human-readable sizes (<code>4.0K</code>, <code>2.3M</code>) instead of raw bytes</td></tr></tbody></table>
+<p>Flags combine, so <code>ls -la</code> is <code>ls -l -a</code> merged. You will type <code>ls -la</code> more than almost any other command in this course; make it a reflex.</p>
+<h3 id="creating-copying-moving-and-removing">Creating, copying, moving, and removing</h3>
+<p>Navigating is only half the job; you also reshape the tree. <strong><code>mkdir</code></strong> (“make directory”) creates a new directory: <code>mkdir data</code> makes one here, and <code>mkdir -p a/b/c</code> creates a whole chain of nested directories in one step (the <code>-p</code> means “make parents as needed and do not complain if they already exist”). <strong><code>touch</code></strong> creates an empty file if it does not exist, and updates a file’s timestamp if it does — a quick way to make a placeholder. <strong><code>cp</code></strong> (“copy”) duplicates a file: <code>cp notes.txt backup.txt</code> leaves both; copying a whole directory needs <code>cp -r</code> (the <code>-r</code> means “recursive,” reaching into subdirectories). <strong><code>mv</code></strong> (“move”) relocates or renames: <code>mv notes.txt data/</code> moves the file into <code>data</code>, while <code>mv old.txt new.txt</code> renames it — moving and renaming are the same operation to the filesystem, because both just change the name-to-location entry.</p>
+<p>Then there is <strong><code>rm</code></strong> (“remove”), which deletes. <code>rm notes.txt</code> unlinks a file immediately: no Trash, no confirmation, no undo. Deleting a directory and everything inside it uses <code>rm -r</code>, and you will often see it written <code>rm -rf</code>, where <code>-f</code> (“force”) suppresses the prompts that would otherwise ask you to confirm. <strong>This combination is the single most dangerous command a beginner runs.</strong> <code>rm -rf</code> walks a directory tree deleting everything without pause, and if you point it at the wrong place — a stray space, a mistyped variable, a path that begins with <code>/</code> — it will erase far more than you meant, permanently. The professional habits are simple and worth adopting today: read any <code>rm -rf</code> command fully before pressing Return, prefer deleting by moving into a temporary “trash” directory when you can, never run <code>rm -rf</code> with a path you have not double-checked, and be especially wary of it in scripts where a path comes from a variable. Respect for <code>rm</code> is not timidity; it is the mark of someone who has, or has watched someone, lose real work.</p>
+<h3 id="hidden-files">Hidden files</h3>
+<p>Any file or directory whose name begins with a dot — like <code>.bashrc</code> or <code>.git</code> — is <strong>hidden</strong>: ordinary <code>ls</code> does not show it, and neither do most graphical file browsers by default. This is a convention, not a security feature; <code>ls -a</code> reveals everything. Hidden files exist to keep configuration out of the way. Your shell’s settings, a project’s <code>.gitignore</code>, a tool’s cache directory — all are dotfiles so that a normal listing of your home directory shows <em>your</em> work rather than a clutter of machinery. When a tutorial tells you to edit a config file you cannot see, <code>ls -a</code> is almost always the reason it was hidden.</p>
+<h3 id="permissions-who-may-do-what">Permissions: who may do what</h3>
+<p>Every file and directory records three things about access: an <strong>owner</strong> (a single user), a <strong>group</strong> (a named set of users), and, for each of those plus “everyone else,” which of three actions is allowed. The three actions are <strong>read</strong> (<code>r</code>), <strong>write</strong> (<code>w</code>), and <strong>execute</strong> (<code>x</code>). For a file, read means you may view its contents, write means you may change or delete its contents, and execute means you may run it as a program. For a directory the meanings shift slightly: read lets you list the names inside, write lets you add or remove entries, and execute lets you <em>enter</em> the directory and reach items through it.</p>
+<p>The three actions are recorded for three classes of people — the <strong>user</strong> (owner), the <strong>group</strong>, and <strong>other</strong> (everyone else) — giving nine bits in all. The first column of <code>ls -l</code> displays them as a ten-character string: one character for the type (<code>-</code> for a file, <code>d</code> for a directory) followed by three groups of <code>rwx</code>.</p>
+<p><img src="/ai-roadmap-365/_astro/permissions-bits.tblgbO7__Z7euU1.svg" alt="Diagram: decoding the permission string dash r w x r dash x r dash dash into user, group, and other, and into octal 754" loading="lazy" decoding="async" fetchpriority="auto" width="720" height="440"></p>
+<p>Read the string in the diagram, <code>-rwxr-xr--</code>, left to right. The leading <code>-</code> says it is an ordinary file. The next three characters, <code>rwx</code>, are the <strong>user</strong> (owner): full read, write, and execute. The next three, <code>r-x</code>, are the <strong>group</strong>: read and execute, but not write (a dash means the permission is absent). The last three, <code>r--</code>, are <strong>other</strong>: read only. So the owner can do anything, group members can read and run but not change it, and everyone else can only read it.</p>
+<p>The same nine bits have a compact numeric spelling, <strong>octal notation</strong>, which you will see constantly. Within each group of three, read is worth 4, write is worth 2, and execute is worth 1; you add up the ones that are present. So <code>rwx</code> = 4 + 2 + 1 = 7, <code>r-x</code> = 4 + 0 + 1 = 5, and <code>r--</code> = 4 + 0 + 0 = 4. Written together, <code>-rwxr-xr--</code> is <strong>754</strong>. Three digits, one per class, each the sum of its permissions.</p>
+<p>Two commands change these settings. <strong><code>chmod</code></strong> (“change mode”) sets permissions. You can use octal — <code>chmod 754 script.sh</code> sets exactly the bits above — or symbolic form — <code>chmod +x script.sh</code> adds execute for everyone, <code>chmod u+w notes.txt</code> adds write for the user, <code>chmod go-r secret.txt</code> removes read for group and other. <strong><code>chown</code></strong> (“change owner”) reassigns a file’s owner or group, as in <code>chown alice notes.txt</code>; because handing your file to another user is a system-level act, <code>chown</code> usually requires administrator rights (<code>sudo</code>), whereas changing the permissions on files you already own does not. This is the mechanism behind “make the script executable”: a freshly written <code>train.sh</code> is just data until <code>chmod +x train.sh</code> turns on its execute bit, after which <code>./train.sh</code> runs it.</p>
+<h2 id="an-everyday-analogy">An everyday analogy</h2>
+<p>Think of the filesystem as a vast office building, and you will rarely be confused again.</p>
+<p>The building has exactly one main entrance at street level — that is the root, <code>/</code>. From the lobby, hallways lead to wings, wings to floors, floors to rooms, rooms to filing cabinets, cabinets to drawers, and drawers to individual folders and documents. Each <strong>directory</strong> is one of these nested spaces; each <strong>file</strong> is a document inside one. There is always a route from the front door to any document, and writing that route out — lobby, third floor, east wing, room 312, cabinet B, the blue folder — is an <strong>absolute path</strong>: it works no matter where in the building you happen to be standing.</p>
+<p>But you are rarely standing at the front door. You are in some room, and from there you would give directions relative to <em>here</em>: “the next drawer down” or “back out to the hallway and two doors left.” That is a <strong>relative path</strong>, and it depends entirely on your current room — your <strong>working directory</strong>. When you feel disoriented, you check the number on the door you are standing in front of; that is <code>pwd</code>. Walking to another room is <code>cd</code>; stepping back into the hallway you came from is <code>cd ..</code>; and looking around the room to see what is in it is <code>ls</code>.</p>
+<p>Your <strong>home directory</strong> is your own office — the room that is yours, where your things live, and the place the building’s shorthand <code>~</code> always points. And <strong>permissions</strong> are the locks and access badges. Your office door recognizes your badge (you are the owner: read, write, execute). Colleagues on your team have badges that let them into the shared reading rooms but not to alter the master files (the group: read and execute, not write). Visitors can sit in the public lobby but open nothing private (other: read only). <code>chmod</code> is the facilities office reprogramming which badges open which doors; <code>chown</code> is reassigning whose office a room is — a bigger decision that needs building management’s sign-off. And <code>rm -rf</code> on the wrong path is the demolition crew who were handed the wrong room number: fast, thorough, and impossible to take back. Hold the building in your mind and paths, homes, and permissions all fall into place.</p>
+<h2 id="examples-in-practice">Examples in practice</h2>
+<p>Here is a short session that exercises the whole lesson. Read it as a story; you will run the real thing in the lab.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ pwd</span></span>
+<span class="line"><span>/home/alice</span></span>
+<span class="line"><span>$ mkdir -p project/data</span></span>
+<span class="line"><span>$ cd project</span></span>
+<span class="line"><span>$ pwd</span></span>
+<span class="line"><span>/home/alice/project</span></span>
+<span class="line"><span>$ touch data/notes.txt report.md</span></span>
+<span class="line"><span>$ ls</span></span>
+<span class="line"><span>data  report.md</span></span>
+<span class="line"><span>$ ls -la</span></span>
+<span class="line"><span>total 8</span></span>
+<span class="line"><span>drwxr-xr-x  4 alice alice 4096 Jul 12 09:00 .</span></span>
+<span class="line"><span>drwxr-xr-x 12 alice alice 4096 Jul 12 09:00 ..</span></span>
+<span class="line"><span>drwxr-xr-x  2 alice alice 4096 Jul 12 09:00 data</span></span>
+<span class="line"><span>-rw-r--r--  1 alice alice    0 Jul 12 09:00 report.md</span></span></code></pre>
+<p>Every part of that <code>ls -la</code> output is now readable. The <code>.</code> and <code>..</code> entries are “here” and “the parent.” The <code>d</code> at the start of the <code>data</code> line marks it a directory; the <code>-</code> on <code>report.md</code> marks it a plain file. The string <code>-rw-r--r--</code> says the owner may read and write, and group and other may only read — octal <strong>644</strong>, the ordinary default for a new file. Notice the file has no <code>x</code> anywhere: it is data, not a program.</p>
+<p>Now let us turn a file into a runnable script and watch the permission change, which is the heart of the lab:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ touch hello.sh</span></span>
+<span class="line"><span>$ ls -l hello.sh</span></span>
+<span class="line"><span>-rw-r--r-- 1 alice alice 0 Jul 12 09:01 hello.sh</span></span>
+<span class="line"><span>$ chmod 754 hello.sh</span></span>
+<span class="line"><span>$ ls -l hello.sh</span></span>
+<span class="line"><span>-rwxr-xr-- 1 alice alice 0 Jul 12 09:01 hello.sh</span></span></code></pre>
+<p>The single <code>chmod 754</code> flipped the permission string from <code>-rw-r--r--</code> (644) to <code>-rwxr-xr--</code> (754), because <code>chmod 754</code> sets owner <code>rwx</code> = 7, group <code>r-x</code> = 5, and other <code>r--</code> = 4. Change the octal digits and the string follows exactly: <code>chmod 755</code> would give <code>-rwxr-xr-x</code>, <code>chmod 700</code> would give <code>-rwx------</code>. Getting this octal-to-string translation right, in your head, on a file you made, is the concrete skill this lesson exists to give you.</p>
+<p>Finally, moving and copying reshape the tree without changing any file’s contents:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ cp report.md report-backup.md</span></span>
+<span class="line"><span>$ mv report.md data/</span></span>
+<span class="line"><span>$ ls</span></span>
+<span class="line"><span>data  hello.sh  report-backup.md</span></span>
+<span class="line"><span>$ ls data</span></span>
+<span class="line"><span>notes.txt  report.md</span></span></code></pre>
+<p><code>cp</code> left two copies; <code>mv</code> relocated the original into <code>data</code>, changing only the name-to-location entry, not the bytes. From here, <code>cd data</code> and <code>pwd</code> would print <code>/home/alice/project/data</code>, and <code>../report-backup.md</code> would be the relative path back up to the backup — the whole vocabulary of the lesson, working together.</p>
+<h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
+<h3 id="security">Security</h3>
+<p>Permissions are a first line of defense, not a decoration. The reason a random program running under your account cannot rewrite the operating system is that the system’s files are owned by an administrative account and marked unwritable by ordinary users. The habit that follows is least privilege: give a file the <em>fewest</em> permissions that let it do its job. A private key or credentials file should be <code>600</code> (owner read/write, nobody else anything); a shared script might be <code>755</code>; almost nothing should be <code>777</code> (everyone can do everything), which is a common, dangerous shortcut that effectively removes protection. And because execute is what turns data into a running program, be deliberate about which files you make executable and where they came from — running an unread, freshly-<code>chmod +x</code>’d script from the internet is a classic way to get compromised.</p>
+<h3 id="privacy">Privacy</h3>
+<p>The filesystem is where sensitive data rests, so it is where privacy is won or lost. On a shared machine or server, another user with the right group membership — or an overly generous “other” bit — can read files you assumed were private. Deleting is subtler than it looks: <code>rm</code> removes the name-to-location entry, but the underlying bytes often linger on the disk until overwritten, which is why truly erasing sensitive data is a deliberate act, not a casual <code>rm</code>. When your project holds personal data, the permission bits on those files are a privacy control you are actively setting, whether you think about them or not.</p>
+<h3 id="performance">Performance</h3>
+<p>The tree’s shape has performance consequences. Directories with tens of thousands of files in a single level are slow to list and slow to search, because the directory is one long list the system must scan; grouping files into subdirectories keeps each listing small and fast. Operations that only touch the name-to-location entries — <code>mv</code> within the same disk, or renaming — are near-instant regardless of file size, because no bytes move. Copying, by contrast, actually reads and writes every byte, so <code>cp</code> of a large directory is as slow as the data is big. Knowing which operations move bytes and which only move names lets you predict what will be fast.</p>
+<h3 id="scalability">Scalability</h3>
+<p>The same hierarchy that organizes ten files organizes ten million, which is exactly why it underpins large data work. A serious dataset is not one file but a deliberate directory layout — splits, shards, and metadata arranged so that both humans and programs can find any piece by path. A reproducible project keeps code, data, configuration, and outputs in separate, predictable directories so it can grow without turning into a swamp. The conventions you are learning today are the ones that let a project scale from a laptop experiment to a directory tree spanning many machines.</p>
+<h3 id="cost">Cost</h3>
+<p>Storage and the movement of data cost real money, and the filesystem is where those costs are counted. Duplicated files — the copies you made “just in case” and forgot — quietly consume paid disk. Cloud storage bills by the byte stored and often by the byte transferred, so an unthinking recursive copy of a large tree can be a line item. The discipline of a clean directory layout, deleting what you no longer need (carefully), and knowing when an operation duplicates data versus merely relinks it, is the same discipline that keeps a storage bill from surprising you.</p>
+<h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
+<p>“Alternatives” here means other ways to work with, and other ways to learn, the filesystem — differing in interface, depth, and cost.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Resource</th><th>Type</th><th>What it offers</th><th>Cost</th></tr></thead><tbody><tr><td>The command-line tools in this lesson (<code>cd</code>, <code>ls</code>, <code>chmod</code>, …)</td><td>Free, preinstalled</td><td>The universal, scriptable interface every server and lab in this course assumes</td><td>Free</td></tr><tr><td>Your OS graphical file manager (Finder, GNOME Files)</td><td>Free, preinstalled</td><td>Point-and-click navigation and drag-to-move; friendly, but not scriptable and it hides permissions</td><td>Free</td></tr><tr><td><code>The Linux Command Line</code> (William Shotts)</td><td>Free online book</td><td>A thorough, beginner-friendly walk through the shell and filesystem</td><td>Free to read online</td></tr><tr><td>The Missing Semester of Your CS Education — The Shell (MIT)</td><td>Free course materials</td><td>Short, practical lectures and exercises on the shell and files</td><td>Free</td></tr><tr><td>GNU Coreutils manual</td><td>Free reference</td><td>The authoritative description of <code>ls</code>, <code>cp</code>, <code>mv</code>, <code>chmod</code>, and the rest</td><td>Free</td></tr><tr><td>Cross-platform file managers (for example, midnight-commander-style tools)</td><td>Open source</td><td>A two-pane keyboard-driven middle ground between the raw shell and a GUI</td><td>Free</td></tr><tr><td>Cloud storage clients and object-store browsers</td><td>Commercial (often free tier)</td><td>Graphical browsing of remote storage that mirrors the same tree-and-permissions ideas</td><td>Free tier to paid</td></tr></tbody></table>
+<p>For this course, the command line is the one to master; the graphical tools are fine for casual browsing, but everything you automate later assumes the commands. Read one thing beyond this lesson? The relevant chapters of <em>The Linux Command Line</em>.</p>
+<h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>Absolute path</td><td>Relative path</td><td>An absolute path starts at <code>/</code> and is valid from anywhere; a relative path starts from your current directory and depends on it</td></tr><tr><td>Directory</td><td>File</td><td>A directory is a list mapping names to items; a file holds actual data</td></tr><tr><td><code>mv</code> (move/rename)</td><td><code>cp</code> (copy)</td><td><code>mv</code> changes only the name-to-location entry and moves no bytes; <code>cp</code> duplicates the data</td></tr><tr><td>Symbolic link</td><td>Copy</td><td>A symbolic link is a small pointer to another path — one file, two names; a copy is independent data</td></tr><tr><td>Permission (<code>chmod</code>)</td><td>Ownership (<code>chown</code>)</td><td><code>chmod</code> sets which actions are allowed; <code>chown</code> sets <em>who</em> the owner and group are</td></tr><tr><td>Hidden file (dotfile)</td><td>Ordinary file</td><td>A hidden file’s name begins with a dot so <code>ls</code> skips it by default; it is otherwise a normal file</td></tr></tbody></table>
+<p>A word on the <strong>symbolic link</strong> (or “symlink”), which the table introduces: it is a special file that simply points at another path, so following it lands you at the target. Symlinks let one file appear in several places, or give a stable short name to something whose real location may change — for instance, pointing <code>current</code> at whichever versioned directory is active. They are the clearest proof that a path is a <em>name for</em> a file rather than the file itself.</p>
+<h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
+<p>Reach for the command line whenever you need to be <strong>precise, repeatable, or fast</strong> with files: setting up a project’s directory structure, moving or renaming many files at once, fixing a <code>Permission denied</code> error, making a script executable, or doing anything you will later want to automate in a script. Any time you find yourself clicking through a graphical file browser doing the same action over and over, that is the signal to drop to the shell, where the same work is one command. And absolutely reach for these skills the moment a tool reports it cannot find a file or cannot access it — nine times out of ten the fix is a path you can now read or a permission bit you can now set.</p>
+<p>Know equally when the graphical file manager is the better tool. For casual, one-off browsing — glancing at photos, dragging a single download into a folder, previewing a document — clicking is perfectly reasonable and often faster than typing. When you are unsure what you are about to delete, the graphical Trash, which is reversible, is safer than <code>rm</code>, which is not. And there is one command to treat with permanent caution regardless of convenience: never reach for <code>rm -rf</code> as a routine cleanup habit. Use it rarely, read it fully, and check the path twice, because the whole point of the command is that it does not stop to ask. The professional posture is to live in the shell for anything precise or repeatable, keep a graphical option for casual browsing, and hold a healthy, specific respect for the few commands that cannot be undone.</p>
+<h2 id="knowledge-check">Knowledge check</h2>
+<p>Try these from memory before looking back:</p>
+<ol>
+<li>Explain the difference between an absolute path and a relative path, and give an example of each pointing at the same file.</li>
+<li>What do <code>.</code>, <code>..</code>, <code>~</code>, and <code>/</code> each mean in a path? For a file, what do the three permission letters <code>r</code>, <code>w</code>, and <code>x</code> allow?</li>
+<li>Translate the permission string <code>-rwxr-xr--</code> into its octal number, showing the arithmetic for each of the three groups.</li>
+<li>A tutorial says to run <code>chmod +x deploy.sh</code>, then <code>./deploy.sh</code>. Explain what the first command changes and why the second one would fail without it.</li>
+<li>Why is <code>rm -rf</code> considered dangerous, and name two habits that reduce the risk of using it.</li>
+</ol>
+<h2 id="hands-on-exercise">Hands-on exercise</h2>
+<p>Time to work the real filesystem. In this exercise — completed in full in the Day 9 lab directory — you will build a small directory tree inside a temporary workspace, navigate it, create and move files, and make a file executable while watching its permission string change. Everything happens inside a folder the lab creates and later deletes, so you cannot harm anything else on your machine.</p>
+<p>Open your terminal and run each command, reading its output before moving on:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">pwd</span></span></code></pre>
+<p>Prints where you are now — your anchor. Then create and enter a scratch tree:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">mkdir</span><span style="color:#79B8FF"> -p</span><span style="color:#9ECBFF"> demo/data</span></span>
+<span class="line"><span style="color:#79B8FF">cd</span><span style="color:#9ECBFF"> demo</span></span></code></pre>
+<p><code>mkdir -p</code> makes <code>demo</code> and <code>demo/data</code> in one step; <code>cd</code> moves you into <code>demo</code>. Now create two files and list everything, including the details:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">touch</span><span style="color:#9ECBFF"> data/notes.txt</span><span style="color:#9ECBFF"> report.md</span></span>
+<span class="line"><span style="color:#B392F0">ls</span><span style="color:#79B8FF"> -la</span></span></code></pre>
+<p><code>touch</code> makes two empty files; <code>ls -la</code> shows a long listing with hidden entries, so you can see <code>.</code>, <code>..</code>, the <code>data</code> directory (marked <code>d</code>), and <code>report.md</code> (marked <code>-</code>). Read the permission string on <code>report.md</code>. Now make a script and change its permissions:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">touch</span><span style="color:#9ECBFF"> run.sh</span></span>
+<span class="line"><span style="color:#B392F0">ls</span><span style="color:#79B8FF"> -l</span><span style="color:#9ECBFF"> run.sh</span></span>
+<span class="line"><span style="color:#B392F0">chmod</span><span style="color:#79B8FF"> 754</span><span style="color:#9ECBFF"> run.sh</span></span>
+<span class="line"><span style="color:#B392F0">ls</span><span style="color:#79B8FF"> -l</span><span style="color:#9ECBFF"> run.sh</span></span></code></pre>
+<p>Compare the two <code>ls -l run.sh</code> lines: the string changes from <code>-rw-r--r--</code> to <code>-rwxr-xr--</code> as the execute and other bits are set to match octal 754. Finally, practice moving:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">mv</span><span style="color:#9ECBFF"> report.md</span><span style="color:#9ECBFF"> data/</span></span>
+<span class="line"><span style="color:#B392F0">ls</span></span>
+<span class="line"><span style="color:#B392F0">ls</span><span style="color:#9ECBFF"> data</span></span></code></pre>
+<p><code>mv</code> relocates <code>report.md</code> into <code>data</code>; the two <code>ls</code> commands confirm it left the current directory and arrived in <code>data</code>.</p>
+<h3 id="expected-output">Expected output</h3>
+<p>A representative run (dates and the owner name will differ on your machine):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ pwd</span></span>
+<span class="line"><span>/home/alice</span></span>
+<span class="line"><span>$ mkdir -p demo/data</span></span>
+<span class="line"><span>$ cd demo</span></span>
+<span class="line"><span>$ touch data/notes.txt report.md</span></span>
+<span class="line"><span>$ ls -la</span></span>
+<span class="line"><span>total 8</span></span>
+<span class="line"><span>drwxr-xr-x  4 alice alice 4096 Jul 12 09:10 .</span></span>
+<span class="line"><span>drwxr-xr-x 20 alice alice 4096 Jul 12 09:10 ..</span></span>
+<span class="line"><span>drwxr-xr-x  2 alice alice 4096 Jul 12 09:10 data</span></span>
+<span class="line"><span>-rw-r--r--  1 alice alice    0 Jul 12 09:10 report.md</span></span>
+<span class="line"><span>$ touch run.sh</span></span>
+<span class="line"><span>$ ls -l run.sh</span></span>
+<span class="line"><span>-rw-r--r-- 1 alice alice 0 Jul 12 09:10 run.sh</span></span>
+<span class="line"><span>$ chmod 754 run.sh</span></span>
+<span class="line"><span>$ ls -l run.sh</span></span>
+<span class="line"><span>-rwxr-xr-- 1 alice alice 0 Jul 12 09:10 run.sh</span></span>
+<span class="line"><span>$ mv report.md data/</span></span>
+<span class="line"><span>$ ls</span></span>
+<span class="line"><span>data  run.sh</span></span></code></pre>
+<p>Line by line: <code>pwd</code> confirms the starting point; <code>ls -la</code> shows the new tree with <code>data</code> as a directory and <code>report.md</code> as a <code>644</code> file; the two <code>run.sh</code> listings bracket the <code>chmod</code>, showing <code>-rw-r--r--</code> become <code>-rwxr-xr--</code> (octal 754); and the final <code>ls</code> proves <code>report.md</code> has moved out of the current directory into <code>data</code>.</p>
+<h3 id="validate-your-work">Validate your work</h3>
+<p>You are done when you can check every box:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> You can print your current location with <code>pwd</code> and explain what the path means.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You created a nested directory with a single <code>mkdir -p</code> command.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You listed a directory with <code>ls -la</code> and can name what <code>d</code>, <code>-</code>, <code>.</code>, and <code>..</code> mean in the output.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You changed a file’s permissions with <code>chmod 754</code> and can read the before/after permission strings.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can state the octal number for a permission string and the string for an octal number.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You moved a file with <code>mv</code> and confirmed its new location with <code>ls</code>.</li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><strong><code>No such file or directory</code>.</strong> You are running a relative path from the wrong place. Run <code>pwd</code> to see where you are, then adjust — either <code>cd</code> to the right directory or use an absolute path.</li>
+<li><strong><code>Permission denied</code> when running <code>./run.sh</code>.</strong> The execute bit is not set. Run <code>chmod +x run.sh</code> (or <code>chmod 754 run.sh</code>) and check with <code>ls -l</code> that an <code>x</code> now appears.</li>
+<li><strong><code>ls</code> does not show your dotfile.</strong> Hidden files whose names start with a dot are skipped by plain <code>ls</code>; use <code>ls -a</code> or <code>ls -la</code> to reveal them.</li>
+<li><strong><code>mkdir: cannot create directory … File exists</code>.</strong> The directory already exists; add <code>-p</code>, which makes parents as needed and does not complain if the target is already there.</li>
+<li><strong><code>cd: not a directory</code>.</strong> You tried to <code>cd</code> into a file. <code>ls -l</code> shows a <code>d</code> in the first column for directories and a <code>-</code> for files; you can only enter the ones marked <code>d</code>.</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<ul>
+<li><strong>Confusing absolute and relative paths.</strong> A path starting with <code>/</code> is absolute and ignores where you are; a path without a leading <code>/</code> is relative to your current directory. When a script “cannot find” a file that is clearly there, this is usually why — check <code>pwd</code>.</li>
+<li><strong>Misreading octal.</strong> Each digit is a <em>sum</em> within one group of three: read 4, write 2, execute 1. <code>7</code> is <code>rwx</code>, <code>5</code> is <code>r-x</code>, <code>4</code> is <code>r--</code>. <code>755</code> is not “seven hundred fifty-five” but three independent groups. Practice translating both directions until it is automatic.</li>
+<li><strong>Running <code>rm</code> or <code>rm -rf</code> without reading it.</strong> Deletion at the command line is immediate and permanent. Read the whole command, confirm the path with <code>pwd</code> or <code>ls</code> first, and never run a recursive delete on a path you have not verified.</li>
+</ul>
+<h2 id="practice-assignment">Practice assignment</h2>
+<p>Open the worksheet in the starter directory of the Day 9 lab (<code>filesystem-worksheet.md</code>) and complete it for your own machine. Using the commands from this lesson, record: (1) your home directory’s absolute path (from <code>pwd</code> after <code>cd ~</code>); (2) one file you create, written both as an absolute path and as a relative path from a directory one level above it, confirming both point at the same file; and (3) the full permission string of a file you make executable with <code>chmod</code>, together with its octal number, showing the arithmetic for each of the three groups. Then write two or three sentences explaining, in your own words, why the execute bit is what separates a data file from a runnable script. Keep the worksheet; later lessons on shell scripting build directly on these skills.</p>
+<h2 id="extension-challenge">Extension challenge</h2>
+<p>Go one step deeper into permissions and links. First, create a file and give it three different permission settings in turn — <code>chmod 644</code>, <code>chmod 600</code>, and <code>chmod 755</code> — running <code>ls -l</code> after each and writing down how the permission string changes and who can now do what. Predict each string <em>before</em> you run <code>ls -l</code>, then check yourself; you are training the octal-to-string translation until it is instant. Second, explore the symbolic link: run <code>ln -s data/notes.txt shortcut.txt</code> to create a link, then <code>ls -l shortcut.txt</code> and notice the <code>l</code> at the start of the line and the <code>-&gt; data/notes.txt</code> arrow showing where it points. Confirm that reading <code>shortcut.txt</code> reaches the same file as <code>data/notes.txt</code>, then delete the link with <code>rm shortcut.txt</code> and verify the original file is untouched. Write two or three sentences on the difference between a symbolic link and a copy, and why a link is proof that a path is a <em>name for</em> a file rather than the file itself. You have now touched every idea in the lesson with your own hands.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. What does the single forward slash / mean at the very start of a path? </strong> </p> <ol type="A"> <li>The current working directory</li><li>The root directory — the single top of the filesystem tree</li><li>The user&#39;s home directory</li><li>A hidden file</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> The root directory — the single top of the filesystem tree </p> <p>A leading / is the root directory, the one point from which every file and directory on a macOS or Linux system descends. In the middle of a path, / instead separates one name from the next.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. Which statement about absolute and relative paths is correct? </strong> </p> <ol type="A"> <li>An absolute path starts from your current directory; a relative path starts from /</li><li>Absolute and relative paths can never point at the same file</li><li>An absolute path starts at / and means the same thing from anywhere; a relative path starts from your current working directory</li><li>Relative paths only work for directories, never for files</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> An absolute path starts at / and means the same thing from anywhere; a relative path starts from your current working directory </p> <p>An absolute path begins at the root / and is valid no matter where you are standing, while a relative path begins from your current working directory and depends on it. Both can name the same file.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. In a path, what does .. mean? </strong> </p> <ol type="A"> <li>The current directory</li><li>The parent directory, one level up</li><li>Your home directory</li><li>A hidden file</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> The parent directory, one level up </p> <p>A single dot (.) means the current directory, while two dots (..) mean its parent — the directory one level up. The tilde (~) means your home directory.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. Which command shows a long listing that also includes hidden files whose names start with a dot? </strong> </p> <ol type="A"> <li>ls</li><li>ls -h</li><li>ls -la</li><li>pwd -a</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> ls -la </p> <p>The -l flag gives the long listing (permissions, owner, size, date) and the -a flag includes hidden dot-files; combined as ls -la they show a detailed listing of everything in the directory.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. The permission string -rwxr-xr-- corresponds to which octal number? </strong> </p> <ol type="A"> <li>644</li><li>755</li><li>754</li><li>777</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> 754 </p> <p>Within each group of three, read is 4, write is 2, execute is 1. So rwx = 4+2+1 = 7, r-x = 4+0+1 = 5, and r-- = 4+0+0 = 4, giving 754.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. For a plain file, what does the execute (x) permission allow? </strong> </p> <ol type="A"> <li>Viewing the file&#39;s contents</li><li>Changing or deleting the file&#39;s contents</li><li>Running the file as a program</li><li>Renaming the file</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Running the file as a program </p> <p>For a file, read (r) allows viewing its contents, write (w) allows changing them, and execute (x) allows running it as a program — which is why making a script runnable means adding the execute bit.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. Why is the command rm -rf considered especially dangerous? </strong> </p> <ol type="A"> <li>It only works if you are an administrator</li><li>It recursively deletes everything under a path immediately, with no confirmation and no undo</li><li>It permanently changes a file&#39;s owner</li><li>It sends files to the Trash, which then fills up</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> It recursively deletes everything under a path immediately, with no confirmation and no undo </p> <p>The -r flag makes rm recurse into directories and -f suppresses confirmation prompts, so rm -rf erases an entire tree at once with no Trash and no undo — a mistyped or wrong path can destroy far more than intended.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. What is the difference between chmod and chown? </strong> </p> <ol type="A"> <li>chmod sets which actions are allowed; chown sets who the owner and group are</li><li>chmod deletes a file; chown copies it</li><li>chmod works only on directories; chown works only on files</li><li>They are two names for the same command</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> chmod sets which actions are allowed; chown sets who the owner and group are </p> <p>chmod (&quot;change mode&quot;) sets the read/write/execute permissions on a file, while chown (&quot;change owner&quot;) reassigns which user and group own it. Changing owners is a system-level act that usually needs administrator rights; changing permissions on your own files does not.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>path</strong> </dt> <dd data-astro-cid-whrtx2kk>A sequence of directory names separated by slashes that spells out the route to a file or directory in the filesystem tree.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>absolute path</strong> </dt> <dd data-astro-cid-whrtx2kk>A path that starts at the root directory (/) and gives the full route from the top, so it means the same thing no matter what the current directory is.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>relative path</strong> </dt> <dd data-astro-cid-whrtx2kk>A path that starts from the current working directory rather than from the root, so its meaning depends on where you currently are.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>working directory</strong> </dt> <dd data-astro-cid-whrtx2kk>The directory a shell is currently &quot;in,&quot; from which relative paths are interpreted; printed by the pwd command.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>home directory</strong> </dt> <dd data-astro-cid-whrtx2kk>The personal directory where a user&#39;s own files live and where a terminal usually starts; abbreviated by the shell as the tilde (~).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>root directory</strong> </dt> <dd data-astro-cid-whrtx2kk>The single directory at the top of the filesystem tree, written as a lone forward slash (/), under which everything else lives.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>directory</strong> </dt> <dd data-astro-cid-whrtx2kk>A named list that maps names to files and to other directories, forming the branches of the filesystem tree (called a &quot;folder&quot; in graphical tools).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>hidden file</strong> </dt> <dd data-astro-cid-whrtx2kk>A file or directory whose name begins with a dot, which plain ls and most file browsers skip by default; revealed with ls -a.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>permission</strong> </dt> <dd data-astro-cid-whrtx2kk>A rule recording whether a class of user (owner, group, or other) may read, write, or execute a given file or directory.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>chmod</strong> </dt> <dd data-astro-cid-whrtx2kk>The command that changes a file or directory&#39;s permissions, using either symbolic form (such as +x) or octal form (such as 754).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>octal notation</strong> </dt> <dd data-astro-cid-whrtx2kk>A three-digit way of writing permissions in which each digit is the sum, within one class, of read (4), write (2), and execute (1) — for example, 754.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>symbolic link</strong> </dt> <dd data-astro-cid-whrtx2kk>A small special file that points at another path, so following it reaches the target; proof that a path is a name for a file rather than the file itself.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>execute permission</strong> </dt> <dd data-astro-cid-whrtx2kk>The permission (x) that, for a file, allows it to be run as a program, and for a directory, allows entering it and reaching items through it.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://linuxcommand.org/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Linux Command Line</a> — William Shotts (accessed 2026-07-12) — A thorough, beginner-friendly guide to the shell, navigation, files, and permissions. </li><li data-astro-cid-whrtx2kk> <a href="https://missing.csail.mit.edu/2020/course-shell/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Missing Semester of Your CS Education — The Shell</a> — MIT (accessed 2026-07-12) — Practical lecture and exercises on the shell and working with files. </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Filesystem Hierarchy Standard</a> — Wikipedia (accessed 2026-07-12) — The conventional meaning of top-level directories such as /bin, /etc, /home, and /usr. </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/File-system_permissions" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>File-system permissions</a> — Wikipedia (accessed 2026-07-12) — The read/write/execute model for user, group, and other, and octal notation. </li><li data-astro-cid-whrtx2kk> <a href="https://www.gnu.org/software/coreutils/manual/coreutils.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>GNU Coreutils Manual</a> — GNU (accessed 2026-07-12) — The authoritative reference for ls, cp, mv, rm, mkdir, chmod, and chown. </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="9" data-astro-cid-whrtx2kk>
+Mark Day 9 as read
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+      surfaces for someone searching for one — it costs you a click and it is genuinely how people
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+★ Star on GitHub
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-008-meet-the-terminal-shells-prompts-and" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 8</span> <span class="pn__title" data-astro-cid-oerjsknp>Meet the Terminal: Shells, Prompts, and Commands</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-010-working-with-text-cat-grep-sed" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 10 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Working with Text: cat, grep, sed, and Pipes</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+      // Progressive enhancement only: the theme falls back to dark and every
+      // .reveal element is visible by default (the hidden start state exists
+      // only inside a prefers-reduced-motion: no-preference query).
+      (() => {
+        const toggle = document.getElementById('theme');
+        if (toggle) {
+          toggle.addEventListener('click', () => {
+            const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+            document.documentElement.dataset.theme = next;
+            try {
+              localStorage.setItem('theme', next);
+            } catch {
+              /* private mode */
+            }
+          });
+        }
+
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const items = document.querySelectorAll('.reveal');
+        if (items.length && !reduced && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry, i) => {
+                if (!entry.isIntersecting) return;
+                entry.target.style.transitionDelay = `${Math.min(i * 50, 240)}ms`;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.06 },
+          );
+          items.forEach((el) => io.observe(el));
+        } else {
+          items.forEach((el) => el.classList.add('is-in'));
+        }
+      })();
+    </script> </body> </html>

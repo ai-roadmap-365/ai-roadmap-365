@@ -1,0 +1,456 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 4: Binary and Data Representation: Bits, Bytes, and Numbers · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to convert numbers between decimal, binary, and hexadecimal by hand, add and negate binary numbers the way the hardware does, and explain overflow, floating point, and quantization well enough to size an AI model from its bit format."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-004-binary-and-data-representation-bits-bytes/"><meta property="og:title" content="Day 4: Binary and Data Representation: Bits, Bytes, and Numbers · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to convert numbers between decimal, binary, and hexadecimal by hand, add and negate binary numbers the way the hardware does, and explain overflow, floating point, and quantization well enough to size an AI model from its bit format."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-004-binary-and-data-representation-bits-bytes/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-004-binary-and-data-representation-bits-bytes.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 4: Binary and Data Representation: Bits, Bytes, and Numbers · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 4: Binary and Data Representation: Bits, Bytes, and Numbers · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to convert numbers between decimal, binary, and hexadecimal by hand, add and negate binary numbers the way the hardware does, and explain overflow, floating point, and quantization well enough to size an AI model from its bit format."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-004-binary-and-data-representation-bits-bytes.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+      // Dark is the default regardless of OS preference - this is a dark-first
+      // design. A visitor who picks light with the toggle keeps it. Applied
+      // before first paint so there is no flash of the wrong theme.
+      (() => {
+        let t;
+        try {
+          t = localStorage.getItem('theme');
+        } catch {
+          t = null;
+        }
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+      })();
+    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+<style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
+.starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+365 Days of AI
+</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+Labs
+</a> </header> <main id="main">  <article data-day="4" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>Inside the Machine</span>  › 
+Day 4 </p> <h1 data-astro-cid-whrtx2kk>Day 4: Binary and Data Representation: Bits, Bytes, and Numbers</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-004-binary-and-data-representation-bits-bytes.png" width="1200" height="630" alt="Day 4 of 365 — Binary and Data Representation: Bits, Bytes, and Numbers" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to convert numbers between decimal, binary, and hexadecimal by hand, add and negate binary numbers the way the hardware does, and explain overflow, floating point, and quantization well enough to size an AI model from its bit format.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Inside the Machine</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-004-binary-and-data-representation-bits-bytes" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-004-binary-and-data-representation-bits-bytes</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
+cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-004-binary-and-data-representation-bits-bytes</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/ai-roadmap-365/labs/day-004-binary-and-data-representation-bits-bytes" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Explain place value in bases 2, 10, and 16 and read any byte by summing the place values under its 1-bits</li><li data-astro-cid-whrtx2kk>Convert numbers between decimal, binary, and hexadecimal by hand using the subtraction, division, and bit-grouping methods</li><li data-astro-cid-whrtx2kk>Add two 8-bit binary numbers column by column, tracking carries, and verify the result in decimal</li><li data-astro-cid-whrtx2kk>Negate a number in two&#39;s complement (flip the bits, add 1) and explain why one adder circuit then handles both addition and subtraction</li><li data-astro-cid-whrtx2kk>Describe integer overflow, including the Ariane 5 flight 501 conversion failure and the Year 2038 problem, and state the range limits of 8-, 16-, and 32-bit integers</li><li data-astro-cid-whrtx2kk>Explain in plain language why 0.1 + 0.2 ≠ 0.3 in floating point and what the sign, exponent, and mantissa fields of a float32 each control</li><li data-astro-cid-whrtx2kk>Compute the memory footprint of a model from its parameter count and numeric format (float32, float16, bfloat16, int8), and distinguish KiB/MiB/GiB from kB/MB/GB</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Day 1 (How a Computer Works) — transistors, registers, and the adder circuit are assumed</li><li data-astro-cid-whrtx2kk>Comfort opening a terminal, as practiced in the Day 1 lab</li><li data-astro-cid-whrtx2kk>Primary-school column addition — the carry rule is reused unchanged in base 2</li></ul> <h2 id="why-this-matters">Why this matters</h2>
+<p>On Day 1 you learned that a computer is billions of on/off switches, and that everything it touches — numbers, text, model weights — is patterns of 1s and 0s. Today we stop waving at those patterns and learn to read them. This is not trivia. The single most practical skill in all of low-level computing is the ability to look at a number and know how it lives in memory: how many bits it occupies, what its largest value is, what happens one step past that value, and how much precision it carries.</p>
+<p>Every one of those questions shows up, constantly, in an AI career. When practitioners say a 7-billion-parameter model “needs 28 GB in float32 but only 7 GB in int8,” they are doing byte arithmetic you will be able to do by the end of this lesson. When a training run produces <code>NaN</code> losses, someone is about to reason about floating-point exponents. When a file is “1 TB” on the box but your operating system reports 931 GiB, nothing is broken — two different meanings of the same prefix are colliding, and you will know exactly why. And when software fails catastrophically because a number silently wrapped around — as it did aboard the Ariane 5 rocket in 1996, destroying about 370 million dollars of hardware in forty seconds — the root cause is the material of today’s lesson.</p>
+<p>There is also a quieter payoff. Hexadecimal numbers — <code>0x7ffee4c0</code>, <code>#1d4ed8</code>, a 64-character hash — decorate error messages, stack traces, color pickers, and security tools everywhere. After today they stop being noise and become the compact, readable notation for raw bits that engineers designed them to be. You will never again skim past a hex number as if it were static.</p>
+<h2 id="the-idea-in-plain-language">The idea in plain language</h2>
+<p>You already know how to read the number 3,507. Without thinking, you decompose it: 3 thousands, 5 hundreds, 0 tens, 7 ones. Each position is worth ten times the position to its right, because our everyday system is base 10 — almost certainly an accident of having ten fingers. The digits only mean something <em>because of where they sit</em>. That idea is called place value, and it is the whole secret of today.</p>
+<p>Binary is the same game with two digits instead of ten. Each position is worth <em>two</em> times the position to its right, so the place values run 1, 2, 4, 8, 16, 32, 64, 128 instead of 1, 10, 100, 1000. The binary number <code>101010</code> means one 32, no 16, one 8, no 4, one 2, no 1 — which adds to 42. Nothing else changes: the counting rules, the addition rules, even the “carry the one” you learned in primary school all work identically. Binary is not a different kind of mathematics; it is ordinary arithmetic written in the only alphabet a two-state switch can store.</p>
+<p>One binary digit is a bit. Eight bits make a byte, which can hold 256 different patterns — enough for one character of English text, one color channel of a pixel, or one small number. Groups of bytes make the “words” a processor handles at once — 32 or 64 bits on modern machines. And because long strings of bits are miserable for humans to read, engineers write them in base 16, hexadecimal, where each single digit stands for exactly four bits. Everything else in this lesson — negative numbers, fractions, overflow, the sizes of AI models — is built from these few moves.</p>
+<h2 id="historical-background">Historical background</h2>
+<p>Binary numbers are far older than computers. Gottfried Leibniz — the same Leibniz who built a mechanical calculator, met on Day 1 — published a paper in 1703, the <em>Explication de l’Arithmétique Binaire</em>, laying out arithmetic with 0 and 1 and marveling that all numbers could be built from nothing and one. He connected it to the broken and unbroken lines of the ancient Chinese <em>I Ching</em> hexagrams, which encode 64 symbols in what is recognizably a six-bit pattern. For two centuries binary remained a curiosity.</p>
+<p>The next thread came from logic. In 1854, George Boole published <em>The Laws of Thought</em>, showing that logical reasoning — AND, OR, NOT — could be carried out as algebra over two values, true and false. Boole was doing philosophy; he never saw a machine run his algebra. The threads fused in 1937, when a 21-year-old MIT graduate student named Claude Shannon wrote what is often called the most influential master’s thesis ever: he showed that electrical relay circuits could implement Boolean algebra, and therefore that circuits could calculate. Two-valued logic, two-valued arithmetic, two-state switches — suddenly they were the same subject.</p>
+<p>Builders followed quickly. Konrad Zuse’s Z3, completed in Berlin in 1941, was a working programmable calculator that used binary throughout, including a form of binary floating point — a design choice years ahead of its time. American wartime machines like ENIAC initially computed in decimal, but John von Neumann’s 1945 EDVAC report argued firmly for binary, and the stored-program machines that followed settled the question. Hardware for two states is smaller, cheaper, and far more reliable than hardware for ten.</p>
+<p>The vocabulary came later. The word <em>byte</em> was coined by Werner Buchholz in 1956 during the design of IBM’s Stretch computer (spelled with a <em>y</em> so it would not be misread as <em>bit</em>), and IBM’s System/360 family, announced in 1964, standardized the byte at eight bits — before that, machines used six-, seven-, and nine-bit chunks. Fractions took longest to tame: through the 1970s every manufacturer’s floating point behaved differently, and the same program could give different answers on different machines. The IEEE 754 standard of 1985, driven substantially by Berkeley’s William Kahan (who received the Turing Award for it), defined the binary formats essentially every processor uses today — including the float32 that stores neural network weights. One loose end lingered into the internet era: does “kilobyte” mean 1,000 or 1,024 bytes? In 1998 the International Electrotechnical Commission gave the powers of two their own names — kibibyte, mebibyte, gibibyte — a fix the world has adopted only partially, which is why your disk still seems to shrink between the store and your screen.</p>
+<h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
+<p>Binary is a positional numeral system with base 2: a way of <em>writing</em> numbers, exactly as decimal and Roman numerals are ways of writing numbers. The quantity forty-two is the same quantity whether written <code>42</code>, <code>101010</code>, <code>0x2A</code>, or <code>XLII</code>. What makes binary special is not mathematical — it is physical. A transistor is either conducting or not, a capacitor charged or not, a magnetic domain oriented one way or the other. Two-symbol notation is the only notation such devices can hold natively, and it tolerates noise superbly: a voltage that sags from 1.0 to 0.7 still reads unambiguously as “on,” whereas a ten-level scheme would have long since misread it.</p>
+<p>Equally important is what binary is not. It is not “the computer’s language” in the sense of something the machine understands — Day 1’s lesson stands: the machine understands nothing. It is also not inherently about numbers. A byte like <code>01000001</code> has no built-in meaning at all; it is the letter A if the software treats it as ASCII text, the number 65 if treated as an integer, a brightness level if it sits in an image, part of an instruction if the program counter points at it. Meaning lives entirely in conventions — the <em>encodings</em> — that people agreed on. Data representation is the study of those agreements.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Common misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”Binary numbers are a different kind of math.”</td><td>Same arithmetic, different notation; carries and place value work exactly as in decimal.</td></tr><tr><td>”A byte inherently stores a number.”</td><td>A byte is just 8 bits; number, letter, pixel, or instruction is decided by the encoding the software applies.</td></tr><tr><td>”Programmers read long binary strings fluently.”</td><td>Nobody does; that is precisely why hexadecimal exists — one hex digit per four bits.</td></tr><tr><td>”Computers store decimals like 0.1 exactly.”</td><td>0.1 is infinitely repeating in binary, so floats store a close approximation — the source of 0.1 + 0.2 ≠ 0.3.</td></tr><tr><td>”A kilobyte is definitely 1,024 bytes.”</td><td>Storage marketing uses 1,000 (kB); operating systems often use 1,024 (KiB); the mismatch is the ‘missing’ disk space.</td></tr></tbody></table>
+<h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
+<p>Each layer of today’s material exists because it solved a concrete engineering problem.</p>
+<p><em>Binary itself</em> solves reliability. Early designers knew decimal electronics were possible — ENIAC ran decimal — but distinguishing ten voltage levels in the presence of heat, noise, and aging components is fragile, while distinguishing two is robust. Fewer distinctions per component also means simpler circuits: the entire multiplication table of binary is 0×0=0, 0×1=0, 1×0=0, 1×1=1.</p>
+<p><em>Two’s complement</em> solves negative numbers. Circuits have no minus sign, and the obvious fix — reserve one bit to mean “negative” — creates ugly problems: two different zeros (+0 and −0) and an adder that must special-case subtraction. Two’s complement, standard in essentially every processor since the 1960s, represents −n as the bit pattern of 2ᵏ − n. The payoff is enormous: one adder circuit handles positive and negative numbers identically, with no special cases, and zero is unique. The cost is a strange-looking asymmetric range (−128 to +127 for a byte) and wrap-around behavior you must understand — we will work it by hand below.</p>
+<p><em>Hexadecimal</em> solves human readability. A 32-bit address written in binary is 32 characters of visual porridge; in hex it is 8 characters, and because 16 = 2⁴, the translation is a mechanical digit-by-digit substitution with no arithmetic at all. Hex is not a computer feature — processors never see it — it is an ergonomic notation for people who must read raw bits.</p>
+<p><em>Floating point</em> solves range. Science and engineering need 0.000000000067 and 602,000,000,000,000,000,000,000 in the same program, and no fixed-position scheme can hold both. Floating point stores numbers the way scientific notation does — a sign, some significant digits, and an exponent that slides the point — trading exactness for astonishing range. IEEE 754 then solved the <em>portability</em> of that trade, so every machine rounds the same way.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>Roll up your sleeves — this is a pencil-and-paper section, and the lab drills everything you see here.</p>
+<h3 id="place-value-in-three-bases">Place value in three bases</h3>
+<p>Decimal digit positions are worth powers of 10; binary positions, powers of 2; hexadecimal positions, powers of 16. Reading any of them is the same act: multiply each digit by its place value and add.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Position (from right)</th><th>3</th><th>2</th><th>1</th><th>0</th></tr></thead><tbody><tr><td>Base 10 place value</td><td>1000</td><td>100</td><td>10</td><td>1</td></tr><tr><td>Base 2 place value</td><td>8</td><td>4</td><td>2</td><td>1</td></tr><tr><td>Base 16 place value</td><td>4096</td><td>256</td><td>16</td><td>1</td></tr></tbody></table>
+<p>Hexadecimal needs sixteen digit symbols, so after 9 it borrows letters: A=10, B=11, C=12, D=13, E=14, F=15. The hex number <code>2A</code> is 2×16 + 10×1 = 42. By convention, hex is written with the prefix <code>0x</code> (so <code>0x2A</code>) so nobody mistakes it for decimal.</p>
+<p>Here is a full byte decoded. Memorize the eight place values — 128, 64, 32, 16, 8, 4, 2, 1 — the way you know your times tables; they are the working vocabulary of this whole field.</p>
+<p><img src="/ai-roadmap-365/_astro/binary-place-values.Dt5Cujef_iu4t0.svg" alt="Diagram: the eight place values of a byte decoding 10110101 into 181" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="360"></p>
+<h3 id="converting-between-bases-by-hand">Converting between bases, by hand</h3>
+<p><strong>Binary to decimal</strong> is the diagram above: add the place values under the 1s. <code>10110101</code> = 128 + 32 + 16 + 4 + 1 = 181.</p>
+<p><strong>Decimal to binary</strong> has two equally good methods. The <em>subtraction method</em>: repeatedly subtract the largest power of 2 that fits. The <em>division method</em>: divide by 2 repeatedly and read the remainders bottom-to-top. Both, worked for 42:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>Subtraction method for 42:            Division method for 42:</span></span>
+<span class="line"><span>  42 - 32 = 10   -&gt; bit 32 is 1         42 / 2 = 21  remainder 0</span></span>
+<span class="line"><span>  10 - 16?  no   -&gt; bit 16 is 0         21 / 2 = 10  remainder 1</span></span>
+<span class="line"><span>  10 -  8 =  2   -&gt; bit  8 is 1         10 / 2 =  5  remainder 0</span></span>
+<span class="line"><span>   2 -  4?  no   -&gt; bit  4 is 0          5 / 2 =  2  remainder 1</span></span>
+<span class="line"><span>   2 -  2 =  0   -&gt; bit  2 is 1          2 / 2 =  1  remainder 0</span></span>
+<span class="line"><span>   0 -  1?  no   -&gt; bit  1 is 0          1 / 2 =  0  remainder 1</span></span>
+<span class="line"><span>  read the bits: 101010                 read remainders upward: 101010</span></span></code></pre>
+<p><strong>Hex to binary and back</strong> is the easiest conversion in computing: each hex digit <em>is</em> four bits, independently of its neighbors. <code>0x2F</code> → <code>2</code> is <code>0010</code>, <code>F</code> is <code>1111</code> → <code>00101111</code>. In reverse, group bits in fours from the right: <code>10110100</code> → <code>1011</code> <code>0100</code> → <code>0xB4</code>. No arithmetic, just table lookup — which is exactly why programmers write bits in hex.</p>
+<h3 id="binary-addition-with-carries">Binary addition, with carries</h3>
+<p>Add column by column from the right, exactly as in decimal, except the columns overflow at two instead of ten: 1 + 1 = 10 in binary, so you write 0 and carry 1. Here is 93 + 38, which produces a satisfying chain of carries:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>  carries:  1 1 1 1 1</span></span>
+<span class="line"><span>             0 1 0 1 1 1 0 1   (93)</span></span>
+<span class="line"><span>           + 0 0 1 0 0 1 1 0   (38)</span></span>
+<span class="line"><span>           -----------------</span></span>
+<span class="line"><span>             1 0 0 0 0 0 1 1   (131)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>column 1:  1 + 0         = 1</span></span>
+<span class="line"><span>column 2:  0 + 1         = 1</span></span>
+<span class="line"><span>column 3:  1 + 1         = 10  -&gt; write 0, carry 1</span></span>
+<span class="line"><span>column 4:  1 + 0 + carry = 10  -&gt; write 0, carry 1</span></span>
+<span class="line"><span>column 5:  1 + 0 + carry = 10  -&gt; write 0, carry 1</span></span>
+<span class="line"><span>column 6:  0 + 1 + carry = 10  -&gt; write 0, carry 1</span></span>
+<span class="line"><span>column 7:  1 + 0 + carry = 10  -&gt; write 0, carry 1</span></span>
+<span class="line"><span>column 8:  0 + 0 + carry = 1</span></span>
+<span class="line"><span>Check: 128 + 2 + 1 = 131 ✓</span></span></code></pre>
+<p>This is precisely what the adder circuit from Day 1 does — one gate cluster per column, each passing its carry to the next.</p>
+<h3 id="negative-numbers-twos-complement">Negative numbers: two’s complement</h3>
+<p>To negate a number in two’s complement, flip every bit, then add 1. Worked for −44 in 8 bits:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>  44        = 0 0 1 0 1 1 0 0</span></span>
+<span class="line"><span>  flip bits = 1 1 0 1 0 0 1 1</span></span>
+<span class="line"><span>  add 1     = 1 1 0 1 0 1 0 0   &lt;- this pattern means -44</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Proof it works: add 44 and -44 and you must get zero.</span></span>
+<span class="line"><span>     0 0 1 0 1 1 0 0   (+44)</span></span>
+<span class="line"><span>   + 1 1 0 1 0 1 0 0   (-44)</span></span>
+<span class="line"><span>   -----------------</span></span>
+<span class="line"><span>   1 0 0 0 0 0 0 0 0</span></span>
+<span class="line"><span>   ^ the ninth bit does not exist in an 8-bit register — it falls off,</span></span>
+<span class="line"><span>     leaving 0 0 0 0 0 0 0 0 = 0 ✓</span></span></code></pre>
+<p>That “falling off the end” is the elegance of the scheme: ordinary addition automatically does subtraction. Reading a two’s-complement byte is simple once you know the trick: the leftmost bit’s place value is <em>negative</em> 128 instead of +128. So <code>11010100</code> = −128 + 64 + 16 + 4 = −44, and <code>11111111</code> = −128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = −1. An 8-bit signed byte therefore runs from −128 (<code>10000000</code>) to +127 (<code>01111111</code>) — asymmetric, because zero occupies one of the 256 patterns on the positive side. The leftmost bit is called the sign bit: 0 means the number is non-negative, 1 means negative.</p>
+<h3 id="overflow-when-the-register-runs-out">Overflow: when the register runs out</h3>
+<p>Every register has a fixed width, and arithmetic that exceeds it <em>wraps around</em> silently. Unsigned 8-bit: 255 + 1 = 0. Signed 8-bit: 127 + 1 = −128 — the pattern <code>01111111</code> plus one becomes <code>10000000</code>, and the sign bit flips. The hardware raises a status flag, but unless software checks it, the wrong number simply flows onward.</p>
+<p>The canonical cautionary tale is Ariane 5, flight 501, launched on 4 June 1996 — the maiden flight of the European Space Agency’s new heavy rocket. Its inertial reference system reused well-tested software from the smaller Ariane 4. Inside that software, an alignment routine converted a 64-bit floating-point value — a quantity called the horizontal bias, related to the rocket’s sideways velocity — into a 16-bit signed integer, which can hold at most 32,767. On Ariane 4’s gentler trajectory the value could never get that large, and the designers had, after analysis, deliberately left that particular conversion unprotected to save processor time. Ariane 5 climbed faster and drifted horizontally more quickly than its predecessor; about 37 seconds after ignition the horizontal bias exceeded what 16 bits could hold, the conversion raised an operand-error exception, and the error handling shut the inertial reference computer down — then shut down its identical backup, which had failed the same way milliseconds earlier, because both ran the same code on the same trajectory. The flight computer, now fed diagnostic bit patterns that it interpreted as flight data, swiveled the nozzles hard over; aerodynamic forces began tearing the vehicle apart, and it self-destructed, taking four scientific satellites with it. Total loss is commonly put around 370 million US dollars. The inquiry board’s report is a classic of engineering literature, and the lesson for you is compact: a number’s <em>representation</em> has edges, and software that never asks “does this value still fit?” is trusting that physics will stay polite. A subtler cousin haunts calendars: 32-bit signed counters of seconds since 1970 overflow on 19 January 2038 — a representation deadline the industry is still engineering its way out of.</p>
+<h3 id="fractions-floating-point-in-plain-language">Fractions: floating point in plain language</h3>
+<p>How do you store 3.14159 in bits? The scheme every modern machine uses is binary scientific notation. A float32 splits its 32 bits into three fields: 1 sign bit, 8 exponent bits, and 23 fraction bits (the fraction is traditionally called the mantissa or significand). The value is roughly <em>sign × 1.mantissa × 2^(exponent − 127)</em> — some significant digits, and an exponent saying where the binary point sits. The same 32 bits mean wildly different things depending on which convention you apply:</p>
+<p><img src="/ai-roadmap-365/_astro/float-vs-int.AroBrLoB_ZPPGBW.svg" alt="Diagram: the same 32 bits read as the integer 1078530011 and as the float 3.1415927" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="430"></p>
+<p>That bit pattern — <code>0x40490FDB</code> — is the number 1,078,530,011 if read as an int32, and π (well, 3.1415927, the closest float32 to π) if read under IEEE 754. Same bits; meaning by agreement. This is the deepest sentence in today’s lesson, so it bears repeating: <em>bits have no intrinsic meaning; representation is a contract.</em></p>
+<p>Floating point’s trade is exactness for range. A float32 spans magnitudes from about 10⁻³⁸ to 10³⁸ but carries only about 7 decimal digits of precision, and — crucially — it can only represent numbers whose fractional part is a sum of <em>halves, quarters, eighths…</em> Just as 1/3 has no finite decimal expansion, 1/10 has no finite binary expansion:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>0.1 in binary = 0.000110011001100110011...  (0011 repeats forever)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>so the machine stores the nearest representable value:</span></span>
+<span class="line"><span>  0.1  is stored as  0.10000000000000000555...</span></span>
+<span class="line"><span>  0.2  is stored as  0.20000000000000001110...</span></span>
+<span class="line"><span>  add them and round:  0.30000000000000004441...</span></span>
+<span class="line"><span>which is why, in nearly every language:  0.1 + 0.2  -&gt;  0.30000000000000004</span></span></code></pre>
+<p>Nothing is broken. The machine adds its two approximations flawlessly; the surprise exists only because we asked it a decimal question in a binary world. The practical rules follow directly: never compare floats with exact equality (test “closer than some tolerance” instead), and never use binary floats for money (use integer cents, or decimal types built for the purpose).</p>
+<h3 id="bits-and-model-weights-what-precision-means-in-practice">Bits and model weights: what precision means in practice</h3>
+<p>Now connect this to the machine-learning world you are heading toward. A neural network is, at rest, a gigantic array of numbers, and <em>someone must choose their representation</em>. The industry’s standard choices:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Format</th><th>Bits</th><th>Layout (sign/exponent/fraction)</th><th>Bytes per number</th><th>Character</th></tr></thead><tbody><tr><td>float32</td><td>32</td><td>1 / 8 / 23</td><td>4</td><td>Full precision; training default for years</td></tr><tr><td>float16</td><td>16</td><td>1 / 5 / 10</td><td>2</td><td>Half the memory; small exponent overflows easily</td></tr><tr><td>bfloat16</td><td>16</td><td>1 / 8 / 7</td><td>2</td><td>Keeps float32’s range, drops precision; built for machine learning</td></tr><tr><td>int8</td><td>8</td><td>two’s complement integer</td><td>1</td><td>Weights mapped onto 256 levels via a scale factor</td></tr></tbody></table>
+<p>Read the bfloat16 row through today’s lens and it explains itself: bfloat16 keeps float32’s <em>eight exponent bits</em> — the field that controls range, whose exhaustion causes overflow — and sacrifices mantissa bits, the ones that control fine precision. Neural networks, it turns out, tolerate coarse values far better than they tolerate overflow. Quantization to int8 goes further: it maps each weight onto one of 256 integer levels (a two’s-complement byte, plus a stored scale factor for converting back), literally throwing away all but one byte per number. The arithmetic is the same byte arithmetic you can now do: 7 billion parameters × 4 bytes = 28 GB in float32; × 2 bytes = 14 GB in half precision; × 1 byte = 7 GB in int8. Whether a model fits on your hardware is a multiplication problem, and you now own every term in it.</p>
+<p>One last unit trap. Prefixes like kilo/mega/giga officially mean powers of 1,000, and drive manufacturers use them that way: a “1 TB” disk holds 10¹² bytes. Memory and many operating systems count in powers of 1,024: 1 KiB = 1,024 bytes, 1 MiB = 1,024², 1 GiB = 1,024³. Since 10¹² ÷ 1,024³ ≈ 931, your “1 TB” drive honestly reports about 931 GiB — a 7% gap at the tera scale that is pure units, not missing hardware. When precision matters, write KiB/MiB/GiB for the binary units and let kB/MB/GB mean powers of ten.</p>
+<h2 id="an-everyday-analogy">An everyday analogy</h2>
+<p>Picture a car’s mechanical odometer with just three decimal digits — it can show 000 through 999. That little window is a 3-digit register, and it teaches every hard idea of this lesson.</p>
+<p>Drive one mile past 999 and the odometer reads 000. Nothing warned you; the machinery happily rolled over. That is overflow — Ariane 5’s 16-bit window was showing its version of 999 while the rocket’s real “mileage” kept climbing.</p>
+<p>Now the stranger trick. Suppose the odometer reads 000 and you could roll it <em>backward</em> one mile: it would show 999. So within this three-digit world, 999 behaves exactly like −1: add it to anything and you get one less (007 + 999 rolls around to 006). Likewise 998 acts like −2, and 997 like −3. Congratulations — you have discovered two’s complement, in base 10. Computers do precisely this in base 2: they nominate the top half of the patterns to stand for negatives, and then a single “roll forward” mechanism does both addition and subtraction. There is no minus sign inside the register, just as there is none inside the odometer — only the <em>convention</em> that 999 shall mean −1.</p>
+<p>The analogy even covers hexadecimal. An odometer that showed miles in groups — one dial for thousands, one for the rest — would be easier to read at a glance than six spinning digits. Hex is that grouping for bits: four binary dials condensed into one sixteen-position dial, purely for the human at the dashboard.</p>
+<h2 id="examples-in-practice">Examples in practice</h2>
+<p>Start with worked micro-examples you can verify by hand. The ASCII agreement assigns capital A the number 65 = <code>01000001</code> = <code>0x41</code>; lowercase a is 97 = <code>0x61</code> — exactly one bit different (the 32 bit), which is why case conversion is blindingly fast. The web color <code>#1d4ed8</code> — this course’s accent blue — is three bytes: red <code>0x1d</code> = 29, green <code>0x4e</code> = 78, blue <code>0xd8</code> = 216, each channel one byte from 0 to 255. A SHA-256 hash prints as 64 hex characters because 64 × 4 bits = 256 bits. A memory address like <code>0x7ffee4c0</code> in a crash log is just a byte number written compactly — you can now read all of these cold.</p>
+<p>Overflow stories are everywhere once you know to look. In December 2014, the view counter on the music video “Gangnam Style” approached 2,147,483,647 views — the largest 32-bit signed integer, <code>01111111 11111111 11111111 11111111</code> — and YouTube publicly noted it had moved the counter to 64 bits. The venerable game Pac-Man breaks on level 256 because the level number lives in one byte: an internal calculation overflows and garbles half the screen. The Year 2038 problem sits in the same family, and so did the Ariane disaster. Floating point supplies its own genre: type <code>0.1 + 0.2</code> into the console of nearly any language and read the trailing 4; financial systems dodge the entire issue by counting integer cents.</p>
+<p>And the representation-is-a-contract principle runs the modern AI economy. Model files you will download later in this course are described as “fp16 weights” or “8-bit quantized” — phrases that fix the bytes-per-parameter and thus whether the file fits your GPU. One more contract hides below even these: when a multi-byte number is stored, machines must agree which byte comes first in memory — least-significant-byte first (“little-endian,” used by x86 and most ARM systems) or most-significant first (“big-endian,” traditional in network protocols). Endianness bugs appear exactly when data crosses between systems that assumed different orders — one more reminder that in computing, meaning never lives in the bits alone.</p>
+<h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
+<h3 id="security">Security</h3>
+<p>Integer overflow is not just a reliability bug; it is one of the classic gateways to exploitation. A program that computes <code>length + header_size</code> for a memory allocation can be fed a length so large the sum wraps around to a tiny number — the program allocates a small buffer, then writes the attacker’s enormous payload into it, overrunning memory. Overflow-driven buffer bugs have ranked for decades among the most dangerous software weaknesses, and languages and compilers now offer checked arithmetic precisely because humans keep forgetting that registers have edges. Hex literacy is a defensive skill, too: security advisories, exploit write-ups, and packet dumps are written in it.</p>
+<h3 id="privacy">Privacy</h3>
+<p>Everything sensitive is bits, and bits are promiscuous: they survive in places their owners forget. The GB/GiB story has a privacy cousin — “deleting” data usually edits the encoding’s bookkeeping, not the bits themselves, as Day 1 noted. Representation also <em>leaks</em>: file sizes, message lengths, and even the timing of bit patterns can reveal content without decoding it (encrypted traffic analysis works this way). And because text encodings map numbers to characters, subtle representation tricks — look-alike characters with different code numbers — power phishing domains. Understanding that data is numbers under agreements is the first step in reasoning about where those numbers actually go.</p>
+<h3 id="performance">Performance</h3>
+<p>Fewer bits move faster. Day 1 established that data movement, not arithmetic, bottlenecks modern machines; today gives that teeth. Halving numeric width (float32 → float16/bfloat16) halves the bytes streaming through the memory hierarchy, roughly doubling the useful bandwidth — the entire logic of mixed-precision training and quantized inference. Processors also do binary tricks constantly: shifting bits left by one <em>is</em> multiplication by two, and compilers quietly rewrite multiplications by powers of two into shifts. None of this requires you to write bit tricks yourself; it requires you to understand why the people who chose your data types made the choices they did.</p>
+<h3 id="scalability">Scalability</h3>
+<p>Representation limits are scale deadlines. A 32-bit counter feels infinite at a thousand events per day and overflows in weeks at a hundred thousand per second; system designers now reach for 64 bits by default for identifiers, timestamps, and counters (the Gangnam Style fix, applied preemptively). Floating point has a subtler scale trap: adding a tiny number to a huge one can leave the huge one unchanged (the small value falls below the mantissa’s resolution), so summing a billion small values naively drifts — numerical software orders and compensates its arithmetic to survive scale. The 2038 deadline shows what postponing a representation decision costs: the fix is conceptually trivial and operationally global.</p>
+<h3 id="cost">Cost</h3>
+<p>Bytes are billable. Cloud storage, memory, and network transfer are priced per byte, so representation choices are line items: storing a billion timestamps as 8-byte integers versus 30-byte text strings is nearly a 4× storage bill difference for identical information. In AI the effect dominates hardware purchasing — the difference between a model in float32 and int8 is literally a factor of four in memory, which can be the difference between renting a datacenter GPU and running on the laptop you already own. Marketing units matter at invoice time too: a petabyte contract specified in powers of ten delivers about 11% fewer bytes than one specified in powers of two — the same 1,000-vs-1,024 gap, compounded five times. Reading the units is free; not reading them is not.</p>
+<h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
+<p>As with Day 1, “alternatives” here means other excellent routes into the same material, at different depths and formats.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Resource</th><th>Type</th><th>What it offers</th><th>Cost</th></tr></thead><tbody><tr><td>The Day 4 lab in this course</td><td>Free</td><td>Conversion drills by hand plus a shell toolkit you complete yourself</td><td>Free</td></tr><tr><td>Crash Course Computer Science, episodes 4 and 5 (PBS Digital Studios)</td><td>Free video</td><td>Binary, hexadecimal, and how the ALU adds — visual and fast</td><td>Free</td></tr><tr><td>Wikipedia: “Binary number”, “Two’s complement”, “IEEE 754”</td><td>Free reference</td><td>Rigorous, well-cited treatments of exactly today’s three pillars</td><td>Free</td></tr><tr><td>”Code” by Charles Petzold (2nd ed.), middle chapters</td><td>Book (commercial)</td><td>The gentlest deep telling of binary, bytes, and codes in print</td><td>Book purchase</td></tr><tr><td>From Nand to Tetris (Schocken &amp; Nisan)</td><td>Open course</td><td>Build the adder and ALU that execute this lesson’s arithmetic</td><td>Free materials</td></tr><tr><td>A programmer’s calculator (macOS Calculator’s Programmer view, or <code>bc</code>)</td><td>Built-in software</td><td>Instant dec/hex/bin conversion for checking your hand work</td><td>Free</td></tr></tbody></table>
+<p>If you read only one thing beyond this lesson, make it Petzold’s chapters on binary codes — and check every hand conversion you ever do against a programmer’s calculator until the two of you always agree.</p>
+<h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>Bit</td><td>Byte</td><td>A bit is one 0/1; a byte is 8 bits — the smallest unit most machines address in memory</td></tr><tr><td>Binary</td><td>Hexadecimal</td><td>Both describe the same bits; hex packs four bits per digit purely for human readability</td></tr><tr><td>Unsigned integer</td><td>Two’s complement integer</td><td>Same adder circuit; the convention reassigns the top bit’s place value to −2ᵏ⁻¹, buying negatives at the cost of half the positive range</td></tr><tr><td>Integer</td><td>Floating point</td><td>Integers are exact within their range; floats trade exactness for enormous range via an explicit exponent field</td></tr><tr><td>float16</td><td>bfloat16</td><td>Both 16 bits; float16 spends them on precision (10-bit fraction), bfloat16 on range (float32’s 8-bit exponent) — range wins for machine learning</td></tr><tr><td>kB / MB / GB</td><td>KiB / MiB / GiB</td><td>Powers of 1,000 (marketing, disks, networks) versus powers of 1,024 (memory, many OS displays); a 7% gap at tera scale</td></tr></tbody></table>
+<h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
+<p>Reach for today’s skills whenever a number crosses a boundary — that is where representation bites. Choosing a column type in a database, parsing a binary file, reading a hex dump or crash address, sizing a model for a GPU, debugging a negative number that should have been huge (a classic two’s-complement misread), or auditing arithmetic near a type’s maximum: these are hand-conversion and bit-layout moments, and doing a quick <code>255 + 1 = ?</code> sanity check in your head is faster than any tool. Reach for it, too, when reading spec sheets and invoices, where the kB/KiB distinction quietly moves real money, and whenever floating-point equality or accumulating error could corrupt results — tests for “close enough,” money in integer cents.</p>
+<p>Do not, however, become the person who writes cryptic bit tricks in application code. High-level languages, compilers, and libraries handle representation superbly almost all the time, and clarity beats cleverness: <code>x * 8</code> says what it means, and the compiler will emit the shift for you. Do not hand-roll decimal-money arithmetic with floats to “keep it simple,” and do not reinvent quantization schemes that battle-tested libraries already implement. The professional posture mirrors Day 1’s: work at the highest layer that solves the problem, but <em>read</em> the layer below fluently — because when a number is wrong at a boundary, the explanation is almost always in the bits, and now the bits are yours to read.</p>
+<h2 id="knowledge-check">Knowledge check</h2>
+<p>Try these from memory before looking back:</p>
+<ol>
+<li>Convert 77 to binary using either the subtraction or division method, showing each step, then convert your answer to hexadecimal by grouping bits.</li>
+<li>Add the bytes <code>00110101</code> and <code>01001011</code> by hand, tracking every carry, and check your work in decimal.</li>
+<li>The byte <code>11101100</code> is a two’s-complement signed integer. What decimal number is it? Explain the role the leftmost bit played in your answer.</li>
+<li>In one paragraph, retell the Ariane 5 failure: what representation was converted to what, why the value went out of range on Ariane 5 but never on Ariane 4, and why the backup computer did not save the flight.</li>
+<li>A colleague stores prices as floats and cannot reproduce a customer’s total. Explain, using 0.1’s binary expansion, what is happening and what representation to use instead.</li>
+<li>A “2 TB” external drive shows up as roughly 1.8 TiB. Show the arithmetic proving the drive is not defective.</li>
+</ol>
+<h2 id="hands-on-exercise">Hands-on exercise</h2>
+<p>Time to make the machine confirm your hand work. Your shell already contains two perfectly good base-conversion tools: <code>printf</code>, which formats numbers between decimal and hex, and <code>bc</code>, an arbitrary-precision calculator that speaks any base from 2 to 16. The Day 4 lab builds a full toolkit from these; here you will run the core moves. Open a terminal (macOS, Linux, or WSL — identical commands) and type each line, pressing Return after each.</p>
+<p>Decimal to hexadecimal and back with <code>printf</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">printf</span><span style="color:#9ECBFF"> &#39;%X\n&#39;</span><span style="color:#79B8FF"> 42</span></span>
+<span class="line"><span style="color:#79B8FF">printf</span><span style="color:#9ECBFF"> &#39;%d\n&#39;</span><span style="color:#79B8FF"> 0xFF</span></span></code></pre>
+<p>The first prints <code>2A</code> — the <code>%X</code> format says “render this value in hex.” The second prints <code>255</code>, because <code>printf</code> understands <code>0x</code>-prefixed hex input, and <code>%d</code> says “render in decimal.”</p>
+<p>Decimal to binary and back with <code>bc</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &#39;obase=2; 42&#39;</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> bc</span></span>
+<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &#39;ibase=2; 101010&#39;</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> bc</span></span></code></pre>
+<p><code>obase</code> sets the output base, <code>ibase</code> the input base. The first prints <code>101010</code>; the second prints <code>42</code>. For hex input to <code>bc</code>, set <code>obase</code> first and use uppercase digits — <code>echo &#39;obase=2; ibase=16; FF&#39; | bc</code> prints <code>11111111</code>.</p>
+<p>Finally, inspect a character’s byte — the full chain from symbol to bits:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">printf</span><span style="color:#9ECBFF"> &#39;%d\n&#39;</span><span style="color:#9ECBFF"> &quot;&#39;A&quot;</span></span>
+<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &#39;obase=2; 65&#39;</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> bc</span></span></code></pre>
+<p>The strange-looking <code>&quot;&#39;A&quot;</code> is a POSIX printf feature: a leading apostrophe means “give me the character’s code number.” You get <code>65</code>, then <code>1000001</code> — pad it to <code>01000001</code> and you are looking at the byte your machine stores for the letter A.</p>
+<h3 id="expected-output">Expected output</h3>
+<p>A real run, exactly as the terminal shows it:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ printf &#39;%X\n&#39; 42</span></span>
+<span class="line"><span>2A</span></span>
+<span class="line"><span>$ printf &#39;%d\n&#39; 0xFF</span></span>
+<span class="line"><span>255</span></span>
+<span class="line"><span>$ echo &#39;obase=2; 42&#39; | bc</span></span>
+<span class="line"><span>101010</span></span>
+<span class="line"><span>$ echo &#39;ibase=2; 101010&#39; | bc</span></span>
+<span class="line"><span>42</span></span>
+<span class="line"><span>$ printf &#39;%d\n&#39; &quot;&#39;A&quot;</span></span>
+<span class="line"><span>65</span></span>
+<span class="line"><span>$ echo &#39;obase=2; 65&#39; | bc</span></span>
+<span class="line"><span>1000001</span></span></code></pre>
+<p>Note that <code>bc</code> prints <code>1000001</code> (7 digits), not <code>01000001</code> — like all calculators it drops leading zeros, which carry no numeric value. When you want fixed-width bytes, you pad: the lab’s toolkit does this with <code>printf &#39;%08d&#39;</code>.</p>
+<h3 id="validate-your-work">Validate your work</h3>
+<p>You are done when you can check every box:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> <code>printf &#39;%X\n&#39; 42</code> printed <code>2A</code>, and you can show by hand why 42 = 2×16 + 10.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>printf &#39;%d\n&#39; 0xFF</code> printed <code>255</code>, and you can show by hand why <code>0xFF</code> = 15×16 + 15.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Both <code>bc</code> conversions printed <code>101010</code> and <code>42</code>, matching the worked example in “How it works.”</li>
+<li class="task-list-item"><input type="checkbox" disabled/> The character inspection printed <code>65</code>, and you can write A’s full byte, <code>01000001</code>, from the <code>bc</code> output.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You converted one number of your own choosing (try your age) to binary by hand and <code>bc</code> agreed with you.</li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><strong><code>bc: command not found</code>.</strong> <code>bc</code> ships with macOS and most Linux distributions, but some minimal server or container images omit it. Install it with your package manager (Debian/Ubuntu: <code>sudo apt install bc</code>; Fedora: <code>sudo dnf install bc</code>); the lab’s requirements file covers this.</li>
+<li><strong><code>bc</code> prints the wrong number for hex input.</strong> Two classic causes: you set <code>ibase=16</code> <em>before</em> <code>obase</code>, so the <code>2</code> of <code>obase=2</code> was itself read in the new base — always set <code>obase</code> first; or you typed lowercase <code>ff</code> — <code>bc</code> requires uppercase hex digits.</li>
+<li><strong><code>printf &#39;%d\n&#39; &quot;&#39;A&quot;</code> prints 0 or an error.</strong> The apostrophe must sit <em>inside</em> the quotes, directly before the character: <code>&quot;&#39;A&quot;</code>. In PowerShell this feature does not exist — use WSL, or <code>[byte][char]&#39;A&#39;</code> as the PowerShell equivalent.</li>
+<li><strong>Numbers echo back unchanged.</strong> If <code>echo &#39;obase=2; 42&#39; | bc</code> prints <code>42</code>, the quotes were probably dropped and the shell mangled the semicolon; keep the whole expression inside single quotes.</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<ul>
+<li><strong>Reading bit strings left-to-right as place value 1, 2, 4, 8…</strong> Place values grow from the <em>right</em>, exactly as in decimal (the ones column is rightmost). <code>1000001</code> is 65, not 65 backwards; misreading direction is the single most common drill error.</li>
+<li><strong>Forgetting that <code>bc</code> drops leading zeros.</strong> A byte is always 8 bits in this course’s drills; re-pad <code>bc</code>’s output before comparing with a hand answer.</li>
+<li><strong>Mixing bases mid-problem.</strong> Writing “42” while thinking “the bit pattern 42” causes silent nonsense; say the base out loud (forty-two decimal; one-zero-one-zero-one-zero binary) until it is habit.</li>
+<li><strong>Trusting the tool over the hand method too early.</strong> The point of today is that <em>you</em> can do the conversion; use <code>printf</code> and <code>bc</code> to check your work, not to replace it — the drills in the lab are done on paper first.</li>
+</ul>
+<h2 id="practice-assignment">Practice assignment</h2>
+<p>Open <code>starter/conversion-drills.md</code> in the Day 4 lab directory. It contains twelve drills: four decimal-to-binary conversions, three binary-to-decimal, two hex-to-binary, two eight-bit additions with carries, and one two’s-complement negation — each with working space. Complete all twelve <em>by hand</em>, showing your steps, then verify every answer using the <code>printf</code>/<code>bc</code> commands from the hands-on exercise (the drill sheet tells you which command checks which drill). Finish by completing the four exercises in <code>starter/binary_toolkit.sh</code> so that the lab’s test suite passes, and keep your drill sheet — Day 5 builds directly on these bytes when we turn them into text, images, and sound.</p>
+<h2 id="extension-challenge">Extension challenge</h2>
+<p>Three probes, in rising order of depth. First, quantization arithmetic: take a model size you have heard of — say 70 billion parameters — and compute its memory footprint in GiB at float32, bfloat16, int8, and 4 bits per weight, remembering to divide bytes by 1,024³. Which versions fit in the RAM you measured on Day 1? Second, precision archaeology: using <code>printf &#39;%.20f\n&#39; 0.1</code> (and the same for 0.2 and for the sum typed as 0.3), print what your machine <em>actually</em> stores for each, and identify which decimal digit is the first to go wrong. Third, the deep one: bfloat16 was created because float16’s 5-bit exponent caps its largest value near 65,504, while gradients and activations in training routinely exceed that. Write a short paragraph explaining, purely in terms of exponent bits and place value, why adding three exponent bits (5 → 8) multiplies the representable range so dramatically while costing only three bits of mantissa — and why that trade is exactly the one a noisy statistical process like learning can afford. You will meet this trade again, with money on the table, the first time you load a model onto a GPU.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. What decimal number does the binary pattern 101010 represent? </strong> </p> <ol type="A"> <li>52, because the digits sum with place values 16, 8, 4</li><li>20, because there are two 1-bits and a trailing zero</li><li>42, because the 1-bits sit on the place values 32, 8, and 2</li><li>84, because each 1-bit doubles the previous total</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> 42, because the 1-bits sit on the place values 32, 8, and 2 </p> <p>Binary place values run 1, 2, 4, 8, 16, 32 from the right; 101010 has 1-bits under 32, 8, and 2, and 32 + 8 + 2 = 42.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. Why do engineers write bit patterns in hexadecimal? </strong> </p> <ol type="A"> <li>Each hex digit corresponds to exactly four bits, so long binary strings compress into a short, mechanically translatable form for humans</li><li>Processors compute faster on hexadecimal numbers than on binary ones</li><li>Hexadecimal can represent negative numbers while binary cannot</li><li>Hexadecimal avoids the rounding errors that binary introduces</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> Each hex digit corresponds to exactly four bits, so long binary strings compress into a short, mechanically translatable form for humans </p> <p>Hex is purely a human convenience: because 16 = 2⁴, each hex digit stands for one four-bit group, so conversion is table lookup with no arithmetic. The processor itself only ever sees bits.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. In 8-bit two&#39;s complement, how do you form the representation of −44 from 44 (00101100)? </strong> </p> <ol type="A"> <li>Set the leftmost bit to 1, giving 10101100</li><li>Reverse the order of the bits, giving 00110100</li><li>Subtract the pattern from 11111111, giving 11010011</li><li>Flip every bit and add 1, giving 11010100</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> Flip every bit and add 1, giving 11010100 </p> <p>Two&#39;s complement negation is invert-then-increment: 00101100 flips to 11010011, and adding 1 gives 11010100. Adding that to 00101100 produces a ninth bit that falls off the register, leaving exactly zero.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. What actually went wrong in the software aboard Ariane 5 flight 501 in 1996? </strong> </p> <ol type="A"> <li>A floating-point division by zero crashed the main flight computer</li><li>A 64-bit floating-point value was converted to a 16-bit signed integer it could not fit, raising an unhandled exception that shut down both inertial reference computers</li><li>Cosmic radiation flipped a bit in the guidance program&#39;s memory</li><li>The engines were commanded in imperial units while guidance computed in metric</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> A 64-bit floating-point value was converted to a 16-bit signed integer it could not fit, raising an unhandled exception that shut down both inertial reference computers </p> <p>Alignment code reused from Ariane 4 converted the horizontal-bias value to a 16-bit signed integer. Ariane 5&#39;s faster, flatter ascent pushed the value past 32,767 about 37 seconds after ignition; the operand-error exception halted both identical inertial units, and the vehicle broke up and self-destructed.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. Why does 0.1 + 0.2 print as 0.30000000000000004 in most programming languages? </strong> </p> <ol type="A"> <li>The addition circuit in the ALU has a known rounding defect</li><li>One tenth has no finite binary expansion, so the machine adds two close approximations and the rounded sum differs microscopically from 0.3</li><li>The decimal point character is being misread as a thousands separator</li><li>Floating-point numbers can only store values greater than 1 exactly</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> One tenth has no finite binary expansion, so the machine adds two close approximations and the rounded sum differs microscopically from 0.3 </p> <p>0.1 in binary is 0.000110011001100… repeating forever, just as 1/3 repeats in decimal. Floats store the nearest representable values, and the sum of those approximations rounds to a number a hair above 0.3. The hardware adds flawlessly; the inputs were never exactly 0.1 and 0.2.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. A 7-billion-parameter model is quantized from float32 to int8. What happens to its memory footprint for weights? </strong> </p> <ol type="A"> <li>It drops from about 28 GB to about 7 GB, because each weight shrinks from 4 bytes to 1 byte</li><li>It halves from about 28 GB to about 14 GB, because int8 stores two weights per byte</li><li>It stays the same, because quantization only changes computation speed, not storage</li><li>It drops to about 875 MB, because int8 uses one bit per weight</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> It drops from about 28 GB to about 7 GB, because each weight shrinks from 4 bytes to 1 byte </p> <p>Quantization to int8 stores each weight in a single two&#39;s-complement byte (with a scale factor for reconstruction) instead of four bytes: 7 billion × 4 bytes ≈ 28 GB becomes 7 billion × 1 byte ≈ 7 GB.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. Both float16 and bfloat16 use 16 bits. What is the key difference, and why does machine learning generally prefer bfloat16? </strong> </p> <ol type="A"> <li>bfloat16 stores two numbers per 16 bits, doubling effective memory capacity</li><li>float16 is an integer format while bfloat16 is a floating-point format</li><li>bfloat16 keeps float32&#39;s 8 exponent bits, preserving its range at the cost of mantissa precision — and training tolerates coarse values far better than overflow</li><li>bfloat16 rounds decimal fractions like 0.1 exactly, avoiding accumulation error</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> bfloat16 keeps float32&#39;s 8 exponent bits, preserving its range at the cost of mantissa precision — and training tolerates coarse values far better than overflow </p> <p>float16 spends its bits on precision (10-bit mantissa, 5-bit exponent); bfloat16 spends them on range (7-bit mantissa, 8-bit exponent, matching float32). Gradients and activations routinely exceed float16&#39;s ~65,504 ceiling, so keeping the exponent field is the safer trade for learning.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. A drive sold as &quot;1 TB&quot; shows about 931 GiB in the operating system. Why? </strong> </p> <ol type="A"> <li>The filesystem permanently reserves 7% of every drive for error correction</li><li>The drive shipped partly full of preinstalled recovery software</li><li>The operating system is misreading the drive&#39;s firmware and the true size is 1,024 GiB</li><li>The manufacturer counts in powers of 1,000 (1 TB = 10¹² bytes) while the OS counts in powers of 1,024, and 10¹² ÷ 1,024³ ≈ 931</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> The manufacturer counts in powers of 1,000 (1 TB = 10¹² bytes) while the OS counts in powers of 1,024, and 10¹² ÷ 1,024³ ≈ 931 </p> <p>Both numbers describe the same bytes. Marketing prefixes are decimal (kilo = 1,000), while KiB/MiB/GiB are binary (kibi = 1,024); the gap compounds to about 7% at the tera scale. No storage is missing.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>bit</strong> </dt> <dd data-astro-cid-whrtx2kk>A single binary digit, 0 or 1 — the smallest unit of information, physically realized as one two-state switch.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>byte</strong> </dt> <dd data-astro-cid-whrtx2kk>A group of 8 bits, able to hold 256 distinct patterns; the smallest unit of memory most machines address, standardized at 8 bits by IBM&#39;s System/360 in 1964.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>nibble</strong> </dt> <dd data-astro-cid-whrtx2kk>Half a byte — 4 bits — which is exactly the amount of information one hexadecimal digit represents.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>word</strong> </dt> <dd data-astro-cid-whrtx2kk>The natural chunk of bits a processor handles in one operation, typically 32 or 64 bits on modern machines.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>place value</strong> </dt> <dd data-astro-cid-whrtx2kk>The worth of a digit position in a positional numeral system: powers of 10 in decimal, powers of 2 in binary, powers of 16 in hexadecimal.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>hexadecimal</strong> </dt> <dd data-astro-cid-whrtx2kk>Base-16 notation using digits 0–9 and A–F, written with the 0x prefix; each digit encodes exactly four bits, making it the standard human-readable shorthand for raw binary.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>two&#39;s complement</strong> </dt> <dd data-astro-cid-whrtx2kk>The standard representation of signed integers, in which −n is the bit pattern of 2ᵏ − n (flip the bits, add 1); it gives one unique zero and lets a single adder circuit perform both addition and subtraction.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>sign bit</strong> </dt> <dd data-astro-cid-whrtx2kk>The leftmost bit of a signed integer; in two&#39;s complement it carries a negative place value (−128 in a byte), so a 1 there makes the whole number negative.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>overflow</strong> </dt> <dd data-astro-cid-whrtx2kk>What happens when an arithmetic result exceeds what a fixed-width register can hold: the value silently wraps around, as when an unsigned byte computes 255 + 1 = 0.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>floating point</strong> </dt> <dd data-astro-cid-whrtx2kk>Binary scientific notation for storing fractional numbers as a sign, a mantissa, and an exponent, standardized by IEEE 754 in 1985; it trades exactness for enormous range.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>mantissa</strong> </dt> <dd data-astro-cid-whrtx2kk>The significant-digits field of a floating-point number (also called the significand or fraction), which controls precision; float32 gives it 23 bits.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>exponent</strong> </dt> <dd data-astro-cid-whrtx2kk>The field of a floating-point number that scales the mantissa by a power of two, controlling range; when it cannot hold a needed power, the number overflows.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>quantization</strong> </dt> <dd data-astro-cid-whrtx2kk>Reducing the bits used per number — for example mapping float32 model weights onto 256 int8 levels plus a scale factor — shrinking memory and data movement at a small cost in precision.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>endianness</strong> </dt> <dd data-astro-cid-whrtx2kk>The convention for which byte of a multi-byte number is stored first in memory: least-significant first (little-endian, x86 and most ARM) or most-significant first (big-endian, traditional in network protocols).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>gibibyte</strong> </dt> <dd data-astro-cid-whrtx2kk>The binary giga-unit, GiB = 1,024³ bytes, defined by the IEC in 1998 to end the ambiguity with the decimal gigabyte (GB = 10⁹ bytes) that makes a &quot;1 TB&quot; drive report about 931 GiB.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Binary_number" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Binary number</a> — Wikipedia (accessed 2026-07-12) — Place value, base conversion methods, binary arithmetic, and the Leibniz history. </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Two%27s_complement" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Two&#39;s complement</a> — Wikipedia (accessed 2026-07-12) — The invert-and-add-one construction, the asymmetric range, and why one adder serves both signs. </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/IEEE_754" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>IEEE 754</a> — Wikipedia (accessed 2026-07-12) — The 1985 floating-point standard: field layouts of the binary formats and rounding behavior. </li><li data-astro-cid-whrtx2kk> <a href="https://www.charlespetzold.com/code/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Code: The Hidden Language of Computer Hardware and Software (2nd ed.)</a> — Charles Petzold / Microsoft Press (accessed 2026-07-12) — The gentlest thorough treatment of binary codes, bytes, and hexadecimal in print. </li><li data-astro-cid-whrtx2kk> <a href="https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Crash Course Computer Science</a> — PBS Digital Studios (accessed 2026-07-12) — Episode 4 covers binary and data representation; episode 5 builds the ALU that adds it. </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="4" data-astro-cid-whrtx2kk>
+Mark Day 4 as read
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+      surfaces for someone searching for one — it costs you a click and it is genuinely how people
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+★ Star on GitHub
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-003-memory-hierarchy-registers-ram-and-storage" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 3</span> <span class="pn__title" data-astro-cid-oerjsknp>Memory Hierarchy: Registers, RAM, and Storage</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-005-text-images-and-sound-as-data" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 5 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Text, Images, and Sound as Data</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+      // Progressive enhancement only: the theme falls back to dark and every
+      // .reveal element is visible by default (the hidden start state exists
+      // only inside a prefers-reduced-motion: no-preference query).
+      (() => {
+        const toggle = document.getElementById('theme');
+        if (toggle) {
+          toggle.addEventListener('click', () => {
+            const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+            document.documentElement.dataset.theme = next;
+            try {
+              localStorage.setItem('theme', next);
+            } catch {
+              /* private mode */
+            }
+          });
+        }
+
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const items = document.querySelectorAll('.reveal');
+        if (items.length && !reduced && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry, i) => {
+                if (!entry.isIntersecting) return;
+                entry.target.style.transitionDelay = `${Math.min(i * 50, 240)}ms`;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.06 },
+          );
+          items.forEach((el) => io.observe(el));
+        } else {
+          items.forEach((el) => el.classList.add('is-in'));
+        }
+      })();
+    </script> </body> </html>

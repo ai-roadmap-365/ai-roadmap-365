@@ -1,0 +1,402 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 10: Working with Text: cat, grep, sed, and Pipes · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to compose small command-line tools into pipelines that search, filter, transform, and summarize text — and use them to inspect and clean the kind of real data you will feed to machine-learning workflows."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-010-working-with-text-cat-grep-sed/"><meta property="og:title" content="Day 10: Working with Text: cat, grep, sed, and Pipes · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to compose small command-line tools into pipelines that search, filter, transform, and summarize text — and use them to inspect and clean the kind of real data you will feed to machine-learning workflows."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-010-working-with-text-cat-grep-sed/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-010-working-with-text-cat-grep-sed.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 10: Working with Text: cat, grep, sed, and Pipes · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 10: Working with Text: cat, grep, sed, and Pipes · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to compose small command-line tools into pipelines that search, filter, transform, and summarize text — and use them to inspect and clean the kind of real data you will feed to machine-learning workflows."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-010-working-with-text-cat-grep-sed.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+      // Dark is the default regardless of OS preference - this is a dark-first
+      // design. A visitor who picks light with the toggle keeps it. Applied
+      // before first paint so there is no flash of the wrong theme.
+      (() => {
+        let t;
+        try {
+          t = localStorage.getItem('theme');
+        } catch {
+          t = null;
+        }
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+      })();
+    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+<style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
+.starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+365 Days of AI
+</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+Labs
+</a> </header> <main id="main">  <article data-day="10" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>The Command Line</span>  › 
+Day 10 </p> <h1 data-astro-cid-whrtx2kk>Day 10: Working with Text: cat, grep, sed, and Pipes</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-010-working-with-text-cat-grep-sed.png" width="1200" height="630" alt="Day 10 of 365 — Working with Text: cat, grep, sed, and Pipes" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to compose small command-line tools into pipelines that search, filter, transform, and summarize text — and use them to inspect and clean the kind of real data you will feed to machine-learning workflows.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>The Command Line</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-010-working-with-text-cat-grep-sed" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-010-working-with-text-cat-grep-sed</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
+cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-010-working-with-text-cat-grep-sed</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/ai-roadmap-365/labs/day-010-working-with-text-cat-grep-sed" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Explain the Unix philosophy — small tools that each do one thing, composed with pipes — and why a universal text interface makes composition powerful</li><li data-astro-cid-whrtx2kk>Describe the three standard streams (stdin, stdout, stderr) and why keeping errors separate from results makes pipes safe</li><li data-astro-cid-whrtx2kk>Use the pipe `|` and the redirection operators `&gt;`, `&gt;&gt;`, and `&lt;` to connect commands and route output to and from files</li><li data-astro-cid-whrtx2kk>View text with cat, less, head, and tail, and search it with grep using the flags -i, -c, -n, -v, and -r plus a basic regular expression</li><li data-astro-cid-whrtx2kk>Transform and summarize text with sed substitution, cut, sort, uniq -c, and wc</li><li data-astro-cid-whrtx2kk>Build a top-N pipeline step by step and apply it to a real web log to find the busiest client, count errors, and list unique paths</li><li data-astro-cid-whrtx2kk>Connect these tools to AI practice: inspecting datasets, cleaning training data, and filtering generated text streams</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Day 8 (Meet the Terminal) and Day 9 (Navigating the Filesystem) for basic command-line comfort</li><li data-astro-cid-whrtx2kk>A computer running macOS or Linux, or Windows with WSL, and permission to open a terminal</li></ul> <h2 id="why-this-matters">Why this matters</h2>
+<p>Almost everything you will do on the road to AI runs through text. Datasets arrive as text files. Model outputs come back as text. Configuration, logs, prompts, code, and error messages are all text. Long before you train anything, you will spend real hours <em>cleaning</em> text: dropping blank rows, filtering out garbage lines, pulling one column out of a million, counting how often each label appears, and finding the three malformed records that are breaking your pipeline. This is not busywork around the edges of the “real” AI work — for most practitioners it <em>is</em> the majority of the work, and the people who do it fastest are the ones fluent with a handful of small command-line tools.</p>
+<p>Here is the concrete payoff. Suppose a data file has ten million lines and your training job crashes on a bad one. Opening that file in a graphical editor may freeze your machine; scrolling to find the culprit is hopeless. A one-line command finds it in under a second. Suppose you need to know how many examples in a dataset carry each category label before you split it for training — a single pipeline answers in the time it takes to type it. Suppose a model produced a hundred thousand generated lines and you need only the ones containing a specific token — again, one command. Learning these tools is learning to move through data at the speed of thought instead of the speed of the mouse.</p>
+<p>Today you learn the Unix philosophy — build small tools that each do one thing well, then snap them together with <strong>pipes</strong> — and the specific tools that make it real: <code>cat</code>, <code>less</code>, <code>head</code>, <code>tail</code> for viewing; <code>grep</code> for searching; <code>sed</code>, <code>cut</code>, <code>sort</code>, <code>uniq</code>, <code>wc</code> for transforming and summarizing. By the end you will read and write pipelines that answer real questions about real data, and in the lab you will point them at an actual web log.</p>
+<h2 id="the-idea-in-plain-language">The idea in plain language</h2>
+<p>A <strong>pipe</strong>, written as the vertical bar <code>|</code>, connects two commands so that the output of the first becomes the input of the second. That single idea is the whole game. Instead of one enormous program that tries to do everything, you keep a drawer of small, sharp tools — one that searches, one that sorts, one that counts — and you chain them for the job at hand. Each tool reads a stream of text, does its one transformation, and writes a stream of text for the next tool. Text in, text out, every time. Because every tool speaks the same language (lines of text), any tool’s output can feed any other tool’s input, and the number of useful combinations is effectively unlimited.</p>
+<p>To make this work, every command-line program is born wired to three text streams. <strong>Standard input</strong> (stdin) is where it reads from — by default your keyboard, but a pipe or a file can be attached instead. <strong>Standard output</strong> (stdout) is where it writes its results — by default your screen. <strong>Standard error</strong> (stderr) is a <em>second</em> output, reserved for error and diagnostic messages, kept separate so that complaints never get mixed into the data flowing down a pipe. Learn these three streams and the rest is combinations.</p>
+<p>The <strong>Unix philosophy</strong> is the design taste behind all of this: write programs that do one thing well, write them to work together, and make text streams the universal interface between them. You are not learning twenty unrelated commands today. You are learning one idea — composition — and a small vocabulary of tools that were deliberately built to compose.</p>
+<h2 id="historical-background">Historical background</h2>
+<p>These tools are not a modern fad; they are among the most battle-tested software ever written, and they come from one remarkably productive place. In 1969 and the early 1970s, at Bell Labs in New Jersey, Ken Thompson and Dennis Ritchie created the Unix operating system. Its culture prized small, sharp programs over large monolithic ones.</p>
+<p>The pivotal moment for today’s lesson came in 1973, when Douglas McIlroy — a Bell Labs colleague who had been arguing for a way to connect programs like sections of a garden hose — saw the pipe added to Unix. Suddenly the output of any program could flow directly into the input of another, and a style of computing was born. McIlroy later distilled the resulting philosophy into a famous summary: write programs that do one thing and do it well; write programs to work together; and write programs to handle text streams, because that is a universal interface. That sentence still governs good command-line design half a century later.</p>
+<p>The individual tools have equally specific origins. <code>grep</code> was written by Ken Thompson around 1973; its odd name comes from a command sequence in the older <code>ed</code> text editor, <code>g/re/p</code>, meaning “globally search for a regular expression and print” — the name is literally the feature. <code>sed</code>, the stream editor, was written by Lee McMahon at Bell Labs in the early 1970s to apply editing commands to a flowing stream of text rather than an interactive session. <code>awk</code>, a small language for working with columns of text, appeared in 1977 and is named for its three authors — Alfred Aho, Peter Weinberger, and Brian Kernighan. These programs have been refined for decades, are installed on essentially every Mac and Linux server on earth, and behave the same today as they did on hardware you would now find in a museum. When you learn them, you learn a skill with an unusually long shelf life.</p>
+<h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
+<p>“Working with text” on the command line means transforming streams of lines with composable tools. A <strong>stream</strong> is just text moving through a program one line at a time, from an input to an output; a <strong>filter</strong> is a program that reads a stream, transforms it, and writes a stream. <code>grep</code>, <code>sed</code>, <code>sort</code>, <code>uniq</code>, <code>cut</code>, and <code>wc</code> are all filters. Pipes chain filters into pipelines. That is the entire mental model.</p>
+<p>It helps to be precise about what this is <em>not</em>. It is not programming in the full sense — there are no functions or data structures to design today, just tools to combine, though <code>sed</code> and <code>awk</code> do contain small languages inside them. It is not editing a file in place by default: a pipeline reads its input and prints a <em>new</em> stream to the screen, leaving the original file untouched unless you deliberately redirect the output back to disk. This is a feature, not a limitation — it means you can experiment fearlessly, because nothing you type at a pipe can quietly corrupt your data. And it is not a graphical, point-and-click activity: the power comes precisely from expressing an operation as text you can type, save, share, and re-run exactly.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Common misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”<code>grep</code> edits the file it searches.”</td><td><code>grep</code> only reads; it prints matching lines to a new stream and never changes the file.</td></tr><tr><td>”A pipe saves the data to a temporary file.”</td><td>A pipe streams data directly between two running programs in memory; no file is created.</td></tr><tr><td>”<code>sed &#39;s/a/b/&#39; file</code> changes the file.”</td><td>By default <code>sed</code> prints the edited text to the screen; the file is unchanged unless you save the output or use in-place mode.</td></tr><tr><td>”`sort</td><td>uniq<code>isn&#39;t needed —</code>uniq` removes all duplicates.”</td></tr><tr><td>”These old tools can’t handle big files.”</td><td>Because they stream line by line, they handle files far larger than memory — often better than graphical editors.</td></tr></tbody></table>
+<h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
+<p>Before pipes, combining two programs meant an awkward dance: run the first, tell it to write a temporary file, run the second on that file, then remember to delete the temporary file. Every combination was a small chore, so people wrote big programs that tried to do many things at once — and big programs are hard to write, hard to trust, and hard to change. The pipe dissolved that whole class of problem. If connecting programs is free and instant, you never need a program to do more than one thing, because you can always add another program to the chain.</p>
+<p>The deeper problem being solved is <strong>composition</strong>: how do you build a large capability out of small, reliable parts? The Unix answer — a universal text interface plus a cheap way to connect programs — is one of the most successful answers in the history of software. It solves the everyday problems you will actually hit: search a huge file without loading it into an editor; extract one field from structured records; count how often each distinct value appears; reshape data from one format toward another; and glue any of these together for a question nobody anticipated when the tools were written. The tools were created so that the person with the question — not the person who wrote the software — gets to decide how the pieces combine.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>Start with the streams, because every tool is wired to them. When a program runs, the operating system hands it three open channels: standard input (file descriptor 0), standard output (file descriptor 1), and standard error (file descriptor 2). By default input comes from your keyboard and both outputs go to your terminal, which is why you normally see everything mixed together on screen. The magic of the shell is that it can <em>rewire</em> these channels before the program starts.</p>
+<p><img src="/ai-roadmap-365/_astro/stdio-streams.Cj0FZdjJ_Z2onIGW.svg" alt="Architecture diagram: a program's three standard streams — stdin, stdout, and stderr — and the pipes and redirects that connect them" loading="lazy" decoding="async" fetchpriority="auto" width="780" height="470"></p>
+<p>There are two ways to rewire a stream. <strong>Redirection</strong> connects a stream to a file. <code>&gt;</code> sends standard output into a file, replacing its contents; <code>&gt;&gt;</code> appends to the file instead; <code>&lt;</code> takes standard input from a file; and <code>2&gt;</code> sends standard error to a file. <strong>Piping</strong>, with <code>|</code>, connects one program’s standard output directly to the next program’s standard input, with no file in between. The separation of stdout from stderr is what makes pipes safe: because error messages travel on stderr, they appear on your screen instead of contaminating the clean data flowing through the pipe.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Operator</th><th>What it does</th><th>Example</th></tr></thead><tbody><tr><td><code>|</code></td><td>Send stdout of the left command into stdin of the right</td><td><code>cat log | grep 404</code></td></tr><tr><td><code>&gt;</code></td><td>Redirect stdout to a file (overwrite it)</td><td><code>grep 404 log &gt; errors.txt</code></td></tr><tr><td><code>&gt;&gt;</code></td><td>Redirect stdout to a file (append to it)</td><td><code>grep 500 log &gt;&gt; errors.txt</code></td></tr><tr><td><code>&lt;</code></td><td>Take stdin from a file</td><td><code>wc -l &lt; log</code></td></tr><tr><td><code>2&gt;</code></td><td>Redirect stderr to a file</td><td><code>sort huge 2&gt; problems.txt</code></td></tr><tr><td><code>2&gt;&amp;1</code></td><td>Send stderr to wherever stdout is going</td><td><code>./run 2&gt;&amp;1 | less</code></td></tr></tbody></table>
+<p>Now the tools themselves, grouped by job.</p>
+<h3 id="viewing-text">Viewing text</h3>
+<p><code>cat</code> prints a file’s contents to standard output — handy for short files and for feeding a file into a pipe. <code>head</code> prints the first lines of its input (the first 10 by default; <code>head -n 3</code> for three), and <code>tail</code> prints the last lines (<code>tail -n 20</code> for the final twenty; <code>tail -f</code> follows a growing file live, invaluable for watching a log). For anything longer than a screen, <code>less</code> opens a scrollable pager you can page through and search inside with <code>/</code>, quitting with <code>q</code>. Rule of thumb: <code>cat</code> to dump or pipe, <code>head</code>/<code>tail</code> to peek at the ends, <code>less</code> to read comfortably.</p>
+<h3 id="searching-with-grep">Searching with <code>grep</code></h3>
+<p><code>grep PATTERN file</code> prints every line that contains the pattern. It is the tool you reach for constantly. A few flags carry most of the value: <code>-i</code> ignores case; <code>-c</code> prints a count of matching lines instead of the lines; <code>-n</code> prefixes each match with its line number; <code>-v</code> inverts the match, printing lines that do <em>not</em> contain the pattern; and <code>-r</code> searches a whole directory tree recursively. The pattern can be a plain string or a <strong>regular expression</strong> — a compact notation for describing text patterns, where <code>^</code> anchors to the start of a line, <code>$</code> to the end, <code>.</code> matches any single character, and <code>[0-9]</code> matches any one digit. So <code>grep &#39;^Error&#39; log</code> finds lines that <em>begin</em> with “Error”, and <code>grep -c &#39;404&#39; access.log</code> counts how many lines mention 404. Regular expressions are a deep topic of their own; today you need only this taste.</p>
+<h3 id="transforming-with-sed-cut-sort-uniq-and-wc">Transforming with <code>sed</code>, <code>cut</code>, <code>sort</code>, <code>uniq</code>, and <code>wc</code></h3>
+<p><code>sed</code> is the stream editor; its most common use is substitution. <code>sed &#39;s/old/new/&#39;</code> replaces the first occurrence of “old” with “new” on each line, and <code>sed &#39;s/old/new/g&#39;</code> replaces every occurrence (the trailing <code>g</code> means “global”). <code>sed</code> prints the transformed stream and leaves your file alone. <code>cut</code> slices columns: <code>cut -d&#39;,&#39; -f1</code> takes the first comma-separated field of each line — perfect for CSV data. <code>sort</code> orders lines, with <code>-n</code> for numeric order and <code>-r</code> for reverse; <code>sort -u</code> sorts and removes duplicates in one step. <code>uniq</code> collapses <em>adjacent</em> identical lines, and <code>uniq -c</code> prefixes each with a count of how many times it repeated — which is why <code>sort | uniq -c</code> is the canonical way to tally values. Finally, <code>wc</code> counts: <code>wc -l</code> counts lines, <code>wc -w</code> words, <code>wc -c</code> bytes.</p>
+<h3 id="building-a-pipeline-step-by-step">Building a pipeline step by step</h3>
+<p>Watch a real question get answered by growing a pipeline one stage at a time. The question: <em>which client IP addresses hit our web server most often?</em> Each log line begins with the client’s IP. Build up from the left.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>Stage 1 — read the file:</span></span>
+<span class="line"><span>  cat access.log</span></span>
+<span class="line"><span>  → every line of the log</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Stage 2 — keep just the first column (the IP):</span></span>
+<span class="line"><span>  cat access.log | cut -d&#39; &#39; -f1</span></span>
+<span class="line"><span>  → 10.0.0.14</span></span>
+<span class="line"><span>    10.0.0.7</span></span>
+<span class="line"><span>    192.168.1.10</span></span>
+<span class="line"><span>    ...</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Stage 3 — group identical IPs so uniq can see them:</span></span>
+<span class="line"><span>  cat access.log | cut -d&#39; &#39; -f1 | sort</span></span>
+<span class="line"><span>  → 10.0.0.14</span></span>
+<span class="line"><span>    10.0.0.14</span></span>
+<span class="line"><span>    10.0.0.7</span></span>
+<span class="line"><span>    ...</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Stage 4 — collapse each run into &quot;count IP&quot;:</span></span>
+<span class="line"><span>  cat access.log | cut -d&#39; &#39; -f1 | sort | uniq -c</span></span>
+<span class="line"><span>  →   10 10.0.0.14</span></span>
+<span class="line"><span>       7 10.0.0.7</span></span>
+<span class="line"><span>       ...</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Stage 5 — rank by count, biggest first, and keep the top 5:</span></span>
+<span class="line"><span>  cat access.log | cut -d&#39; &#39; -f1 | sort | uniq -c | sort -rn | head -n 5</span></span></code></pre>
+<p>Each stage does exactly one job, and you can inspect the stream after any stage by simply not typing the rest. That habit — build a pipeline incrementally, checking the output at each <code>|</code> — is how professionals write these commands correctly the first time.</p>
+<p><img src="/ai-roadmap-365/_astro/pipeline-flow.DCSTZeMh_Z287821.svg" alt="Flow diagram: text flowing through a cat, grep, sort, and uniq pipeline connected by pipes" loading="lazy" decoding="async" fetchpriority="auto" width="820" height="380"></p>
+<h2 id="an-everyday-analogy">An everyday analogy</h2>
+<p>Picture a factory assembly line. Raw material rolls in at one end and a finished product rolls out the other, and in between sits a row of workers, each at a single station doing exactly one small job. One worker only <em>inspects</em> items and pushes the rejects off the belt. The next only <em>sorts</em> what remains into order. The next only <em>tallies</em> how many of each kind go by. No single worker understands the whole product; each masters one narrow task and trusts the belt to bring the right thing and carry the result onward.</p>
+<p>The belt is the pipe. The stream of items moving along it is the text flowing between commands: one worker’s finished pile is the next worker’s raw supply, which is exactly what “standard output becomes standard input” means. The worker who inspects and discards is <code>grep</code>, keeping only the items that match. The sorter is <code>sort</code>; the tallyer is <code>uniq -c</code>. Feeding the first worker from a bin of parts is redirection with <code>&lt;</code>; boxing the final output into a warehouse crate instead of showing it to you is redirection with <code>&gt;</code>. And the factory has one more belt you rarely notice: a separate chute where any worker drops a broken part with a note for the supervisor. That chute is <strong>standard error</strong> — deliberately kept off the main line so a defect report never gets sorted and counted as if it were a real product.</p>
+<p>The analogy even explains why the Unix approach wins. You would never build a single monstrous machine that inspects, sorts, and tallies all at once; if the sorting logic needed changing you would have to rebuild the whole thing. A line of one-job stations lets you swap in a different sorter, add a new inspection step, or reorder the workers freely. Composability on the factory floor is exactly composability at the command line.</p>
+<h2 id="examples-in-practice">Examples in practice</h2>
+<p>Let’s do several real tasks, each a small pipeline. Assume a file <code>access.log</code> whose lines look like <code>10.0.0.14 - - [12/Jul/2026:08:01:12 +0000] &quot;GET /index.html HTTP/1.1&quot; 200 1043</code>.</p>
+<p><strong>Count the lines in a file.</strong> The simplest useful command:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">wc</span><span style="color:#79B8FF"> -l</span><span style="color:#F97583"> &lt;</span><span style="color:#9ECBFF"> access.log</span></span></code></pre>
+<p>Feeding the file on standard input with <code>&lt;</code> makes <code>wc</code> print only the number, with no filename attached — handy when you want just the count.</p>
+<p><strong>Find and count errors.</strong> How many “404 Not Found” responses were served?</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">grep</span><span style="color:#79B8FF"> -c</span><span style="color:#9ECBFF"> &#39; 404 &#39;</span><span style="color:#9ECBFF"> access.log</span></span></code></pre>
+<p>The spaces around <code>404</code> keep it from accidentally matching a byte count or timestamp that happens to contain those digits — a small habit that prevents real mistakes.</p>
+<p><strong>Extract unique values.</strong> Which distinct pages were requested? Here the path is the seventh space-separated field:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">cut</span><span style="color:#79B8FF"> -d</span><span style="color:#9ECBFF">&#39; &#39;</span><span style="color:#79B8FF"> -f7</span><span style="color:#9ECBFF"> access.log</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> sort</span><span style="color:#79B8FF"> -u</span></span></code></pre>
+<p><code>cut</code> pulls the path column, and <code>sort -u</code> orders the paths and removes duplicates, leaving one line per distinct page.</p>
+<p><strong>Substitute text in a stream.</strong> Strip the leading slash from each path:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">cut</span><span style="color:#79B8FF"> -d</span><span style="color:#9ECBFF">&#39; &#39;</span><span style="color:#79B8FF"> -f7</span><span style="color:#9ECBFF"> access.log</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> sort</span><span style="color:#79B8FF"> -u</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> sed</span><span style="color:#9ECBFF"> &#39;s#^/##&#39;</span></span></code></pre>
+<p>Notice the delimiter: <code>sed</code> lets you use any character after <code>s</code>, so <code>s#^/##</code> uses <code>#</code> to avoid clashing with the slash we are matching. The file on disk is never touched — only the stream printed to your screen is changed.</p>
+<p><strong>The top-N pattern, computed fully.</strong> Take a tiny five-line input to see every number:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>input IPs (after cut):        after sort:           after uniq -c:      after sort -rn:</span></span>
+<span class="line"><span>  10.0.0.7                      10.0.0.7               2 10.0.0.7          2 10.0.0.7</span></span>
+<span class="line"><span>  10.0.0.14                     10.0.0.7               2 10.0.0.14         2 10.0.0.14</span></span>
+<span class="line"><span>  10.0.0.7                      10.0.0.14              1 192.168.1.10      1 192.168.1.10</span></span>
+<span class="line"><span>  192.168.1.10                  10.0.0.14</span></span>
+<span class="line"><span>  10.0.0.14                     192.168.1.10</span></span></code></pre>
+<p>Sorting brings identical IPs together; <code>uniq -c</code> turns each run into a count; <code>sort -rn</code> ranks those counts numerically from high to low. Swap <code>head</code> onto the end and you have a leaderboard. This exact pipeline, on a real forty-line log, is the heart of today’s lab.</p>
+<h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
+<p><strong>Security.</strong> These tools only do what you type, but what you type can matter. Because <code>&gt;</code> overwrites a file completely, a mistyped redirect can erase data in an instant — <code>sort data &gt; data</code> will destroy <code>data</code>, because the shell empties the file before <code>sort</code> reads it. Treat <code>&gt;</code> onto an existing file with the same care you would a delete. And never run a pipeline you copied from an untrusted source without reading it, especially if it pipes downloaded text into a shell.</p>
+<p><strong>Privacy.</strong> Logs and datasets frequently contain personal data. Under many privacy laws an IP address is personal data, and real logs may hold user identifiers or session tokens. The same tools that analyze such data can also redact it — a <code>sed</code> substitution can mask a field before you share a file — but the responsibility is yours: know what is in a stream before you send it anywhere. Today’s lab uses entirely synthetic data with private-range addresses precisely so there is nothing sensitive to leak.</p>
+<p><strong>Performance.</strong> Streaming is the quiet superpower here. Because each tool processes one line at a time and passes it on, a pipeline never needs to hold the whole file in memory, so it can chew through files far larger than your RAM — the very files that freeze a graphical editor. The pipe also lets stages run concurrently: while <code>sort</code> works on early output, <code>cut</code> is already producing more. One caveat: <code>sort</code> must see all its input before it can emit the first sorted line, so it is the stage most likely to need scratch space on a truly enormous file.</p>
+<p><strong>Scalability.</strong> The same pipeline that answers a question about a forty-line sample answers it about a forty-million-line production log, unchanged. That is a rare and valuable property: you develop on a small file you can eyeball, then run the identical command on the real thing. When one machine is not enough, the same philosophy scales outward — the “map-reduce” idea behind large data systems is recognizably <code>grep</code>-then-<code>sort</code>-then-<code>count</code>, spread across many computers.</p>
+<p><strong>Cost.</strong> These tools are free, open source, and already installed, so the direct cost is zero. The indirect savings are large: a question you can answer with a five-second pipeline is a question you do not spin up a cloud database or write a throwaway program to answer. Fluency here routinely turns an afternoon of work into a single line.</p>
+<h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
+<p>For the core jobs, several excellent tools compete, and it is worth knowing when to reach for each. All of the following are free and open source unless noted.</p>
+<p><code>grep</code> is the universal searcher — installed everywhere, fast enough for almost anything, and the right default. Its most notable modern alternative is <strong>ripgrep</strong> (<code>rg</code>), written by Andrew Gallant and first released in 2016. Ripgrep is free and open source, respects your project’s ignore files, searches directories recursively by default, and is often dramatically faster on large codebases because it skips binary and ignored files automatically. Use <code>grep</code> for portability and for pipelines on standard servers; reach for <code>ripgrep</code> when searching big source trees on your own machine, if you have installed it. Example: <code>rg &#39;def train&#39; src/</code> finds every line containing <code>def train</code> under <code>src/</code>, honoring your ignore files, with zero flags.</p>
+<p><code>sed</code> is the right tool for simple, streaming substitutions — swap this for that, delete matching lines, print a range. When the job grows to “pull out column 3 where column 5 is greater than 100 and add up column 7,” you have outgrown <code>sed</code> and want <strong>awk</strong>, the small columns-and-patterns language from 1977. <code>awk &#39;$9 == 404&#39; access.log</code> prints every line whose ninth field is 404; <code>awk &#39;{sum += $10} END {print sum}&#39; access.log</code> adds up the tenth field across all lines. <code>awk</code> shines exactly where whitespace-separated columns and simple arithmetic meet — which is most log and table data. For anything larger still, a general-purpose language such as Python (with a library like <code>pandas</code>) takes over; the command line stops being the right tool when the logic needs real data structures, tests, or reuse.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool</th><th>Best at</th><th>When to choose it</th><th>Cost</th></tr></thead><tbody><tr><td><code>grep</code></td><td>Finding lines that match a pattern</td><td>The default search; portable everywhere</td><td>Free, preinstalled</td></tr><tr><td><code>ripgrep</code> (<code>rg</code>)</td><td>Fast recursive search of source trees</td><td>Big codebases on your own machine</td><td>Free, open source (install)</td></tr><tr><td><code>sed</code></td><td>Simple stream substitutions and deletions</td><td>One clear find-and-replace on a stream</td><td>Free, preinstalled</td></tr><tr><td><code>awk</code></td><td>Columns plus arithmetic and conditions</td><td>Field extraction with logic or sums</td><td>Free, preinstalled</td></tr><tr><td><code>cut</code></td><td>Grabbing a fixed column</td><td>Pulling one field from delimited data</td><td>Free, preinstalled</td></tr><tr><td>Python + <code>pandas</code></td><td>Complex, reusable data transformation</td><td>Logic too big for a one-liner</td><td>Free, open source (install)</td></tr></tbody></table>
+<h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>Pipe (<code>|</code>)</td><td>Redirect (<code>&gt;</code>)</td><td>A pipe streams output into another <em>program</em>; a redirect writes output into a <em>file</em></td></tr><tr><td><code>grep</code></td><td><code>sed</code></td><td><code>grep</code> selects whole lines that match; <code>sed</code> transforms the text of lines</td></tr><tr><td><code>cut</code></td><td><code>awk</code></td><td><code>cut</code> grabs fixed columns with no logic; <code>awk</code> adds conditions and arithmetic</td></tr><tr><td><code>sort -u</code></td><td><code>uniq</code></td><td><code>sort -u</code> removes all duplicates; <code>uniq</code> only collapses <em>adjacent</em> ones, so needs sorted input</td></tr><tr><td>stdout</td><td>stderr</td><td>Results travel on stdout and flow through pipes; errors travel on stderr and reach your screen</td></tr><tr><td>A shell pipeline</td><td>A Python script</td><td>The pipeline is a fast one-liner for ad-hoc questions; the script is for reusable, testable logic</td></tr></tbody></table>
+<h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
+<p>Reach for pipes and text tools whenever a question is <em>ad hoc</em>, the data is <em>line-oriented text</em>, and you want an answer <em>now</em>: inspecting logs, sampling and counting a dataset, finding malformed rows, extracting a column, or reshaping a file toward another format. This is the fastest path from question to answer that computing offers, and it is precisely the daily rhythm of preparing data — the phase where far more time goes than most beginners expect. If you can express the job as “read lines, keep or transform some, summarize,” a pipeline is almost always the right tool, and building it stage by stage keeps you correct.</p>
+<p>Know when to climb to a higher tool, too. When the logic gets genuinely complex — nested conditions, joining two datasets on a key, parsing a format where fields can contain the delimiter (real CSV with quoted commas is a classic trap for <code>cut</code>) — a proper program in Python or a purpose-built library will be clearer and more reliable than an ever-growing pipeline. When you will run the same transformation many times, write and save a script (which is exactly where this week is heading) rather than retyping a fragile one-liner. And when correctness truly matters, remember that a pipeline is hard to test; code you can write tests for is safer. The professional instinct is to prototype at the command line for speed, then graduate to a script or program the moment the task earns permanence.</p>
+<h2 id="the-ai-connection">The AI connection</h2>
+<p>Everything today feeds directly into working with data for machine learning, because data preparation is text processing wearing a different hat. Before a dataset can teach anything, someone has to look at it, and the command line is how you look: <code>head</code> to see the first rows, <code>wc -l</code> to learn how many examples you have, <code>cut</code> and <code>sort | uniq -c</code> to see the distribution of labels, and <code>grep</code> to fish out the malformed lines that will otherwise crash a training run at hour three. Cleaning a dataset — dropping empties, filtering out junk, deduplicating near-identical rows, normalizing a field with <code>sed</code> — is exactly the filter-and-transform work you practiced here, at the scale where doing it by hand is impossible and doing it in a pipeline takes seconds.</p>
+<p>The connection runs the other way too. Systems that generate text produce <em>streams</em> of it, and you will constantly pipe those streams onward — filtering generated lines to the ones that parse, counting how often each category appears in a batch of outputs, extracting a specific field from structured results, or masking sensitive values before you store them. Log analysis, the lab’s task, is the same skill again: when a data pipeline or a running service misbehaves, its logs are text, and the person who can <code>grep</code> the error, <code>sort | uniq -c</code> the failure types, and spot the pattern is the person who fixes it fastest. Master these small tools now and you will move through the unglamorous, decisive, everyday work of real machine-learning practice at the speed of a single typed line.</p>
+<h2 id="knowledge-check">Knowledge check</h2>
+<p>Try these from memory before looking back:</p>
+<ol>
+<li>In your own words, state the Unix philosophy in one sentence, and explain what the pipe <code>|</code> has to do with it.</li>
+<li>Name the three standard streams, say what each is for by default, and explain why keeping standard error separate from standard output matters when you use a pipe.</li>
+<li>What is the difference between <code>&gt;</code> and <code>|</code>? Give one example of each.</li>
+<li>Why does <code>uniq</code> usually need <code>sort</code> in front of it? What single command does both jobs at once?</li>
+<li>Write a pipeline that prints the five most common values in the first comma-separated column of a file called <code>data.csv</code>, most frequent first.</li>
+</ol>
+<h2 id="hands-on-exercise">Hands-on exercise</h2>
+<p>Time to run real pipelines on real text. This exercise is worked in full in the Day 10 lab directory, which ships a synthetic web log (<code>examples/samples/access.log</code>) with forty request lines. Open your terminal, change into the lab directory, and first look at the data:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">head</span><span style="color:#9ECBFF"> examples/samples/access.log</span></span></code></pre>
+<p>Each line has the shape <code>IP - - [timestamp] &quot;METHOD path HTTP/1.1&quot; status size</code>, so the IP is the first space-separated field, the path is the seventh, and the status code is the ninth. Now answer four questions, each with one pipeline.</p>
+<p>Count the total requests (one request per line):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">wc</span><span style="color:#79B8FF"> -l</span><span style="color:#F97583"> &lt;</span><span style="color:#9ECBFF"> examples/samples/access.log</span></span></code></pre>
+<p>Find the busiest client IPs (the top-N pattern from the lesson):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">cut</span><span style="color:#79B8FF"> -d</span><span style="color:#9ECBFF">&#39; &#39;</span><span style="color:#79B8FF"> -f1</span><span style="color:#9ECBFF"> examples/samples/access.log</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> sort</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> uniq</span><span style="color:#79B8FF"> -c</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> sort</span><span style="color:#79B8FF"> -rn</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> head</span><span style="color:#79B8FF"> -n</span><span style="color:#79B8FF"> 5</span></span></code></pre>
+<p>Count the “404 Not Found” responses by matching the ninth field with <code>awk</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">awk</span><span style="color:#9ECBFF"> &#39;$9 == 404&#39;</span><span style="color:#9ECBFF"> examples/samples/access.log</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> wc</span><span style="color:#79B8FF"> -l</span></span></code></pre>
+<p>Count how many distinct paths were requested:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">cut</span><span style="color:#79B8FF"> -d</span><span style="color:#9ECBFF">&#39; &#39;</span><span style="color:#79B8FF"> -f7</span><span style="color:#9ECBFF"> examples/samples/access.log</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> sort</span><span style="color:#79B8FF"> -u</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> wc</span><span style="color:#79B8FF"> -l</span></span></code></pre>
+<p>Then open <code>starter/analyze_log.sh</code>, complete its four numbered exercises with these pipelines, run it with <code>bash starter/analyze_log.sh</code>, and check your work with <code>bash tests/run_tests.sh</code>.</p>
+<h3 id="expected-output">Expected output</h3>
+<p>Running the completed analysis on the committed sample prints exactly these figures (the sample is fixed, so your numbers must match):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>=== Log Analysis Report ===</span></span>
+<span class="line"><span>Log file: examples/samples/access.log</span></span>
+<span class="line"><span>Total requests: 40</span></span>
+<span class="line"><span>Top 5 IP addresses (count  IP):</span></span>
+<span class="line"><span>  10 10.0.0.14</span></span>
+<span class="line"><span>   7 10.0.0.7</span></span>
+<span class="line"><span>   6 10.0.0.99</span></span>
+<span class="line"><span>   5 192.168.1.23</span></span>
+<span class="line"><span>   5 192.168.1.10</span></span>
+<span class="line"><span>404 responses: 7</span></span>
+<span class="line"><span>Unique paths: 13</span></span>
+<span class="line"><span>=== End of report ===</span></span></code></pre>
+<p>Read it back: forty total requests; the busiest client is <code>10.0.0.14</code> with ten requests; seven responses were 404s; and thirteen distinct paths were requested. Every number here came out of a pipeline you can rebuild from memory.</p>
+<h3 id="validate-your-work">Validate your work</h3>
+<p>You are done when you can check every box:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> <code>wc -l</code> reports 40 total requests.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Your top-IP pipeline names <code>10.0.0.14</code> as the busiest, with a count of 10.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Your 404 pipeline reports 7.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Your unique-paths pipeline reports 13.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>bash tests/run_tests.sh</code> ends with <code>0 failure(s).</code></li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can explain, for each pipeline, what every stage between the <code>|</code> bars does.</li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><strong><code>uniq -c</code> shows the same IP several times.</strong> You forgot to <code>sort</code> before <code>uniq</code>; <code>uniq</code> only collapses adjacent duplicates. Put <code>sort</code> immediately before it.</li>
+<li><strong>The wrong column comes out.</strong> Recount the fields from the left starting at 1: the IP is field 1, the path is field 7, the status is field 9. <code>cut -d&#39; &#39; -f1</code> and <code>awk &#39;{print $1}&#39;</code> both mean “field 1.”</li>
+<li><strong>Your 404 count is 0 or far too high.</strong> Match the status field, not any stray “404”: <code>awk &#39;$9 == 404&#39;</code> is precise; a bare <code>grep 404</code> can match a byte size or timestamp. See the lab’s troubleshooting file.</li>
+<li><strong><code>No such file or directory</code>.</strong> Run the commands from the lab directory so the relative path <code>examples/samples/access.log</code> resolves, or give the full path.</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<ul>
+<li><strong>Using <code>uniq</code> without <code>sort</code>.</strong> The single most common pipeline bug. If a tally looks wrong, check the sort step first.</li>
+<li><strong>Miscounting fields.</strong> Off-by-one on the column number silently produces plausible-looking but wrong answers. Verify with a quick <code>head</code> and count deliberately.</li>
+<li><strong>Overwriting data with <code>&gt;</code>.</strong> <code>sort file &gt; file</code> empties the file before <code>sort</code> reads it. To edit in place, write to a new file and rename it, or use a tool’s dedicated in-place option — never redirect onto the file you are reading.</li>
+</ul>
+<h2 id="practice-assignment">Practice assignment</h2>
+<p>Complete <code>starter/analyze_log.sh</code> so all four pipelines work, run it, and confirm <code>bash tests/run_tests.sh</code> reports zero failures. Then fill in <code>starter/text-pipelines-worksheet.md</code> with your findings: the total request count, the busiest IP and its count, the number of 404s, and the count of unique paths. Finish with a short paragraph (4–6 sentences) describing one pattern you noticed in the log — for instance, how many responses were successful (status 200) versus errors, or whether a single client dominated the traffic — and name the pipeline you would run to confirm it. Keep the worksheet; later lessons build on this data-inspection habit.</p>
+<h2 id="extension-challenge">Extension challenge</h2>
+<p>Go one step past the lab. First, produce a full status-code breakdown with a single pipeline — <code>awk &#39;{print $9}&#39; examples/samples/access.log | sort | uniq -c | sort -rn</code> — and confirm the counts sum to 40. Second, adapt the top-IP pipeline to field 7 to find the single most-requested <em>path</em> instead of the most active IP. Third, compute the total bytes served without any pipe at all, using <code>awk</code>’s ability to accumulate: <code>awk &#39;{sum += $10} END {print sum}&#39; examples/samples/access.log</code>. Finally, use a <code>sed</code> substitution in a pipeline to rewrite every path so it drops its leading slash, and watch closely to confirm the file on disk is unchanged afterward — proof that a pipeline transforms the <em>stream</em>, not the source. Write two or three sentences on which of these you would keep as a saved script and why, foreshadowing the shell scripting you will meet later this week.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. What does the pipe operator `|` do in a command like `cat log | grep 404`? </strong> </p> <ol type="A"> <li>It saves the output of `cat` to a temporary file that `grep` then opens</li><li>It connects the standard output of `cat` directly to the standard input of `grep`</li><li>It runs `cat` and `grep` on two separate files at the same time</li><li>It tells the shell to ignore any errors from `cat`</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> It connects the standard output of `cat` directly to the standard input of `grep` </p> <p>A pipe streams one program&#39;s standard output straight into the next program&#39;s standard input, in memory, with no intermediate file — the core mechanism of composing small tools.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. Which statement about the three standard streams is correct? </strong> </p> <ol type="A"> <li>Standard input, output, and error all go to the same place and cannot be separated</li><li>Standard error is where a program reads its input from</li><li>Standard output carries a program&#39;s results while standard error carries its diagnostic messages, and the two are kept separate</li><li>Standard output is only used when writing to a file</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Standard output carries a program&#39;s results while standard error carries its diagnostic messages, and the two are kept separate </p> <p>Results travel on stdout and diagnostics on stderr; keeping them separate is what lets a pipe carry clean data while error messages still reach your screen.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. Why does `uniq` almost always need `sort` before it in a pipeline? </strong> </p> <ol type="A"> <li>`uniq` runs faster on sorted input but produces the same result either way</li><li>`uniq` only collapses duplicate lines that are adjacent, so identical lines must first be brought together by sorting</li><li>`sort` is required to convert the text into a format `uniq` can read</li><li>`uniq` cannot read from a pipe unless `sort` opens the stream first</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> `uniq` only collapses duplicate lines that are adjacent, so identical lines must first be brought together by sorting </p> <p>`uniq` compares each line only with the one before it, so it collapses runs of adjacent duplicates; sorting first groups all identical lines together. `sort -u` does both steps at once.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. What is the key difference between `&gt;` and `|`? </strong> </p> <ol type="A"> <li>`&gt;` writes standard output into a file, while `|` streams standard output into another program</li><li>They are identical; both send output to a file</li><li>`&gt;` appends to a file, while `|` overwrites it</li><li>`|` writes to a file, while `&gt;` sends output to another program</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> `&gt;` writes standard output into a file, while `|` streams standard output into another program </p> <p>A redirect (`&gt;`) sends output to a file (overwriting it), while a pipe (`|`) sends output to another running program. `&gt;&gt;` is the append form of the redirect.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. Which pipeline correctly prints the five most common values in the first column of a space-separated file? </strong> </p> <ol type="A"> <li>cut -d&#39; &#39; -f1 file | uniq -c | head -n 5</li><li>cut -d&#39; &#39; -f1 file | sort | uniq -c | sort -rn | head -n 5</li><li>sort file | cut -d&#39; &#39; -f1 | head -n 5</li><li>grep -c file | sort -rn | head -n 5</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> cut -d&#39; &#39; -f1 file | sort | uniq -c | sort -rn | head -n 5 </p> <p>Extract the column with cut, group duplicates with sort, count each run with uniq -c, rank by count with sort -rn, and keep the top five with head — the canonical top-N pattern.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. What does `sed &#39;s/cat/dog/g&#39;` do to each line of its input? </strong> </p> <ol type="A"> <li>Deletes every line that contains the word cat</li><li>Replaces only the first occurrence of cat with dog on each line</li><li>Replaces every occurrence of cat with dog on each line</li><li>Permanently rewrites the original file, replacing cat with dog</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Replaces every occurrence of cat with dog on each line </p> <p>The trailing `g` (global) makes the substitution replace every match on a line, not just the first; by default sed prints the changed stream and leaves the source file untouched.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. In the log line format `IP - - [time] &quot;GET /path HTTP/1.1&quot; status size`, which command counts requests that returned status 404 by matching the ninth field? </strong> </p> <ol type="A"> <li>grep -v 404 access.log | wc -l</li><li>cut -d&#39; &#39; -f1 access.log | wc -l</li><li>awk &#39;$9 == 404&#39; access.log | wc -l</li><li>sort access.log | uniq -c</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> awk &#39;$9 == 404&#39; access.log | wc -l </p> <p>awk splits each line into whitespace-separated fields, so `$9 == 404` selects only lines whose status field is 404; piping to `wc -l` counts them. Matching the exact field avoids false hits from a stray 404 elsewhere in the line.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. Which best states the Unix philosophy behind these tools? </strong> </p> <ol type="A"> <li>Build one large program that can perform every text operation you might need</li><li>Always store intermediate results in files so each step can be inspected later</li><li>Prefer graphical tools because they are easier for beginners to use</li><li>Write small programs that each do one thing well and work together through text streams</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> Write small programs that each do one thing well and work together through text streams </p> <p>The philosophy favors small, single-purpose programs composed through a universal text interface — which is exactly why pipes make the tools so powerful in combination.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Unix philosophy</strong> </dt> <dd data-astro-cid-whrtx2kk>A design approach that favors small programs each doing one job well, built to work together, communicating through text streams as a universal interface.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>pipe</strong> </dt> <dd data-astro-cid-whrtx2kk>The `|` operator, which connects one command&#39;s standard output directly to the next command&#39;s standard input so data flows between programs without any intermediate file.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>standard input</strong> </dt> <dd data-astro-cid-whrtx2kk>The default stream (stdin, file descriptor 0) a program reads from — the keyboard by default, or a file or pipe when redirected.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>standard output</strong> </dt> <dd data-astro-cid-whrtx2kk>The default stream (stdout, file descriptor 1) a program writes its results to — the terminal by default, or a file or the next command in a pipe when redirected.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>standard error</strong> </dt> <dd data-astro-cid-whrtx2kk>A second output stream (stderr, file descriptor 2) reserved for error and diagnostic messages, kept separate from standard output so errors never contaminate the data flowing through a pipe.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>redirection</strong> </dt> <dd data-astro-cid-whrtx2kk>Connecting a program&#39;s stream to a file: `&gt;` overwrites a file with standard output, `&gt;&gt;` appends to it, `&lt;` supplies standard input from a file, and `2&gt;` sends standard error to a file.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>filter</strong> </dt> <dd data-astro-cid-whrtx2kk>A program that reads a text stream, transforms it, and writes a text stream — such as grep, sed, sort, uniq, cut, or wc — the building block of a pipeline.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>cat</strong> </dt> <dd data-astro-cid-whrtx2kk>A command that prints the contents of one or more files to standard output, commonly used to view a short file or feed a file into a pipeline.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>grep</strong> </dt> <dd data-astro-cid-whrtx2kk>A command that searches its input line by line and prints the lines matching a pattern; common flags include -i (ignore case), -c (count), -n (line numbers), -v (invert), and -r (recursive).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>sed</strong> </dt> <dd data-astro-cid-whrtx2kk>The stream editor: a command that applies editing operations — most often substitution with `s/old/new/` — to a flowing stream of text, printing the result without changing the source file by default.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>regular expression</strong> </dt> <dd data-astro-cid-whrtx2kk>A compact notation for describing text patterns, where symbols such as ^ (start of line), $ (end of line), . (any character), and [0-9] (any digit) let a single expression match many strings.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>uniq</strong> </dt> <dd data-astro-cid-whrtx2kk>A command that collapses adjacent identical lines into one, and with -c prefixes each with a count of how many times it repeated — usually paired with a preceding sort.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://missing.csail.mit.edu/2020/data-wrangling/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Missing Semester of Your CS Education — Data Wrangling</a> — MIT (accessed 2026-07-12) — A hands-on lecture on chaining command-line tools to slice and transform text. </li><li data-astro-cid-whrtx2kk> <a href="https://linuxcommand.org/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Linux Command Line</a> — William Shotts (accessed 2026-07-12) — A free book-length introduction to the shell, pipes, redirection, and text tools. </li><li data-astro-cid-whrtx2kk> <a href="https://www.gnu.org/software/grep/manual/grep.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>GNU Grep Manual</a> — GNU Project (accessed 2026-07-12) — The authoritative reference for grep options and regular-expression syntax. </li><li data-astro-cid-whrtx2kk> <a href="https://www.gnu.org/software/sed/manual/sed.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>GNU Sed Manual</a> — GNU Project (accessed 2026-07-12) — The authoritative reference for sed commands, including substitution. </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Pipeline_(Unix)" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Pipeline (Unix)</a> — Wikipedia (accessed 2026-07-12) — Overview of Unix pipes, their history, and Douglas McIlroy&#39;s role in their creation. </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="10" data-astro-cid-whrtx2kk>
+Mark Day 10 as read
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+      surfaces for someone searching for one — it costs you a click and it is genuinely how people
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+★ Star on GitHub
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-009-navigating-the-filesystem-paths-files-and" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 9</span> <span class="pn__title" data-astro-cid-oerjsknp>Navigating the Filesystem: Paths, Files, and Permissions</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-011-environment-variables-and-shell-configuration" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 11 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Environment Variables and Shell Configuration</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+      // Progressive enhancement only: the theme falls back to dark and every
+      // .reveal element is visible by default (the hidden start state exists
+      // only inside a prefers-reduced-motion: no-preference query).
+      (() => {
+        const toggle = document.getElementById('theme');
+        if (toggle) {
+          toggle.addEventListener('click', () => {
+            const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+            document.documentElement.dataset.theme = next;
+            try {
+              localStorage.setItem('theme', next);
+            } catch {
+              /* private mode */
+            }
+          });
+        }
+
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const items = document.querySelectorAll('.reveal');
+        if (items.length && !reduced && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry, i) => {
+                if (!entry.isIntersecting) return;
+                entry.target.style.transitionDelay = `${Math.min(i * 50, 240)}ms`;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.06 },
+          );
+          items.forEach((el) => io.observe(el));
+        } else {
+          items.forEach((el) => el.classList.add('is-in'));
+        }
+      })();
+    </script> </body> </html>

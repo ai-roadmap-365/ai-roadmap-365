@@ -1,0 +1,437 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 11: Environment Variables and Shell Configuration · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to read and set environment variables, explain how PATH decides which command runs, edit the correct shell configuration file for your shell, and keep secrets like API keys out of version control."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-011-environment-variables-and-shell-configuration/"><meta property="og:title" content="Day 11: Environment Variables and Shell Configuration · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to read and set environment variables, explain how PATH decides which command runs, edit the correct shell configuration file for your shell, and keep secrets like API keys out of version control."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-011-environment-variables-and-shell-configuration/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-011-environment-variables-and-shell-configuration.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 11: Environment Variables and Shell Configuration · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 11: Environment Variables and Shell Configuration · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to read and set environment variables, explain how PATH decides which command runs, edit the correct shell configuration file for your shell, and keep secrets like API keys out of version control."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-011-environment-variables-and-shell-configuration.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+      // Dark is the default regardless of OS preference - this is a dark-first
+      // design. A visitor who picks light with the toggle keeps it. Applied
+      // before first paint so there is no flash of the wrong theme.
+      (() => {
+        let t;
+        try {
+          t = localStorage.getItem('theme');
+        } catch {
+          t = null;
+        }
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+      })();
+    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+<style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
+.starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+365 Days of AI
+</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+Labs
+</a> </header> <main id="main">  <article data-day="11" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>The Command Line</span>  › 
+Day 11 </p> <h1 data-astro-cid-whrtx2kk>Day 11: Environment Variables and Shell Configuration</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-011-environment-variables-and-shell-configuration.png" width="1200" height="630" alt="Day 11 of 365 — Environment Variables and Shell Configuration" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to read and set environment variables, explain how PATH decides which command runs, edit the correct shell configuration file for your shell, and keep secrets like API keys out of version control.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>The Command Line</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-011-environment-variables-and-shell-configuration" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-011-environment-variables-and-shell-configuration</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
+cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-011-environment-variables-and-shell-configuration</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/ai-roadmap-365/labs/day-011-environment-variables-and-shell-configuration" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Distinguish a shell variable from an environment variable and explain what export does</li><li data-astro-cid-whrtx2kk>Explain how the shell uses PATH to resolve a bare command name, and diagnose &quot;command not found&quot; and wrong-version problems</li><li data-astro-cid-whrtx2kk>Name and describe the most important environment variables — PATH, HOME, USER, SHELL, LANG, EDITOR — and what each controls</li><li data-astro-cid-whrtx2kk>Identify which configuration file a shell reads for login versus interactive sessions in bash and zsh, and edit the correct one</li><li data-astro-cid-whrtx2kk>Define aliases and functions and place them in a config file so they persist across new terminals</li><li data-astro-cid-whrtx2kk>Store secrets such as API keys in environment variables and dotenv files kept out of version control, and describe how direnv automates this</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Days 8-10: comfort opening a terminal, navigating the filesystem, and running basic commands</li><li data-astro-cid-whrtx2kk>A computer running macOS or Linux (Windows via WSL) with a bash or zsh shell</li></ul> <h2 id="why-this-matters">Why this matters</h2>
+<p>Sooner or later your work will depend on a value that lives nowhere in your code. You will run a program that talks to a paid service and needs a secret key to prove who you are. You will type <code>python</code> and get a version you did not expect, or type a tool’s name and be told it does not exist even though you just installed it. You will hand a working project to a colleague and watch it fail on their machine for reasons neither of you can see. Every one of these is a story about the <em>environment</em> — the invisible set of named values your shell hands to every program it starts.</p>
+<p>Environment variables are how you tell a program something without editing the program: where to find things, who you are, what language to speak in, and — critically — secrets it must never have hard-coded. When you later connect to a service that charges per request, the accepted, safe way to give your code its key is an environment variable such as <code>ANTHROPIC_API_KEY</code>, never a line pasted into a file you might share. When you run a project and get “command not found” or the wrong interpreter, the <code>PATH</code> variable is deciding which program runs. And when a script works for you but not for a teammate, the difference is almost always something in one person’s environment that the other lacks. Reproducibility — the property that the same commands produce the same result on another machine — is, in practice, mostly about controlling the environment.</p>
+<p>Today you learn to see this invisible layer clearly: what environment variables are, how the shell uses <code>PATH</code> to find commands, which configuration files set all of this up when a terminal opens, and how to keep secrets out of the places they must never go. Master it now and a whole category of baffling failures becomes readable.</p>
+<h2 id="the-idea-in-plain-language">The idea in plain language</h2>
+<p>A shell — the program that reads the commands you type — keeps a set of named values called <strong>variables</strong>. Each is just a name paired with a piece of text: <code>HOME</code> might be <code>/Users/mira</code>, <code>EDITOR</code> might be <code>nano</code>. Some of these values stay private to the shell itself. Others are marked to be <em>inherited</em> by every program the shell launches. That marked-for-inheritance set is the <strong>environment</strong>, and its members are <strong>environment variables</strong>.</p>
+<p>The distinction is the whole game. When you set a plain <strong>shell variable</strong>, only the current shell can see it; the programs it starts know nothing about it. When you <strong>export</strong> a variable, you promise the shell to copy it into the environment of every command it runs from then on. A program you launch receives a fresh copy of that environment and reads from it whatever it was told to look for. This is how a value set once in your terminal reaches a Python script, a database tool, or a compiler without any of them sharing memory.</p>
+<p>One environment variable deserves top billing: <strong><code>PATH</code></strong>. When you type a bare command name like <code>git</code>, the shell does not search your whole disk for it. It looks only in the specific directories listed in <code>PATH</code>, in order, and runs the first match. That single rule explains “command not found” (the program is not in any listed directory), why the <em>wrong</em> version can run (an earlier directory holds a different copy), and why installing a tool sometimes requires “adding it to your PATH.” Finally, because typing the same export commands into every new terminal would be tedious, the shell reads <strong>configuration files</strong> — <code>.bashrc</code>, <code>.zshrc</code>, and their relatives — automatically when it starts, so your settings are there every time.</p>
+<h2 id="historical-background">Historical background</h2>
+<p>The idea of a per-process set of inherited string values is old and remarkably stable. It arrived with the Unix operating system at Bell Labs in the 1970s. The Seventh Edition of Unix, released in 1979, introduced the environment as we still use it, along with the Bourne shell (<code>sh</code>), written by Stephen Bourne, whose syntax for setting and exporting variables is the ancestor of what you type today. Before that, programs received only command-line arguments; the environment added a second, quieter channel for passing configuration that every child process would inherit automatically.</p>
+<p>The mechanism sits at the boundary between the shell and the operating system. When any Unix program starts another, it does so through a family of system calls in the <code>exec</code> family, and those calls accept an array of <code>NAME=value</code> strings — the new program’s environment. The shell is simply the most visible user of this facility: it maintains your variables and, on each command, hands the exported ones to the operating system to pass along. That design has outlived nearly everything around it.</p>
+<p>Shells multiplied over the decades. The Bourne shell was joined by the C shell (<code>csh</code>) in the late 1970s, and then by the Bourne-Again Shell — <strong>bash</strong> — written by Brian Fox for the GNU Project, first released in 1989, which became the default interactive shell on most Linux distributions and, for many years, on macOS. The <strong>Z shell</strong> (<code>zsh</code>), created by Paul Falstad in 1990, added conveniences and became the default shell on macOS starting with the Catalina release in 2019. The shells differ in features and in which configuration files they read, but the environment itself — names mapped to strings, inherited by children — has not changed in over forty years. Learn it once and it stays learned.</p>
+<h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
+<p>An environment variable is a named string, held by a running process, that the operating system copies to any child process that process starts. Every word is load-bearing. <em>Named string</em>: the value is always text — the number <code>8</code> in an environment variable is the two-character string <code>&quot;8&quot;</code>, not an integer; a program must interpret it. <em>Held by a running process</em>: the environment belongs to a specific process while it runs, not to the disk and not to your account permanently. <em>Copied to children</em>: a child gets its own copy, so changes it makes do not flow back to the parent.</p>
+<p>That last point is the source of the most common confusion, so name it plainly. A program can <strong>never</strong> change its parent’s environment. When a script sets a variable and exits, your terminal’s environment is exactly as it was before. When you edit a configuration file, already-open terminals do not update until you reload the file or open a new one. The environment flows strictly downward, parent to child, and never back up.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Common misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”Setting a variable in a script changes my terminal too.”</td><td>A child process gets a <em>copy</em>; its changes vanish when it exits. Nothing flows back to the parent.</td></tr><tr><td>”<code>export</code> creates the variable.”</td><td>The variable may already exist; <code>export</code> only marks it to be <em>inherited</em> by future child processes.</td></tr><tr><td>”Environment variables are stored on disk.”</td><td>They live in a running process’s memory. Files like <code>.zshrc</code> merely <em>re-create</em> them each time a shell starts.</td></tr><tr><td>”Editing <code>.zshrc</code> updates my open terminals.”</td><td>Config files are read only when a shell starts. Open shells keep their old environment until reloaded.</td></tr><tr><td>”<code>PATH</code> searches everywhere for a command.”</td><td>It searches only the listed directories, in order, and runs the first match — nothing else.</td></tr></tbody></table>
+<h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
+<p>The environment solves a specific problem: how does a program learn its context without being rewritten for every machine? Hard-coding answers into the program is brittle — a tool that assumes your username, your home directory, or your preferred editor would need editing for every user. Command-line arguments can carry such details, but they must be passed explicitly on every invocation and threaded by hand through every layer of a program that starts other programs. The environment offers a third way: set a value once, and it is quietly available to the program and to everything it launches, however deep.</p>
+<p>This is why the environment holds exactly the kind of information that is <em>the same across many commands but differs across machines or users</em>: where your home directory is (<code>HOME</code>), who you are (<code>USER</code>), which language and formatting to use (<code>LANG</code>), which text editor to open when a tool needs one (<code>EDITOR</code>), and where to find executable programs (<code>PATH</code>). It is also why it became the standard channel for <strong>secrets</strong>. A credential must reach your program but must not live in your source code, where it would be copied, shared, and version-controlled by accident. Placing it in an environment variable keeps it in memory at run time and out of the files you commit — provided you follow the discipline this lesson teaches. The environment, in short, is the machine’s answer to “configuration that travels with the process, not the code.”</p>
+<h2 id="how-it-works">How it works</h2>
+<p>Let us build the picture from the shell outward, then watch <code>PATH</code> resolve a command.</p>
+<h3 id="shell-variables-versus-environment-variables">Shell variables versus environment variables</h3>
+<p>Open a shell and assign a variable. In bash and zsh the syntax is a name, an equals sign, and a value, with <strong>no spaces around the equals sign</strong>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#E1E4E8">greeting</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;hello&quot;</span></span></code></pre>
+<p>Right now <code>greeting</code> is a <em>shell variable</em>: the current shell can read it as <code>$greeting</code>, but it is not in the environment, so programs the shell starts cannot see it. Prove it by starting a child shell — a fresh <code>bash</code> process — and asking for the value:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;</span><span style="color:#E1E4E8">$greeting</span><span style="color:#9ECBFF">&quot;</span><span style="color:#6A737D">        # prints: hello</span></span>
+<span class="line"><span style="color:#B392F0">bash</span><span style="color:#79B8FF"> -c</span><span style="color:#9ECBFF"> &#39;echo &quot;$greeting&quot;&#39;</span><span style="color:#6A737D">   # prints an empty line — the child never received it</span></span></code></pre>
+<p>Now <strong>export</strong> it, which marks it for inheritance, and repeat:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#E1E4E8"> greeting</span></span>
+<span class="line"><span style="color:#B392F0">bash</span><span style="color:#79B8FF"> -c</span><span style="color:#9ECBFF"> &#39;echo &quot;$greeting&quot;&#39;</span><span style="color:#6A737D">   # prints: hello — the child inherited it</span></span></code></pre>
+<p>You can set and export in one step with <code>export greeting=&quot;hello&quot;</code>. To see the difference in bulk, <code>set</code> (in bash) lists all shell variables, while <code>env</code> or <code>printenv</code> lists only the exported ones — the actual environment. A variable is in the environment if, and only if, it has been exported.</p>
+<h3 id="path-and-how-a-command-is-found">PATH and how a command is found</h3>
+<p><code>PATH</code> is a single string holding a list of directories separated by colons, for example <code>/usr/local/bin:/usr/bin:/bin</code>. When you type a command that contains no slash, the shell walks this list left to right, checking each directory for an executable file of that name, and runs the <strong>first</strong> one it finds. It never looks in directories that are not listed, and it stops at the first match.</p>
+<p><img src="/ai-roadmap-365/_astro/path-resolution.l0iZr7r-_ZoGyxE.svg" alt="Flowchart: the shell searches each PATH directory in order until it finds the command" loading="lazy" decoding="async" fetchpriority="auto" width="720" height="520"></p>
+<p>Three everyday mysteries fall out of this one rule. “Command not found” means no directory in <code>PATH</code> contained an executable of that name — often because a tool installed into a directory that was never added to <code>PATH</code>. Running the <em>wrong</em> version happens when two directories both contain the command and the earlier one wins; this is why <code>PATH</code> order matters and why installers often prepend their directory rather than append it. And a command that lives in your current folder but is not on <code>PATH</code> will not run as a bare name — you must write <code>./toolname</code>, with an explicit path, precisely because the shell does not treat the current directory as part of <code>PATH</code>.</p>
+<p>You can ask the shell to show its work. <code>command -v python3</code> prints the full path it <em>would</em> run, or nothing if the command is not found. <code>type python3</code> says whether the name is a program on <code>PATH</code>, a shell builtin, an alias, or a function, and where it resolves. <code>which python3</code> similarly reports the resolved path. These three are your first tools whenever a command misbehaves: they turn an invisible decision into a visible one.</p>
+<h3 id="the-important-variables">The important variables</h3>
+<p>A handful of environment variables appear on nearly every system. Knowing them turns cryptic behavior into obvious behavior.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Variable</th><th>What it holds</th><th>Example value</th><th>Why it matters</th></tr></thead><tbody><tr><td><code>PATH</code></td><td>Colon-separated list of directories searched for commands</td><td><code>/usr/local/bin:/usr/bin:/bin</code></td><td>Decides which program (or which version) a bare command name runs</td></tr><tr><td><code>HOME</code></td><td>The absolute path to your home directory</td><td><code>/Users/mira</code></td><td><code>~</code> expands to it; many tools store settings under it</td></tr><tr><td><code>USER</code></td><td>Your login name</td><td><code>mira</code></td><td>Scripts and prompts use it to know who is running</td></tr><tr><td><code>SHELL</code></td><td>The path to your <em>login</em> shell program</td><td><code>/bin/zsh</code></td><td>Tells tools which shell you prefer; note it is not always the shell running right now</td></tr><tr><td><code>LANG</code></td><td>Language and character-encoding preference</td><td><code>en_US.UTF-8</code></td><td>Controls message language, sorting, and how text bytes are decoded</td></tr><tr><td><code>EDITOR</code></td><td>The command to open when a tool needs you to edit text</td><td><code>nano</code></td><td>Git and other tools launch it for commit messages and the like</td></tr><tr><td><code>PWD</code></td><td>Your current working directory</td><td><code>/Users/mira/projects</code></td><td>The shell updates it as you <code>cd</code>; programs read it to resolve relative paths</td></tr></tbody></table>
+<p>Two subtleties reward attention. <code>SHELL</code> names your configured login shell, not necessarily the process reading your keystrokes this second — if you type <code>bash</code> inside zsh, <code>SHELL</code> may still say <code>/bin/zsh</code>. And <code>LANG</code> is more than cosmetic: set it to a value the system does not have and some programs emit warnings or sort text unexpectedly, because it governs how bytes are interpreted as characters — the encoding ideas from earlier this week, surfacing as a single variable.</p>
+<h3 id="configuration-files-login-versus-interactive-shells">Configuration files: login versus interactive shells</h3>
+<p>Typing your exports into every new terminal would be unbearable, so shells read startup files automatically. <em>Which</em> files they read depends on two properties of the shell session. A shell is a <strong>login shell</strong> if it is the first shell of a session — the one an SSH connection drops you into, or the one a new macOS Terminal tab starts. A shell is <strong>interactive</strong> if it is reading commands you type, as opposed to running a script non-interactively. A single shell can be both, one, or neither, and each combination reads a different set of files.</p>
+<p><img src="/ai-roadmap-365/_astro/shell-config-load.B8ZQmrTA_ZkyiEX.svg" alt="Diagram: which shell configuration files load for login versus interactive shells" loading="lazy" decoding="async" fetchpriority="auto" width="740" height="520"></p>
+<p>For <strong>bash</strong>: a login shell reads the system-wide <code>/etc/profile</code>, then the first it finds of <code>~/.bash_profile</code>, <code>~/.bash_login</code>, or <code>~/.profile</code>. A non-login interactive shell — such as a second terminal opened on a Linux desktop — reads <code>~/.bashrc</code> instead. Because these two paths diverge, the widespread convention is to put your real settings in <code>~/.bashrc</code> and add a line to <code>~/.bash_profile</code> that <em>sources</em> it (<code>source ~/.bashrc</code>), so both kinds of shell end up identical. For <strong>zsh</strong>: <code>~/.zshenv</code> is read on every invocation, <code>~/.zprofile</code> only for login shells, and <code>~/.zshrc</code> for interactive shells. On macOS, where a new Terminal tab is an interactive login shell running zsh, the file you almost always want to edit is <code>~/.zshrc</code>.</p>
+<p>The practical rule is simple and saves hours: <strong>put a setting in the file the shell actually reads, or it silently does nothing.</strong> The most common configuration bug in existence is editing <code>~/.bash_profile</code> on a machine whose terminals read <code>~/.zshrc</code>, then wondering why nothing changed. After editing a config file, either open a new terminal or reload it in place with <code>source ~/.zshrc</code> (substitute your file), because — as established — open shells do not re-read these files on their own.</p>
+<h3 id="aliases-and-functions">Aliases and functions</h3>
+<p>Two features let you extend the shell with your own commands, and both belong in your config file so they persist. An <strong>alias</strong> is a short name that expands to a longer command. Defined with <code>alias name=&#39;command&#39;</code>, it is pure text substitution:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#F97583">alias</span><span style="color:#E1E4E8"> ll</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&#39;ls -la&#39;</span></span>
+<span class="line"><span style="color:#F97583">alias</span><span style="color:#E1E4E8"> gs</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&#39;git status&#39;</span></span></code></pre>
+<p>After this, typing <code>ll</code> runs <code>ls -la</code>. Aliases are perfect for fixed shorthand but cannot easily take arguments in the middle of the command. For anything with logic or positional arguments, use a <strong>shell function</strong>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">mkcd</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#B392F0">  mkdir</span><span style="color:#79B8FF"> -p</span><span style="color:#9ECBFF"> &quot;</span><span style="color:#79B8FF">$1</span><span style="color:#9ECBFF">&quot;</span><span style="color:#E1E4E8"> &amp;&amp; </span><span style="color:#79B8FF">cd</span><span style="color:#9ECBFF"> &quot;</span><span style="color:#79B8FF">$1</span><span style="color:#9ECBFF">&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Now <code>mkcd project</code> makes the directory <code>project</code> and moves into it, using <code>$1</code> for the first argument. Functions can hold multiple lines, conditionals, and loops (the subject of tomorrow’s lesson). Placed in <code>~/.zshrc</code> or <code>~/.bashrc</code>, aliases and functions load automatically in every new shell, becoming a personal toolkit that follows you.</p>
+<h2 id="an-everyday-analogy">An everyday analogy</h2>
+<p>Picture the shell as a workshop assistant you brief at the start of a shift. In front of the assistant is a private desk covered in sticky notes — the <strong>shell variables</strong>. The assistant can read them freely, but they are personal: no one else in the workshop sees them. Along one wall hangs a shared corkboard, and any note pinned there is photocopied and handed to every helper the assistant hires for a task. Pinning a note to that corkboard is <strong>exporting</strong> a variable; the corkboard is the <strong>environment</strong>. A helper who is handed the photocopies can read every pinned note but knows nothing of the sticky notes left on the desk.</p>
+<p>Two facts about the workshop map exactly onto how environments behave. First, each helper gets a <em>photocopy</em>, not the original. A helper who scribbles on their copy changes nothing on the corkboard, and when the helper goes home the scribbles are gone — which is why a script can never alter your terminal’s environment. Second, the corkboard is set up fresh each shift by an <strong>opening checklist</strong> the assistant follows on arriving: this is the configuration file, <code>~/.zshrc</code> or <code>~/.bashrc</code>, re-pinning the same standing notes every morning so the board looks the same each day. Edit the checklist and today’s already-pinned board does not change; the edit takes effect at the next shift, or when the assistant re-runs the checklist on the spot.</p>
+<p><code>PATH</code> is the assistant’s ordered list of toolbox drawers. Told to fetch the “wrench,” the assistant does not ransack the whole workshop; it opens the listed drawers in order and grabs the first wrench found. Two drawers each holding a wrench? The earlier drawer wins — the reason command order and version surprises happen. A wrench sitting on the bench but in no listed drawer will not be found by name; you must point at it directly (<code>./wrench</code>). And the safe-combination note — a <strong>secret</strong> — is pinned to the shared corkboard so the assistant’s helpers can open the safe, but it is <em>never</em> photocopied into the workshop’s public logbook that gets carried out the door. That logbook is your version control, and the discipline of keeping the combination off it is the habit the next section makes non-negotiable.</p>
+<h2 id="examples-in-practice">Examples in practice</h2>
+<p>Start with inspection. To read one variable, echo it with a <code>$</code> in front of the name; to list the whole environment, use <code>printenv</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;</span><span style="color:#E1E4E8">$HOME</span><span style="color:#9ECBFF">&quot;</span><span style="color:#6A737D">        # /Users/mira</span></span>
+<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;</span><span style="color:#E1E4E8">$PATH</span><span style="color:#9ECBFF">&quot;</span><span style="color:#6A737D">        # /usr/local/bin:/usr/bin:/bin</span></span>
+<span class="line"><span style="color:#B392F0">printenv</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> sort</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> head</span><span style="color:#6A737D">   # the exported environment, alphabetized</span></span></code></pre>
+<p><code>PATH</code> is easier to read one directory per line. Replace each colon with a newline using <code>tr</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;</span><span style="color:#E1E4E8">$PATH</span><span style="color:#9ECBFF">&quot;</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> tr</span><span style="color:#9ECBFF"> &#39;:&#39;</span><span style="color:#9ECBFF"> &#39;\n&#39;</span></span></code></pre>
+<p>Now set, export, and confirm inheritance, all without disturbing your real setup by doing it inside a subshell — a throwaway child shell created with parentheses:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  project_env</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;staging&quot;</span><span style="color:#6A737D">          # a shell variable, private to this subshell</span></span>
+<span class="line"><span style="color:#F97583">  export</span><span style="color:#E1E4E8"> project_env             </span><span style="color:#6A737D"># now exported into this subshell&#39;s environment</span></span>
+<span class="line"><span style="color:#B392F0">  bash</span><span style="color:#79B8FF"> -c</span><span style="color:#9ECBFF"> &#39;echo &quot;child sees: $project_env&quot;&#39;</span><span style="color:#6A737D">   # child sees: staging</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;after subshell: </span><span style="color:#E1E4E8">$project_env</span><span style="color:#9ECBFF">&quot;</span><span style="color:#6A737D">   # after subshell: (empty) — nothing leaked out</span></span></code></pre>
+<p>The final line prints nothing because everything inside the parentheses happened in a child that has now exited — a clean demonstration that environments flow downward only. To prepend a directory to <code>PATH</code> for the current shell (the standard way to make a newly installed tool findable), put it first so it is searched first, keeping the old value on the end:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#E1E4E8"> PATH</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;</span><span style="color:#E1E4E8">$HOME</span><span style="color:#9ECBFF">/bin:</span><span style="color:#E1E4E8">$PATH</span><span style="color:#9ECBFF">&quot;</span></span></code></pre>
+<p>Read that carefully: it sets <code>PATH</code> to your personal <code>bin</code> directory, a colon, and then whatever <code>PATH</code> was before. To make this permanent you would place the same line in <code>~/.zshrc</code> or <code>~/.bashrc</code>. Finally, resolve a command explicitly to see which file would run and what kind of thing the name is:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">command</span><span style="color:#79B8FF"> -v</span><span style="color:#9ECBFF"> git</span><span style="color:#6A737D">      # /usr/bin/git   (the file PATH would run)</span></span>
+<span class="line"><span style="color:#79B8FF">type</span><span style="color:#9ECBFF"> ll</span><span style="color:#6A737D">             # ll is an alias for ls -la   (if you defined it above)</span></span></code></pre>
+<h3 id="secrets-dotenv-and-direnv">Secrets, dotenv, and direnv</h3>
+<p>A secret is a value that grants access and must stay private: an API key, a database password, a token. The rule is absolute: <strong>secrets go in environment variables, never in committed code.</strong> For a single session you can export one directly, using an obviously fake placeholder while learning:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#E1E4E8"> ANTHROPIC_API_KEY</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;sk-example-not-a-real-key&quot;</span></span></code></pre>
+<p>Managing many such values by hand is error-prone, so two widely used tools formalize the practice. The <strong>dotenv</strong> pattern keeps them in a file conventionally named <code>.env</code>, one <code>NAME=value</code> per line, that you load when needed and — this is the essential half — add to <code>.gitignore</code> so it is never committed:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># .env  (this file must be listed in .gitignore)</span></span>
+<span class="line"><span style="color:#E1E4E8">ANTHROPIC_API_KEY</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">sk-example-not-a-real-key</span></span>
+<span class="line"><span style="color:#E1E4E8">DATABASE_URL</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">postgres://localhost/myapp</span></span></code></pre>
+<p>Many programming libraries can read a <code>.env</code> file directly at startup. From the shell you can load one into your current environment with a single line, exporting every entry:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">set</span><span style="color:#79B8FF"> -a</span><span style="color:#E1E4E8">; </span><span style="color:#79B8FF">source</span><span style="color:#9ECBFF"> .env</span><span style="color:#E1E4E8">; </span><span style="color:#79B8FF">set</span><span style="color:#9ECBFF"> +a</span></span></code></pre>
+<p>Here <code>set -a</code> tells the shell to auto-export every variable it assigns, <code>source</code> runs the file’s assignments in the current shell, and <code>set +a</code> turns the behavior back off. The second tool, <strong>direnv</strong>, goes further: it reads a per-directory <code>.envrc</code> file and loads those variables automatically whenever you <code>cd</code> into the project, then unloads them when you leave — so each project carries its own environment with no manual sourcing. Both tools exist to make the same safe habit effortless: real secrets present in the environment at run time, absent from every file you commit.</p>
+<h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
+<p><strong>Security.</strong> The environment is the correct home for secrets <em>and</em> a surface you must guard. A key in an environment variable is not in your code, which is the point — but it is readable by the process and its children, can appear in a process listing on some systems if passed as an argument (which is why the environment, not the command line, is preferred), and will be captured by anything that logs the full environment for debugging. Never print your environment into a log you will share, never paste real <code>.env</code> contents into a chat or an issue, and treat a leaked key as compromised — rotate it, meaning generate a new one and revoke the old, rather than hoping no one noticed.</p>
+<p><strong>Privacy.</strong> Your environment quietly reveals your username, home directory path, locale, and often the tools you use. A machine profile or bug report that dumps <code>printenv</code> can expose more about you than intended. Share deliberately, redacting anything that names your accounts or reveals a secret.</p>
+<p><strong>Performance.</strong> The environment is small and read at process start, so it has no meaningful runtime cost — but <code>PATH</code> does have a subtle one. A very long <code>PATH</code>, or one containing slow network-mounted directories, means the shell checks more places before finding each command; keeping <code>PATH</code> short and local keeps command lookup instant. Shells also cache the locations of found commands, which is why a freshly installed tool sometimes is not found until you open a new shell or run <code>hash -r</code> to clear that cache.</p>
+<p><strong>Scalability.</strong> As projects and machines multiply, environment discipline is what keeps them consistent. Configuration-as-environment lets the identical code run in development, testing, and production by changing only the variables, and lets a team standardize on one set of names. This is why deployment platforms and container systems make “set these environment variables” the primary configuration mechanism: it scales from one laptop to thousands of servers without touching the code.</p>
+<p><strong>Cost.</strong> The direct cost is nil, but the indirect cost of <em>getting it wrong</em> is real. A committed secret can lead to a stolen key and a surprise bill from whatever paid service it unlocked; a misconfigured <code>PATH</code> that runs the wrong interpreter can waste an afternoon; a non-reproducible environment can make a bug impossible to diagnose. The few minutes spent understanding this layer pay for themselves the first time they save you from any of these.</p>
+<h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
+<p>The environment is a built-in mechanism, not a product, so “alternatives” means both the tools that manage it and the other ways to pass configuration into a program.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Approach or tool</th><th>Type</th><th>What it offers</th><th>Cost</th></tr></thead><tbody><tr><td>Plain <code>export</code> in a config file</td><td>Built in</td><td>Zero dependencies; the baseline everyone has</td><td>Free</td></tr><tr><td>dotenv (<code>.env</code>) files</td><td>Open convention/libraries</td><td>Per-project variables in one gitignored file, loadable by shell or libraries</td><td>Free</td></tr><tr><td>direnv</td><td>Open source tool</td><td>Automatic per-directory loading and unloading of environment on <code>cd</code></td><td>Free</td></tr><tr><td>Command-line arguments / flags</td><td>Built in</td><td>Explicit per-run configuration, visible in the command itself</td><td>Free</td></tr><tr><td>Config files (JSON, YAML, TOML)</td><td>Built in / libraries</td><td>Structured, nested settings that outgrow flat strings — but must not hold secrets in a repo</td><td>Free</td></tr><tr><td>Secret managers (e.g. cloud vault services)</td><td>Commercial/managed</td><td>Central storage, access control, rotation, and auditing for secrets at scale</td><td>Free tiers vary; paid at scale</td></tr></tbody></table>
+<p>Choosing among them is a matter of scope. Use a config file for a value you set once and rarely change on a machine. Use a command-line flag for something that differs on every run. Use a <code>.env</code> file with direnv for a project’s secrets and settings during development. Reach for a managed secret manager when a team or a production system needs central control, rotation, and an audit trail. For a beginner, <code>export</code> in <code>~/.zshrc</code> for durable personal settings and a gitignored <code>.env</code> for project secrets covers almost everything you will meet for a long time.</p>
+<h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>Shell variable</td><td>Environment variable</td><td>A shell variable is private to the current shell; an environment variable has been exported and is inherited by child processes</td></tr><tr><td><code>export VAR</code></td><td><code>VAR=value</code></td><td>Assignment sets or changes the value; <code>export</code> marks the name for inheritance — they are independent steps you can do together or apart</td></tr><tr><td><code>.bashrc</code></td><td><code>.bash_profile</code></td><td><code>.bashrc</code> loads for interactive non-login shells; <code>.bash_profile</code> for login shells — the reason a setting can appear in one situation but not another</td></tr><tr><td><code>PATH</code> entry</td><td>An absolute command path</td><td>A <code>PATH</code> entry lets you run a command by bare name; an absolute path like <code>/usr/bin/git</code> runs a specific file regardless of <code>PATH</code></td></tr><tr><td>Environment variable</td><td>Command-line argument</td><td>Both pass values to a program; the environment is inherited automatically by all children, while an argument is given explicitly on one invocation</td></tr><tr><td><code>.env</code> file (gitignored)</td><td>A config file in the repo</td><td>Both hold settings; the <code>.env</code> is for secrets and machine-specific values kept out of version control, the committed config for shareable, non-secret defaults</td></tr></tbody></table>
+<h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
+<p>Reach for an environment variable when a value must reach a program but should not be baked into its code: secrets above all, and machine- or user-specific settings such as paths, locales, and tool choices. Reach for <code>PATH</code> knowledge the moment a command is “not found” or the wrong version runs — inspecting <code>PATH</code> and using <code>command -v</code> will solve the mystery faster than any guess. Reach for your config file when a setting should persist across every new terminal, and for aliases and functions when you find yourself typing the same long command repeatedly. And reach for the environment whenever you want the same code to run unchanged across your laptop, a teammate’s machine, and a server, varying only by configuration.</p>
+<p>Know equally when not to lean on it. The environment is a flat set of plain strings, so it is a poor home for structured, nested, or large configuration — use a proper config file for that. It is global to a process and its children, which makes it easy to create hidden, surprising action-at-a-distance; a value passed as an explicit argument is often clearer for something that changes every run. And an environment variable is <em>not</em> a safe place to record a secret if you then print, log, or commit it — the safety comes entirely from the discipline of keeping it out of shared files. Set variables deliberately, keep secrets in gitignored files, and prefer explicitness when a reader of your command would otherwise have to guess where a value came from.</p>
+<h2 id="knowledge-check">Knowledge check</h2>
+<p>Try these from memory before looking back:</p>
+<ol>
+<li>In one or two sentences, explain the difference between a shell variable and an environment variable, and what <code>export</code> does to bridge them.</li>
+<li>Your <code>PATH</code> is <code>/usr/local/bin:/usr/bin:/bin</code>, and an executable named <code>format</code> exists in both <code>/usr/bin</code> and <code>/bin</code>. Which one runs when you type <code>format</code>, and why?</li>
+<li>You add <code>export EDITOR=nano</code> to <code>~/.bash_profile</code>, but on your macOS machine the setting never takes effect in new Terminal tabs. Give the most likely reason and the fix.</li>
+<li>A classmate sets a variable in a shell script, runs the script, and is surprised the variable is gone in their terminal afterward. Explain why, using the parent/child idea.</li>
+<li>Describe two concrete things you must do to keep an API key both usable by your program and out of version control.</li>
+</ol>
+<h2 id="hands-on-exercise">Hands-on exercise</h2>
+<p>Time to make the invisible layer visible — safely. In this exercise, worked through in full in the Day 11 lab directory, you will inspect your own environment, then set and export a variable <em>inside a subshell</em> so your real environment is never touched. A subshell is a child shell created by wrapping commands in parentheses; when it exits, everything it changed disappears.</p>
+<p>Open your terminal and run each command, reading the output before moving on.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;</span><span style="color:#E1E4E8">$HOME</span><span style="color:#9ECBFF">&quot;</span></span></code></pre>
+<p>Prints your home directory — the value of <code>HOME</code>, the same path <code>~</code> expands to.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;</span><span style="color:#E1E4E8">$PATH</span><span style="color:#9ECBFF">&quot;</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> tr</span><span style="color:#9ECBFF"> &#39;:&#39;</span><span style="color:#9ECBFF"> &#39;\n&#39;</span></span></code></pre>
+<p>Prints your <code>PATH</code> one directory per line, so you can count how many places the shell searches for a command.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">printenv</span><span style="color:#9ECBFF"> SHELL</span><span style="color:#9ECBFF"> LANG</span><span style="color:#9ECBFF"> USER</span></span></code></pre>
+<p>Prints three environment variables at once: your login shell, your locale, and your username.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#E1E4E8">( </span><span style="color:#F97583">export</span><span style="color:#E1E4E8"> DEMO_VAR</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;hello from subshell&quot;</span><span style="color:#E1E4E8">; </span><span style="color:#B392F0">bash</span><span style="color:#79B8FF"> -c</span><span style="color:#9ECBFF"> &#39;echo child sees: $DEMO_VAR&#39;</span><span style="color:#E1E4E8"> )</span></span></code></pre>
+<p>Sets and exports <code>DEMO_VAR</code> inside a subshell, then starts a child that inherits it — proving export makes a value flow downward.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;after: </span><span style="color:#E1E4E8">$DEMO_VAR</span><span style="color:#9ECBFF">&quot;</span></span></code></pre>
+<p>Prints <code>after:</code> with nothing after it, because <code>DEMO_VAR</code> lived only in the subshell that has now exited — nothing leaked into your real environment.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">command</span><span style="color:#79B8FF"> -v</span><span style="color:#9ECBFF"> ls</span></span>
+<span class="line"><span style="color:#79B8FF">type</span><span style="color:#9ECBFF"> cd</span></span></code></pre>
+<p><code>command -v ls</code> prints the path <code>PATH</code> resolves for <code>ls</code>; <code>type cd</code> reveals that <code>cd</code> is a shell builtin, not a program on disk — a useful reminder that not every command is a file.</p>
+<h3 id="expected-output">Expected output</h3>
+<p>A representative run (your paths and locale will differ — that is the point):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ echo &quot;$HOME&quot;</span></span>
+<span class="line"><span>/Users/mira</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ echo &quot;$PATH&quot; | tr &#39;:&#39; &#39;\n&#39;</span></span>
+<span class="line"><span>/usr/local/bin</span></span>
+<span class="line"><span>/usr/bin</span></span>
+<span class="line"><span>/bin</span></span>
+<span class="line"><span>/usr/sbin</span></span>
+<span class="line"><span>/sbin</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ printenv SHELL LANG USER</span></span>
+<span class="line"><span>/bin/zsh</span></span>
+<span class="line"><span>en_US.UTF-8</span></span>
+<span class="line"><span>mira</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ ( export DEMO_VAR=&quot;hello from subshell&quot;; bash -c &#39;echo child sees: $DEMO_VAR&#39; )</span></span>
+<span class="line"><span>child sees: hello from subshell</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ echo &quot;after: $DEMO_VAR&quot;</span></span>
+<span class="line"><span>after:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ command -v ls</span></span>
+<span class="line"><span>/bin/ls</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ type cd</span></span>
+<span class="line"><span>cd is a shell builtin</span></span></code></pre>
+<p>Line by line: <code>HOME</code> is your home path; <code>PATH</code> here lists five directories the shell searches in order; the three environment variables report a zsh login shell, a UTF-8 US-English locale, and the username <code>mira</code>; the subshell’s child inherits <code>DEMO_VAR</code> and prints it; the line after the subshell is empty because the variable never escaped the child; <code>ls</code> resolves to <code>/bin/ls</code>; and <code>cd</code> is revealed as a builtin rather than a file, which is why it can change <em>your</em> shell’s directory when a separate program never could.</p>
+<h3 id="validate-your-work">Validate your work</h3>
+<p>You are done when you can check every box:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> You can state your <code>HOME</code> directory and your <code>USER</code> name from memory.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can say how many directories are in your <code>PATH</code>.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You saw the subshell’s child print the exported value.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You confirmed the variable was empty <em>after</em> the subshell exited.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can name the full path <code>command -v ls</code> resolved to on your machine.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can explain why <code>type cd</code> reports a builtin rather than a file path.</li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><strong><code>echo $PATH</code> prints a literal <code>$PATH</code>.</strong> You are in a shell or quoting context that does not expand variables; use double quotes, <code>echo &quot;$PATH&quot;</code>, in bash or zsh.</li>
+<li><strong><code>DEMO_VAR</code> is still set after the subshell.</strong> You ran the <code>export</code> outside the parentheses. Re-run the exact line with the surrounding <code>( … )</code>, which is what confines it to a child shell.</li>
+<li><strong><code>command -v</code> prints nothing.</strong> That command genuinely is not on your <code>PATH</code>; try a command you know exists, like <code>ls</code>, to confirm the tool works before concluding anything is broken.</li>
+<li><strong><code>bash -c</code> prints an empty value inside the subshell.</strong> You set the variable but did not <code>export</code> it, so the child did not inherit it — add the <code>export</code>.</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<ul>
+<li><strong>Spaces around the equals sign.</strong> <code>NAME = value</code> is not an assignment; the shell reads it as running the command <code>NAME</code> with arguments <code>=</code> and <code>value</code>. Write <code>NAME=value</code> with no spaces.</li>
+<li><strong>Forgetting to export.</strong> A plain assignment stays private to the current shell; child programs — including scripts and language runtimes — see nothing until you <code>export</code>.</li>
+<li><strong>Editing the wrong config file.</strong> Putting settings in <code>~/.bash_profile</code> on a zsh machine (or vice versa) means they never load. Confirm your shell with <code>echo &quot;$0&quot;</code> or <code>printenv SHELL</code> and edit the matching file.</li>
+</ul>
+<h2 id="practice-assignment">Practice assignment</h2>
+<p>Open the environment worksheet in the starter directory of the Day 11 lab and complete it for your own machine using the commands from this lesson: record how many directories are in your <code>PATH</code>, the value of your <code>SHELL</code>, and your <code>LANG</code>. Then design one alias you would genuinely use — a shorthand for a command you type often — write both the alias definition and one or two sentences explaining what it saves you, and note which configuration file (<code>~/.zshrc</code>, <code>~/.bashrc</code>, or another) you would add it to and why that is the correct file for your shell. Do not edit your real config file for this assignment; just identify it correctly. Keep the worksheet — a later lesson on shell scripting builds on it.</p>
+<h2 id="extension-challenge">Extension challenge</h2>
+<p>Go one step deeper into how <code>PATH</code> shapes which program runs. First, create a personal <code>bin</code> directory and a tiny script that shadows a common command name, then watch <code>PATH</code> order decide the winner — all inside a subshell so nothing persists:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#B392F0">  mkdir</span><span style="color:#79B8FF"> -p</span><span style="color:#9ECBFF"> &quot;</span><span style="color:#E1E4E8">$HOME</span><span style="color:#9ECBFF">/demo-bin&quot;</span></span>
+<span class="line"><span style="color:#79B8FF">  printf</span><span style="color:#9ECBFF"> &#39;#!/usr/bin/env bash\necho &quot;this is my custom echo&quot;\n&#39;</span><span style="color:#F97583"> &gt;</span><span style="color:#9ECBFF"> &quot;</span><span style="color:#E1E4E8">$HOME</span><span style="color:#9ECBFF">/demo-bin/echo&quot;</span></span>
+<span class="line"><span style="color:#B392F0">  chmod</span><span style="color:#9ECBFF"> +x</span><span style="color:#9ECBFF"> &quot;</span><span style="color:#E1E4E8">$HOME</span><span style="color:#9ECBFF">/demo-bin/echo&quot;</span></span>
+<span class="line"><span style="color:#F97583">  export</span><span style="color:#E1E4E8"> PATH</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;</span><span style="color:#E1E4E8">$HOME</span><span style="color:#9ECBFF">/demo-bin:</span><span style="color:#E1E4E8">$PATH</span><span style="color:#9ECBFF">&quot;</span></span>
+<span class="line"><span style="color:#79B8FF">  command</span><span style="color:#79B8FF"> -v</span><span style="color:#9ECBFF"> echo</span><span style="color:#6A737D">         # note where echo now resolves</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">rm</span><span style="color:#79B8FF"> -rf</span><span style="color:#9ECBFF"> &quot;</span><span style="color:#E1E4E8">$HOME</span><span style="color:#9ECBFF">/demo-bin&quot;</span><span style="color:#6A737D">   # clean up the demo directory</span></span></code></pre>
+<p>Observe that after prepending your directory, <code>command -v echo</code> may resolve to your custom file rather than the system one, because your directory is searched first — the clearest possible demonstration of why <code>PATH</code> order matters (and, incidentally, one way problems and even attacks happen when an untrusted directory sits early in <code>PATH</code>). Write three or four sentences explaining, in your own words, what changed and why, and why you would <em>not</em> want an unfamiliar directory near the front of your real <code>PATH</code>. Then connect it forward: when a project later insists on a specific Python interpreter, it is manipulating exactly this ordering so that the right one is found first — the same mechanism, in service of reproducibility.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. What is the difference between a shell variable and an environment variable? </strong> </p> <ol type="A"> <li>A shell variable holds numbers while an environment variable holds text</li><li>A shell variable is private to the current shell; an environment variable has been exported and is inherited by child processes</li><li>A shell variable is permanent while an environment variable disappears at power-off</li><li>There is no difference; the two terms are interchangeable</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> A shell variable is private to the current shell; an environment variable has been exported and is inherited by child processes </p> <p>Every variable starts private to the shell. Only when you export it does it join the environment, the set of values the operating system copies to every child process the shell launches.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. You type the command `format` and your PATH is `/usr/local/bin:/usr/bin:/bin`. An executable named `format` exists in both `/usr/bin` and `/bin`. Which one runs? </strong> </p> <ol type="A"> <li>The one in /bin, because it is the most trusted system directory</li><li>Both run, one after the other</li><li>The one in /usr/bin, because it comes first among the directories that contain it</li><li>Neither; a name in two directories causes an error</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> The one in /usr/bin, because it comes first among the directories that contain it </p> <p>The shell searches PATH left to right and runs the first match. Since /usr/bin appears before /bin, its copy wins. This ordering is why the wrong version of a tool sometimes runs.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. What does the `export` keyword actually do? </strong> </p> <ol type="A"> <li>It creates a new variable that did not exist before</li><li>It saves the variable permanently to a file on disk</li><li>It marks a variable to be inherited by child processes the shell starts</li><li>It deletes the variable from the current shell</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> It marks a variable to be inherited by child processes the shell starts </p> <p>export does not create or persist a variable; it marks the name so that its value is copied into the environment of every command the shell runs from then on. The variable may already exist beforehand.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. On a macOS machine using zsh, you add `export EDITOR=nano` to `~/.bash_profile`, but new Terminal tabs never pick it up. What is the most likely reason? </strong> </p> <ol type="A"> <li>nano is not installed, so the setting is ignored</li><li>Your shell is zsh, which does not read ~/.bash_profile; you should edit ~/.zshrc</li><li>export cannot be used with EDITOR</li><li>You must restart the computer for any config change to take effect</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Your shell is zsh, which does not read ~/.bash_profile; you should edit ~/.zshrc </p> <p>Each shell reads its own configuration files. zsh reads ~/.zshrc (and ~/.zprofile, ~/.zshenv), never ~/.bash_profile. Putting the setting in the file your shell actually reads is the fix.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. Why can a shell script never change the environment of the terminal that launched it? </strong> </p> <ol type="A"> <li>Scripts are not allowed to use the export keyword</li><li>The script runs as a child process with its own copy of the environment; changes vanish when it exits and never flow back to the parent</li><li>The terminal locks its environment while a script runs</li><li>Only the operating system can change environment variables</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> The script runs as a child process with its own copy of the environment; changes vanish when it exits and never flow back to the parent </p> <p>A child process receives a copy of the environment. It can modify its own copy, but that copy is discarded when the child exits. The environment flows strictly downward, from parent to child, never back up.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. Which command tells you the full path that the shell would run for a given command name? </strong> </p> <ol type="A"> <li>echo</li><li>export</li><li>command -v</li><li>printenv</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> command -v </p> <p>`command -v python3` prints the resolved path (or nothing if not found). `type` and `which` give similar information; printenv lists environment variables, and echo prints text.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. Which configuration file does bash read for a non-login interactive shell (for example, a second terminal opened on a Linux desktop)? </strong> </p> <ol type="A"> <li>~/.bash_profile</li><li>~/.bashrc</li><li>/etc/passwd</li><li>~/.zshrc</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> ~/.bashrc </p> <p>bash reads ~/.bashrc for interactive non-login shells and ~/.bash_profile for login shells. Because they diverge, the common convention is to have ~/.bash_profile source ~/.bashrc so both behave the same.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. What is the safe, standard way to give your program an API key without risking it in version control? </strong> </p> <ol type="A"> <li>Paste the key directly into your source code and commit it</li><li>Put the key in an environment variable (for example via a .env file that is listed in .gitignore)</li><li>Email the key to yourself so you always have a copy</li><li>Store the key in the git commit message</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Put the key in an environment variable (for example via a .env file that is listed in .gitignore) </p> <p>Secrets belong in environment variables, kept out of committed files. A common pattern is a .env file loaded at run time and listed in .gitignore, so the key is present in memory but absent from every file you commit.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>environment variable</strong> </dt> <dd data-astro-cid-whrtx2kk>A named string value held by a running process and copied by the operating system to every child process it starts, used to pass configuration and secrets without editing code.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>shell variable</strong> </dt> <dd data-astro-cid-whrtx2kk>A named value known only to the current shell; unlike an environment variable, it is not inherited by the programs the shell launches unless it is exported.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>export</strong> </dt> <dd data-astro-cid-whrtx2kk>A shell keyword that marks a variable to be included in the environment, so that child processes started afterward inherit a copy of its value.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>PATH</strong> </dt> <dd data-astro-cid-whrtx2kk>An environment variable holding a colon-separated list of directories the shell searches, in order, to find the executable for a bare command name, running the first match.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>HOME</strong> </dt> <dd data-astro-cid-whrtx2kk>An environment variable holding the absolute path to your home directory; the shell expands the shorthand ~ to its value.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>alias</strong> </dt> <dd data-astro-cid-whrtx2kk>A short name defined in the shell that expands to a longer command by simple text substitution, such as ll for ls -la.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>shell function</strong> </dt> <dd data-astro-cid-whrtx2kk>A named block of shell commands that can take arguments and contain logic, used like a command; more powerful than an alias for anything beyond fixed text substitution.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>.bashrc</strong> </dt> <dd data-astro-cid-whrtx2kk>The configuration file bash reads for interactive non-login shells; a common place to define aliases, functions, and exported variables.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>.zshrc</strong> </dt> <dd data-astro-cid-whrtx2kk>The configuration file zsh reads for interactive shells; on macOS, where a new Terminal tab runs zsh, this is usually the file to edit for personal settings.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>login shell</strong> </dt> <dd data-astro-cid-whrtx2kk>The first shell of a session, such as the one an SSH connection or a new macOS Terminal tab starts; it reads profile files like ~/.bash_profile or ~/.zprofile.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>interactive shell</strong> </dt> <dd data-astro-cid-whrtx2kk>A shell that is reading commands a person types, as opposed to running a script non-interactively; it reads files like ~/.bashrc or ~/.zshrc.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>subshell</strong> </dt> <dd data-astro-cid-whrtx2kk>A child shell created by wrapping commands in parentheses; variables it sets and exports affect only itself and vanish when it exits, leaving the parent environment untouched.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>dotenv</strong> </dt> <dd data-astro-cid-whrtx2kk>A convention of storing environment variables as NAME=value lines in a file (commonly .env) that is loaded at run time and kept out of version control via .gitignore.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>direnv</strong> </dt> <dd data-astro-cid-whrtx2kk>An open-source tool that automatically loads a per-directory set of environment variables when you enter a project directory and unloads them when you leave.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://www.gnu.org/software/bash/manual/bash.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Bash Reference Manual</a> — GNU (accessed 2026-07-12) — Authoritative reference for shell variables, export, and the startup files bash reads. </li><li data-astro-cid-whrtx2kk> <a href="https://missing.csail.mit.edu/2020/course-shell/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Missing Semester of Your CS Education — The Shell</a> — MIT (accessed 2026-07-12) — A practical introduction to the shell, environment, and PATH. </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Environment_variable" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Environment variable</a> — Wikipedia (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://linuxcommand.org/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Linux Command Line</a> — William Shotts (accessed 2026-07-12) — Free book covering the environment and shell configuration for beginners. </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/PATH_(variable)" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>PATH (variable)</a> — Wikipedia (accessed 2026-07-12) </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="11" data-astro-cid-whrtx2kk>
+Mark Day 11 as read
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+      surfaces for someone searching for one — it costs you a click and it is genuinely how people
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+★ Star on GitHub
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-010-working-with-text-cat-grep-sed" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 10</span> <span class="pn__title" data-astro-cid-oerjsknp>Working with Text: cat, grep, sed, and Pipes</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-012-shell-scripting-variables-loops-and-conditionals" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 12 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Shell Scripting: Variables, Loops, and Conditionals</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+      // Progressive enhancement only: the theme falls back to dark and every
+      // .reveal element is visible by default (the hidden start state exists
+      // only inside a prefers-reduced-motion: no-preference query).
+      (() => {
+        const toggle = document.getElementById('theme');
+        if (toggle) {
+          toggle.addEventListener('click', () => {
+            const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+            document.documentElement.dataset.theme = next;
+            try {
+              localStorage.setItem('theme', next);
+            } catch {
+              /* private mode */
+            }
+          });
+        }
+
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const items = document.querySelectorAll('.reveal');
+        if (items.length && !reduced && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry, i) => {
+                if (!entry.isIntersecting) return;
+                entry.target.style.transitionDelay = `${Math.min(i * 50, 240)}ms`;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.06 },
+          );
+          items.forEach((el) => io.observe(el));
+        } else {
+          items.forEach((el) => el.classList.add('is-in'));
+        }
+      })();
+    </script> </body> </html>

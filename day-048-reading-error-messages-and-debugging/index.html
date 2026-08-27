@@ -1,0 +1,426 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 48: Reading Error Messages and Debugging · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to read any Python traceback bottom-up, recognize the common exceptions on sight, and work through a bug with a calm, repeatable method instead of guessing."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-048-reading-error-messages-and-debugging/"><meta property="og:title" content="Day 48: Reading Error Messages and Debugging · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to read any Python traceback bottom-up, recognize the common exceptions on sight, and work through a bug with a calm, repeatable method instead of guessing."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-048-reading-error-messages-and-debugging/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-048-reading-error-messages-and-debugging.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 48: Reading Error Messages and Debugging · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 48: Reading Error Messages and Debugging · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to read any Python traceback bottom-up, recognize the common exceptions on sight, and work through a bug with a calm, repeatable method instead of guessing."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-048-reading-error-messages-and-debugging.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+      // Dark is the default regardless of OS preference - this is a dark-first
+      // design. A visitor who picks light with the toggle keeps it. Applied
+      // before first paint so there is no flash of the wrong theme.
+      (() => {
+        let t;
+        try {
+          t = localStorage.getItem('theme');
+        } catch {
+          t = null;
+        }
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+      })();
+    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+<style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
+.starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+365 Days of AI
+</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+Labs
+</a> </header> <main id="main">  <article data-day="48" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/programming-with-python">Programming with Python</a>  ›  <span>Python Setup and First Programs</span>  › 
+Day 48 </p> <h1 data-astro-cid-whrtx2kk>Day 48: Reading Error Messages and Debugging</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-048-reading-error-messages-and-debugging.png" width="1200" height="630" alt="Day 48 of 365 — Reading Error Messages and Debugging" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to read any Python traceback bottom-up, recognize the common exceptions on sight, and work through a bug with a calm, repeatable method instead of guessing.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Programming with Python</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Python Setup and First Programs</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/programming-with-python/day-048-reading-error-messages-and-debugging" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/programming-with-python/day-048-reading-error-messages-and-debugging</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
+cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/programming-with-python/day-048-reading-error-messages-and-debugging</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/ai-roadmap-365/labs/day-048-reading-error-messages-and-debugging" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Read a Python traceback from the bottom up: identify the exception type and message, then the culprit frame with its file, line number, and function</li><li data-astro-cid-whrtx2kk>Recognize the common built-in exceptions (SyntaxError, IndentationError, NameError, TypeError, ValueError, IndexError, KeyError, AttributeError, ModuleNotFoundError, ZeroDivisionError) and state what each really means</li><li data-astro-cid-whrtx2kk>Distinguish confusable pairs — TypeError vs ValueError, and IndexError vs KeyError — and use the exception type to point at the right fix</li><li data-astro-cid-whrtx2kk>Apply the six-step debugging method: reproduce, read, isolate, hypothesize, test, fix</li><li data-astro-cid-whrtx2kk>Use print-debugging well and pause a running program with breakpoint()/pdb to step through and inspect variables</li><li data-astro-cid-whrtx2kk>Explain why the line named in an error is not always where the bug is, and know when to climb the call stack</li><li data-astro-cid-whrtx2kk>Connect calm, methodical debugging to AI practice, where models, data, and dependencies raise these same exceptions</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Days 43-47: Python installed, and comfort writing and running small programs with variables, strings, numbers, and input/output</li><li data-astro-cid-whrtx2kk>A terminal and a text editor; no prior debugging experience required</li></ul> <h2 id="why-this-matters">Why this matters</h2>
+<p>For the last five days you have written Python that mostly worked. Starting now — and for the rest of your career — most of the code you run will fail before it succeeds. That is not a sign you are doing it wrong. It is the normal texture of programming: you write a few lines, run them, read what the machine says, and adjust. The single skill that most separates people who move fast from people who get stuck is not writing flawless code the first time. It is reading a failure calmly and knowing exactly what to do next.</p>
+<p>This matters directly for the AI work ahead of you. When you load a dataset and it is missing a column, Python raises a <code>KeyError</code>. When you feed a model a list where it expected an array, you get a <code>TypeError</code>. When a dependency is not installed in your environment, you get a <code>ModuleNotFoundError</code>. When a downloaded file is truncated, an index runs off the end and you get an <code>IndexError</code>. The libraries you will lean on — the ones that train models and wrangle data — do not hide these errors; they surface them through the very same traceback you will learn to read today. An engineer who reads a hundred-line traceback and finds the one line that matters in ten seconds will iterate ten times faster than one who panics and starts changing things at random.</p>
+<p>So today we reframe the whole activity. An error message is not the machine scolding you. It is the machine handing you a detailed report of exactly what went wrong and where — often the most useful information you will get all day. The goal is to stop flinching at red text and start reading it, the way a doctor reads a chart: symptom first, then the trail back to the cause. Once you can do that, nothing your program does will feel like a mystery for long.</p>
+<h2 id="the-idea-in-plain-language">The idea in plain language</h2>
+<p>When Python cannot carry out an instruction, it stops and raises an <em>exception</em> — a signal that something exceptional happened and normal execution cannot continue. An exception has a <em>type</em> (like <code>ValueError</code> or <code>KeyError</code>) that categorizes what went wrong, and usually a short <em>message</em> with the specifics. If nothing in your program catches that exception, Python prints a <em>traceback</em> — a report of where the failure happened — and exits.</p>
+<p>A traceback looks intimidating because it can be long, but its structure is simple and always the same. The last line names the exception type and its message: this is <em>what</em> went wrong. Above it, the traceback lists the chain of function calls that led to the failure — which function was running, which function called it, and so on back to the top of your program. This chain is the <em>call stack</em>, and each entry in it is a <em>stack frame</em>: one function’s place in the story, complete with the file name, the line number, and the exact line of code being run when things broke.</p>
+<p>The one habit that makes tracebacks readable is this: <strong>read from the bottom up.</strong> The bottom line tells you the kind of problem. The line just above the bottom tells you where in <em>your</em> code it surfaced. Only if that is not enough do you climb further up the stack. Most beginners read top-down, drown in library internals, and give up; you will read the punchline first, then work backward exactly as far as you need to. That single reversal turns a wall of text into a precise set of directions.</p>
+<h2 id="historical-background">Historical background</h2>
+<p>Errors and exceptions are older than Python. Early programs simply crashed — or worse, kept running with corrupt data. The idea of a structured <em>exception</em> that a program could raise and, optionally, catch and handle grew through languages of the 1970s and 1980s; by the time Guido van Rossum released the first version of Python in 1991, exceptions were a designed-in, central feature rather than an afterthought. In Python, raising and catching exceptions is not an emergency mechanism reserved for disasters; it is a normal part of how the language communicates, used everywhere from a missing dictionary key to the end of a loop over a file.</p>
+<p>The traceback — the printed record of the call stack at the moment of failure — is Python’s way of turning an invisible internal state into something you can read. The phrase it prints at the top, <code>Traceback (most recent call last):</code>, is itself a reading instruction that has stayed stable for decades: the calls are listed oldest first, so the most recent call — the one nearest the actual error — sits at the bottom, right above the exception. Recent versions of Python have made these reports even more helpful: since Python 3.11, released in 2022, tracebacks can underline the exact sub-expression on a line that caused the error, so a failure inside <code>a[i] + b[j]</code> points a caret at the specific piece that broke.</p>
+<p>Interactive debugging has a similarly long lineage. Python has shipped a built-in debugger, <code>pdb</code>, since its early days — a tool that lets you pause a running program and inspect it line by line. For years, starting the debugger meant importing <code>pdb</code> and calling a slightly awkward incantation. Python 3.7, released in 2018, added the built-in <code>breakpoint()</code> function through PEP 553, giving you one memorable word to drop into any line where you want the program to stop so you can look around. The tools have grown friendlier, but the underlying idea has not changed since the first computers: when you cannot see what a program is doing, make it stop and tell you.</p>
+<h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
+<p>Debugging is the systematic process of finding and fixing the cause of a program’s incorrect behavior. Reading error messages is the first and most common part of it, because a large fraction of bugs announce themselves with an exception and a traceback that points almost directly at the problem. Every word of that definition earns its place. <em>Systematic</em>: debugging is a method, not a mood — a repeatable loop you can run whether you feel clever today or not. <em>Cause</em>: the aim is the underlying reason, not the surface symptom. <em>Incorrect behavior</em>: sometimes the program crashes, and sometimes it runs happily while producing the wrong answer — both are bugs, though only the first hands you a traceback.</p>
+<p>It helps just as much to be clear about what debugging is <em>not</em>. It is not guessing. It is not changing lines until the error goes away and hoping you did not break something else. It is not a judgment of your worth as a programmer — professionals with decades of experience spend a large share of every day debugging, because writing new code always outruns the mind’s ability to foresee every case. And an error message is emphatically not a punishment. The most damaging misconception a beginner can hold is that seeing red text means failure; in truth, a clear exception is the machine doing you an enormous favor by telling you precisely what it could not do and where.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Common misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”An error means I failed.”</td><td>An error is diagnostic information; it tells you exactly what to fix next.</td></tr><tr><td>”I should read the traceback from the top.”</td><td>Read it bottom-up: the exception type and the nearest frame matter most.</td></tr><tr><td>”The bug is on the line in the error.”</td><td>That is where the error <em>surfaced</em>; the cause is often a few lines — or frames — earlier.</td></tr><tr><td>”Debugging is guessing until it works.”</td><td>Debugging is a systematic loop: reproduce, read, isolate, hypothesize, test, fix.</td></tr><tr><td>”Good programmers do not get errors.”</td><td>Good programmers get errors constantly and read them fast; that speed is the skill.</td></tr></tbody></table>
+<h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
+<p>Exceptions and tracebacks exist to solve a problem that plagued early programming: silent, undiagnosable failure. Without them, a program that hit an impossible situation had two bad options — stop dead with no explanation, or blunder onward using garbage values, so the mistake surfaced much later, far from its cause, as a wrong answer nobody could trace. Either way the programmer was left guessing. The structured exception fixed the first problem: when something goes wrong, the program stops <em>at the point of failure</em> and reports the type of problem in a controlled way. The traceback fixed the second: it captures the full chain of calls that led to that point, so the report arrives with a map back to the origin.</p>
+<p>The debugger solves a different but related problem. A traceback is a single snapshot taken at the instant of a crash, which is perfect when the program crashes but useless when it runs to completion with a wrong result, or when you simply cannot tell <em>why</em> a variable holds the value it does. For those cases you need to see the program while it is alive — to freeze it mid-run and inspect the values of variables at that exact moment. That is what <code>pdb</code> and <code>breakpoint()</code> provide: a way to pause execution and look inside, instead of reconstructing events after the fact. Together, exceptions, tracebacks, and the debugger cover the whole territory: they make failure loud, they make it locatable, and they make the living program inspectable. Every one of these is something you will reach for constantly once your programs — and your AI experiments — grow past a few dozen lines.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>Let’s walk through the two things you must be able to do: read a traceback, and debug methodically.</p>
+<h3 id="reading-a-traceback-bottom-to-top">Reading a traceback, bottom to top</h3>
+<p>Suppose you run a small program and Python prints this:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>Traceback (most recent call last):</span></span>
+<span class="line"><span>  File &quot;report.py&quot;, line 12, in &lt;module&gt;</span></span>
+<span class="line"><span>    main()</span></span>
+<span class="line"><span>  File &quot;report.py&quot;, line 9, in main</span></span>
+<span class="line"><span>    print_average(scores)</span></span>
+<span class="line"><span>  File &quot;report.py&quot;, line 4, in print_average</span></span>
+<span class="line"><span>    average = total / len(values)</span></span>
+<span class="line"><span>ZeroDivisionError: division by zero</span></span></code></pre>
+<p>Read the <strong>last line first</strong>: <code>ZeroDivisionError: division by zero</code>. That is the <em>what</em> — the type of problem (a division by zero) and its message. You now know the category of the bug before reading anything else.</p>
+<p>Now move to the <strong>frame directly above the exception</strong>, the bottom-most <code>File</code> block: <code>File &quot;report.py&quot;, line 4, in print_average</code>, and under it the exact line of code, <code>average = total / len(values)</code>. This is <em>where</em> the error surfaced — line 4, inside the function <code>print_average</code>. Ninety percent of the time, this is all you need: you can see that <code>len(values)</code> was zero, so <code>values</code> was an empty list.</p>
+<p>The frames above are the <em>call stack</em>, read as a story from the bottom up: <code>print_average</code> was running (bottom frame); it was called by <code>main</code> at line 9 (next frame up); and <code>main</code> was called at line 12 at the top level of the file, shown as <code>&lt;module&gt;</code> (top frame). Each frame is one function’s place in the chain, with its file, line number, function name, and the line it was executing. You climb this stack only when the bottom frame is not enough — for instance, when the empty list was created far away and you need to find out which caller passed it in.</p>
+<p><img src="/ai-roadmap-365/_astro/traceback-anatomy.CPmKjZhL_Z2svYzD.svg" alt="Diagram: the anatomy of a Python traceback, read from the bottom up" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="470"></p>
+<h3 id="the-common-exceptions-and-what-each-really-means">The common exceptions and what each really means</h3>
+<p>Most everyday failures are one of a small set of exception types. Learning what each one <em>really</em> means — the underlying situation, not just the name — lets you jump almost instantly from the last line of a traceback to the kind of fix required.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Exception</th><th>What it really means</th><th>Tiny example that raises it</th></tr></thead><tbody><tr><td><code>SyntaxError</code></td><td>Python could not parse your code; it is not valid Python.</td><td><code>print(&quot;hi&quot;</code> (missing <code>)</code>)</td></tr><tr><td><code>IndentationError</code></td><td>A special <code>SyntaxError</code>: indentation is wrong or inconsistent.</td><td>a line indented when it should not be</td></tr><tr><td><code>NameError</code></td><td>You used a name that does not exist (typo, or used before defined).</td><td><code>prnit(&quot;hi&quot;)</code></td></tr><tr><td><code>TypeError</code></td><td>An operation got a value of the wrong <em>type</em>.</td><td><code>&quot;3&quot; + 5</code></td></tr><tr><td><code>ValueError</code></td><td>The type is right but the <em>value</em> is unacceptable.</td><td><code>int(&quot;hello&quot;)</code></td></tr><tr><td><code>IndexError</code></td><td>A sequence index is out of range.</td><td><code>[1, 2, 3][5]</code></td></tr><tr><td><code>KeyError</code></td><td>A dictionary key does not exist.</td><td><code>{&quot;a&quot;: 1}[&quot;b&quot;]</code></td></tr><tr><td><code>AttributeError</code></td><td>An object has no such attribute or method.</td><td><code>&quot;hi&quot;.apend(&quot;x&quot;)</code> (typo for <code>append</code>)</td></tr><tr><td><code>ModuleNotFoundError</code></td><td>Python cannot find a module to import.</td><td><code>import nonexistent_module</code></td></tr><tr><td><code>ZeroDivisionError</code></td><td>You divided by zero.</td><td><code>1 / 0</code></td></tr></tbody></table>
+<p>Two pairs are worth pinning down because beginners confuse them. <code>TypeError</code> versus <code>ValueError</code>: a <code>TypeError</code> means the <em>kind</em> of thing is wrong — you tried to add a string to a number, and no value would have made that operation valid. A <code>ValueError</code> means the kind of thing is right but this particular value is not — <code>int(&quot;42&quot;)</code> works, but <code>int(&quot;hello&quot;)</code> raises <code>ValueError</code> because a string is the right type for <code>int()</code>, yet “hello” is not a number. And <code>IndexError</code> versus <code>KeyError</code>: both mean “I looked something up and it was not there,” but <code>IndexError</code> is for positions in an ordered sequence (a list or tuple index), while <code>KeyError</code> is for named lookups in a dictionary.</p>
+<h3 id="the-systematic-debugging-method">The systematic debugging method</h3>
+<p>When the traceback alone does not hand you the fix — or when the program produces a wrong answer without crashing — you switch from reading to investigating, using a repeatable six-step loop.</p>
+<p><img src="/ai-roadmap-365/_astro/debug-method.DWOHCWrZ_120Pm.svg" alt="Flowchart: the debugging method loop from reproduce to fix" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="440"></p>
+<ol>
+<li><strong>Reproduce.</strong> Get the failure to happen on demand. A bug you cannot trigger reliably is a bug you cannot fix with confidence, because you will never know whether you fixed it. Note the exact command and inputs that cause it.</li>
+<li><strong>Read.</strong> Read the error and the traceback carefully, bottom-up, exactly as above. Note the exception type, the file, the line, and the function.</li>
+<li><strong>Isolate.</strong> Narrow down where the problem lives. Cut the program down, or add checks, until you have the smallest piece that still fails. A bug in ten lines is far easier to see than the same bug in a thousand.</li>
+<li><strong>Hypothesize.</strong> Form one specific, testable guess about the cause — “the list is empty because the file had no data rows” — not a vague “something’s wrong with the loop.”</li>
+<li><strong>Test.</strong> Check the hypothesis. Print the suspect value, or pause in the debugger and look. Either the guess is confirmed or it is ruled out; both outcomes are progress.</li>
+<li><strong>Fix.</strong> Change the <em>cause</em>, not the symptom, then re-run your reproduction from step 1 to confirm the failure is gone — and that you have not created a new one.</li>
+</ol>
+<p>The loop is the point. If a hypothesis is wrong, you do not despair; you form the next one, now better informed. Bugs fall to steady iteration far more reliably than to flashes of insight.</p>
+<h3 id="print-debugging-and-the-interactive-debugger">Print-debugging and the interactive debugger</h3>
+<p>The simplest way to test a hypothesis is to make the program tell you what it is doing. <em>Print-debugging</em> means adding temporary <code>print()</code> calls to reveal values and control flow: <code>print(f&quot;scores = {scores!r}&quot;)</code> right before the failing line shows you exactly what <code>scores</code> held. Done well, print-debugging is fast and honest: label each print so you know which one fired (<code>print(&quot;A:&quot;, x)</code>), print the <em>repr</em> with <code>!r</code> so you can tell <code>&quot;3&quot;</code> from <code>3</code>, and remove the prints once the bug is found so they do not clutter the code or leak into output. Its weaknesses are that you must edit, re-run, and guess in advance what to print — and you often discover you printed the wrong thing.</p>
+<p>The interactive debugger removes that guesswork by letting you pause the living program and look around freely. Drop the built-in <code>breakpoint()</code> function on any line, and when Python reaches it the program stops and gives you a <code>(Pdb)</code> prompt where you can type commands: <code>p scores</code> <strong>p</strong>rints a variable, <code>n</code> runs the <strong>n</strong>ext line, <code>s</code> <strong>s</strong>teps <em>into</em> a function call, <code>c</code> <strong>c</strong>ontinues until the next breakpoint or the end, <code>l</code> <strong>l</strong>ists the code around you, and <code>q</code> <strong>q</strong>uits. Because you are inside the paused program, you can inspect any variable in scope, evaluate expressions, and walk forward one line at a time watching values change — no re-running, no guessing what to print. Since Python 3.7, <code>breakpoint()</code> is the one-word way in; the older <code>import pdb; pdb.set_trace()</code> does the same thing and still appears in lots of code.</p>
+<h3 id="rubber-duck-debugging-and-when-the-error-is-not-where-it-says">Rubber-duck debugging, and when the error is not where it says</h3>
+<p>Sometimes the most effective tool is your own voice. <em>Rubber-duck debugging</em> is the practice of explaining your code, line by line and out loud, to an inanimate object — traditionally a rubber duck on your desk. It works because articulating what each line is <em>supposed</em> to do forces you to compare intent against reality, and the mismatch — the place where “this should hold the scores” meets “but I never actually filled it” — usually reveals itself the moment you say it aloud. You do not need the duck; a patient colleague, a written explanation, or a quiet monologue all work.</p>
+<p>Finally, a crucial subtlety: the line named in the error is where the program <em>broke</em>, which is not always where it went <em>wrong</em>. A <code>ZeroDivisionError</code> on <code>total / len(values)</code> is real, but the actual mistake may be fifty lines earlier where <code>values</code> was filled from a file that turned out to be empty. A <code>KeyError</code> when you read <code>record[&quot;email&quot;]</code> is genuine, but the bug might be in the code that built <code>record</code> and forgot that field. This is why the call stack exists and why you sometimes climb it: the symptom appears at the bottom frame, but the cause can hide in a caller above, or in code that ran long before the crash. Keeping “where it broke ≠ where it went wrong” in mind is what stops you from fixing symptoms forever.</p>
+<h2 id="an-everyday-analogy">An everyday analogy</h2>
+<p>Think of debugging as detective work at the scene of an incident. When a program crashes, Python hands you a report much like a detective’s case file. The last line of the traceback is the coroner’s finding — the cause of death, stated plainly: “division by zero,” “no such key.” You read that first, because it tells you what kind of case you are working before you waste time on details.</p>
+<p>The call stack above it is the timeline of the day, reconstructed witness by witness. Each stack frame is a witness statement: “I am the function <code>print_average</code>, I was on line 4 running <code>average = total / len(values)</code> when it happened, and I was sent here by <code>main</code>.” Read the timeline from the bottom — from the moment of the incident — and work backward through who called whom, exactly as a detective starts at the body and traces the events that led there. Most cases are solved at the scene, in the bottom frame; only the tangled ones require interviewing the earlier witnesses further up.</p>
+<p>The rest of the method is ordinary detective procedure. You <em>reproduce</em> the crime to study it under controlled conditions. You <em>isolate</em> by narrowing the list of suspects until one piece of code remains. You form a <em>hypothesis</em> about the culprit and you <em>test</em> it against evidence rather than arresting on a hunch — and the debugger is your interview room, where you stop a suspect variable mid-run and ask it directly what value it is holding. Even the rubber duck fits: it is the partner you talk the case through with, the one who says nothing but in front of whom you suddenly hear the flaw in your own theory. Hold this scene in mind and error text stops being alarming; it becomes the most cooperative witness you will ever question.</p>
+<h2 id="examples-in-practice">Examples in practice</h2>
+<p>Start with a real traceback you can reproduce. Put this in a file and run it:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> print_average</span><span style="color:#E1E4E8">(values):</span></span>
+<span class="line"><span style="color:#E1E4E8">    total </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> sum</span><span style="color:#E1E4E8">(values)</span></span>
+<span class="line"><span style="color:#E1E4E8">    average </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> total </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> len</span><span style="color:#E1E4E8">(values)   </span><span style="color:#6A737D"># line 3</span></span>
+<span class="line"><span style="color:#79B8FF">    print</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">f</span><span style="color:#9ECBFF">&quot;Average: </span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">average</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">scores </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> []</span></span>
+<span class="line"><span style="color:#E1E4E8">print_average(scores)</span></span></code></pre>
+<p>Running it prints a <code>ZeroDivisionError</code> whose bottom frame points at line 3. Read bottom-up: the <em>what</em> is division by zero; the <em>where</em> is <code>total / len(values)</code>; and one glance shows <code>len(values)</code> is zero because <code>scores</code> is empty. The fix is to handle the empty case — <code>if not values: print(&quot;No scores yet&quot;); return</code> — and note that the real cause was up in the caller, where <code>scores</code> was never filled.</p>
+<p>Now watch the difference between two lookups. This raises <code>IndexError: list index out of range</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">scores </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">88</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">92</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">79</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#79B8FF">print</span><span style="color:#E1E4E8">(scores[</span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">])     </span><span style="color:#6A737D"># valid indices are 0, 1, 2</span></span></code></pre>
+<p>The list has three items at positions 0, 1, and 2; asking for position 3 walks off the end. Compare it with this, which raises <code>KeyError: &#39;Germany&#39;</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">capitals </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {</span><span style="color:#9ECBFF">&quot;France&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;Paris&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&quot;Japan&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;Tokyo&quot;</span><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#79B8FF">print</span><span style="color:#E1E4E8">(capitals[</span><span style="color:#9ECBFF">&quot;Germany&quot;</span><span style="color:#E1E4E8">])</span></span></code></pre>
+<p>Same shape of mistake — looking up something that is not there — but the exception type tells you instantly whether you are dealing with a positional sequence (<code>IndexError</code>) or a named dictionary (<code>KeyError</code>), which points at a different fix.</p>
+<p>Finally, a quick pass with the debugger. Take the empty-list program above and change the call site to pause first:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">scores </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> []</span></span>
+<span class="line"><span style="color:#79B8FF">breakpoint</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">print_average(scores)</span></span></code></pre>
+<p>When you run it, the program stops at a <code>(Pdb)</code> prompt before the failing call. Type <code>p scores</code> and Python prints <code>[]</code> — you have caught the empty list red-handed, without adding a single <code>print</code> you would later have to delete. Type <code>c</code> to continue (and watch it crash as expected), or <code>q</code> to quit. That is the whole loop in miniature: reproduce, read, isolate, hypothesize (“<code>scores</code> is empty”), test (<code>p scores</code>), fix.</p>
+<h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
+<h3 id="security">Security</h3>
+<p>Tracebacks are wonderful for you and dangerous when shown to strangers. A raw traceback can reveal file paths, function names, library versions, and fragments of internal logic — a map of your system that an attacker would love. The rule that follows is simple: detailed tracebacks belong in your development console and your private logs, never on a user’s screen or a public web page. Production web frameworks hide tracebacks from users by default for exactly this reason; when you build anything others touch, you show them a calm generic message and keep the real traceback where only you can read it.</p>
+<h3 id="privacy">Privacy</h3>
+<p>Error messages often quote the data that triggered them. A <code>KeyError: &#39;ssn&#39;</code> or a <code>ValueError</code> printed with a customer’s raw input can spill personal information straight into a log file that is less protected than your database. As your programs start handling real data — including the training data and prompts of AI systems — treat what your errors print as seriously as what your program stores. Log the exception type and location freely; think twice before logging the offending value verbatim.</p>
+<h3 id="performance">Performance</h3>
+<p>Reading errors well is itself a performance issue — of your time, the most expensive resource in any project. The difference between finding a bug in ten seconds and thirty minutes, multiplied across the dozens of errors in a working day, is the difference between finishing and floundering. There is also a small runtime dimension: raising and handling exceptions is not free, so exceptions are for exceptional situations, not for ordinary control flow you could express with a plain <code>if</code>. Use them to signal genuine problems, not as a routine branch taken thousands of times in a tight loop.</p>
+<h3 id="scalability">Scalability</h3>
+<p>As programs grow from one file to many, and from your laptop to a cluster, the traceback is what keeps failures findable. A stack that spans your code, a library, and a framework is exactly what lets you locate a bug in a hundred thousand lines you did not all write. This is also why <em>logging</em> — recording what happened to a durable stream, covered on Day 40 — scales where scattered <code>print()</code> calls do not: on a server running unattended, or across many machines, you cannot watch a console, so you capture exceptions to logs and read them after the fact. The bigger the system, the more its debuggability rests on well-captured errors.</p>
+<h3 id="cost">Cost</h3>
+<p>Every hour spent stuck on a bug you could have read in a minute is real money, and in cloud and AI work the meter runs literally: a training job that crashes with an unread <code>TypeError</code> after two hours on rented GPUs has burned those hours for nothing. Fast, methodical debugging is one of the highest-leverage skills you can build precisely because it converts directly into saved time and saved spend. The habit you form this week pays out every day you write code.</p>
+<h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
+<p>The tools for reading errors and debugging range from what ships with Python to full graphical environments. Here is how the leading options compare and when to reach for each.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool</th><th>Type</th><th>What it offers</th><th>Cost</th></tr></thead><tbody><tr><td><code>print()</code> debugging</td><td>Built in</td><td>Zero setup; add a line, see a value. Best for a quick look.</td><td>Free</td></tr><tr><td><code>pdb</code> / <code>breakpoint()</code></td><td>Built into Python</td><td>Pause any program, inspect variables, step line by line — no install.</td><td>Free</td></tr><tr><td>Python <code>logging</code> module</td><td>Built into Python (Day 40)</td><td>Durable, level-controlled records for long-running and production code.</td><td>Free</td></tr><tr><td>VS Code debugger</td><td>Free commercial (open-source core)</td><td>A graphical debugger: click to set breakpoints, hover to see values, watch panes.</td><td>Free</td></tr><tr><td>PyCharm debugger</td><td>Commercial (free Community edition)</td><td>A powerful IDE debugger with rich inspection and conditional breakpoints.</td><td>Free tier; paid Pro</td></tr></tbody></table>
+<p>For learning, master the free, built-in trio first: read the traceback, use <code>print()</code> for a quick check, and reach for <code>breakpoint()</code> when you need to pause and look around. Every one of these is free and always available, even on a bare server with no graphical interface. A graphical debugger in an editor like VS Code (free) or PyCharm (free Community edition; paid Professional edition adds features you will not need for a long while) makes the same <code>pdb</code> ideas friendlier — click a line to set a breakpoint, hover a variable to see its value — but it is a convenience layered on the fundamentals, not a replacement for understanding them. Learn the command-line debugger and every graphical one becomes obvious; learn only the graphical one and you are stuck the first time you meet a remote machine.</p>
+<h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>Exception</td><td>Traceback</td><td>An exception is the raised signal (“division by zero”); a traceback is the printed report of <em>where</em> it happened.</td></tr><tr><td>Syntax error</td><td>Runtime error</td><td>A syntax error stops the program from starting at all; a runtime error (like <code>KeyError</code>) happens while it runs.</td></tr><tr><td><code>TypeError</code></td><td><code>ValueError</code></td><td>Wrong <em>kind</em> of value versus right kind but unacceptable value (<code>&quot;3&quot; + 5</code> vs <code>int(&quot;hello&quot;)</code>).</td></tr><tr><td><code>IndexError</code></td><td><code>KeyError</code></td><td>Missing position in an ordered sequence versus missing key in a dictionary.</td></tr><tr><td>Print-debugging</td><td>Interactive debugger</td><td>Prints require editing and re-running; the debugger pauses the live program so you can inspect anything.</td></tr><tr><td>Debugging</td><td>Testing</td><td>Debugging finds the cause of a known failure; testing (later in this course) tries to <em>cause</em> failures on purpose to catch them early.</td></tr></tbody></table>
+<h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
+<p>Reach for careful traceback-reading every single time a program raises an exception — which is to say, constantly. It is the fastest tool you have and the right first move for the overwhelming majority of failures: read the bottom line, read the bottom frame, and act. Reach for print-debugging when the traceback is not enough and you have a quick, specific question — “what is in this variable right here?” Reach for the interactive debugger when the situation is murkier: a wrong answer with no crash, a value you cannot explain, or a loop whose behavior you need to watch unfold. Reach for the full six-step method whenever a bug does not yield to a glance — reproduce, isolate, hypothesize, test — and reach for the rubber duck the moment you have been staring at the same lines for ten minutes without progress.</p>
+<p>Know the limits too. Do not fire up the debugger for a bug the traceback already explains — that is slower, not faster. Do not scatter <code>print()</code> calls at random hoping one reveals something; a single well-placed, well-labelled print beats twenty guesses. Do not leave debugging prints in code you keep — remove them, and use the <code>logging</code> module for anything that must persist. And do not treat exceptions as ordinary control flow: if a missing key is a normal, expected case, check for it with <code>if key in d</code> or <code>d.get(key)</code> rather than catching a <code>KeyError</code> you provoked on purpose. The professional habit is to match the tool to the failure — read first, print for a quick check, debug for a real investigation — and to always, always fix the cause rather than silence the symptom.</p>
+<h2 id="knowledge-check">Knowledge check</h2>
+<p>Try these from memory before looking back:</p>
+<ol>
+<li>In your own words, explain why you read a traceback from the bottom up. What does the very last line tell you, and what does the bottom-most <code>File</code> frame tell you?</li>
+<li>A program raises <code>ValueError: invalid literal for int() with base 10: &#39;hello&#39;</code>. What category of mistake is this, and how does it differ from a <code>TypeError</code>?</li>
+<li>You look up <code>data[&quot;price&quot;]</code> and get a <code>KeyError: &#39;price&#39;</code>. The lookup line is clearly correct. Where should you actually look for the bug, and why?</li>
+<li>Name the six steps of the systematic debugging method in order, with one sentence on what each accomplishes.</li>
+<li>Give one situation where the interactive debugger (<code>breakpoint()</code>) is clearly better than adding <code>print()</code> calls, and one situation where a <code>print()</code> is the better choice.</li>
+</ol>
+<h2 id="hands-on-exercise">Hands-on exercise</h2>
+<p>Time to read real tracebacks and fix real bugs. In the Day 48 lab directory you will find three tiny Python programs, each of which crashes with a different common exception when you run it. Your job is to run each one, read its traceback the way you learned today, diagnose the cause, and fix it — recording your reasoning in a worksheet as you go.</p>
+<p>First, run one of the buggy programs directly so you see a genuine traceback (from the lab directory):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">python3</span><span style="color:#9ECBFF"> examples/buggy/average_scores.py</span></span></code></pre>
+<p>It will crash. Read the output bottom-up: the last line names the exception type and message, and the bottom <code>File</code> frame names the line number and the exact line of code. Then run the guided walkthrough, which runs all three buggy programs, captures each traceback, and points out the exception type and culprit line for you:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">bash</span><span style="color:#9ECBFF"> examples/debug_walkthrough.sh</span></span></code></pre>
+<p>Now do the work yourself. The <code>starter/</code> directory has its own copies of the three buggy programs. For each one, run it, fill in the matching row of <code>starter/debug-worksheet.md</code> (exception type, line number, cause, and your fix), then edit the program so it runs cleanly. Finally, run the test script to confirm the buggy versions still fail as expected and your fixed versions now succeed:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">bash</span><span style="color:#9ECBFF"> tests/run_tests.sh</span></span></code></pre>
+<h3 id="expected-output">Expected output</h3>
+<p>Running a buggy program prints a real traceback. For <code>average_scores.py</code> it looks like this (your Python version’s exact wording may differ slightly):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>Traceback (most recent call last):</span></span>
+<span class="line"><span>  File &quot;examples/buggy/average_scores.py&quot;, line 5, in &lt;module&gt;</span></span>
+<span class="line"><span>    print(f&quot;Student {i + 1}: {scores[i]}&quot;)</span></span>
+<span class="line"><span>                              ~~~~~~^^^</span></span>
+<span class="line"><span>IndexError: list index out of range</span></span></code></pre>
+<p>Read bottom-up: <code>IndexError: list index out of range</code> is the <em>what</em>; line 5, <code>print(f&quot;Student {i + 1}: {scores[i]}&quot;)</code>, is <em>where</em> it surfaced; and the caret marks <code>scores[i]</code> as the offending piece. The cause is a loop that counts one position too far. The guided walkthrough summarizes all three like this:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>=== average_scores.py ===</span></span>
+<span class="line"><span>Exception: IndexError: list index out of range</span></span>
+<span class="line"><span>Culprit line 5: print(f&quot;Student {i + 1}: {scores[i]}&quot;)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>=== lookup_capital.py ===</span></span>
+<span class="line"><span>Exception: KeyError: &#39;Germany&#39;</span></span>
+<span class="line"><span>Culprit line 6: print(f&quot;The capital of {country} is {capitals[country]}.&quot;)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>=== total_price.py ===</span></span>
+<span class="line"><span>Exception: TypeError: can only concatenate str (not &quot;int&quot;) to str</span></span>
+<span class="line"><span>Culprit line 4: total = price + tax</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>All three buggy programs failed as expected. Now run the fixed versions:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>--- fixed/average_scores.py ---</span></span>
+<span class="line"><span>Student 1: 88</span></span>
+<span class="line"><span>Student 2: 92</span></span>
+<span class="line"><span>Student 3: 79</span></span>
+<span class="line"><span>Student 4: 95</span></span>
+<span class="line"><span>Average: 88.5</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>--- fixed/lookup_capital.py ---</span></span>
+<span class="line"><span>The capital of Germany is unknown.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>--- fixed/total_price.py ---</span></span>
+<span class="line"><span>Total: 12</span></span></code></pre>
+<h3 id="validate-your-work">Validate your work</h3>
+<p>You are done when you can check every box:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> You ran each buggy program and saw its traceback with your own eyes.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> For each program you can state the exception type and the line number where it surfaced.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Your <code>starter/debug-worksheet.md</code> has all three rows filled in: type, line, cause, fix.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You edited each starter program so it runs without raising an exception.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>bash tests/run_tests.sh</code> prints its success summary and exits 0.</li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><strong><code>python3: command not found</code>.</strong> Use <code>python</code> instead, or revisit Day 43 (installing Python). Confirm with <code>python3 --version</code>.</li>
+<li><strong>“But my fixed program still crashes.”</strong> Read the <em>new</em> traceback — a fix can reveal a second bug, or introduce one. That is normal; run the loop again on the new error.</li>
+<li><strong>The test script says a buggy program did not fail.</strong> You probably edited a file in <code>examples/buggy/</code> by mistake; those must stay broken. Only edit the copies in <code>starter/</code>. Restore the originals with <code>git checkout -- examples/buggy</code>.</li>
+<li><strong>You cannot tell which line the error is on.</strong> Look for the bottom-most <code>File &quot;...&quot;</code>, line N line in the traceback; N is the line, and the code shown beneath it is that line.</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<ul>
+<li><strong>Reading the traceback top-down.</strong> The top frames are often inside libraries you did not write. Start at the bottom: the exception type, then the nearest frame.</li>
+<li><strong>Fixing the symptom, not the cause.</strong> Wrapping a crash in a blanket <code>try/except</code> that hides it is not a fix; find why the value was wrong in the first place.</li>
+<li><strong>Editing the wrong copy.</strong> The <code>examples/buggy/</code> programs are the reference and must stay broken so the walkthrough and tests work; do your fixing in <code>starter/</code>.</li>
+</ul>
+<h2 id="practice-assignment">Practice assignment</h2>
+<p>Open <code>starter/debug-worksheet.md</code> and complete it fully for all three programs. For each one, record four things from your own investigation: the exact exception type and message, the line number where it surfaced, the underlying cause in one sentence (not just “it crashed” — <em>why</em> the value was wrong), and the specific change you made to fix it. Then, below the table, write one short paragraph (4–6 sentences) describing how the three bugs differ: what category of mistake each represents (a bad index, a missing key, a type mismatch), and how the exception type alone told you which kind of fix each needed. Keep the worksheet — recognizing exception types on sight is a skill that compounds, and a later lesson builds on it.</p>
+<h2 id="extension-challenge">Extension challenge</h2>
+<p>Go one level deeper and practice the interactive debugger on a real pause. Take a copy of <code>starter/average_scores.py</code> (before you fix it, or a fresh broken copy) and add the line <code>breakpoint()</code> immediately before the <code>for</code> loop. Run it with <code>python3</code>, and when you reach the <code>(Pdb)</code> prompt, use the debugger to investigate: type <code>p scores</code> to print the list, <code>p len(scores)</code> to see its length, and <code>n</code> a few times to step through the loop one iteration at a time, printing <code>p i</code> and <code>p scores[i]</code> at each step until you watch the exact moment <code>i</code> walks off the end. Write two or three sentences describing what you saw at the last valid index versus the first invalid one, and explain why stepping through in the debugger showed you the bug more directly than the crash alone did. You have just done what professional engineers do when a value refuses to make sense — paused the living program and asked it, one line at a time, what it was really doing.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. In which order should you read a Python traceback, and why? </strong> </p> <ol type="A"> <li>Top to bottom, because the first frame is always where your bug is</li><li>Bottom to top, because the last line names the exception and the frame above it shows where the error surfaced</li><li>It does not matter; every line says the same thing</li><li>Only the middle frames matter; ignore the top and bottom</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Bottom to top, because the last line names the exception and the frame above it shows where the error surfaced </p> <p>Tracebacks list calls oldest-first, so the most recent call sits at the bottom next to the exception. Reading bottom-up gives you the &quot;what&quot; (the exception type and message) and then the &quot;where&quot; (the nearest frame) with the least wasted effort.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. A program raises TypeError. What category of mistake does that signal? </strong> </p> <ol type="A"> <li>A dictionary key that does not exist</li><li>A sequence index that is out of range</li><li>An operation given a value of the wrong type, such as adding a string to a number</li><li>Code that Python could not parse at all</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> An operation given a value of the wrong type, such as adding a string to a number </p> <p>A TypeError means an operation received the wrong KIND of value — for example &quot;3&quot; + 5, where no value would make string-plus-integer valid. That differs from a ValueError, where the type is right but the specific value is unacceptable.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. What is the difference between a TypeError and a ValueError? </strong> </p> <ol type="A"> <li>A TypeError is the wrong kind of value; a ValueError is the right kind of value but an unacceptable one</li><li>They are two names for exactly the same error</li><li>A ValueError only happens with dictionaries; a TypeError only happens with lists</li><li>A TypeError happens before the program starts; a ValueError happens while it runs</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> A TypeError is the wrong kind of value; a ValueError is the right kind of value but an unacceptable one </p> <p>int(&quot;hello&quot;) raises ValueError because a string is the right type for int() but &quot;hello&quot; is not a number. &quot;3&quot; + 5 raises TypeError because a string and an integer are incompatible kinds for the + operation.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. You look up my_list[5] on a list that has three items. Which exception is raised? </strong> </p> <ol type="A"> <li>KeyError</li><li>IndexError</li><li>ValueError</li><li>AttributeError</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> IndexError </p> <p>IndexError means a sequence index is out of range. A three-item list has valid positions 0, 1, and 2, so asking for position 5 walks off the end. A missing lookup in a dictionary would instead raise KeyError.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. What is the correct order of the six-step systematic debugging method? </strong> </p> <ol type="A"> <li>Fix, read, reproduce, test, isolate, hypothesize</li><li>Reproduce, read, isolate, hypothesize, test, fix</li><li>Hypothesize, fix, read, reproduce, isolate, test</li><li>Read, fix, reproduce, hypothesize, isolate, test</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Reproduce, read, isolate, hypothesize, test, fix </p> <p>First make the failure reproducible, then read the error, isolate the smallest failing piece, form one testable hypothesis about the cause, test it, and only then fix the cause — re-running your reproduction to confirm.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. What does the built-in breakpoint() function do when your program reaches it? </strong> </p> <ol type="A"> <li>It permanently deletes the current variable to free memory</li><li>It pauses the running program and drops you into the interactive debugger so you can inspect variables and step line by line</li><li>It prints every variable in the program and then exits</li><li>It restarts the program from the first line</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> It pauses the running program and drops you into the interactive debugger so you can inspect variables and step line by line </p> <p>breakpoint() (added in Python 3.7) stops execution at that line and opens the pdb debugger prompt, where commands like p (print a value), n (next line), s (step into), and c (continue) let you inspect the live program without adding and re-running print statements.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. Why is it said that &quot;where the program broke is not always where it went wrong&quot;? </strong> </p> <ol type="A"> <li>Because Python reports line numbers at random</li><li>Because the error surfaces at the line that failed, but the real cause can be earlier code or a calling function that supplied a bad value</li><li>Because tracebacks never include the correct file name</li><li>Because every exception is actually a SyntaxError in disguise</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Because the error surfaces at the line that failed, but the real cause can be earlier code or a calling function that supplied a bad value </p> <p>A ZeroDivisionError on total / len(values) is genuine, but the actual mistake may be far earlier where values was filled from an empty file. The call stack exists precisely so you can climb from the symptom to a cause hiding in a caller.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. Why should you avoid showing raw tracebacks to the users of a program you build? </strong> </p> <ol type="A"> <li>Tracebacks make the program run more slowly for users</li><li>Tracebacks can leak file paths, versions, internal logic, and sometimes user data, which is a security and privacy risk</li><li>Users are legally forbidden from reading tracebacks</li><li>Tracebacks only display correctly for the original author</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Tracebacks can leak file paths, versions, internal logic, and sometimes user data, which is a security and privacy risk </p> <p>A raw traceback can reveal file paths, function names, library versions, and even the offending data — a useful map for an attacker. Detailed tracebacks belong in your private console and logs; users should see a calm generic message instead.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>exception</strong> </dt> <dd data-astro-cid-whrtx2kk>A signal Python raises when it cannot carry out an instruction; it has a type that categorizes the problem and usually a message with the specifics, and it stops normal execution unless the program catches it.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>traceback</strong> </dt> <dd data-astro-cid-whrtx2kk>The report Python prints when an uncaught exception occurs, showing the chain of function calls that led to the failure, each with its file, line number, and code, ending with the exception type and message.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>stack frame</strong> </dt> <dd data-astro-cid-whrtx2kk>One entry in a traceback (and in the call stack): a single function&#39;s place in the chain of calls, recording the file, line number, function name, and the exact line being executed.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>call stack</strong> </dt> <dd data-astro-cid-whrtx2kk>The ordered chain of function calls active at a given moment — who called whom — which the traceback lists oldest-first so the most recent call sits nearest the error.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>SyntaxError</strong> </dt> <dd data-astro-cid-whrtx2kk>An error raised when Python cannot parse your code because it is not valid Python; it stops the program from starting at all.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>IndentationError</strong> </dt> <dd data-astro-cid-whrtx2kk>A special kind of SyntaxError caused by wrong or inconsistent indentation, such as a line indented where Python did not expect it.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>NameError</strong> </dt> <dd data-astro-cid-whrtx2kk>An error raised when you use a name that does not exist, usually because of a typo or because the name was used before it was defined.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>TypeError</strong> </dt> <dd data-astro-cid-whrtx2kk>An error raised when an operation receives a value of the wrong type, such as trying to add a string to an integer.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>ValueError</strong> </dt> <dd data-astro-cid-whrtx2kk>An error raised when a value is the right type but unacceptable for the operation, such as calling int(&quot;hello&quot;).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>IndexError</strong> </dt> <dd data-astro-cid-whrtx2kk>An error raised when you access a position in an ordered sequence (a list or tuple) that is out of range.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>KeyError</strong> </dt> <dd data-astro-cid-whrtx2kk>An error raised when you look up a key in a dictionary that does not exist.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>AttributeError</strong> </dt> <dd data-astro-cid-whrtx2kk>An error raised when you access an attribute or method that an object does not have, often due to a typo in the method name.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>ModuleNotFoundError</strong> </dt> <dd data-astro-cid-whrtx2kk>An error raised when Python cannot find a module you tried to import, commonly because it is not installed in the current environment.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>pdb</strong> </dt> <dd data-astro-cid-whrtx2kk>Python&#39;s built-in interactive debugger, which lets you pause a running program at a prompt and inspect variables, step line by line, and continue.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>breakpoint</strong> </dt> <dd data-astro-cid-whrtx2kk>A built-in function (added in Python 3.7) that pauses the program where it is called and drops you into the pdb debugger, replacing the older import pdb; pdb.set_trace() incantation.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>print-debugging</strong> </dt> <dd data-astro-cid-whrtx2kk>The practice of adding temporary print() calls to reveal a program&#39;s values and control flow; fast for a quick, specific question but requires editing and re-running.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>rubber-duck debugging</strong> </dt> <dd data-astro-cid-whrtx2kk>The practice of explaining your code aloud, line by line, to an inanimate object or patient listener, which often surfaces the flaw the moment intent and reality are compared.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://docs.python.org/3/tutorial/errors.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Errors and Exceptions</a> — Python Software Foundation (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://docs.python.org/3/library/exceptions.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Built-in Exceptions</a> — Python Software Foundation (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://docs.python.org/3/library/pdb.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>pdb — The Python Debugger</a> — Python Software Foundation (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://realpython.com/python-traceback/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Python Traceback</a> — Real Python (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://missing.csail.mit.edu/2020/debugging-profiling/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Missing Semester of Your CS Education — Debugging and Profiling</a> — MIT (accessed 2026-07-12) </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="48" data-astro-cid-whrtx2kk>
+Mark Day 48 as read
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+      surfaces for someone searching for one — it costs you a click and it is genuinely how people
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+★ Star on GitHub
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-047-input-output-and-f-strings" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 47</span> <span class="pn__title" data-astro-cid-oerjsknp>Input, Output, and f-strings</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-049-your-first-real-program" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 49 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Your First Real Program</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+      // Progressive enhancement only: the theme falls back to dark and every
+      // .reveal element is visible by default (the hidden start state exists
+      // only inside a prefers-reduced-motion: no-preference query).
+      (() => {
+        const toggle = document.getElementById('theme');
+        if (toggle) {
+          toggle.addEventListener('click', () => {
+            const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+            document.documentElement.dataset.theme = next;
+            try {
+              localStorage.setItem('theme', next);
+            } catch {
+              /* private mode */
+            }
+          });
+        }
+
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const items = document.querySelectorAll('.reveal');
+        if (items.length && !reduced && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry, i) => {
+                if (!entry.isIntersecting) return;
+                entry.target.style.transitionDelay = `${Math.min(i * 50, 240)}ms`;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.06 },
+          );
+          items.forEach((el) => io.observe(el));
+        } else {
+          items.forEach((el) => el.classList.add('is-in'));
+        }
+      })();
+    </script> </body> </html>

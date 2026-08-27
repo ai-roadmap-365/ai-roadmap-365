@@ -1,0 +1,420 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 7: Processes, Threads, and Scheduling · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to explain what a process really is, how the scheduler makes hundreds of programs share a few cores, and spawn, observe, and signal processes yourself from the shell."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-007-processes-threads-and-scheduling/"><meta property="og:title" content="Day 7: Processes, Threads, and Scheduling · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to explain what a process really is, how the scheduler makes hundreds of programs share a few cores, and spawn, observe, and signal processes yourself from the shell."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-007-processes-threads-and-scheduling/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-007-processes-threads-and-scheduling.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 7: Processes, Threads, and Scheduling · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 7: Processes, Threads, and Scheduling · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to explain what a process really is, how the scheduler makes hundreds of programs share a few cores, and spawn, observe, and signal processes yourself from the shell."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-007-processes-threads-and-scheduling.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+      // Dark is the default regardless of OS preference - this is a dark-first
+      // design. A visitor who picks light with the toggle keeps it. Applied
+      // before first paint so there is no flash of the wrong theme.
+      (() => {
+        let t;
+        try {
+          t = localStorage.getItem('theme');
+        } catch {
+          t = null;
+        }
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+      })();
+    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+<style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
+.starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+365 Days of AI
+</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+Labs
+</a> </header> <main id="main">  <article data-day="7" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>Inside the Machine</span>  › 
+Day 7 </p> <h1 data-astro-cid-whrtx2kk>Day 7: Processes, Threads, and Scheduling</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-007-processes-threads-and-scheduling.png" width="1200" height="630" alt="Day 7 of 365 — Processes, Threads, and Scheduling" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to explain what a process really is, how the scheduler makes hundreds of programs share a few cores, and spawn, observe, and signal processes yourself from the shell.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Inside the Machine</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-007-processes-threads-and-scheduling" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-007-processes-threads-and-scheduling</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
+cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-007-processes-threads-and-scheduling</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/ai-roadmap-365/labs/day-007-processes-threads-and-scheduling" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Distinguish a program from a process, and name what every process owns: a PID, private memory, file handles, an owner, a parent, and an exit code</li><li data-astro-cid-whrtx2kk>Trace the process lifecycle — spawn, ready, running, waiting, exit — including where zombies come from and what exit codes mean</li><li data-astro-cid-whrtx2kk>Explain why threads are cheaper than processes and why shared memory makes them dangerous, including what a race condition is</li><li data-astro-cid-whrtx2kk>Describe how the scheduler uses time slices, preemption, and context switches to run hundreds of processes on a handful of cores</li><li data-astro-cid-whrtx2kk>Control processes from the shell: start background jobs with &amp;, capture PIDs from $!, inspect with jobs and ps, and send signals with kill</li><li data-astro-cid-whrtx2kk>Distinguish concurrency from parallelism precisely and choose between threads and processes for a given kind of work</li><li data-astro-cid-whrtx2kk>Connect scheduling to AI practice: data-loader worker processes, GPU kernel queues, the GIL preview, and the batch throughput-versus-latency trade-off</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Days 1–6 of this course, especially Day 6 (operating systems) — this lesson builds directly on the OS mental model</li><li data-astro-cid-whrtx2kk>A terminal on macOS or Linux (or WSL on Windows) for the hands-on exercise</li></ul> <h2 id="why-this-matters">Why this matters</h2>
+<p>Open your machine’s activity monitor right now and count the processes. On a laptop doing “nothing,” you will find several hundred — window servers, update checkers, cloud-sync daemons, indexers — all apparently running at once on a chip with perhaps 8 or 14 cores. Something is doing an enormous amount of invisible bookkeeping to make hundreds of programs share a handful of processors so smoothly that you never notice, and that something is the subject of today’s lesson: processes, threads, and the scheduler that juggles them.</p>
+<p>This is not background trivia for an AI career; it is daily working knowledge. When you train a model, your training script is a process; the data-loader workers feeding it batches are separate processes the framework spawned for you; and when they crash or hang, the error messages speak the language of this lesson — PIDs, signals, exit codes, zombies. When a fine-tuning job saturates one CPU core while thirteen sit idle, the explanation is a thread that cannot parallelize. When you launch a long job over a remote connection and wonder whether it will survive you closing the laptop, the answer hangs on how processes relate to their parents and what signals get sent when a shell dies. When GPU utilization graphs sawtooth between 100 percent and zero, the usual culprit is a scheduling story: compute waiting on data that a starved loader process failed to deliver.</p>
+<p>The engineers who debug these situations quickly are not smarter; they simply have the model you will build today — a clear picture of what a process is, how the operating system slices time among processes, and how to observe and control processes from the shell. This is also the finale of Week 1: the day the machine you have been dissecting since Day 1 finally starts <em>running things</em>, and you take the controls.</p>
+<h2 id="the-idea-in-plain-language">The idea in plain language</h2>
+<p>A program is a file: instructions sitting on disk, doing nothing, the way a recipe in a book cooks nothing. A <strong>process</strong> is that program <em>running</em> — the recipe actually being cooked, with real ingredients out on the counter. The operating system creates a process by loading the program’s instructions into memory, giving it its own private slice of memory to work in, assigning it an identity number called a <strong>PID</strong> (process identifier), and handing it a small table of the files and connections it has open. One program can become many processes: open three terminal windows and you have three separate shell processes from one shell program, each with its own memory, each unaware of the others.</p>
+<p>Inside a process live one or more <strong>threads</strong> — independent streams of instructions that share the process’s memory. If a process is a kitchen, threads are cooks in that kitchen: they share the same counters and pantry, which makes cooperation cheap and collisions possible. Two processes, by contrast, are two separate kitchens: safe from each other, but anything they want to share must be deliberately carried between them.</p>
+<p>Above all of this sits the <strong>scheduler</strong>, a core part of the operating system. There are far more processes and threads that want CPU time than there are cores, so the scheduler gives each runnable thread a brief turn — a <strong>time slice</strong>, typically a few milliseconds — then interrupts it, saves its exact position, and hands the core to another. Swapping one thread’s saved state for another’s is a <strong>context switch</strong>, and it happens so fast, thousands of times per second across all cores, that hundreds of programs <em>appear</em> to run simultaneously on 14 cores. They do not. At any instant, exactly as many threads are truly executing as you have cores; everything else is frozen mid-instruction, waiting its turn. Today you will learn to see this illusion clearly — and to spawn, watch, and stop processes yourself from the shell.</p>
+<h2 id="historical-background">Historical background</h2>
+<p>The earliest computers ran one job at a time, start to finish. In the 1950s, machines like the IBM mainframes were fed <strong>batches</strong> of jobs on punched cards: an operator queued them up, each ran to completion, and the next began. The machine was monstrously expensive and often idle — whenever a job paused to read a tape or print a line, the processor, the costliest component in the building, simply waited.</p>
+<p>That waste drove the first big idea: <strong>multiprogramming</strong>. Keep several jobs in memory at once, and when one stops to wait for slow input or output, switch the processor to another. The processor stays busy; the accounting problem — whose job is this, where was it, what memory does it own — gives birth to the process as a bookkeeping unit.</p>
+<p>The second big idea arrived in the 1960s: <strong>time-sharing</strong>. Systems like CTSS at MIT (1961) and its ambitious successor Multics sliced processor time so finely that many humans at terminals could each interact with the machine <em>at the same time</em>, each experiencing what felt like a private computer. This required preemption — the system forcibly interrupting a running job when its slice expired — and fast switching, the direct ancestors of today’s scheduler. Unix, begun in 1969 at Bell Labs by Ken Thompson and Dennis Ritchie partly in reaction to Multics’s complexity, made the process the organizing concept of the whole system: every running thing is a process; processes are created by existing processes (a parent “forks” a child); each reports an exit code to its parent when it dies. That model, refined but not replaced, is what runs on your Mac (whose kernel descends from BSD Unix), on every Linux server, and on every Android phone.</p>
+<p>Threads came later. Through the 1980s and 1990s, as programs wanted to do several things at once <em>within</em> one application — redraw the screen while loading a file — operating systems added lightweight execution streams sharing one process’s memory, standardized for Unix-like systems as POSIX threads (pthreads) in 1995. Then the hardware turned the pressure up: around the mid-2000s, single cores stopped getting dramatically faster (the heat wall you met on Day 1) and vendors shipped multicore chips instead. Suddenly threads and processes were not just a convenience for overlapping work but the <em>only</em> way to use the whole chip — and that is precisely the world AI computing was born into: frameworks that spawn worker processes by the dozen and feed thousands of GPU cores in parallel.</p>
+<h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
+<p>A process is the operating system’s unit of a running program: one program image in memory, plus everything the OS must track to run, pause, resume, and clean up after it. Concretely, each process has its own PID, its own private virtual memory (Day 6’s address-space illusion — each process believes it has memory to itself), a table of open file handles (files, network connections, and terminal streams it may read or write), an owner (the user it runs as, which bounds what it may touch), a parent process that created it, and an <strong>exit code</strong> it leaves behind when it terminates — 0 for success by convention, anything else signaling some flavor of failure.</p>
+<p>A thread is the unit of <em>execution scheduling</em>: an instruction stream with its own program counter and stack, living inside a process and sharing that process’s memory and file handles with its sibling threads. The scheduler actually schedules threads; a “single-threaded process” is simply a process containing one.</p>
+<p>Equally important is what these things are not. A process is not the program — deleting a program file does not stop its running processes, and one program can run as fifty processes. A process is not a window — many processes have no window at all (the hundreds of daemons on your machine), and one application window may be backed by several cooperating processes, as modern browsers do with one process per tab. Threads are not “mini-processes” — they have no memory of their own, which is exactly their power and their danger. And the scheduler is not fair in any simple sense — it juggles priorities, sleeping processes, and interactive responsiveness, so a heavy computation politely loses the core to your mouse pointer many times per second.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Property</th><th>Process</th><th>Thread</th></tr></thead><tbody><tr><td>Memory</td><td>Own private address space</td><td>Shares the process’s memory with sibling threads</td></tr><tr><td>Creation cost</td><td>Relatively heavy (new address space, new bookkeeping)</td><td>Light (new stack and registers inside an existing process)</td></tr><tr><td>Isolation</td><td>Strong — one crashing process cannot corrupt another’s memory</td><td>None — one misbehaving thread can corrupt or crash the whole process</td></tr><tr><td>Communication</td><td>Deliberate and explicit (pipes, sockets, files, shared regions)</td><td>Trivial — just read the same variables (and there lies the danger)</td></tr><tr><td>Identity</td><td>PID, owner, exit code, parent</td><td>Thread ID within its process</td></tr><tr><td>Typical use</td><td>Isolation, multi-program workflows, data-loader workers</td><td>Overlapping work within one program: I/O, UI, parallel loops</td></tr></tbody></table>
+<h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
+<p>Processes, threads, and scheduling all answer the same underlying problem in different ways: <strong>the computer has fewer processors than things worth doing</strong>, and some of those things spend most of their time waiting.</p>
+<p>The process solves three problems at once. First, <em>sharing</em>: by making each running program a self-contained, pausable, resumable unit, the OS can multiplex an expensive machine among many programs and users — the original 1960s motivation. Second, <em>protection</em>: because each process gets private memory and runs as a specific user, a buggy or malicious program is walled off; it can crash itself but not scribble over the memory of your training run next door. Third, <em>lifecycle management</em>: parents, PIDs, signals, and exit codes give the system — and you, at the shell — a uniform way to start work, check on it, stop it, and learn how it ended. Every job queue, every container, every web server worker pool is built on this machinery.</p>
+<p>Threads solve a different problem: work <em>within</em> one program that should overlap. A program downloading a file should still respond to clicks; a server handling a thousand connections cannot afford a whole process per connection. Threads make such overlap cheap because there is no new address space to build — but the price is that all threads share one memory, so two threads updating the same data at the same time can interleave in ways that corrupt it. This class of bug — the race condition — is why threads are famously described as cheap and dangerous, and why Python (as you will see in the AI toolchain later) historically allowed only one thread at a time to execute Python code: a global interpreter lock, the GIL, that trades parallel speed for safety.</p>
+<p>The scheduler solves the allocation problem the other two create: given dozens of runnable threads and a few cores, who runs now, and for how long? Its goals genuinely conflict — keep interactive programs snappy (low <strong>latency</strong>), keep the machine busy on useful work (high <strong>throughput</strong>), and be reasonably fair — and every scheduling policy is a compromise among them. You will meet the same latency-versus-throughput tension again in AI serving, where batching many requests together raises throughput but makes each individual request wait.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>Four mechanisms, from the single process up to the juggling act.</p>
+<h3 id="the-anatomy-and-lifecycle-of-a-process">The anatomy and lifecycle of a process</h3>
+<p>When you run a command, your shell (itself a process) asks the kernel to create a child process, and the kernel builds the full kit: a fresh PID, a private virtual address space holding the program’s code, its global data, a <strong>heap</strong> for memory the program requests as it runs, and a <strong>stack</strong> per thread for function calls; a file-handle table whose first three entries are the standard input, output, and error streams you met on Day 6; and a record of the parent’s PID. This is why every process on your system except the very first forms one giant family tree — on your Mac or Linux box, <code>ps -o pid,ppid,command</code> shows each process alongside the PID of its parent.</p>
+<p>From birth to death, a process moves through a small set of states. It starts in a <em>spawned/new</em> state while the kernel builds it, then becomes <strong>ready</strong>: runnable, wanting a core, standing in the scheduler’s queue. When the scheduler picks it, it is <strong>running</strong> — actually executing on a core — until one of three things happens: its time slice expires and it is preempted back to ready; it asks for something slow (a disk read, a network packet, a timer, user input) and goes to <strong>waiting</strong>, where it consumes no CPU at all until the event arrives and returns it to ready; or it finishes and <strong>exits</strong>, leaving behind its exit code. There is one famous afterlife state: a <strong>zombie</strong> is a process that has exited but whose parent has not yet collected (“reaped”) its exit code — a dead entry in the process table, consuming almost nothing, waiting for its parent to ask how it died. A few zombies are normal and momentary; zombies that accumulate mean a buggy parent, a pattern you may someday recognize in a misbehaving data-loading pipeline.</p>
+<p><img src="/ai-roadmap-365/_astro/process-lifecycle.Dxk59762_120Pm.svg" alt="State diagram: the process lifecycle from spawn through ready, running, and waiting to exit" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="440"></p>
+<p>Follow the arrows: the ready-running loop in the middle is the scheduler’s territory (dispatch and preempt, over and over), the excursion to waiting is where processes spend most of their lives on an interactive machine, and the exit on the right records the exit code — the single number by which scripts and pipelines judge success. When your shell prints nothing after a command, it still received that code; <code>echo $?</code> reveals the last one.</p>
+<h3 id="threads-cheap-and-dangerous">Threads: cheap and dangerous</h3>
+<p>Creating a process means building a whole new address space; creating a thread means adding one more instruction stream — a program counter, registers, and a stack — inside an address space that already exists. That is why threads are cheap: starting one is orders of magnitude lighter than starting a process, and switching between two threads of the same process is cheaper than switching between processes because the memory mapping does not change.</p>
+<p>The shared memory that makes threads cheap is exactly what makes them dangerous. Suppose two threads both execute <code>counter = counter + 1</code> at nearly the same moment. Each reads the value, adds one, writes it back — but if both read before either writes, one increment vanishes. Nothing crashes; the number is simply, silently wrong, and only under just the right timing. These race conditions are among the hardest bugs in software because they are not reliably reproducible. The cures — locks that let only one thread into a critical section at a time — bring their own pathologies (deadlocks, where two threads each hold a lock the other needs, forever). The practical wisdom you will use in AI work: threads shine when work is mostly <em>waiting</em> (network calls, disk reads, feeding a GPU); for heavy <em>computation</em> in parallel, separate processes with explicit hand-offs are often the safer, and in Python historically the only effective, choice.</p>
+<h3 id="the-scheduler-time-slices-context-switches-preemption">The scheduler: time slices, context switches, preemption</h3>
+<p>Now the juggling act. At any moment your machine has perhaps 500 processes containing a couple of thousand threads, of which almost all are waiting — blocked on input, timers, or events. The scheduler’s concern is the handful that are ready. To each running thread it grants a time slice on the order of milliseconds. When the slice expires, a hardware timer interrupts the core — this is <strong>preemption</strong>: the thread is not asked, it is stopped — and the kernel performs a <strong>context switch</strong>: it saves the interrupted thread’s complete CPU state (program counter, registers, stack pointer) into memory, selects the next ready thread by its policy and priorities, loads that thread’s saved state, and resumes it exactly where it froze, mid-computation, none the wiser.</p>
+<p><img src="/ai-roadmap-365/_astro/scheduler-timeslices.Bzx2jEow_1CHiN3.svg" alt="Timeline: three processes sharing one CPU core through time slices and context switches" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="400"></p>
+<p>The diagram shows one core and three processes over a stretch of milliseconds: A runs, is preempted, B runs, blocks early on a disk read (yielding the rest of its slice), C runs, and so on — with thin dark slivers between slices marking the context switches themselves. Two lessons hide in those slivers. First, a context switch is pure overhead — microseconds of saving and loading during which no useful work happens, plus a subtler tax afterward as the incoming thread finds the CPU caches full of the outgoing thread’s data. Thousands of switches per second are fine; force millions (say, by spawning far more busy threads than cores) and the machine spends its life switching instead of working. Second, blocking is free CPU: a thread waiting on disk or network is charged nothing, which is why one core handles hundreds of mostly-idle processes gracefully. Multiply this picture by your core count — an M4-class laptop chip with 14 cores runs up to 14 threads truly simultaneously — and add that schedulers boost the priority of interactive, frequently-sleeping processes over long-running compute hogs, and you have the real answer to “how do 100 programs run at once on 14 cores”: they don’t; they take very fast turns, and most of them are asleep.</p>
+<h3 id="jobs-and-signals-taking-the-controls-in-the-shell">Jobs and signals: taking the controls in the shell</h3>
+<p>The shell gives you a direct handle on all this. End a command with <code>&amp;</code> and the shell starts it as a <strong>background job</strong>: the process runs, but the shell does not wait — you get your prompt back immediately, and the special variable <code>$!</code> holds the new child’s PID. The <code>jobs</code> command lists your shell’s background children; <code>ps</code> shows processes system-wide; <code>wait</code> pauses the shell until a child finishes and hands you its exit code.</p>
+<p>To influence a process you do not converse with it — you send it a <strong>signal</strong>, a tiny numbered notification delivered by the kernel. The <code>kill</code> command, despite its name, is the general signal-sender:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Signal</th><th>Number</th><th>Sent by</th><th>Plain meaning</th><th>Can the process refuse?</th></tr></thead><tbody><tr><td>SIGTERM</td><td>15</td><td><code>kill PID</code> (the default)</td><td>“Please shut down.”</td><td>Yes — it may clean up first, or handle and ignore it</td></tr><tr><td>SIGINT</td><td>2</td><td>Ctrl+C in the terminal</td><td>”Stop what you’re doing.”</td><td>Yes — interactive programs often catch it</td></tr><tr><td>SIGKILL</td><td>9</td><td><code>kill -9 PID</code></td><td>”Cease to exist, now.”</td><td>No — the kernel ends it; no cleanup runs</td></tr><tr><td>SIGSTOP</td><td>—</td><td><code>kill -STOP PID</code></td><td>”Freeze (resumable).”</td><td>No — paused until SIGCONT</td></tr><tr><td>SIGCONT</td><td>—</td><td><code>kill -CONT PID</code>, <code>bg</code>, <code>fg</code></td><td>”Resume.”</td><td>Resumes a stopped process</td></tr><tr><td>SIGHUP</td><td>1</td><td>Terminal/connection closes</td><td>”Your terminal went away.”</td><td>Yes — daemons traditionally reload config instead</td></tr></tbody></table>
+<p>The etiquette matters: always try SIGTERM first, giving the process a chance to flush files and release resources; reach for SIGKILL only when a process ignores polite requests — and know that SIGKILL leaves no opportunity to clean up, which is how half-written checkpoint files happen. A process that ends because of a signal reports a distinctive exit code, 128 plus the signal number: a SIGTERM death is 143, a SIGKILL death is 137 — a number worth memorizing, because containerized jobs killed for exceeding memory limits die with exactly that code. And SIGHUP explains the remote-job problem from the introduction: close the terminal and your background children are told their terminal died, which by default terminates them — the reason tools exist to detach long jobs from any terminal (<code>nohup</code>, and later in this course, terminal multiplexers).</p>
+<h3 id="concurrency-versus-parallelism-precisely">Concurrency versus parallelism, precisely</h3>
+<p>Two words this lesson lets you use exactly. <strong>Concurrency</strong> is <em>dealing with</em> many tasks in overlapping time periods — structure, not simultaneity. One core running three processes in slices is concurrent: progress on all three, never two at the same instant. <strong>Parallelism</strong> is <em>executing</em> more than one task at the same physical instant, which requires more than one execution unit — multiple cores, or a GPU’s thousands of them. A single barista rotating among four half-made drinks is concurrent; four baristas each making a drink is parallel. All parallelism on a shared machine involves concurrency (the scheduler is still there), but concurrency does not require parallelism at all. The distinction earns its keep in AI work: Python threads under the GIL give you concurrency (great for overlapping waits) but not parallelism of Python computation — which is why frameworks reach for <em>processes</em> when they need real simultaneous work on many cores.</p>
+<h2 id="an-everyday-analogy">An everyday analogy</h2>
+<p>Return to the restaurant kitchen from Day 1, where the chef was the CPU and the kitchen manager was the operating system. Tonight the picture sharpens. Each <em>order</em> pinned above the counter is a process: its own ticket number (PID), its own workspace and ingredients that no other order may touch (private memory), its own tab of what has been requisitioned from the pantry (file handles), and a defined ending — the dish goes out, and the expediter records whether it was served or scrapped (exit code). If one order is ruined, it is scraped into the bin without contaminating any other order: isolation.</p>
+<p>The manager runs the schedule with a strict rule: no order monopolizes the chef. The chef works order A for ninety seconds — timer rings, hands off — order B goes on the stove, but B immediately needs forty minutes in the oven, so B is set aside (waiting: costing no chef time at all) and order C gets the chef early. Every hand-off, the chef must put down one order’s tools and mentally reload another’s recipe and status — a real cost, small if occasional, ruinous if the manager rang the bell every five seconds. That is the context switch, and “too many active orders” is why over-threaded programs thrash.</p>
+<p>Now threads: a big banquet order (one process) may have three cooks on it at once (threads), sharing one workspace. They coordinate instantly — no tickets, just glances — which is fast, and occasionally two of them salt the same pot because each saw it unsalted a moment ago. That is a race condition, and the fix — a rule that only one cook touches the pot at a time — is a lock, complete with the deadlock scenario where cook one holds the pan and needs the whisk while cook two holds the whisk and needs the pan. Signals, finally, are the manager’s interventions, from a polite “wrap that order up” (SIGTERM) that lets a cook plate what is ready, to physically taking the pan off the flame mid-sauce (SIGKILL) — effective, immediate, and guaranteed to leave a mess for someone.</p>
+<h2 id="examples-in-practice">Examples in practice</h2>
+<p>Watch it all happen on your real machine. Run <code>ps -e | wc -l</code> and you will count hundreds of processes; run <code>top</code> (or open Activity Monitor / System Monitor) and sort by CPU, and you will see nearly all of them at 0.0% — the waiting majority — with a few percent scattered among the handful doing anything. Open a modern browser with ten tabs and check again: many separate processes for one application, a deliberate design so that one crashing tab (a dead process) takes down neither the other tabs nor the browser — process isolation used as a crash barrier.</p>
+<p>The shell mechanics appear everywhere in real workflows. <code>python train.py &amp;</code> starts a training run in the background; <code>jobs</code> confirms it is running; <code>kill %1</code> or <code>kill &lt;PID&gt;</code> ends it politely, giving the program a chance to save a checkpoint. A pipeline like <code>prepare_data &amp;&amp; train</code> uses exit codes as logic: the second command runs only if the first exits 0. And the first time a long remote job dies the moment you close your laptop, you will recognize SIGHUP doing exactly what it was designed to do in 1970s terminal rooms.</p>
+<p>Now the AI connection, concretely. A typical training setup is a small <em>society</em> of processes: the main training process owns the model and talks to the GPU, while the framework spawns several <strong>data-loader worker processes</strong> whose only job is reading and preprocessing the next batches so the GPU never waits — producer processes feeding a consumer, scheduled exactly as today’s lesson describes. Why worker <em>processes</em> rather than threads? Python’s GIL: within one Python process, only one thread executes Python code at a time, so true parallel preprocessing on many cores requires separate processes. (You will study the GIL properly in the Python section; today you already know the vocabulary it lives in.) Multi-GPU training goes further — one process per GPU, cooperating explicitly, because isolation plus deliberate communication scales more predictably than shared everything. Meanwhile the GPU has a scheduling story of its own: your process does not command the GPU directly but submits kernels — units of GPU work — into a queue that the GPU driver and hardware schedule onto thousands of cores; when the queue runs dry because a starved data loader delivered late, utilization craters, and the sawtooth graph from this lesson’s introduction is the diagnosis. Finally, model <em>serving</em> replays the scheduler’s oldest dilemma: batch many user requests together and the GPU’s throughput soars while each user waits longer; serve each instantly and latency shines while throughput collapses. Time-sharing’s latency-versus-throughput trade-off, wearing an AI costume.</p>
+<h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
+<h3 id="security">Security</h3>
+<p>Process isolation is the operating system’s fundamental security boundary: private address spaces mean one process cannot read or corrupt another’s memory, and per-process ownership means a process can touch only what its user may touch. Modern software leans on this hard — browsers sandbox each tab in a low-privilege process, and containers are, at heart, ordinary processes wearing extra isolation. Signals have a security dimension too: the kernel only lets you signal processes you own, which is why the discipline you will practice in today’s lab — signal only processes you started — is both good manners and the enforced rule.</p>
+<h3 id="privacy">Privacy</h3>
+<p>A process’s memory holds whatever it is working on — your documents, credentials, a model’s inputs — in the clear, because the CPU must compute on it. Isolation keeps other <em>unprivileged</em> processes out, but administrators and debugging tools can inspect process memory, and process <em>metadata</em> is far more public than the memory itself: <code>ps</code> shows every process’s full command line to every user on a shared system. Passing a password or secret key as a command-line argument publishes it to anyone running <code>ps</code> at that moment — a classic leak on shared machines and clusters, avoided by passing secrets through files or environment configuration instead.</p>
+<h3 id="performance">Performance</h3>
+<p>Three performance truths follow from today’s mechanics. Context switches cost real time — mostly modest, but oversubscription (hundreds of busy threads on a dozen cores) drowns machines in switching overhead, which is why worker pools default to roughly one worker per core for compute-heavy tasks. Blocking is free — a process waiting on the disk consumes no CPU, so the cure for waiting-dominated work is more concurrency, while the cure for compute-dominated work is more parallelism, and misdiagnosing which one you have is a classic performance mistake. And a single-threaded bottleneck caps everything: one Python loop tokenizing a dataset will pin one core at 100 percent while the other thirteen idle, and no scheduler can fix a program that only offers one thread of work.</p>
+<h3 id="scalability">Scalability</h3>
+<p>Scaling within one machine means turning cores into throughput — worker processes for isolated parallel jobs, threads where memory must be shared and waits overlapped. Scaling beyond one machine reuses the same conceptual kit at datacenter size: cluster schedulers allocate whole jobs to nodes the way a kernel allocates threads to cores, with the same tensions among fairness, throughput, and latency, and the same preemption idea (cheap “spot” GPU instances are precisely compute that a higher-priority claimant may preempt). Understanding a single machine’s scheduler is the readable small print of every job queue you will ever submit to.</p>
+<h3 id="cost">Cost</h3>
+<p>Idle cores on hardware you rent are money burned, and the fixes are scheduling fixes: enough data-loader workers to keep GPUs fed, enough parallelism to keep cores busy, batch sizes that balance each request’s latency against the throughput the accountant sees. Preemptible capacity turns scheduling into a market — computing that tolerates being SIGTERM’d and resumed (checkpoint early, checkpoint often) rents for a fraction of the price of guaranteed machines. And graceful shutdown is a cost line, not a nicety: a training job that handles SIGTERM by saving a checkpoint loses minutes when preempted; one that only dies to SIGKILL loses everything since its last save.</p>
+<h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
+<p>Other excellent ways to learn and explore this material, from watching to reading to poking at live systems.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Resource</th><th>Type</th><th>What it offers</th><th>Cost</th></tr></thead><tbody><tr><td>The Day 7 lab in this course</td><td>Free</td><td>Spawn, observe, and signal real processes from your own shell</td><td>Free</td></tr><tr><td>Operating Systems: Three Easy Pieces (Arpaci-Dusseau)</td><td>Free textbook</td><td>The classic modern OS text; its virtualization chapters cover processes and scheduling in depth</td><td>Free online</td></tr><tr><td>Crash Course Computer Science (PBS Digital Studios)</td><td>Free video series</td><td>Short visual episodes on operating systems and multitasking</td><td>Free</td></tr><tr><td>Wikipedia: Process, Thread, Scheduling (computing)</td><td>Free reference</td><td>Well-cited overviews and the standard vocabulary</td><td>Free</td></tr><tr><td>htop</td><td>Open source tool</td><td>A friendlier, colorful <code>top</code>: live process tree, per-core meters, interactive signaling</td><td>Free</td></tr><tr><td>Activity Monitor (macOS) / System Monitor (GNOME)</td><td>Bundled tool</td><td>Graphical process viewing and termination, no terminal required</td><td>Included with the OS</td></tr><tr><td>Brendan Gregg’s <em>Systems Performance</em> (2nd ed.)</td><td>Book (commercial)</td><td>The professional deep end: measuring schedulers, CPUs, and latency on real systems</td><td>Book purchase</td></tr></tbody></table>
+<p>If you read one thing beyond this course, make it the process and scheduling chapters of <em>Operating Systems: Three Easy Pieces</em> — a free, genuinely enjoyable university text.</p>
+<h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>Program</td><td>Process</td><td>A program is a passive file of instructions on disk; a process is a running instance with a PID, memory, and state — one program can run as many processes</td></tr><tr><td>Process</td><td>Thread</td><td>A process owns private memory and resources; a thread is an execution stream inside a process, sharing its memory with sibling threads</td></tr><tr><td>Concurrency</td><td>Parallelism</td><td>Concurrency structures many tasks over overlapping time (possible on one core); parallelism executes tasks at the same physical instant (requires multiple cores)</td></tr><tr><td>Preemptive scheduling</td><td>Cooperative scheduling</td><td>Preemptive systems interrupt tasks when their slice expires; cooperative systems wait for tasks to yield voluntarily — one stubborn task can freeze everything</td></tr><tr><td>SIGTERM</td><td>SIGKILL</td><td>SIGTERM is a request the process can catch to clean up (or ignore); SIGKILL is unrefusable termination by the kernel, with no chance to clean up</td></tr><tr><td>Foreground job</td><td>Background job</td><td>The shell waits for a foreground job and forwards your keystrokes to it; a background job (<code>&amp;</code>) runs while the shell returns your prompt immediately</td></tr></tbody></table>
+<h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
+<p>Reach for today’s model whenever a machine’s behavior confuses you: a frozen application (waiting on what? — check its state), a fan screaming with no window open (which process — <code>top</code> will name it), a job that dies when you disconnect (SIGHUP), an exit code of 137 in a cluster log (SIGKILL, almost always the out-of-memory killer). Reach for it when designing work: mostly-waiting tasks want concurrency (threads or async), compute-heavy tasks want parallelism (processes, roughly one per core), and anything long-running wants a plan for SIGTERM. Reach for it in every AI pipeline decision about <code>num_workers</code>, per-GPU processes, or serving batch sizes — each is this lesson with a framework flag in front of it.</p>
+<p>Know also when <em>not</em> to descend to this level. Do not hand-manage processes when the tools above you already do it well — frameworks spawn and reap their own workers, and fighting them causes the orphans and zombies you would be trying to prevent. Do not sprinkle threads on slow code before measuring: parallelizing a program that is actually disk-bound, or already bottlenecked on one lock, adds complexity and race-condition risk for nothing. And do not reach for <code>kill -9</code> as a habit — the polite signal first is not ceremony; it is the difference between a saved checkpoint and a corrupted one. The professional pattern is the same layered thinking as all week: trust the abstractions by default, and descend deliberately, tools in hand, when the evidence points below.</p>
+<h2 id="knowledge-check">Knowledge check</h2>
+<p>Try these from memory before looking back:</p>
+<ol>
+<li>A friend says “a process is just another word for a program.” Correct them precisely, naming at least three things a process has that a program file does not.</li>
+<li>Trace the lifecycle of a process that reads a file and exits: name each state it passes through and what moves it from one state to the next, including where a zombie could appear.</li>
+<li>Your machine has 14 cores and 480 processes. Explain, using time slices, context switches, and the waiting state, why everything still feels instantaneous.</li>
+<li>When would you choose threads over processes for parallel work, and what single property of threads makes them both cheap and dangerous?</li>
+<li>You must stop a training job. Give the exact sequence of signals you would send, in order, with the reason for the order — and state what exit code the job reports if it dies to each.</li>
+</ol>
+<h2 id="hands-on-exercise">Hands-on exercise</h2>
+<p>Time to take the controls. In this exercise — worked through fully in the Day 7 lab directory — you spawn a background process, observe it with the shell’s job tools and with <code>ps</code>, terminate it politely, and verify its death. Everything runs identically on macOS and Linux.</p>
+<p>Start a process that conveniently does nothing for five minutes, in the background:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sleep</span><span style="color:#79B8FF"> 300</span><span style="color:#E1E4E8"> &amp;</span></span></code></pre>
+<p>The shell prints a job number and a PID, and gives your prompt back — <code>sleep</code> is now a real process in the waiting state (blocked on a timer, costing zero CPU). Capture its PID from the special variable that holds the last background child’s PID:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">echo</span><span style="color:#79B8FF"> $!</span></span></code></pre>
+<p>See it through the shell’s eyes, then through the system’s:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">jobs</span><span style="color:#79B8FF"> -l</span></span>
+<span class="line"><span style="color:#B392F0">ps</span><span style="color:#79B8FF"> -o</span><span style="color:#9ECBFF"> pid,ppid,stat,command</span><span style="color:#79B8FF"> -p</span><span style="color:#F97583"> &lt;</span><span style="color:#9ECBFF">PI</span><span style="color:#E1E4E8">D</span><span style="color:#F97583">&gt;</span></span></code></pre>
+<p><code>jobs -l</code> lists your shell’s background children with PIDs; the <code>ps</code> line shows the process’s PID, its parent’s PID (<code>ppid</code> — your shell!), its state code (<code>stat</code> — an <code>S</code> means sleeping/waiting), and the command. While you are there, meet your shell itself and count the whole population:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">echo</span><span style="color:#79B8FF"> $$</span></span>
+<span class="line"><span style="color:#B392F0">ps</span><span style="color:#79B8FF"> -e</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> wc</span><span style="color:#79B8FF"> -l</span></span></code></pre>
+<p><code>$$</code> is the current shell’s own PID; the <code>ps -e</code> count is every process on the machine. Now end your sleeper politely and confirm the outcome:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">kill</span><span style="color:#F97583"> &lt;</span><span style="color:#9ECBFF">PI</span><span style="color:#E1E4E8">D</span><span style="color:#F97583">&gt;</span></span>
+<span class="line"><span style="color:#79B8FF">wait</span><span style="color:#F97583"> &lt;</span><span style="color:#9ECBFF">PI</span><span style="color:#E1E4E8">D</span><span style="color:#F97583">&gt;</span><span style="color:#E1E4E8">; </span><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;exit status: </span><span style="color:#79B8FF">$?</span><span style="color:#9ECBFF">&quot;</span></span>
+<span class="line"><span style="color:#B392F0">ps</span><span style="color:#79B8FF"> -p</span><span style="color:#F97583"> &lt;</span><span style="color:#9ECBFF">PI</span><span style="color:#E1E4E8">D</span><span style="color:#F97583">&gt;</span></span></code></pre>
+<p><code>kill</code> sends SIGTERM (signal 15); <code>wait</code> collects the child’s exit status — expect 143, which is 128 + 15, the signature of a SIGTERM death; and the final <code>ps</code> finds nothing, printing only a header, because the PID is gone.</p>
+<h3 id="expected-output">Expected output</h3>
+<p>A real session on macOS (PIDs will differ on every run — that is the nature of PIDs):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ sleep 300 &amp;</span></span>
+<span class="line"><span>[1] 84210</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ echo $!</span></span>
+<span class="line"><span>84210</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ jobs -l</span></span>
+<span class="line"><span>[1]+ 84210 Running                 sleep 300 &amp;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ ps -o pid,ppid,stat,command -p 84210</span></span>
+<span class="line"><span>  PID  PPID STAT COMMAND</span></span>
+<span class="line"><span>84210 84019 S    sleep 300</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ echo $$</span></span>
+<span class="line"><span>84019</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ ps -e | wc -l</span></span>
+<span class="line"><span>     612</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ kill 84210</span></span>
+<span class="line"><span>$ wait 84210; echo &quot;exit status: $?&quot;</span></span>
+<span class="line"><span>[1]+ Terminated: 15          sleep 300</span></span>
+<span class="line"><span>exit status: 143</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ ps -p 84210</span></span>
+<span class="line"><span>  PID TTY           TIME CMD</span></span></code></pre>
+<p>Read the story in the numbers: the sleeper’s PPID (84019) is exactly the shell’s <code>$$</code> — parent and child, one branch of the process tree. The state <code>S</code> is the waiting state from the lifecycle diagram. The exit status 143 = 128 + 15 announces death by SIGTERM. And the final <code>ps -p</code> printing only a header is the verification that the process is truly gone.</p>
+<h3 id="validate-your-work">Validate your work</h3>
+<p>You are done when you can check every box:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> You started a background process with <code>&amp;</code> and captured its PID from <code>$!</code>.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You saw the same process in both <code>jobs -l</code> and <code>ps</code>, and its PPID matched your shell’s <code>$$</code>.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can read the <code>stat</code> column and say which lifecycle state the sleeper was in.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You terminated it with plain <code>kill</code> (SIGTERM), not <code>kill -9</code>.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You observed exit status 143 and can explain the arithmetic behind it.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>ps -p &lt;PID&gt;</code> confirms the process no longer exists.</li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><strong><code>kill: (12345) - No such process</code>.</strong> The PID is wrong or the process already exited. <code>sleep 300</code> exits by itself after five minutes; rerun <code>sleep 300 &amp;</code> and use the fresh PID from <code>$!</code> immediately.</li>
+<li><strong><code>wait: pid 12345 is not a child of this shell</code>.</strong> <code>wait</code> only works on your own shell’s children. If you opened a new terminal (a new shell process), the sleeper belongs to the old one — run the whole sequence in a single terminal.</li>
+<li><strong><code>jobs</code> prints nothing.</strong> <code>jobs</code> is per-shell: it lists only background jobs of the shell you type it in. Same fix — one terminal, start to finish.</li>
+<li><strong><code>ps: illegal option</code> or strange columns.</strong> Use exactly <code>ps -o pid,ppid,stat,command</code> — this portable form works on both macOS and Linux; other flag spellings differ between the two.</li>
+<li><strong>You killed the wrong thing.</strong> If you typo a PID belonging to another of your processes, that process gets SIGTERM. This is why the lab’s iron rule exists: check with <code>ps -p &lt;PID&gt;</code> <em>before</em> you signal, and only ever signal processes you started.</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<ul>
+<li><strong>Reaching for <code>kill -9</code> first.</strong> SIGKILL forbids cleanup — no checkpoint saving, no file flushing, no removing temporary files. The professional habit is SIGTERM, a short wait, and only then escalation. Make it a reflex now, while the stakes are a <code>sleep</code>.</li>
+<li><strong>Confusing the job number with the PID.</strong> <code>[1] 84210</code> shows both: <code>%1</code> is the shell’s job label (usable as <code>kill %1</code>), 84210 is the system-wide PID. <code>kill 1</code> and <code>kill %1</code> are catastrophically different commands — PID 1 is the system’s ancestral process (your kill would be refused, but the lesson stands: know which number you are holding).</li>
+<li><strong>Using <code>$!</code> too late.</strong> <code>$!</code> always holds the PID of the <em>most recent</em> background job. Start two sleeps and <code>$!</code> names only the second — capture it into a variable (<code>worker_pid=$!</code>) immediately after each <code>&amp;</code>.</li>
+<li><strong>Expecting exit code 0 from a killed process.</strong> Termination by signal is not success: the 128 + signal-number convention exists so scripts can distinguish “finished” from “was terminated,” and tooling all over the AI world (containers, job queues) relies on it.</li>
+</ul>
+<h2 id="practice-assignment">Practice assignment</h2>
+<p>Open the process worksheet in the starter directory of the Day 7 lab and complete it from a real session on your machine: record your total process count, your shell’s PID and its parent chain (who spawned your shell? and who spawned <em>that</em>?), a full background-job lifecycle you ran (the command, its PID, both <code>jobs</code> and <code>ps</code> sightings, the signal you sent, and the exit status you collected), and finally a comparison run — terminate one <code>sleep</code> with plain <code>kill</code> and another with <code>kill -9</code>, and write down every difference you can observe in what the shell reports and the exit statuses (<code>143</code> versus <code>137</code>, and why). Then complete the five exercises in <code>starter/process_playground.sh</code> so the script performs the whole spawn-observe-terminate-verify cycle automatically, and prove it with the lab’s test suite.</p>
+<h2 id="extension-challenge">Extension challenge</h2>
+<p>Make the scheduler visible. Run a pure compute burner in the background — <code>yes &gt; /dev/null &amp;</code> — and watch it with <code>top</code>: one core pinned near 100 percent. Start a second, a third, up to one more than your core count (from Day 1’s worksheet), watching how the system distributes them across cores, and what happens when burners outnumber cores and the scheduler must slice. Then pick one burner, freeze it mid-run with <code>kill -STOP &lt;PID&gt;</code>, find the <code>T</code> (stopped) state in <code>ps -o stat</code>, thaw it with <code>kill -CONT &lt;PID&gt;</code>, and finally terminate every burner you started (politely). Write three or four sentences on what you observed about time slicing and states — you have just watched, live, everything the timeline diagram claims.</p>
+<p>You now hold Week 1 entire, and it is one connected story: transistors switch (Day 1), so a CPU can fetch, decode, and execute (Day 2); the memory hierarchy keeps that CPU fed (Day 3); everything it touches is bits (Day 4) encoding text, images, and sound (Day 5); the operating system turns that raw machine into a safe, shareable platform (Day 6); and today the platform came alive — processes taking turns on those cores, scheduled slice by slice, answering to your signals. The weekly project, the Annotated Machine Teardown, asks you to bind it together: one page, your machine, every layer labeled with the real numbers you measured — including, now, its living population of processes.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. What is the difference between a program and a process? </strong> </p> <ol type="A"> <li>They are two words for the same thing</li><li>A program is a passive file of instructions on disk; a process is a running instance of a program with its own PID, memory, and state</li><li>A program runs in RAM while a process runs on the disk</li><li>A process is the source code and a program is the compiled version</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> A program is a passive file of instructions on disk; a process is a running instance of a program with its own PID, memory, and state </p> <p>A program is just a file until the operating system loads it into memory, assigns it a PID, gives it private memory and file handles, and starts executing it — that running instance is a process, and one program can run as many processes at once.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. A process asks to read a block from disk. Which lifecycle state does it enter while the disk works, and what does that cost in CPU time? </strong> </p> <ol type="A"> <li>Running — it keeps its core until the read completes</li><li>Ready — it goes back into the scheduler queue and keeps consuming its slice</li><li>Waiting — it is blocked until the event arrives and consumes no CPU at all</li><li>Zombie — it is dead until the disk revives it</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Waiting — it is blocked until the event arrives and consumes no CPU at all </p> <p>A process blocked on input or output moves to the waiting state, where the scheduler ignores it entirely; when the event arrives it returns to ready. Blocked processes cost no CPU, which is why one core can host hundreds of mostly-idle processes.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. What exactly is a zombie process? </strong> </p> <ol type="A"> <li>A process that has exited but whose parent has not yet collected its exit code</li><li>A process consuming 100 percent CPU that cannot be killed</li><li>A process whose parent died before it did</li><li>A background process detached from any terminal</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> A process that has exited but whose parent has not yet collected its exit code </p> <p>When a process exits, the kernel keeps a small process-table entry holding its exit code until the parent reads it with a wait call; until then the dead process is a zombie. A few momentary zombies are normal — accumulating zombies indicate a parent that never reaps its children.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. Why are threads described as cheap compared with processes — and what makes them dangerous? </strong> </p> <ol type="A"> <li>Threads run on special low-power cores, but overheat easily</li><li>Threads need no new address space because they share the process&#39;s memory — and that same shared memory allows race conditions when two threads touch the same data</li><li>Threads are cheaper because the scheduler never preempts them, which risks freezing the machine</li><li>Threads copy the whole process memory at creation, which is fast but wastes RAM</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Threads need no new address space because they share the process&#39;s memory — and that same shared memory allows race conditions when two threads touch the same data </p> <p>Creating a thread only adds a stack and registers inside an existing address space, so it is far lighter than creating a process. But because all threads of a process share one memory, simultaneous unsynchronized updates can silently corrupt data — the race condition.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. Your laptop has 14 cores and 480 processes. How do they all appear to run at once? </strong> </p> <ol type="A"> <li>The operating system compresses processes so 480 fit onto 14 cores simultaneously</li><li>Most processes are waiting; the scheduler gives each runnable thread a milliseconds-long time slice and context-switches so fast that turn-taking looks simultaneous</li><li>Each core secretly contains about 34 smaller cores</li><li>Only 14 processes ever exist at a time; the rest are swapped to disk</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Most processes are waiting; the scheduler gives each runnable thread a milliseconds-long time slice and context-switches so fast that turn-taking looks simultaneous </p> <p>At any instant at most 14 threads truly execute. Nearly all processes are blocked in the waiting state, and the few runnable ones take rapid preempted turns — time slices separated by context switches — creating the illusion of simultaneity.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. What is the practical difference between kill (SIGTERM) and kill -9 (SIGKILL)? </strong> </p> <ol type="A"> <li>SIGTERM works only on background jobs; SIGKILL works on any process</li><li>They are identical; -9 just makes it faster</li><li>SIGKILL politely asks the process to stop; SIGTERM forces it</li><li>SIGTERM is a request the process can catch to clean up (or ignore); SIGKILL is unrefusable termination by the kernel with no chance to clean up</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> SIGTERM is a request the process can catch to clean up (or ignore); SIGKILL is unrefusable termination by the kernel with no chance to clean up </p> <p>SIGTERM (signal 15, the default) lets a process save files and shut down gracefully — a process killed by it exits with code 143. SIGKILL (signal 9) is enforced by the kernel, runs no cleanup, and yields exit code 137; use it only after SIGTERM fails.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. Which statement correctly distinguishes concurrency from parallelism? </strong> </p> <ol type="A"> <li>Concurrency structures many tasks over overlapping time and is possible on one core; parallelism executes tasks at the same physical instant and requires multiple execution units</li><li>Concurrency is the hardware feature; parallelism is the software feature</li><li>Parallelism is possible on a single core; concurrency requires at least two cores</li><li>They are synonyms used by different operating systems</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> Concurrency structures many tasks over overlapping time and is possible on one core; parallelism executes tasks at the same physical instant and requires multiple execution units </p> <p>A single core running three processes in time slices is concurrent but never parallel; simultaneous execution needs multiple cores (or a GPU&#39;s thousands). All parallelism on a shared machine also involves concurrency, but not vice versa.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. Why do machine-learning frameworks load training data with several worker processes rather than threads in Python? </strong> </p> <ol type="A"> <li>Threads cannot read files on most operating systems</li><li>Python&#39;s global interpreter lock allows only one thread to execute Python code at a time, so real parallel preprocessing across cores requires separate processes</li><li>Processes are always faster than threads for every workload</li><li>Worker processes can share the GPU while threads cannot</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Python&#39;s global interpreter lock allows only one thread to execute Python code at a time, so real parallel preprocessing across cores requires separate processes </p> <p>Under the GIL, Python threads provide concurrency (overlapping waits) but not parallel execution of Python code. Spawning worker processes gives each its own interpreter and memory, so many cores can genuinely preprocess batches simultaneously to keep the GPU fed.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>process</strong> </dt> <dd data-astro-cid-whrtx2kk>A running instance of a program: the program&#39;s instructions loaded into private memory, plus the PID, file handles, owner, parent, and state the operating system tracks to run and clean up after it.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>PID</strong> </dt> <dd data-astro-cid-whrtx2kk>Process identifier — the unique number the operating system assigns to each process, used to observe it (ps -p) and signal it (kill).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>thread</strong> </dt> <dd data-astro-cid-whrtx2kk>An independent stream of instructions inside a process, with its own program counter and stack but sharing the process&#39;s memory and file handles with its sibling threads.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>scheduler</strong> </dt> <dd data-astro-cid-whrtx2kk>The part of the operating system that decides which runnable thread gets which CPU core, and for how long, balancing responsiveness, throughput, and fairness.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>context switch</strong> </dt> <dd data-astro-cid-whrtx2kk>The act of saving one thread&#39;s complete CPU state and loading another&#39;s so a core can change what it is running — pure overhead that pays for the illusion of simultaneity.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>time slice</strong> </dt> <dd data-astro-cid-whrtx2kk>The brief interval, typically a few milliseconds, that the scheduler lets a thread run before preempting it and giving the core to another.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>preemption</strong> </dt> <dd data-astro-cid-whrtx2kk>The scheduler forcibly interrupting a running thread when its time slice expires or something more urgent arrives — the thread is not asked, it is stopped.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>signal</strong> </dt> <dd data-astro-cid-whrtx2kk>A small numbered notification the kernel delivers to a process, such as SIGTERM (&quot;please shut down&quot;), SIGINT (Ctrl+C), or SIGKILL (unrefusable termination).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>exit code</strong> </dt> <dd data-astro-cid-whrtx2kk>The number a process leaves behind when it terminates: 0 means success, other values signal failure, and 128 plus a signal number marks death by that signal (143 for SIGTERM, 137 for SIGKILL).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>zombie process</strong> </dt> <dd data-astro-cid-whrtx2kk>A process that has exited but whose exit code has not yet been collected by its parent, leaving a dead entry in the process table until it is reaped.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>concurrency</strong> </dt> <dd data-astro-cid-whrtx2kk>Structuring many tasks so they make progress over overlapping time periods — achievable on a single core through time slicing, with no true simultaneity required.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>parallelism</strong> </dt> <dd data-astro-cid-whrtx2kk>Executing more than one task at the same physical instant, which requires multiple execution units such as several CPU cores or a GPU&#39;s thousands of cores.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>background job</strong> </dt> <dd data-astro-cid-whrtx2kk>A command started with &amp; so the shell does not wait for it: the process runs while the prompt returns immediately, its PID captured in $! and listed by jobs.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>race condition</strong> </dt> <dd data-astro-cid-whrtx2kk>A bug in which the result depends on the timing of threads touching shared data — for example two threads both incrementing a counter and silently losing one update.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Process_(computing)" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Process (computing)</a> — Wikipedia (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Thread_(computing)" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Thread (computing)</a> — Wikipedia (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Scheduling_(computing)" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Scheduling (computing)</a> — Wikipedia (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://pages.cs.wisc.edu/~remzi/OSTEP/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Operating Systems: Three Easy Pieces</a> — Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau (accessed 2026-07-12) — Free online textbook; the virtualization chapters cover processes, the process API, and scheduling in depth. </li><li data-astro-cid-whrtx2kk> <a href="https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Crash Course Computer Science</a> — PBS Digital Studios (accessed 2026-07-12) — Free video series; the operating-systems episode covers multitasking and scheduling visually. </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="7" data-astro-cid-whrtx2kk>
+Mark Day 7 as read
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+      surfaces for someone searching for one — it costs you a click and it is genuinely how people
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+★ Star on GitHub
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-006-operating-systems-what-they-do-and" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 6</span> <span class="pn__title" data-astro-cid-oerjsknp>Operating Systems: What They Do and Why</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-008-meet-the-terminal-shells-prompts-and" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 8 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Meet the Terminal: Shells, Prompts, and Commands</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+      // Progressive enhancement only: the theme falls back to dark and every
+      // .reveal element is visible by default (the hidden start state exists
+      // only inside a prefers-reduced-motion: no-preference query).
+      (() => {
+        const toggle = document.getElementById('theme');
+        if (toggle) {
+          toggle.addEventListener('click', () => {
+            const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+            document.documentElement.dataset.theme = next;
+            try {
+              localStorage.setItem('theme', next);
+            } catch {
+              /* private mode */
+            }
+          });
+        }
+
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const items = document.querySelectorAll('.reveal');
+        if (items.length && !reduced && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry, i) => {
+                if (!entry.isIntersecting) return;
+                entry.target.style.transitionDelay = `${Math.min(i * 50, 240)}ms`;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.06 },
+          );
+          items.forEach((el) => io.observe(el));
+        } else {
+          items.forEach((el) => el.classList.add('is-in'));
+        }
+      })();
+    </script> </body> </html>

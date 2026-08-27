@@ -1,0 +1,406 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 34: Undoing Things: Reset, Revert, and Reflog · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to fix a bad commit, un-stage and discard changes, rewind a branch with the right reset mode, safely undo shared history with revert, and recover &#34;lost&#34; commits with the reflog — so that nothing you do in Git ever feels irreversible again."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-034-undoing-things-reset-revert-and-reflog/"><meta property="og:title" content="Day 34: Undoing Things: Reset, Revert, and Reflog · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to fix a bad commit, un-stage and discard changes, rewind a branch with the right reset mode, safely undo shared history with revert, and recover &#34;lost&#34; commits with the reflog — so that nothing you do in Git ever feels irreversible again."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-034-undoing-things-reset-revert-and-reflog/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-034-undoing-things-reset-revert-and-reflog.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 34: Undoing Things: Reset, Revert, and Reflog · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 34: Undoing Things: Reset, Revert, and Reflog · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to fix a bad commit, un-stage and discard changes, rewind a branch with the right reset mode, safely undo shared history with revert, and recover &#34;lost&#34; commits with the reflog — so that nothing you do in Git ever feels irreversible again."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-034-undoing-things-reset-revert-and-reflog.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+      // Dark is the default regardless of OS preference - this is a dark-first
+      // design. A visitor who picks light with the toggle keeps it. Applied
+      // before first paint so there is no flash of the wrong theme.
+      (() => {
+        let t;
+        try {
+          t = localStorage.getItem('theme');
+        } catch {
+          t = null;
+        }
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+      })();
+    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+<style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
+.starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+365 Days of AI
+</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+Labs
+</a> </header> <main id="main">  <article data-day="34" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>Git and GitHub</span>  › 
+Day 34 </p> <h1 data-astro-cid-whrtx2kk>Day 34: Undoing Things: Reset, Revert, and Reflog</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-034-undoing-things-reset-revert-and-reflog.png" width="1200" height="630" alt="Day 34 of 365 — Undoing Things: Reset, Revert, and Reflog" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to fix a bad commit, un-stage and discard changes, rewind a branch with the right reset mode, safely undo shared history with revert, and recover &quot;lost&quot; commits with the reflog — so that nothing you do in Git ever feels irreversible again.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Git and GitHub</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-034-undoing-things-reset-revert-and-reflog" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-034-undoing-things-reset-revert-and-reflog</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
+cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-034-undoing-things-reset-revert-and-reflog</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/ai-roadmap-365/labs/day-034-undoing-things-reset-revert-and-reflog" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Fix the most recent commit&#39;s message or contents with git commit --amend, and explain why the commit hash changes</li><li data-astro-cid-whrtx2kk>Un-stage a file with git restore --staged and discard an uncommitted change with git restore, distinguishing the two</li><li data-astro-cid-whrtx2kk>Explain what git reset --soft, --mixed, and --hard each move among HEAD, the index, and the working tree, and choose the right mode for a situation</li><li data-astro-cid-whrtx2kk>Undo a shared commit safely with git revert and explain why it is preferable to reset once history is published</li><li data-astro-cid-whrtx2kk>Recover commits dropped by a hard reset using git reflog followed by git reset --hard, proving that committed work is almost never truly lost</li><li data-astro-cid-whrtx2kk>State the one hard limit of Git&#39;s safety net — that uncommitted work has no protection — and the commit-or-stash habit that closes it</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Days 29–32: why version control exists, and Git fundamentals (init, add, commit, branches, remotes)</li><li data-astro-cid-whrtx2kk>Comfort running commands in a terminal on macOS or Linux, and a working Git installation</li></ul> <h2 id="why-this-matters">Why this matters</h2>
+<p>The single most valuable thing version control gives you is not a tidy history or a shared repository — it is the freedom to make mistakes. Once you truly believe that almost nothing you do in Git is permanent, you stop tiptoeing. You try the risky refactor, rename the confusingly-named files, restructure a folder full of experiments, and rewrite that ugly commit message, because you know that any of it can be walked back. Fear makes people commit rarely, branch never, and hoard half-finished work in files named <code>script_final_v3_REALLY_final.py</code>. Confidence makes people move fast and clean up as they go. The difference between the two is knowing today’s five commands cold.</p>
+<p>This matters enormously the moment your work turns experimental, and building anything with data or models is nothing but experiments. You will change a preprocessing step, launch a run, discover it made results worse, and need to get back to exactly the code that produced last week’s good numbers. You will stage a pile of edits, realise half of them belong in a separate commit, and need to un-stage cleanly. You will run one wrong command at midnight and watch two hours of committed work seemingly vanish — and the engineer who calmly types <code>git reflog</code> and restores it in ten seconds is simply the one who learned that Git keeps a safety net under everything. The stakes are concrete: the alternative to knowing how to undo is re-doing, and re-doing lost work is where afternoons go to die. Today you learn to fix mistakes without fear, and to recover from the mistakes that look, for a heart-stopping moment, unfixable.</p>
+<h2 id="the-idea-in-plain-language">The idea in plain language</h2>
+<p>Every time you commit in Git, you save a complete snapshot of your project and give it a unique name (a long hexadecimal hash like <code>a1b2c3d</code>). Those snapshots do not overwrite each other; they pile up, each pointing back to the one before it, forming a chain. “Undoing” in Git almost never means destroying a snapshot. It means one of three gentler things: editing the most recent snapshot, moving a pointer so a different snapshot becomes “the current one,” or adding a <em>new</em> snapshot that cancels out an old one. The snapshots themselves stay on disk, quietly reachable, long after you think you have thrown them away.</p>
+<p>There are only a handful of moves to learn. <strong>Amend</strong> fixes the commit you just made — a wrong message or a forgotten file — by replacing it with a corrected version. <strong>Restore</strong> deals with changes you have not committed yet: it can pull a file out of the staging area (un-stage it) or throw away edits in your working files to match the last commit. <strong>Reset</strong> moves the branch pointer to an earlier commit, and comes in three strengths — soft, mixed, and hard — that differ in how much of your current work they disturb. <strong>Revert</strong> undoes an old commit the polite way, by making a brand-new commit that reverses it, which is the only safe choice once other people have your history. And underneath all of it sits <strong>reflog</strong>, short for “reference log”: a private diary Git keeps of every position your branch has ever occupied, so that even a commit you “deleted” with a reckless reset can be found again and restored.</p>
+<p>The whole subject becomes easy once you hold one picture in your head: three storage areas that Git shuffles work between. Your <strong>working tree</strong> is the actual files on disk you edit. The <strong>index</strong> (also called the staging area) is a holding pen for the changes you have marked as ready to commit. And <strong>HEAD</strong> is a pointer to your latest commit — the snapshot you would get back if you threw everything else away. Almost every undo command is just a rule about which of these three it touches.</p>
+<h2 id="historical-background">Historical background</h2>
+<p>Git was written in a hurry in April 2005 by Linus Torvalds, the creator of Linux. For years the Linux kernel project had used a proprietary version-control system called BitKeeper under a free-of-charge licence; when that arrangement broke down, thousands of developers were suddenly left without a tool that could handle a project their size. Torvalds spent about two weeks building a replacement with a specific, unusual set of priorities: it had to be fast, it had to be fully distributed (every developer holding a complete copy of the history), and above all its stored data had to be trustworthy — every snapshot named by a cryptographic hash of its own contents, so that corruption or tampering could not go unnoticed.</p>
+<p>That last decision is the quiet reason today’s lesson works. Because a commit is content-addressed — its name is computed from what is inside it — commits are treated as immutable objects that Git accumulates rather than edits in place. When you “amend” or “rebase” or “reset,” Git is not scribbling over an old snapshot; it is creating new snapshot objects and moving pointers, while the old objects linger in the repository’s object store until a cleanup process eventually decides nothing references them. This is precisely what makes recovery possible.</p>
+<p>The safety net itself, the reflog, has been part of Git since its early years, recording every movement of <code>HEAD</code> and of branch tips. Two of the commands you will use today are much younger. For over a decade, un-staging a file and discarding a file’s edits were both awkwardly bolted onto the overloaded <code>git checkout</code> command, which also switched branches — a genuine source of beginner confusion, since the same word did three unrelated things. In August 2019, Git version 2.23 split those jobs into two new, clearly named commands: <code>git switch</code> for moving between branches and <code>git restore</code> for undoing changes to files. The older <code>git checkout -- file</code> and <code>git reset HEAD file</code> still work everywhere and you will meet them in older tutorials, but <code>git restore</code> is the modern, readable way, and it is what this lesson teaches first.</p>
+<h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
+<p>“Undoing things” in Git is a family of operations that move your project backward or sideways in its history without, in almost every case, destroying committed work. It <em>is</em> pointer manipulation and snapshot creation. It is <em>not</em>, as a rule, deletion. When you reset a branch back two commits, those two commits do not evaporate; they become “unreachable” — no branch or tag points to them anymore — but they sit intact in the object store, findable through the reflog, for weeks. This is the mental correction most beginners need: the panic of “I lost my commits” is nearly always misplaced, because losing a <em>commit</em> in Git is genuinely hard to do by accident.</p>
+<p>There is exactly one important exception, and you must respect it or the safety net has a hole. Work that has never been committed — edits sitting in your working tree, or changes you staged but never committed — is <em>not</em> a snapshot and is <em>not</em> in the reflog. There is nothing for Git to recover it from. The command <code>git reset --hard</code>, and to a lesser degree <code>git restore</code>, will overwrite those uncommitted changes with no undo whatsoever. So the honest one-sentence version of Git’s safety promise is: <em>committed</em> work is almost impossible to truly lose, and <em>uncommitted</em> work has no protection at all. The practical habit that follows is to commit or stash your work before running any command that touches the working tree, which is the safest reflex you can build today.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Common misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”<code>git reset</code> deletes my commits.”</td><td>It moves the branch pointer; the commits become unreachable but stay in the object store, recoverable via the reflog for weeks.</td></tr><tr><td>”Amending edits the old commit in place.”</td><td>Amend builds a <em>new</em> commit with a new hash that replaces the old one; the original still lingers in the reflog.</td></tr><tr><td>”Once I run a bad command, the work is gone.”</td><td>If the work was committed, <code>git reflog</code> almost always finds it. Only <em>uncommitted</em> changes have no safety net.</td></tr><tr><td>”Reset and revert do the same thing.”</td><td>Reset rewrites history by moving the pointer; revert preserves history by adding a new, inverse commit.</td></tr><tr><td>”<code>--hard</code> is just a stronger undo.”</td><td>It also erases uncommitted changes in your working files, permanently — the one genuinely destructive option here.</td></tr></tbody></table>
+<h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
+<p>Version control exists to answer a human problem: people make mistakes, change their minds, and need earlier versions of their work. But a system that only ever moved forward would be half a tool. The commands in this lesson solve the <em>backward</em> problems, and each one targets a distinct, real frustration.</p>
+<p>The first problem is the just-made mistake: you commit, and a half-second later you spot a typo in the message or realise you forgot to stage a file. Re-doing the commit from scratch is silly; <code>git commit --amend</code> fixes it in place. The second problem is the mis-aimed change: you staged more than you meant to, or edited a file you now want to abandon. <code>git restore</code> puts things back without ceremony. The third problem is the regretted direction: several commits in, you conclude the whole approach was wrong and want the branch to look as though those commits never happened. <code>git reset</code> rewinds the pointer. The fourth problem is the <em>published</em> regret: the bad commit is already on a shared server and teammates have pulled it, so you cannot quietly rewrite the past without breaking their copies. <code>git revert</code> undoes it additively, in a way everyone can safely absorb.</p>
+<p>Underneath all four is the deepest problem Git set out to solve: making experimentation cheap. If every misstep were expensive to reverse, rational people would stop experimenting, and a version-control system that discourages trying things has defeated its own purpose. By guaranteeing that committed history is recoverable and that undo operations are quick and local, Git converts mistakes from disasters into minor detours — which is exactly the psychological condition under which good, fast work gets done.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>To undo with confidence you need the model behind the commands, not just the commands. Everything below is a rule about three areas — the working tree, the index, and <code>HEAD</code> — so we start there and build up.</p>
+<h3 id="the-three-trees">The three trees</h3>
+<p>Picture your project as living in three places at once. The <strong>working tree</strong> is the set of real files on your disk, the ones your editor opens and changes. The <strong>index</strong>, or staging area, is a proposed next snapshot: when you run <code>git add file.py</code>, you copy that file’s current state into the index, marking it as part of the commit you are about to make. <strong><code>HEAD</code></strong> is a pointer to your most recent commit on the current branch — the last snapshot you saved. A normal commit takes whatever is in the index and freezes it into a new snapshot, then advances <code>HEAD</code> to point at it.</p>
+<p>Undo commands work by moving changes <em>between</em> these three areas, or by moving the <code>HEAD</code> pointer itself. That is the entire trick. <code>git add</code> moves a change from the working tree into the index; the undo commands move things the other way, or slide <code>HEAD</code> to a different commit. Keep the three trees in mind and every command below stops being magic.</p>
+<h3 id="fixing-the-last-commit-with-amend">Fixing the last commit with amend</h3>
+<p>You commit, then immediately notice the message says “fix tpyo” or that you left out a file. Run:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> commit</span><span style="color:#79B8FF"> --amend</span><span style="color:#79B8FF"> -m</span><span style="color:#9ECBFF"> &quot;Fix typo in the data loader&quot;</span></span></code></pre>
+<p>Git takes the currently-staged content, combines it with the previous commit’s content, and produces a <em>new</em> commit that replaces the last one on your branch. If you had forgotten a file, you would <code>git add</code> it first, then amend, and it would be folded into that same commit. The crucial detail: the original commit is not edited — it is replaced by a new commit with a new hash, and the old one drifts off into the reflog. That is why the rule is the same as for reset: amend a commit only if you have not yet shared it, because rewriting a commit others already have causes the same divergence problems described later.</p>
+<h3 id="un-staging-and-discarding-with-restore">Un-staging and discarding with restore</h3>
+<p>Two different “I changed my mind” situations, two flavours of one command. If you staged a file and want to un-stage it — take it back out of the index while keeping your edits in the working tree — run:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> restore</span><span style="color:#79B8FF"> --staged</span><span style="color:#9ECBFF"> notes.md</span></span></code></pre>
+<p>Your edits to <code>notes.md</code> are untouched on disk; they are simply no longer marked for the next commit. If instead you want to <em>throw away</em> your edits to a file and snap it back to how it looked in the last commit, run:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> restore</span><span style="color:#9ECBFF"> notes.md</span></span></code></pre>
+<p>This one is destructive to uncommitted work: the edits are gone, because they were never committed and never in the reflog. Git prints a warning-free success, so respect the command. (The older equivalents, still valid, are <code>git reset HEAD notes.md</code> to un-stage and <code>git checkout -- notes.md</code> to discard.)</p>
+<h3 id="reset-in-depth-soft-mixed-and-hard">Reset in depth: soft, mixed, and hard</h3>
+<p><code>git reset &lt;commit&gt;</code> moves the current branch pointer to <code>&lt;commit&gt;</code> — that always happens. What differs between the three modes is how far the change reaches into the index and working tree.</p>
+<ul>
+<li><strong><code>--soft</code></strong> moves only <code>HEAD</code>. Your index and working tree are left exactly as they were, so all the changes from the commits you rewound are still staged, ready to be re-committed. This is the gentle mode you use to “squash” or re-do the last commit while keeping every change.</li>
+<li><strong><code>--mixed</code></strong> (the default, used when you name no mode) moves <code>HEAD</code> and resets the index to match, but leaves the working tree alone. The changes from the rewound commits are still on disk as edits, but now <em>un-staged</em>. This is what you want when you committed too early and would like to re-stage things differently.</li>
+<li><strong><code>--hard</code></strong> moves all three: <code>HEAD</code>, the index, and the working tree. Your files on disk are forcibly rewritten to match the target commit, and any uncommitted changes are destroyed with no undo. This is the powerful, dangerous mode — right for wiping a failed experiment clean, wrong any time you have working changes you might still want.</li>
+</ul>
+<p><img src="/ai-roadmap-365/_astro/reset-modes.aFu4XVW2_1wsD12.svg" alt="Diagram: git reset modes and which of HEAD, the index, and the working tree each one moves" loading="lazy" decoding="async" fetchpriority="auto" width="780" height="540"></p>
+<p>Read the diagram as three rows of increasing reach. The most common everyday use is <code>git reset --soft HEAD~1</code>, which means “move the branch back by one commit but keep all its changes staged” — the standard way to redo a commit you are not happy with. <code>HEAD~1</code> is Git’s notation for “one commit before <code>HEAD</code>”; <code>HEAD~2</code> means two before, and so on.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Reset mode</th><th>Moves HEAD</th><th>Resets the index</th><th>Resets the working tree</th><th>Typical use</th></tr></thead><tbody><tr><td><code>--soft</code></td><td>yes</td><td>no</td><td>no</td><td>Redo or combine the last commit while keeping every change staged</td></tr><tr><td><code>--mixed</code> (default)</td><td>yes</td><td>yes</td><td>no</td><td>Un-commit and un-stage, to re-stage the changes differently</td></tr><tr><td><code>--hard</code></td><td>yes</td><td>yes</td><td>yes</td><td>Discard commits <em>and</em> uncommitted work to return cleanly to a known state</td></tr></tbody></table>
+<h3 id="undoing-a-shared-commit-with-revert">Undoing a shared commit with revert</h3>
+<p>Reset rewrites history — it makes the branch look as though the rewound commits never existed. That is fine on a branch only you have, and a disaster on a branch other people have already pulled, because your history and theirs now disagree about what happened. When a commit is already shared, you undo it <em>additively</em> instead:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> revert</span><span style="color:#9ECBFF"> a1b2c3d</span></span></code></pre>
+<p>Git computes the exact inverse of commit <code>a1b2c3d</code> — every line it added becomes a line removed, and vice versa — and records that inverse as a brand-new commit on top of your branch. The original commit stays in history, and a new commit cancels its effect. Because you only added a commit and rewrote nothing, everyone else can pull your revert and stay perfectly in sync.</p>
+<p><img src="/ai-roadmap-365/_astro/revert-vs-reset.D2Rka5ZE_Z5cDVE.svg" alt="Flowchart: git revert adds a new inverse commit while git reset moves the branch pointer backward" loading="lazy" decoding="async" fetchpriority="auto" width="780" height="580"></p>
+<p>The flowchart shows the fork in the road. Down the revert path, commit <code>C</code> remains and a new commit <code>C&#39;</code> undoes it — history grows. Down the reset path, <code>HEAD</code> slides back to <code>B</code> and <code>C</code> falls off the branch into a dangling state — history shrinks (or rather, is rewritten). The rule to memorise: <strong>reset for private history, revert for shared history.</strong></p>
+<h3 id="the-safety-net-reflog">The safety net: reflog</h3>
+<p>Every time <code>HEAD</code> moves — a commit, a checkout, a reset, a rebase, an amend, a merge — Git appends a line to a log of where <code>HEAD</code> has been. That log is the reflog, and you read it with:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> reflog</span></span></code></pre>
+<p>You get a list like <code>a1b2c3d HEAD@{0}: commit: add feature</code>, <code>9f8e7d6 HEAD@{1}: reset: moving to HEAD~2</code>, and so on. Each entry names a commit hash and describes the action that put <code>HEAD</code> there. This is the recovery mechanism: after a reset drops a commit, that commit’s hash is still sitting in the reflog, and you can move your branch back onto it with <code>git reset --hard &lt;hash&gt;</code> (or safely inspect it first with <code>git checkout &lt;hash&gt;</code>). The commit was never gone; it was only unreferenced.</p>
+<p>The reflog is local and private — it lives in your own repository, never travels to a remote, and records only <em>your</em> actions. It is also not eternal: by default Git keeps reflog entries for reachable commits about 90 days and for unreachable ones at least 30 days, after which the garbage collector becomes eligible to prune the truly orphaned commits. That window is enormous compared to how fast you will usually notice a mistake, which is why “just check the reflog” resolves the great majority of Git panics.</p>
+<h2 id="an-everyday-analogy">An everyday analogy</h2>
+<p>Think of your project as a single-player video game with save points. Every commit is a <strong>save</strong> you deliberately make and can name — a snapshot of the whole world at that moment. Your <strong>working tree</strong> is the live game you are playing right now, with progress since your last save not yet written to any slot. The <strong>index</strong> is the little “ready to save” buffer where you gather exactly what the next save will contain.</p>
+<p>Now the undo moves map cleanly. <strong>Amend</strong> is realising your last save had a bad name or missed an item, and overwriting <em>that same save slot</em> with a corrected one. <strong>Reset</strong> is loading an earlier save. <code>--soft</code> and <code>--mixed</code> are gentle loads that put your character back at the earlier point but keep the items and progress you had gathered since; <code>--hard</code> is loading an old save <em>without</em> saving your current game first — everything you had done since the last save is simply gone. That is why <code>--hard</code> deserves a moment’s pause every single time: unsaved progress does not come back.</p>
+<p><strong>Revert</strong> is the move for a co-op game where your teammates have already seen the current state. You do not yank everyone back to an earlier save — that would desync the whole party. Instead you play forward a corrective sequence that undoes the damage the last chapter did, so the story now contains both the mistake and its cancellation, and everyone stays on the same timeline. And the <strong>reflog</strong> is the game’s automatic log of every position your character has ever stood in. Even a save you overwrote or a checkpoint you abandoned leaves a footprint here, so as long as the log has not been swept, you can teleport back to any spot you were ever standing. The analogy holds all the way down: committed saves are safe, unsaved progress is not, and the autolog is the reason a “lost” save almost never really is.</p>
+<h2 id="examples-in-practice">Examples in practice</h2>
+<p>Here is a real sequence of the kind you will run constantly, shown as terminal transcripts. First, the just-made-mistake fix:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ git commit -m &quot;Add data celaner&quot;</span></span>
+<span class="line"><span>[main 4d9a1c2] Add data celaner</span></span>
+<span class="line"><span>$ git commit --amend -m &quot;Add data cleaner&quot;</span></span>
+<span class="line"><span>[main 7b2f8e0] Add data cleaner</span></span></code></pre>
+<p>The hash changed from <code>4d9a1c2</code> to <code>7b2f8e0</code> — proof that amend produced a new commit rather than editing the old one. The typo is fixed and no extra commit clutters the log.</p>
+<p>Next, un-committing to reshape a commit that bundled two unrelated changes. Suppose your last commit accidentally mixed a bug fix and an unrelated rename:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ git reset --soft HEAD~1</span></span>
+<span class="line"><span>$ git status</span></span>
+<span class="line"><span>On branch main</span></span>
+<span class="line"><span>Changes to be committed:</span></span>
+<span class="line"><span>  modified:   loader.py</span></span>
+<span class="line"><span>  renamed:    old_name.py -&gt; new_name.py</span></span></code></pre>
+<p><code>--soft</code> rewound one commit but kept everything staged, so now you can un-stage the rename with <code>git restore --staged new_name.py</code>, commit the bug fix alone, then stage and commit the rename separately — two clean commits out of one messy one.</p>
+<p>Now a revert, the safe undo for a commit you have already pushed:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ git revert 7b2f8e0</span></span>
+<span class="line"><span>[main c3d4e5f] Revert &quot;Add data cleaner&quot;</span></span>
+<span class="line"><span>$ git log --oneline</span></span>
+<span class="line"><span>c3d4e5f Revert &quot;Add data cleaner&quot;</span></span>
+<span class="line"><span>7b2f8e0 Add data cleaner</span></span></code></pre>
+<p>Both commits are in the log: the original and its inverse. Anyone who pulls this sees a clean, additive history.</p>
+<p>Finally, the disaster-and-recovery that makes the whole lesson click. You run a <code>--hard</code> reset that drops two commits, realise your error, and get them back:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ git reset --hard HEAD~2</span></span>
+<span class="line"><span>HEAD is now at 7b2f8e0 Add data cleaner</span></span>
+<span class="line"><span>$ git reflog</span></span>
+<span class="line"><span>7b2f8e0 HEAD@{0}: reset: moving to HEAD~2</span></span>
+<span class="line"><span>a1b2c3d HEAD@{1}: commit: add model config</span></span>
+<span class="line"><span>9f8e7d6 HEAD@{2}: commit: add training loop</span></span>
+<span class="line"><span>7b2f8e0 HEAD@{3}: commit: add data cleaner</span></span>
+<span class="line"><span>$ git reset --hard a1b2c3d</span></span>
+<span class="line"><span>HEAD is now at a1b2c3d add model config</span></span></code></pre>
+<p>The two “lost” commits, <code>9f8e7d6</code> and <code>a1b2c3d</code>, were in the reflog the entire time. Pointing the branch back at <code>a1b2c3d</code> restores both, because <code>a1b2c3d</code> still points back to <code>9f8e7d6</code>, which points back to the rest. Nothing was ever truly lost — the branch pointer had simply moved. Run this recovery once yourself in the lab and the fear drains out of Git permanently.</p>
+<h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
+<h3 id="security">Security</h3>
+<p>Rewriting history has a security dimension the moment secrets are involved. A common panic is committing an API key or password by accident. Deleting it in a later commit is <em>not</em> enough — the secret is still sitting in the earlier snapshot, visible to anyone who checks out that commit or reads the history. Genuinely removing it means rewriting every commit that contained it (with history-rewriting tools) <em>and</em>, because the value has been exposed to your own machine’s storage and possibly a remote, rotating the secret so the leaked one no longer works. History rewriting also underpins a subtler point: because commits are content-addressed by hash, you cannot silently alter a shared commit without its hash changing and the tampering becoming visible — an integrity guarantee that undo operations respect rather than break.</p>
+<h3 id="privacy">Privacy</h3>
+<p>The reflog is a private, local record of everything you did in your repository, including references to commits you thought you had discarded. That is a feature when <em>you</em> need to recover, and a consideration when you hand a repository to someone else: your reflog does not travel when you push or when someone clones, so your local fumbling stays yours. But a full copy of your <code>.git</code> directory — for example a repository folder you zip up and email — carries the reflog and every “deleted” commit with it. If a discarded commit held something sensitive, treat “removed from the branch” and “removed from the repository” as different claims.</p>
+<h3 id="performance">Performance</h3>
+<p>The undo operations here are cheap and local. Reset, restore, amend, and reflog all operate on your own repository with no network round-trip, which is why they feel instant even on large projects — moving a pointer is trivial work regardless of how much history hangs behind it. The one operation with a cost is <code>git revert</code> on a commit that conflicts with later changes: Git must compute and possibly let you resolve a merge, which is proportional to the size of the conflict, not the history. And garbage collection, the process that eventually prunes unreachable commits, runs occasionally in the background and is what reclaims disk space from the snapshots your resets left behind.</p>
+<h3 id="scalability">Scalability</h3>
+<p>These commands scale to enormous histories without slowing down, because none of them traverse the whole history — they manipulate a pointer and, at most, compare two snapshots. What does <em>not</em> scale is coordination: history rewriting on a shared branch scales terribly with team size, because every person who has pulled the old history must now reconcile their copy. This is the entire reason the “reset for private, revert for shared” rule exists. On a solo branch, reset freely; on a branch a hundred people track, a single force-push of rewritten history can cost a hundred people an afternoon.</p>
+<h3 id="cost">Cost</h3>
+<p>The direct monetary cost of these commands is zero — Git is free and open source, and every operation here runs locally. The real cost is measured in avoided rework. An engineer who can recover a “lost” branch in ten seconds instead of reconstructing a day’s work has turned a potential catastrophe into a non-event, and across a career that difference is measured in weeks. The counter-cost to respect is the destructive edge of <code>--hard</code> and force-push: the cheapest command in the toolbox is also the one most able to erase uncommitted work or overwrite a colleague’s commits, so its price is paid only when used carelessly.</p>
+<h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
+<p>The commands themselves are the free, open-source foundation, but you do not have to drive them all from raw terminal syntax. Several tools wrap the same operations in a friendlier interface, and knowing when to reach for each is part of the skill.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool</th><th>Type</th><th>What it offers for undo</th><th>Cost</th></tr></thead><tbody><tr><td>Git command line</td><td>Free, open source</td><td>The complete, authoritative set: <code>amend</code>, <code>restore</code>, <code>reset</code>, <code>revert</code>, <code>reflog</code>. Every other tool calls these underneath.</td><td>Free</td></tr><tr><td>VS Code (built-in Git)</td><td>Free</td><td>Right-click a file to “Discard Changes,” un-stage with a click, and use the Timeline view to see and restore earlier versions of a file.</td><td>Free</td></tr><tr><td>GitHub Desktop</td><td>Free</td><td>Buttons for “Undo” the last commit and “Revert” a commit, with a visual diff; hides hashes for beginners.</td><td>Free</td></tr><tr><td>lazygit / tig</td><td>Free, open source</td><td>Fast terminal UIs that make reset, revert, and reflog navigation interactive without memorising flags.</td><td>Free</td></tr><tr><td>JetBrains IDEs / commercial GUIs</td><td>Commercial</td><td>Polished visual history, one-click revert, and a “Local History” feature that even tracks uncommitted edits.</td><td>Paid (often free tiers)</td></tr></tbody></table>
+<p>The honest guidance: learn the command line first, because it is what every graphical button ultimately runs, and because when something goes truly wrong the recovery path — <code>git reflog</code> followed by <code>git reset --hard &lt;hash&gt;</code> — is fastest and clearest as typed commands. Reach for a GUI for the routine, low-stakes moves: VS Code’s Git panel makes un-staging and discarding individual files pleasant, and its Timeline view is a genuinely useful extra safety net because it can restore a file version you never even committed. Use <code>git reflog</code> when a GUI’s undo button is not enough — no graphical tool exposes the full recovery power of the reflog as directly as the command does.</p>
+<h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td><code>git reset</code></td><td><code>git revert</code></td><td>Reset rewrites history by moving the branch pointer; revert preserves history by adding a new inverse commit</td></tr><tr><td><code>git restore</code></td><td><code>git reset</code></td><td>Restore targets files (un-stage or discard changes); reset targets the branch pointer and, depending on mode, the index and working tree</td></tr><tr><td><code>git commit --amend</code></td><td><code>git commit</code></td><td>Amend replaces the previous commit with a new one; a plain commit adds a new commit after it</td></tr><tr><td><code>--soft</code> reset</td><td><code>--hard</code> reset</td><td>Soft keeps your index and working tree intact; hard overwrites both, destroying uncommitted changes</td></tr><tr><td><code>git reflog</code></td><td><code>git log</code></td><td>Reflog is a local record of everywhere <code>HEAD</code> has moved, including abandoned commits; log shows only the commits currently reachable from your branch</td></tr><tr><td>Reachable commit</td><td>Unreachable commit</td><td>A reachable commit is pointed to by a branch or tag; an unreachable one is off every branch but survives in the object store until garbage collection</td></tr></tbody></table>
+<h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
+<p>The governing decision is almost always <em>private versus shared history</em>, so make that your first question. If the commits you want to undo exist only on your own machine — a local branch you have never pushed — you are free to rewrite: <code>git commit --amend</code> to fix the very last commit, <code>git reset --soft</code> to redo a commit while keeping its changes, and <code>git reset --hard</code> to wipe a failed experiment back to a known-good commit. Rewriting private history harms no one, and the reflog protects you if you overshoot. Reach for <code>git restore</code> any time the change you regret was never committed at all — an over-eager staging, or edits to a file you would rather abandon.</p>
+<p>The moment history is shared, the rules invert. If the bad commit is already on a remote and teammates may have pulled it, do <strong>not</strong> reset-and-force-push; use <code>git revert</code> to add an inverse commit that everyone can absorb cleanly. Force-pushing rewritten history to a shared branch is the classic way to ruin a colleague’s afternoon, and <code>git push --force</code> is a command to treat with real suspicion; when you genuinely must force-push your own feature branch, prefer <code>git push --force-with-lease</code>, which refuses to overwrite work you have not seen. And know the one hard limit of the whole safety net: none of it protects <em>uncommitted</em> work. Before any <code>git reset --hard</code>, and before any command that rewrites the working tree, commit or <code>git stash</code> your changes first — that single habit closes the only real hole in Git’s promise that nothing is ever lost.</p>
+<h2 id="knowledge-check">Knowledge check</h2>
+<p>Try these from memory before looking back:</p>
+<ol>
+<li>Name the three “trees” Git shuffles work between, and say in one sentence what each one holds.</li>
+<li>A teammate says “<code>git reset</code> deleted my two commits and they’re gone forever.” Explain why they are almost certainly wrong and the exact command sequence that recovers the commits.</li>
+<li>You committed a change that is already pushed and pulled by three colleagues, and you now need to undo it. Which command do you use, and why is <code>git reset</code> the wrong choice here?</li>
+<li>Explain the difference between <code>git reset --soft HEAD~1</code> and <code>git reset --hard HEAD~1</code> in terms of what happens to your staged changes and your edited files.</li>
+<li>You just ran <code>git commit</code> and immediately noticed a typo in the message. Give the one command that fixes it, and explain why the commit’s hash changes afterward.</li>
+</ol>
+<h2 id="hands-on-exercise">Hands-on exercise</h2>
+<p>Time to make Git break and then bring it back. In this exercise — worked through in full in the Day 34 lab directory — you will create a small throwaway repository with a few commits, then practise every undo move on it, ending with a deliberate “disaster” you recover from. Because you build a fresh repository just for this, there is nothing of value to lose, so you can be fearless.</p>
+<p>Open your terminal and create a scratch repository (the lab script does this for you, but doing it by hand once cements it):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">mkdir</span><span style="color:#9ECBFF"> /tmp/undo-practice</span><span style="color:#E1E4E8"> &amp;&amp; </span><span style="color:#79B8FF">cd</span><span style="color:#9ECBFF"> /tmp/undo-practice</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> init</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> config</span><span style="color:#9ECBFF"> user.email</span><span style="color:#9ECBFF"> &quot;you@example.com&quot;</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> config</span><span style="color:#9ECBFF"> user.name</span><span style="color:#9ECBFF"> &quot;Undo Practice&quot;</span></span>
+<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;line 1&quot;</span><span style="color:#F97583"> &gt;</span><span style="color:#9ECBFF"> notes.txt</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> notes.txt</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> commit</span><span style="color:#79B8FF"> -m</span><span style="color:#9ECBFF"> &quot;Frist commit&quot;</span></span></code></pre>
+<p>Now fix that misspelled message with an amend, and confirm the hash changed:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> commit</span><span style="color:#79B8FF"> --amend</span><span style="color:#79B8FF"> -m</span><span style="color:#9ECBFF"> &quot;First commit&quot;</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> log</span><span style="color:#79B8FF"> --oneline</span></span></code></pre>
+<p>Make and commit two more changes so you have a history to play with, then simulate the disaster — drop two commits with a hard reset — and recover them from the reflog:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> reset</span><span style="color:#79B8FF"> --hard</span><span style="color:#9ECBFF"> HEAD~2</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> reflog</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> reset</span><span style="color:#79B8FF"> --hard</span><span style="color:#F97583"> &lt;</span><span style="color:#9ECBFF">the</span><span style="color:#9ECBFF"> hash</span><span style="color:#9ECBFF"> from</span><span style="color:#9ECBFF"> the</span><span style="color:#9ECBFF"> reflog</span><span style="color:#9ECBFF"> for</span><span style="color:#9ECBFF"> the</span><span style="color:#9ECBFF"> newest</span><span style="color:#9ECBFF"> lost</span><span style="color:#9ECBFF"> commi</span><span style="color:#E1E4E8">t</span><span style="color:#F97583">&gt;</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> log</span><span style="color:#79B8FF"> --oneline</span></span></code></pre>
+<h3 id="expected-output">Expected output</h3>
+<p>A representative run (your hashes will differ — that is expected):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ git commit --amend -m &quot;First commit&quot;</span></span>
+<span class="line"><span>[main 8c1d2e3] First commit</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ git reset --hard HEAD~2</span></span>
+<span class="line"><span>HEAD is now at 8c1d2e3 First commit</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ git reflog</span></span>
+<span class="line"><span>5a6b7c8 HEAD@{0}: reset: moving to HEAD~2</span></span>
+<span class="line"><span>2f3e4d5 HEAD@{1}: commit: Third commit</span></span>
+<span class="line"><span>9a8b7c6 HEAD@{2}: commit: Second commit</span></span>
+<span class="line"><span>8c1d2e3 HEAD@{3}: commit (amend): First commit</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ git reset --hard 2f3e4d5</span></span>
+<span class="line"><span>HEAD is now at 2f3e4d5 Third commit</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ git log --oneline</span></span>
+<span class="line"><span>2f3e4d5 Third commit</span></span>
+<span class="line"><span>9a8b7c6 Second commit</span></span>
+<span class="line"><span>8c1d2e3 First commit</span></span></code></pre>
+<p>The final <code>git log</code> shows all three commits back in place. The two commits the hard reset “removed” were listed in the reflog the whole time, and pointing the branch back at the newest one (<code>2f3e4d5</code>) restored the entire chain, because each commit points to its parent.</p>
+<h3 id="validate-your-work">Validate your work</h3>
+<p>You are done when you can check every box:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> You amended a commit and confirmed its hash changed in <code>git log --oneline</code>.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You un-staged a file with <code>git restore --staged</code> and saw it move from “staged” to “not staged” in <code>git status</code>.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You discarded a working change with <code>git restore</code> and saw the file revert to the committed version.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You dropped two commits with <code>git reset --hard HEAD~2</code> and confirmed <code>git log</code> was shorter.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You found the lost commits in <code>git reflog</code> and restored them with <code>git reset --hard &lt;hash&gt;</code>, confirming <code>git log</code> was full again.</li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><strong><code>git reflog</code> shows nothing but the initial commit.</strong> The reflog only records moves of <code>HEAD</code> since the repository was created; if you just ran <code>git init</code> and made one commit, there is little to show. Make several commits and a reset first, then look.</li>
+<li><strong><code>fatal: not a git repository</code>.</strong> You are not inside the repository folder. <code>cd</code> into <code>/tmp/undo-practice</code> (or wherever you created it) before running Git commands.</li>
+<li><strong><code>Please tell me who you are</code> on your first commit.</strong> Git needs an identity. Run the two <code>git config user.email</code> and <code>git config user.name</code> lines shown above; setting them locally in this scratch repo keeps your real global config untouched.</li>
+<li><strong>You recovered to the wrong commit.</strong> No harm done — run <code>git reflog</code> again (the reflog even records <em>this</em> reset) and <code>git reset --hard</code> to the correct hash. The reflog remembers every move, including your recovery attempts.</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<ul>
+<li><strong>Running <code>git reset --hard</code> with uncommitted edits you wanted.</strong> Hard reset overwrites the working tree; any change you had not committed is gone and not in the reflog. Commit or stash before every hard reset.</li>
+<li><strong>Copying the wrong hash from the reflog.</strong> The newest lost commit is the one whose chain includes all the others; restoring to it brings the whole chain back. Read the reflog descriptions (<code>commit: Third commit</code>) to identify the right one.</li>
+<li><strong>Reaching for <code>reset</code> on shared history.</strong> In this scratch repo there is no remote, so reset is safe. On a real pushed branch, undoing with reset and force-pushing breaks teammates’ copies — use <code>git revert</code> there instead.</li>
+</ul>
+<h2 id="practice-assignment">Practice assignment</h2>
+<p>Open the undo worksheet in the starter directory of the Day 34 lab and complete it as you run through the lab’s five exercises on a throwaway repository. Record, in your own words: (1) what changed between the commit before and the commit after your <code>git commit --amend</code> — specifically the message and the hash; (2) the difference you observed between <code>git reset --soft HEAD~1</code> and <code>git reset --hard HEAD~1</code>, noting what happened to your staged changes and your working files in each case; and (3) the exact reflog hash you used to recover your commits after the deliberate hard reset, with a one-sentence explanation of why that particular commit restored the whole chain. Keep the worksheet — the Week 5 project (a versioned notes repository) expects you to demonstrate a clean recovery, and this is your rehearsal.</p>
+<h2 id="extension-challenge">Extension challenge</h2>
+<p>Go one level deeper into the safety net. First, deliberately create a commit, note its hash with <code>git log --oneline</code>, then <code>git reset --hard HEAD~1</code> to drop it and confirm <code>git log</code> no longer lists it. Now find it <em>without</em> the reflog: run <code>git fsck --lost-found</code>, which scans the object store for “dangling” commits that no branch points to, and confirm your dropped commit’s hash appears among them. This proves the commit is a real object still sitting in <code>.git</code>, independent of the reflog. Restore it by creating a branch that points to it: <code>git branch recovered &lt;hash&gt;</code>, then <code>git log recovered --oneline</code>. Finally, write three or four sentences explaining the relationship you have just demonstrated between three ideas: a commit being <em>unreachable</em> (off every branch), a commit being <em>recoverable</em> (still in the object store, findable by reflog or fsck), and a commit being <em>pruned</em> (eventually removed by garbage collection once the reflog window expires). You now understand not just how to undo, but why undo in Git is so hard to make permanent — which is the deepest reason experienced developers work without fear.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. You just ran git commit and immediately noticed a typo in the commit message. Which command fixes it most directly? </strong> </p> <ol type="A"> <li>git revert HEAD</li><li>git reset --hard HEAD~1</li><li>git commit --amend -m &quot;corrected message&quot;</li><li>git restore --staged .</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> git commit --amend -m &quot;corrected message&quot; </p> <p>git commit --amend replaces the most recent commit with a new one carrying the corrected message. The commit&#39;s hash changes because amend creates a new commit object rather than editing the old one in place.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. What does git reset --soft HEAD~1 do to your staged changes and your working files? </strong> </p> <ol type="A"> <li>It moves HEAD back one commit but leaves the index and working tree untouched, so the rewound changes stay staged</li><li>It moves HEAD back one commit and deletes all uncommitted changes in the working tree</li><li>It creates a new commit that reverses the last commit</li><li>It only un-stages files without moving HEAD</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> It moves HEAD back one commit but leaves the index and working tree untouched, so the rewound changes stay staged </p> <p>A --soft reset moves only the branch pointer (HEAD). The index and working tree are left exactly as they were, so every change from the rewound commit remains staged and ready to be re-committed.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. Which git reset mode also overwrites your working-tree files, permanently discarding uncommitted changes? </strong> </p> <ol type="A"> <li>--soft</li><li>--mixed</li><li>--hard</li><li>All three affect the working tree equally</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> --hard </p> <p>Only --hard moves all three: HEAD, the index, and the working tree. It forcibly rewrites your files to match the target commit, and any uncommitted changes are destroyed with no undo — which is why it is the one genuinely dangerous mode.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. A bad commit is already pushed and three teammates have pulled it. What is the correct way to undo it? </strong> </p> <ol type="A"> <li>git reset --hard HEAD~1, then git push --force</li><li>git revert &lt;hash&gt;, which adds a new inverse commit everyone can pull</li><li>git commit --amend, then push again</li><li>Delete the .git folder and re-clone</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> git revert &lt;hash&gt;, which adds a new inverse commit everyone can pull </p> <p>Once history is shared, rewriting it with reset and force-push breaks teammates&#39; copies. git revert undoes the commit additively by recording a new inverse commit, so everyone can pull the change and stay in sync.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. How does git revert differ from git reset? </strong> </p> <ol type="A"> <li>Revert deletes commits while reset keeps them</li><li>They are identical; revert is just an alias for reset</li><li>Revert rewrites history by moving the pointer; reset adds a new commit</li><li>Revert preserves history by adding a new inverse commit; reset rewrites history by moving the branch pointer</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> Revert preserves history by adding a new inverse commit; reset rewrites history by moving the branch pointer </p> <p>Revert is additive and safe for shared branches: it leaves the original commit in place and records a new commit that cancels it. Reset is subtractive: it moves the branch pointer, rewriting what the history looks like.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. After git reset --hard HEAD~2 drops two commits, how do you get them back? </strong> </p> <ol type="A"> <li>You cannot; a hard reset permanently deletes commits</li><li>Run git reflog to find the dropped commit&#39;s hash, then git reset --hard &lt;hash&gt;</li><li>Run git pull to re-download them from the remote</li><li>Run git commit --amend to rebuild them</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Run git reflog to find the dropped commit&#39;s hash, then git reset --hard &lt;hash&gt; </p> <p>The dropped commits become unreachable but still exist in the object store, and their hashes remain listed in git reflog. Pointing the branch back at the newest lost commit with git reset --hard restores the whole chain, since each commit points to its parent.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. What is the git reflog? </strong> </p> <ol type="A"> <li>A shared log on the remote server showing everyone&#39;s commits</li><li>A local, private record of every position HEAD has occupied, including commits no branch points to anymore</li><li>The same thing as git log, showing only reachable commits</li><li>A list of files currently staged for commit</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> A local, private record of every position HEAD has occupied, including commits no branch points to anymore </p> <p>The reflog (reference log) records every movement of HEAD in your own repository. It is local and never pushed, and because it references commits even after they fall off a branch, it is the primary recovery mechanism after a mistaken reset.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. Which statement about Git&#39;s safety net is accurate? </strong> </p> <ol type="A"> <li>Both committed and uncommitted work are always recoverable</li><li>Nothing in Git can ever be recovered once a command runs</li><li>Committed work is almost impossible to lose, but uncommitted work has no protection and is not in the reflog</li><li>Only work pushed to a remote is safe</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Committed work is almost impossible to lose, but uncommitted work has no protection and is not in the reflog </p> <p>Commits are content-addressed objects that linger in the object store and are tracked by the reflog, so committed work is nearly always recoverable. Uncommitted edits in the working tree are not snapshots and not in the reflog, so git reset --hard erases them with no undo — hence the habit of committing or stashing first.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>amend</strong> </dt> <dd data-astro-cid-whrtx2kk>Replacing the most recent commit with a new one — used to fix its message or add a forgotten file. Because it builds a new commit object, the commit&#39;s hash changes.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>reset</strong> </dt> <dd data-astro-cid-whrtx2kk>A command that moves the current branch pointer to a specified commit, optionally also updating the index and working tree depending on its mode (soft, mixed, or hard).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>soft reset</strong> </dt> <dd data-astro-cid-whrtx2kk>git reset --soft: moves only HEAD to the target commit, leaving the index and working tree untouched, so the rewound changes remain staged.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>hard reset</strong> </dt> <dd data-astro-cid-whrtx2kk>git reset --hard: moves HEAD, the index, and the working tree to the target commit, permanently discarding any uncommitted changes. The one genuinely destructive undo mode.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>revert</strong> </dt> <dd data-astro-cid-whrtx2kk>A command that undoes a commit by creating a new commit which applies its exact inverse, preserving history. The safe way to undo commits that have already been shared.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>restore</strong> </dt> <dd data-astro-cid-whrtx2kk>A command (added in Git 2.23) for undoing changes to files: git restore --staged un-stages a file, while git restore discards a file&#39;s uncommitted edits to match the last commit.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>reflog</strong> </dt> <dd data-astro-cid-whrtx2kk>Short for &quot;reference log&quot;: a local, private record of every position HEAD has occupied, including commits that no branch points to anymore, making it Git&#39;s primary recovery mechanism.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>HEAD</strong> </dt> <dd data-astro-cid-whrtx2kk>A pointer to the commit you currently have checked out — normally the tip of the current branch, and the snapshot you would return to if you discarded everything else.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>detached HEAD</strong> </dt> <dd data-astro-cid-whrtx2kk>The state where HEAD points directly at a specific commit instead of a branch, so new commits belong to no branch and can be lost if you switch away without saving them to one.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>force push</strong> </dt> <dd data-astro-cid-whrtx2kk>git push --force: overwriting the remote branch with your local history, used after rewriting history. It can destroy teammates&#39; commits; git push --force-with-lease is a safer variant that refuses to overwrite work you have not seen.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>index</strong> </dt> <dd data-astro-cid-whrtx2kk>Also called the staging area: a holding area for the changes marked as ready to go into the next commit. git add copies changes into it; a commit freezes its contents into a new snapshot.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Git Basics — Undoing Things (Pro Git)</a> — Chacon &amp; Straub / Pro Git (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://git-scm.com/docs/git-reset" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>git-reset Documentation</a> — Git (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://git-scm.com/docs/git-revert" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>git-revert Documentation</a> — Git (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://git-scm.com/docs/git-reflog" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>git-reflog Documentation</a> — Git (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Reset Demystified (Pro Git)</a> — Chacon &amp; Straub / Pro Git (accessed 2026-07-12) </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="34" data-astro-cid-whrtx2kk>
+Mark Day 34 as read
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+      surfaces for someone searching for one — it costs you a click and it is genuinely how people
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+★ Star on GitHub
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-033-pull-requests-and-code-review" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 33</span> <span class="pn__title" data-astro-cid-oerjsknp>Pull Requests and Code Review</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-035-git-workflows-for-real-projects" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 35 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Git Workflows for Real Projects</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+      // Progressive enhancement only: the theme falls back to dark and every
+      // .reveal element is visible by default (the hidden start state exists
+      // only inside a prefers-reduced-motion: no-preference query).
+      (() => {
+        const toggle = document.getElementById('theme');
+        if (toggle) {
+          toggle.addEventListener('click', () => {
+            const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+            document.documentElement.dataset.theme = next;
+            try {
+              localStorage.setItem('theme', next);
+            } catch {
+              /* private mode */
+            }
+          });
+        }
+
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const items = document.querySelectorAll('.reveal');
+        if (items.length && !reduced && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry, i) => {
+                if (!entry.isIntersecting) return;
+                entry.target.style.transitionDelay = `${Math.min(i * 50, 240)}ms`;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.06 },
+          );
+          items.forEach((el) => io.observe(el));
+        } else {
+          items.forEach((el) => el.classList.add('is-in'));
+        }
+      })();
+    </script> </body> </html>

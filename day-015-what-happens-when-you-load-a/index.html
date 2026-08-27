@@ -1,0 +1,433 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 15: What Happens When You Load a Web Page · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to trace, stop by stop, the journey a web request takes — URL, DNS, TCP, TLS, HTTP, server, response, render — and use that map to reason about latency, failures, and the layered structure of the internet."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-015-what-happens-when-you-load-a/"><meta property="og:title" content="Day 15: What Happens When You Load a Web Page · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to trace, stop by stop, the journey a web request takes — URL, DNS, TCP, TLS, HTTP, server, response, render — and use that map to reason about latency, failures, and the layered structure of the internet."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-015-what-happens-when-you-load-a/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-015-what-happens-when-you-load-a.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 15: What Happens When You Load a Web Page · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 15: What Happens When You Load a Web Page · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to trace, stop by stop, the journey a web request takes — URL, DNS, TCP, TLS, HTTP, server, response, render — and use that map to reason about latency, failures, and the layered structure of the internet."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-015-what-happens-when-you-load-a.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+      // Dark is the default regardless of OS preference - this is a dark-first
+      // design. A visitor who picks light with the toggle keeps it. Applied
+      // before first paint so there is no flash of the wrong theme.
+      (() => {
+        let t;
+        try {
+          t = localStorage.getItem('theme');
+        } catch {
+          t = null;
+        }
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+      })();
+    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+<style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
+.starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+365 Days of AI
+</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+Labs
+</a> </header> <main id="main">  <article data-day="15" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>How the Internet Works</span>  › 
+Day 15 </p> <h1 data-astro-cid-whrtx2kk>Day 15: What Happens When You Load a Web Page</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-015-what-happens-when-you-load-a.png" width="1200" height="630" alt="Day 15 of 365 — What Happens When You Load a Web Page" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to trace, stop by stop, the journey a web request takes — URL, DNS, TCP, TLS, HTTP, server, response, render — and use that map to reason about latency, failures, and the layered structure of the internet.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>How the Internet Works</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-015-what-happens-when-you-load-a" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-015-what-happens-when-you-load-a</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
+cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-015-what-happens-when-you-load-a</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/ai-roadmap-365/labs/day-015-what-happens-when-you-load-a" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>List the stops of a page load in order — URL parsing, DNS lookup, TCP connection, TLS handshake, HTTP request and response, sub-resource fetching, and rendering — and say what each accomplishes</li><li data-astro-cid-whrtx2kk>Explain the difference between a domain name and an IP address, and why DNS is needed to bridge them</li><li data-astro-cid-whrtx2kk>Name the four layers of the internet protocol stack (application, transport, internet, link) and the single job each performs</li><li data-astro-cid-whrtx2kk>Define round-trip time and latency and explain why round trips, not bandwidth, dominate the felt speed of connection setup</li><li data-astro-cid-whrtx2kk>Use dig, ping, and curl to measure DNS resolution, round-trip time, and per-stage connection timings for a real site</li><li data-astro-cid-whrtx2kk>Read a curl timing line as a timeline and compute the cost of each stop (DNS, TCP, TLS, server) from it</li><li data-astro-cid-whrtx2kk>Connect the request journey to networked services: explain that every hosted-service call, dataset download, and deployed endpoint is this same pipeline</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Days 1–14 of this course (the computing stack, the terminal, and running commands)</li><li data-astro-cid-whrtx2kk>A computer running macOS or Linux (or Windows via WSL) with an internet connection and a terminal</li></ul> <h2 id="why-this-matters">Why this matters</h2>
+<p>You will spend a large part of your working life waiting for one computer to answer another. Every time you call a hosted model, download a dataset, pull a package, hit an API, or open a dashboard, your machine sends a request across a network and waits for a reply. When that reply is slow, or never comes, or comes back as a cryptic error, the difference between an engineer who fixes it in minutes and one who flails for an afternoon is a clear mental model of the journey a request actually takes.</p>
+<p>That journey is the subject of this lesson, and it is more consequential than it looks. Why does a service feel snappy from one office and sluggish from another? Because part of the delay is the physical distance a signal travels, and every extra back-and-forth trip multiplies it. Why does an application sometimes hang for exactly a few seconds before failing? Because a name lookup or a connection attempt is timing out on a fixed schedule. Why does the first request to a fresh server cost more than the ones after it? Because setting up a secure connection takes several round trips that later requests get to skip. None of this is mysterious once you can name the stops along the way.</p>
+<p>Today is the opening map for the whole networking part of this course. We will not go deep on any single stop — later days zoom into names and addresses, into the connection protocol, into encryption, into the request format itself. Today you get the end-to-end picture: you type a web address, press Enter, and a precise sequence of events carries your request out to a server and brings a page back. By the end you will be able to trace that sequence yourself, with real tools, on a real site — and you will understand why the same story explains loading a web page, downloading a model, and calling any service on the internet.</p>
+<h2 id="the-idea-in-plain-language">The idea in plain language</h2>
+<p>Loading a web page is not one action. It is a short pipeline of smaller actions, each of which must finish before the next can start, and each of which can fail on its own.</p>
+<p>When you type an address like <code>https://example.com</code> and press Enter, your browser first pulls the address apart to see what you are asking for: which protocol (the rules for talking), which host (the machine’s name), and which path (the specific resource). But the host is a name meant for humans, and the network only routes to numbers, so your computer performs a <strong>name lookup</strong> — it asks a directory service to translate <code>example.com</code> into a numeric address the network can reach. This translation is called DNS, the Domain Name System.</p>
+<p>With a number in hand, your computer opens a <strong>connection</strong> to that machine. On the modern web this connection is then <strong>secured</strong>: the two sides run a short negotiation that agrees on encryption keys, so everything that follows is scrambled to anyone listening in between. Only now does your browser send the actual <strong>request</strong> — a small block of text that says, in effect, “please give me the page at this path.” The server receives it, does whatever work it needs to (reads a file, runs some code, queries a database), and sends back a <strong>response</strong>: a status code, some headers, and the page’s content.</p>
+<p>That first response is usually just an HTML document — a skeleton. As the browser reads it, it discovers references to more resources (stylesheets, scripts, images, fonts) and fires off more requests for each, often reusing the connection it already opened. As those pieces arrive, the browser <strong>renders</strong>: it turns the HTML and CSS into the boxes, text, and pictures you see, and runs any scripts. The whole pipeline, on a warm connection, can complete in well under a second — but every stage is a place where time is spent and where things can go wrong.</p>
+<h2 id="historical-background">Historical background</h2>
+<p>The idea of a network that survives the loss of any single link goes back to the 1960s. In 1969 the ARPANET, funded by the United States Department of Defense’s Advanced Research Projects Agency, connected its first four university nodes and demonstrated <strong>packet switching</strong> — chopping messages into small packets that find their own way across the network rather than reserving a dedicated line. In 1974 Vint Cerf and Bob Kahn published the design for TCP, the Transmission Control Protocol, which later split into TCP and IP (the Internet Protocol). On 1 January 1983 the ARPANET switched over to TCP/IP, the moment often taken as the birth of the internet as a network of networks speaking a common language.</p>
+<p>The Domain Name System arrived in 1983 as well, designed principally by Paul Mockapetris, replacing a single shared <code>HOSTS.TXT</code> file that had listed every machine by hand — an approach that clearly could not scale as the network grew. DNS distributed the job of translating names to addresses across a hierarchy of servers.</p>
+<p>The web itself is younger. In 1989 Tim Berners-Lee, working at CERN, the European physics laboratory near Geneva, proposed a system of linked documents; by 1991 he had built the first web server and browser and defined three things that still run the web today: URLs to address documents, HTTP (the HyperText Transfer Protocol) to request them, and HTML to write them. Security came later: SSL, the ancestor of today’s TLS (Transport Layer Security), was developed at Netscape in the mid-1990s so that commerce could happen safely, and over the following decades the web shifted from mostly unencrypted <code>http://</code> to almost entirely encrypted <code>https://</code>. Each stop on today’s journey, in other words, was invented to solve a specific problem, and they were assembled over half a century into the pipeline you use without thinking.</p>
+<h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
+<p>Loading a web page is a <strong>client-initiated, request-response exchange over a layered network</strong>. Every word carries weight. <em>Client-initiated</em>: your machine (the client) always speaks first; the server waits and answers. <em>Request-response</em>: the unit of work is one request and its matching reply — the server does not push pages at you unbidden in the basic model. <em>Layered network</em>: the work is divided into cooperating layers, each handling one concern (naming, connecting, securing, formatting) and hiding the others, exactly like the computing stack you met on Day 1.</p>
+<p>It is equally important to see what the journey is not. It is not a single, continuous “pipe” that magically appears between you and a website; it is a sequence of discrete, independently failing steps. It is not instantaneous; information travels at a finite speed and each round trip costs real milliseconds. It is not inherently private unless it is encrypted; on plain <code>http://</code>, anyone on the path can read and alter what passes. And the server is not a single mystical machine — behind one name there may be caches, load balancers, and many servers, but from your side the whole thing behaves as one responder. Keeping these distinctions straight will save you from a hundred debugging wrong-turns.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Common misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”Typing a URL connects me straight to the website.”</td><td>Several steps happen first: parsing, a name lookup, a connection, and usually a security handshake — before any page is requested.</td></tr><tr><td>”The whole page arrives in one response.”</td><td>The first response is usually just HTML; the browser then makes many more requests for styles, scripts, images, and fonts.</td></tr><tr><td>”A slow site means a slow server.”</td><td>Delay can come from name lookup, distance (round trips), connection setup, or the browser’s own rendering — not only the server’s work.</td></tr><tr><td>”<code>https</code> just means the site is trustworthy.”</td><td><code>https</code> means the connection is encrypted and the server proved its identity for that name — not that the content or company is safe.</td></tr><tr><td>”The page failed, so the server is down.”</td><td>The failure may be name resolution, a blocked port, or a timeout somewhere on the path; the server itself may be perfectly healthy.</td></tr></tbody></table>
+<h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
+<p>The web page load exists to solve a deceptively hard problem: let any computer fetch a document from any other computer, anywhere in the world, without the two having ever met, and without either needing to know the details of the machines and networks in between. Before this, sharing information meant physical media or bespoke, incompatible systems. The breakthrough was to agree on a small stack of shared conventions and let everything else vary.</p>
+<p>Each layer of that stack solves one sub-problem so the others do not have to. Addressing (IP) solves “how do I refer to a machine anywhere on the planet.” Naming (DNS) solves “how do humans use memorable names instead of numbers that change.” Reliable delivery (TCP) solves “how do I get a stream of bytes across an unreliable network without pieces going missing or arriving jumbled.” Security (TLS) solves “how do I know I am really talking to that server, and keep eavesdroppers out.” Formatting (HTTP) solves “how do the two sides agree on what is being asked for and what is being returned.” Because each problem is solved once, in a layer, a new browser or a new server or a new kind of network can be built without reinventing the rest. That separation of concerns is why the web could grow from a handful of physics documents to the backbone of modern software — including, as you will see, the way machine-learning services are delivered.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>Let us walk the journey from the moment you press Enter to the moment the page appears, then step back and see the layered structure underneath it.</p>
+<h3 id="the-journey-stop-by-stop">The journey, stop by stop</h3>
+<p><img src="/ai-roadmap-365/_astro/request-journey.ByEOVhDX_2chm7h.svg" alt="Diagram: the journey of a web request from browser to server and back" loading="lazy" decoding="async" fetchpriority="auto" width="900" height="360"></p>
+<ol>
+<li><strong>URL parsing.</strong> The browser reads <code>https://example.com/page</code> and separates the <em>scheme</em> (<code>https</code>, the rules to use), the <em>host</em> (<code>example.com</code>, the machine), and the <em>path</em> (<code>/page</code>, the resource). A missing scheme is filled in; the default port for <code>https</code> is 443.</li>
+<li><strong>DNS lookup.</strong> The host is a name, and the network routes to numbers, so the browser asks a <strong>resolver</strong> to translate <code>example.com</code> into an IP address such as <code>104.20.23.154</code>. If the answer is cached nearby, this is instant; if not, it takes one or more round trips to the DNS hierarchy. (Day 16 goes deep on this.)</li>
+<li><strong>TCP connection.</strong> With an IP address, your machine opens a TCP connection to port 443 on that server. TCP guarantees that bytes arrive in order and complete; establishing it takes a short back-and-forth called the three-way handshake — one round trip before any data flows.</li>
+<li><strong>TLS handshake.</strong> For <code>https</code>, the two sides now negotiate encryption: the server presents a certificate proving it owns that name, and they agree on secret keys. This costs another round trip or two. From here on, everything is scrambled to anyone in between. (Day 19 covers TLS in detail.)</li>
+<li><strong>HTTP request.</strong> Only now does the browser send the real request — a short block of text: a method (<code>GET</code>), the path (<code>/page</code>), and headers describing the browser and what it accepts.</li>
+<li><strong>The server.</strong> The server receives the request, does its work — read a file, run application code, query a database, consult a cache — and prepares an answer.</li>
+<li><strong>HTTP response.</strong> The server sends back a status line (for example <code>200 OK</code>), headers (content type, length, caching rules), and the body — usually an HTML document.</li>
+<li><strong>Parse and fetch more.</strong> The browser reads the HTML and finds links to more resources: CSS, JavaScript, images, fonts. It issues more requests for each, usually reusing the open connection, and often several at once.</li>
+<li><strong>Render.</strong> As resources arrive, the browser builds a model of the page, applies the styles, runs the scripts, lays out the boxes, and paints pixels to the screen. The page becomes visible and interactive.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Stop</th><th>What happens</th><th>Roughly how long</th><th>Where it can fail</th></tr></thead><tbody><tr><td>URL parse</td><td>Split scheme, host, path</td><td>Negligible</td><td>Malformed address</td></tr><tr><td>DNS lookup</td><td>Name → IP address</td><td>0 ms cached, tens of ms cold</td><td>Name not found; resolver down</td></tr><tr><td>TCP connect</td><td>Three-way handshake to the port</td><td>~1 round trip</td><td>Port closed; host unreachable</td></tr><tr><td>TLS handshake</td><td>Agree keys, verify certificate</td><td>~1–2 round trips</td><td>Expired or invalid certificate</td></tr><tr><td>HTTP request/response</td><td>Ask for the resource, receive it</td><td>1 round trip + server work</td><td>404 not found; 500 server error</td></tr><tr><td>Fetch sub-resources</td><td>Requests for CSS, JS, images</td><td>Overlapping round trips</td><td>Missing or slow assets</td></tr><tr><td>Render</td><td>Build, style, script, paint</td><td>Milliseconds to seconds</td><td>Heavy scripts; large images</td></tr></tbody></table>
+<h3 id="the-layered-model-underneath">The layered model underneath</h3>
+<p>Every step above rides on a stack of layers, each responsible for one concern and each treating the layer below it as a reliable service it need not understand. This is the internet’s version of the abstraction stack from Day 1.</p>
+<p><img src="/ai-roadmap-365/_astro/internet-layers.C_bX3NTg_1BvU0B.svg" alt="Diagram: the four layers of the internet protocol stack" loading="lazy" decoding="async" fetchpriority="auto" width="720" height="460"></p>
+<p>Read the stack from the top. Your browser speaks the <strong>application layer</strong> — HTTP, the language of requests and responses (with TLS sitting just beneath it to encrypt that conversation). HTTP hands its data to the <strong>transport layer</strong> — TCP — which splits it into segments, numbers them, and guarantees they arrive in order and intact, retransmitting anything lost. TCP hands its segments to the <strong>internet layer</strong> — IP — which wraps each one with source and destination addresses and figures out the next hop toward the destination, across as many networks as it takes. IP hands its packets to the <strong>link layer</strong> — your Wi-Fi or Ethernet — which actually moves bits over the physical medium to the next device. Each layer adds its own wrapper on the way down and strips it on the way up, a process called encapsulation: your request is a letter inside an envelope inside a mailbag inside a truck.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Layer</th><th>Job</th><th>Example</th><th>Unit</th></tr></thead><tbody><tr><td>Application</td><td>Agree what is asked and returned</td><td>HTTP, DNS, TLS</td><td>Message / request</td></tr><tr><td>Transport</td><td>Deliver a byte stream reliably to the right program</td><td>TCP (and UDP)</td><td>Segment</td></tr><tr><td>Internet</td><td>Address and route packets across networks</td><td>IP</td><td>Packet</td></tr><tr><td>Link</td><td>Move bits to the next physical device</td><td>Wi-Fi, Ethernet</td><td>Frame</td></tr></tbody></table>
+<h3 id="why-round-trips-matter">Why round trips matter</h3>
+<p>The single most useful number in networking is the <strong>round-trip time</strong> (RTT): how long a signal takes to go to the server and come back. Signals travel near the speed of light, but the planet is large — a round trip between continents is often tens to well over a hundred milliseconds, and that floor cannot be optimized away by a faster computer. Notice how many stages in the journey cost “a round trip”: the TCP handshake, the TLS handshake, each DNS query that misses its cache, the request itself. A cold <code>https</code> connection can therefore cost three or four round trips <em>before the first byte of the page arrives</em>. If your RTT to a server is 100 ms, that is a third of a second spent purely on setup. This is why the web works so hard to avoid round trips — by caching DNS answers, keeping connections open and reusing them, and moving content physically closer to you. Latency, not bandwidth, is what makes the first visit to a distant site feel slow.</p>
+<h2 id="an-everyday-analogy">An everyday analogy</h2>
+<p>Picture sending a sealed, urgent letter to a large company across the country and getting a reply — the whole exchange is the request journey.</p>
+<p>You start with the company’s name, not its address, so you look it up in a directory: that is <strong>DNS</strong>, turning <code>example.com</code> into a street address (an IP). To make sure your letter and its reply can go back and forth reliably, you first phone ahead and agree, “I’ll send, you confirm, then we begin” — that opening exchange is the <strong>TCP handshake</strong>. Because the contents are confidential, you and the company agree on a private code and verify each other’s identity before sending anything real — that is the <strong>TLS handshake</strong>, with the company’s certificate acting like notarized letterhead proving they are who they claim. Now you mail your actual message: “Please send me the document at this reference” — the <strong>HTTP request</strong>. The mailroom (the <strong>server</strong>) finds the document, and mails it back — the <strong>response</strong>.</p>
+<p>The document turns out to be an index that mentions several appendices, so you fire off more letters for each — the browser fetching CSS, scripts, and images — using the same open channel rather than phoning ahead each time. Finally you spread all the pages on your desk and assemble them into something readable — the browser <strong>rendering</strong> the page. And here is the analogy’s sharpest lesson: nothing you do speeds up the mail truck. The distance to the company sets a hard minimum on every round trip, which is why a nearby branch office answers faster than headquarters overseas, and why sending one thick envelope beats sending twenty thin ones that each wait for a reply. Round trips, not the size of any single letter, dominate the felt speed. This analogy carries through the rest of the networking days: addresses, sealed envelopes, confirmations, and the tyranny of distance.</p>
+<h2 id="examples-in-practice">Examples in practice</h2>
+<p>Let us make the journey concrete with the tools you will use throughout this section. Suppose you want to understand why a site feels slow.</p>
+<p>First, resolve its name to an address, the DNS step, using <code>dig</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ dig +short example.com</span></span>
+<span class="line"><span>104.20.23.154</span></span>
+<span class="line"><span>172.66.147.243</span></span></code></pre>
+<p>Two addresses come back — the name maps to more than one server, a common setup for reliability. Next, measure the round-trip time to one of them with <code>ping</code>, which sends tiny packets and times the echo:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ ping -c 2 example.com</span></span>
+<span class="line"><span>PING example.com (104.20.23.154): 56 data bytes</span></span>
+<span class="line"><span>64 bytes from 104.20.23.154: icmp_seq=0 ttl=58 time=9.414 ms</span></span>
+<span class="line"><span>64 bytes from 104.20.23.154: icmp_seq=1 ttl=58 time=9.219 ms</span></span></code></pre>
+<p>About 9 ms each way here — a nearby edge server. Multiply that by the three or four round trips a cold connection needs and you can predict the setup cost. Now watch the actual connection stages with <code>curl</code>, asking it to print the time at which each stage completed:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ curl -sS -o /dev/null \</span></span>
+<span class="line"><span>    -w &quot;dns=%{time_namelookup}s connect=%{time_connect}s tls=%{time_appconnect}s total=%{time_total}s\n&quot; \</span></span>
+<span class="line"><span>    https://example.com</span></span>
+<span class="line"><span>dns=0.031s connect=0.041s tls=0.088s total=0.140s</span></span></code></pre>
+<p>Read this as a timeline. By 31 ms the name was resolved (DNS). By 41 ms the TCP connection was open — so the handshake took about 10 ms, one round trip. By 88 ms the TLS handshake finished — another ~47 ms for the secure negotiation. The complete response arrived at 140 ms. In one line, <code>curl</code> has shown you the first several stops of the journey with real numbers, and told you where the time went: here, mostly in TLS and the server’s response, not DNS. That is exactly the reasoning the Day 15 lab has you practice on a site of your choosing.</p>
+<p>To see the layer below, <code>traceroute example.com</code> lists each network hop between you and the server, and the browser’s own <strong>DevTools Network tab</strong> shows every one of the dozens of sub-resource requests a real page makes, with a waterfall of their timings. Five small tools, and the abstract pipeline becomes something you can watch.</p>
+<h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
+<h3 id="security">Security</h3>
+<p>Because the journey crosses networks you do not control, security is about proving identity and preventing tampering. TLS does both: the server’s certificate, signed by a trusted authority, proves it genuinely owns the name you typed, and the negotiated encryption stops anyone on the path from reading or altering the traffic. This is why a certificate warning is never to be clicked past casually — it means the identity proof failed, and you may be talking to an impostor. It is also why plain <code>http://</code> is now treated as unsafe for anything that matters.</p>
+<h3 id="privacy">Privacy</h3>
+<p>Even with <code>https</code>, the journey leaks some information. The <em>names</em> you look up via DNS and the <em>addresses</em> you connect to are often visible to your network and your resolver, even though the page contents are encrypted. Observers can see <em>that</em> you connected to a host and roughly how much data you exchanged, if not what it said. For anyone handling sensitive requests — including calls carrying private data to a hosted service — this matters: encryption protects the payload, but the metadata of who talked to whom is harder to hide.</p>
+<h3 id="performance">Performance</h3>
+<p>Performance on the web is dominated by two quantities: <strong>latency</strong> (how long a round trip takes, set largely by distance) and <strong>bandwidth</strong> (how much data per second the pipe carries). Beginners over-focus on bandwidth, but for small requests and connection setup, latency rules — you cannot pay off a round trip with a fatter pipe. The web’s performance tricks nearly all attack latency: caching to skip lookups, keeping connections alive to skip handshakes, and content delivery networks that place copies of data physically near you so the round trip is short.</p>
+<h3 id="scalability">Scalability</h3>
+<p>One server cannot answer the world, so a single name usually fronts many machines. Load balancers spread requests across a fleet; caches and content delivery networks serve common responses without troubling the origin at all; and DNS itself can hand different users different addresses to steer them to a nearby data center. From your side the journey looks identical — one name, one response — but behind the name is an elastic system that can grow to millions of simultaneous requests.</p>
+<h3 id="cost">Cost</h3>
+<p>Every stop has a price. Data transferred out of a data center is metered and billed by the gigabyte. Each round trip a design forces on users is paid in their time and your conversion rate. Serving from a cache or a nearby edge is far cheaper and faster than recomputing a response at a distant origin. Understanding the journey lets you spend wisely: cache what repeats, shorten the distance, and cut the number of round trips a page requires.</p>
+<h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
+<p>For a concepts lesson, the useful “alternatives” are the tools and resources for studying and inspecting the journey — differing in depth, format, and cost.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Resource</th><th>Type</th><th>What it offers</th><th>Cost</th></tr></thead><tbody><tr><td>The Day 15 lab in this course</td><td>Free</td><td>Trace a real page load end to end with <code>dig</code>, <code>ping</code>, and <code>curl</code></td><td>Free</td></tr><tr><td>Browser DevTools (Network tab)</td><td>Free, ships with the browser</td><td>A live waterfall of every request a real page makes, with per-stage timings</td><td>Free</td></tr><tr><td><code>curl</code>, <code>dig</code>, <code>ping</code>, <code>traceroute</code></td><td>Free, open source / built in</td><td>Command-line inspection of each stop on the journey</td><td>Free</td></tr><tr><td>MDN Web Docs — “How the Web works”</td><td>Free reference</td><td>A clear written walkthrough of the same pipeline</td><td>Free</td></tr><tr><td>High Performance Browser Networking (Ilya Grigorik)</td><td>Free online book</td><td>Deep, rigorous treatment of latency, TCP, TLS, and HTTP</td><td>Free to read online</td></tr><tr><td>Wireshark</td><td>Open source software</td><td>Capture and inspect the actual packets of each layer</td><td>Free</td></tr><tr><td>Crash Course Computer Science — The Internet</td><td>Free video series</td><td>A short, visual explanation of packets, routing, and protocols</td><td>Free</td></tr></tbody></table>
+<p>If you read one thing beyond this course, make it <em>High Performance Browser Networking</em> — it turns today’s map into working expertise. To <em>see</em> the layers live, install Wireshark after this section.</p>
+<h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>Latency</td><td>Bandwidth</td><td>Latency is the delay of one round trip (set by distance); bandwidth is data per second — small requests are latency-bound, big transfers bandwidth-bound</td></tr><tr><td>DNS</td><td>IP address</td><td>DNS is the directory that translates a name; the IP address is the number the network actually routes to</td></tr><tr><td>TCP</td><td>IP</td><td>TCP delivers an ordered, reliable byte stream to the right program; IP just addresses and routes individual packets and may lose or reorder them</td></tr><tr><td>HTTP</td><td>HTTPS</td><td>HTTP is the plain request/response format; HTTPS is the same format carried inside a TLS-encrypted connection</td></tr><tr><td>Client</td><td>Server</td><td>The client initiates the request and waits; the server listens and responds</td></tr><tr><td>URL</td><td>Domain name</td><td>The domain name is only the host part; a URL also includes the scheme, path, and any query — the full address of a resource</td></tr></tbody></table>
+<h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
+<p>Reach for this mental model whenever a networked thing is slow, flaky, or broken. When a service “hangs,” ask <em>which stop</em> is stalling: is the name failing to resolve, the connection refusing, the certificate invalid, or the server slow to respond? Each has a different fix, and the tools in this lesson tell them apart in seconds. Reach for it when you design anything that others will call over a network: minimize round trips, cache what repeats, and place data near its users. And reach for it when you read a status page or an incident report, because the vocabulary — DNS, TCP, TLS, HTTP status codes, latency — is exactly the language operators use.</p>
+<p>Know, too, when the details should stay hidden. Writing everyday application code, you should not hand-roll socket connections or parse raw packets; mature libraries handle the journey correctly, and reimplementing it invites subtle bugs and security holes. The layered model exists precisely so you can work at the top — make a request, handle a response — and descend to the lower stops only when a measurement points there. The professional habit is the same as on Day 1: operate at the highest layer that solves your problem, and drop down deliberately, tool in hand, when the evidence demands it.</p>
+<h2 id="the-ai-connection">The AI connection</h2>
+<p>Here is why this map matters for the work ahead. Every interaction you will have with a hosted machine-learning system is exactly this journey. Calling a model over an API is a DNS lookup, a TCP connection, a TLS handshake, and an HTTP request carrying your input, followed by a response carrying the model’s output — the same nine stops you traced today. Downloading a dataset or a set of model weights is the same journey moving far more data, where bandwidth finally dominates over latency. Deploying your own service means <em>being</em> the server at stop six, answering requests others send. When a model call is slow, this lesson tells you where to look: is it the network round trips to a distant region, the time the model spends computing its answer, or the size of the response coming back? When a call fails, the status code and the failing stage name the cause. The engineers who ship reliable, fast machine-learning products are, underneath the sophistication, people who understand this request journey cold — which is why it opens the networking part of your path.</p>
+<h2 id="knowledge-check">Knowledge check</h2>
+<p>Try these from memory before looking back:</p>
+<ol>
+<li>List the stops between pressing Enter on <code>https://example.com</code> and seeing the page, in order, in one short sentence each.</li>
+<li>A site takes exactly the same time to start loading from two computers on the same fast connection, but one is across the world from the server. Which quantity explains the gap, and why can a faster computer not fix it?</li>
+<li>Explain the difference between DNS and an IP address, and why the network needs both.</li>
+<li>Name the four layers of the internet stack from top to bottom, with the one job each performs.</li>
+<li>Given <code>dns=0.030s connect=0.045s tls=0.095s total=0.160s</code> from <code>curl</code>, how long did the TLS handshake take, and how long did the server plus content transfer take after TLS finished?</li>
+</ol>
+<h2 id="hands-on-exercise">Hands-on exercise</h2>
+<p>Time to watch the journey on a real site. In this exercise — worked through in full in the Day 15 lab directory — you will use three command-line tools to trace the first stops of a page load and read the timings. Open your terminal.</p>
+<p>First, resolve a name to its address (the DNS stop):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">dig</span><span style="color:#9ECBFF"> +short</span><span style="color:#9ECBFF"> example.com</span></span></code></pre>
+<p>This prints the IP address (or addresses) the name maps to. Next, measure the round-trip time (the cost of one back-and-forth):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">ping</span><span style="color:#79B8FF"> -c</span><span style="color:#79B8FF"> 2</span><span style="color:#9ECBFF"> example.com</span></span></code></pre>
+<p>The <code>-c 2</code> sends two packets; read the <code>time=</code> values in milliseconds. Finally, watch the connection stages with <code>curl</code>, which reports the moment each stage completed:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -sS</span><span style="color:#79B8FF"> -o</span><span style="color:#9ECBFF"> /dev/null</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#79B8FF">  -w</span><span style="color:#9ECBFF"> &quot;dns=%{time_namelookup}s connect=%{time_connect}s tls=%{time_appconnect}s total=%{time_total}s\n&quot;</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#9ECBFF">  https://example.com</span></span></code></pre>
+<p>Here <code>-o /dev/null</code> throws away the page body so you see only the timing line; <code>-w</code> names the fields to print. Each number is the elapsed time <em>from the start</em> at which that stage finished, so the gaps between them are the cost of each stop.</p>
+<h3 id="expected-output">Expected output</h3>
+<p>A typical run (your numbers will differ with distance and network — that is the point):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ dig +short example.com</span></span>
+<span class="line"><span>104.20.23.154</span></span>
+<span class="line"><span>172.66.147.243</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ ping -c 2 example.com</span></span>
+<span class="line"><span>PING example.com (104.20.23.154): 56 data bytes</span></span>
+<span class="line"><span>64 bytes from 104.20.23.154: icmp_seq=0 ttl=58 time=9.414 ms</span></span>
+<span class="line"><span>64 bytes from 104.20.23.154: icmp_seq=1 ttl=58 time=9.219 ms</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ curl -sS -o /dev/null -w &quot;dns=%{time_namelookup}s connect=%{time_connect}s tls=%{time_appconnect}s total=%{time_total}s\n&quot; https://example.com</span></span>
+<span class="line"><span>dns=0.031s connect=0.041s tls=0.088s total=0.140s</span></span></code></pre>
+<p>Reading the <code>curl</code> line: DNS finished at 31 ms, the TCP connection at 41 ms (so the handshake was ~10 ms, one round trip), TLS at 88 ms, and the full response at 140 ms. The gaps are the per-stop costs.</p>
+<h3 id="validate-your-work">Validate your work</h3>
+<p>You are done when you can check every box:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> You can state the IP address <code>dig</code> returned for your chosen site.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can state the round-trip time <code>ping</code> reported, in milliseconds.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can read the <code>curl</code> line and say when DNS, connect, and TLS each finished.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can compute the TLS handshake duration (connect time subtracted from TLS time).</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can name which stop took the most time for your site.</li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><strong><code>dig: command not found</code>.</strong> On some minimal Linux systems <code>dig</code> lives in a <code>dnsutils</code>/<code>bind-utils</code> package; or use <code>nslookup example.com</code> or <code>host example.com</code> instead.</li>
+<li><strong><code>ping</code> shows no replies or “Request timeout.”</strong> Many networks and servers block ping (ICMP) on purpose. A blocked ping does <strong>not</strong> mean the site is down — confirm with <code>curl</code>, which uses normal web traffic.</li>
+<li><strong><code>curl</code> prints <code>could not resolve host</code>.</strong> The DNS stop failed: check your spelling and your internet connection; try <code>dig</code> on the same name to isolate the problem.</li>
+<li><strong>All <code>curl</code> times are <code>0.000</code>.</strong> You are probably offline, or a proxy/firewall blocked the request; reconnect and retry.</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<ul>
+<li><strong>Reading the <code>curl</code> numbers as durations instead of timestamps.</strong> Each value is the elapsed time <em>from the start</em> at which that stage finished, not the length of that stage. Subtract consecutive values to get each stop’s cost.</li>
+<li><strong>Assuming a blocked <code>ping</code> means the server is down.</strong> Ping and web traffic use different protocols; a server can refuse ping while happily serving pages. Always confirm with <code>curl</code>.</li>
+<li><strong>Confusing the DNS time with the total time.</strong> <code>time_namelookup</code> is just the first stop; the total includes connection, TLS, the request, and the server’s work.</li>
+</ul>
+<h2 id="practice-assignment">Practice assignment</h2>
+<p>Open the journey worksheet in the starter directory of the Day 15 lab and complete it for a website of your choice (pick one you use often). Record: the IP address <code>dig</code> resolves it to, the round-trip time <code>ping</code> reports, and the DNS, connect, TLS, and total times from <code>curl</code>. Then write one short paragraph (5–8 sentences) narrating your site’s request journey with its real numbers — which stop cost the most, how many round trips the setup implies given your RTT, and whether the site felt latency-bound (far away, high RTT) or fast and nearby. Keep the worksheet; a later networking lesson builds on it.</p>
+<h2 id="extension-challenge">Extension challenge</h2>
+<p>Go one layer deeper and watch the path itself. Run <code>traceroute example.com</code> (on Windows, <code>tracert</code>), which lists every network hop between you and the server, with the round-trip time to each. Count the hops and notice where the time jumps — often at the crossing between your provider and the wider internet, or at an ocean. Then compare two sites: one hosted near you and one you know is far away (a government or university site on another continent is a good choice). Run the same <code>curl</code> timing command against both and record the difference in DNS, TLS, and total time. Write two or three sentences explaining how distance (visible as RTT in <code>ping</code> and hop count in <code>traceroute</code>) shows up as slower connection setup in <code>curl</code> — you have now measured the tyranny of distance that shapes every networked service, from a web page to a hosted model call.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. You type https://example.com and press Enter. Which step happens FIRST, before the browser can request the page? </strong> </p> <ol type="A"> <li>The server renders the HTML for you</li><li>The browser parses the URL and looks up the name to get an IP address</li><li>The TLS handshake encrypts the page content</li><li>The browser paints pixels to the screen</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> The browser parses the URL and looks up the name to get an IP address </p> <p>The browser first splits the URL into scheme, host, and path, then performs a DNS lookup to translate the host name into an IP address the network can route to. Only after there is an address can a connection be opened and the page requested.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. What does the Domain Name System (DNS) actually do? </strong> </p> <ol type="A"> <li>It encrypts the connection so eavesdroppers cannot read it</li><li>It guarantees that packets arrive in order and complete</li><li>It translates a human-friendly name like example.com into a numeric IP address</li><li>It renders the HTML into a visible page</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> It translates a human-friendly name like example.com into a numeric IP address </p> <p>DNS is the internet&#39;s directory: it maps memorable names to the numeric IP addresses the network routes to. Reliability is TCP&#39;s job, encryption is TLS&#39;s job, and rendering is the browser&#39;s job.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. On a fresh https connection, which sequence of setup steps happens in order before the first HTTP request is sent? </strong> </p> <ol type="A"> <li>TLS handshake, then TCP connection, then DNS lookup</li><li>DNS lookup, then TLS handshake, then TCP connection</li><li>DNS lookup, then TCP connection, then TLS handshake</li><li>TCP connection, then DNS lookup, then TLS handshake</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> DNS lookup, then TCP connection, then TLS handshake </p> <p>You need an address before you can connect, so DNS comes first; then TCP opens the connection to that address; then TLS negotiates encryption over that connection. Only after all three can the HTTP request go out.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. Why does distance to a server matter so much for how fast a page starts to load? </strong> </p> <ol type="A"> <li>Longer distance reduces the available bandwidth to zero</li><li>Each round trip takes longer over distance, and connection setup needs several round trips</li><li>DNS cannot resolve names for far-away servers</li><li>Servers far away always have slower processors</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Each round trip takes longer over distance, and connection setup needs several round trips </p> <p>Signals travel at a finite speed, so a longer distance means a longer round-trip time. Because setting up a connection (TCP handshake, TLS handshake, DNS misses, the request itself) costs several round trips, distance multiplies the setup delay — this is latency, and a faster computer cannot remove it.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. In the internet&#39;s layered model, what is the job of the transport layer (TCP)? </strong> </p> <ol type="A"> <li>To move bits over the physical Wi-Fi or Ethernet medium</li><li>To address and route individual packets across networks</li><li>To agree what is being asked for and returned</li><li>To deliver an ordered, reliable byte stream to the right program</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> To deliver an ordered, reliable byte stream to the right program </p> <p>TCP (the transport layer) turns the unreliable packet delivery of IP into an ordered, complete byte stream for a specific program, retransmitting anything lost. Routing is IP&#39;s job (internet layer), moving bits is the link layer&#39;s job, and agreeing on the message format is the application layer&#39;s job.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. A curl run prints: dns=0.030s connect=0.050s tls=0.100s total=0.180s. How long did the TLS handshake take? </strong> </p> <ol type="A"> <li>About 50 milliseconds (0.100 minus 0.050)</li><li>About 100 milliseconds</li><li>About 30 milliseconds</li><li>About 180 milliseconds</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> About 50 milliseconds (0.100 minus 0.050) </p> <p>Each number is the elapsed time from the start at which that stage finished. TCP connect finished at 0.050s and TLS finished at 0.100s, so the TLS handshake took the gap between them: about 0.050s, or 50 milliseconds.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. Your ping to a website times out with no replies, but the site loads fine in your browser. What is the most likely explanation? </strong> </p> <ol type="A"> <li>The site is down and the browser is showing a cached copy</li><li>DNS is broken, so the browser guessed the address</li><li>The server or network blocks ping (ICMP) traffic, which is separate from normal web traffic</li><li>The TLS certificate has expired</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> The server or network blocks ping (ICMP) traffic, which is separate from normal web traffic </p> <p>Ping uses the ICMP protocol, which many servers and networks block on purpose. Web pages travel over TCP on port 443, a different path, so a blocked ping does not mean the site is down — always confirm reachability with a tool like curl.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. The first response to a page load is usually just an HTML document. What does the browser do next? </strong> </p> <ol type="A"> <li>Nothing more — the single response contains the entire page</li><li>It reads the HTML, discovers references to CSS, scripts, images, and fonts, and requests each of them</li><li>It closes the connection and reports the page as finished</li><li>It re-runs the DNS lookup for every image individually</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> It reads the HTML, discovers references to CSS, scripts, images, and fonts, and requests each of them </p> <p>The initial HTML is a skeleton that references more resources. The browser parses it, issues additional HTTP requests for the stylesheets, scripts, images, and fonts it names — usually reusing the open connection — and renders the page as those pieces arrive.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>URL</strong> </dt> <dd data-astro-cid-whrtx2kk>A Uniform Resource Locator — the full address of a resource on the web, made of a scheme (such as https), a host name, and a path, plus any query.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>DNS</strong> </dt> <dd data-astro-cid-whrtx2kk>The Domain Name System, the internet&#39;s directory service that translates a human-friendly name like example.com into a numeric IP address.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>IP address</strong> </dt> <dd data-astro-cid-whrtx2kk>The numeric address (such as 104.20.23.154) that identifies a machine on the network, so packets can be routed to it.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>TCP</strong> </dt> <dd data-astro-cid-whrtx2kk>The Transmission Control Protocol, which delivers a reliable, ordered stream of bytes between two programs, retransmitting anything lost.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>TLS</strong> </dt> <dd data-astro-cid-whrtx2kk>Transport Layer Security, the protocol that encrypts a connection and verifies the server&#39;s identity so traffic is private and tamper-proof; the S in https.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>HTTP</strong> </dt> <dd data-astro-cid-whrtx2kk>The HyperText Transfer Protocol, the request-and-response format a browser and server use to ask for and return web resources.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>round-trip time</strong> </dt> <dd data-astro-cid-whrtx2kk>The time for a signal to travel to the server and back again, abbreviated RTT; the basic unit of network delay.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>latency</strong> </dt> <dd data-astro-cid-whrtx2kk>The delay before data begins to arrive, dominated by round-trip time and set largely by distance; distinct from bandwidth.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>bandwidth</strong> </dt> <dd data-astro-cid-whrtx2kk>The amount of data a connection can carry per second; important for large transfers but not for the round trips of connection setup.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>packet</strong> </dt> <dd data-astro-cid-whrtx2kk>A small, individually addressed chunk of data that the network routes independently; messages are split into packets and reassembled at the destination.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>protocol</strong> </dt> <dd data-astro-cid-whrtx2kk>An agreed set of rules two computers follow to communicate, such as HTTP, TCP, IP, or TLS.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>client</strong> </dt> <dd data-astro-cid-whrtx2kk>The program that initiates a request and waits for a reply, such as your web browser.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>server</strong> </dt> <dd data-astro-cid-whrtx2kk>The program that listens for requests and returns responses, such as the machine hosting a website.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>encapsulation</strong> </dt> <dd data-astro-cid-whrtx2kk>The layered wrapping of data as it goes down the network stack — an HTTP message inside a TCP segment inside an IP packet inside a link frame — unwrapped again at the other end.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/How_the_Web_works" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>How the Web works</a> — MDN Web Docs (accessed 2026-07-12) — A clear written walkthrough of the request-response pipeline covered in this lesson. </li><li data-astro-cid-whrtx2kk> <a href="https://hpbn.co/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>What happens when you type a URL — High Performance Browser Networking</a> — Ilya Grigorik (accessed 2026-07-12) — Free online book with a rigorous treatment of latency, TCP, TLS, and HTTP. </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Internet_protocol_suite" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Internet protocol suite</a> — Wikipedia (accessed 2026-07-12) — Reference on the layered TCP/IP model used in this lesson. </li><li data-astro-cid-whrtx2kk> <a href="https://missing.csail.mit.edu/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Missing Semester of Your CS Education</a> — MIT (accessed 2026-07-12) — Command-line tooling background for dig, curl, and friends. </li><li data-astro-cid-whrtx2kk> <a href="https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Crash Course Computer Science — The Internet</a> — PBS Digital Studios (accessed 2026-07-12) — Short, visual explanation of packets, routing, and protocols. </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="15" data-astro-cid-whrtx2kk>
+Mark Day 15 as read
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+      surfaces for someone searching for one — it costs you a click and it is genuinely how people
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+★ Star on GitHub
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-014-automating-tasks-with-shell-scripts-and" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 14</span> <span class="pn__title" data-astro-cid-oerjsknp>Automating Tasks with Shell Scripts and cron</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-016-ip-addresses-dns-and-routing" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 16 →</span> <span class="pn__title" data-astro-cid-oerjsknp>IP Addresses, DNS, and Routing</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+      // Progressive enhancement only: the theme falls back to dark and every
+      // .reveal element is visible by default (the hidden start state exists
+      // only inside a prefers-reduced-motion: no-preference query).
+      (() => {
+        const toggle = document.getElementById('theme');
+        if (toggle) {
+          toggle.addEventListener('click', () => {
+            const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+            document.documentElement.dataset.theme = next;
+            try {
+              localStorage.setItem('theme', next);
+            } catch {
+              /* private mode */
+            }
+          });
+        }
+
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const items = document.querySelectorAll('.reveal');
+        if (items.length && !reduced && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry, i) => {
+                if (!entry.isIntersecting) return;
+                entry.target.style.transitionDelay = `${Math.min(i * 50, 240)}ms`;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.06 },
+          );
+          items.forEach((el) => io.observe(el));
+        } else {
+          items.forEach((el) => el.classList.add('is-in'));
+        }
+      })();
+    </script> </body> </html>

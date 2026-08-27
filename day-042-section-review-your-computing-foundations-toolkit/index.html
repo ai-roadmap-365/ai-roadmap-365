@@ -1,0 +1,420 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 42: Section Review: Your Computing Foundations Toolkit · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to see the six areas of Course 1 as one connected stack, trace a real action through every layer, honestly assess your own strengths and gaps, and know exactly which earlier day to revisit for each weakness — a solid foundation to build Python and everything after on."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-042-section-review-your-computing-foundations-toolkit/"><meta property="og:title" content="Day 42: Section Review: Your Computing Foundations Toolkit · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to see the six areas of Course 1 as one connected stack, trace a real action through every layer, honestly assess your own strengths and gaps, and know exactly which earlier day to revisit for each weakness — a solid foundation to build Python and everything after on."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-042-section-review-your-computing-foundations-toolkit/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-042-section-review-your-computing-foundations-toolkit.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 42: Section Review: Your Computing Foundations Toolkit · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 42: Section Review: Your Computing Foundations Toolkit · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to see the six areas of Course 1 as one connected stack, trace a real action through every layer, honestly assess your own strengths and gaps, and know exactly which earlier day to revisit for each weakness — a solid foundation to build Python and everything after on."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-042-section-review-your-computing-foundations-toolkit.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+      // Dark is the default regardless of OS preference - this is a dark-first
+      // design. A visitor who picks light with the toggle keeps it. Applied
+      // before first paint so there is no flash of the wrong theme.
+      (() => {
+        let t;
+        try {
+          t = localStorage.getItem('theme');
+        } catch {
+          t = null;
+        }
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+      })();
+    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+<style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
+.starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+365 Days of AI
+</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+Labs
+</a> </header> <main id="main">  <article data-day="42" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>Systems Foundations: Storage, Observability, and Tooling</span>  › 
+Day 42 </p> <h1 data-astro-cid-whrtx2kk>Day 42: Section Review: Your Computing Foundations Toolkit</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-042-section-review-your-computing-foundations-toolkit.png" width="1200" height="630" alt="Day 42 of 365 — Section Review: Your Computing Foundations Toolkit" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to see the six areas of Course 1 as one connected stack, trace a real action through every layer, honestly assess your own strengths and gaps, and know exactly which earlier day to revisit for each weakness — a solid foundation to build Python and everything after on.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Systems Foundations: Storage, Observability, and Tooling</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-042-section-review-your-computing-foundations-toolkit" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-042-section-review-your-computing-foundations-toolkit</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
+cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-042-section-review-your-computing-foundations-toolkit</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/ai-roadmap-365/labs/day-042-section-review-your-computing-foundations-toolkit" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Consolidate the six areas of Course 1 (the machine, the command line, the internet, APIs, git and GitHub, and systems foundations) into a single mental model of the computing stack</li><li data-astro-cid-whrtx2kk>Trace one concrete action — calling an API and storing the result — through every layer you learned, naming what happens at each step</li><li data-astro-cid-whrtx2kk>Explain how the two wrapping domains, version control and systems tooling, apply at every layer rather than at one</li><li data-astro-cid-whrtx2kk>Self-assess your confidence across all six areas and identify the specific earlier day to revisit for each weakness</li><li data-astro-cid-whrtx2kk>Diagnose a failed request by naming the layer it lives in, using the right Course 1 concept at each step</li><li data-astro-cid-whrtx2kk>Explain how this foundation makes Python and everything after (data, machine learning, deployment) comprehensible rather than magical</li><li data-astro-cid-whrtx2kk>Run a toolkit check on your own machine that confirms the core Course 1 tools and cross-section skills are present and ready</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Days 1-41 of this section — this review consolidates all of them</li><li data-astro-cid-whrtx2kk>A computer running macOS, Linux, or Windows with a terminal, git, and python3 available</li></ul> <h2 id="why-this-matters">Why this matters</h2>
+<p>For forty-one days you have been assembling something, one tool at a time, and today you finally step back and see that it is a whole. You started with a bare machine — transistors and the fetch-decode-execute loop — and you now hold a working engineer’s foundation: you can drive a shell, reason about a network request, read and call an API, version your work with git, debug it, store its data, watch it run, and automate the whole thing. Course 1 is finished. This is the day it stops being forty-one separate lessons and becomes one mental model you carry everywhere.</p>
+<p>Why spend a day reviewing instead of racing ahead to Python? Because the difference between someone who copies code from the internet and someone who <em>builds</em> systems is exactly this consolidated picture. When your Python program later fails to reach a server, the person with the foundation asks a precise question — is it DNS, the port, the TLS handshake, the HTTP status, or my API key? — while the person without it just retypes the command and hopes. When a training run is mysteriously slow, one of them checks the memory hierarchy and the storage layer; the other files a bug report. The foundation is not trivia you memorize; it is the set of questions you now know how to ask, and the layers you now know how to look inside.</p>
+<p>Here is the concrete promise of today. Everything ahead in this course — Python, then data work, machine learning, large language models, agents, and deployment — sits directly on top of the six areas you just learned. A deployed model is a program (days 1-7) started by a shell command (8-14), reachable over the network (15-21) through an API (22-28), with its code in version control (29-35) and its data, logs, and automation handled by the systems tooling of days 36-41. Nothing in the rest of the course asks you to abandon this foundation; it asks you to build on it. Today you make sure the foundation is solid, find the one or two soft spots, and learn exactly which day to revisit to firm them up.</p>
+<h2 id="the-idea-in-plain-language">The idea in plain language</h2>
+<p>A “computing foundation” is the layer of general knowledge that sits beneath any specific technology you will ever use. It does not go stale when a framework changes its name, because it is about the machine, the network, and the workflow — the things that stay the same underneath the fashions. Course 1 taught this foundation in six connected areas, and the point of today is to see the connections, not just the list.</p>
+<p>The six areas are: <strong>how computers work</strong> (the machine underneath everything), <strong>the command line</strong> (how you talk to that machine directly), <strong>the internet</strong> (how machines talk to each other), <strong>APIs</strong> (how programs talk to each other over that internet), <strong>git and GitHub</strong> (how you track and share the changes you make), and <strong>systems foundations</strong> — editors, debugging, regular expressions, storage, observability, and automation (the everyday craft of building and running real software). Learned separately they are six skills. Understood together they are a single stack: a request leaves your keyboard, travels down through your machine, out across the network, into somebody’s API, and back — and now you understand every layer it passes through.</p>
+<p>Today does four things. It <strong>recaps</strong> each of the six areas in a sentence or two so the whole map is in front of you at once. It <strong>connects</strong> them, tracing one concrete action all the way through the stack so you feel how the pieces interlock. It helps you <strong>self-assess</strong> honestly — what can you actually do now, and where are you shaky? And it gives you <strong>a repair manual</strong>: for each weakness, the exact earlier day to revisit. A review that only congratulates you is worthless; this one is meant to be used.</p>
+<h2 id="historical-background">Historical background</h2>
+<p>The idea that a working programmer needs a broad, shared <em>baseline</em> — not just the syntax of one language — is older than any specific tool in this section, and it has a clear lineage. In 1968 a NATO conference coined the term “software engineering” to name a crisis: programs had grown too large and too interconnected for ad-hoc craft, and the field needed shared foundations and disciplined practice. The tools you learned are that discipline made concrete.</p>
+<p>Each of your six areas has its own well-documented origin. The layered machine descends from the stored-program design of the 1945 EDVAC report. The command line and the pipe date to Unix at Bell Labs in the early 1970s, where Ken Thompson and Dennis Ritchie built a system whose philosophy — small tools, composed by piping text — you used every day of Week 2. The internet’s addressing and transport grew from ARPANET and the TCP/IP work of Vint Cerf and Bob Kahn in the 1970s; the Web and HTTP came from Tim Berners-Lee at CERN in 1989-1991. The API-over-HTTP style you learned, REST, was named and described by Roy Fielding in his 2000 doctoral dissertation. Git was written by Linus Torvalds in 2005 to manage the Linux kernel’s development after a licensing dispute with a previous tool. Regular expressions trace to Stephen Kleene’s mathematical work in the 1950s and reached programmers through Unix tools in the 1970s and 1980s.</p>
+<p>The striking thing, looking back, is how <em>stable</em> this foundation is. Some of these ideas are half a century old and still exactly what you use. That stability is the whole reason a course puts them first: the transistor count on a chip has grown a millionfold since these ideas appeared, but the shell, the pipe, an IP address, an HTTP request, a git commit, and a regular expression work today essentially as they did decades ago. You have not learned a fashion. You have learned the part that lasts.</p>
+<h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
+<p>Your computing foundation is a coherent, durable, portable body of knowledge about how software systems actually work and how a professional builds them. It is <em>coherent</em> because the six areas connect into one stack. It is <em>durable</em> because it changes slowly. It is <em>portable</em> because it applies whether you end up doing web development, data science, machine learning, or operations. When you can look at an unfamiliar system and immediately see which layer you are dealing with, you have the foundation.</p>
+<p>It is equally important to be honest about what this foundation is <strong>not</strong>, so you neither undersell nor oversell what you now know.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>It is</th><th>It is not</th></tr></thead><tbody><tr><td>A working mental model of the whole stack, top to bottom</td><td>Deep mastery of any single layer — each of these areas has specialists who spend careers in it</td></tr><tr><td>Enough to reason about, debug, and build real systems</td><td>A substitute for the practice you still owe each skill</td></tr><tr><td>The vocabulary to ask precise questions and read documentation</td><td>Everything you will ever need — the course has eleven more months for good reason</td></tr><tr><td>Transferable across languages, clouds, and job titles</td><td>Tied to any one tool; tools will change, the layers will not</td></tr><tr><td>The launchpad for Python and everything after</td><td>The destination — it is Day 42 of 365</td></tr></tbody></table>
+<p>Read that table both ways. You know more than most people ever will about how their computers work, and you should feel that. And you have barely begun — which is exactly right for the end of the first of many courses. Confidence without arrogance is the correct posture leaving Course 1.</p>
+<h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
+<p>This course front-loads six weeks of foundations before you write a single line of Python, and that ordering is deliberate. It solves a specific, common failure: the self-taught developer who can produce code but cannot <em>operate</em>. That person can write a script but cannot say why it will not connect to a server, cannot recover a file they deleted, cannot read a stack trace, cannot tell whether the bug is in their code or the network, and treats every layer below their editor as an impenetrable box. Their ceiling is low not because they cannot code, but because they cannot see the system their code lives in.</p>
+<p>The foundation solves this by making the boxes transparent <em>before</em> you have a language to hide inside. Learn the shell before Python, and Python’s <code>subprocess</code> and file paths make immediate sense. Learn HTTP before you call an API from Python, and the <code>requests</code> library is obvious rather than magical. Learn git before you have a big project to lose, and you never lose one. Learn debugging, storage, and observability as concepts first, and the Python-specific versions later are just the same ideas with new syntax. The problem this section solves is <em>dependency</em>: everything ahead depends on this, so putting it first means nothing ahead has to be taught as magic.</p>
+<p>There is a second problem it solves: <strong>transfer</strong>. Languages and frameworks come and go, but a person grounded in the machine, the network, and the workflow can pick up any of them quickly, because the new thing is always a variation on a foundation they already hold. You did not spend six weeks learning things you will discard. You spent six weeks learning the things you will still be using when today’s frameworks are historical footnotes.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>The foundation “works” as a system when its six areas connect. Let us make the connections explicit, first as a map of the whole, then by tracing one action through it.</p>
+<h3 id="the-six-areas-and-how-they-connect">The six areas, and how they connect</h3>
+<p><img src="/ai-roadmap-365/_astro/foundations-map.Gb2IjeQK_Z1S6kJX.svg" alt="Diagram: the six domains of your computing foundations as one connected system" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="560"></p>
+<p>Read the map from the inside out. At the center sits <strong>the machine</strong> (days 1-7): transistors, the fetch-decode-execute cycle, the memory hierarchy, binary data, and the operating system that schedules it all. Everything else runs <em>on</em> this. Wrapped around it is <strong>the command line</strong> (days 8-14): the shell is how you drive the machine directly — navigating the filesystem, transforming text with pipes, setting environment variables, and scripting repeatable work. The shell is the hinge between you and everything else; almost every other tool in the section is something you invoke from it.</p>
+<p>Reaching outward, <strong>the internet</strong> (days 15-21) is how your machine talks to other machines: IP and DNS to find them, TCP and ports to connect, HTTP and HTTPS to exchange requests and responses, and tools like <code>curl</code> to inspect the traffic. Built on top of the internet, <strong>APIs</strong> (days 22-28) are how <em>programs</em> talk to each other: REST resources and verbs, JSON as the shared data format, authentication with keys and tokens, and the practical realities of rate limits, pagination, and error handling.</p>
+<p>Underneath and around all of your building work sit two more areas. <strong>Git and GitHub</strong> (days 29-35) track every change you make — commits, branches, merges, remotes, pull requests, and the ability to undo almost anything. And <strong>systems foundations</strong> (days 36-41) are the daily craft: a configured editor, debuggers and linters and formatters, regular expressions for pattern work, storage choices (files, databases, object storage, caches), observability (logs, metrics, traces), and the automation that ties it together with scripts, hooks, and pipelines. These last two areas are not “on top of” the stack — they wrap the whole thing, because you version and observe and automate at every layer.</p>
+<h3 id="tracing-one-action-through-every-layer">Tracing one action through every layer</h3>
+<p>The connections become concrete the moment you follow a single action down through the stack. Consider one ordinary task — <em>fetch some data from a public API and save it to a database</em> — and watch how many of your six areas it touches.</p>
+<p><img src="/ai-roadmap-365/_astro/stack-journey.Dc8dDnU2_1aRjuH.svg" alt="Flowchart: a single action — calling an API and storing the result — traced through every layer you learned" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="620"></p>
+<ol>
+<li><strong>You type a command in the shell</strong> (days 8-14). The terminal is a program; the shell parses your line, expands variables and globs, and prepares to run it. This is Week 2 at work.</li>
+<li><strong>The command runs as a process on the machine</strong> (days 1-7). The operating system loads it, gives it memory and a slice of CPU time, and it begins to execute — the fetch-decode-execute loop from Day 1, now running your program.</li>
+<li><strong>The program opens a network connection</strong> (days 15-21). It resolves the server’s name to an IP address via DNS, opens a TCP connection to a port, and completes a TLS handshake so the traffic is encrypted. Everything from Week 3 fires here, in a fraction of a second.</li>
+<li><strong>It sends an HTTP request to an API</strong> (days 22-28). A <code>GET</code> request with an <code>Authorization</code> header travels to a REST endpoint; the server checks your key, applies rate limits, and returns a JSON body with a status code you know how to interpret.</li>
+<li><strong>The result is stored</strong> (day 39). You parse the JSON and write it somewhere deliberate — a file, a SQLite database, object storage, or a cache — having chosen the store on purpose, not by accident.</li>
+<li><strong>You can see what happened</strong> (day 40). Logs record the request and its status; if something failed, you have a trace to follow rather than a shrug.</li>
+<li><strong>All of it is versioned and automated</strong> (days 29-35, 41). The script lives in a git repository; a commit records this change; a hook or pipeline could run it on a schedule, format and lint it, and test it — without you touching it again.</li>
+</ol>
+<p>One command. Seven of your lessons, five of your six areas, in the space of a heartbeat. That is what it means to have a <em>foundation</em> rather than a pile of facts: you can trace any action through the stack and know, at each step, what is happening and how to look inside it. Before Course 1 this was one opaque event — “the program got the data.” Now it is a sequence of layers you understand end to end.</p>
+<h2 id="an-everyday-analogy">An everyday analogy</h2>
+<p>Think of the last six weeks as equipping a workshop. When you started, the room was empty: bare walls, a power outlet, nothing on the benches. You could not build anything, because you had no tools and did not know where anything was.</p>
+<p>Week by week you fitted out a station. First you learned the <strong>building itself</strong> — where the power comes from, how the lights work, what the load-bearing walls are (the machine). Then you set up your <strong>main workbench</strong> with the hand tools you reach for constantly (the command line). You ran <strong>pipes and wiring to the outside</strong> so materials could come and go (the internet), and you fitted <strong>standard couplings</strong> so you could connect to any supplier’s delivery system (APIs). You installed a <strong>logbook and a labeling system</strong> so every change to the workshop is recorded and reversible (git). And you added the <strong>quality bench</strong> — good lighting, measuring tools, inspection gauges, and a conveyor that moves work through automatically (the systems foundations of storage, observability, and automation).</p>
+<p>Today you are not adding a new station. Today you stand in the middle of the finished workshop, and for the first time you see it as one place where the stations connect — how a part comes in through the couplings, gets logged, moves along the bench, is measured and stored, and how the conveyor can run the whole sequence while you sleep. A person with a workshop like this does not panic when a job is unfamiliar; they know which station handles which part of it. That is precisely the difference the foundation makes, and it is why the next thing you build — your first real programs in Python — will feel like <em>using</em> a workshop you own, not wandering an empty room.</p>
+<h2 id="examples-in-practice">Examples in practice</h2>
+<p>Here is the recap in the form you will actually use it: the six areas, the flagship skill of each, and the day that anchors it. This is the table to screenshot and keep.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Area</th><th>Days</th><th>The one skill that anchors it</th><th>Anchor day</th></tr></thead><tbody><tr><td>How computers work</td><td>1-7</td><td>Trace an instruction and place data in the memory hierarchy</td><td>Day 1</td></tr><tr><td>The command line</td><td>8-14</td><td>Compose small tools with pipes to transform text</td><td>Day 10</td></tr><tr><td>The internet</td><td>15-21</td><td>Follow a request from URL to response across DNS, TCP, and HTTP</td><td>Day 15</td></tr><tr><td>APIs</td><td>22-28</td><td>Make an authenticated REST call and parse the JSON reply</td><td>Day 28</td></tr><tr><td>Git and GitHub</td><td>29-35</td><td>Commit, branch, and recover work without losing history</td><td>Day 30</td></tr><tr><td>Systems foundations</td><td>36-41</td><td>Choose a store, read the logs, and automate a repeatable task</td><td>Day 41</td></tr></tbody></table>
+<p>Now three worked “you can do this now” examples that each cross several areas, to prove the recap is real and not just a list.</p>
+<p><strong>Diagnosing a failed request.</strong> A script cannot reach an API. You do not guess. You check name resolution first (is the host even found? — Day 16), then whether the connection opens on the right port (Day 17), then the HTTP status the server actually returned (Day 18): a <code>401</code> means your key or token is wrong (Day 25), a <code>429</code> means you hit a rate limit (Day 27), a <code>404</code> means the resource path is wrong (Day 23). Five days, one calm diagnosis, instead of blind retries.</p>
+<p><strong>Recovering from a mistake.</strong> You deleted the wrong file and panicked — except it was committed, so <code>git checkout</code> brought it back (Day 30). You made three commits on the wrong branch, so you learned that branches are cheap and moved them (Day 31). You force-changed history and thought all was lost, until the reflog showed every prior state (Day 34). The foundation turns “I lost my work” from a catastrophe into a two-command fix.</p>
+<p><strong>Making something run itself.</strong> You wrote a small shell script (Day 12), had it fetch data from an API on a schedule (Day 28), write the result into a SQLite database (Day 39), and log each run so you can see failures (Day 40) — then wired a git hook so the script is formatted and linted on every commit (Days 37, 41). No single step is advanced. Together they are a small automated system, built entirely from Course 1.</p>
+<h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
+<p>A consolidated foundation changes how you handle every cross-cutting concern, because each one lives across multiple layers you now understand.</p>
+<h3 id="security">Security</h3>
+<p>Security is not one lesson; it threads through all six areas, and you can now see the whole thread. Physical control of the machine is total control (Day 1). The shell can run anything, so an unread script from the internet is a live risk (Days 8, 14). Traffic is exposed unless encrypted, which is why HTTPS and TLS exist (Day 19). API keys and tokens are secrets that must never be committed to git (Days 25, 30) — a mistake the whole industry keeps making. You now hold the map of where a system can be attacked, which is the first requirement for defending one.</p>
+<h3 id="privacy">Privacy</h3>
+<p>Data lives in states with different exposures, at every layer. It rests in your chosen store (Day 39), travels over the network where encryption does or does not protect it (Day 19), passes through APIs whose providers may retain it (Days 22-27), and leaves traces in logs that can quietly capture sensitive values (Day 40). The foundation lets you ask the right privacy question at each hop — <em>who can see this here, and for how long?</em> — instead of assuming data is private simply because you cannot see it.</p>
+<h3 id="performance">Performance</h3>
+<p>Slow systems are usually waiting, not computing, and you now know where they wait. The memory hierarchy explains why data that does not fit in fast memory crawls (Day 3). The network is orders of magnitude slower than local memory, so every API round trip has a real cost (Days 15-17). Storage choices change everything — a cache exists precisely to avoid a slow trip (Day 39). Observability is how you <em>find</em> the slow layer instead of guessing (Day 40). Performance work is measurement, and you now know what to measure.</p>
+<h3 id="scalability">Scalability</h3>
+<p>Growing a system means growing at the layer that is actually the bottleneck, and you can now identify it. One machine can only get so big (Day 1); beyond that you add machines that cooperate over the network (Days 15-17), coordinate through APIs (Days 22-27), share state in databases and caches (Day 39), and stay debuggable only if they are observable (Day 40) and automated (Day 41). Every scaling technique ahead is an extension of a Course 1 idea.</p>
+<h3 id="cost">Cost</h3>
+<p>Cost lives at every layer too. Faster hardware and memory cost more (Day 1). Network egress is billed (Days 15-18). APIs charge per call, which is why rate limits, caching, and pagination are cost tools as much as technical ones (Days 27, 39). Storage tiers trade price for speed (Day 39). You can now reason about the bill the way you reason about the code, because you understand what generates it.</p>
+<h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
+<p>For a review, “alternatives” means other good ways to consolidate and stress-test the foundation you have built — different depths, formats, and costs. All of the core ones are free.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Resource</th><th>Type</th><th>What it offers</th><th>Cost</th></tr></thead><tbody><tr><td>Today’s lab (the toolkit check)</td><td>Free</td><td>Inspects your own machine for the whole Course 1 toolkit and reports readiness, tied to this review</td><td>Free</td></tr><tr><td>The Missing Semester of Your CS Education (MIT)</td><td>Free lectures</td><td>The exact companion to this section: shell, editors, git, debugging, and automation as one practical toolkit</td><td>Free</td></tr><tr><td>The Linux Command Line (William Shotts)</td><td>Free online book</td><td>A thorough, beginner-friendly deep dive to firm up Weeks 2 and 6</td><td>Free (PDF/HTML); optional print purchase</td></tr><tr><td>Pro Git (Chacon &amp; Straub)</td><td>Free online book</td><td>The definitive reference to consolidate the git week (29-35)</td><td>Free; optional print purchase</td></tr><tr><td>MDN Web Docs — Learn web development</td><td>Free reference</td><td>Authoritative, current material to deepen the internet and API weeks (15-28)</td><td>Free</td></tr><tr><td>Crash Course Computer Science (PBS)</td><td>Free video series</td><td>A fast visual re-run of the machine layer (days 1-7) if that is your soft spot</td><td>Free</td></tr></tbody></table>
+<p>The pattern is deliberate: the entire foundation of this course can be reinforced with free, high-quality, stable resources. If you revisit exactly one thing before Course 2, make it the area you rate yourself weakest on in today’s self-assessment — the resources above are chosen to match each area.</p>
+<h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+<p>It helps to place “having a foundation” against the things it is often confused with.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>Having a foundation</td><td>Knowing a language</td><td>The foundation is the durable stack any language runs on; a language is one changeable tool that sits on it</td></tr><tr><td>Foundational skill</td><td>Framework knowledge</td><td>Foundations change over decades; frameworks change over months — the first makes the second easy to pick up</td></tr><tr><td>A section review</td><td>A cheat sheet</td><td>A cheat sheet lists commands; a review builds the mental model that tells you <em>which</em> command and <em>why</em></td></tr><tr><td>Breadth (this section)</td><td>Depth (a specialty)</td><td>Course 1 is deliberately broad so nothing ahead is a mystery; depth comes later, on top of the breadth</td></tr><tr><td>Self-assessment</td><td>A graded exam</td><td>The exam ranks you against others; the self-assessment finds <em>your</em> soft spot so you can fix it before you need it</td></tr></tbody></table>
+<p>The comparison to hold onto is the first one. People new to the field often believe learning to code means learning a language. You now know better: the language is the small, visible part; the foundation is the large, durable part underneath. That is why this section came before Python, not after.</p>
+<h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
+<p>Reach for the consolidated foundation constantly, and in a specific way: whenever something confuses you, <strong>name the layer</strong>. A program that will not connect is a <em>networking</em> question before it is a code question. A file that vanished is a <em>version control</em> question. A run that is slow is a <em>memory-or-storage</em> question. A bug you cannot reproduce is an <em>observability</em> question. The single most valuable habit from Course 1 is asking “which layer is this?” before you touch anything — it turns panic into a plan and is the fastest route to a fix.</p>
+<p>Use it, too, as your guide for filling gaps. The honest truth is that you are stronger in some of the six areas than others, and that is completely normal after six weeks. The professional move is not to pretend otherwise but to know your weakest area and its repair day, so you can shore it up deliberately.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>If you feel shaky about…</th><th>Revisit</th><th>Because it anchors</th></tr></thead><tbody><tr><td>What the machine is really doing</td><td>Days 1-3</td><td>The stack, the CPU cycle, and the memory hierarchy</td></tr><tr><td>Living in the terminal</td><td>Days 8-10</td><td>Shell basics, filesystem navigation, and text tools</td></tr><tr><td>Why a request fails</td><td>Days 15-18</td><td>The page load, DNS/IP, ports, and HTTP</td></tr><tr><td>Calling and reading APIs</td><td>Days 23-25, 28</td><td>REST, JSON, auth, and a real end-to-end call</td></tr><tr><td>Losing or recovering work</td><td>Days 30-31, 34</td><td>Commits, branches, and undo</td></tr><tr><td>Storing, seeing, and automating</td><td>Days 39-41</td><td>Storage choices, observability, and automation</td></tr></tbody></table>
+<p>Know equally when <em>not</em> to over-rely on it. The foundation tells you which layer a problem lives in; it does not, by itself, make you an expert in that layer — do not mistake a good map for having walked every road on it. And do not let review become procrastination: one honest pass to find your soft spot, one targeted revisit, and then move forward. You do not need to master all six areas before Course 2; you need them solid enough that Python builds cleanly on top, which they now are.</p>
+<h2 id="knowledge-check">Knowledge check</h2>
+<p>Try these from memory before moving on — they deliberately draw across the whole section.</p>
+<ol>
+<li>Name the six areas of Course 1 in order, with one sentence each on what it lets you do. Which two “wrap” the whole stack rather than sitting at one layer?</li>
+<li>Trace the action “fetch data from an API and save it to a database” through as many of the six areas as you can, naming what happens at each step.</li>
+<li>A script fails with the message that it cannot connect to a host. List, in order, the three layers you would check and the tool or concept from Course 1 you would use at each.</li>
+<li>Your teammate committed an API key to a shared repository. Using ideas from the git week and the API week, explain why this is a security problem and what two things must now happen.</li>
+<li>Honestly rate yourself 1-5 on each of the six areas. For your lowest score, state the exact day you will revisit and one thing you expect to relearn there.</li>
+</ol>
+<h2 id="hands-on-exercise">Hands-on exercise</h2>
+<p>Time to prove the foundation is real — on your own machine. In this exercise, worked through in full in the Day 42 lab directory, you will run a <em>toolkit check</em>: a script that inspects your computer for the core Course 1 tools, reports the version of each, confirms you can actually perform three cross-section skills (make a git repository, run a shell pipeline, and query a SQLite database), and maps every tool back to the day that taught it — a genuine readiness report for the rest of the course.</p>
+<p>From the lab directory, first run the finished version to see what a readiness report looks like:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">bash</span><span style="color:#9ECBFF"> examples/toolkit_check.sh</span></span></code></pre>
+<p>It detects your operating system, then checks for a shell, <code>git</code>, <code>curl</code>, <code>python3</code>, <code>sqlite3</code>, and a configured editor, printing each tool’s version and the day it maps to. It then runs three live skill checks — creating a throwaway git repo and committing to it, running a <code>printf | grep | wc -l</code> pipeline, and creating and querying a tiny in-memory SQLite table — and prints a final readiness score. Everything is read-only on your real files and needs no network.</p>
+<p>Then open the starter version and complete its four numbered exercises:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">bash</span><span style="color:#9ECBFF"> starter/toolkit_check.sh</span></span></code></pre>
+<p>Each exercise names the exact command to fill in. When you are done, run the tests:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">bash</span><span style="color:#9ECBFF"> tests/run_tests.sh</span></span></code></pre>
+<h3 id="expected-output">Expected output</h3>
+<p>A typical run of the completed check on macOS (your versions will differ — that is the point):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>=== Computing Foundations Toolkit Check ===</span></span>
+<span class="line"><span>Generated on: 2026-07-12</span></span>
+<span class="line"><span>Operating system kernel: Darwin</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>-- Tool inventory --</span></span>
+<span class="line"><span>[ok]   shell     : /bin/zsh (maps to Day 8: Meet the Terminal)</span></span>
+<span class="line"><span>[ok]   git       : git version 2.39.5 (maps to Day 30: Git Fundamentals)</span></span>
+<span class="line"><span>[ok]   curl      : curl 8.7.1 (maps to Day 21: Inspecting Traffic with curl)</span></span>
+<span class="line"><span>[ok]   python3   : Python 3.12.7 (maps to Day 15+: used across the course)</span></span>
+<span class="line"><span>[ok]   sqlite3   : 3.43.2 (maps to Day 39: Data Storage)</span></span>
+<span class="line"><span>[ok]   editor    : $EDITOR=vim (maps to Day 36: Choosing an Editor)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>-- Skill checks --</span></span>
+<span class="line"><span>[ok]   git init + commit works        (Days 29-30)</span></span>
+<span class="line"><span>[ok]   shell pipeline works           (Days 10-12)</span></span>
+<span class="line"><span>[ok]   sqlite query works             (Day 39)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>-- Readiness --</span></span>
+<span class="line"><span>Tools present: 6 / 6   Skills passed: 3 / 3</span></span>
+<span class="line"><span>You are ready for Course 2. Nice work finishing the foundations.</span></span>
+<span class="line"><span>=== End of check ===</span></span></code></pre>
+<p>If a tool is missing, its line reads <code>[--]</code> instead of <code>[ok]</code> and names the day that covers installing it, so a gap points you straight to its repair.</p>
+<h3 id="validate-your-work">Validate your work</h3>
+<p>You are done when you can check every box:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> The check runs and prints the header, a tool inventory, skill checks, and a readiness line.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>git</code>, <code>curl</code>, and <code>python3</code> are reported present on your machine.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> The three skill checks (git commit, pipeline, SQLite query) all pass.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Every tool line names the Course 1 day it maps to.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> A missing tool degrades to a <code>[--]</code> line naming its install day — it does not crash the script.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>bash tests/run_tests.sh</code> ends with <code>0 failure(s).</code></li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><strong><code>sqlite3: command not found</code>.</strong> SQLite ships with macOS and most Linux installs; if it is missing, the check reports it as a gap rather than failing. Day 39 covers installing it (<code>brew install sqlite</code> or <code>apt install sqlite3</code>).</li>
+<li><strong><code>editor</code> shows as unset.</strong> You have no <code>$EDITOR</code> environment variable. The check then looks for common editors on your <code>PATH</code>; if it still finds none, that is your cue to revisit Day 36 and configure one.</li>
+<li><strong>The git skill check leaves a folder behind.</strong> It should not — it builds the repo under a temporary directory and removes it. If you interrupted the script mid-run, delete any <code>toolkit-check-tmp.*</code> directory in your system temp folder.</li>
+<li><strong><code>Permission denied</code> running the script.</strong> Run it through bash explicitly (<code>bash starter/toolkit_check.sh</code>) rather than <code>./</code>, or make it executable with <code>chmod +x</code>.</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<ul>
+<li><strong>Reading a missing tool as a failure of the check.</strong> A <code>[--]</code> line is the script working correctly — it <em>found</em> a gap. The readiness report is meant to surface gaps, not hide them.</li>
+<li><strong>Confusing “tool present” with “skill solid.”</strong> Having <code>git</code> installed is not the same as being comfortable with branching and undo. Use the worksheet’s confidence ratings, not just the tool inventory, to decide what to revisit.</li>
+<li><strong>Editing the wrong line in the starter.</strong> Each exercise asks you to replace one specific assignment. If output looks scrambled, restore the starter from git and change only the assignments named in the exercise comments.</li>
+</ul>
+<h2 id="practice-assignment">Practice assignment</h2>
+<p>Open the self-assessment worksheet in the starter directory of the Day 42 lab and complete it fully. Rate your confidence from 1 (shaky) to 5 (solid) on each of the six areas of Course 1, and for every area note the specific day you would revisit to improve. Then run the toolkit check on your machine, paste its readiness line into the worksheet, and write one short paragraph (5-8 sentences) answering: <em>which single area is your weakest, which exact day will you revisit, and what do you expect to relearn there?</em> Keep the worksheet — it is your personal map into Course 2, and a later checkpoint will ask you to revisit it and mark your progress.</p>
+<h2 id="extension-challenge">Extension challenge</h2>
+<p>Turn the toolkit check into something you <em>keep</em>. Extend the completed script to add one more meaningful check drawn from a Course 1 area the starter does not cover — for example, confirm that <code>curl</code> can format a request without sending it (<code>curl --help</code> is enough; keep it offline), or that your git has a global <code>user.name</code> and <code>user.email</code> configured (<code>git config --get user.name</code>), or that a Python one-liner can parse JSON (<code>python3 -c &#39;import json; print(json.loads(&quot;{\&quot;ok\&quot;:true}&quot;))&#39;</code>), exercising the API week’s data-format skill. Map your new check to its day, make it degrade gracefully if the tool is missing, and add a matching assertion to <code>tests/run_tests.sh</code> so your extended check is verified. Then write two or three sentences explaining which area your new check strengthens and why a working engineer would want it in a readiness report. You have just done what the rest of this course asks of you constantly: take a working system you understand, extend it deliberately, and test the extension — the exact loop that carries you from here through Python and everything after.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. Course 1 taught six connected areas. Which two of them &quot;wrap&quot; the whole stack rather than sitting at a single layer? </strong> </p> <ol type="A"> <li>The machine and the command line</li><li>The internet and APIs</li><li>Git/GitHub and systems foundations (storage, observability, automation)</li><li>The command line and the internet</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Git/GitHub and systems foundations (storage, observability, automation) </p> <p>You version, observe, and automate at every layer, so git/GitHub (days 29-35) and the systems foundations (days 36-41) wrap the entire stack instead of occupying one layer of it.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. When you trace &quot;fetch data from an API and save it to a database&quot; through the stack, in which order do the layers engage? </strong> </p> <ol type="A"> <li>Network connection, then shell command, then process on the machine, then storage</li><li>Shell command, then process on the machine, then network connection, then HTTP request to the API, then storage</li><li>HTTP request, then storage, then shell command, then the machine</li><li>Storage, then the API, then the network, then the shell</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Shell command, then process on the machine, then network connection, then HTTP request to the API, then storage </p> <p>You type a command in the shell (8-14); it runs as a process on the machine (1-7); the process opens a network connection (15-21); it sends an HTTP request to the API (22-28); then the result is stored (39). The action moves from your keyboard down and out through the layers.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. A script reports it cannot connect to a host. Following the Course 1 foundation, what is the first layer to check? </strong> </p> <ol type="A"> <li>Whether the database schema is correct</li><li>Whether the name resolves to an IP address (DNS)</li><li>Whether the git history is clean</li><li>Whether the code has a linter warning</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Whether the name resolves to an IP address (DNS) </p> <p>Cannot-connect problems are networking problems first. You check name resolution (DNS, Day 16), then the connection and port (Day 17), then the HTTP status (Day 18) — naming the layer before touching the code.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. An HTTP response comes back with status 401 when your script calls an API. What does the foundation tell you it most likely means? </strong> </p> <ol type="A"> <li>The server is rate-limiting you; slow down</li><li>The resource path is wrong; the endpoint does not exist</li><li>Your API key or token is missing or invalid (an authentication problem)</li><li>The JSON body is malformed</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Your API key or token is missing or invalid (an authentication problem) </p> <p>A 401 is an authentication failure (Day 25): the key or token is wrong or missing. A 429 would be a rate limit (Day 27) and a 404 a wrong resource path (Day 23) — knowing the status codes turns a vague failure into a precise fix.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. Why does this course teach six weeks of foundations before you write a single line of Python? </strong> </p> <ol type="A"> <li>Because Python is too hard to learn without a computer science degree</li><li>Because everything ahead depends on this foundation, so teaching it first means nothing later has to be presented as magic</li><li>Because the foundations are more important than Python and you will rarely use Python</li><li>Because employers require a certificate in each area before hiring</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Because everything ahead depends on this foundation, so teaching it first means nothing later has to be presented as magic </p> <p>The foundation is a dependency for everything ahead: learn the shell, HTTP, git, and debugging first and their Python equivalents become obvious rather than magical. The ordering removes magic from the rest of the course.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. A teammate accidentally committed an API key to a shared repository. Drawing on the git and API weeks, what must happen? </strong> </p> <ol type="A"> <li>Nothing — committed keys are automatically encrypted by git</li><li>The key must be treated as compromised and rotated, and it must be removed from the repository going forward</li><li>Delete the whole repository and start over</li><li>Only make the repository private; the key is then safe</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> The key must be treated as compromised and rotated, and it must be removed from the repository going forward </p> <p>A secret in version control should be assumed exposed (Days 25, 30): rotate/revoke the key with the provider and remove it from the tracked files. Making a repo private later does not undo the exposure — the key must be rotated.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. Your program runs slowly even though the CPU is barely busy. Which Course 1 ideas best explain where to look? </strong> </p> <ol type="A"> <li>Only the choice of programming language matters for speed</li><li>The memory hierarchy and the storage/network layers — slow systems are usually waiting on data, not computing, and observability helps you find where</li><li>Slow runs are always caused by a git merge conflict</li><li>The regular-expression engine is the only possible bottleneck</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> The memory hierarchy and the storage/network layers — slow systems are usually waiting on data, not computing, and observability helps you find where </p> <p>Slow-but-idle usually means waiting, not computing: the memory hierarchy (Day 3), storage choices (Day 39), and network round trips (Days 15-17) are the usual culprits, and observability (Day 40) is how you find the actual slow layer instead of guessing.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. What is the single most valuable habit to carry out of Course 1 when something breaks? </strong> </p> <ol type="A"> <li>Immediately rewrite the whole program from scratch</li><li>Retype the failing command repeatedly until it works</li><li>Name the layer the problem lives in before touching anything — is it networking, version control, memory/storage, or observability?</li><li>Assume the tool is broken and switch to a different one</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Name the layer the problem lives in before touching anything — is it networking, version control, memory/storage, or observability? </p> <p>The foundation turns confusion into a plan: asking &quot;which layer is this?&quot; narrows a vague failure to a specific area with its own tools and concepts, which is the fastest route to a real fix.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>computing foundation</strong> </dt> <dd data-astro-cid-whrtx2kk>The durable, portable body of knowledge about how software systems work — the machine, the network, and the workflow — that sits beneath any specific language or framework and changes only slowly.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>the stack</strong> </dt> <dd data-astro-cid-whrtx2kk>The layered set of technologies an action passes through, from your keyboard down through the machine, out across the network, into an API, and back — understood here as one connected whole rather than separate topics.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>command line</strong> </dt> <dd data-astro-cid-whrtx2kk>The shell and terminal you use to drive the machine directly, composing small tools with pipes; the hinge between you and every other tool in the section (days 8-14).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>memory hierarchy</strong> </dt> <dd data-astro-cid-whrtx2kk>The layered arrangement of storage from fast, small registers and cache through RAM to slow, large disk, which explains why systems that outgrow fast memory slow down (day 3).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>DNS</strong> </dt> <dd data-astro-cid-whrtx2kk>The Domain Name System, which resolves a human-readable host name to an IP address — the first layer to check when a program cannot connect (day 16).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>HTTP status code</strong> </dt> <dd data-astro-cid-whrtx2kk>The number a server returns with a response that tells you what happened: for example 401 (authentication failed), 404 (resource not found), or 429 (rate limited) — days 18, 23, 25, 27.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>REST API</strong> </dt> <dd data-astro-cid-whrtx2kk>A style of interface where programs exchange data over HTTP using resources and verbs, most often carrying JSON; how programs talk to each other over the internet (days 22-24).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>version control</strong> </dt> <dd data-astro-cid-whrtx2kk>Tracking every change to your work with git so you can commit, branch, merge, share, and undo almost anything — a domain that wraps the whole stack (days 29-35).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>observability</strong> </dt> <dd data-astro-cid-whrtx2kk>The practice of seeing what a running system is doing through logs, metrics, and traces, so you can find the layer where a problem lives instead of guessing (day 40).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>automation</strong> </dt> <dd data-astro-cid-whrtx2kk>Making repeatable work run itself with scripts, hooks, and pipelines, so tasks like formatting, linting, testing, and scheduled jobs happen without manual effort (days 12, 14, 41).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>self-assessment</strong> </dt> <dd data-astro-cid-whrtx2kk>An honest rating of your own confidence across the six areas, used to find your weakest area and the specific earlier day to revisit — a repair map rather than a grade.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>readiness report</strong> </dt> <dd data-astro-cid-whrtx2kk>The output of the toolkit-check lab: a summary of which core Course 1 tools and cross-section skills are present on your machine, mapping each to the day that taught it.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://missing.csail.mit.edu/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Missing Semester of Your CS Education</a> — MIT (accessed 2026-07-12) — The closest companion to this section: shell, editors, git, debugging, and automation taught as one practical toolkit. </li><li data-astro-cid-whrtx2kk> <a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Pro Git</a> — Chacon &amp; Straub (accessed 2026-07-12) — The definitive free reference for consolidating the git week (days 29-35). </li><li data-astro-cid-whrtx2kk> <a href="https://linuxcommand.org/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Linux Command Line</a> — William Shotts (accessed 2026-07-12) — A thorough, beginner-friendly deep dive to firm up the command-line weeks. </li><li data-astro-cid-whrtx2kk> <a href="https://developer.mozilla.org/en-US/docs/Learn" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>MDN Web Docs — Learn web development</a> — MDN Web Docs (accessed 2026-07-12) — Authoritative, current material to deepen the internet and API weeks (days 15-28). </li><li data-astro-cid-whrtx2kk> <a href="https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Crash Course Computer Science</a> — PBS Digital Studios (accessed 2026-07-12) — A fast visual re-run of the machine layer (days 1-7) if that is your soft spot. </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="42" data-astro-cid-whrtx2kk>
+Mark Day 42 as read
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+      surfaces for someone searching for one — it costs you a click and it is genuinely how people
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+★ Star on GitHub
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-041-thinking-in-automation-scripts-hooks-and" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 41</span> <span class="pn__title" data-astro-cid-oerjsknp>Thinking in Automation: Scripts, Hooks, and Pipelines</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-043-installing-python-and-virtual-environments" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 43 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Installing Python and Virtual Environments</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+      // Progressive enhancement only: the theme falls back to dark and every
+      // .reveal element is visible by default (the hidden start state exists
+      // only inside a prefers-reduced-motion: no-preference query).
+      (() => {
+        const toggle = document.getElementById('theme');
+        if (toggle) {
+          toggle.addEventListener('click', () => {
+            const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+            document.documentElement.dataset.theme = next;
+            try {
+              localStorage.setItem('theme', next);
+            } catch {
+              /* private mode */
+            }
+          });
+        }
+
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const items = document.querySelectorAll('.reveal');
+        if (items.length && !reduced && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry, i) => {
+                if (!entry.isIntersecting) return;
+                entry.target.style.transitionDelay = `${Math.min(i * 50, 240)}ms`;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.06 },
+          );
+          items.forEach((el) => io.observe(el));
+        } else {
+          items.forEach((el) => el.classList.add('is-in'));
+        }
+      })();
+    </script> </body> </html>
