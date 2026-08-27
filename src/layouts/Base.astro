@@ -76,12 +76,6 @@ const ogImage = new URL(`${base}/${image}`, site).href;
     <a class="skip" href="#main">Skip to content</a>
 
     <header class="site-header">
-      {/* This course is a section of sandeepbazar.github.io. The chip is the
-          way up to that parent; the brand beside it stays this course. */}
-      <a class="site-home" href="https://sandeepbazar.github.io/">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>
-        Sandeep Bazar
-      </a>
       <a class="brand" href={`${base}/`}>
         <svg viewBox="0 0 32 32" aria-hidden="true">
           <defs>
@@ -156,14 +150,13 @@ const ogImage = new URL(`${base}/${image}`, site).href;
     <footer class="site-footer">
       <div class="inner">
         <span>
-          {config.course.title} · by <a href={config.course.author_url}>{config.course.author}</a> ·
-          lessons and labs are free to use
+          {config.course.title} · by {config.course.author} · lessons and labs are free to use
         </span>
         <nav>
           <a href={config.repository.public_url}>Labs on GitHub</a>
           <a href="https://sandeepbazar.github.io/blogs/">Writing</a>
           <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a>
-          <a href={config.course.author_url}>LinkedIn</a>
+          <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a>
         </nav>
       </div>
     </footer>

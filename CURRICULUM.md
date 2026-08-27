@@ -2,7 +2,7 @@
 
 > GENERATED — do not edit by hand. Run `npm run generate:section-nav`.
 
-The complete map of all nine courses: **141 of 365 days complete.** Click a course to expand it, then a subsection, to drill down to individual days — nothing is shown all at once.
+The complete map of all nine courses: **147 of 365 days complete.** Click a course to expand it, then a subsection, to drill down to individual days — nothing is shown all at once.
 
 <details>
 <summary><h3>Course01 · Computing Foundations — 42/42 complete</h3></summary>
@@ -309,22 +309,22 @@ The linear algebra, calculus, probability, and data-analysis skills that make ma
 </details>
 
 <details>
-<summary><h3>Course04 · Machine Learning — 1/56 complete</h3></summary>
+<summary><h3>Course04 · Machine Learning — 7/56 complete</h3></summary>
 
 Classical machine learning done properly: models, evaluation, feature work, and the discipline that separates working systems from leaderboard tricks.
 
 <details>
-<summary>Days 141-147 · Machine Learning Fundamentals — 1/7</summary>
+<summary>Days 141-147 · Machine Learning Fundamentals — 7/7</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
 | Day 141 | [What Machine Learning Is and Is Not](content/sections/machine-learning/day-141-what-machine-learning-is-and-is/) | [lab](labs/sections/machine-learning/day-141-what-machine-learning-is-and-is/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-141-what-machine-learning-is-and-is) | complete |
-| Day 142 | Supervised, Unsupervised, and Reinforcement Learning | — | — | planned |
-| Day 143 | The Machine Learning Workflow | — | — | planned |
-| Day 144 | Train, Validation, and Test Splits | — | — | planned |
-| Day 145 | Overfitting and Underfitting | — | — | planned |
-| Day 146 | Your First Model with scikit-learn | — | — | planned |
-| Day 147 | An End-to-End Classification Exercise | — | — | planned |
+| Day 142 | [Supervised, Unsupervised, and Reinforcement Learning](content/sections/machine-learning/day-142-supervised-unsupervised-and-reinforcement-learning/) | [lab](labs/sections/machine-learning/day-142-supervised-unsupervised-and-reinforcement-learning/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-142-supervised-unsupervised-and-reinforcement-learning) | complete |
+| Day 143 | [The Machine Learning Workflow](content/sections/machine-learning/day-143-the-machine-learning-workflow/) | [lab](labs/sections/machine-learning/day-143-the-machine-learning-workflow/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-143-the-machine-learning-workflow) | complete |
+| Day 144 | [Train, Validation, and Test Splits](content/sections/machine-learning/day-144-train-validation-and-test-splits/) | [lab](labs/sections/machine-learning/day-144-train-validation-and-test-splits/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-144-train-validation-and-test-splits) | complete |
+| Day 145 | [Overfitting and Underfitting](content/sections/machine-learning/day-145-overfitting-and-underfitting/) | [lab](labs/sections/machine-learning/day-145-overfitting-and-underfitting/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-145-overfitting-and-underfitting) | complete |
+| Day 146 | [Your First Model with scikit-learn](content/sections/machine-learning/day-146-your-first-model-with-scikit-learn/) | [lab](labs/sections/machine-learning/day-146-your-first-model-with-scikit-learn/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-146-your-first-model-with-scikit-learn) | complete |
+| Day 147 | [An End-to-End Classification Exercise](content/sections/machine-learning/day-147-an-end-to-end-classification-exercise/) | [lab](labs/sections/machine-learning/day-147-an-end-to-end-classification-exercise/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-147-an-end-to-end-classification-exercise) | complete |
 
 </details>
 <details>

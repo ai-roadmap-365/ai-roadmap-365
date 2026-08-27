@@ -34,7 +34,6 @@ course:
   weeks: 52
   language: en
   author: Sandeep Bazar
-  author_url: https://www.linkedin.com/in/sandeepbazar/
 
 # The LinkedIn 365-day challenge. scripts/generate-social.mjs reads this to
 # build one ready-to-paste post per day plus its share card.

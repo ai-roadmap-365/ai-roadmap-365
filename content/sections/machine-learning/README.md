@@ -4,26 +4,26 @@
 
 Classical machine learning done properly: models, evaluation, feature work, and the discipline that separates working systems from leaderboard tricks.
 
-**1 of 56 lessons written.** Expand a subsection below to see its days.
+**7 of 56 lessons written.** Expand a subsection below to see its days.
 
-<details open>
-<summary><strong>Days 141-147 · Machine Learning Fundamentals</strong> — 1/7 complete</summary>
+<details>
+<summary><strong>Days 141-147 · Machine Learning Fundamentals</strong> — 7/7 complete</summary>
 
 | Day | Lesson | Lab | Blog | Status |
 | --- | --- | --- | --- | --- |
 | Day 141 | [What Machine Learning Is and Is Not](./day-141-what-machine-learning-is-and-is/) | [lab](../../../labs/sections/machine-learning/day-141-what-machine-learning-is-and-is/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-141-what-machine-learning-is-and-is) | complete |
-| Day 142 | Supervised, Unsupervised, and Reinforcement Learning | — | — | planned |
-| Day 143 | The Machine Learning Workflow | — | — | planned |
-| Day 144 | Train, Validation, and Test Splits | — | — | planned |
-| Day 145 | Overfitting and Underfitting | — | — | planned |
-| Day 146 | Your First Model with scikit-learn | — | — | planned |
-| Day 147 | An End-to-End Classification Exercise | — | — | planned |
+| Day 142 | [Supervised, Unsupervised, and Reinforcement Learning](./day-142-supervised-unsupervised-and-reinforcement-learning/) | [lab](../../../labs/sections/machine-learning/day-142-supervised-unsupervised-and-reinforcement-learning/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-142-supervised-unsupervised-and-reinforcement-learning) | complete |
+| Day 143 | [The Machine Learning Workflow](./day-143-the-machine-learning-workflow/) | [lab](../../../labs/sections/machine-learning/day-143-the-machine-learning-workflow/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-143-the-machine-learning-workflow) | complete |
+| Day 144 | [Train, Validation, and Test Splits](./day-144-train-validation-and-test-splits/) | [lab](../../../labs/sections/machine-learning/day-144-train-validation-and-test-splits/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-144-train-validation-and-test-splits) | complete |
+| Day 145 | [Overfitting and Underfitting](./day-145-overfitting-and-underfitting/) | [lab](../../../labs/sections/machine-learning/day-145-overfitting-and-underfitting/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-145-overfitting-and-underfitting) | complete |
+| Day 146 | [Your First Model with scikit-learn](./day-146-your-first-model-with-scikit-learn/) | [lab](../../../labs/sections/machine-learning/day-146-your-first-model-with-scikit-learn/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-146-your-first-model-with-scikit-learn) | complete |
+| Day 147 | [An End-to-End Classification Exercise](./day-147-an-end-to-end-classification-exercise/) | [lab](../../../labs/sections/machine-learning/day-147-an-end-to-end-classification-exercise/) | [blog](https://sandeepbazar.github.io/ai-roadmap-365/day-147-an-end-to-end-classification-exercise) | complete |
 
 **Project:** First End-to-End Model — Train, evaluate, and document a classifier on the iris dataset with a proper train/test protocol and an honest error analysis.
 
 </details>
 
-<details>
+<details open>
 <summary><strong>Days 148-154 · Regression</strong> — 0/7 complete</summary>
 
 | Day | Lesson | Lab | Blog | Status |
