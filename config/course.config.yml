@@ -11,20 +11,27 @@
 
 repository:
   mode: public
-  owner: sandeepbazar
-  name: ai-roadmap-365
-  url: https://github.com/sandeepbazar/ai-roadmap-365
+  owner: ai-roadmap-365
+  name: ai-roadmap-365.github.io
+  url: https://github.com/ai-roadmap-365/ai-roadmap-365.github.io
   branch: main
-  public_name: ai-roadmap-365
-  public_url: https://github.com/sandeepbazar/ai-roadmap-365
+  public_name: ai-roadmap-365.github.io
+  public_url: https://github.com/ai-roadmap-365/ai-roadmap-365.github.io
   public_branch: main
   site_branch: site
 
+# Git identity for every commit this project makes, in EITHER repository.
+# Deliberately explicit: it must never be derived from repository.owner, which
+# is an organization name and not a person (A24, A38).
+committer:
+  name: sandeepbazar
+  email: 5602033+sandeepbazar@users.noreply.github.com
+
 
 website:
-  local_base_url: http://localhost:4321/ai-roadmap-365
-  public_base_url: https://sandeepbazar.github.io/ai-roadmap-365
-  base_path: /ai-roadmap-365
+  local_base_url: http://localhost:4321
+  public_base_url: https://ai-roadmap-365.github.io
+  base_path: ''
   port: 4321
 
 course:

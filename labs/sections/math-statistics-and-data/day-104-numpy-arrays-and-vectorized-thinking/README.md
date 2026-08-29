@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** NumPy: Arrays and Vectorized Thinking
 - **Day number:** 104 of 365
-- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-104-numpy-arrays-and-vectorized-thinking
+- **Lesson article:** https://ai-roadmap-365.github.io/day-104-numpy-arrays-and-vectorized-thinking
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-104-numpy-arrays-and-vectorized-thinking` when the site is running.
 <!-- generated-links:end -->

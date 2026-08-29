@@ -2,7 +2,7 @@
   "name": "ai-roadmap",
   "version": "0.1.0",
   "type": "module",
-  "description": "365 Days of AI Mastery \u2014 a year-long course from how a computer works to shipping production AI systems, with one lesson and one runnable lab every day.",
+  "description": "365 Days of AI Mastery — a year-long course from how a computer works to shipping production AI systems, with one lesson and one runnable lab every day.",
   "license": "MIT AND CC-BY-NC-SA-4.0",
   "engines": {
     "node": ">=20.0.0"
@@ -50,7 +50,9 @@
     "generate:social": "node scripts/generate-social.mjs",
     "generate:hero-images": "python3 scripts/generate_hero_images.py",
     "release:public": "node scripts/release/public-sync.mjs",
-    "docs:html": "node scripts/render-private-docs.mjs"
+    "docs:html": "node scripts/render-private-docs.mjs",
+    "generate:bootstrap": "node scripts/generate-bootstrap.mjs",
+    "validate:bootstrap": "node scripts/validate/bootstrap.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -77,9 +79,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sandeepbazar/ai-roadmap-365.git"
+    "url": "https://github.com/ai-roadmap-365/ai-roadmap-365.github.io.git"
   },
-  "homepage": "https://sandeepbazar.github.io/ai-roadmap-365/",
+  "homepage": "https://ai-roadmap-365.github.io/",
   "keywords": [
     "ai",
     "machine-learning",

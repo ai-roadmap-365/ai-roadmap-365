@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** Random Variables and Distributions
 - **Day number:** 114 of 365
-- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-114-random-variables-and-distributions
+- **Lesson article:** https://ai-roadmap-365.github.io/day-114-random-variables-and-distributions
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-114-random-variables-and-distributions` when the site is running.
 <!-- generated-links:end -->

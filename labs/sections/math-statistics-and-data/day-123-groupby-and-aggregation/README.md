@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** Groupby and Aggregation
 - **Day number:** 123 of 365
-- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-123-groupby-and-aggregation
+- **Lesson article:** https://ai-roadmap-365.github.io/day-123-groupby-and-aggregation
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-123-groupby-and-aggregation` when the site is running.
 <!-- generated-links:end -->

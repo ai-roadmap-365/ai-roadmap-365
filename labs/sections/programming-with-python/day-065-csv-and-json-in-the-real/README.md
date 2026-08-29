@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** CSV and JSON in the Real World
 - **Day number:** 65 of 365
-- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-065-csv-and-json-in-the-real
+- **Lesson article:** https://ai-roadmap-365.github.io/day-065-csv-and-json-in-the-real
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-065-csv-and-json-in-the-real` when the site is running.
 <!-- generated-links:end -->

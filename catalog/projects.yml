@@ -5,7 +5,7 @@ description: >-
   the curriculum changes.
 entries:
   - name: 'Week 01: Annotated Machine Teardown'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Computing Foundations
     license: Course material (free to use)
     pricing: Included in course
@@ -14,7 +14,7 @@ entries:
       diagram of its CPU, memory, storage, and OS, with measured numbers.
     last_verified: '2026-07-12'
   - name: 'Week 02: Personal Automation Script'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Computing Foundations
     license: Course material (free to use)
     pricing: Included in course
@@ -23,7 +23,7 @@ entries:
       with logging and a dry-run mode.
     last_verified: '2026-07-12'
   - name: 'Week 03: Request Journey Map'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Computing Foundations
     license: Course material (free to use)
     pricing: Included in course
@@ -32,7 +32,7 @@ entries:
       document every hop and header in a journey diagram.
     last_verified: '2026-07-12'
   - name: 'Week 04: Weather Command-Line Dashboard'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Computing Foundations
     license: Course material (free to use)
     pricing: Included in course
@@ -41,7 +41,7 @@ entries:
       and renders a readable daily report.
     last_verified: '2026-07-12'
   - name: 'Week 05: Versioned Notes Repository'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Computing Foundations
     license: Course material (free to use)
     pricing: Included in course
@@ -50,7 +50,7 @@ entries:
       resolved conflict, and a clean commit history.
     last_verified: '2026-07-12'
   - name: 'Week 06: Automated Quality Pipeline'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Computing Foundations
     license: Course material (free to use)
     pricing: Included in course
@@ -59,7 +59,7 @@ entries:
       every commit via git hooks.
     last_verified: '2026-07-12'
   - name: 'Week 07: Command-Line Calculator'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Programming with Python
     license: Course material (free to use)
     pricing: Included in course
@@ -68,7 +68,7 @@ entries:
       README and usage examples.
     last_verified: '2026-07-12'
   - name: 'Week 08: Terminal Task Manager'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Programming with Python
     license: Course material (free to use)
     pricing: Included in course
@@ -77,7 +77,7 @@ entries:
       lists and dictionaries idiomatically.
     last_verified: '2026-07-12'
   - name: 'Week 09: Flashcard Study App'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Programming with Python
     license: Course material (free to use)
     pricing: Included in course
@@ -86,7 +86,7 @@ entries:
       functions.
     last_verified: '2026-07-12'
   - name: 'Week 10: Expense Tracker'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Programming with Python
     license: Course material (free to use)
     pricing: Included in course
@@ -95,7 +95,7 @@ entries:
       reports.
     last_verified: '2026-07-12'
   - name: 'Week 11: Tested Utility Library'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Programming with Python
     license: Course material (free to use)
     pricing: Included in course
@@ -104,7 +104,7 @@ entries:
       CI-style local quality gates.
     last_verified: '2026-07-12'
   - name: 'Week 12: Personal Automation Toolkit'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Programming with Python
     license: Course material (free to use)
     pricing: Included in course
@@ -113,7 +113,7 @@ entries:
       installable CLI tool.
     last_verified: '2026-07-12'
   - name: 'Week 13: Personal Library Database'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Programming with Python
     license: Course material (free to use)
     pricing: Included in course
@@ -122,7 +122,7 @@ entries:
       Python reporting script.
     last_verified: '2026-07-12'
   - name: 'Week 14: Section Project: End-to-End Data Pipeline'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Programming with Python
     license: Course material (free to use)
     pricing: Included in course
@@ -131,7 +131,7 @@ entries:
       SQLite via SQLAlchemy, and emits a daily report — tested and logged.
     last_verified: '2026-07-12'
   - name: 'Week 15: Image Transformer'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Math, Statistics, and Data
     license: Course material (free to use)
     pricing: Included in course
@@ -140,7 +140,7 @@ entries:
       transformations visually.
     last_verified: '2026-07-12'
   - name: 'Week 16: Gradient Descent Visualizer'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Math, Statistics, and Data
     license: Course material (free to use)
     pricing: Included in course
@@ -149,7 +149,7 @@ entries:
       including a pathological case.
     last_verified: '2026-07-12'
   - name: 'Week 17: A/B Test Analyzer'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Math, Statistics, and Data
     license: Course material (free to use)
     pricing: Included in course
@@ -158,7 +158,7 @@ entries:
       and a plain-language verdict.
     last_verified: '2026-07-12'
   - name: 'Week 18: Messy Dataset Rescue'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Math, Statistics, and Data
     license: Course material (free to use)
     pricing: Included in course
@@ -167,7 +167,7 @@ entries:
       with before/after data-quality checks.
     last_verified: '2026-07-12'
   - name: 'Week 19: Exploratory Analysis Report'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Math, Statistics, and Data
     license: Course material (free to use)
     pricing: Included in course
@@ -176,7 +176,7 @@ entries:
       honestly-scaled charts.
     last_verified: '2026-07-12'
   - name: 'Week 20: Section Project: Full Exploratory Study'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Math, Statistics, and Data
     license: Course material (free to use)
     pricing: Included in course
@@ -185,7 +185,7 @@ entries:
       them with cleaned data, statistics, and visuals.
     last_verified: '2026-07-12'
   - name: 'Week 21: First End-to-End Model'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Machine Learning
     license: Course material (free to use)
     pricing: Included in course
@@ -194,7 +194,7 @@ entries:
       protocol and an honest error analysis.
     last_verified: '2026-07-12'
   - name: 'Week 22: House Price Model'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Machine Learning
     license: Course material (free to use)
     pricing: Included in course
@@ -203,7 +203,7 @@ entries:
       diagnostics.
     last_verified: '2026-07-12'
   - name: 'Week 23: Spam Classifier'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Machine Learning
     license: Course material (free to use)
     pricing: Included in course
@@ -212,7 +212,7 @@ entries:
       trade-off analysis.
     last_verified: '2026-07-12'
   - name: 'Week 24: Tabular Challenge'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Machine Learning
     license: Course material (free to use)
     pricing: Included in course
@@ -221,7 +221,7 @@ entries:
       linear model, with a documented comparison.
     last_verified: '2026-07-12'
   - name: 'Week 25: Feature Engineering Challenge'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Machine Learning
     license: Course material (free to use)
     pricing: Included in course
@@ -230,7 +230,7 @@ entries:
       each feature’s measured impact.
     last_verified: '2026-07-12'
   - name: 'Week 26: Model Audit Report'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Machine Learning
     license: Course material (free to use)
     pricing: Included in course
@@ -239,7 +239,7 @@ entries:
       model report.
     last_verified: '2026-07-12'
   - name: 'Week 27: Customer Segmentation'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Machine Learning
     license: Course material (free to use)
     pricing: Included in course
@@ -248,7 +248,7 @@ entries:
       number of clusters chosen.
     last_verified: '2026-07-12'
   - name: 'Week 28: Section Project: Deployed ML Service'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Machine Learning
     license: Course material (free to use)
     pricing: Included in course
@@ -257,7 +257,7 @@ entries:
       a monitoring plan.
     last_verified: '2026-07-12'
   - name: 'Week 29: MNIST from Scratch'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Deep Learning
     license: Course material (free to use)
     pricing: Included in course
@@ -266,7 +266,7 @@ entries:
       digits.
     last_verified: '2026-07-12'
   - name: 'Week 30: Fashion-MNIST Classifier'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Deep Learning
     license: Course material (free to use)
     pricing: Included in course
@@ -275,7 +275,7 @@ entries:
       beating a stated baseline.
     last_verified: '2026-07-12'
   - name: 'Week 31: Custom Image Classifier'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Deep Learning
     license: Course material (free to use)
     pricing: Included in course
@@ -284,7 +284,7 @@ entries:
       gallery.
     last_verified: '2026-07-12'
   - name: 'Week 32: Sentiment Analyzer'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Deep Learning
     license: Course material (free to use)
     pricing: Included in course
@@ -293,7 +293,7 @@ entries:
       network.
     last_verified: '2026-07-12'
   - name: 'Week 33: Fine-Tuned Transformer'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Deep Learning
     license: Course material (free to use)
     pricing: Included in course
@@ -302,7 +302,7 @@ entries:
       report results honestly.
     last_verified: '2026-07-12'
   - name: 'Week 34: Section Project: Reproduce a Result'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Deep Learning
     license: Course material (free to use)
     pricing: Included in course
@@ -311,7 +311,7 @@ entries:
       reproduction report.
     last_verified: '2026-07-12'
   - name: 'Week 35: Model Comparison Study'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: LLMs and Generative AI
     license: Course material (free to use)
     pricing: Included in course
@@ -320,7 +320,7 @@ entries:
       patterns and cost.
     last_verified: '2026-07-12'
   - name: 'Week 36: Reusable Prompt Library'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: LLMs and Generative AI
     license: Course material (free to use)
     pricing: Included in course
@@ -329,14 +329,14 @@ entries:
       examples.
     last_verified: '2026-07-12'
   - name: 'Week 37: Command-Line AI Assistant'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: LLMs and Generative AI
     license: Course material (free to use)
     pricing: Included in course
     notes: Build a streaming CLI assistant with conversation memory, tool use, and a cost meter.
     last_verified: '2026-07-12'
   - name: 'Week 38: Semantic Search Engine'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: LLMs and Generative AI
     license: Course material (free to use)
     pricing: Included in course
@@ -345,7 +345,7 @@ entries:
       retrieval-quality evaluation.
     last_verified: '2026-07-12'
   - name: 'Week 39: Documentation Q&A Bot'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: LLMs and Generative AI
     license: Course material (free to use)
     pricing: Included in course
@@ -354,7 +354,7 @@ entries:
       answer-quality eval.
     last_verified: '2026-07-12'
   - name: 'Week 40: Local Fine-Tuned Model'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: LLMs and Generative AI
     license: Course material (free to use)
     pricing: Included in course
@@ -363,7 +363,7 @@ entries:
       before and after.
     last_verified: '2026-07-12'
   - name: 'Week 41: Section Project: Multimodal App'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: LLMs and Generative AI
     license: Course material (free to use)
     pricing: Included in course
@@ -372,7 +372,7 @@ entries:
       out, generated image alongside.
     last_verified: '2026-07-12'
   - name: 'Week 42: Research Agent'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: 'AI Engineering: Agents and Applications'
     license: Course material (free to use)
     pricing: Included in course
@@ -381,14 +381,14 @@ entries:
       cited brief.
     last_verified: '2026-07-12'
   - name: 'Week 43: Personal MCP Server'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: 'AI Engineering: Agents and Applications'
     license: Course material (free to use)
     pricing: Included in course
     notes: Build and test an MCP server exposing your own data or tools, and use it from a real client.
     last_verified: '2026-07-12'
   - name: 'Week 44: Agent-Built Feature'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: 'AI Engineering: Agents and Applications'
     license: Course material (free to use)
     pricing: Included in course
@@ -397,7 +397,7 @@ entries:
       documenting the workflow.
     last_verified: '2026-07-12'
   - name: 'Week 45: Evaluation Harness'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: 'AI Engineering: Agents and Applications'
     license: Course material (free to use)
     pricing: Included in course
@@ -406,7 +406,7 @@ entries:
       your AI features.
     last_verified: '2026-07-12'
   - name: 'Week 46: Full-Stack AI App'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: 'AI Engineering: Agents and Applications'
     license: Course material (free to use)
     pricing: Included in course
@@ -415,7 +415,7 @@ entries:
       layer.
     last_verified: '2026-07-12'
   - name: 'Week 47: Section Project: Production Assistant'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: 'AI Engineering: Agents and Applications'
     license: Course material (free to use)
     pricing: Included in course
@@ -424,7 +424,7 @@ entries:
       and privacy review.
     last_verified: '2026-07-12'
   - name: 'Week 48: Containerized Deployment'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Deployment, MLOps, and Security
     license: Course material (free to use)
     pricing: Included in course
@@ -433,7 +433,7 @@ entries:
       the image.
     last_verified: '2026-07-12'
   - name: 'Week 49: Monitored Deployment'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Deployment, MLOps, and Security
     license: Course material (free to use)
     pricing: Included in course
@@ -442,7 +442,7 @@ entries:
       procedure.
     last_verified: '2026-07-12'
   - name: 'Week 50: Section Project: Security Review'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Deployment, MLOps, and Security
     license: Course material (free to use)
     pricing: Included in course
@@ -451,7 +451,7 @@ entries:
       and fix the top three.
     last_verified: '2026-07-12'
   - name: 'Week 51: Capstone Milestone 1'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Capstone
     license: Course material (free to use)
     pricing: Included in course
@@ -460,7 +460,7 @@ entries:
       passing eval baseline.
     last_verified: '2026-07-12'
   - name: 'Week 52: Capstone Final Delivery'
-    url: https://sandeepbazar.github.io/ai-roadmap-365/#curriculum
+    url: https://ai-roadmap-365.github.io/#curriculum
     category: Capstone
     license: Course material (free to use)
     pricing: Included in course

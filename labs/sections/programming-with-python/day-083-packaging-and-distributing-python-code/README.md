@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** Packaging and Distributing Python Code
 - **Day number:** 83 of 365
-- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-083-packaging-and-distributing-python-code
+- **Lesson article:** https://ai-roadmap-365.github.io/day-083-packaging-and-distributing-python-code
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-083-packaging-and-distributing-python-code` when the site is running.
 <!-- generated-links:end -->

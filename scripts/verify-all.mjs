@@ -15,6 +15,7 @@ const STEPS = [
   ['typecheck', ['npx', 'astro', 'check']],
   ['validate:curriculum', ['node', 'scripts/validate/curriculum.mjs']],
   ['validate:readmes', ['node', 'scripts/validate/readmes.mjs']],
+  ['validate:bootstrap', ['node', 'scripts/validate/bootstrap.mjs']],
   ['validate:lessons', ['node', 'scripts/validate/lessons.mjs']],
   ['validate:labs', ['node', 'scripts/validate/labs.mjs']],
   ['validate:projects', ['node', 'scripts/validate/projects.mjs']],

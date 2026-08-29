@@ -129,6 +129,10 @@ try {
   cpSync(dist, staging, { recursive: true });
 
   run('git', ['init', '-q', '-b', siteBranch], { cwd: staging });
+  // A fresh temp repo inherits the GLOBAL git identity, which is not
+  // necessarily this project's. Set it explicitly (A24, A38).
+  run('git', ['config', 'user.name', config.committer.name], { cwd: staging });
+  run('git', ['config', 'user.email', config.committer.email], { cwd: staging });
   run('git', ['add', '-A'], { cwd: staging });
 
   const stamp = run('git', ['log', '-1', '--format=%h %s'], { cwd: repoRoot }).trim();

@@ -7,8 +7,8 @@ import { rehypeOpenInNewTab } from './scripts/lib/rehype-open-in-new-tab.mjs';
 // They are duplicated here as literals because Astro needs them before any
 // app code runs; scripts/validate/curriculum.mjs asserts they stay in sync.
 export default defineConfig({
-  site: 'https://sandeepbazar.github.io',
-  base: '/ai-roadmap-365',
+  site: 'https://ai-roadmap-365.github.io',
+  base: '',
   trailingSlash: 'ignore',
   integrations: [mdx()],
   // Links an author wrote inside a lesson open in a new tab so the reader

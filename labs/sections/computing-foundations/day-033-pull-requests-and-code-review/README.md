@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** Pull Requests and Code Review
 - **Day number:** 33 of 365
-- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-033-pull-requests-and-code-review
+- **Lesson article:** https://ai-roadmap-365.github.io/day-033-pull-requests-and-code-review
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-033-pull-requests-and-code-review` when the site is running.
 <!-- generated-links:end -->

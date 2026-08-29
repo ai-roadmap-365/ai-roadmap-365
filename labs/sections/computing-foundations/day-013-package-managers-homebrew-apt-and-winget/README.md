@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** Package Managers: Homebrew, apt, and winget
 - **Day number:** 13 of 365
-- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-013-package-managers-homebrew-apt-and-winget
+- **Lesson article:** https://ai-roadmap-365.github.io/day-013-package-managers-homebrew-apt-and-winget
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-013-package-managers-homebrew-apt-and-winget` when the site is running.
 <!-- generated-links:end -->

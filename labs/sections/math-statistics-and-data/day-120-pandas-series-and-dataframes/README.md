@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** pandas: Series and DataFrames
 - **Day number:** 120 of 365
-- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-120-pandas-series-and-dataframes
+- **Lesson article:** https://ai-roadmap-365.github.io/day-120-pandas-series-and-dataframes
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-120-pandas-series-and-dataframes` when the site is running.
 <!-- generated-links:end -->

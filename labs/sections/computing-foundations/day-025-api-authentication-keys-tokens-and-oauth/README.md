@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** API Authentication: Keys, Tokens, and OAuth
 - **Day number:** 25 of 365
-- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-025-api-authentication-keys-tokens-and-oauth
+- **Lesson article:** https://ai-roadmap-365.github.io/day-025-api-authentication-keys-tokens-and-oauth
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-025-api-authentication-keys-tokens-and-oauth` when the site is running.
 <!-- generated-links:end -->

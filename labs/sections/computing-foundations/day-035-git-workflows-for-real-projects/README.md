@@ -9,7 +9,7 @@ entirely on your own machine, with no network and no account.
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** Git Workflows for Real Projects
 - **Day number:** 35 of 365
-- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-035-git-workflows-for-real-projects
+- **Lesson article:** https://ai-roadmap-365.github.io/day-035-git-workflows-for-real-projects
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-035-git-workflows-for-real-projects` when the site is running.
 <!-- generated-links:end -->

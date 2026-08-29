@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** Why Test, and pytest Basics
 - **Day number:** 71 of 365
-- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-071-why-test-and-pytest-basics
+- **Lesson article:** https://ai-roadmap-365.github.io/day-071-why-test-and-pytest-basics
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-071-why-test-and-pytest-basics` when the site is running.
 <!-- generated-links:end -->

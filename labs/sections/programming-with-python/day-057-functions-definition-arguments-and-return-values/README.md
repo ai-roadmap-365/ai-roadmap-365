@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** Functions: Definition, Arguments, and Return Values
 - **Day number:** 57 of 365
-- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-057-functions-definition-arguments-and-return-values
+- **Lesson article:** https://ai-roadmap-365.github.io/day-057-functions-definition-arguments-and-return-values
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-057-functions-definition-arguments-and-return-values` when the site is running.
 <!-- generated-links:end -->

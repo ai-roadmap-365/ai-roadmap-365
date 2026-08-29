@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** Exceptions and Error Handling Strategy
 - **Day number:** 66 of 365
-- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-066-exceptions-and-error-handling-strategy
+- **Lesson article:** https://ai-roadmap-365.github.io/day-066-exceptions-and-error-handling-strategy
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-066-exceptions-and-error-handling-strategy` when the site is running.
 <!-- generated-links:end -->

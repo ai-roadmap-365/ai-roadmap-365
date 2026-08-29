@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** Finding Data: Open Datasets and APIs
 - **Day number:** 134 of 365
-- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-134-finding-data-open-datasets-and-apis
+- **Lesson article:** https://ai-roadmap-365.github.io/day-134-finding-data-open-datasets-and-apis
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-134-finding-data-open-datasets-and-apis` when the site is running.
 <!-- generated-links:end -->

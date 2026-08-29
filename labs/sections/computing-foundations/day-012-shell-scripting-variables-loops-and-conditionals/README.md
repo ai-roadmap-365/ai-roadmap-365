@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** Shell Scripting: Variables, Loops, and Conditionals
 - **Day number:** 12 of 365
-- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-012-shell-scripting-variables-loops-and-conditionals
+- **Lesson article:** https://ai-roadmap-365.github.io/day-012-shell-scripting-variables-loops-and-conditionals
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-012-shell-scripting-variables-loops-and-conditionals` when the site is running.
 <!-- generated-links:end -->

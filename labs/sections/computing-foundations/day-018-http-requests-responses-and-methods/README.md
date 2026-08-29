@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** HTTP: Requests, Responses, and Methods
 - **Day number:** 18 of 365
-- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-018-http-requests-responses-and-methods
+- **Lesson article:** https://ai-roadmap-365.github.io/day-018-http-requests-responses-and-methods
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-018-http-requests-responses-and-methods` when the site is running.
 <!-- generated-links:end -->

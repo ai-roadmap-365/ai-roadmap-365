@@ -5,7 +5,7 @@
 <!-- generated-links:start — do not edit by hand; regenerate with `npm run update:links` -->
 - **Lesson title:** Indexes and Query Performance
 - **Day number:** 89 of 365
-- **Lesson article:** https://sandeepbazar.github.io/ai-roadmap-365/day-089-indexes-and-query-performance
+- **Lesson article:** https://ai-roadmap-365.github.io/day-089-indexes-and-query-performance
 - **Lab files:** everything you need is in [this directory](./) — follow “How to run” below.
 - **Browse the course locally:** from the repository root, this lab also appears in the course website at `/labs/day-089-indexes-and-query-performance` when the site is running.
 <!-- generated-links:end -->
