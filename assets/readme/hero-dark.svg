@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 284" role="img" aria-label="365 Days of AI Mastery: nine standalone courses, 154 of 365 days complete, one lesson and one runnable lab every day.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 284" role="img" aria-label="365 Days of AI Mastery: nine standalone courses, 365 of 365 days complete, one lesson and one runnable lab every day.">
   <style>
     .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
     .sans{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
     .b{font-size:11.5px;font-weight:700}.xs{font-size:9.5px;letter-spacing:.06em}
     .cap{font-size:10px;font-weight:700;letter-spacing:.18em}
-    @keyframes arc{from{stroke-dashoffset:389.6}to{stroke-dashoffset:225.2}}
+    @keyframes arc{from{stroke-dashoffset:389.6}to{stroke-dashoffset:0.0}}
     @keyframes spin{to{transform:rotate(360deg)}}
     @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
     @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
@@ -16,7 +16,7 @@
     .f1{animation-delay:.2s}.f2{animation-delay:.4s}.f3{animation-delay:.6s}
     .glow{animation:glow 4.4s ease-in-out infinite}
     @media (prefers-reduced-motion:reduce){*{animation:none!important}
-      .arc{stroke-dashoffset:225.2}.fill{transform:none}}
+      .arc{stroke-dashoffset:0.0}.fill{transform:none}}
   </style>
   <defs><radialGradient id="g-dark">
     <stop offset="0%" stop-color="#38bdf8" stop-opacity=".34"/>
@@ -53,8 +53,8 @@
       <rect x="24" y="198" width="248" height="34" rx="9" fill="#121a30" stroke="#243154"/>
       <text x="38" y="213" class="mono b" fill="#e8ecf8">Machine Learning</text>
       <rect x="38" y="220" width="212" height="4" rx="2" fill="#243154"/>
-      <rect class="fill f3" x="38" y="220" width="53" height="4" rx="2" fill="#38bdf8"/>
-      <text x="256" y="213" text-anchor="end" class="mono xs" fill="#38bdf8">14/56</text>
+      <rect class="fill f3" x="38" y="220" width="212" height="4" rx="2" fill="#22c55e"/>
+      <text x="256" y="213" text-anchor="end" class="mono xs" fill="#22c55e">56/56</text>
     </g>
   <g transform="translate(440 146)">
     <g class="ticks" opacity=".5">
@@ -63,7 +63,7 @@
     <circle r="62" fill="none" stroke="#243154" stroke-width="9"/>
     <circle class="arc" r="62" fill="none" stroke="#1d4ed8" stroke-width="9" stroke-linecap="round"
             stroke-dasharray="389.6" transform="rotate(-90)"/>
-    <text y="-2" text-anchor="middle" class="sans" font-size="30" font-weight="800" fill="#e8ecf8">154</text>
+    <text y="-2" text-anchor="middle" class="sans" font-size="30" font-weight="800" fill="#e8ecf8">365</text>
     <text y="20" text-anchor="middle" class="mono xs" fill="#93a4c8">OF 365 DAYS</text>
   </g>
   <text x="440" y="248" text-anchor="middle" class="sans" font-size="14" font-weight="700" fill="#e8ecf8">365 Days of AI Mastery</text>
