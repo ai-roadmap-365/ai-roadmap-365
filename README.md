@@ -1,8 +1,21 @@
 <p align="center">
-  <img src="assets/readme/hero.svg" alt="365 Days of AI Mastery — one year, nine courses, every day: from how a computer works to shipping production AI systems" width="100%">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ai-roadmap-365/ai-roadmap-365/main/assets/readme/hero-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ai-roadmap-365/ai-roadmap-365/main/assets/readme/hero-light.svg">
+    <img src="https://raw.githubusercontent.com/ai-roadmap-365/ai-roadmap-365/main/assets/readme/hero-light.svg" alt="365 Days of AI Mastery: nine standalone courses, one lesson and one runnable lab every day, with the day count read from the curriculum itself." width="880">
+  </picture>
 </p>
 
 <h1 align="center">📚 365 Days of AI Mastery</h1>
+
+<p align="center">
+  <strong>Star us&nbsp;❤️&nbsp;→</strong>&nbsp;<a href="https://github.com/ai-roadmap-365/ai-roadmap-365" title="Star ai-roadmap-365 on GitHub"><picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ai-roadmap-365/ai-roadmap-365/main/assets/readme/star-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ai-roadmap-365/ai-roadmap-365/main/assets/readme/star-light.svg">
+    <img src="https://raw.githubusercontent.com/ai-roadmap-365/ai-roadmap-365/main/assets/readme/star-light.svg" alt="Star this repository on GitHub" width="132" height="34" align="middle">
+  </picture></a>
+</p>
+
 
 <p align="center">
   <b>📖 Read the course →
