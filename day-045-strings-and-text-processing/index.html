@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 45: Strings and Text Processing · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will handle text in Python with confidence — creating, slicing, cleaning, and formatting strings — and understand why strings are immutable Unicode sequences and how they become the bytes that travel to files and services."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-045-strings-and-text-processing/"><meta property="og:title" content="Day 45: Strings and Text Processing · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will handle text in Python with confidence — creating, slicing, cleaning, and formatting strings — and understand why strings are immutable Unicode sequences and how they become the bytes that travel to files and services."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-045-strings-and-text-processing/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-045-strings-and-text-processing.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 45: Strings and Text Processing · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 45: Strings and Text Processing · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will handle text in Python with confidence — creating, slicing, cleaning, and formatting strings — and understand why strings are immutable Unicode sequences and how they become the bytes that travel to files and services."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-045-strings-and-text-processing.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 45: Strings and Text Processing · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will handle text in Python with confidence — creating, slicing, cleaning, and formatting strings — and understand why strings are immutable Unicode sequences and how they become the bytes that travel to files and services."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://ai-roadmap-365.github.io/day-045-strings-and-text-processing/"><meta property="og:title" content="Day 45: Strings and Text Processing · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will handle text in Python with confidence — creating, slicing, cleaning, and formatting strings — and understand why strings are immutable Unicode sequences and how they become the bytes that travel to files and services."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://ai-roadmap-365.github.io/day-045-strings-and-text-processing/"><meta property="og:image" content="https://ai-roadmap-365.github.io/social/day-045-strings-and-text-processing.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 45: Strings and Text Processing · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 45: Strings and Text Processing · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will handle text in Python with confidence — creating, slicing, cleaning, and formatting strings — and understand why strings are immutable Unicode sequences and how they become the bytes that travel to files and services."><meta name="twitter:image" content="https://ai-roadmap-365.github.io/social/day-045-strings-and-text-processing.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
       // Dark is the default regardless of OS preference - this is a dark-first
       // design. A visitor who picks light with the toggle keeps it. Applied
       // before first paint so there is no flash of the wrong theme.
@@ -11,81 +11,173 @@
         }
         document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
       })();
-    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+    </script><link rel="stylesheet" href="/_astro/_day_.CiF6NwwU.css">
 <style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
 .starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
-</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="site-home" href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener"> <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M15 5l-7 7 7 7"></path> </svg>
+Sandeep Bazar
+</a> <a class="brand" href="/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
 365 Days of AI
-</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
-Labs
-</a> </header> <main id="main">  <article data-day="45" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/programming-with-python">Programming with Python</a>  ›  <span>Python Setup and First Programs</span>  › 
-Day 45 </p> <h1 data-astro-cid-whrtx2kk>Day 45: Strings and Text Processing</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-045-strings-and-text-processing.png" width="1200" height="630" alt="Day 45 of 365 — Strings and Text Processing" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will handle text in Python with confidence — creating, slicing, cleaning, and formatting strings — and understand why strings are immutable Unicode sequences and how they become the bytes that travel to files and services.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Programming with Python</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Python Setup and First Programs</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/programming-with-python/day-045-strings-and-text-processing" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/programming-with-python/day-045-strings-and-text-processing</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
-cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/programming-with-python/day-045-strings-and-text-processing</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
-You can also <a href="/ai-roadmap-365/labs/day-045-strings-and-text-processing" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
-</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Explain what a string is in Python — an immutable, ordered sequence of Unicode characters — and connect its immutability to what you learned about tuples on Day 44</li><li data-astro-cid-whrtx2kk>Create strings with single, double, and triple quotes, use escape sequences, and know when a raw string is the right choice</li><li data-astro-cid-whrtx2kk>Index and slice strings with positive and negative positions, including reversal with s[::-1], and state why the stop index is excluded</li><li data-astro-cid-whrtx2kk>Apply the essential string methods — lower, upper, strip, split, join, replace, find, startswith, count — and remember that each returns a new string</li><li data-astro-cid-whrtx2kk>Format text three ways (%, str.format, f-strings), choose f-strings as the modern default, and use format specs for alignment and precision</li><li data-astro-cid-whrtx2kk>Convert between text and bytes with encode and decode, always naming the encoding, and connect this to the data representation you met on Day 5</li><li data-astro-cid-whrtx2kk>Decide when a plain string method is enough and when a task calls for a regular expression (Day 38)</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Day 44 (Variables and Types) — this lesson builds on Python types and the idea of immutability</li><li data-astro-cid-whrtx2kk>Day 5 (Text, Images, and Sound as Data) — helpful background for the Unicode and encoding section</li><li data-astro-cid-whrtx2kk>Python 3 installed and the ability to run a script from the terminal</li></ul> <h2 id="why-this-matters">Why this matters</h2>
-<p>Almost everything you will ever say to an AI system, and almost everything it says back, is a string of text. A prompt is a string. A model’s reply is a string. The instructions you write, the documents you feed in for context, the labels on your training data, the configuration you paste into a terminal — all strings. Long before a model does anything clever with language, plain, ordinary code has to build that text, clean it, cut it apart, and stitch it back together. If you cannot do that fluently, everything downstream is harder than it needs to be.</p>
-<p>The practical consequences are immediate. When you assemble a prompt from a template — a fixed frame with a few blanks filled in from your data — you are doing string formatting, and a single misplaced quote or a stray newline can change the answer you get. When you load a dataset of customer reviews or scraped web pages, most of your effort is not modelling at all; it is <em>text cleaning</em> — stripping whitespace, fixing inconsistent capitalization, splitting fields, throwing away junk. Practitioners often repeat that data preparation is the majority of real machine-learning work, and the majority of data preparation is string work. Even the way a model reads your prompt starts with a step called tokenization, which chops a string into pieces before any mathematics happens.</p>
-<p>Today you learn how Python represents and manipulates text: strings as immutable sequences of characters, how to slice them, the handful of methods you will use every day, the three styles of formatting (and which one to reach for), and how text becomes the bytes that travel over a network or sit on a disk. By the end you will read and write string code without hesitation — the quiet skill underneath every noisy demo.</p>
+</a> <nav aria-label="Primary"> <a href="/sections">Courses</a> <a href="/labs">Labs</a> <a href="/catalog">Catalogs</a> <a href="/search">Search</a> <a href="/glossary">Glossary</a> <a href="/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+GitHub
+</a> </header> <main id="main">  <article data-day="45" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/sections/programming-with-python">Programming with Python</a>  ›  <span>Python Setup and First Programs</span>  › 
+Day 45 </p> <h1 data-astro-cid-whrtx2kk>Day 45: Strings and Text Processing</h1>  <img class="day-hero" src="/social/day-045-strings-and-text-processing.png" width="1200" height="630" alt="Day 45 of 365 — Strings and Text Processing" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will handle text in Python with confidence — creating, slicing, cleaning, and formatting strings — and understand why strings are immutable Unicode sequences and how they become the bytes that travel to files and services.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Programming with Python</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Python Setup and First Programs</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/programming-with-python/day-045-strings-and-text-processing" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/programming-with-python/day-045-strings-and-text-processing</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/ai-roadmap-365/ai-roadmap-365.github.io.git
+cd ai-roadmap-365.github.io</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/programming-with-python/day-045-strings-and-text-processing</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/labs/day-045-strings-and-text-processing" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Explain what a string is in Python — an immutable, ordered sequence of Unicode characters — and connect its immutability to what you learned about tuples on Day 44</li><li data-astro-cid-whrtx2kk>Create strings with single, double, and triple quotes, use escape sequences, and know when a raw string is the right choice</li><li data-astro-cid-whrtx2kk>Index and slice strings with positive and negative positions, including reversal with s[::-1], and state why the stop index is excluded</li><li data-astro-cid-whrtx2kk>Apply the essential string methods — lower, upper, strip, split, join, replace, find, startswith, count — and remember that each returns a new string</li><li data-astro-cid-whrtx2kk>Format text three ways (%, str.format, f-strings), choose f-strings as the modern default, and use format specs for alignment and precision</li><li data-astro-cid-whrtx2kk>Convert between text and bytes with encode and decode, always naming the encoding, and connect this to the data representation you met on Day 5</li><li data-astro-cid-whrtx2kk>Decide when a plain string method is enough and when a task calls for a regular expression (Day 38)</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk>Day 44 (Variables and Types) — this lesson builds on Python types and the idea of immutability</li><li data-astro-cid-whrtx2kk>Day 5 (Text, Images, and Sound as Data) — helpful background for the Unicode and encoding section</li><li data-astro-cid-whrtx2kk>Python 3 installed and the ability to run a script from the terminal</li> </ul> <h2 id="why-this-matters">Why this matters</h2>
+<ul>
+<li>
+<p><strong>Most real data is text</strong>, and most of the work before any model sees it is
+string handling.</p>
+</li>
+<li>
+<p><strong>Every prompt and every response is a string</strong>, so this is the layer all AI
+work passes through.</p>
+</li>
+<li>
+<p><strong>Encoding bugs are silent.</strong> A name with an accent survives or corrupts
+depending on decisions made here.</p>
+</li>
+<li>
+<p><strong>f-strings are the one formatting syntax to learn</strong>, and they replace three
+older ones you will still meet in existing code.</p>
+</li>
+<li>
+<p><strong>Strings are immutable</strong>, which is why building one in a loop is slow and the
+idiom to avoid that is worth knowing.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="the-idea-in-plain-language">The idea in plain language</h2>
-<p>A <strong>string</strong> in Python is a piece of text: a sequence of characters in a fixed order. You write one by putting characters between quotes — <code>&quot;hello&quot;</code> or <code>&#39;hello&#39;</code> — and Python stores it as an object you can inspect and copy from, but never change in place. That last part is the single most important idea in this lesson: strings are <strong>immutable</strong>. Once a string exists, its characters are settled. Every operation that looks like it “changes” a string actually builds and hands back a brand-new string, leaving the original exactly as it was. This is the same idea of immutability you began meeting when you studied Python’s types on Day 44, now applied to text.</p>
-<p>Because a string is a <em>sequence</em>, it has positions, and you can reach into it the way you reached into a list: <code>s[0]</code> is the first character, <code>s[-1]</code> is the last. You can also take a run of characters — a <strong>slice</strong> — with <code>s[start:stop]</code>, and Python hands you a new, smaller string. On top of positions, strings carry a rich set of <strong>methods</strong>: named actions you call with a dot, like <code>s.lower()</code> to get a lower-cased copy or <code>s.split()</code> to break the text into a list of words. And when you need to build a sentence out of values — a name, a count, a price — you use <strong>string formatting</strong> to drop those values into a template, with <strong>f-strings</strong> being the modern, readable way to do it.</p>
-<p>Hold three facts in mind and the rest follows: a string is an ordered sequence you can index and slice; a string never changes, so methods return new strings; and formatting is how you weave data into text. Everything else in this lesson is detail hung on those three hooks.</p>
+<p><img src="/_astro/str-versus-bytes.hPuR5BnE_ZIALX.svg" alt="Diagram: str compared with bytes in Python" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong>A string is an immutable sequence of characters.</strong> Every “change” makes a new
+one.</p>
+</li>
+<li>
+<p><strong>You can index and slice it</strong> like any sequence, including from the end with
+negative positions.</p>
+</li>
+<li>
+<p><strong>Methods do the work</strong>, and they return new strings rather than editing in
+place.</p>
+</li>
+<li>
+<p><strong>f-strings put expressions inside text</strong>, evaluated where they sit.</p>
+</li>
+<li>
+<p><strong>Text becomes bytes through an encoding</strong>, which is Day 5 arriving in Python.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="historical-background">Historical background</h2>
-<p>Text handling is older than Python by decades, and its history explains why Python does things the way it does. In the earliest computers there were only numbers; text was bolted on by agreeing that particular numbers would <em>stand for</em> particular characters. The most influential such agreement, <strong>ASCII</strong>, was standardized in 1963 and assigned the numbers 0 through 127 to the English letters, digits, punctuation, and a few control codes — so the capital letter <code>A</code> became the number 65, exactly the convention you met on Day 5 when you learned how a computer represents data. The word “string” itself — a “string of characters” — has been standard computing vocabulary since those early years.</p>
-<p>ASCII’s 128 slots covered American English and almost nothing else. As computing spread across languages, a tangle of incompatible encodings grew up, each mapping the bytes above 127 to different accented letters or scripts, so text that looked fine on one machine turned to garbage on another. The fix was <strong>Unicode</strong>: a single catalogue that gives every character in every writing system its own number, or <em>code point</em>. The Unicode Consortium was founded in 1991 to steward it. A companion invention, <strong>UTF-8</strong>, designed by Ken Thompson and Rob Pike in 1992, encodes those code points into bytes efficiently and has become the dominant text encoding of the internet.</p>
-<p>Python grew up alongside Unicode and eventually embraced it fully. The release of <strong>Python 3.0 in December 2008</strong> made a decisive change: an ordinary string (<code>str</code>) became a sequence of Unicode characters, while raw bytes got their own separate type (<code>bytes</code>). This clean split — text is one thing, bytes are another, and you convert deliberately between them — is why Python 3 handles the world’s languages so gracefully, and why the <code>encode</code>/<code>decode</code> pair you will meet below matters. The last piece of the modern picture arrived with <strong>Python 3.6 in December 2016</strong>, which introduced <strong>f-strings</strong> through PEP 498 (authored by Eric V. Smith): a concise, fast, readable syntax for embedding values directly inside string literals. Every technique in this lesson sits on that history.</p>
+<ul>
+<li>
+<p><strong>Python 2 conflated text and bytes</strong>, and the resulting confusion was severe
+enough to justify a breaking language change.</p>
+</li>
+<li>
+<p><strong>Python 3 separated them permanently</strong>: <code>str</code> is text, <code>bytes</code> is bytes, and
+converting requires you to name an encoding.</p>
+</li>
+<li>
+<p><strong>That change is why Python 3 handles international text well</strong> and why the
+migration took the community a decade.</p>
+</li>
+<li>
+<p><strong>Formatting arrived in three waves.</strong> <code>%</code> formatting from C, then <code>str.format</code>
+in 2008, then f-strings in Python 3.6.</p>
+</li>
+<li>
+<p><strong>f-strings won because they read in the order they execute.</strong> The value sits
+where it appears rather than in a separate argument list.</p>
+</li>
+<li>
+<p><strong>The older two survive in existing code</strong>, so you need to recognise them even
+though you should not write them.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
-<p>A Python string is an immutable sequence of Unicode characters, represented by the built-in type <code>str</code>. Every word is load-bearing. <em>Immutable</em>: you cannot alter a character in place. <em>Sequence</em>: it has an order and a length, so indexing, slicing, iteration, and <code>len()</code> all work. <em>Unicode characters</em>: each element is a full character — a letter, a digit, an emoji, a Chinese ideograph — not a raw byte, so <code>len(&quot;café&quot;)</code> is 4 regardless of how many bytes that would take to store.</p>
-<p>It helps to be equally clear about what a string is not. A string is not a <code>bytes</code> object: <code>&quot;hello&quot;</code> (text) and <code>b&quot;hello&quot;</code> (bytes) are different types, and mixing them raises errors on purpose. A string is not mutable like a list, so <code>s[0] = &quot;H&quot;</code> is not allowed and never will be. A string is not a number, even when it looks like one: <code>&quot;42&quot;</code> is text, and adding it to <code>8</code> is an error until you convert it with <code>int(&quot;42&quot;)</code>. And a string method never edits the original — a frequent beginner trap is calling <code>s.upper()</code> and expecting <code>s</code> to change, when in fact you must capture the returned value: <code>s = s.upper()</code>.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”<code>s.upper()</code> changes the string.”</td><td>It returns a <strong>new</strong> upper-cased string; the original is untouched. You must assign the result.</td></tr><tr><td>”<code>len(s)</code> counts bytes.”</td><td>It counts characters (code points). <code>&quot;café&quot;</code> has length 4 even though UTF-8 stores it in 5 bytes.</td></tr><tr><td>”Single and double quotes mean different things.”</td><td>They are interchangeable; pick whichever avoids escaping the quote inside your text.</td></tr><tr><td>”<code>\n</code> is two characters, a backslash and an n.”</td><td>It is one character, a newline. The backslash is an escape that Python reads as a single control character.</td></tr><tr><td>”You need a regex to do any text work.”</td><td>Most everyday tasks are simpler and clearer with plain string methods; regex is for genuinely complex patterns (Day 38).</td></tr></tbody></table>
+<p><strong>A string is:</strong></p>
+<ul>
+<li>An immutable sequence of Unicode characters.</li>
+<li>Indexable, sliceable and iterable, like other sequences.</li>
+<li>The type every method here returns — never a modified original.</li>
+</ul>
+<p><strong>It is not:</strong></p>
+<ul>
+<li>
+<p><strong>Not bytes.</strong> <code>str</code> is text; <code>bytes</code> is bytes; the boundary between them is an
+encoding you must choose.</p>
+</li>
+<li>
+<p><strong>Not mutable.</strong> There is no operation that edits a string in place.</p>
+</li>
+<li>
+<p><strong>Not a list of characters</strong>, though it behaves like one for indexing. There is
+no separate character type; <code>s[0]</code> is a one-character string.</p>
+</li>
+<li>
+<p><strong>Not the right tool for structured text.</strong> Nested markup needs a parser, as Day
+38 argued.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
-<p>Strings exist because computers compute on numbers, but humans think in words, names, sentences, and files full of prose. Some layer has to bridge that gap, letting a program hold “the customer’s last name” or “the first line of the file” as a single, manipulable value. Without a string type you would juggle bare arrays of character-numbers by hand, tracking lengths and boundaries yourself — exactly the error-prone drudgery that older languages forced on programmers and that caused a long history of bugs and security holes.</p>
-<p>The <em>immutability</em> of Python strings solves a subtler set of problems. Because a string can never change underneath you, it is safe to share: you can pass a string to a function, use it as a dictionary key, or hand the same string to ten different parts of a program, all without worrying that one of them will secretly rewrite it and surprise the others. Immutable text is predictable text. The cost — that “editing” a string means building a new one — is real but usually cheap, and Python’s design bets, correctly, that safety and simplicity are worth more than in-place edits for the vast majority of programs. The rich library of string methods and the evolution toward f-strings then solve the everyday problem of <em>ergonomics</em>: making the common tasks — clean this up, split that apart, format this nicely — short, readable, and hard to get wrong.</p>
+<ul>
+<li><strong>Text is the universal data type</strong>, and a language needs a good one.</li>
+<li><strong>Immutability makes strings safe to share</strong> and usable as dictionary keys.</li>
+<li><strong>Separating text from bytes</strong> ended a whole category of silent corruption.</li>
+<li><strong>Rich methods mean common operations are one call</strong>, not a loop.</li>
+<li><strong>f-strings solve readability.</strong> Interpolating values where they appear is
+clearer than positional arguments, and the format spec covers alignment,
+precision and padding without a second library.</li>
+</ul>
+<hr/>
 <h2 id="how-it-works">How it works</h2>
-<p>Let’s build the picture from the ground up: how you create strings, how you reach into them, the methods you will lean on, how you format output, and how text turns into bytes.</p>
 <h3 id="creating-strings">Creating strings</h3>
-<p>You write a string literal between single or double quotes, and the two are interchangeable — choose the one that lets you avoid escaping:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">a </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> &#39;She said hello&#39;</span></span>
-<span class="line"><span style="color:#E1E4E8">b </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> &quot;It&#39;s a fine day&quot;</span><span style="color:#6A737D">     # double quotes so the apostrophe needs no escape</span></span></code></pre>
-<p>For text that spans several lines, use <strong>triple quotes</strong>, which preserve the line breaks inside:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">poem </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> &quot;&quot;&quot;the river and the reader</span></span>
-<span class="line"><span style="color:#9ECBFF">a river starts as a thin trickle&quot;&quot;&quot;</span></span></code></pre>
-<p>Some characters cannot be typed directly, so Python uses <strong>escape sequences</strong>: a backslash followed by a code. The important ones are <code>\n</code> (newline), <code>\t</code> (tab), <code>\\</code> (a literal backslash), and <code>\&quot;</code> or <code>\&#39;</code> (a quote that would otherwise end the string). Each escape is a <em>single</em> character in the resulting string, even though you typed two symbols. When you want the backslashes to stay literal — most commonly for Windows file paths or regular-expression patterns — prefix the string with <code>r</code> to make a <strong>raw string</strong>, where <code>r&quot;C:\new&quot;</code> really is a backslash, an <code>n</code>, an <code>e</code>, and a <code>w</code>, rather than a newline.</p>
+<ul>
+<li>
+<p><strong>Single and double quotes are identical.</strong> Choose whichever avoids escaping.</p>
+</li>
+<li>
+<p><strong>Triple quotes span lines</strong> and keep the newlines.</p>
+</li>
+<li>
+<p><strong>A raw string, <code>r&quot;...&quot;</code>, disables backslash escapes</strong> — which is what regular
+expressions and Windows paths want.</p>
+</li>
+<li>
+<p><strong>Adjacent literals concatenate</strong>, so a long string can be split across lines
+inside brackets with no operator at all.</p>
+</li>
+</ul>
 <h3 id="indexing-and-slicing">Indexing and slicing</h3>
-<p>Because a string is a sequence, each character has a position, counted from <code>0</code> at the left. Negative positions count from the right, so <code>-1</code> is the last character. A <strong>slice</strong> <code>s[start:stop]</code> copies the run from <code>start</code> up to <em>but not including</em> <code>stop</code>, returning a new string of <code>stop - start</code> characters. Omit an end to run to the edge (<code>s[:3]</code>, <code>s[3:]</code>), and add a third number — the step — to skip characters or, with <code>-1</code>, walk backwards: <code>s[::-1]</code> reverses the whole string.</p>
-<p><img src="/ai-roadmap-365/_astro/string-slicing.DY23Zcz5_ZWUKpC.svg" alt="Diagram: indexing and slicing a Python string with positive and negative positions and one slice highlighted" loading="lazy" decoding="async" fetchpriority="auto" width="680" height="440"></p>
-<p>The diagram traces the word <code>&quot;PYTHON&quot;</code>. Reading it fixes the two rules people most often stumble over: the start index is <em>included</em> and the stop index is <em>excluded</em> (so <code>s[1:4]</code> gives three characters, <code>&quot;YTH&quot;</code>), and negative indices let you reach the end without knowing the length. Because slicing returns a fresh string, none of this ever disturbs the original — immutability again.</p>
+<p><img src="/_astro/half-open-slicing.B1404yig_Z16hImP.svg" alt="Diagram: why Python slices are half-open" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<p><img src="/_astro/string-slicing.DY23Zcz5_ZWUKpC.svg" alt="Diagram: indexing and slicing a Python string with positive and negative positions and one slice highlighted" loading="lazy" decoding="async" fetchpriority="auto" width="680" height="440"></p>
+<ul>
+<li>
+<p><strong><code>s[0]</code> is the first character; <code>s[-1]</code> is the last.</strong></p>
+</li>
+<li>
+<p><strong><code>s[a:b]</code> runs from <code>a</code> up to but not including <code>b</code>.</strong> That half-open rule is
+why <code>s[:n]</code> and <code>s[n:]</code> fit together with no overlap and no gap.</p>
+</li>
+<li>
+<p><strong>Either end may be omitted</strong>, and <code>s[:]</code> is the whole thing.</p>
+</li>
+<li>
+<p><strong>A third value is a step</strong>: <code>s[::-1]</code> reverses.</p>
+</li>
+<li>
+<p><strong>Slicing never raises for out-of-range bounds</strong>, unlike indexing — it just
+gives you what exists.</p>
+</li>
+</ul>
 <h3 id="essential-methods">Essential methods</h3>
-<p>A string method is an action you call with a dot after the string. Because strings are immutable, every method that transforms text returns a <em>new</em> string; the original stays put. These few cover the great majority of real work:</p>
+<p><img src="/_astro/join-not-plus.eSIihhQo_ZIALX.svg" alt="Diagram: string concatenation in a loop compared with join" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
 
 
 
@@ -127,89 +219,181 @@ You can also <a href="/ai-roadmap-365/labs/day-045-strings-and-text-processing" 
 
 
 
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Method</th><th>What it does</th><th>Example → result</th></tr></thead><tbody><tr><td><code>s.lower()</code> / <code>s.upper()</code></td><td>Return a copy in lower or upper case</td><td><code>&quot;River&quot;.lower()</code> → <code>&quot;river&quot;</code></td></tr><tr><td><code>s.strip()</code></td><td>Remove leading/trailing whitespace (or given characters)</td><td><code>&quot;  hi \n&quot;.strip()</code> → <code>&quot;hi&quot;</code></td></tr><tr><td><code>s.split(sep)</code></td><td>Break into a list; default splits on any whitespace</td><td><code>&quot;a b c&quot;.split()</code> → <code>[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</code></td></tr><tr><td><code>sep.join(list)</code></td><td>Join a list of strings with <code>sep</code> between them</td><td><code>&quot;-&quot;.join([&quot;a&quot;,&quot;b&quot;])</code> → <code>&quot;a-b&quot;</code></td></tr><tr><td><code>s.replace(old, new)</code></td><td>Replace every occurrence of one substring with another</td><td><code>&quot;a.b.c&quot;.replace(&quot;.&quot;, &quot;/&quot;)</code> → <code>&quot;a/b/c&quot;</code></td></tr><tr><td><code>s.find(sub)</code></td><td>Position of the first match, or <code>-1</code> if absent</td><td><code>&quot;banana&quot;.find(&quot;na&quot;)</code> → <code>2</code></td></tr><tr><td><code>s.startswith(p)</code> / <code>s.endswith(p)</code></td><td>Test the beginning or end; returns <code>True</code>/<code>False</code></td><td><code>&quot;report.txt&quot;.endswith(&quot;.txt&quot;)</code> → <code>True</code></td></tr><tr><td><code>s.count(sub)</code></td><td>How many non-overlapping times <code>sub</code> appears</td><td><code>&quot;banana&quot;.count(&quot;a&quot;)</code> → <code>3</code></td></tr></tbody></table>
-<p>The pair <code>split</code> and <code>join</code> are the workhorses of text processing: <code>split</code> turns a line into a list of fields you can examine, and <code>join</code> turns a list of pieces back into one string. Notice that <code>join</code> is a method <em>on the separator</em>, which reads oddly at first (<code>&quot;, &quot;.join(names)</code>) but is exactly right — the separator is what goes <em>between</em> the pieces.</p>
+<table><thead><tr><th>Method</th><th>What it does</th></tr></thead><tbody><tr><td><code>.strip()</code></td><td>Remove leading and trailing whitespace</td></tr><tr><td><code>.lower()</code> / <code>.upper()</code></td><td>Change case</td></tr><tr><td><code>.split(sep)</code></td><td>Break into a list; no argument splits on any whitespace</td></tr><tr><td><code>&quot;&quot;.join(parts)</code></td><td>The inverse — and the right way to build a string</td></tr><tr><td><code>.replace(a, b)</code></td><td>Every occurrence, returning a new string</td></tr><tr><td><code>.startswith()</code> / <code>.endswith()</code></td><td>A clearer test than slicing</td></tr><tr><td><code>.find()</code> / <code>.index()</code></td><td>Position; <code>find</code> returns <code>-1</code>, <code>index</code> raises</td></tr><tr><td><code>in</code></td><td>The readable membership test</td></tr></tbody></table>
+<ul>
+<li><strong>Every one returns a new string.</strong> <code>s.strip()</code> on its own line does nothing;
+you must assign the result.</li>
+</ul>
+<h3 id="splitting-and-joining-precisely">Splitting and joining, precisely</h3>
+<p><img src="/_astro/split-variants.BQdgzisP_Z16hImP.svg" alt="Diagram: the differences between Python's string splitting methods" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<ul>
+<li>
+<p><strong><code>.split()</code> with no argument is not the same as <code>.split(&quot; &quot;)</code>.</strong> The first
+collapses runs of any whitespace and drops leading and trailing empties; the
+second splits on every single space, producing empty strings between doubles.</p>
+</li>
+<li>
+<p><strong><code>.splitlines()</code> handles every line ending</strong> — <code>\n</code>, <code>\r\n</code>, and the unusual
+ones — where <code>.split(&quot;\n&quot;)</code> leaves a stray <code>\r</code> on Windows files.</p>
+</li>
+<li>
+<p><strong><code>.partition(sep)</code> returns three pieces</strong>: before, the separator, after. It is
+the right tool when there is exactly one separator and you want both sides.</p>
+</li>
+<li>
+<p><strong><code>maxsplit</code> limits the work</strong>: <code>line.split(&quot;,&quot;, 1)</code> takes the first field and
+leaves the rest intact, which is what log parsing usually wants.</p>
+</li>
+<li>
+<p><strong>Join takes an iterable of strings only.</strong> <code>&quot;, &quot;.join([1, 2])</code> raises; map to
+<code>str</code> first.</p>
+</li>
+</ul>
 <h3 id="string-formatting-three-styles">String formatting: three styles</h3>
-<p>Formatting means weaving values into text. Python has three styles, added over its history, and knowing when to use each is part of A13’s tool literacy — all three are built into the language, entirely free, with no package to install.</p>
-<p>The oldest is the <strong><code>%</code> operator</strong>, borrowed from the C language: <code>&quot;Total: %.2f&quot; % price</code>. The second is the <strong><code>str.format()</code> method</strong>: <code>&quot;Total: {:.2f}&quot;.format(price)</code>, using <code>{}</code> placeholders. The newest and now the default is the <strong>f-string</strong>: put an <code>f</code> before the opening quote and write the value directly inside braces — <code>f&quot;Total: {price:.2f}&quot;</code>. Inside those braces you can place any expression, not just a variable, and after a colon you can add a <strong>format spec</strong> that controls how the value is displayed.</p>
-<p><img src="/ai-roadmap-365/_astro/fstring-anatomy.DnwJIAJn_1BvU0B.svg" alt="Flowchart: an f-string broken into literal text, an embedded expression, and a format spec producing formatted output" loading="lazy" decoding="async" fetchpriority="auto" width="720" height="460"></p>
-<p>The diagram takes <code>f&quot;Total: {price * qty:.2f}&quot;</code> apart. Python keeps the literal text <code>Total: </code> as-is, <em>evaluates the expression</em> <code>price * qty</code> first, then applies the format spec <code>.2f</code> — “a floating-point number with two decimal places” — to display the result. With <code>price = 5.0</code> and <code>qty = 5</code>, the whole f-string produces <code>Total: 25.00</code>. Format specs are a small language of their own: <code>:&gt;10</code> right-aligns a value in a field ten characters wide, <code>:&lt;10</code> left-aligns it, <code>:^10</code> centres it, <code>:,</code> inserts thousands separators, and <code>:.1%</code> shows a fraction as a percentage. You will use alignment specs to line up columns in a table, exactly as today’s lab does.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Style</th><th>Looks like</th><th>Use it when</th></tr></thead><tbody><tr><td>f-string</td><td><code>f&quot;Hi {name}, {n:,} items&quot;</code></td><td>Almost always — most readable, fastest, expressions inline (Python 3.6+)</td></tr><tr><td><code>str.format()</code></td><td><code>&quot;Hi {}, {:,} items&quot;.format(name, n)</code></td><td>The template and its values are far apart, or you build the template dynamically</td></tr><tr><td><code>%</code> operator</td><td><code>&quot;Hi %s, %d items&quot; % (name, n)</code></td><td>Reading old code, or a codebase that already uses it; avoid in new code</td></tr></tbody></table>
-<h3 id="unicode-and-encoding-in-python">Unicode and encoding in Python</h3>
-<p>A <code>str</code> is a sequence of Unicode characters — abstract letters, independent of how they are stored. But files and networks deal in <strong>bytes</strong>, so at the boundary you must convert. Turning text into bytes is <strong>encoding</strong> (<code>s.encode(&quot;utf-8&quot;)</code>), and turning bytes back into text is <strong>decoding</strong> (<code>b.decode(&quot;utf-8&quot;)</code>). This is the same idea you met on Day 5, now with names: an encoding like UTF-8 is the agreed rule for which bytes represent which characters.</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">text </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> &quot;café&quot;</span></span>
-<span class="line"><span style="color:#E1E4E8">data </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> text.encode(</span><span style="color:#9ECBFF">&quot;utf-8&quot;</span><span style="color:#E1E4E8">)   </span><span style="color:#6A737D"># b&#39;caf\xc3\xa9&#39;  — 5 bytes</span></span>
-<span class="line"><span style="color:#E1E4E8">back </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> data.decode(</span><span style="color:#9ECBFF">&quot;utf-8&quot;</span><span style="color:#E1E4E8">)   </span><span style="color:#6A737D"># &quot;café&quot;          — 4 characters</span></span></code></pre>
-<p>Notice that the four-character string takes five bytes, because UTF-8 stores the accented <code>é</code> in two bytes. This is why <code>len()</code> on a string counts characters, not storage. The one firm rule: always name the encoding explicitly when you read or write text, rather than relying on the platform default, which differs between operating systems and is a classic source of the dreaded <code>UnicodeDecodeError</code>. Today’s lab passes <code>encoding=&quot;utf-8&quot;</code> for exactly this reason.</p>
+<p><img src="/_astro/fstring-spec.wxTIPH-X_Z16hImP.svg" alt="Diagram: the parts of an f-string format specification" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">name, score </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> &quot;Ada&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.9137</span></span>
+<span class="line"><span style="color:#F97583">f</span><span style="color:#9ECBFF">&quot;</span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">name</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF"> scored </span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">score</span><span style="color:#F97583">:.1%</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">&quot;</span><span style="color:#6A737D">        # f-string  — write this</span></span>
+<span class="line"><span style="color:#9ECBFF">&quot;{} scored {:.1%}&quot;</span><span style="color:#E1E4E8">.format(name, score)  </span><span style="color:#6A737D"># str.format — recognise it</span></span>
+<span class="line"><span style="color:#9ECBFF">&quot;%s scored %.1f%%&quot;</span><span style="color:#F97583"> %</span><span style="color:#E1E4E8"> (name, score </span><span style="color:#F97583">*</span><span style="color:#79B8FF"> 100</span><span style="color:#E1E4E8">)  </span><span style="color:#6A737D"># %-formatting — legacy</span></span></code></pre>
+<p><img src="/_astro/fstring-anatomy.DnwJIAJn_1BvU0B.svg" alt="Flowchart: an f-string broken into literal text, an embedded expression, and a format spec producing formatted output" loading="lazy" decoding="async" fetchpriority="auto" width="720" height="460"></p>
+<ul>
+<li><strong>The expression inside the braces is real Python</strong>, evaluated where it sits.</li>
+<li><strong>After a colon comes the format spec</strong>: width, alignment, precision, type.</li>
+<li><strong><code>f&quot;{value!r}&quot;</code></strong> gives the debugging representation, and <code>f&quot;{value=}&quot;</code> prints
+the expression and its value together.</li>
+</ul>
+<h3 id="unicode-and-encoding">Unicode and encoding</h3>
+<p><img src="/_astro/encoding-boundary.gteMByUe_Z16hImP.svg" alt="Diagram: encoding and decoding between str and bytes" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<ul>
+<li>
+<p><strong><code>str</code> is text; <code>bytes</code> is bytes.</strong> <code>.encode()</code> goes one way, <code>.decode()</code> the
+other, and both take an encoding.</p>
+</li>
+<li>
+<p><strong>UTF-8 is the default and the right choice.</strong></p>
+</li>
+<li>
+<p><strong><code>len()</code> counts characters, not bytes.</strong> <code>len(&quot;café&quot;)</code> is 4 and
+<code>len(&quot;café&quot;.encode())</code> is 5 — Day 5, in Python.</p>
+</li>
+<li>
+<p><strong>Reading with the wrong encoding produces mojibake</strong> rather than an error,
+which is why it goes unnoticed.</p>
+</li>
+</ul>
 <h3 id="a-nod-to-regular-expressions">A nod to regular expressions</h3>
-<p>When a pattern is genuinely complex — “any sequence of digits,” “an email-shaped token,” “whitespace of any kind” — plain methods stop being enough, and you reach for <strong>regular expressions</strong> (regex), Python’s <code>re</code> module, which you met on Day 38. Regex is powerful but harder to read, so the professional habit is to prefer simple string methods for simple jobs and escalate to regex only when the pattern truly demands it. We return to this trade-off below.</p>
+<p><img src="/_astro/method-or-regex.CXHfOMtd_ZIALX.svg" alt="Diagram: string methods compared with regular expressions" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li><strong><code>re</code> is the standard library module</strong>, and Day 38 covers the language.</li>
+<li><strong>Use a raw string for every pattern</strong>, so backslashes reach <code>re</code> intact.</li>
+<li><strong>Reach for a string method first.</strong> <code>startswith</code> is clearer than <code>^</code> to most
+readers, and clarity is the scarce resource.</li>
+</ul>
+<hr/>
 <h2 id="an-everyday-analogy">An everyday analogy</h2>
-<p>Picture a label-maker that prints words onto a strip of tape — a printed ribbon of characters. Each character sits in its own little cell along the ribbon, in a fixed order, and that is your string.</p>
-<p>Reading the ribbon is easy and safe: you can point at the first cell (<code>s[0]</code>), the last cell (<code>s[-1]</code>), or count in from either end. You can take scissors and cut out a run of cells to get a shorter piece — but here is the crucial detail that makes the analogy honest: your “cut” is really a <em>photocopy</em> of that run. The original ribbon is never damaged; slicing hands you a fresh copy and leaves the source intact. That is immutability. You physically cannot re-ink a single cell on an existing ribbon; if you want a different message, the machine prints a new ribbon. So when you “change” a string — upper-case it, strip its edges, replace a word — the label-maker is quietly printing a new tape and handing it to you, while the old one still sits on the desk exactly as before.</p>
-<p>The methods are the machine’s buttons. One button copies the ribbon in all capitals; another trims the blank tape off the ends; another cuts the ribbon at every space to give you a little pile of word-strips; another glues a pile of strips back into one ribbon with a chosen separator between them. And formatting is the template mode: you set up a ribbon with blanks in it — “Total: ____” — and the machine fills each blank with a value, formatted just so, printing the finished tape. Keep the printed ribbon in mind and the rules stop feeling arbitrary: you can read any cell, copy any run, and press buttons to print new ribbons, but you can never re-ink a cell in place.</p>
+<p>A printed page you cannot edit.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>The page</th><th>The string</th></tr></thead><tbody><tr><td>The printed text</td><td>An immutable string</td></tr><tr><td>Reading the third word</td><td>Indexing</td></tr><tr><td>Photocopying a passage</td><td>Slicing</td></tr><tr><td>Retyping with a correction</td><td>A method returning a new string</td></tr><tr><td>The original, unchanged</td><td>Immutability</td></tr><tr><td>A fill-in-the-blanks form</td><td>An f-string</td></tr><tr><td>Which alphabet it is printed in</td><td>The encoding</td></tr></tbody></table>
+<ul>
+<li>
+<p><strong>You never correct the page.</strong> You produce a new one and keep or discard the
+old.</p>
+</li>
+<li>
+<p><strong>Retyping the whole page for each small change</strong> is why building a string in a
+loop is slow, and why <code>join</code> exists.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="examples-in-practice">Examples in practice</h2>
-<p>Start with the technical heart of today’s lab: counting words in a block of text using only splitting and a dictionary.</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">text </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> &quot;a river runs, a river rests, a river runs on&quot;</span></span>
-<span class="line"><span style="color:#E1E4E8">counts </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {}</span></span>
-<span class="line"><span style="color:#F97583">for</span><span style="color:#E1E4E8"> token </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> text.split():             </span><span style="color:#6A737D"># [&quot;a&quot;, &quot;river&quot;, &quot;runs,&quot;, ...]</span></span>
-<span class="line"><span style="color:#E1E4E8">    word </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> token.strip(</span><span style="color:#9ECBFF">&quot;.,&quot;</span><span style="color:#E1E4E8">).lower()   </span><span style="color:#6A737D"># tidy the edges, normalize case</span></span>
-<span class="line"><span style="color:#E1E4E8">    counts[word] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> counts.get(word, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span></span>
-<span class="line"><span style="color:#6A737D"># counts == {&quot;a&quot;: 3, &quot;river&quot;: 3, &quot;runs&quot;: 2, &quot;rests&quot;: 1, &quot;on&quot;: 1}</span></span></code></pre>
-<p>Read it slowly. <code>text.split()</code> cuts the line into tokens on whitespace. For each token, <code>strip(&quot;.,&quot;)</code> peels commas and periods off the ends and <code>lower()</code> folds case, so <code>&quot;runs,&quot;</code> and <code>&quot;runs&quot;</code> count as the same word — a tiny but typical piece of <em>text cleaning</em>. The dictionary tallies each word, and <code>counts.get(word, 0)</code> supplies a starting count of <code>0</code> the first time a word appears. This exact pattern — split, normalize, tally in a dict — recurs constantly whenever you summarize text.</p>
-<p>Now formatting, building an aligned row for a report:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">label, value </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> &quot;Words&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">105</span></span>
-<span class="line"><span style="color:#79B8FF">print</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">f</span><span style="color:#9ECBFF">&quot;</span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">label</span><span style="color:#F97583">:&lt;20</span><span style="color:#79B8FF">}{</span><span style="color:#E1E4E8">value</span><span style="color:#F97583">:&gt;10</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">&quot;</span><span style="color:#E1E4E8">)   </span><span style="color:#6A737D"># &#39;Words                      105&#39;</span></span></code></pre>
-<p>The <code>:&lt;20</code> left-aligns the label in a 20-character field and <code>:&gt;10</code> right-aligns the number in a 10-character field, so a column of such rows lines up neatly no matter how long each label is. Change <code>value</code> to <code>1234567</code> and the number still sits flush against the right edge. This is precisely how today’s lab prints its statistics table.</p>
-<p>A few more everyday tasks, each a one-liner:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#9ECBFF">&quot;  ready</span><span style="color:#79B8FF">\n</span><span style="color:#9ECBFF">&quot;</span><span style="color:#E1E4E8">.strip()                       </span><span style="color:#6A737D"># &quot;ready&quot;        — clean whitespace</span></span>
-<span class="line"><span style="color:#9ECBFF">&quot;first,last,email&quot;</span><span style="color:#E1E4E8">.split(</span><span style="color:#9ECBFF">&quot;,&quot;</span><span style="color:#E1E4E8">)             </span><span style="color:#6A737D"># [&#39;first&#39;, &#39;last&#39;, &#39;email&#39;]  — parse a CSV row</span></span>
-<span class="line"><span style="color:#9ECBFF">&quot;/&quot;</span><span style="color:#E1E4E8">.join([</span><span style="color:#9ECBFF">&quot;usr&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&quot;local&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&quot;bin&quot;</span><span style="color:#E1E4E8">])         </span><span style="color:#6A737D"># &quot;usr/local/bin&quot;  — build a path</span></span>
-<span class="line"><span style="color:#9ECBFF">&quot;report_2026.txt&quot;</span><span style="color:#E1E4E8">.endswith(</span><span style="color:#9ECBFF">&quot;.txt&quot;</span><span style="color:#E1E4E8">)        </span><span style="color:#6A737D"># True            — check a file type</span></span>
-<span class="line"><span style="color:#9ECBFF">&quot;the river&quot;</span><span style="color:#E1E4E8">.replace(</span><span style="color:#9ECBFF">&quot;river&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&quot;sea&quot;</span><span style="color:#E1E4E8">)       </span><span style="color:#6A737D"># &quot;the sea&quot;       — substitute a word</span></span>
-<span class="line"><span style="color:#9ECBFF">&quot;Hello, World&quot;</span><span style="color:#E1E4E8">[</span><span style="color:#79B8FF">7</span><span style="color:#E1E4E8">:]                         </span><span style="color:#6A737D"># &quot;World&quot;         — slice off a prefix</span></span></code></pre>
-<p>Each of these — cleaning, parsing, building, checking, substituting, slicing — is a routine step in preparing text, and together they cover a surprising share of the code you will write when wrangling data.</p>
+<p><img src="/_astro/strip-returns.D4icu_Kh_Z16hImP.svg" alt="Diagram: why string methods must have their result assigned" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<ul>
+<li>
+<p><strong><code>s.strip()</code> on its own line doing nothing</strong>, because the result was not
+assigned.</p>
+</li>
+<li>
+<p><strong><code>len()</code> disagreeing with the byte count</strong> of a file, which is encoding.</p>
+</li>
+<li>
+<p><strong>A Windows path with <code>\t</code> in it</strong> silently becoming a tab, fixed by a raw
+string.</p>
+</li>
+<li>
+<p><strong>A CSV split on commas</strong> that breaks on the first quoted field containing one.</p>
+</li>
+<li>
+<p><strong>Building a report with <code>+=</code> in a loop</strong> and finding it quadratic on large
+input.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
-<p><strong>Security.</strong> The great classical vulnerabilities are string-handling failures: building a database query or a shell command by pasting untrusted text straight into a template lets an attacker inject their own commands. The lesson for your own code is to keep untrusted input as <em>data</em>, never splicing it blindly into something that will be executed, and to use the safe, parameterized tools your libraries provide rather than hand-built string concatenation for queries and commands.</p>
-<p><strong>Privacy.</strong> Text is where sensitive information lives — names, addresses, messages, health details. Because a string is easy to copy, log, and print, personal data can leak simply by being written to a log file or echoed in an error message. When you clean and process text, be deliberate about what you retain and what you print; a stray <code>print</code> of a whole record is a real privacy incident.</p>
-<p><strong>Performance.</strong> Immutability has a cost: building a big string by repeatedly adding to it (<code>result = result + piece</code> in a loop) creates a new string every time and can turn a fast job slow. The idiomatic fix leans on the very methods in this lesson — collect the pieces in a list and <code>&quot;&quot;.join(them)</code> once at the end, which builds the final string in a single pass. Knowing this one pattern spares you a common performance trap.</p>
-<p><strong>Scalability.</strong> When text grows from a line to a multi-gigabyte file, you cannot always hold it all in memory as one string. The scalable habit is to process text a line or a chunk at a time — iterating over a file yields one line at a time — so memory use stays flat no matter how large the input. The string operations are identical; you simply apply them to a stream of pieces rather than one giant string.</p>
-<p><strong>Cost.</strong> In systems that price work by the amount of text — including the language models you will use, which meter usage by tokens — the length and cleanliness of your strings translate directly into money and speed. Trimming needless whitespace, removing boilerplate, and sending only the text that matters are not just tidy habits; they reduce cost and latency. Efficient text handling is efficient spending.</p>
+<p><img src="/_astro/injection-by-concatenation.B7lSt4mt_ZIALX.svg" alt="Diagram: string concatenation compared with parameterised input" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong>Security: never build a command or a query by string concatenation</strong> from
+untrusted input. That is injection, in every language.</p>
+</li>
+<li>
+<p><strong>Use parameterised queries and argument lists</strong>, which keep data and code
+separate by construction.</p>
+</li>
+<li>
+<p><strong>Privacy: text is where personal data lives</strong>, and redaction is string work —
+imperfect, and worth reviewing rather than trusting.</p>
+</li>
+<li>
+<p><strong>Performance: <code>+=</code> in a loop is quadratic</strong>, because each step copies the whole
+accumulated string. <code>&quot;&quot;.join(parts)</code> is linear.</p>
+</li>
+<li>
+<p><strong>Slicing copies.</strong> A slice of a large string is a new string of that size, which
+matters when you take many.</p>
+</li>
+<li>
+<p><strong>Cost: encoding mistakes corrupt data silently</strong>, and the corruption is often
+discovered long after the source file is gone.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
-<p>Every tool in this lesson ships inside Python itself, at no cost, so “alternatives” means the different <em>built-in</em> approaches and the standard-library modules that extend them — not paid products.</p>
 
 
 
@@ -250,21 +434,18 @@ You can also <a href="/ai-roadmap-365/labs/day-045-strings-and-text-processing" 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Approach</th><th>Type</th><th>What it offers</th><th>Cost</th></tr></thead><tbody><tr><td>f-strings (<code>str</code> and its methods)</td><td>Built into Python</td><td>The default for creating and formatting text; readable and fast</td><td>Free</td></tr><tr><td><code>str.format()</code> and <code>%</code></td><td>Built into Python</td><td>Older formatting styles you will meet in existing code</td><td>Free</td></tr><tr><td><code>re</code> (regular expressions)</td><td>Standard library</td><td>Pattern matching for complex text (Day 38)</td><td>Free</td></tr><tr><td><code>string</code> module</td><td>Standard library</td><td>Constants like <code>string.punctuation</code>; <code>Template</code> for simple <code>$name</code> substitution</td><td>Free</td></tr><tr><td><code>textwrap</code></td><td>Standard library</td><td>Wrapping and filling paragraphs to a width</td><td>Free</td></tr><tr><td><code>unicodedata</code></td><td>Standard library</td><td>Look up and normalize Unicode characters</td><td>Free</td></tr><tr><td><code>pandas</code> string methods (<code>.str</code>)</td><td>Open-source library</td><td>Apply string operations across whole columns of a table</td><td>Free/open source</td></tr></tbody></table>
-<p>For the work in this course you will spend almost all your time with <code>str</code> methods and f-strings, reach for <code>re</code> when a pattern is genuinely complex, and later meet <code>pandas</code> string methods when you clean tabular data at scale. There is no paid tier to any of this; text processing in Python is free all the way down.</p>
+<table><thead><tr><th>Tool</th><th>Type</th><th>Where it fits</th></tr></thead><tbody><tr><td><code>str</code> methods</td><td>Free, built in</td><td>The large majority of text work</td></tr><tr><td>f-strings</td><td>Free, built in</td><td>All formatting you write from now on</td></tr><tr><td><code>re</code></td><td>Free, standard library</td><td>Patterns — Day 38</td></tr><tr><td><code>textwrap</code></td><td>Free, standard library</td><td>Wrapping and indenting blocks</td></tr><tr><td><code>unicodedata</code></td><td>Free, standard library</td><td>Normalisation, when two strings look identical</td></tr><tr><td><code>str.translate</code></td><td>Free, built in</td><td>Fast bulk character mapping</td></tr></tbody></table>
+<ul>
+<li>
+<p><strong>Reach for a method before a regular expression.</strong> It is faster, clearer, and
+it cannot over-match.</p>
+</li>
+<li>
+<p><strong>Learn <code>unicodedata.normalize</code> exists.</strong> The day two visually identical strings
+compare unequal, it is the answer.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
 
 
@@ -303,90 +484,213 @@ You can also <a href="/ai-roadmap-365/labs/day-045-strings-and-text-processing" 
 
 
 
-
-
-
-<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td><code>str</code> (text)</td><td><code>bytes</code> (raw bytes)</td><td><code>str</code> is Unicode characters for humans; <code>bytes</code> is storage/transmission. Convert with <code>encode</code>/<code>decode</code>.</td></tr><tr><td>String methods</td><td>Regular expressions (<code>re</code>)</td><td>Methods are simple and readable for fixed substrings; regex handles complex, variable patterns at the cost of readability.</td></tr><tr><td>f-string</td><td><code>str.format()</code></td><td>Same power; f-strings embed the expression inline and read better, so they are the default for new code.</td></tr><tr><td>Slicing <code>s[a:b]</code></td><td>Indexing <code>s[i]</code></td><td>Indexing returns one character; slicing returns a new (possibly empty) substring, <code>b - a</code> characters long.</td></tr><tr><td>String (immutable)</td><td>List (mutable)</td><td>You can reassign a whole string but not edit one character in place; a list can be changed element by element.</td></tr><tr><td><code>split</code></td><td><code>join</code></td><td>Inverse operations: <code>split</code> turns one string into a list of pieces; <code>join</code> turns a list of pieces into one string.</td></tr></tbody></table>
+<table><thead><tr><th>Term</th><th>What it actually is</th></tr></thead><tbody><tr><td><strong><code>str</code></strong></td><td>Immutable text</td></tr><tr><td><strong><code>bytes</code></strong></td><td>Raw bytes, with no encoding attached</td></tr><tr><td><strong>Encoding</strong></td><td>The rule converting between them</td></tr><tr><td><strong>Slice</strong></td><td>A new string from a range of positions</td></tr><tr><td><strong>f-string</strong></td><td>A literal with expressions evaluated inside it</td></tr><tr><td><strong>Format spec</strong></td><td>What follows the colon: width, alignment, precision</td></tr><tr><td><strong>Raw string</strong></td><td>One where backslash is not an escape</td></tr></tbody></table>
+<hr/>
 <h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
-<p>Reach for plain string methods whenever the task is describable with fixed substrings and simple structure: trimming whitespace, changing case, splitting on a known separator, checking a prefix or suffix, replacing a literal word. This is the overwhelming majority of text work, and methods keep it short and obvious. Reach for f-strings whenever you build output for a person or a template for a machine — reports, messages, prompts, file names — because they are the clearest way to weave values into text. Reach for <code>encode</code>/<code>decode</code> precisely at the boundary where text meets a file, a socket, or any raw-byte world, and name the encoding every time.</p>
-<p>Know when to escalate and when to stop. When a pattern becomes genuinely variable — matching any run of digits, any whitespace, an email-shaped token — stop stretching string methods into knots and switch to a regular expression (Day 38), which was built for exactly that. Conversely, do not reach for regex when a one-line <code>replace</code> or <code>split</code> would do; a regex is harder to read and easier to get subtly wrong, and reviewers will thank you for the simpler code. And when performance matters, do not build a large string by repeated concatenation in a loop — collect pieces and <code>join</code> them once. The professional instinct is to use the simplest tool that clearly expresses the task, and to escalate only when the task, measured honestly, demands it.</p>
-<p>The AI thread ties all of this together. When you engineer a prompt, you are formatting a string — often an f-string template with your data dropped into the blanks. When you prepare training or evaluation data, you spend most of your time on string cleaning: stripping, splitting, normalizing case, removing junk. When a model reads your input, the very first step is tokenization, which operates on the string you hand it, so the exact characters — every stray space and newline — matter. And when you send text to any service that charges by length, tidy strings are cheaper strings. The fluency you build today is not a preliminary to the interesting work; in AI practice, careful text handling <em>is</em> a large part of the work.</p>
+<ul>
+<li>
+<p><strong>Use f-strings for everything you write.</strong> Recognise the other two; do not add
+them.</p>
+</li>
+<li>
+<p><strong>Use <code>&quot;&quot;.join()</code></strong> whenever you build a string from parts.</p>
+</li>
+<li>
+<p><strong>Use a raw string for every regular expression</strong> and every Windows path.</p>
+</li>
+<li>
+<p><strong>Use <code>in</code> rather than <code>find() != -1</code>.</strong> It says what you mean.</p>
+</li>
+<li>
+<p><strong>Do not concatenate in a loop.</strong></p>
+</li>
+<li>
+<p><strong>Do not build SQL or shell commands by concatenation.</strong></p>
+</li>
+<li>
+<p><strong>Do not assume <code>len()</code> is bytes.</strong> It is characters, and the difference is
+Day 5’s.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="the-ai-connection">The AI connection</h2>
+<ul>
+<li>
+<p><strong>Everything a language model reads and writes is a string</strong>, so text handling
+is the layer every prompt and every response passes through.</p>
+</li>
+<li>
+<p><strong>Tokenisation happens on text</strong>, and Day 5’s encoding lesson decides how a
+string becomes bytes before it becomes tokens.</p>
+</li>
+<li>
+<p><strong>Cleaning training data is string work</strong>: stripping markup, normalising
+whitespace, folding case, removing control characters.</p>
+</li>
+<li>
+<p><strong>Model output arrives fenced in markdown</strong>, and stripping that fence is the
+most-written three lines in AI code.</p>
+</li>
+<li>
+<p><strong>Normalisation matters more than it looks.</strong> Two visually identical strings
+with different code points tokenise differently and embed differently.</p>
+</li>
+</ul>
 <h2 id="knowledge-check">Knowledge check</h2>
-<p>Try these from memory before looking back:</p>
-<ol>
-<li>Explain in one sentence why <code>s.upper()</code> does not change <code>s</code>, and what you must do to keep the upper-cased result.</li>
-<li>Given <code>s = &quot;PYTHON&quot;</code>, state the values of <code>s[0]</code>, <code>s[-1]</code>, <code>s[1:4]</code>, and <code>s[::-1]</code>, and say how many characters <code>s[1:4]</code> contains and why.</li>
-<li>Write an f-string that prints a name left-aligned in 12 columns followed by a price right-aligned in 8 columns with two decimal places.</li>
-<li>Describe the difference between <code>str</code> and <code>bytes</code>, and name the two operations that convert between them in each direction.</li>
-<li>You must decide between a string method and a regular expression for a task: give one task where each is the right choice, and justify both.</li>
-</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">quiz</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  question</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;A function calls `text.strip()` on its own line and then returns `text`, but the whitespace is still present. Why?&quot;</span></span>
+<span class="line"><span style="color:#85E89D">  options</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;Strings are immutable, so strip() returns a new string and the original is unchanged&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;strip() removes only spaces, not tabs or newlines, unless given arguments&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;The method must be called as strip(text) to modify the variable in place&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;strip() only affects the string if it is assigned to a new variable name&quot;</span></span>
+<span class="line"><span style="color:#85E89D">  answer_index</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span></span>
+<span class="line"><span style="color:#85E89D">  explanation</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;No string method modifies its target, because no string can be modified at all. Every one returns a new string, so the result has to be assigned — text = text.strip() — or it is computed and immediately discarded.&quot;</span></span></code></pre>
+<hr/>
 <h2 id="hands-on-exercise">Hands-on exercise</h2>
-<p>Time to process real text. In the Day 45 lab you will build a small program, <code>text_report.py</code>, that reads a fixed block of sample text and produces a clean report using only the tools from this lesson: a title-cased heading, counts of lines, words, characters, and unique words, the single most common word (found with <code>split</code> plus a dictionary), and a neatly aligned statistics table built with f-string format specs. The full solution lives in the lab’s <code>examples/</code> directory; a starter with five numbered exercises is in <code>starter/</code>.</p>
-<p>To see the finished report first, then start your own version, run these from the lab directory:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">python3</span><span style="color:#9ECBFF"> examples/text_report.py</span></span>
-<span class="line"><span style="color:#B392F0">python3</span><span style="color:#9ECBFF"> starter/text_report.py</span></span></code></pre>
-<p>The first command prints the complete report from the committed sample; the second runs your working copy, which begins with the five exercises unfinished. Each exercise names the exact method or expression to use — read the file, build the heading with <code>.strip().title()</code>, count words into a dict, find the most common, and print the table with alignment specs.</p>
+<p>Slice, transform and format real text, then break an encoding on purpose. Worked
+through fully in the Day 45 lab directory.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>What you are doing</th><th>Command</th></tr></thead><tbody><tr><td>Index from both ends</td><td><code>s[0]</code>, <code>s[-1]</code></td></tr><tr><td>Slice, and reverse</td><td><code>s[2:5]</code>, <code>s[::-1]</code></td></tr><tr><td>Show immutability</td><td><code>s.strip()</code> without assigning, then with</td></tr><tr><td>Build efficiently</td><td><code>&quot;&quot;.join(parts)</code> rather than <code>+=</code> in a loop</td></tr><tr><td>Format with a spec</td><td><code>f&quot;{value:&gt;10.2f}&quot;</code> and <code>f&quot;{ratio:.1%}&quot;</code></td></tr><tr><td>Count characters vs bytes</td><td><code>len(s)</code> and <code>len(s.encode())</code></td></tr><tr><td>Cause mojibake</td><td><code>s.encode(&quot;utf-8&quot;).decode(&quot;latin-1&quot;)</code></td></tr></tbody></table>
 <h3 id="expected-output">Expected output</h3>
-<p>Running the completed reference program on the committed sample prints exactly this (the sample never changes, so your numbers must match):</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>============================================</span></span>
-<span class="line"><span>          The River And The Reader          </span></span>
-<span class="line"><span>============================================</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Preview:  the river and the reader A river starts ...</span></span>
-<span class="line"><span>Heading reversed:  redaeR ehT dnA reviR ehT</span></span>
-<span class="line"><span>First / last body word:  &#39;river&#39; / &#39;you&#39;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Statistic                Value</span></span>
-<span class="line"><span>------------------------------</span></span>
-<span class="line"><span>Lines                        9</span></span>
-<span class="line"><span>Words                      105</span></span>
-<span class="line"><span>Characters                 556</span></span>
-<span class="line"><span>Unique words                66</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Most common word:  &quot;river&quot; (11 times, 10.5% of words)</span></span></code></pre>
-<p>The heading is the first line of the sample fed through <code>.title()</code>; the reversed line is <code>heading[::-1]</code>; the table rows use <code>:&lt;20</code> and <code>:&gt;10</code> to align; and the final line reports the word your counting dictionary found most often.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>&#39;c&#39; &#39;é&#39;</span></span>
+<span class="line"><span>&#39;af&#39; &#39;éfac&#39;</span></span>
+<span class="line"><span>&#39;  café  &#39; &#39;café&#39;</span></span>
+<span class="line"><span>     12.50  91.4%</span></span>
+<span class="line"><span>4 5</span></span>
+<span class="line"><span>cafÃ©</span></span></code></pre>
+<ul>
+<li>
+<p><strong><code>len</code> is 4 and the byte length is 5</strong> — the accented character takes two
+bytes in UTF-8.</p>
+</li>
+<li>
+<p><strong><code>cafÃ©</code> is mojibake</strong>: correct bytes, wrong decoding, and no error raised.</p>
+</li>
+</ul>
 <h3 id="validate-your-work">Validate your work</h3>
-<p>You are done when you can check every box:</p>
 <ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" disabled/> <code>python3 examples/text_report.py</code> prints the report above without error.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> Your finished <code>starter/text_report.py</code> prints the same four counts: 9 lines, 105 words, 556 characters, 66 unique words.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> The most common word line reads <code>&quot;river&quot; (11 times, 10.5% of words)</code>.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> <code>bash tests/run_tests.sh</code> ends with <code>9 checks, 0 failure(s).</code></li>
-<li class="task-list-item"><input type="checkbox" disabled/> You can explain, in one sentence each, what <code>split</code>, <code>strip</code>, <code>.title()</code>, and <code>[::-1]</code> did in your program.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You indexed from both ends and sliced with a step</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You demonstrated that a method returns rather than modifies</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You built a string with <code>join</code> and can say why <code>+=</code> in a loop is worse</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You used a format spec for width and precision</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You produced mojibake deliberately and can name which step was wrong</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>bash tests/run_tests.sh</code> reports 0 failures</li>
 </ul>
 <h3 id="troubleshooting">Troubleshooting</h3>
 <ul>
-<li><strong><code>UnicodeDecodeError</code> when reading the sample.</strong> You omitted or mismatched the encoding. Read with <code>encoding=&quot;utf-8&quot;</code> and, if you edited the sample, restore it with <code>git checkout -- examples/sample.txt</code>.</li>
-<li><strong><code>SyntaxError</code> inside an f-string, usually about quotes.</strong> A double-quoted f-string cannot contain an unescaped double quote in its <code>{...}</code>; use single quotes inside, or put the literal quote in the text part. The lab’s troubleshooting file has worked examples.</li>
-<li><strong><code>IndexError: list index out of range</code>.</strong> <code>lines[0]</code> failed because the text was empty — Exercise 1 did not actually read the file into <code>text</code>.</li>
-<li><strong>The table columns do not line up.</strong> The alignment comes from the format specs <code>:&lt;20</code> and <code>:&gt;10</code>; a label longer than 20 characters pushes the number across. Keep labels short or widen the field.</li>
+<li>
+<p><strong><code>IndexError</code> on <code>s[10]</code></strong> but a slice of the same range works. Indexing is
+strict; slicing is not.</p>
+</li>
+<li>
+<p><strong>Your f-string prints the braces.</strong> You wrote a plain string. The <code>f</code> prefix is
+required.</p>
+</li>
+<li>
+<p><strong>A backslash behaves unexpectedly.</strong> Use a raw string.</p>
+</li>
+<li>
+<p><strong><code>.replace()</code> seems not to work.</strong> You did not assign the result.</p>
+</li>
 </ul>
 <h3 id="common-mistakes">Common mistakes</h3>
 <ul>
-<li><strong>Expecting a method to change the string.</strong> <code>s.strip()</code> returns a new string; if you do not assign it (<code>s = s.strip()</code>), nothing appears to happen. This is immutability biting.</li>
-<li><strong>Off-by-one in a slice.</strong> <code>s[a:b]</code> includes <code>a</code> but stops before <code>b</code>, so <code>&quot;River&quot;[0:3]</code> is <code>&quot;Riv&quot;</code>, not <code>&quot;Rive&quot;</code>. When in doubt, remember the slice length is <code>b - a</code>.</li>
-<li><strong>Forgetting to normalize before counting.</strong> If you skip <code>strip</code> and <code>lower</code>, then <code>&quot;River,&quot;</code>, <code>&quot;river&quot;</code>, and <code>&quot;River&quot;</code> count as three different words and your tallies are wrong.</li>
-<li><strong>Reaching for <code>%</code> formatting in new code.</strong> It still works, but f-strings are the modern default; prefer <code>f&quot;...&quot;</code> unless you are matching an existing style.</li>
+<li><strong>Calling a method and discarding the result.</strong></li>
+<li><strong>Concatenating in a loop.</strong></li>
+<li><strong>Confusing character count with byte count.</strong></li>
+<li><strong>Writing <code>%</code> or <code>.format()</code> in new code.</strong></li>
 </ul>
+<hr/>
 <h2 id="practice-assignment">Practice assignment</h2>
-<p>Complete the strings worksheet in the lab’s <code>starter/</code> directory and finish all five exercises in <code>starter/text_report.py</code> so it reproduces the expected report exactly. Then extend the program in one small way of your choosing and write two or three sentences in the worksheet about what you added: for example, print the <em>longest</em> line and its length using <code>max(lines, key=len)</code> and an f-string, or print the top three words instead of only the most common by sorting <code>counts.items()</code> and slicing <code>[:3]</code>. Record in the worksheet the sample’s word count, one slice expression with its result, and one f-string you wrote yourself that uses both an embedded expression and a format spec. Keep the worksheet; a later lesson on input and output builds directly on today’s formatting.</p>
+<ul>
+<li>
+<p><strong>Take a messy text file</strong> and clean it with methods alone: strip, case-fold,
+collapse whitespace, drop empty lines.</p>
+</li>
+<li>
+<p><strong>Write the same output three ways</strong> — <code>%</code>, <code>.format()</code> and an f-string — and
+compare readability.</p>
+</li>
+<li>
+<p><strong>Measure <code>+=</code> against <code>join</code></strong> for 50,000 pieces, and record the ratio.</p>
+</li>
+<li>
+<p><strong>Round-trip text through two encodings</strong> and find one that loses information.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="extension-challenge">Extension challenge</h2>
-<p>Go one layer deeper into the text-versus-bytes distinction that underlies all of this. In a Python shell, take a string that contains a non-ASCII character — <code>s = &quot;café&quot;</code> — and compare <code>len(s)</code> with <code>len(s.encode(&quot;utf-8&quot;))</code>. Explain in writing why the two differ, which one counts characters and which counts bytes, and what would happen if you tried to <code>decode</code> those bytes with the wrong encoding. Then measure the performance point from the lesson: build a 100,000-character string two ways — once by repeated concatenation in a loop (<code>result = result + &quot;x&quot;</code>) and once by collecting the pieces in a list and calling <code>&quot;&quot;.join(pieces)</code> — and time both with Python’s <code>timeit</code>. Write two or three sentences on which was faster and why immutability explains the difference. You will have connected today’s abstract idea — strings are immutable Unicode sequences — to concrete facts about memory, speed, and encoding that working practitioners reason about every day.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
-Q1. You run `s = &quot;river&quot;; s.upper()` and then print `s`. What does it show, and why? </strong> </p> <ol type="A"> <li>&quot;RIVER&quot;, because upper() changes the string in place</li><li>&quot;river&quot;, because upper() returns a new string and the original is unchanged</li><li>An error, because strings have no upper() method</li><li>&quot;River&quot;, because upper() only capitalizes the first letter</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> &quot;river&quot;, because upper() returns a new string and the original is unchanged </p> <p>Strings are immutable, so `upper()` returns a brand-new upper-cased string and leaves `s` untouched. To keep the result you must assign it: `s = s.upper()`.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q2. What is `len(&quot;café&quot;)` in Python 3, and what does the number count? </strong> </p> <ol type="A"> <li>5, because it counts the bytes needed to store the text</li><li>4, because it counts characters (code points), not bytes</li><li>3, because accented letters are not counted</li><li>It depends on the operating system</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> 4, because it counts characters (code points), not bytes </p> <p>A Python 3 `str` is a sequence of Unicode characters, so `len` counts characters: &quot;café&quot; has 4. Its UTF-8 encoding happens to take 5 bytes because `é` needs two, but `len` on the string counts characters.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q3. Given `s = &quot;PYTHON&quot;`, what is `s[1:4]`? </strong> </p> <ol type="A"> <li>&quot;YTHO&quot;</li><li>&quot;PYT&quot;</li><li>&quot;YTH&quot;</li><li>&quot;YTHON&quot;</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> &quot;YTH&quot; </p> <p>A slice `s[start:stop]` includes `start` but excludes `stop`, so `s[1:4]` takes indices 1, 2, and 3 — &quot;YTH&quot; — which is `4 - 1 = 3` characters long.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q4. Which formatting style is the recommended default for new Python code? </strong> </p> <ol type="A"> <li>The f-string, e.g. `f&quot;Total: {price:.2f}&quot;`</li><li>The `%` operator, e.g. `&quot;Total: %.2f&quot; % price`</li><li>Manual concatenation with `+` and `str()`</li><li>The `%` operator for numbers and `+` for text</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> The f-string, e.g. `f&quot;Total: {price:.2f}&quot;` </p> <p>Introduced in Python 3.6 (PEP 498), f-strings are the modern default: they embed the expression inline, read clearly, and are fast. `%` and `str.format()` still work but are preferred mainly for older code.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q5. Which operation turns a `str` into `bytes`, and what must you always supply? </strong> </p> <ol type="A"> <li>`decode`, always supplying a file path</li><li>`str()`, which needs nothing</li><li>`encode`, always supplying the encoding such as &quot;utf-8&quot;</li><li>`bytes()` with no arguments</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> `encode`, always supplying the encoding such as &quot;utf-8&quot; </p> <p>Text is turned into bytes with `encode` (`s.encode(&quot;utf-8&quot;)`) and bytes back into text with `decode`. You should always name the encoding explicitly rather than rely on the platform default, which is a common cause of `UnicodeDecodeError`.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q6. What does `&quot;-&quot;.join([&quot;a&quot;, &quot;b&quot;, &quot;c&quot;])` produce? </strong> </p> <ol type="A"> <li>[&quot;a&quot;, &quot;-&quot;, &quot;b&quot;, &quot;-&quot;, &quot;c&quot;]</li><li>&quot;a-b-c&quot;</li><li>&quot;-a-b-c-&quot;</li><li>&quot;abc&quot;</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> &quot;a-b-c&quot; </p> <p>`join` is a method on the separator: it glues the list elements into one string with the separator placed *between* them, giving &quot;a-b-c&quot;. It is the inverse of `split`.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q7. What is the value of `&quot;river&quot;[::-1]`? </strong> </p> <ol type="A"> <li>&quot;river&quot;</li><li>&quot;rev ir&quot;</li><li>&quot;revir&quot;</li><li>&quot;revir&quot; reversed to &quot;rivre&quot;</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> &quot;revir&quot; </p> <p>A slice with a step of `-1`, `s[::-1]`, walks the string backwards and returns a new reversed string, so &quot;river&quot; becomes &quot;revir&quot;.</p> </details> </div><div class="quiz-question"> <p> <strong>
+<ul>
+<li>
+<p><strong>Normalise two visually identical strings</strong> that compare unequal, using
+<code>unicodedata.normalize</code>, and explain what differed.</p>
+</li>
+<li>
+<p><strong>Write a wrapper that reads a file with an unknown encoding</strong>, tries UTF-8, and
+falls back deliberately rather than silently.</p>
+</li>
+<li>
+<p><strong>Implement <code>strip</code> yourself</strong> with slicing, then compare against the built-in
+for correctness on edge cases.</p>
+</li>
+<li>
+<p><strong>Find where slicing’s copying cost matters</strong>: slice a 10 MB string a thousand
+times and measure the memory.</p>
+</li>
+</ul>
+<hr/>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. You run `s = &quot;river&quot;; s.upper()` and then print `s`. What does it show, and why? </strong> </p> <ol type="A"> <li>&quot;RIVER&quot;, because upper() changes the string in place</li><li>An error, because strings have no upper() method</li><li>&quot;river&quot;, because upper() returns a new string and the original is unchanged</li><li>&quot;River&quot;, because upper() only capitalizes the first letter</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> &quot;river&quot;, because upper() returns a new string and the original is unchanged </p> <p>Strings are immutable, so `upper()` returns a brand-new upper-cased string and leaves `s` untouched. To keep the result you must assign it: `s = s.upper()`.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. What is `len(&quot;café&quot;)` in Python 3, and what does the number count? </strong> </p> <ol type="A"> <li>5, because it counts the bytes needed to store the text</li><li>It depends on the operating system</li><li>3, because accented letters are not counted</li><li>4, because it counts characters (code points), not bytes</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> 4, because it counts characters (code points), not bytes </p> <p>A Python 3 `str` is a sequence of Unicode characters, so `len` counts characters: &quot;café&quot; has 4. Its UTF-8 encoding happens to take 5 bytes because `é` needs two, but `len` on the string counts characters.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. Given `s = &quot;PYTHON&quot;`, what is `s[1:4]`? </strong> </p> <ol type="A"> <li>&quot;YTH&quot;</li><li>&quot;PYT&quot;</li><li>&quot;YTHO&quot;</li><li>&quot;YTHON&quot;</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> &quot;YTH&quot; </p> <p>A slice `s[start:stop]` includes `start` but excludes `stop`, so `s[1:4]` takes indices 1, 2, and 3 — &quot;YTH&quot; — which is `4 - 1 = 3` characters long.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. Which formatting style is the recommended default for new Python code? </strong> </p> <ol type="A"> <li>The `%` operator, e.g. `&quot;Total: %.2f&quot; % price`</li><li>The f-string, e.g. `f&quot;Total: {price:.2f}&quot;`</li><li>Manual concatenation with `+` and `str()`</li><li>The `%` operator for numbers and `+` for text</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> The f-string, e.g. `f&quot;Total: {price:.2f}&quot;` </p> <p>Introduced in Python 3.6 (PEP 498), f-strings are the modern default: they embed the expression inline, read clearly, and are fast. `%` and `str.format()` still work but are preferred mainly for older code.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. Which operation turns a `str` into `bytes`, and what must you always supply? </strong> </p> <ol type="A"> <li>`decode`, always supplying a file path</li><li>`str()`, which needs nothing</li><li>`encode`, always supplying the encoding</li><li>`bytes()` with no arguments</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> `encode`, always supplying the encoding </p> <p>Text is turned into bytes with `encode` (`s.encode(&quot;utf-8&quot;)`) and bytes back into text with `decode`. You should always name the encoding explicitly rather than rely on the platform default, which is a common cause of `UnicodeDecodeError`.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. What does `&quot;-&quot;.join([&quot;a&quot;, &quot;b&quot;, &quot;c&quot;])` produce? </strong> </p> <ol type="A"> <li>[&quot;a&quot;, &quot;-&quot;, &quot;b&quot;, &quot;-&quot;, &quot;c&quot;]</li><li>&quot;abc&quot;</li><li>&quot;-a-b-c-&quot;</li><li>&quot;a-b-c&quot;</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> &quot;a-b-c&quot; </p> <p>`join` is a method on the separator: it glues the list elements into one string with the separator placed *between* them, giving &quot;a-b-c&quot;. It is the inverse of `split`.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. What is the value of `&quot;river&quot;[::-1]`? </strong> </p> <ol type="A"> <li>&quot;revir&quot;</li><li>&quot;rev ir&quot;</li><li>&quot;river&quot;</li><li>&quot;revir&quot; reversed to &quot;rivre&quot;</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> &quot;revir&quot; </p> <p>A slice with a step of `-1`, `s[::-1]`, walks the string backwards and returns a new reversed string, so &quot;river&quot; becomes &quot;revir&quot;.</p> </details> </div><div class="quiz-question"> <p> <strong>
 Q8. For which task is a plain string method the better choice over a regular expression? </strong> </p> <ol type="A"> <li>Matching any run of one or more digits anywhere in the text</li><li>Checking whether a filename ends with the fixed suffix &quot;.txt&quot;</li><li>Extracting every email-shaped token from a document</li><li>Matching whitespace of any kind, including tabs and newlines</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Checking whether a filename ends with the fixed suffix &quot;.txt&quot; </p> <p>A fixed-substring test like &quot;ends with .txt&quot; is exactly what `str.endswith(&quot;.txt&quot;)` is for — simple and readable. The other three involve variable patterns, which are where regular expressions (Day 38) earn their added complexity.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>string</strong> </dt> <dd data-astro-cid-whrtx2kk>A piece of text in Python: an ordered, immutable sequence of Unicode characters, written between quotes and represented by the built-in type str.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>immutable</strong> </dt> <dd data-astro-cid-whrtx2kk>Unable to be changed in place. A string never changes; every operation that seems to modify it actually returns a new string and leaves the original untouched.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>index</strong> </dt> <dd data-astro-cid-whrtx2kk>The position of a single character in a string, counted from 0 at the left; negative indices count from the right, so s[-1] is the last character.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>slice</strong> </dt> <dd data-astro-cid-whrtx2kk>A run of characters copied out of a string with s[start:stop], returning a new string that includes start but excludes stop (stop − start characters).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>method</strong> </dt> <dd data-astro-cid-whrtx2kk>A named action called on a string with a dot, such as s.lower() or s.split(); because strings are immutable, transforming methods return a new string.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>f-string</strong> </dt> <dd data-astro-cid-whrtx2kk>A string literal prefixed with f whose {...} braces embed expressions evaluated at run time, the modern default for formatting (added in Python 3.6 via PEP 498).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>format spec</strong> </dt> <dd data-astro-cid-whrtx2kk>The part of an f-string field after the colon that controls display, such as :.2f for two decimal places or :&gt;10 to right-align in a 10-character field.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>split</strong> </dt> <dd data-astro-cid-whrtx2kk>A string method that breaks text into a list of pieces on a separator; with no argument it splits on any run of whitespace.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>join</strong> </dt> <dd data-astro-cid-whrtx2kk>A string method called on a separator that glues a list of strings into one, placing the separator between the pieces; the inverse of split.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>encode</strong> </dt> <dd data-astro-cid-whrtx2kk>The operation that turns a str into bytes using a named encoding such as UTF-8, done at the boundary where text is written to a file or network.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>decode</strong> </dt> <dd data-astro-cid-whrtx2kk>The operation that turns bytes back into a str using a named encoding; the reverse of encode.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>escape sequence</strong> </dt> <dd data-astro-cid-whrtx2kk>A backslash followed by a code that represents a single character hard to type directly, such as \n for a newline or \t for a tab.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>raw string</strong> </dt> <dd data-astro-cid-whrtx2kk>A string literal prefixed with r in which backslashes are treated literally rather than as escapes, useful for file paths and regular-expression patterns.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Text Sequence Type — str</a> — Python Software Foundation (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://docs.python.org/3/tutorial/inputoutput.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Fancier Output Formatting</a> — Python Software Foundation (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://realpython.com/python-f-strings/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Python String Formatting</a> — Real Python (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://peps.python.org/pep-0498/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>PEP 498 — Literal String Interpolation</a> — Python Software Foundation (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://docs.python.org/3/howto/unicode.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Unicode HOWTO</a> — Python Software Foundation (accessed 2026-07-12) </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="45" data-astro-cid-whrtx2kk>
 Mark Day 45 as read
-</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
       surfaces for someone searching for one — it costs you a click and it is genuinely how people
-      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/ai-roadmap-365/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
 ★ Star on GitHub
-</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-044-variables-and-types" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 44</span> <span class="pn__title" data-astro-cid-oerjsknp>Variables and Types</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-046-numbers-math-and-precision" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 46 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Numbers, Math, and Precision</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
-</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/day-044-variables-and-types" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 44</span> <span class="pn__title" data-astro-cid-oerjsknp>Variables and Types</span> </a> <a class="pn__card pn__card--next" href="/day-046-numbers-math-and-precision" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 46 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Numbers, Math, and Precision</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://ocm-mcp-server.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener">LinkedIn</a> </nav> </div> </footer> <script>
       // Progressive enhancement only: the theme falls back to dark and every
       // .reveal element is visible by default (the hidden start state exists
       // only inside a prefers-reduced-motion: no-preference query).

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lab · Day 78: HTTP in Python with requests · 365 Days of AI Mastery</title><meta name="description" content="A year-long, hands-on path from computing foundations to shipping production AI systems — one lesson and one lab every day."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/labs/day-078-http-in-python-with-requests/"><meta property="og:title" content="Lab · Day 78: HTTP in Python with requests · 365 Days of AI Mastery"><meta property="og:description" content="A year-long, hands-on path from computing foundations to shipping production AI systems — one lesson and one lab every day."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/labs/day-078-http-in-python-with-requests/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/cover.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Lab · Day 78: HTTP in Python with requests · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Lab · Day 78: HTTP in Python with requests · 365 Days of AI Mastery"><meta name="twitter:description" content="A year-long, hands-on path from computing foundations to shipping production AI systems — one lesson and one lab every day."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/cover.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lab · Day 78: HTTP in Python with requests · 365 Days of AI Mastery</title><meta name="description" content="A year-long, hands-on path from computing foundations to shipping production AI systems — one lesson and one lab every day."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://ai-roadmap-365.github.io/labs/day-078-http-in-python-with-requests/"><meta property="og:title" content="Lab · Day 78: HTTP in Python with requests · 365 Days of AI Mastery"><meta property="og:description" content="A year-long, hands-on path from computing foundations to shipping production AI systems — one lesson and one lab every day."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://ai-roadmap-365.github.io/labs/day-078-http-in-python-with-requests/"><meta property="og:image" content="https://ai-roadmap-365.github.io/social/cover.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Lab · Day 78: HTTP in Python with requests · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Lab · Day 78: HTTP in Python with requests · 365 Days of AI Mastery"><meta name="twitter:description" content="A year-long, hands-on path from computing foundations to shipping production AI systems — one lesson and one lab every day."><meta name="twitter:image" content="https://ai-roadmap-365.github.io/social/cover.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
       // Dark is the default regardless of OS preference - this is a dark-first
       // design. A visitor who picks light with the toggle keeps it. Applied
       // before first paint so there is no flash of the wrong theme.
@@ -11,14 +11,16 @@
         }
         document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
       })();
-    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+    </script><link rel="stylesheet" href="/_astro/_day_.CiF6NwwU.css">
 <style>.starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
-</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="site-home" href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener"> <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M15 5l-7 7 7 7"></path> </svg>
+Sandeep Bazar
+</a> <a class="brand" href="/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
 365 Days of AI
-</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
-Labs
-</a> </header> <main id="main">  <article class="readable"> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/programming-with-python">Programming with Python</a>  ›  <span>Python for Automation and the Web</span>  › 
-Day 78 </p> <h1>Hands-on lab — Day 78: HTTP in Python with requests</h1> <div class="callout"> <ul> <li><a href="/ai-roadmap-365/day-078-http-in-python-with-requests">← Back to the Day 78 lesson</a></li> <li> <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/programming-with-python/day-078-http-in-python-with-requests" target="_blank" rel="noopener noreferrer">Open the hands-on files on GitHub</a>
+</a> <nav aria-label="Primary"> <a href="/sections">Courses</a> <a href="/labs">Labs</a> <a href="/catalog">Catalogs</a> <a href="/search">Search</a> <a href="/glossary">Glossary</a> <a href="/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+GitHub
+</a> </header> <main id="main">  <article class="readable"> <p class="crumbs" aria-label="Breadcrumb"> <a href="/sections/programming-with-python">Programming with Python</a>  ›  <span>Python for Automation and the Web</span>  › 
+Day 78 </p> <h1>Hands-on lab — Day 78: HTTP in Python with requests</h1> <div class="callout"> <ul> <li><a href="/day-078-http-in-python-with-requests">← Back to the Day 78 lesson</a></li> <li> <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/programming-with-python/day-078-http-in-python-with-requests" target="_blank" rel="noopener noreferrer">Open the hands-on files on GitHub</a>
 — clone or download them from the public labs repository
 </li> <li>Local path in your clone: <code>labs/sections/programming-with-python/day-078-http-in-python-with-requests/</code></li> </ul> </div>  <h2 id="commands">Commands</h2> <h3>Setup</h3> <pre><code>cd labs/sections/programming-with-python/day-078-http-in-python-with-requests
 python3 -m venv .venv
@@ -61,8 +63,8 @@ troubleshooting.md</pre> <h2 id="readme">Lab README</h2> <div><h2 id="day-078-la
 <ul>
 <li><strong>Lesson title:</strong> HTTP in Python with requests</li>
 <li><strong>Day number:</strong> 78 of 365</li>
-<li><strong>Lesson article:</strong> <a href="https://sandeepbazar.github.io/ai-roadmap-365/day-078-http-in-python-with-requests" target="_blank" rel="noopener noreferrer">https://sandeepbazar.github.io/ai-roadmap-365/day-078-http-in-python-with-requests</a></li>
-<li><strong>Lab files:</strong> everything you need is in <a href="./" target="_blank" rel="noopener noreferrer">this directory</a> — follow “How to run” below.</li>
+<li><strong>Lesson article:</strong> <a href="https://ai-roadmap-365.github.io/day-078-http-in-python-with-requests" target="_blank" rel="noopener noreferrer">https://ai-roadmap-365.github.io/day-078-http-in-python-with-requests</a></li>
+<li><strong>Lab files:</strong> everything you need is in <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/programming-with-python/day-078-http-in-python-with-requests" target="_blank" rel="noopener noreferrer">this directory</a> — follow “How to run” below.</li>
 <li><strong>Browse the course locally:</strong> from the repository root, this lab also appears in the course website at <code>/labs/day-078-http-in-python-with-requests</code> when the site is running.</li>
 </ul>
 <h3 id="purpose">Purpose</h3>
@@ -152,7 +154,7 @@ time.</p>
 <h3 id="free-and-open-source-options">Free and open-source options</h3>
 <p>Everything here is free and open source: Python, bash, the standard library,
 requests (Apache 2.0) and pytest (MIT). See
-<a href="requirements/README.md" target="_blank" rel="noopener noreferrer"><code>requirements/README.md</code></a> for the per-package detail.
+<a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/programming-with-python/day-078-http-in-python-with-requests/requirements/README.md" target="_blank" rel="noopener noreferrer"><code>requirements/README.md</code></a> for the per-package detail.
 No account, no API key, no purchase.</p>
 <p>The lesson's Alternatives section compares four libraries. Two —
 <code>urllib.request</code> and <code>http.client</code> — need no installation at all, and
@@ -269,8 +271,8 @@ reach a non-loopback address raises. Still 48 passed.</li>
 once you complete every exercise. Exits 0 only if all of them pass.</li>
 </ul>
 <h3 id="expected-output">Expected output</h3>
-<p>See <a href="expected-output/sample-run.txt" target="_blank" rel="noopener noreferrer"><code>expected-output/sample-run.txt</code></a> and
-<a href="expected-output/pytest-runs.txt" target="_blank" rel="noopener noreferrer"><code>expected-output/pytest-runs.txt</code></a> — real
+<p>See <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/programming-with-python/day-078-http-in-python-with-requests/expected-output/sample-run.txt" target="_blank" rel="noopener noreferrer"><code>expected-output/sample-run.txt</code></a> and
+<a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/programming-with-python/day-078-http-in-python-with-requests/expected-output/pytest-runs.txt" target="_blank" rel="noopener noreferrer"><code>expected-output/pytest-runs.txt</code></a> — real
 captured sessions. The heart of it:</p>
 <pre><code class="language-text">$ python3 examples/raw_socket_demo.py
 
@@ -301,7 +303,7 @@ captured sessions. The heart of it:</p>
 </code></pre>
 <p>Only the port number, the <code>Date</code> header and the elapsed times vary between
 runs, and all three are explained in
-<a href="expected-output/FIELDS.md" target="_blank" rel="noopener noreferrer"><code>expected-output/FIELDS.md</code></a>, which also lists the
+<a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/programming-with-python/day-078-http-in-python-with-requests/expected-output/FIELDS.md" target="_blank" rel="noopener noreferrer"><code>expected-output/FIELDS.md</code></a>, which also lists the
 exact required behaviour of every endpoint and every client function.</p>
 <h3 id="validation-steps">Validation steps</h3>
 <ol>
@@ -335,7 +337,7 @@ Once every exercise is complete, eight structural checks are replaced by three
 behavioural ones and the line becomes <code>53 checks, 0 failure(s).</code> The command
 exits 0 on success and non-zero on any failure, so it is usable in continuous
 integration. A full captured run is in
-<a href="expected-output/test-run.txt" target="_blank" rel="noopener noreferrer"><code>expected-output/test-run.txt</code></a>.</p>
+<a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/programming-with-python/day-078-http-in-python-with-requests/expected-output/test-run.txt" target="_blank" rel="noopener noreferrer"><code>expected-output/test-run.txt</code></a>.</p>
 <p>Three of the checks are worth reading the runner for:</p>
 <ul>
 <li><strong>the offline proof.</strong> The whole example suite is re-run with
@@ -362,7 +364,7 @@ shut down in a <code>finally</code> block by a context manager. The runner passe
 git checkout -- starter/     # optional: reset your work
 </code></pre>
 <h3 id="troubleshooting">Troubleshooting</h3>
-<p>See <a href="troubleshooting.md" target="_blank" rel="noopener noreferrer">troubleshooting.md</a> for the full list. The five you
+<p>See <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/programming-with-python/day-078-http-in-python-with-requests/troubleshooting.md" target="_blank" rel="noopener noreferrer">troubleshooting.md</a> for the full list. The five you
 are most likely to meet: <code>ModuleNotFoundError: No module named 'requests'</code>,
 which always means the interpreter running your script is not the one the
 package is installed in; a call that never returns, which always means a
@@ -373,7 +375,7 @@ chunk instead of 64, because something read <code>.content</code> before the loo
 means the flaky endpoint was still armed from an earlier test and needs
 <code>/control/reset</code>.</p>
 <h3 id="security-notes">Security notes</h3>
-<p>See <a href="security.md" target="_blank" rel="noopener noreferrer">security.md</a>. Short version: the server binds <code>127.0.0.1</code>
+<p>See <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/programming-with-python/day-078-http-in-python-with-requests/security.md" target="_blank" rel="noopener noreferrer">security.md</a>. Short version: the server binds <code>127.0.0.1</code>
 and not <code>0.0.0.0</code>, which is the difference between a private fixture and a
 service open to everyone on the coffee-shop Wi-Fi. No credential appears in
 any file; <code>make_session</code> reads <code>READINGS_TOKEN</code> from the environment and the
@@ -4016,10 +4018,10 @@ documentation. Every field you read from a response is input from another
 party's machine. Validate it before it reaches anything that matters, which is
 precisely the job Day 82's pydantic models will do properly.</p></div>  <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lab ran and taught you something, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
       surfaces for someone searching for one — it costs you a click and it is genuinely how people
-      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/ai-roadmap-365/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
 ★ Star on GitHub
 </a> </aside>  </article>  </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
-</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+</span> <nav> <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://ocm-mcp-server.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener">LinkedIn</a> </nav> </div> </footer> <script>
       // Progressive enhancement only: the theme falls back to dark and every
       // .reveal element is visible by default (the hidden start state exists
       // only inside a prefers-reduced-motion: no-preference query).

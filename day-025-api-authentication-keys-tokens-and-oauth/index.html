@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 25: API Authentication: Keys, Tokens, and OAuth · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to authenticate to any API using the scheme it expects — API key, bearer token, Basic auth, or OAuth 2.0 — and keep your credentials out of your code and git so a leaked key never costs you money."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-025-api-authentication-keys-tokens-and-oauth/"><meta property="og:title" content="Day 25: API Authentication: Keys, Tokens, and OAuth · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to authenticate to any API using the scheme it expects — API key, bearer token, Basic auth, or OAuth 2.0 — and keep your credentials out of your code and git so a leaked key never costs you money."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-025-api-authentication-keys-tokens-and-oauth/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-025-api-authentication-keys-tokens-and-oauth.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 25: API Authentication: Keys, Tokens, and OAuth · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 25: API Authentication: Keys, Tokens, and OAuth · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to authenticate to any API using the scheme it expects — API key, bearer token, Basic auth, or OAuth 2.0 — and keep your credentials out of your code and git so a leaked key never costs you money."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-025-api-authentication-keys-tokens-and-oauth.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 25: API Authentication: Keys, Tokens, and OAuth · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to authenticate to any API using the scheme it expects — API key, bearer token, Basic auth, or OAuth 2.0 — and keep your credentials out of your code and git so a leaked key never costs you money."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://ai-roadmap-365.github.io/day-025-api-authentication-keys-tokens-and-oauth/"><meta property="og:title" content="Day 25: API Authentication: Keys, Tokens, and OAuth · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to authenticate to any API using the scheme it expects — API key, bearer token, Basic auth, or OAuth 2.0 — and keep your credentials out of your code and git so a leaked key never costs you money."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://ai-roadmap-365.github.io/day-025-api-authentication-keys-tokens-and-oauth/"><meta property="og:image" content="https://ai-roadmap-365.github.io/social/day-025-api-authentication-keys-tokens-and-oauth.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 25: API Authentication: Keys, Tokens, and OAuth · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 25: API Authentication: Keys, Tokens, and OAuth · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to authenticate to any API using the scheme it expects — API key, bearer token, Basic auth, or OAuth 2.0 — and keep your credentials out of your code and git so a leaked key never costs you money."><meta name="twitter:image" content="https://ai-roadmap-365.github.io/social/day-025-api-authentication-keys-tokens-and-oauth.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
       // Dark is the default regardless of OS preference - this is a dark-first
       // design. A visitor who picks light with the toggle keeps it. Applied
       // before first paint so there is no flash of the wrong theme.
@@ -11,173 +11,385 @@
         }
         document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
       })();
-    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+    </script><link rel="stylesheet" href="/_astro/_day_.CiF6NwwU.css">
 <style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
 .starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
-</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="site-home" href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener"> <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M15 5l-7 7 7 7"></path> </svg>
+Sandeep Bazar
+</a> <a class="brand" href="/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
 365 Days of AI
-</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
-Labs
-</a> </header> <main id="main">  <article data-day="25" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>APIs and the Web</span>  › 
-Day 25 </p> <h1 data-astro-cid-whrtx2kk>Day 25: API Authentication: Keys, Tokens, and OAuth</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-025-api-authentication-keys-tokens-and-oauth.png" width="1200" height="630" alt="Day 25 of 365 — API Authentication: Keys, Tokens, and OAuth" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to authenticate to any API using the scheme it expects — API key, bearer token, Basic auth, or OAuth 2.0 — and keep your credentials out of your code and git so a leaked key never costs you money.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>APIs and the Web</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-025-api-authentication-keys-tokens-and-oauth" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-025-api-authentication-keys-tokens-and-oauth</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
-cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-025-api-authentication-keys-tokens-and-oauth</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
-You can also <a href="/ai-roadmap-365/labs/day-025-api-authentication-keys-tokens-and-oauth" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
-</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Distinguish authentication from authorization and map each failure to its HTTP status code (401 vs 403)</li><li data-astro-cid-whrtx2kk>Send an API key in a header, a bearer token in the Authorization header, and Basic auth with curl, and explain why a key in a URL query string is riskier</li><li data-astro-cid-whrtx2kk>Explain why base64 in Basic auth is encoding, not encryption, and why TLS is what actually protects the credential</li><li data-astro-cid-whrtx2kk>Describe the OAuth 2.0 authorization-code flow at an intuitive level, including consent, scopes, and access versus refresh tokens</li><li data-astro-cid-whrtx2kk>Apply safe-secret habits: read keys from environment variables, keep them out of code and git, use least privilege, and rotate leaked keys immediately</li><li data-astro-cid-whrtx2kk>Connect authentication to AI practice: every hosted model API call carries Authorization: Bearer &lt;key&gt;, and keeping that key out of code and git is a daily security habit</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Day 18 (HTTP requests, responses, methods, and status codes) and Day 19 (HTTPS and TLS)</li><li data-astro-cid-whrtx2kk>Day 11 (environment variables and shell configuration) and comfort running curl in a terminal</li></ul> <h2 id="why-this-matters">Why this matters</h2>
-<p>The moment you make your first real call to a model API, you will meet authentication — and if you get it wrong, one of two things happens. Either the server refuses you with a <code>401</code> and nothing works, or, far worse, your secret key ends up somewhere it should not be and someone else spends your money running up a bill against your account. Both outcomes are avoidable, and both come down to a single question every API asks of every request: <em>who is calling, and are they allowed?</em></p>
-<p>This is not an abstract concern you can defer. Every request to a hosted model — every completion, every embedding, every image you generate through a paid service — carries a credential in its <code>Authorization</code> header that proves the call is yours to make. That credential is tied to a billing account. A leaked key is not like a leaked password you can quietly reset before anyone notices; it is a live payment instrument, and automated bots scan public code constantly looking for exactly these strings so they can drain them within minutes. The habit you build today — keys live in the environment, never in your code, never in your git history — is the single most valuable security reflex in your whole first month of building with APIs.</p>
-<p>There is a happier reason this matters too. Authentication is what lets an API safely give <em>you</em> things: your usage, your rate limits, your fine-tuned models, your saved data. Once you understand the handful of schemes that nearly every API on the internet uses — a key in a header, a bearer token, Basic auth, and OAuth for acting on behalf of a user — you can read any API’s documentation and know within a minute how to authenticate to it. Today you learn that handful, send each one by hand, and set up the safe-secret habits that keep the whole thing from ever costing you a cent you did not mean to spend.</p>
-<h2 id="the-idea-in-plain-language">The idea in plain language</h2>
-<p>An API is a door into someone else’s server, and authentication is the doorkeeper. Before the server will do any work for you, it wants to know two things. First, <em>who are you?</em> — proving your identity is <strong>authentication</strong>. Second, <em>are you allowed to do this?</em> — deciding what an identified caller may do is <strong>authorization</strong>. These two words look alike and are constantly confused, but they are different jobs: authentication checks the badge; authorization checks whether the badge opens this particular door.</p>
-<p>The way you prove identity is by presenting a <strong>credential</strong> — a secret string the server recognizes as yours. The simplest kind is an <strong>API key</strong>: a long random string the API issued to you, which you attach to every request. Slightly more structured is a <strong>bearer token</strong>: a token that means “whoever bears this is authorized,” sent in a standard <code>Authorization</code> header. <strong>Basic auth</strong> bundles a username and password together into one header field. And <strong>OAuth 2.0</strong> is the elaborate-but-necessary dance that lets you grant an app permission to act on your behalf at another service — “let this photo printer read my cloud photos” — without ever handing over your actual password.</p>
-<p>All four schemes are just different envelopes for the same idea: put a secret in the request, and let the server check it. The differences are in who issued the secret, how long it lasts, what it grants, and how carefully it must be guarded. Learn the four envelopes and you have learned API authentication.</p>
-<h2 id="historical-background">Historical background</h2>
-<p>Authentication on the web is older than the web’s fame. HTTP Basic authentication — username and password, encoded together and sent in a header — was specified in the earliest HTTP standards and formalized in 1999 in RFC 2617; it is genuinely ancient by internet standards and still works in every browser and every HTTP client today. Its weakness was understood from the start: it protects nothing on its own, because the encoding is trivially reversible. Only the arrival of widespread transport encryption made it safe to use at all.</p>
-<p>As web APIs proliferated in the 2000s, providers handed out <strong>API keys</strong> — long random strings tied to a developer account — as a simpler alternative than making every integrator manage passwords. Keys are easy to issue, easy to revoke, and easy to reason about, and they remain the workhorse of machine-to-machine APIs to this day.</p>
-<p>The hard problem was delegation: how can you let a third-party app use your data at another service without giving that app your password? Early answers were ugly — apps literally asked for your username and password and logged in as you, a pattern that gave them far too much power and no way to revoke it short of changing your password. <strong>OAuth</strong> was created to fix exactly this. OAuth 1.0 was published in 2007, refined as RFC 5849 in 2010, and then substantially redesigned into <strong>OAuth 2.0</strong>, published in October 2012 as RFC 6749. OAuth 2.0 shifted much of the complexity onto encrypted transport (TLS) instead of the elaborate request-signing of 1.0, and it became the foundation of “Sign in with…” buttons and delegated API access across the industry. The bearer-token pattern it popularized — a token that stands alone as proof of authorization — is now how the majority of modern APIs, including model APIs, accept credentials.</p>
-<h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
-<p>API authentication is the mechanism by which a server verifies the identity behind a request and — usually in the same breath — decides what that identity is permitted to do. It is a check performed on <em>every</em> request: HTTP is stateless, so the server does not “remember” that you logged in a moment ago. Each request must carry its own proof, which is why the credential rides along in a header every single time.</p>
-<p>Authentication is <em>not</em> encryption, and this trips up beginners constantly. Encryption (the TLS you met on Day 19) hides your request from eavesdroppers in transit; authentication proves who sent it. You need both, and they are independent: Basic auth over plain HTTP is encrypted by nothing and readable by anyone on the path, while a bearer token over HTTPS is both hidden in transit and proves identity on arrival. Authentication is also not the same as <strong>authorization</strong>, its constant companion. Authentication answers “who are you”; authorization answers “may you do this.” A valid key that lacks permission for an action gets you a <code>403 Forbidden</code>, whereas a missing or wrong credential gets you a <code>401 Unauthorized</code> — two different failures with two different fixes.</p>
-<p>Finally, an API key or token is not a username you can share freely. It is a <strong>secret</strong>, equivalent to a password, and often more dangerous than one because it is designed to be used by automated code with no human watching. Treating credentials as secrets — the whole back half of this lesson — is not optional polish; it is the core of the discipline.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Common misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”Authentication and authorization are the same thing.”</td><td>Authentication proves <em>who</em> you are (→ <code>401</code> if it fails); authorization decides <em>what</em> you may do (→ <code>403</code> if it fails).</td></tr><tr><td>”Basic auth encrypts my password.”</td><td>It only encodes it reversibly; without TLS, anyone on the network can read it in seconds.</td></tr><tr><td>”An API key isn’t really a password.”</td><td>It is exactly a password — a secret string that grants access and spends money — and often used with no human oversight.</td></tr><tr><td>”OAuth means the app knows my password.”</td><td>The whole point of OAuth is that the app never sees your password; it receives a scoped token instead.</td></tr><tr><td>”If my key leaks, I’ll just notice the bill later.”</td><td>Automated scanners find committed keys within minutes and can rack up charges before any bill arrives.</td></tr></tbody></table>
-<h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
-<p>Authentication exists because an open API endpoint with no doorkeeper is a resource anyone in the world can consume — and if that resource costs money to serve (compute, bandwidth, a language model’s GPU time), an unauthenticated endpoint is a way to go bankrupt. The first problem authentication solves is simply <em>attribution</em>: tying every request to an account so the provider can meter usage, enforce limits, bill correctly, and cut off abuse. Without a credential on each request, none of that is possible.</p>
-<p>The second problem is <em>least privilege</em>. Once the server knows who you are, it can give you exactly the access you need and no more — your data but not someone else’s, read access but not delete, this project but not that one. Authorization built on top of authentication is what makes multi-tenant services safe, so that millions of customers can share one API without reaching into each other’s accounts.</p>
-<p>The third problem — the one OAuth was invented for — is <em>delegation without disclosure</em>. In a connected world you constantly want one service to act on your behalf at another: a calendar app reading your email for events, a photo printer fetching your cloud album, a data tool exporting your spreadsheet. The naive solution of handing over your password is catastrophic: the app gets total control forever and you cannot revoke it without locking yourself out. OAuth solves this by letting you grant a <em>narrow, revocable</em> permission — a scoped token — while your password stays with you. That single idea is why “Connect your account” buttons are safe to click.</p>
-<h2 id="how-it-works">How it works</h2>
-<p>Let’s build up the four schemes concretely, then look at how OAuth’s delegation flow works, and finally at how secrets are handled safely. Throughout, when a key or token appears it is an obviously fake short placeholder like <code>token-example-123</code> — never paste a real one into anything you will share.</p>
-<h3 id="the-common-schemes">The common schemes</h3>
-<p>Every scheme puts a secret into the HTTP request. They differ mainly in <em>which part</em> of the request carries it and <em>what the secret represents</em>.</p>
-<p><strong>API key in a header.</strong> The API issues you a key, and you attach it to a request header whose name the API chooses — commonly something like <code>X-API-Key</code>:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>GET /v1/data HTTP/1.1</span></span>
-<span class="line"><span>Host: api.example.com</span></span>
-<span class="line"><span>X-API-Key: key-example-abc123</span></span></code></pre>
-<p>To send it with <code>curl</code>, you set the header explicitly:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -H</span><span style="color:#9ECBFF"> &quot;X-API-Key: key-example-abc123&quot;</span><span style="color:#9ECBFF"> https://api.example.com/v1/data</span></span></code></pre>
-<p>Some APIs instead let you put the key in the URL as a query parameter, like <code>?api_key=key-example-abc123</code>. <strong>This is worse, and you should avoid it when a header is available.</strong> A query string is part of the URL, and URLs leak: they are written to server access logs, saved in browser history, stored in proxy caches, and pasted into chat messages and bug reports. A header is far less likely to be logged by accident. Same secret, riskier envelope — choose the header.</p>
-<p><strong>Bearer token.</strong> A bearer token is sent in the standard <code>Authorization</code> header with the scheme name <code>Bearer</code>. “Bearer” means exactly what it says: possession is authorization, so whoever holds the token can use it, which is why it must be guarded like cash.</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -H</span><span style="color:#9ECBFF"> &quot;Authorization: Bearer token-example-123&quot;</span><span style="color:#9ECBFF"> https://api.example.com/v1/data</span></span></code></pre>
-<p>This is the format the great majority of modern APIs — including model APIs — expect. When you later write <code>Authorization: Bearer &lt;your key&gt;</code>, you are using this exact scheme.</p>
-<p><strong>Basic auth.</strong> Basic auth carries a username and password. The two are joined with a colon (<code>user:pass</code>), encoded together with base64, and sent in the <code>Authorization</code> header with the scheme name <code>Basic</code>:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># curl builds the header for you from -u:</span></span>
-<span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -u</span><span style="color:#9ECBFF"> user:pass</span><span style="color:#9ECBFF"> https://api.example.com/v1/data</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#6A737D"># which produces this header (dXNlcjpwYXNz is base64 of &quot;user:pass&quot;):</span></span>
-<span class="line"><span style="color:#6A737D"># Authorization: Basic dXNlcjpwYXNz</span></span></code></pre>
-<p>The crucial fact: <strong>base64 is not encryption</strong>. It is a reversible encoding — anyone can decode <code>dXNlcjpwYXNz</code> back to <code>user:pass</code> instantly, with no key. Basic auth therefore keeps a password secret <em>only</em> when it rides inside TLS (HTTPS). Over plain HTTP it is equivalent to shouting your password across the room. This is why Basic auth is safe on modern HTTPS APIs and disastrous without it.</p>
-<p><img src="/ai-roadmap-365/_astro/auth-schemes.WwSAc9CA_1JMqKY.svg" alt="Diagram: a request carrying different credential types to a server that checks them" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="460"></p>
-<p>Read the diagram left to right: the same request can carry any of three credential envelopes — an API key in a custom header, a bearer token in the <code>Authorization</code> header, or a base64-encoded <code>user:pass</code> for Basic auth — and the server’s doorkeeper checks whichever it receives, then answers <code>200 OK</code> if the credential is valid or <code>401 Unauthorized</code> if it is missing or wrong.</p>
-<h3 id="oauth-20-at-an-intuitive-level">OAuth 2.0 at an intuitive level</h3>
-<p>The three schemes above all assume <em>you</em> hold the secret and call the API directly. OAuth 2.0 handles a different situation: an application wants to call an API <em>on your behalf</em>, using data that belongs to you at some other service, and it should never see your password.</p>
-<p>The core flow is the <strong>authorization-code flow</strong>, and it is easiest to follow as a story with four players: <strong>you</strong> (the resource owner), the <strong>app</strong> you are using (the client), the <strong>authorization server</strong> (the login/consent service at the provider that owns your data), and the <strong>API</strong> (the resource server holding your data). Here is the dance:</p>
-<ol>
-<li>The app sends you to the authorization server — you are redirected to a page hosted by the provider, not the app. You already have an account there.</li>
-<li>You <strong>log in and consent</strong>. The provider shows exactly what the app is asking for (“read your photos”) and you approve or deny. Your password is typed into the provider’s page, which the app never sees.</li>
-<li>The authorization server hands the app a short-lived <strong>authorization code</strong> (delivered by redirecting your browser back to the app). This code is not yet a usable credential — it is a one-time voucher.</li>
-<li>The app exchanges that code, together with its own client secret, directly with the authorization server for an <strong>access token</strong>. This exchange happens app-to-server, out of your browser’s view.</li>
-<li>The app calls the API, sending the access token as a bearer token: <code>Authorization: Bearer &lt;access token&gt;</code>. The API honors it and returns your photos — and <em>only</em> your photos, within the scope you granted.</li>
-</ol>
-<p><img src="/ai-roadmap-365/_astro/oauth-flow.UXFLBPTY_Zgq2Mh.svg" alt="Flowchart: the OAuth authorization-code flow — user to app to auth server to consent to token to API" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="520"></p>
-<p>Two ideas make this powerful. First, <strong>scopes</strong>: when the app requests access, it names the specific permissions it wants (read photos, but not delete them; calendar, but not email), and the token it receives is limited to exactly those scopes. You can see them on the consent screen and refuse. Second, <strong>access tokens versus refresh tokens</strong>. Access tokens are deliberately short-lived — often minutes to an hour — so that a leaked one expires quickly. To avoid asking you to log in again every hour, the app may also receive a longer-lived <strong>refresh token</strong>, which it can exchange for a fresh access token without bothering you. The refresh token is the more sensitive of the two and is guarded most carefully, because it is the key to minting new access. If anything goes wrong, you can revoke the app’s tokens at the provider — the delegation is undoable, which is the whole point.</p>
-<h3 id="handling-secrets-safely">Handling secrets safely</h3>
-<p>A credential is only as safe as the place you keep it. The cardinal rule, which you met on Day 11, is: <strong>secrets live in the environment, never in your code and never in git.</strong> Your program reads the key from an environment variable at runtime; the literal string never appears in a source file that could be committed, shared, screenshotted, or pushed to a public repository.</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># Set it once in your shell (or, better, in a gitignored .env file you load):</span></span>
-<span class="line"><span style="color:#F97583">export</span><span style="color:#E1E4E8"> DEMO_TOKEN</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;token-example-123&quot;</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#6A737D"># Your code and commands read it from the environment — the secret is never typed inline:</span></span>
-<span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -H</span><span style="color:#9ECBFF"> &quot;Authorization: Bearer </span><span style="color:#E1E4E8">$DEMO_TOKEN</span><span style="color:#9ECBFF">&quot;</span><span style="color:#9ECBFF"> https://api.example.com/v1/data</span></span></code></pre>
-<p>Four habits turn this rule into a discipline:</p>
+</a> <nav aria-label="Primary"> <a href="/sections">Courses</a> <a href="/labs">Labs</a> <a href="/catalog">Catalogs</a> <a href="/search">Search</a> <a href="/glossary">Glossary</a> <a href="/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+GitHub
+</a> </header> <main id="main">  <article data-day="25" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/sections/computing-foundations">Computing Foundations</a>  ›  <span>APIs and the Web</span>  › 
+Day 25 </p> <h1 data-astro-cid-whrtx2kk>Day 25: API Authentication: Keys, Tokens, and OAuth</h1>  <img class="day-hero" src="/social/day-025-api-authentication-keys-tokens-and-oauth.png" width="1200" height="630" alt="Day 25 of 365 — API Authentication: Keys, Tokens, and OAuth" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to authenticate to any API using the scheme it expects — API key, bearer token, Basic auth, or OAuth 2.0 — and keep your credentials out of your code and git so a leaked key never costs you money.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>APIs and the Web</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/computing-foundations/day-025-api-authentication-keys-tokens-and-oauth" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/computing-foundations/day-025-api-authentication-keys-tokens-and-oauth</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/ai-roadmap-365/ai-roadmap-365.github.io.git
+cd ai-roadmap-365.github.io</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-025-api-authentication-keys-tokens-and-oauth</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/labs/day-025-api-authentication-keys-tokens-and-oauth" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Distinguish authentication from authorization and map each failure to its HTTP status code (401 vs 403)</li><li data-astro-cid-whrtx2kk>Send an API key in a header, a bearer token in the Authorization header, and Basic auth with curl, and explain why a key in a URL query string is riskier</li><li data-astro-cid-whrtx2kk>Explain why base64 in Basic auth is encoding, not encryption, and why TLS is what actually protects the credential</li><li data-astro-cid-whrtx2kk>Describe the OAuth 2.0 authorization-code flow at an intuitive level, including consent, scopes, and access versus refresh tokens</li><li data-astro-cid-whrtx2kk>Apply safe-secret habits: read keys from environment variables, keep them out of code and git, use least privilege, and rotate leaked keys immediately</li><li data-astro-cid-whrtx2kk>Connect authentication to AI practice: every hosted model API call carries Authorization: Bearer &lt;key&gt;, and keeping that key out of code and git is a daily security habit</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk>Day 18 (HTTP requests, responses, methods, and status codes) and Day 19 (HTTPS and TLS)</li><li data-astro-cid-whrtx2kk>Day 11 (environment variables and shell configuration) and comfort running curl in a terminal</li> </ul> <h2 id="why-this-matters">Why this matters</h2>
 <ul>
-<li><strong>Never hard-code.</strong> A key pasted into your source is one accidental <code>git push</code> away from the entire internet. Read it from the environment instead.</li>
-<li><strong>Keep it out of git.</strong> Put real secrets in a <code>.env</code> file and add that file to <code>.gitignore</code> so it is never tracked. Commit a <code>.env.example</code> with the <em>names</em> of the variables and empty values, so collaborators know what to set without seeing your secret.</li>
-<li><strong>Least privilege.</strong> When an API lets you scope a key (read-only, one project, limited spend), create the narrowest key that does the job. If it leaks, the blast radius is small.</li>
-<li><strong>Rotate.</strong> Keys are meant to be replaced. Rotate them periodically, and <em>immediately</em> if one is ever exposed — the instant a key touches a public place, treat it as burned: revoke it at the provider and issue a new one. Revocation is what makes a leak survivable.</li>
+<li>
+<p><strong>Every model API call carries a credential</strong>, and getting that one header wrong is
+your most likely first error.</p>
+</li>
+<li>
+<p><strong>A leaked key is a bill.</strong> Model APIs are metered, and a key found in a public
+repository is found within minutes.</p>
+</li>
+<li>
+<p><strong><code>401</code> is authentication; <code>403</code> is permission.</strong> Two different problems, and today
+they stop being interchangeable.</p>
+</li>
+<li>
+<p><strong>OAuth is how your app acts on someone else’s behalf</strong> without ever seeing their
+password.</p>
+</li>
+<li>
+<p><strong>Everything here is a habit, not a technique.</strong> The techniques are simple; the
+discipline is what protects you.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="the-idea-in-plain-language">The idea in plain language</h2>
+<ul>
+<li>
+<p><strong>Every scheme puts a secret into the request.</strong> They differ in which part carries
+it and what the secret represents.</p>
+</li>
+<li>
+<p><strong>An API key says “this is which account”.</strong> A bearer token says “whoever holds
+this is authorised”.</p>
+</li>
+<li>
+<p><strong>Basic auth carries a username and password</strong>, encoded but not encrypted.</p>
+</li>
+<li>
+<p><strong>OAuth is delegation</strong>: you let an app act for you, at a service you already have
+an account with, without handing over your password.</p>
+</li>
+<li>
+<p><strong>The secret’s safety is about where you keep it</strong>, far more than which scheme you
+chose.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="historical-background">Historical background</h2>
+<p><img src="/_astro/password-to-delegation.7w_AYm1C_Z16hImP.svg" alt="Diagram: the progression from shared passwords to delegated authorization" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<ul>
+<li>
+<p><strong>Early web APIs used the password directly</strong>, because HTTP already had Basic auth
+and it was there.</p>
+</li>
+<li>
+<p><strong>That was untenable the moment third-party apps appeared.</strong> Giving an app your
+password gives it everything, forever, revocable only by changing the password.</p>
+</li>
+<li>
+<p><strong>API keys came next</strong> — a per-account secret you could revoke without disturbing
+your login.</p>
+</li>
+<li>
+<p><strong>OAuth 1.0, 2007, grew out of that specific problem</strong>: a photo-printing service
+needing your photos without needing your account.</p>
+</li>
+<li>
+<p><strong>OAuth 2.0, 2012, simplified it and leaned entirely on TLS</strong> for transport
+security, which is why it is far easier to implement and far less forgiving of
+plain HTTP.</p>
+</li>
+<li>
+<p><strong>Bearer tokens became the default</strong> because they are simple, and simplicity is
+what gets implemented correctly.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
+<p><img src="/_astro/authn-versus-authz.DUyvI1Z3_ZIALX.svg" alt="Diagram: authentication compared with authorization" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<p><strong>Authentication is:</strong></p>
+<ul>
+<li>Proving which account a request belongs to.</li>
+<li>A secret placed in a specific part of the request, checked by the server.</li>
+<li>The precondition for rate limiting, billing and audit — all of which need to know
+who you are.</li>
+</ul>
+<p><strong>It is not:</strong></p>
+<ul>
+<li>
+<p><strong>Not authorization.</strong> Authentication is who you are; authorization is what you may
+do. <code>401</code> and <code>403</code> mark the difference.</p>
+</li>
+<li>
+<p><strong>Not encryption.</strong> The credential is protected in transit by TLS, not by the
+scheme carrying it.</p>
+</li>
+<li>
+<p><strong>Not identity of a person.</strong> A key identifies an account, which may be shared by a
+team, a script and a server.</p>
+</li>
+<li>
+<p><strong>Not permanent.</strong> Every credential here is meant to be revoked and replaced, and a
+scheme without revocation is a scheme you cannot recover from.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
+<ul>
+<li>
+<p><strong>Attribution.</strong> The service needs to know whose request this is, to meter it, bill
+it and log it.</p>
+</li>
+<li>
+<p><strong>Revocation.</strong> A key you can cancel is a mistake you can survive; a password is
+not.</p>
+</li>
+<li>
+<p><strong>Least privilege.</strong> A scoped credential can do less than you can, which limits the
+damage when it leaks.</p>
+</li>
+<li>
+<p><strong>Delegation without impersonation.</strong> OAuth exists so an app can act for you
+without becoming you.</p>
+</li>
+<li>
+<p><strong>Rate limiting.</strong> You cannot count requests per account until you know which
+account they belong to.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="how-it-works">How it works</h2>
+<p><img src="/_astro/auth-schemes.WwSAc9CA_1JMqKY.svg" alt="Diagram: a request carrying different credential types to a server that checks them" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="460"></p>
+<h3 id="the-common-schemes">The common schemes</h3>
+<p><img src="/_astro/scheme-comparison.CC3fNcr4_Z16hImP.svg" alt="Diagram: API keys, bearer tokens and Basic auth compared" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<p><img src="/_astro/where-the-key-goes.C210PtA8_ZIALX.svg" alt="Diagram: sending a key in a header compared with putting it in the URL" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<p><strong>API key in a header.</strong> The API issues a key; you attach it to a header the API
+names, commonly <code>X-API-Key</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -H</span><span style="color:#9ECBFF"> &quot;X-API-Key: key-example-abc123&quot;</span><span style="color:#9ECBFF"> https://api.example.com/v1/data</span></span></code></pre>
+<ul>
+<li>
+<p><strong>Some APIs accept the key in the URL instead</strong>, as <code>?api_key=...</code>. Avoid it
+whenever a header is available.</p>
+</li>
+<li>
+<p><strong>URLs leak.</strong> They are written to access logs, saved in browser history, cached by
+proxies, and pasted into chats and bug reports.</p>
+</li>
+<li>
+<p><strong>Same secret, riskier envelope.</strong></p>
+</li>
+</ul>
+<p><strong>Bearer token.</strong> Sent in the standard <code>Authorization</code> header:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -H</span><span style="color:#9ECBFF"> &quot;Authorization: Bearer token-example-123&quot;</span><span style="color:#9ECBFF"> https://api.example.com/v1/data</span></span></code></pre>
+<ul>
+<li>
+<p><strong>“Bearer” means what it says</strong>: possession is authorisation. Whoever holds it can
+use it, which is why it is guarded like cash.</p>
+</li>
+<li>
+<p><strong>This is what the great majority of modern APIs expect</strong>, model APIs included.</p>
+</li>
+</ul>
+<p><strong>Basic auth.</strong> Username and password, joined with a colon and base64-encoded:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -u</span><span style="color:#9ECBFF"> user:pass</span><span style="color:#9ECBFF"> https://api.example.com/v1/data</span></span>
+<span class="line"><span style="color:#6A737D"># produces: Authorization: Basic dXNlcjpwYXNz</span></span></code></pre>
+<ul>
+<li>
+<p><strong>Base64 is not encryption.</strong> Anyone decodes <code>dXNlcjpwYXNz</code> back to <code>user:pass</code>
+instantly, with no key.</p>
+</li>
+<li>
+<p><strong>Basic auth keeps a password secret only inside TLS.</strong> Over plain HTTP it is
+equivalent to shouting it across the room.</p>
+</li>
+</ul>
+<h3 id="oauth-20-as-a-story">OAuth 2.0, as a story</h3>
+<p><img src="/_astro/oauth-flow.UXFLBPTY_Zgq2Mh.svg" alt="Flowchart: the OAuth authorization-code flow — user to app to auth server to consent to token to API" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="520"></p>
+<p>Four players: <strong>you</strong> (the resource owner), the <strong>app</strong> (the client), the
+<strong>authorization server</strong> (the provider’s login and consent service), and the <strong>API</strong>
+(holding your data).</p>
+<ol>
+<li>
+<p><strong>The app sends you to the provider.</strong> You land on the provider’s own page, not
+the app’s.</p>
+</li>
+<li>
+<p><strong>You log in and consent.</strong> The provider shows exactly what is being asked for —
+“read your photos” — and you approve or refuse. Your password is typed into the
+provider’s page, which the app never sees.</p>
+</li>
+<li>
+<p><strong>The provider hands the app an authorization code</strong>, via a redirect back. This is
+not yet a usable credential; it is a one-time voucher.</p>
+</li>
+<li>
+<p><strong>The app exchanges the code plus its own client secret</strong> for an access token,
+app-to-server, out of your browser’s view.</p>
+</li>
+<li>
+<p><strong>The app calls the API</strong> with that token as a bearer token, and gets your photos —
+only your photos, only within the scope you granted.</p>
+</li>
+</ol>
+<ul>
+<li>
+<p><strong>Scopes are the limit you can see and refuse.</strong> Read photos but not delete them;
+calendar but not email.</p>
+</li>
+<li>
+<p><strong>Access tokens are deliberately short-lived</strong> — minutes to an hour — so a leaked
+one expires quickly.</p>
+</li>
+<li>
+<p><strong>A refresh token mints new access tokens</strong> without asking you again, which makes it
+the more sensitive of the two.</p>
+</li>
+<li>
+<p><strong>You can revoke at the provider.</strong> The delegation is undoable, which is the whole
+point.</p>
+</li>
+</ul>
+<h3 id="handling-secrets-safely">Handling secrets safely</h3>
+<p><img src="/_astro/env-not-source.DskRK_9B_Z16hImP.svg" alt="Diagram: how a secret reaches a program without entering the repository" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#E1E4E8"> DEMO_TOKEN</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;token-example-123&quot;</span></span>
+<span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -H</span><span style="color:#9ECBFF"> &quot;Authorization: Bearer </span><span style="color:#E1E4E8">$DEMO_TOKEN</span><span style="color:#9ECBFF">&quot;</span><span style="color:#9ECBFF"> https://api.example.com/v1/data</span></span></code></pre>
+<ul>
+<li>
+<p><strong>Never hard-code.</strong> A key in your source is one <code>git push</code> from the internet.</p>
+</li>
+<li>
+<p><strong>Keep it out of git.</strong> Real secrets in <code>.env</code>, <code>.env</code> in <code>.gitignore</code>, and a
+committed <code>.env.example</code> carrying the <em>names</em> with empty values.</p>
+</li>
+<li>
+<p><strong>Least privilege.</strong> Create the narrowest key that does the job — read-only, one
+project, limited spend. If it leaks, the blast radius is small.</p>
+</li>
+<li>
+<p><strong>Rotate.</strong> Periodically, and <em>immediately</em> if one is ever exposed. The instant a
+key touches a public place, treat it as burned: revoke it and issue a new one.</p>
+</li>
 </ul>
 <h3 id="a-note-on-rate-limiting">A note on rate limiting</h3>
-<p>Authentication is what makes <strong>rate limiting</strong> possible, so the two travel together. Because every request carries a credential tied to an account, the server can count how many requests that account makes and refuse further ones past a limit, replying <code>429 Too Many Requests</code>. Limits protect the service from overload and protect you from a runaway loop quietly spending your budget. You will meet rate limits, pagination, and robust error handling in full on Day 27; for now, simply know that the same credential that proves who you are is also the meter that counts what you use.</p>
+<ul>
+<li>
+<p><strong>Authentication is what makes rate limiting possible.</strong> The credential is also the
+meter.</p>
+</li>
+<li>
+<p><strong>Every request is tied to an account</strong>, so the server can count and refuse past a
+limit with <code>429</code>.</p>
+</li>
+<li>
+<p><strong>Limits protect the service from overload</strong> and protect you from a runaway loop
+quietly spending your budget. Day 27 covers this properly.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="an-everyday-analogy">An everyday analogy</h2>
-<p>Think of an API as an exclusive members’ club, and authentication as everything that happens at the door.</p>
-<p>An <strong>API key</strong> is a membership card with your name on it: you show it every time you enter, the doorkeeper checks it against the member list, and if it is valid you are in. Lose the card and whoever finds it can walk in as you — which is why you keep it in your wallet, not taped to the front door. Putting the key in a URL query string is like writing your membership number on a postcard: technically it works, but it passes through many hands and gets copied into places you will never see.</p>
-<p>A <strong>bearer token</strong> is a coat-check ticket. The rule is blunt: whoever holds the ticket gets the coat, no questions asked. That is what “bearer” means — the club does not check that <em>you</em> are the holder, only that the ticket is genuine. Convenient, and exactly why you never let the ticket out of your hand.</p>
-<p><strong>Basic auth</strong> is telling the doorkeeper your name and a password out loud. Inside a private, soundproof booth (TLS) that is perfectly safe. Shouted across a crowded lobby (plain HTTP), everyone hears it. The words are the same; the room is what makes it safe or reckless. Base64 is merely spelling the password phonetically — it does not lower your voice one bit.</p>
-<p><strong>OAuth</strong> is the club’s guest system. Suppose you want a caterer to pick up a parcel you left at the club, but you will not hand them your membership card. Instead you go to the front desk yourself, prove who you are, and authorize a single, specific errand: “this caterer may collect the one parcel in locker 12, today only.” The desk gives the caterer a limited pass (the access token) good for exactly that. Your card never leaves your pocket, the pass expires, and you can cancel it at the desk anytime. The scope (“locker 12 only”) and the expiry are what make handing a stranger a pass sane.</p>
-<p>The analogy even covers secret-keeping: you would not photocopy your membership card and leave stacks of copies around town. Keeping your key in an environment variable rather than in committed code is exactly the discipline of keeping the one card in the one wallet.</p>
+<p><img src="/_astro/scope-least-privilege.cVVHEB55_Z16hImP.svg" alt="Diagram: how to evaluate the scopes an application requests" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<p>Different ways of getting into a building.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>The building</th><th>The scheme</th></tr></thead><tbody><tr><td>Your own name and password at reception</td><td>Basic auth</td></tr><tr><td>A staff badge issued to you</td><td>An API key</td></tr><tr><td>A visitor pass anyone holding may use</td><td>A bearer token</td></tr><tr><td>Letting a courier collect one parcel for you</td><td>OAuth delegation</td></tr><tr><td>”Parcels only, third floor, today”</td><td>Scopes</td></tr><tr><td>A pass that expires at 5pm</td><td>Access token lifetime</td></tr><tr><td>Cancelling a lost badge</td><td>Revocation</td></tr></tbody></table>
+<ul>
+<li>
+<p><strong>You would not give a courier your house keys</strong> so they could fetch one parcel.
+That is precisely the problem OAuth solves.</p>
+</li>
+<li>
+<p><strong>A visitor pass works for whoever is holding it.</strong> Drop it in the street and the
+finder walks in — which is what “bearer” means.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="examples-in-practice">Examples in practice</h2>
-<p>Let’s authenticate to a public test server that accepts <em>any</em> credentials, so we can see each scheme succeed and fail without needing a real account. (This is precisely what today’s lab does, at length, against <code>httpbin.org</code>.)</p>
-<p><strong>Basic auth, right and wrong.</strong> A test endpoint expects the username <code>user</code> and password <code>pass</code>. Send them and the server returns <code>200 OK</code>; send the wrong password and it returns <code>401 Unauthorized</code>:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># Correct credentials → 200</span></span>
-<span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#79B8FF"> -o</span><span style="color:#9ECBFF"> /dev/null</span><span style="color:#79B8FF"> -w</span><span style="color:#9ECBFF"> &#39;%{http_code}\n&#39;</span><span style="color:#79B8FF"> -u</span><span style="color:#9ECBFF"> user:pass</span><span style="color:#79B8FF"> \</span></span>
-<span class="line"><span style="color:#9ECBFF">  https://httpbin.org/basic-auth/user/pass</span></span>
-<span class="line"><span style="color:#6A737D"># prints: 200</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#6A737D"># Wrong password → 401</span></span>
-<span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#79B8FF"> -o</span><span style="color:#9ECBFF"> /dev/null</span><span style="color:#79B8FF"> -w</span><span style="color:#9ECBFF"> &#39;%{http_code}\n&#39;</span><span style="color:#79B8FF"> -u</span><span style="color:#9ECBFF"> user:wrongpass</span><span style="color:#79B8FF"> \</span></span>
-<span class="line"><span style="color:#9ECBFF">  https://httpbin.org/basic-auth/user/pass</span></span>
-<span class="line"><span style="color:#6A737D"># prints: 401</span></span></code></pre>
-<p>Here <code>-u user:pass</code> tells <code>curl</code> to build the <code>Authorization: Basic …</code> header for you, and <code>-w &#39;%{http_code}&#39;</code> prints just the status code so you can see authentication pass or fail as a number. <code>401</code> is the server saying “I don’t know who you are”; that single number is the most common authentication signal you will read.</p>
-<p><strong>Bearer token accepted.</strong> A bearer endpoint accepts any well-formed token and echoes it back, showing the <code>Authorization: Bearer …</code> header being honored:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#79B8FF"> -H</span><span style="color:#9ECBFF"> &quot;Authorization: Bearer token-example-123&quot;</span><span style="color:#79B8FF"> \</span></span>
-<span class="line"><span style="color:#9ECBFF">  https://httpbin.org/bearer</span></span></code></pre>
-<p>returns a small JSON body confirming the token was received:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="json"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#79B8FF">  &quot;authenticated&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
-<span class="line"><span style="color:#79B8FF">  &quot;token&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;token-example-123&quot;</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
-<p><strong>Key in a header, echoed back.</strong> To <em>see</em> a header arrive at the server, send a custom key header to an endpoint that reflects your headers:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#79B8FF"> -H</span><span style="color:#9ECBFF"> &quot;X-API-Key: demo-key&quot;</span><span style="color:#9ECBFF"> https://httpbin.org/headers</span></span></code></pre>
-<p>The JSON response includes your header among those the server saw:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="json"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
-<span class="line"><span style="color:#79B8FF">  &quot;headers&quot;</span><span style="color:#E1E4E8">: {</span></span>
-<span class="line"><span style="color:#79B8FF">    &quot;Host&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;httpbin.org&quot;</span><span style="color:#E1E4E8">,</span></span>
-<span class="line"><span style="color:#79B8FF">    &quot;X-Api-Key&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;demo-key&quot;</span></span>
-<span class="line"><span style="color:#E1E4E8">  }</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
-<p><strong>Reading the token from the environment.</strong> Finally, the safe pattern — the token lives in a variable, and the command references the variable, so the secret never appears inline:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#E1E4E8"> DEMO_TOKEN</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;token-example-123&quot;</span></span>
-<span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#79B8FF"> -H</span><span style="color:#9ECBFF"> &quot;Authorization: Bearer </span><span style="color:#E1E4E8">$DEMO_TOKEN</span><span style="color:#9ECBFF">&quot;</span><span style="color:#9ECBFF"> https://httpbin.org/bearer</span></span></code></pre>
-<p>The server sees the same request as before, but your source and your shell history never contain the literal secret in the command you typed. That is the whole habit, in one line.</p>
-<p>Now the real-world tie: when you call a hosted model API, you do precisely the bearer-token example above — <code>Authorization: Bearer $YOUR_KEY</code>, with the key read from an environment variable — against the provider’s endpoint instead of <code>httpbin.org</code>. Everything you just practiced is the actual mechanism, not a simplified stand-in.</p>
+<p><img src="/_astro/base64-not-encryption.CJjLU1Q9_ZIALX.svg" alt="Diagram: base64 encoding compared with encryption" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong><code>401</code> on every call with a key you just copied</strong>: a trailing newline, or a
+missing <code>Bearer </code> prefix. Compare <code>curl -v</code> output with what your code sends.</p>
+</li>
+<li>
+<p><strong><code>403</code> with a valid key</strong>: the key is real and lacks the scope. A different key
+will not help; a different permission will.</p>
+</li>
+<li>
+<p><strong>A key committed and revoked within the hour</strong>, because scanners watch public
+repositories continuously and find them faster than people do.</p>
+</li>
+<li>
+<p><strong>An OAuth consent screen asking for far more than the app needs</strong>, which is exactly
+the moment scopes are there for you to read.</p>
+</li>
+<li>
+<p><strong>A token that works for an hour and then stops</strong>, which is an access token expiring
+and a refresh step that was never implemented.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
-<h3 id="security">Security</h3>
-<p>Credentials are the crown jewels of API security, and the threat model is specific: a stolen key is usable by anyone, from anywhere, immediately. The dominant real-world failure is not clever cryptographic attacks but keys committed to source control — public repositories are scanned continuously by bots that extract and abuse keys within minutes. Defenses are layered: keep secrets out of code and git, scope keys to least privilege so a leak is contained, rotate on any suspicion, and prefer short-lived tokens (OAuth access tokens) over long-lived static keys where you have the choice. Always send credentials over TLS; a secret sent over plain HTTP is compromised in transit regardless of how carefully you stored it.</p>
-<h3 id="privacy">Privacy</h3>
-<p>Because authentication ties every request to an identity, it necessarily produces a detailed record of who did what and when. That is useful for security auditing and essential for billing, but it also means your API activity is inherently identifiable and logged by the provider. Two practical consequences: never put secrets in URLs, where they leak into logs you do not control; and remember that whatever data you send with an authenticated request is now associated with your account — for AI work, prompts and inputs sent to a hosted model are logged against your identity under the provider’s data policies, which you should read before sending anything sensitive.</p>
-<h3 id="performance">Performance</h3>
-<p>Checking a credential is cheap — usually a lookup or a signature verification measured in fractions of a millisecond — so authentication rarely dominates request time. The performance story is really about avoiding waste: a request with a missing or bad credential is a wasted round trip that returns only a <code>401</code>, so validating that your key is set <em>before</em> you send, and reading <code>401</code>/<code>403</code> correctly instead of retrying blindly, saves both latency and rate-limit budget. OAuth adds one wrinkle: the token exchange steps happen up front, but the resulting access token is then reused across many calls, so the cost is amortized and per-request overhead stays low.</p>
-<h3 id="scalability">Scalability</h3>
-<p>Bearer tokens and API keys scale beautifully because they make each request self-contained: the server can verify the credential and serve the request without remembering anything about a prior “login,” which is what lets a service spread across thousands of machines behind a load balancer with no shared session state. This statelessness is a direct descendant of HTTP’s own design (Day 18). It is also why rate limiting keyed on the credential (Day 27) is the natural unit of fairness at scale — the same identity that authenticates each request is the bucket the limiter counts against.</p>
-<h3 id="cost">Cost</h3>
-<p>Authentication is inseparable from money. The credential is what attaches usage to a paying account, so a leaked key is a direct financial liability — attackers running expensive model calls on a stolen key can generate real charges fast. This is why scoping keys (including spend limits where offered) and rotating promptly are cost controls, not just security controls. On the flip side, authentication is what enables usage dashboards and per-key metering, so you can attribute spend to projects and catch anomalies early. Treat every key as a spending instrument, because that is exactly what it is.</p>
+<p><img src="/_astro/leaked-key-response.B5cb652y_Z16hImP.svg" alt="Diagram: the response procedure when a credential is exposed" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<ul>
+<li>
+<p><strong>Security: a bearer token is cash.</strong> No further check is made; possession is the
+whole proof.</p>
+</li>
+<li>
+<p><strong>Git does not forget.</strong> Removing a key in a later commit leaves it in the history,
+which is why the response to exposure is revocation, not deletion.</p>
+</li>
+<li>
+<p><strong>Privacy: OAuth scopes are a privacy control you can actually exercise.</strong> Reading
+the consent screen is the one moment you get to say no.</p>
+</li>
+<li>
+<p><strong>Performance: authentication is cheap; TLS is what costs</strong>, and connection reuse
+from Day 15 pays for both.</p>
+</li>
+<li>
+<p><strong>Scalability: stateless bearer tokens scale because any server can verify them.</strong>
+Server-side sessions do not, which is the Day 23 argument again.</p>
+</li>
+<li>
+<p><strong>Cost: a leaked model API key is a metered bill</strong> running until you notice. Spend
+limits on the key are the cheapest insurance available.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
-<p>Here “alternatives” means the tools and standards you can reach for to <em>do</em> API authentication, plus the leading services you will authenticate to. Free-versus-paid is about the tools, since the schemes themselves are open standards anyone can implement.</p>
+<p><img src="/_astro/credential-checklist.BLn2nhPI_Z16hImP.svg" alt="Diagram: the checks to make before using a new API credential" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
 
 
 
@@ -223,10 +435,18 @@ You can also <a href="/ai-roadmap-365/labs/day-025-api-authentication-keys-token
 
 
 
-
-
-<table><thead><tr><th>Tool or standard</th><th>Type</th><th>What it offers</th><th>Cost</th></tr></thead><tbody><tr><td><code>curl</code></td><td>Free, open source</td><td>Sends every scheme by hand (<code>-u</code> for Basic, <code>-H</code> for keys and bearer tokens); the universal way to test auth</td><td>Free</td></tr><tr><td>Environment variables + a gitignored <code>.env</code></td><td>Free convention</td><td>The baseline safe place to keep secrets out of code and git (Day 11)</td><td>Free</td></tr><tr><td><code>dotenv</code> libraries (many languages)</td><td>Open source</td><td>Load <code>.env</code> files into your program’s environment at startup</td><td>Free</td></tr><tr><td>Postman / Insomnia</td><td>Freemium clients</td><td>GUI API clients with built-in Basic, bearer, API-key, and full OAuth 2.0 flows</td><td>Free tier; paid team plans</td></tr><tr><td>Cloud secret managers (e.g. managed vault services)</td><td>Commercial</td><td>Store, rotate, and audit secrets centrally instead of in <code>.env</code> files</td><td>Paid, usage-based</td></tr><tr><td>OAuth 2.0 (RFC 6749)</td><td>Open standard</td><td>The delegation framework itself — free to implement; every major provider supports it</td><td>Free standard</td></tr></tbody></table>
-<p>For learning and everyday testing, <code>curl</code> plus an environment variable is all you need, and it is entirely free — that is exactly the toolkit for today’s lab. Reach for a GUI client like Postman when you want to click through an OAuth flow without wiring it up in code, and for a cloud secret manager only when a team or production system outgrows hand-managed <code>.env</code> files.</p>
+<table><thead><tr><th>Approach</th><th>Type</th><th>Where it fits</th></tr></thead><tbody><tr><td>API key in a header</td><td>The common default</td><td>Server-to-server, single account</td></tr><tr><td>Bearer token</td><td>The modern default</td><td>Almost everything, including model APIs</td></tr><tr><td>Basic auth</td><td>Built into HTTP</td><td>Internal tools, behind TLS, where simplicity wins</td></tr><tr><td>OAuth 2.0</td><td>Free, open standard</td><td>Acting on a user’s behalf at another service</td></tr><tr><td>mTLS</td><td>Free, open standard</td><td>Both sides prove identity; internal service meshes</td></tr><tr><td>Cloud secret managers</td><td>Commercial, free tiers</td><td>Storage, rotation and audit once more than one machine needs a key</td></tr><tr><td><code>git-secrets</code>, <code>gitleaks</code></td><td>Free, open source</td><td>Catching a key <em>before</em> it is committed</td></tr></tbody></table>
+<ul>
+<li>
+<p><strong>Install a pre-commit secret scanner today.</strong> It is the one control that acts
+before the mistake rather than after.</p>
+</li>
+<li>
+<p><strong>Move to a secret manager the moment a key is needed on more than one machine.</strong>
+Copying it around is where key sprawl begins.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
 
 
@@ -265,110 +485,212 @@ You can also <a href="/ai-roadmap-365/labs/day-025-api-authentication-keys-token
 
 
 
-
-
-
-<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>Authentication</td><td>Authorization</td><td>Authentication proves <em>who</em> you are (fails with <code>401</code>); authorization decides <em>what</em> you may do (fails with <code>403</code>)</td></tr><tr><td>API key</td><td>Bearer token</td><td>A key is often a static, long-lived string in a provider-chosen header; a bearer token rides in the standard <code>Authorization: Bearer</code> header and is frequently short-lived</td></tr><tr><td>Basic auth</td><td>Bearer token</td><td>Basic sends <code>user:pass</code> (base64-encoded, reversible); Bearer sends a single opaque token that already represents authorization</td></tr><tr><td>Access token</td><td>Refresh token</td><td>An access token is short-lived and used on every API call; a refresh token is longer-lived and used only to obtain new access tokens</td></tr><tr><td>Base64 encoding</td><td>Encryption</td><td>Base64 is reversible with no key and hides nothing; encryption (TLS) requires a key and actually protects the data</td></tr><tr><td>API key</td><td>OAuth token</td><td>A key authenticates <em>you</em> calling your own account; an OAuth token lets an <em>app</em> act on your behalf, scoped and revocable, without your password</td></tr></tbody></table>
-<p>The table’s throughline: every row is a distinction beginners routinely blur, and each blurred pair causes a specific, avoidable bug — a <code>403</code> mistaken for a <code>401</code>, a base64 string mistaken for encryption, a refresh token treated as casually as an access token.</p>
+<table><thead><tr><th>Term</th><th>What it actually is</th></tr></thead><tbody><tr><td><strong>Authentication</strong></td><td>Proving which account this is</td></tr><tr><td><strong>Authorization</strong></td><td>Deciding what that account may do</td></tr><tr><td><strong>API key</strong></td><td>A long-lived secret identifying an account</td></tr><tr><td><strong>Bearer token</strong></td><td>A credential whose possession is the authorisation</td></tr><tr><td><strong>Scope</strong></td><td>The specific permissions a token carries</td></tr><tr><td><strong>Refresh token</strong></td><td>A credential used to mint new access tokens</td></tr><tr><td><strong>Rotation</strong></td><td>Replacing a credential on purpose, before you must</td></tr></tbody></table>
+<hr/>
 <h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
-<p>You authenticate whenever you call an API that serves a specific account’s resources or costs money to run — which, in practice, is nearly every useful API and certainly every hosted model API. Choose the scheme the provider documents; you rarely get to pick. Reach for a plain API key or bearer token for machine-to-machine calls where <em>you</em> own the account and <em>your</em> code is the caller — the common case for scripts, backends, and model APIs. Reach for OAuth when an application must act on behalf of <em>end users</em> against <em>their</em> accounts at another service, so those users grant scoped, revocable access without surrendering passwords. Use Basic auth when an API specifies it, and only ever over HTTPS.</p>
-<p>Know when authentication is not the tool in front of you. It does not encrypt your traffic — TLS does that, and you need it underneath every scheme here. It does not, by itself, decide fine-grained permissions — that is authorization, configured separately. And you do not need OAuth’s full machinery for a script talking to your own account; reaching for it there is over-engineering, while a simple keyed request is exactly right. The professional instinct is to match the scheme to the situation: static credential for your own machine-to-machine calls, OAuth for delegated user access, TLS always, and secrets in the environment without exception.</p>
-<p>The AI thread ties it all together. Every call you will make to a hosted model API is an authenticated request carrying <code>Authorization: Bearer &lt;your key&gt;</code>, with that key read from an environment variable and kept out of your code and your git history. Nothing about the model changes this picture — it is the same doorkeeper, the same envelope, the same discipline you practiced today. Build the habit now, on a free test server with fake tokens, and by the time a real key with a real bill attached is in your hands, keeping it safe will already be second nature.</p>
+<p><img src="/_astro/key-hygiene.ZuXSDTEJ_ZIALX.svg" alt="Diagram: unsafe and safe credential handling habits" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong>Use a header, not a query parameter</strong>, whenever the API offers both.</p>
+</li>
+<li>
+<p><strong>Use OAuth when acting on someone else’s behalf.</strong> Asking a user for their password
+to another service is never acceptable.</p>
+</li>
+<li>
+<p><strong>Use the narrowest scope that works</strong>, and create a separate key per project so one
+leak does not reach the others.</p>
+</li>
+<li>
+<p><strong>Do not put a credential in a URL, a log, a screenshot, or a commit.</strong></p>
+</li>
+<li>
+<p><strong>Do not share one key across a team.</strong> You lose all ability to revoke one person’s
+access, or to tell whose request that was.</p>
+</li>
+<li>
+<p><strong>Do not build your own OAuth server.</strong> It is a genuinely hard problem with a
+well-tested answer, and the failure mode is silent.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="the-ai-connection">The AI connection</h2>
+<p><img src="/_astro/oauth-token-lifetimes.C-nnyFVT_ZIALX.svg" alt="Diagram: access tokens compared with refresh tokens" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong><code>OPENAI_API_KEY</code>, <code>ANTHROPIC_API_KEY</code>, <code>HF_TOKEN</code></strong> — every provider uses the same
+bearer pattern, read from the environment as on Day 11.</p>
+</li>
+<li>
+<p><strong>Model keys are metered, which makes a leak expensive rather than merely
+embarrassing.</strong> Set a spend limit on every key you create.</p>
+</li>
+<li>
+<p><strong>Never send a key to a model.</strong> Pasting a config file into a chat to debug it sends
+the credential too.</p>
+</li>
+<li>
+<p><strong>Agents that call tools on a user’s behalf need OAuth</strong>, not a shared key — the
+delegation problem is exactly the one OAuth was invented for.</p>
+</li>
+<li>
+<p><strong>Scoped, per-project keys make an agent’s blast radius knowable</strong>, which is the
+main control you have over a system that decides its own actions.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="knowledge-check">Knowledge check</h2>
-<p>Try these from memory before looking back:</p>
-<ol>
-<li>In one sentence each, distinguish authentication from authorization, and name the HTTP status code that signals each one failing.</li>
-<li>A colleague says Basic auth is safe because the password is “encoded.” Explain precisely why base64 encoding provides no secrecy, and what actually makes Basic auth safe in practice.</li>
-<li>Why is putting an API key in a URL query string worse than putting it in a header? Name two specific places the query-string key can leak.</li>
-<li>Walk through the OAuth authorization-code flow for “let a printing app read my cloud photos,” naming the four participants and where the user’s password does and does not go.</li>
-<li>Your key was accidentally pushed to a public repository ten minutes ago. State, in order, exactly what you do — and explain why deleting the commit is not enough.</li>
-</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">quiz</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  question</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;An API accepts its key either as a query parameter or in a header, and both work identically. Why prefer the header?&quot;</span></span>
+<span class="line"><span style="color:#85E89D">  options</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;Query strings are recorded in access logs, browser history and Referer headers, where headers are not&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;Headers are encrypted by TLS while query strings are sent in plaintext&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;Query parameters have a length limit that keys frequently exceed&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;Headers are validated by the server before the query string is parsed&quot;</span></span>
+<span class="line"><span style="color:#85E89D">  answer_index</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span></span>
+<span class="line"><span style="color:#85E89D">  explanation</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;TLS encrypts the whole request, URL included, so transport is not the difference. The difference is what gets written down: URLs are logged by proxies and servers, kept in history, and forwarded in Referer headers, while headers are not recorded by default.&quot;</span></span></code></pre>
+<hr/>
 <h2 id="hands-on-exercise">Hands-on exercise</h2>
-<p>Time to send each scheme yourself. In this exercise — worked through in full in the Day 25 lab directory — you will use <code>curl</code> to authenticate to <code>httpbin.org</code>, a free public test server whose auth endpoints accept <em>any</em> credentials, so you need no account and no real key. You will watch Basic auth succeed and fail, send a bearer token, echo a key header, and read a token from an environment variable.</p>
-<p>Open your terminal and run each command, reading the output before moving on. First, Basic auth with the credentials the endpoint expects:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#79B8FF"> -o</span><span style="color:#9ECBFF"> /dev/null</span><span style="color:#79B8FF"> -w</span><span style="color:#9ECBFF"> &#39;%{http_code}\n&#39;</span><span style="color:#79B8FF"> -u</span><span style="color:#9ECBFF"> user:pass</span><span style="color:#9ECBFF"> https://httpbin.org/basic-auth/user/pass</span></span></code></pre>
-<p>This prints just the HTTP status code. The endpoint <code>basic-auth/user/pass</code> expects username <code>user</code> and password <code>pass</code>; sending them should print <code>200</code>.</p>
-<p>Now send the wrong password and watch authentication fail:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#79B8FF"> -o</span><span style="color:#9ECBFF"> /dev/null</span><span style="color:#79B8FF"> -w</span><span style="color:#9ECBFF"> &#39;%{http_code}\n&#39;</span><span style="color:#79B8FF"> -u</span><span style="color:#9ECBFF"> user:wrongpass</span><span style="color:#9ECBFF"> https://httpbin.org/basic-auth/user/pass</span></span></code></pre>
-<p>This should print <code>401</code> — the server rejecting an unrecognized credential.</p>
-<p>Send a bearer token to the bearer endpoint, which accepts any token and echoes it:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#79B8FF"> -H</span><span style="color:#9ECBFF"> &quot;Authorization: Bearer token-example-123&quot;</span><span style="color:#9ECBFF"> https://httpbin.org/bearer</span></span></code></pre>
-<p>Echo a custom key header off the headers endpoint to see it arrive at the server:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#79B8FF"> -H</span><span style="color:#9ECBFF"> &quot;X-API-Key: demo-key&quot;</span><span style="color:#9ECBFF"> https://httpbin.org/headers</span></span></code></pre>
-<p>Finally, the safe pattern — set a fake token in an environment variable and reference the variable, so the secret never appears inline:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#E1E4E8"> DEMO_TOKEN</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;token-example-123&quot;</span></span>
-<span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#79B8FF"> -H</span><span style="color:#9ECBFF"> &quot;Authorization: Bearer </span><span style="color:#E1E4E8">$DEMO_TOKEN</span><span style="color:#9ECBFF">&quot;</span><span style="color:#9ECBFF"> https://httpbin.org/bearer</span></span></code></pre>
+<p>Authenticate three ways, then prove base64 is not a secret. Worked through fully in
+the Day 25 lab directory.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>What you are doing</th><th>Command</th></tr></thead><tbody><tr><td>Call without a credential</td><td><code>curl -i https://httpbin.org/bearer</code></td></tr><tr><td>Send a bearer token</td><td><code>curl -i -H &quot;Authorization: Bearer token-example-123&quot; https://httpbin.org/bearer</code></td></tr><tr><td>Send Basic auth</td><td><code>curl -i -u user:pass https://httpbin.org/basic-auth/user/pass</code></td></tr><tr><td>Decode what Basic sent</td><td><code>echo -n &#39;user:pass&#39; | base64</code> then <code>base64 -d</code> it back</td></tr><tr><td>Read the key from the environment</td><td><code>export DEMO_TOKEN=token-example-123</code> then use <code>$DEMO_TOKEN</code></td></tr><tr><td>Confirm it is not in your source</td><td><code>grep -r &quot;token-example&quot; . --exclude-dir=.git</code></td></tr></tbody></table>
 <h3 id="expected-output">Expected output</h3>
-<p>A typical run looks like this (the JSON bodies are lightly reformatted for reading):</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ curl -s -o /dev/null -w &#39;%{http_code}\n&#39; -u user:pass https://httpbin.org/basic-auth/user/pass</span></span>
-<span class="line"><span>200</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>$ curl -s -o /dev/null -w &#39;%{http_code}\n&#39; -u user:wrongpass https://httpbin.org/basic-auth/user/pass</span></span>
-<span class="line"><span>401</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>$ curl -s -H &quot;Authorization: Bearer token-example-123&quot; https://httpbin.org/bearer</span></span>
-<span class="line"><span>{</span></span>
-<span class="line"><span>  &quot;authenticated&quot;: true,</span></span>
-<span class="line"><span>  &quot;token&quot;: &quot;token-example-123&quot;</span></span>
-<span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>$ curl -s -H &quot;X-API-Key: demo-key&quot; https://httpbin.org/headers</span></span>
-<span class="line"><span>{</span></span>
-<span class="line"><span>  &quot;headers&quot;: {</span></span>
-<span class="line"><span>    &quot;Accept&quot;: &quot;*/*&quot;,</span></span>
-<span class="line"><span>    &quot;Host&quot;: &quot;httpbin.org&quot;,</span></span>
-<span class="line"><span>    &quot;X-Api-Key&quot;: &quot;demo-key&quot;</span></span>
-<span class="line"><span>  }</span></span>
-<span class="line"><span>}</span></span></code></pre>
-<p>Line by line: <code>200</code> confirms correct Basic auth was accepted; <code>401</code> confirms the wrong password was rejected — the two states of authentication as raw status codes. The bearer response <code>&quot;authenticated&quot;: true</code> shows the <code>Authorization: Bearer …</code> header being honored and the token read back. And the headers endpoint reflects your <code>X-API-Key</code> back to you (note the server normalizes the capitalization to <code>X-Api-Key</code>), proving your key header reached the server. The environment-variable command produces the same bearer response, but with the secret sourced from <code>$DEMO_TOKEN</code> instead of typed inline.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>HTTP/1.1 401 UNAUTHORIZED</span></span>
+<span class="line"><span>HTTP/1.1 200 OK</span></span>
+<span class="line"><span>{&quot;authenticated&quot;: true, &quot;token&quot;: &quot;token-example-123&quot;}</span></span>
+<span class="line"><span>dXNlcjpwYXNz</span></span>
+<span class="line"><span>user:pass</span></span></code></pre>
+<ul>
+<li><strong><code>401</code> with no credential</strong>, <code>200</code> with one — the whole mechanism in two requests.</li>
+<li><strong>The base64 round trip takes one command each way</strong>, with no key involved. That is
+the entire point.</li>
+</ul>
 <h3 id="validate-your-work">Validate your work</h3>
-<p>You are done when you can check every box:</p>
 <ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" disabled/> You saw <code>200</code> for correct Basic auth and <code>401</code> for the wrong password.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> The bearer endpoint returned <code>&quot;authenticated&quot;: true</code> and echoed your token.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> The headers endpoint reflected your <code>X-API-Key</code> value back to you.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You ran the final command with the token in <code>$DEMO_TOKEN</code> and got the same bearer response, without typing the secret inline.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You can explain why <code>401</code> (not <code>403</code>) is the code for a missing or wrong credential.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You produced a <code>401</code> and then a <code>200</code> against the same endpoint</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You decoded a Basic auth header back to the original username and password</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You read a credential from an environment variable rather than typing it inline</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Your <code>.gitignore</code> contains <code>.env</code>, and <code>git status</code> confirms it is untracked</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can state the difference between <code>401</code> and <code>403</code> without hesitating</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>bash tests/run_tests.sh</code> reports 0 failures</li>
 </ul>
 <h3 id="troubleshooting">Troubleshooting</h3>
 <ul>
-<li><strong>Every command prints <code>000</code> or hangs.</strong> <code>000</code> from <code>-w &#39;%{http_code}&#39;</code> means no HTTP response — you are offline or a proxy is blocking the request. Check connectivity; the lab’s tests will simply skip network checks when offline.</li>
-<li><strong>A command prints <code>503</code>.</strong> The public <code>httpbin.org</code> is a shared free service and is occasionally overloaded, returning <code>503 Service Temporarily Unavailable</code>. That is the server, not your credential — wait a moment and retry, or add <code>--retry 5 --retry-delay 2</code> to ride past it.</li>
-<li><strong>Basic auth prints <code>401</code> even with <code>user:pass</code>.</strong> Check for a typo and that the URL path is exactly <code>/basic-auth/user/pass</code> — the username and password in the path must match the ones you send with <code>-u</code>.</li>
-<li><strong><code>$DEMO_TOKEN</code> came through empty.</strong> You opened a new shell after <code>export</code>, or a typo in the variable name. Re-run the <code>export</code> line in the <em>same</em> shell, then the <code>curl</code>. Run <code>echo &quot;$DEMO_TOKEN&quot;</code> to confirm it is set.</li>
-<li><strong><code>curl: command not found</code>.</strong> Install <code>curl</code> (preinstalled on macOS and most Linux; on Debian/Ubuntu, <code>sudo apt install curl</code>).</li>
+<li>
+<p><strong><code>401</code> with a key you are sure is right.</strong> Check for a trailing newline from a copy
+and paste, and check the <code>Bearer </code> prefix and its single space.</p>
+</li>
+<li>
+<p><strong>The shell expands your key oddly.</strong> Quote it. Keys contain characters the shell
+treats specially.</p>
+</li>
+<li>
+<p><strong><code>echo $KEY</code> prints nothing.</strong> You exported it in a different shell, or a script
+set it in a child — Day 11’s inheritance rule.</p>
+</li>
+<li>
+<p><strong>A <code>403</code> you expect to be a <code>401</code>.</strong> The key is valid and lacks permission. Read
+the scope.</p>
+</li>
 </ul>
 <h3 id="common-mistakes">Common mistakes</h3>
 <ul>
-<li><strong>Confusing <code>401</code> and <code>403</code>.</strong> <code>401 Unauthorized</code> means “I don’t know who you are” (authentication failed — fix your credential). <code>403 Forbidden</code> means “I know who you are, but you may not do this” (authorization failed — your credential lacks permission). Reaching for a new key when you actually have a permissions problem wastes time.</li>
-<li><strong>Thinking base64 hides the password.</strong> <code>dXNlcjpwYXNz</code> decodes to <code>user:pass</code> with no key. Basic auth is protected by the TLS around it, never by the encoding. Never rely on base64 for secrecy.</li>
-<li><strong>Putting the secret in the URL.</strong> A key in <code>?api_key=…</code> lands in server logs and browser history. Keep credentials in headers, and never paste a real one into a chat, ticket, or screenshot.</li>
+<li><strong>Hard-coding a key “just for now”.</strong></li>
+<li><strong>Committing <code>.env</code>.</strong> Add it to <code>.gitignore</code> before the first commit, not after.</li>
+<li><strong>Calling base64 encryption.</strong></li>
+<li><strong>Deleting a leaked key from the code instead of revoking it at the provider.</strong></li>
 </ul>
+<hr/>
 <h2 id="practice-assignment">Practice assignment</h2>
-<p>Open the <code>auth-worksheet.md</code> file in the starter directory of the Day 25 lab and complete it for a real run on your machine. Record: the exact status code returned for correct Basic auth and for wrong credentials; whether the bearer endpoint accepted your token (and what the JSON body said); and — the important part — a short paragraph (4–6 sentences) describing, in your own words, how you would store a <em>real</em> API key safely if you were about to call a paid service tomorrow. Name the environment variable you would use, where the <code>.env</code> file would live, why it must be gitignored, and what you would do the instant you discovered that key had been committed to a public repository. Keep the worksheet; the answers are your personal checklist for the first real key you handle.</p>
+<ul>
+<li>
+<p><strong>Take a project you have and move every credential to the environment</strong>, then
+confirm with <code>grep</code> that none remain in source.</p>
+</li>
+<li>
+<p><strong>Create two keys for one service</strong>, one read-only, and prove the narrow one cannot
+perform a write.</p>
+</li>
+<li>
+<p><strong>Walk an OAuth consent screen</strong> for a real app and write down every scope it asks
+for, then decide whether each is justified.</p>
+</li>
+<li>
+<p><strong>Set a spend limit</strong> on any metered API key you hold, and note what happens when it
+is reached.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="extension-challenge">Extension challenge</h2>
-<p>Go one step past sending credentials and prove to yourself that base64 is not encryption. Encode a fake <code>user:pass</code> string yourself and then decode it straight back:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">printf</span><span style="color:#9ECBFF"> &#39;user:pass&#39;</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> base64</span></span>
-<span class="line"><span style="color:#6A737D"># prints: dXNlcjpwYXNz</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#79B8FF">printf</span><span style="color:#9ECBFF"> &#39;dXNlcjpwYXNz&#39;</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> base64</span><span style="color:#79B8FF"> --decode</span><span style="color:#E1E4E8">; </span><span style="color:#79B8FF">echo</span></span>
-<span class="line"><span style="color:#6A737D"># prints: user:pass</span></span></code></pre>
-<p>You just performed, by hand and with no key, the exact transformation that “hides” a password in Basic auth — which is to say, it hides nothing. Then do the security exercise every developer should internalize: imagine the string you decoded was a real credential that had appeared in a public place. Write three or four sentences describing your incident response — revoke first or investigate first, and why — and explain, using what you learned about bearer tokens, why a short-lived OAuth access token would have limited the damage compared with a long-lived static key. You have now reasoned about credential exposure from both sides: how a secret is (barely) wrapped, and what to do when the wrapping fails.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
-Q1. What is the difference between authentication and authorization? </strong> </p> <ol type="A"> <li>Authentication encrypts the request; authorization decrypts it</li><li>Authentication proves who you are; authorization decides what you are allowed to do</li><li>They are two words for the same identity check</li><li>Authentication is for users; authorization is only for machines</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Authentication proves who you are; authorization decides what you are allowed to do </p> <p>Authentication answers &quot;who are you&quot; and fails with 401; authorization answers &quot;may you do this&quot; and fails with 403. They are separate steps, and confusing them leads to fixing the wrong problem.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q2. Which HTTP status code means the server does not recognize your credential (authentication failed)? </strong> </p> <ol type="A"> <li>403 Forbidden</li><li>404 Not Found</li><li>401 Unauthorized</li><li>429 Too Many Requests</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> 401 Unauthorized </p> <p>401 Unauthorized signals a missing or invalid credential — an authentication failure. 403 Forbidden means you are authenticated but lack permission (an authorization failure), which is a different fix.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q3. How is a bearer token sent in an HTTP request? </strong> </p> <ol type="A"> <li>In the URL as ?token=...</li><li>In the Authorization header as &quot;Authorization: Bearer &lt;token&gt;&quot;</li><li>As a base64-encoded username and password</li><li>In a cookie the browser sets automatically</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> In the Authorization header as &quot;Authorization: Bearer &lt;token&gt;&quot; </p> <p>A bearer token rides in the standard Authorization header with the scheme name Bearer. This is the format the great majority of modern APIs, including hosted model APIs, expect.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q4. Why is Basic auth unsafe over plain HTTP? </strong> </p> <ol type="A"> <li>Base64 encoding is reversible with no key, so anyone on the network can read the password</li><li>Basic auth sends the password as an image that can be screenshotted</li><li>The server refuses Basic auth unless a key is also supplied</li><li>Basic auth works only with usernames longer than 16 characters</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> Base64 encoding is reversible with no key, so anyone on the network can read the password </p> <p>Basic auth base64-encodes user:pass, and base64 is encoding, not encryption — dXNlcjpwYXNz decodes straight back to user:pass. Only the TLS in HTTPS actually protects it in transit.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q5. Why is putting an API key in a URL query string worse than putting it in a header? </strong> </p> <ol type="A"> <li>Query strings can only hold 8 characters</li><li>Headers are automatically encrypted while query strings are not</li><li>URLs are written to server logs, browser history, and caches, so the key leaks into places you do not control</li><li>A key in a header is ignored by most servers</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> URLs are written to server logs, browser history, and caches, so the key leaks into places you do not control </p> <p>A query string is part of the URL, and URLs get logged, cached, and stored in history. A header is far less likely to be recorded by accident, so the same secret is safer in a header.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q6. In the OAuth 2.0 authorization-code flow, where does the user type their password? </strong> </p> <ol type="A"> <li>Into the third-party app, which forwards it to the provider</li><li>Into the provider&#39;s own authorization server page — the app never sees it</li><li>Into the API request as a Basic auth header</li><li>Nowhere; OAuth does not use passwords at all</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Into the provider&#39;s own authorization server page — the app never sees it </p> <p>The whole point of OAuth is delegation without disclosure: the user logs in on the provider&#39;s own consent page, and the app receives a scoped access token instead of ever seeing the password.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q7. What is the difference between an access token and a refresh token? </strong> </p> <ol type="A"> <li>An access token is public; a refresh token is secret</li><li>They are identical but issued by different servers</li><li>An access token is short-lived and used on every API call; a refresh token is longer-lived and used only to obtain new access tokens</li><li>An access token is for reading and a refresh token is for writing</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> An access token is short-lived and used on every API call; a refresh token is longer-lived and used only to obtain new access tokens </p> <p>Access tokens are deliberately short-lived so a leaked one expires quickly; a refresh token lives longer and is used only to mint new access tokens without making the user log in again, which is why it is guarded most carefully.</p> </details> </div><div class="quiz-question"> <p> <strong>
+<ul>
+<li>
+<p><strong>Install a pre-commit secret scanner</strong> and prove it blocks a commit containing a
+key-shaped string. This is the control that acts before the mistake.</p>
+</li>
+<li>
+<p><strong>Decode a real JWT</strong> at the token level: split it on the dots and base64-decode the
+first two parts. Seeing the claims in plaintext teaches what a signed token does and
+does not hide.</p>
+</li>
+<li>
+<p><strong>Implement the client half of an OAuth flow</strong> against a provider’s sandbox, and
+observe where the code appears and where the token exchange happens.</p>
+</li>
+<li>
+<p><strong>Rotate a key end to end</strong> on something you run: issue the new one, deploy it,
+confirm traffic has moved, then revoke the old one. Doing it once calmly is what
+makes doing it under pressure possible.</p>
+</li>
+</ul>
+<hr/>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. What is the difference between authentication and authorization? </strong> </p> <ol type="A"> <li>Authentication encrypts the request; authorization decrypts it</li><li>Authentication is for users; authorization is only for machines</li><li>They are two words for the same identity check</li><li>Authentication proves who you are; authorization decides what you are allowed to do</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> Authentication proves who you are; authorization decides what you are allowed to do </p> <p>Authentication answers &quot;who are you&quot; and fails with 401; authorization answers &quot;may you do this&quot; and fails with 403. They are separate steps, and confusing them leads to fixing the wrong problem.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. Which HTTP status code means the server does not recognize your credential (authentication failed)? </strong> </p> <ol type="A"> <li>401 Unauthorized</li><li>404 Not Found</li><li>403 Forbidden</li><li>429 Too Many Requests</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> 401 Unauthorized </p> <p>401 Unauthorized signals a missing or invalid credential — an authentication failure. 403 Forbidden means you are authenticated but lack permission (an authorization failure), which is a different fix.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. How is a bearer token sent in an HTTP request? </strong> </p> <ol type="A"> <li>In the URL as ?token=...</li><li>In the Authorization header as a Bearer token</li><li>As a base64-encoded username and password</li><li>In a cookie that the browser sets automatically for you</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> In the Authorization header as a Bearer token </p> <p>A bearer token rides in the standard Authorization header with the scheme name Bearer. This is the format the great majority of modern APIs, including hosted model APIs, expect.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. Why is Basic auth unsafe over plain HTTP? </strong> </p> <ol type="A"> <li>The server refuses Basic auth unless a key is also supplied</li><li>Basic auth sends the password as an image that can be screenshotted</li><li>Base64 encoding is reversible with no key, so anyone on the network can read the password</li><li>Basic auth works only with usernames longer than 16 characters</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Base64 encoding is reversible with no key, so anyone on the network can read the password </p> <p>Basic auth base64-encodes user:pass, and base64 is encoding, not encryption — dXNlcjpwYXNz decodes straight back to user:pass. Only the TLS in HTTPS actually protects it in transit.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. Why is putting an API key in a URL query string worse than putting it in a header? </strong> </p> <ol type="A"> <li>Query strings can only hold 8 characters</li><li>Headers are automatically encrypted while query strings are not</li><li>A key in a header is ignored by most servers</li><li>URLs land in logs, history, and caches, so the key leaks</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> URLs land in logs, history, and caches, so the key leaks </p> <p>A query string is part of the URL, and URLs get logged, cached, and stored in history. A header is far less likely to be recorded by accident, so the same secret is safer in a header.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. In the OAuth 2.0 authorization-code flow, where does the user type their password? </strong> </p> <ol type="A"> <li>Into the provider&#39;s own authorization server page — the app never sees it</li><li>Into the third-party app, which forwards it to the provider</li><li>Into the API request as a Basic auth header</li><li>Nowhere; OAuth does not use passwords at all</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> Into the provider&#39;s own authorization server page — the app never sees it </p> <p>The whole point of OAuth is delegation without disclosure: the user logs in on the provider&#39;s own consent page, and the app receives a scoped access token instead of ever seeing the password.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. What is the difference between an access token and a refresh token? </strong> </p> <ol type="A"> <li>An access token is public; a refresh token is secret</li><li>An access token is short-lived; a refresh token gets new ones</li><li>They are identical but issued by different servers</li><li>An access token is for reading and a refresh token is for writing</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> An access token is short-lived; a refresh token gets new ones </p> <p>Access tokens are deliberately short-lived so a leaked one expires quickly; a refresh token lives longer and is used only to mint new access tokens without making the user log in again, which is why it is guarded most carefully.</p> </details> </div><div class="quiz-question"> <p> <strong>
 Q8. You discover an API key was pushed to a public repository ten minutes ago. What is the right first response? </strong> </p> <ol type="A"> <li>Delete the commit, since that removes the key from history</li><li>Do nothing until the monthly bill arrives to confirm misuse</li><li>Revoke the key at the provider immediately and issue a new one</li><li>Rename the variable so bots cannot find it</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Revoke the key at the provider immediately and issue a new one </p> <p>The instant a key touches a public place, treat it as burned: revoke it at the provider and issue a replacement. Deleting the commit does not help — automated scanners find keys within minutes, and the key may already be copied elsewhere.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>authentication</strong> </dt> <dd data-astro-cid-whrtx2kk>The process by which a server verifies who is making a request, usually by checking a secret credential the caller presents; failing it returns HTTP 401.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>authorization</strong> </dt> <dd data-astro-cid-whrtx2kk>The process of deciding what an already-identified caller is permitted to do; failing it returns HTTP 403, distinct from an authentication failure.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>API key</strong> </dt> <dd data-astro-cid-whrtx2kk>A long random string an API issues to your account, attached to each request (usually in a header) to identify and authenticate the caller.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>bearer token</strong> </dt> <dd data-astro-cid-whrtx2kk>A credential sent in the standard Authorization header as &quot;Bearer &lt;token&gt;&quot;; possession alone grants access, so it must be guarded like cash.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Basic auth</strong> </dt> <dd data-astro-cid-whrtx2kk>An HTTP authentication scheme that sends a username and password joined by a colon and base64-encoded in the Authorization header; safe only over TLS.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>OAuth</strong> </dt> <dd data-astro-cid-whrtx2kk>An open standard (OAuth 2.0, RFC 6749) that lets an application act on a user&#39;s behalf at another service using a scoped, revocable token, without ever seeing the user&#39;s password.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>access token</strong> </dt> <dd data-astro-cid-whrtx2kk>A short-lived credential, obtained through OAuth, that an app sends as a bearer token on each API call; it expires quickly to limit the damage from a leak.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>refresh token</strong> </dt> <dd data-astro-cid-whrtx2kk>A longer-lived OAuth credential used only to obtain new access tokens when they expire, so the user need not log in again; the more sensitive of the two tokens.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>scope</strong> </dt> <dd data-astro-cid-whrtx2kk>A named permission an OAuth token is limited to (such as read photos but not delete them), shown on the consent screen so the user can approve or refuse it.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>secret</strong> </dt> <dd data-astro-cid-whrtx2kk>Any credential — API key, token, or password — that grants access and must be kept out of code and version control; equivalent to a password in the harm a leak causes.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>least privilege</strong> </dt> <dd data-astro-cid-whrtx2kk>The practice of giving a credential the narrowest access that still does the job (read-only, one project, limited spend) so that a leak has the smallest possible blast radius.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>base64</strong> </dt> <dd data-astro-cid-whrtx2kk>A reversible text encoding with no key, used to package binary or colon-separated data for transport; it hides nothing on its own, which is why Basic auth needs TLS.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Authorization header</a> — MDN Web Docs (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://oauth.net/2/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>OAuth 2.0</a> — OAuth.net (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/OAuth" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>OAuth</a> — Wikipedia (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>HTTP authentication</a> — MDN Web Docs (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://datatracker.ietf.org/doc/html/rfc6749" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The OAuth 2.0 Authorization Framework (RFC 6749)</a> — IETF (accessed 2026-07-12) </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="25" data-astro-cid-whrtx2kk>
 Mark Day 25 as read
-</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
       surfaces for someone searching for one — it costs you a click and it is genuinely how people
-      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/ai-roadmap-365/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
 ★ Star on GitHub
-</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-024-json-and-data-serialization" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 24</span> <span class="pn__title" data-astro-cid-oerjsknp>JSON and Data Serialization</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-026-webhooks-and-event-driven-apis" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 26 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Webhooks and Event-Driven APIs</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
-</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/day-024-json-and-data-serialization" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 24</span> <span class="pn__title" data-astro-cid-oerjsknp>JSON and Data Serialization</span> </a> <a class="pn__card pn__card--next" href="/day-026-webhooks-and-event-driven-apis" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 26 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Webhooks and Event-Driven APIs</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://ocm-mcp-server.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener">LinkedIn</a> </nav> </div> </footer> <script>
       // Progressive enhancement only: the theme falls back to dark and every
       // .reveal element is visible by default (the hidden start state exists
       // only inside a prefers-reduced-motion: no-preference query).

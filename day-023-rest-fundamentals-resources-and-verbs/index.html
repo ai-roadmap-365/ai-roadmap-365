@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 23: REST Fundamentals: Resources and Verbs · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to read almost any web API as a set of resources at addresses acted on by standard verbs, map CRUD onto HTTP methods, and reason about statelessness, idempotency, and good URL design — the architecture behind nearly every API you will ever call."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-023-rest-fundamentals-resources-and-verbs/"><meta property="og:title" content="Day 23: REST Fundamentals: Resources and Verbs · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to read almost any web API as a set of resources at addresses acted on by standard verbs, map CRUD onto HTTP methods, and reason about statelessness, idempotency, and good URL design — the architecture behind nearly every API you will ever call."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-023-rest-fundamentals-resources-and-verbs/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-023-rest-fundamentals-resources-and-verbs.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 23: REST Fundamentals: Resources and Verbs · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 23: REST Fundamentals: Resources and Verbs · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to read almost any web API as a set of resources at addresses acted on by standard verbs, map CRUD onto HTTP methods, and reason about statelessness, idempotency, and good URL design — the architecture behind nearly every API you will ever call."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-023-rest-fundamentals-resources-and-verbs.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 23: REST Fundamentals: Resources and Verbs · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to read almost any web API as a set of resources at addresses acted on by standard verbs, map CRUD onto HTTP methods, and reason about statelessness, idempotency, and good URL design — the architecture behind nearly every API you will ever call."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://ai-roadmap-365.github.io/day-023-rest-fundamentals-resources-and-verbs/"><meta property="og:title" content="Day 23: REST Fundamentals: Resources and Verbs · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to read almost any web API as a set of resources at addresses acted on by standard verbs, map CRUD onto HTTP methods, and reason about statelessness, idempotency, and good URL design — the architecture behind nearly every API you will ever call."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://ai-roadmap-365.github.io/day-023-rest-fundamentals-resources-and-verbs/"><meta property="og:image" content="https://ai-roadmap-365.github.io/social/day-023-rest-fundamentals-resources-and-verbs.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 23: REST Fundamentals: Resources and Verbs · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 23: REST Fundamentals: Resources and Verbs · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to read almost any web API as a set of resources at addresses acted on by standard verbs, map CRUD onto HTTP methods, and reason about statelessness, idempotency, and good URL design — the architecture behind nearly every API you will ever call."><meta name="twitter:image" content="https://ai-roadmap-365.github.io/social/day-023-rest-fundamentals-resources-and-verbs.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
       // Dark is the default regardless of OS preference - this is a dark-first
       // design. A visitor who picks light with the toggle keeps it. Applied
       // before first paint so there is no flash of the wrong theme.
@@ -11,74 +11,170 @@
         }
         document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
       })();
-    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+    </script><link rel="stylesheet" href="/_astro/_day_.CiF6NwwU.css">
 <style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
 .starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
-</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="site-home" href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener"> <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M15 5l-7 7 7 7"></path> </svg>
+Sandeep Bazar
+</a> <a class="brand" href="/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
 365 Days of AI
-</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
-Labs
-</a> </header> <main id="main">  <article data-day="23" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>APIs and the Web</span>  › 
-Day 23 </p> <h1 data-astro-cid-whrtx2kk>Day 23: REST Fundamentals: Resources and Verbs</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-023-rest-fundamentals-resources-and-verbs.png" width="1200" height="630" alt="Day 23 of 365 — REST Fundamentals: Resources and Verbs" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to read almost any web API as a set of resources at addresses acted on by standard verbs, map CRUD onto HTTP methods, and reason about statelessness, idempotency, and good URL design — the architecture behind nearly every API you will ever call.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>APIs and the Web</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-023-rest-fundamentals-resources-and-verbs" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-023-rest-fundamentals-resources-and-verbs</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
-cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-023-rest-fundamentals-resources-and-verbs</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
-You can also <a href="/ai-roadmap-365/labs/day-023-rest-fundamentals-resources-and-verbs" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
-</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Define REST as an architectural style and explain the resource-and-verb model, including why URLs name nouns (/users/1) rather than actions (/getUser)</li><li data-astro-cid-whrtx2kk>Map the four CRUD operations onto the HTTP verbs GET, POST, PUT, PATCH, and DELETE, and state which verb targets a collection versus an item</li><li data-astro-cid-whrtx2kk>Explain statelessness and why it lets a REST service scale horizontally behind a load balancer</li><li data-astro-cid-whrtx2kk>Distinguish a resource from its representation, and identify JSON as the common representation format</li><li data-astro-cid-whrtx2kk>Apply safety and idempotency to decide which verbs are safe to retry, and why blindly retrying a POST is risky</li><li data-astro-cid-whrtx2kk>Compare REST with RPC/gRPC and GraphQL at a high level and choose the right style for a given situation</li><li data-astro-cid-whrtx2kk>Run a full create-read-update-delete cycle against a real REST API with curl and read the status codes and representations it returns</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Day 18 (HTTP requests, responses, and methods) and Day 22 (what an API is)</li><li data-astro-cid-whrtx2kk>A terminal with curl and network access; python3 optional for pretty-printing JSON</li></ul> <h2 id="why-this-matters">Why this matters</h2>
-<p>Yesterday you learned that an API is a contract for asking one program to do something for you. Today you learn the single most common shape that contract takes on the web — REST — because it is the shape almost every service you will ever call is built in. When you fetch data from a weather service, a payments provider, a maps backend, or a hosted model, you are almost always talking to a REST or REST-like API, and the whole design comes down to two ideas: <em>things</em> (called resources) each live at their own address, and a small fixed set of <em>verbs</em> act on them.</p>
-<p>Getting these two ideas straight has direct, practical payoffs. It is why you can guess that <code>GET /users/1</code> reads user 1 and <code>DELETE /users/1</code> removes them without reading a single page of documentation — a well-designed REST API is predictable, and predictability is speed. It is why a request that “worked yesterday and fails today” can often be diagnosed in seconds: you know a <code>POST</code> was supposed to create something, so a <code>409</code> tells you it already exists. It is why you can retry a failed <code>GET</code> a hundred times without fear but must think twice before retrying a <code>POST</code>. And when you eventually build your own service — including a service that wraps a model behind an endpoint — the quality of your REST design decides whether other developers find it obvious or maddening.</p>
-<p>Today you build that mental model from the ground up. Not a framework, not a library, just the architectural style itself: what a resource is, how its address (URL) should be shaped, which verb does which job, why the server refuses to remember you between requests, and how REST compares to the two main alternatives you will meet. By the end you will read almost any web API’s endpoints like a map, and in the lab you will run a full create-read-update-delete cycle against a real API with your own hands.</p>
+</a> <nav aria-label="Primary"> <a href="/sections">Courses</a> <a href="/labs">Labs</a> <a href="/catalog">Catalogs</a> <a href="/search">Search</a> <a href="/glossary">Glossary</a> <a href="/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+GitHub
+</a> </header> <main id="main">  <article data-day="23" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/sections/computing-foundations">Computing Foundations</a>  ›  <span>APIs and the Web</span>  › 
+Day 23 </p> <h1 data-astro-cid-whrtx2kk>Day 23: REST Fundamentals: Resources and Verbs</h1>  <img class="day-hero" src="/social/day-023-rest-fundamentals-resources-and-verbs.png" width="1200" height="630" alt="Day 23 of 365 — REST Fundamentals: Resources and Verbs" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to read almost any web API as a set of resources at addresses acted on by standard verbs, map CRUD onto HTTP methods, and reason about statelessness, idempotency, and good URL design — the architecture behind nearly every API you will ever call.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>APIs and the Web</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/computing-foundations/day-023-rest-fundamentals-resources-and-verbs" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/computing-foundations/day-023-rest-fundamentals-resources-and-verbs</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/ai-roadmap-365/ai-roadmap-365.github.io.git
+cd ai-roadmap-365.github.io</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-023-rest-fundamentals-resources-and-verbs</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/labs/day-023-rest-fundamentals-resources-and-verbs" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Define REST as an architectural style and explain the resource-and-verb model, including why URLs name nouns (/users/1) rather than actions (/getUser)</li><li data-astro-cid-whrtx2kk>Map the four CRUD operations onto the HTTP verbs GET, POST, PUT, PATCH, and DELETE, and state which verb targets a collection versus an item</li><li data-astro-cid-whrtx2kk>Explain statelessness and why it lets a REST service scale horizontally behind a load balancer</li><li data-astro-cid-whrtx2kk>Distinguish a resource from its representation, and identify JSON as the common representation format</li><li data-astro-cid-whrtx2kk>Apply safety and idempotency to decide which verbs are safe to retry, and why blindly retrying a POST is risky</li><li data-astro-cid-whrtx2kk>Compare REST with RPC/gRPC and GraphQL at a high level and choose the right style for a given situation</li><li data-astro-cid-whrtx2kk>Run a full create-read-update-delete cycle against a real REST API with curl and read the status codes and representations it returns</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk>Day 18 (HTTP requests, responses, and methods) and Day 22 (what an API is)</li><li data-astro-cid-whrtx2kk>A terminal with curl and network access; python3 optional for pretty-printing JSON</li> </ul> <h2 id="why-this-matters">Why this matters</h2>
+<ul>
+<li>
+<p><strong>Most APIs you meet are REST-shaped</strong>, so learning one teaches you most of the
+next.</p>
+</li>
+<li>
+<p><strong>The predictability is the product.</strong> Once you know the pattern, you can guess an
+endpoint correctly before reading the documentation.</p>
+</li>
+<li>
+<p><strong><code>POST</code> is not idempotent</strong>, and today that fact acquires teeth: it is the
+difference between a robust integration and a double charge.</p>
+</li>
+<li>
+<p><strong>Statelessness is why services scale</strong>, and it is why your credential travels on
+every request rather than once at login.</p>
+</li>
+<li>
+<p><strong>Designing your own API well</strong> starts with getting resources and verbs right.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="the-idea-in-plain-language">The idea in plain language</h2>
-<p>REST stands for <strong>Representational State Transfer</strong>. Behind the intimidating name is a calm idea: model everything your service offers as a collection of <strong>resources</strong> — the nouns of your system, such as users, orders, articles, or messages — and give each one a stable address. Then let clients act on those resources using the handful of HTTP verbs you already met in the HTTP lesson. You do not invent new operations; you reuse <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, and <code>DELETE</code>, and the <em>combination</em> of a verb and an address says everything.</p>
-<p>The crucial discipline is that the address names a <strong>thing, not an action</strong>. A good REST URL is <code>/users/1</code> — “user number 1” — and the verb decides what you do to that user. A bad, un-RESTful URL bakes the action into the address: <code>/getUser?id=1</code>, <code>/createUser</code>, <code>/deleteUser?id=1</code>. Those work, but they throw away the whole benefit, because now the client must learn a fresh action name for every operation instead of reusing verbs it already knows. In REST, <code>/users</code> is the shelf of all users (a <strong>collection</strong>), <code>/users/1</code> is one user (an <strong>item</strong>), and <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, and <code>DELETE</code> are the fixed set of things you can do to shelves and items.</p>
-<p>Two more ideas round out the picture. First, the server sends you a <strong>representation</strong> of a resource, not the resource itself — usually a chunk of JSON describing user 1, the way a library catalogue card describes a book without being the book. Second, REST is <strong>stateless</strong>: each request carries everything the server needs, and the server remembers nothing about you between requests. Resources, addresses, verbs, representations, statelessness — learn those five words and you have the architecture.</p>
+<p><img src="/_astro/nouns-not-verbs.DWDV9M9z_eplKw.svg" alt="Diagram: verb-based paths compared with resource-based paths" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="424"></p>
+<ul>
+<li>
+<p><strong>REST names things, and HTTP supplies the actions.</strong> Paths are nouns; methods are
+verbs.</p>
+</li>
+<li>
+<p><strong>A collection holds items.</strong> <code>/users</code> is all of them; <code>/users/1</code> is one.</p>
+</li>
+<li>
+<p><strong>Four operations cover almost everything</strong>: create, read, update, delete.</p>
+</li>
+<li>
+<p><strong>Every request stands alone.</strong> The server remembers nothing between them, which is
+what lets a thousand servers answer interchangeably.</p>
+</li>
+<li>
+<p><strong>You never touch a resource</strong>, only representations of it — usually JSON snapshots
+of its current state.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="historical-background">Historical background</h2>
-<p>REST was not invented as a product or a framework; it was <em>described</em>, after the fact, as the style the web had already grown into. In 2000, <strong>Roy Fielding</strong> — a computer scientist who had co-authored the HTTP and URL specifications through the 1990s — submitted his doctoral dissertation at the University of California, Irvine. Its fifth chapter, titled “Representational State Transfer (REST),” gave a name and a precise set of constraints to the architecture that had made the World Wide Web scale from a physics lab to the planet.</p>
-<p>Fielding’s question was essentially: <em>why did the web work so well?</em> Countless independent servers and browsers, written by people who never met, cooperated flawlessly and kept doing so as the system grew a millionfold. He argued the answer was a specific set of architectural constraints, and REST was his name for the bundle of them: a <strong>client–server</strong> split, <strong>statelessness</strong>, <strong>cacheability</strong>, a <strong>uniform interface</strong> (the same small set of methods and addressable resources everywhere), a <strong>layered system</strong> (proxies and gateways a client cannot even see), and an optional <strong>code-on-demand</strong>. Follow those constraints and you get systems that are scalable, resilient, and evolvable; break them and you lose those properties one by one.</p>
-<p>Through the 2000s, as web APIs multiplied, “REST” became the popular shorthand for “an HTTP API organized around resources and standard verbs,” and it steadily displaced the heavier, more ceremonious styles that came before it (you will meet one of them, RPC, later in this lesson). In practice, most APIs people call “RESTful” today satisfy some but not all of Fielding’s original constraints — the field even coined the half-joking term “REST-ish” for them. That is fine and worth knowing: what you will build and consume day to day is the pragmatic, resource-and-verb version of REST, and understanding Fielding’s stricter original helps you see why the pragmatic version behaves the way it does.</p>
+<ul>
+<li>
+<p><strong>Roy Fielding described REST in his 2000 dissertation</strong>, as an architectural style
+rather than a standard or a specification.</p>
+</li>
+<li>
+<p><strong>He was describing the web itself</strong>, and arguing that HTTP’s existing design was
+already the answer people kept trying to replace.</p>
+</li>
+<li>
+<p><strong>The alternative at the time was SOAP</strong> — XML envelopes, generated stubs, a
+toolchain on both ends, and one endpoint that all operations tunnelled through.</p>
+</li>
+<li>
+<p><strong>REST won on simplicity.</strong> No code generation, no toolchain, and a URL you could
+paste into a browser.</p>
+</li>
+<li>
+<p><strong>The name drifted almost immediately.</strong> “REST API” today usually means
+“JSON over HTTP with sensible paths”, which Fielding would not recognise as REST.</p>
+</li>
+<li>
+<p><strong>That drift is fine to know about and pointless to argue over.</strong> Learn the pattern
+people actually use.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
-<p>REST is an <strong>architectural style for networked software</strong> — a set of design constraints, not a protocol, a standard, or a piece of software you install. Every word of that matters. <em>Architectural style</em> means it is a way of organizing a system, like “load-bearing walls” is a way of organizing a building, not a specific brick. <em>Constraints</em> means it is defined by rules you agree to follow (address resources with URLs, act on them with standard verbs, keep the server stateless), and following them buys you scalability and predictability. Because REST is a style and not a standard, there is no official validator that stamps an API “REST-compliant”; there are only APIs that follow the constraints more or less faithfully.</p>
-<p>It helps just as much to say what REST is not. It is <strong>not the same as HTTP</strong> — HTTP is the underlying protocol REST almost always rides on, but you could design a non-REST HTTP API (an RPC-over-HTTP one, for instance), and REST as a set of ideas is not strictly bound to HTTP. It is <strong>not JSON</strong> — JSON is merely the most common <em>representation format</em> REST APIs use; a REST API could return XML, HTML, or anything else, and JSON gets its own full lesson tomorrow. It is <strong>not a framework or library</strong> — tools help you build REST APIs, but REST itself is the design underneath. And REST is <strong>not automatically “good API design”</strong>: you can follow every surface rule and still build something confusing, and you can bend a rule deliberately for good reason. REST is a set of principles that, followed thoughtfully, tend to produce clear, durable APIs.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Common misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”REST is a protocol you implement.”</td><td>REST is an architectural <em>style</em> — a set of constraints; HTTP is the protocol it usually rides on.</td></tr><tr><td>”REST means JSON.”</td><td>JSON is the most common <em>representation</em>, but REST is format-agnostic; the resource is separate from how it is serialized.</td></tr><tr><td>”The URL should say what to do, like <code>/getUser</code>.”</td><td>The URL names a resource (<code>/users/1</code>); the HTTP <em>verb</em> says what to do. Actions belong in verbs, not paths.</td></tr><tr><td>”<code>POST</code> and <code>PUT</code> are interchangeable.”</td><td><code>POST</code> creates (not idempotent); <code>PUT</code> replaces a known resource (idempotent). Confusing them causes duplicates or lost data.</td></tr><tr><td>”A RESTful server remembers my session.”</td><td>REST is stateless by design; each request must carry its own identity (a token), or the server has no idea who you are.</td></tr></tbody></table>
+<p><strong>It is:</strong></p>
+<ul>
+<li>A set of constraints on how to use HTTP, not a protocol of its own.</li>
+<li>Resource-oriented: the path names a thing, the method names the action.</li>
+<li>Stateless, cacheable and uniform — the properties that make it scale.</li>
+</ul>
+<p><strong>It is not:</strong></p>
+<ul>
+<li>
+<p><strong>Not a standard.</strong> There is no REST specification to comply with, which is why
+APIs vary so much while all claiming the name.</p>
+</li>
+<li>
+<p><strong>Not “JSON over HTTP”.</strong> That is the common usage, and it is a subset.</p>
+</li>
+<li>
+<p><strong>Not always the right shape.</strong> Operations that are genuinely not CRUD — “translate
+this”, “run this simulation” — fit awkwardly, and forcing them is worse than not.</p>
+</li>
+<li>
+<p><strong>Not a guarantee of good design.</strong> A REST-shaped API can still be badly named,
+inconsistent and undocumented.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
-<p>The problem REST names and solves is <strong>how to let enormous numbers of independently built clients and servers cooperate over a network without coordinating with each other</strong>. Before the web’s resource-and-verb model won out, integrating two systems often meant learning a bespoke vocabulary of operations for every single service: one API had <code>fetchCustomerRecord</code>, another had <code>getClient</code>, a third had <code>retrieveAccountByID</code>, and each spoke its own dialect. Every new integration was a fresh education. There was no way to <em>guess</em> how an unfamiliar API worked, because there was no shared grammar.</p>
-<p>REST’s answer is the <strong>uniform interface</strong>: agree, once and for everyone, that things are resources at addresses and that a fixed set of verbs acts on them. Now the grammar is shared. If you know one REST API, you can make a good guess at the next one — <code>GET /orders</code> probably lists orders, <code>POST /orders</code> probably creates one, <code>GET /orders/42</code> probably reads order 42. The cost of learning a new API collapses, because most of it is the vocabulary you already know; only the specific resources differ.</p>
-<p>The deeper problems REST solves flow from that uniformity. <strong>Statelessness</strong> lets a provider run a thousand identical copies of a server behind a load balancer and send any request to any copy, because no copy has to remember your previous request — the same property that lets web services and model APIs serve millions of users at once. <strong>Cacheability</strong> means a <code>GET</code>, being a safe read, can be stored and reused by any layer between you and the server, saving round trips. And the <strong>layered system</strong> lets providers slip caches, gateways, and security proxies between client and server invisibly, because every layer speaks the same uniform interface. REST, in short, is the design that makes web-scale cooperation <em>cheap</em> — and that is exactly why it became the default shape of the API economy you are now learning to work in.</p>
+<ul>
+<li>
+<p><strong>Predictability.</strong> If you know <code>/users</code> and <code>/users/1</code>, you can guess
+<code>/users/1/orders</code> — and be right.</p>
+</li>
+<li>
+<p><strong>No toolchain.</strong> A URL and a method are all a client needs, in any language.</p>
+</li>
+<li>
+<p><strong>Cacheability.</strong> Because <code>GET</code> is safe, anything on the path may keep a copy, and
+the web’s whole caching infrastructure applies for free.</p>
+</li>
+<li>
+<p><strong>Scalability through statelessness.</strong> Any server can answer any request.</p>
+</li>
+<li>
+<p><strong>Visibility.</strong> An intermediary can understand a request without understanding the
+application, which is what makes proxies, gateways and logs useful.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="how-it-works">How it works</h2>
-<p>Let’s build the model piece by piece: resources and their addresses, the verbs that act on them, statelessness, representations, and the two properties — safety and idempotency — that make the whole thing predictable.</p>
 <h3 id="resources-collections-and-items">Resources, collections, and items</h3>
-<p>A <strong>resource</strong> is any thing your service exposes that is worth naming: a user, an order, a photo, a comment. Resources come in two shapes that share an address family. A <strong>collection</strong> is a resource that holds many others — <code>/users</code> is the collection of all users. An <strong>item</strong> is a single member of a collection, addressed by appending an identifier — <code>/users/1</code> is the user whose id is 1. Collections nest naturally: <code>/users/1/orders</code> is the collection of orders belonging to user 1, and <code>/users/1/orders/42</code> is one specific order of theirs. Read a REST URL left to right and it reads like a path through a filing system: <em>users → user 1 → their orders → order 42</em>.</p>
-<p>The golden rule from the plain-language section returns here with force: <strong>resource addresses are nouns, and the verb carries the action.</strong> The moment a verb creeps into your path — <code>/users/1/delete</code>, <code>/getOrders</code>, <code>/createUser</code> — you have stopped doing REST and started reinventing a bespoke operation vocabulary, throwing away the predictability that was the whole point.</p>
-<p><img src="/ai-roadmap-365/_astro/rest-resources.DuJpVbTb_1JMqKY.svg" alt="Architecture diagram: the collection /users and the item /users/1, with the four verbs GET, POST, PUT/PATCH, and DELETE acting on them" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="460"></p>
+<p><img src="/_astro/collection-or-item.CBejoJaD_Z16hImP.svg" alt="Diagram: which HTTP methods act on collections and which act on items" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<p><img src="/_astro/rest-resources.DuJpVbTb_1JMqKY.svg" alt="Architecture diagram: the collection /users and the item /users/1, with the four verbs GET, POST, PUT/PATCH, and DELETE acting on them" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="460"></p>
+<ul>
+<li>
+<p><strong>A resource is anything worth naming</strong>: a user, an order, a photo, a comment.</p>
+</li>
+<li>
+<p><strong>A collection holds many</strong> — <code>/users</code>.</p>
+</li>
+<li>
+<p><strong>An item is one member</strong>, addressed by identifier — <code>/users/1</code>.</p>
+</li>
+<li>
+<p><strong>Collections nest naturally</strong>: <code>/users/1/orders</code> is that user’s orders, and
+<code>/users/1/orders/42</code> is one of them.</p>
+</li>
+<li>
+<p><strong>Read a REST URL left to right</strong> and it reads like a path through a filing system.</p>
+</li>
+<li>
+<p><strong>The golden rule: paths are nouns.</strong> The moment a verb appears — <code>/getOrders</code>,
+<code>/users/1/delete</code> — you have stopped doing REST and started inventing a bespoke
+vocabulary, which throws away the predictability that was the point.</p>
+</li>
+</ul>
 <h3 id="the-verbs-mapped-to-crud">The verbs, mapped to CRUD</h3>
-<p>Almost everything you do to stored data is one of four operations remembered by the acronym <strong>CRUD</strong>: <strong>C</strong>reate, <strong>R</strong>ead, <strong>U</strong>pdate, <strong>D</strong>elete. REST maps those four operations onto the HTTP methods you met in the HTTP lesson, and this mapping is the heart of the whole style:</p>
+<p><img src="/_astro/put-versus-patch.QQv-QIgy_ZIALX.svg" alt="Diagram: a PUT request compared with a PATCH request" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
 
 
 
@@ -126,23 +222,74 @@ You can also <a href="/ai-roadmap-365/labs/day-023-rest-fundamentals-resources-a
 
 
 
-<table><thead><tr><th>CRUD operation</th><th>HTTP verb</th><th>Typical target</th><th>What it does</th><th>Success code</th></tr></thead><tbody><tr><td>Read</td><td><code>GET</code></td><td>collection or item</td><td>Fetch a representation; change nothing</td><td><code>200 OK</code></td></tr><tr><td>Create</td><td><code>POST</code></td><td>collection</td><td>Add a new item to the collection; server assigns the id</td><td><code>201 Created</code></td></tr><tr><td>Update (replace)</td><td><code>PUT</code></td><td>item</td><td>Replace the item entirely with the body you send</td><td><code>200 OK</code> (or <code>204</code>)</td></tr><tr><td>Update (partial)</td><td><code>PATCH</code></td><td>item</td><td>Change only the fields you send, leaving the rest</td><td><code>200 OK</code></td></tr><tr><td>Delete</td><td><code>DELETE</code></td><td>item</td><td>Remove the item</td><td><code>200</code>/<code>204 No Content</code></td></tr></tbody></table>
-<p>Notice the pattern. You <code>POST</code> to a <strong>collection</strong> to create — <code>POST /users</code> means “add a new user to the users collection,” and the server assigns the new id and usually returns <code>201 Created</code> with the created resource and its address. You <code>GET</code>, <code>PUT</code>, <code>PATCH</code>, and <code>DELETE</code> an <strong>item</strong> — these all name a specific <code>/users/1</code> you already know. The difference between <code>PUT</code> and <code>PATCH</code> is worth memorizing: <code>PUT</code> <strong>replaces</strong> the whole resource with what you send (leave out a field and you may erase it), while <code>PATCH</code> <strong>merges</strong> only the fields you send (leave out a field and it is left untouched). Reach for <code>PATCH</code> when you want to change one attribute; reach for <code>PUT</code> when you have the complete new version in hand.</p>
-<p><img src="/ai-roadmap-365/_astro/crud-http-map.CRWbnY1t_1JMqKY.svg" alt="Flow diagram: the CRUD operations Create, Read, Update, and Delete mapped to the HTTP methods POST, GET, PUT and PATCH, and DELETE" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="460"></p>
+<table><thead><tr><th>Operation</th><th>Verb</th><th>Target</th><th>What it does</th><th>Success</th></tr></thead><tbody><tr><td>Read</td><td><code>GET</code></td><td>collection or item</td><td>Fetch a representation; change nothing</td><td><code>200</code></td></tr><tr><td>Create</td><td><code>POST</code></td><td><strong>collection</strong></td><td>Add an item; the server assigns the id</td><td><code>201</code></td></tr><tr><td>Update (replace)</td><td><code>PUT</code></td><td>item</td><td>Replace it entirely with your body</td><td><code>200</code>/<code>204</code></td></tr><tr><td>Update (partial)</td><td><code>PATCH</code></td><td>item</td><td>Change only the fields you sent</td><td><code>200</code></td></tr><tr><td>Delete</td><td><code>DELETE</code></td><td>item</td><td>Remove it</td><td><code>200</code>/<code>204</code></td></tr></tbody></table>
+<p><img src="/_astro/crud-http-map.CRWbnY1t_1JMqKY.svg" alt="Flow diagram: the CRUD operations Create, Read, Update, and Delete mapped to the HTTP methods POST, GET, PUT and PATCH, and DELETE" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="460"></p>
+<ul>
+<li>
+<p><strong>You <code>POST</code> to a collection to create.</strong> The server assigns the id and usually
+returns <code>201</code> with the new resource and its address.</p>
+</li>
+<li>
+<p><strong>You <code>GET</code>, <code>PUT</code>, <code>PATCH</code> and <code>DELETE</code> an item</strong> you can already name.</p>
+</li>
+<li>
+<p><strong><code>PUT</code> replaces; <code>PATCH</code> merges.</strong> Leave a field out of a <code>PUT</code> and you may erase
+it. Leave it out of a <code>PATCH</code> and it is untouched.</p>
+</li>
+<li>
+<p><strong>Reach for <code>PATCH</code> to change one attribute</strong>, and <code>PUT</code> when you hold the complete
+new version.</p>
+</li>
+</ul>
 <h3 id="statelessness">Statelessness</h3>
-<p>REST inherits HTTP’s <strong>statelessness</strong> and leans on it hard. Each request must be <strong>self-contained</strong>: it carries everything the server needs to understand and authorize it, and the server keeps no memory of you between requests. If a request needs to prove who you are, it carries a credential — typically an <code>Authorization: Bearer &lt;token&gt;</code> header — on <em>every</em> request, not just the first. There is no “logged-in session” living on the server that later requests silently ride on.</p>
-<p>This feels wasteful until you see what it buys. Because no request depends on server-side memory of a previous one, any request can go to any copy of the server. A provider can run a thousand identical servers behind a load balancer, add or remove copies as traffic changes, and restart any of them mid-conversation, and no client ever notices. Statelessness is the property that turns “one server” into “as many servers as we need,” and it is the main reason REST scales the way it does.</p>
+<p><img src="/_astro/stateless-scaling.BG2b9v5H_Z16hImP.svg" alt="Diagram: how statelessness allows any server to answer any request" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<ul>
+<li>
+<p><strong>Each request is self-contained</strong>: it carries everything the server needs to
+understand and authorise it.</p>
+</li>
+<li>
+<p><strong>The credential travels on every request</strong>, typically as
+<code>Authorization: Bearer &lt;token&gt;</code> — there is no server-side session later requests
+ride on.</p>
+</li>
+<li>
+<p><strong>That feels wasteful until you see what it buys.</strong> Any request can go to any copy
+of the server.</p>
+</li>
+<li>
+<p><strong>A provider can run a thousand identical servers</strong>, add and remove them as traffic
+changes, and restart any of them mid-conversation, and no client notices.</p>
+</li>
+<li>
+<p><strong>Statelessness is what turns “one server” into “as many as we need”.</strong></p>
+</li>
+</ul>
 <h3 id="representations">Representations</h3>
-<p>You never touch a resource directly; you exchange <strong>representations</strong> of it. When you <code>GET /users/1</code>, the server does not hand you the user — it hands you a document <em>describing</em> the user’s current state, almost always as JSON:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="json"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#79B8FF">  &quot;id&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">,</span></span>
 <span class="line"><span style="color:#79B8FF">  &quot;name&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;Ada Lovelace&quot;</span><span style="color:#E1E4E8">,</span></span>
 <span class="line"><span style="color:#79B8FF">  &quot;email&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;ada@example.org&quot;</span><span style="color:#E1E4E8">,</span></span>
 <span class="line"><span style="color:#79B8FF">  &quot;role&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;admin&quot;</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
-<p>That JSON is a representation: a snapshot of the resource’s state, serialized into a format both sides understand. The same resource could be represented as XML, as HTML for a browser, or as a compact binary — the resource (“user 1”) is separate from its representation (“this JSON”). The client can even say which format it prefers using the <code>Accept</code> header, and the server declares what it sent with <code>Content-Type: application/json</code>. The name <strong>Representational State Transfer</strong> is now readable: you transfer representations of resource state back and forth. When you <code>PUT</code> a new body, you are sending a representation of the state you want the resource to have next; when you <code>GET</code>, you receive a representation of its state now.</p>
-<h3 id="safety-and-idempotency-revisited">Safety and idempotency revisited</h3>
-<p>Two properties from the HTTP lesson decide how you may safely treat each verb, and REST depends on them completely. A verb is <strong>safe</strong> if it only reads and never changes server state — <code>GET</code> is safe, which is why caches and crawlers repeat it freely. A verb is <strong>idempotent</strong> if making the identical request many times leaves the server in the same state as making it once.</p>
+<ul>
+<li>
+<p><strong>You never touch the resource</strong>, only a document describing its current state.</p>
+</li>
+<li>
+<p><strong>The same resource could be JSON, XML, HTML or binary.</strong> The resource (“user 1”) is
+separate from its representation (“this JSON”).</p>
+</li>
+<li>
+<p><strong><code>Accept</code> says what you want; <code>Content-Type</code> says what you got.</strong></p>
+</li>
+<li>
+<p><strong>The name is now readable.</strong> Representational State Transfer: you transfer
+representations of resource state back and forth.</p>
+</li>
+</ul>
+<h3 id="safety-and-idempotency">Safety and idempotency</h3>
+<p><img src="/_astro/safe-idempotent-retry.Dgs_4iRk_Z16hImP.svg" alt="Diagram: which HTTP verbs are safe to retry after a timeout" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
 
 
 
@@ -184,10 +331,24 @@ You can also <a href="/ai-roadmap-365/labs/day-023-rest-fundamentals-resources-a
 
 
 
-<table><thead><tr><th>Verb</th><th>Safe?</th><th>Idempotent?</th><th>Why it matters</th></tr></thead><tbody><tr><td><code>GET</code></td><td>Yes</td><td>Yes</td><td>Read freely; cache and retry without fear</td></tr><tr><td><code>POST</code></td><td>No</td><td><strong>No</strong></td><td>Two identical <code>POST</code>s may create two resources — never blindly retry</td></tr><tr><td><code>PUT</code></td><td>No</td><td>Yes</td><td>Replacing with the same body twice equals doing it once</td></tr><tr><td><code>PATCH</code></td><td>No</td><td>Usually no</td><td>A relative change (e.g. “add 1”) applied twice differs from once</td></tr><tr><td><code>DELETE</code></td><td>No</td><td>Yes</td><td>Deleting an already-deleted item leaves it deleted</td></tr></tbody></table>
-<p>The single most important line in that table is that <strong><code>POST</code> is not idempotent</strong>. If you <code>POST /orders</code> to place an order, the network times out, and your retry logic fires, you may place two orders and charge a customer twice. <code>PUT /users/1</code> and <code>DELETE /users/1</code>, by contrast, are idempotent — repeating them is harmless — which is exactly why a flaky network is safe for them and dangerous for <code>POST</code>. This distinction is not academic; it is the difference between a robust integration and a mysterious double-charge, and it is the reason retry logic must know which verb it is retrying.</p>
+<table><thead><tr><th>Verb</th><th>Safe?</th><th>Idempotent?</th><th>Consequence</th></tr></thead><tbody><tr><td><code>GET</code></td><td>Yes</td><td>Yes</td><td>Cache and retry freely</td></tr><tr><td><code>POST</code></td><td>No</td><td><strong>No</strong></td><td>Two identical calls may create two resources</td></tr><tr><td><code>PUT</code></td><td>No</td><td>Yes</td><td>Replacing twice equals replacing once</td></tr><tr><td><code>PATCH</code></td><td>No</td><td>Usually no</td><td>A relative change applied twice differs</td></tr><tr><td><code>DELETE</code></td><td>No</td><td>Yes</td><td>Deleting a deleted item leaves it deleted</td></tr></tbody></table>
+<ul>
+<li>
+<p><strong>The most important line is that <code>POST</code> is not idempotent.</strong></p>
+</li>
+<li>
+<p><strong><code>POST /orders</code>, a timeout, and a retry</strong> can place two orders and charge twice.</p>
+</li>
+<li>
+<p><strong><code>PUT</code> and <code>DELETE</code> are safe to repeat</strong>, which is exactly why a flaky network is
+survivable for them and dangerous for <code>POST</code>.</p>
+</li>
+<li>
+<p><strong>Retry logic must know which verb it is retrying.</strong></p>
+</li>
+</ul>
 <h3 id="hateoas-at-a-glance">HATEOAS at a glance</h3>
-<p>The strictest form of REST adds one more constraint with an unlovely acronym: <strong>HATEOAS</strong>, “Hypermedia As The Engine Of Application State.” The idea is that a resource’s representation should include <strong>links</strong> telling the client what it can do next and where, so the client navigates the API by following links rather than by hard-coding URLs. A hypermedia-rich response to <code>GET /users/1</code> might look like:</p>
+<p><img src="/_astro/hateoas-links.CcsObYjC_ZIALX.svg" alt="Diagram: a client following hypermedia links compared with one building URLs" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="json"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#79B8FF">  &quot;id&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">,</span></span>
 <span class="line"><span style="color:#79B8FF">  &quot;name&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;Ada Lovelace&quot;</span><span style="color:#E1E4E8">,</span></span>
@@ -197,53 +358,132 @@ You can also <a href="/ai-roadmap-365/labs/day-023-rest-fundamentals-resources-a
 <span class="line"><span style="color:#79B8FF">    &quot;edit&quot;</span><span style="color:#E1E4E8">:   { </span><span style="color:#79B8FF">&quot;href&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;/users/1&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">&quot;method&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;PUT&quot;</span><span style="color:#E1E4E8"> }</span></span>
 <span class="line"><span style="color:#E1E4E8">  }</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
-<p>The client reads the <code>_links</code> and follows them, the way you click links on a web page instead of typing every URL by hand — which is precisely how <em>your browser</em> uses the web, the purest REST system there is. In practice, most APIs people call RESTful today skip full HATEOAS and let clients construct URLs from documentation instead; that is the pragmatic “REST-ish” reality. It is still worth recognizing, because when an API does return links, following them keeps your client working even if the server later reorganizes its URLs.</p>
+<ul>
+<li>
+<p><strong>The strictest REST includes links</strong> telling the client what it can do next.</p>
+</li>
+<li>
+<p><strong>The client follows links rather than constructing URLs</strong>, exactly as you click
+through a web page instead of typing every address.</p>
+</li>
+<li>
+<p><strong>Most APIs called RESTful today skip this</strong> and let clients build URLs from
+documentation. That is the pragmatic reality.</p>
+</li>
+<li>
+<p><strong>Where an API does return links, follow them.</strong> Your client keeps working when the
+server reorganises its URLs.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="an-everyday-analogy">An everyday analogy</h2>
-<p>Picture a large, well-run public <strong>library</strong>, and let it carry the whole architecture.</p>
-<p>Every item the library holds is a <strong>resource</strong>, and every one has a fixed <strong>address</strong> — its call number on the shelf. The address names the <em>thing</em>: the shelf labelled “Astronomy” is a <strong>collection</strong>, and a single book with call number 520.1 is an <strong>item</strong>. Crucially, the label on the shelf is a noun — “Astronomy” — not an instruction like “GoFetchMeAnAstronomyBook.” That is the noun-not-verb rule: the address tells you <em>what</em>, never <em>what to do</em>.</p>
-<p>What you <em>do</em> with a book is a separate, small, fixed set of <strong>verbs</strong>, exactly like REST’s methods. You can <strong>read</strong> a book on the spot without changing anything — that is <code>GET</code>, and it is <em>safe</em>: a thousand people reading the same book leave it unchanged. You can <strong>add</strong> a new book to the Astronomy shelf, and the librarian assigns it the next call number and files it — that is <code>POST</code> to the collection, and it is <em>not</em> idempotent: hand in two copies and you get two entries on the shelf. You can <strong>replace</strong> a worn-out book with a fresh identical edition — that is <code>PUT</code>, and it is idempotent: swapping in the same replacement twice is no different from once. You can <strong>correct one detail</strong> on a book’s catalogue card without reprinting the whole card — that is <code>PATCH</code>. And you can <strong>remove</strong> a book from circulation — that is <code>DELETE</code>, also idempotent: a book already withdrawn stays withdrawn no matter how many times you ask.</p>
-<p>The librarian is <strong>stateless</strong>: they do not remember you between visits. Every single time you want to borrow, you hand over your library card along with your request; the librarian never assumes “oh, it’s you again” from a previous visit. That is why REST puts a token on every request. And when you ask for a book, you rarely get the physical object flung at you — you get a <strong>representation</strong>: a printed copy, a large-print edition, an audiobook. Same book, different representation, chosen to suit you, just as a REST server can serve the same resource as JSON or XML depending on your <code>Accept</code> header. Finally, the catalogue card for each book lists <strong>where to find related material</strong> — “see also call number 523.1” — and you follow those pointers around the library rather than memorizing its entire floor plan. That is HATEOAS: the resource tells you what you can do next. Keep this library in mind and REST stops being an acronym and becomes a place you already know how to walk around.</p>
+<p><img src="/_astro/rest-status-per-verb.BXhf3o4M_Z16hImP.svg" alt="Diagram: the expected status codes for each REST verb" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<p>A library catalogue.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>The library</th><th>REST</th></tr></thead><tbody><tr><td>The shelf of all fiction</td><td>A collection, <code>/books</code></td></tr><tr><td>One book with a number</td><td>An item, <code>/books/1</code></td></tr><tr><td>Its section, then its shelf, then the book</td><td>Nested paths</td></tr><tr><td>Read it</td><td><code>GET</code></td></tr><tr><td>Add a new one to the shelf</td><td><code>POST</code> to the collection</td></tr><tr><td>Replace a damaged copy</td><td><code>PUT</code> on the item</td></tr><tr><td>Correct one field on its card</td><td><code>PATCH</code></td></tr><tr><td>Withdraw it</td><td><code>DELETE</code></td></tr></tbody></table>
+<ul>
+<li><strong>The shelf label is a noun.</strong> There is no shelf called “get books”.</li>
+<li><strong>Reading a book twice changes nothing</strong>; that is safe. <strong>Withdrawing it twice
+leaves it withdrawn</strong>; that is idempotent. <strong>Donating a book twice gives the library
+two books</strong>, and that is <code>POST</code>.</li>
+</ul>
+<hr/>
 <h2 id="examples-in-practice">Examples in practice</h2>
-<p>Let’s walk a full <strong>CRUD</strong> cycle against a resource called <code>posts</code>, exactly the kind of exchange you will run in today’s lab against a real public API. Each step is a verb plus an address, and each reply is a status code plus a representation.</p>
-<p><strong>Read the collection</strong> — list every post:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>GET /posts</span></span>
-<span class="line"><span>-&gt; 200 OK</span></span>
-<span class="line"><span>[ { &quot;id&quot;: 1, &quot;title&quot;: &quot;...&quot; }, { &quot;id&quot;: 2, &quot;title&quot;: &quot;...&quot; }, ... ]</span></span></code></pre>
-<p><strong>Read one item</strong> — fetch post 1 by its address:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>GET /posts/1</span></span>
-<span class="line"><span>-&gt; 200 OK</span></span>
-<span class="line"><span>{ &quot;userId&quot;: 1, &quot;id&quot;: 1, &quot;title&quot;: &quot;first post&quot;, &quot;body&quot;: &quot;hello world&quot; }</span></span></code></pre>
-<p><strong>Create</strong> — add a new post by <code>POST</code>ing a representation to the <em>collection</em>. Note you do not choose the id; the server assigns it and echoes the created resource back:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>POST /posts</span></span>
-<span class="line"><span>Content-Type: application/json</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>{ &quot;title&quot;: &quot;my new post&quot;, &quot;body&quot;: &quot;written today&quot;, &quot;userId&quot;: 1 }</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>-&gt; 201 Created</span></span>
-<span class="line"><span>{ &quot;title&quot;: &quot;my new post&quot;, &quot;body&quot;: &quot;written today&quot;, &quot;userId&quot;: 1, &quot;id&quot;: 101 }</span></span></code></pre>
-<p>The <code>201 Created</code> and the new <code>&quot;id&quot;: 101</code> are the server saying “done — your post now lives at <code>/posts/101</code>.” <strong>Update</strong> — replace post 1 entirely with <code>PUT</code> to the <em>item</em>, sending the complete new representation:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>PUT /posts/1</span></span>
-<span class="line"><span>Content-Type: application/json</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>{ &quot;id&quot;: 1, &quot;title&quot;: &quot;edited title&quot;, &quot;body&quot;: &quot;edited body&quot;, &quot;userId&quot;: 1 }</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>-&gt; 200 OK</span></span>
-<span class="line"><span>{ &quot;id&quot;: 1, &quot;title&quot;: &quot;edited title&quot;, &quot;body&quot;: &quot;edited body&quot;, &quot;userId&quot;: 1 }</span></span></code></pre>
-<p>Had you wanted to change only the title, you would <code>PATCH /posts/1</code> with just <code>{ &quot;title&quot;: &quot;edited title&quot; }</code> and leave the body untouched. <strong>Delete</strong> — remove post 1:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>DELETE /posts/1</span></span>
-<span class="line"><span>-&gt; 200 OK   (or 204 No Content)</span></span></code></pre>
-<p>Read those five exchanges again and notice how little you had to memorize: the <em>addresses</em> were just <code>/posts</code> and <code>/posts/1</code>, and the <em>verbs</em> did all the work of distinguishing read from create from replace from delete. That economy — two addresses, five verbs, the whole lifecycle of a resource — is REST paying off. In the lab you will run every one of these against a live server and read the real status codes and bodies it returns.</p>
-<p>One more real-world note ties this to your goal. When you call a hosted model, you typically <code>POST</code> to an endpoint like <code>/v1/messages</code> or <code>/v1/chat/completions</code> with a JSON body carrying your prompt, and you read back a JSON representation of the model’s reply. That is <code>POST</code>-to-a-collection (“create a new completion”) in REST clothing. Most model and tool APIs you will integrate are RESTful or REST-like, so every habit you build today — reading endpoints as resources, knowing which verb is safe to retry, expecting JSON representations — transfers directly to working with them.</p>
+<p><img src="/_astro/rest-resource-verbs.DkYt1RCU_ZIALX.svg" alt="Diagram: REST collections compared with items, and which verb belongs where" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong><code>GET /users?role=admin&amp;_limit=10</code></strong> — filtering and limiting a collection with
+query parameters rather than a new endpoint.</p>
+</li>
+<li>
+<p><strong><code>POST /users</code> returning <code>201</code> with a <code>Location</code> header</strong> pointing at the new
+<code>/users/7</code>.</p>
+</li>
+<li>
+<p><strong><code>PATCH /users/1</code> with <code>{&quot;email&quot;: &quot;new@example.org&quot;}</code></strong> — one field changed,
+everything else untouched.</p>
+</li>
+<li>
+<p><strong><code>PUT /users/1</code> missing the <code>role</code> field</strong>, which silently clears it. This is the
+most common <code>PUT</code> mistake.</p>
+</li>
+<li>
+<p><strong><code>DELETE /users/1</code> twice</strong>, returning <code>204</code> then <code>404</code> — both correct, and the
+resource is gone either way.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
-<p><strong>Security.</strong> Because REST rides on HTTP, everything from the HTTPS lesson applies: send REST traffic only over <code>https://</code> so tokens and bodies are encrypted in transit. Statelessness shapes authentication — since the server remembers nothing, every request must carry its own credential, usually a bearer token in the <code>Authorization</code> header, and that token is as sensitive as a password. A subtler REST-specific risk is that predictable URLs make resources easy to enumerate: if <code>/users/1</code> exists, an attacker will try <code>/users/2</code>, so the server must check on <em>every</em> request that the caller is allowed to see that specific resource (authorization), never assuming that knowing the URL implies the right to access it.</p>
-<p><strong>Privacy.</strong> A resource’s representation contains exactly the fields the server chooses to include, which makes field selection a privacy decision. A careless <code>GET /users/1</code> that returns password hashes, internal notes, or another person’s data leaks it to anyone who can reach the endpoint. Good REST design returns the minimum representation each caller is entitled to, and treats the URL itself as visible — paths appear in logs, browser history, and proxies, so secrets never belong in a URL (<code>/users/1?token=secret</code> is a mistake; the token belongs in a header).</p>
-<p><strong>Performance.</strong> REST’s great performance lever is <strong>caching</strong>, unlocked by the safety of <code>GET</code>. Because a <code>GET</code> changes nothing, any layer — the browser, a proxy, a content-delivery network — may store the response and serve it again without troubling the origin server, using the <code>Cache-Control</code> and related headers from the HTTP lesson. The fastest request is the one never sent. The flip side is the classic REST cost: fetching related data can take many round trips (<code>GET /users/1</code>, then <code>GET /users/1/orders</code>, then each order), a limitation that motivates one of the alternatives you will meet next.</p>
-<p><strong>Scalability.</strong> This is where statelessness earns its keep. A stateless REST service scales <strong>horizontally</strong>: put identical copies behind a load balancer, route any request to any copy, and add copies as demand grows, because no copy needs another’s memory. This is precisely how large web services and model providers absorb enormous request volumes. When you later meet autoscaling and load balancers, remember that REST’s statelessness is what makes them possible.</p>
-<p><strong>Cost.</strong> With paid APIs, requests cost money, and REST’s structure is your cost-control instrument. Knowing that <code>GET</code> is cacheable lets you avoid paying for the same read twice. Knowing that <code>POST</code> is not idempotent stops a naive retry loop from doubling both your bill and a real-world side effect. And reading status codes correctly — a <code>4xx</code> means fix your request rather than retry it, a <code>429</code> means you are over your rate limit — is directly how you avoid paying for requests that can never succeed. REST literacy is, quite literally, spend control.</p>
+<p><img src="/_astro/broken-object-authorization.CvmoouVX_ZIALX.svg" alt="Diagram: checking authentication compared with checking ownership" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong>Security: predictable URLs mean guessable URLs.</strong> <code>/users/1</code> implies <code>/users/2</code>
+exists, so authorisation must be checked per request, not assumed from the path.</p>
+</li>
+<li>
+<p><strong>This is the most common REST vulnerability</strong>: an endpoint that checks you are
+logged in but not that the resource is yours.</p>
+</li>
+<li>
+<p><strong>Never put anything sensitive in a path.</strong> Paths appear in logs, in browser
+history and in <code>Referer</code> headers.</p>
+</li>
+<li>
+<p><strong>Performance: <code>GET</code> being safe is what makes caching possible</strong>, and a correct
+<code>Cache-Control</code> header is often worth more than any server optimisation.</p>
+</li>
+<li>
+<p><strong>Scalability: statelessness is the whole story.</strong> It is what allows horizontal
+scaling with no coordination.</p>
+</li>
+<li>
+<p><strong>Cost: a chatty client is an expensive one.</strong> Fetching a collection and then each
+item individually is the N+1 problem from yesterday, in REST clothing.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
-<p>For an architectural-style lesson, “alternatives” means both other API styles that solve the same problem and the free tools you use to work with REST.</p>
-<p><em>Other API styles.</em> <strong>RPC</strong> (Remote Procedure Call), including the modern <strong>gRPC</strong>, models an API as a set of <em>functions to call</em> rather than resources to act on — you invoke <code>createUser(...)</code> instead of <code>POST /users</code>. It is often faster and more tightly typed, and it shines for internal service-to-service communication where both ends are yours. <strong>GraphQL</strong> exposes a single endpoint and lets the client ask for <em>exactly</em> the fields it wants in one query, directly attacking REST’s many-round-trips problem; it excels when clients need flexible, precise data shapes (mobile apps, rich dashboards). You will see all three compared in the next section.</p>
-<p><em>Tools for working with REST.</em> Every core tool here is free and open source, and you already met most of them.</p>
+<p><img src="/_astro/rest-or-graphql.BU3w5qkQ_ZIALX.svg" alt="Diagram: REST compared with GraphQL" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
 
 
 
@@ -284,17 +524,23 @@ You can also <a href="/ai-roadmap-365/labs/day-023-rest-fundamentals-resources-a
 
 
 
-
-
-
-
-
-
-
-<table><thead><tr><th>Tool</th><th>Type</th><th>What it’s for</th><th>Cost</th></tr></thead><tbody><tr><td><code>curl</code></td><td>Free, open-source CLI</td><td>The universal command-line HTTP/REST client; scriptable, everywhere</td><td>Free</td></tr><tr><td>HTTPie</td><td>Free, open-source CLI</td><td>A friendlier CLI with colored output and JSON by default</td><td>Free</td></tr><tr><td>JSONPlaceholder</td><td>Free public REST API</td><td>A fake online REST API for practice; accepts CRUD requests without an account</td><td>Free</td></tr><tr><td>Postman</td><td>Commercial (free tier)</td><td>Graphical client for building, saving, and sharing REST requests</td><td>Free tier; paid team plans</td></tr><tr><td>Insomnia</td><td>Open-source core</td><td>Graphical REST/GraphQL client, an open alternative to Postman</td><td>Free; paid tiers</td></tr><tr><td>OpenAPI / Swagger</td><td>Open standard + tooling</td><td>Describe a REST API in a machine-readable file; auto-generate docs and clients</td><td>Free spec; some paid tools</td></tr></tbody></table>
-<p>For learning and scripting, <code>curl</code> against a free practice API such as <strong>JSONPlaceholder</strong> — the one you will use in the lab — covers everything at zero cost. The graphical and commercial tools add collaboration, saved request libraries, and generated documentation, not fundamental capability. When you build your own REST API later, describing it with <strong>OpenAPI</strong> is the standard way to hand other developers a precise, tool-readable contract.</p>
+<table><thead><tr><th>Style</th><th>Type</th><th>Where it fits</th></tr></thead><tbody><tr><td>REST</td><td>The default</td><td>Resource-shaped data, public APIs, anything cacheable</td></tr><tr><td>GraphQL</td><td>Free, open source</td><td>Clients that need to choose their own response shape</td></tr><tr><td>gRPC</td><td>Free, open source</td><td>Service-to-service, where speed beats readability</td></tr><tr><td>JSON-RPC</td><td>Free, open source</td><td>Genuinely operation-shaped work that is not CRUD</td></tr><tr><td>OpenAPI</td><td>Free, open source</td><td>Not an alternative — how you describe a REST API formally</td></tr><tr><td>Webhooks</td><td>The inverse</td><td>Events pushed to you, rather than polled — Day 26</td></tr></tbody></table>
+<ul>
+<li>
+<p><strong>GraphQL exists because REST over-fetches and under-fetches.</strong> One endpoint, and
+the client states exactly which fields it wants.</p>
+</li>
+<li>
+<p><strong>Its cost is caching and complexity.</strong> REST gets HTTP caching free; GraphQL has to
+build it.</p>
+</li>
+<li>
+<p><strong>Write an OpenAPI document for anything public.</strong> It generates the documentation,
+the client libraries and the tests.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
-<p>The comparison that matters most today is REST against the two alternative styles, because choosing among them is a real decision you will face. The one-line examples show the same intent — “create a user” — expressed each way.</p>
 
 
 
@@ -324,8 +570,6 @@ You can also <a href="/ai-roadmap-365/labs/day-023-rest-fundamentals-resources-a
 
 
 
-<table><thead><tr><th>Style</th><th>Shape of the API</th><th>”Create a user” looks like</th><th>Choose it when</th></tr></thead><tbody><tr><td><strong>REST</strong></td><td>Resources at URLs, standard verbs</td><td><code>POST /users</code> with a JSON body</td><td>You want a broadly understood, cacheable, public-facing API over CRUD-style data</td></tr><tr><td><strong>RPC / gRPC</strong></td><td>Named functions you call</td><td><code>createUser(name, email)</code> (often over gRPC)</td><td>You control both ends (internal services) and want speed, strong typing, and streaming</td></tr><tr><td><strong>GraphQL</strong></td><td>One endpoint, client-specified queries</td><td><code>mutation { createUser(name, email) { id } }</code></td><td>Clients need flexible, precise data shapes and you want to avoid over- and under-fetching</td></tr></tbody></table>
-<p>None of these is universally “best.” REST wins on ubiquity, cacheability, and how easily any developer can understand it, which is why it dominates public web APIs. RPC and gRPC win inside a system you fully own, where the extra speed and tight contracts pay off and human readability of URLs matters less. GraphQL wins when a single client needs to assemble varied data in one round trip and the many-<code>GET</code> problem of REST becomes painful. A large system often uses more than one — REST at its public edge, gRPC between internal services. The other comparisons below place REST against ideas it is often confused with.</p>
 
 
 
@@ -334,128 +578,215 @@ You can also <a href="/ai-roadmap-365/labs/day-023-rest-fundamentals-resources-a
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>REST</td><td>HTTP</td><td>HTTP is the protocol; REST is an architectural style that <em>uses</em> HTTP’s verbs and URLs</td></tr><tr><td>REST</td><td>JSON</td><td>REST is the design; JSON is the most common representation format it transfers</td></tr><tr><td>Resource</td><td>Endpoint</td><td>A resource is the <em>thing</em> (user 1); an endpoint is the addressable URL that exposes it</td></tr><tr><td><code>POST</code></td><td><code>PUT</code></td><td><code>POST</code> creates a new item in a collection (not idempotent); <code>PUT</code> replaces a known item (idempotent)</td></tr><tr><td><code>PUT</code></td><td><code>PATCH</code></td><td><code>PUT</code> replaces the entire resource; <code>PATCH</code> changes only the fields you send</td></tr></tbody></table>
+<table><thead><tr><th>Term</th><th>What it actually is</th></tr></thead><tbody><tr><td><strong>Resource</strong></td><td>A thing the API names</td></tr><tr><td><strong>Collection</strong></td><td>A resource holding many others</td></tr><tr><td><strong>Item</strong></td><td>One member of a collection</td></tr><tr><td><strong>Representation</strong></td><td>A serialised snapshot of a resource’s state</td></tr><tr><td><strong>CRUD</strong></td><td>Create, read, update, delete</td></tr><tr><td><strong>Statelessness</strong></td><td>The server remembers nothing between requests</td></tr><tr><td><strong>HATEOAS</strong></td><td>Responses carry links to what you can do next</td></tr></tbody></table>
+<hr/>
 <h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
-<p>Reach for REST when you are building or consuming an API over <strong>resource-shaped data</strong> that many, varied clients will use — a public web API, a service other teams integrate with, a backend for web and mobile apps. Its ubiquity is its superpower: because everyone understands the resource-and-verb grammar, a well-designed REST API needs the least explanation and earns trust fastest. Reach for it, too, whenever your data maps cleanly onto CRUD over collections and items, which an enormous fraction of real systems do. And reach for REST’s mental model as a <em>reading</em> tool constantly: even when you did not design an API, seeing its endpoints as resources and verbs lets you predict how it behaves and debug it faster.</p>
-<p>Know equally when another style fits better. If you own both ends of a high-traffic internal link and need maximum speed, strong typing, or streaming, <strong>gRPC</strong> may serve you better than REST. If a single client must gather many related pieces of data in one shot and REST’s round-trip count hurts, <strong>GraphQL</strong> may fit better. If your operation genuinely is not CRUD on a resource — a one-off action like “send this email” or “run this report” — do not contort it into a fake resource; it is fine and common to expose a pragmatic action endpoint rather than pretend everything is a noun. The professional habit is to default to REST for anything public and resource-shaped, and to choose a different style deliberately when a specific pressure — internal speed, flexible querying, a genuine action — argues for it.</p>
-<p>The thread back to your goal is direct. Most of the model and tool APIs you will integrate, and any AI-facing service you eventually build yourself, are RESTful or REST-like: you will <code>POST</code> a JSON body to an endpoint and read a JSON representation back, exactly the pattern you practiced today. Designing your own service well means naming its resources cleanly, choosing the right verb for each operation, keeping it stateless so it scales, and returning honest status codes — the whole discipline of this lesson. Tomorrow you learn JSON, the representation format nearly all of this rides on; today you learned the architecture that shapes almost every API you will ever touch.</p>
+<p><img src="/_astro/query-parameters-not-endpoints.C5dNKVuE_eplKw.svg" alt="Diagram: an endpoint per variation compared with query parameters on one collection" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="424"></p>
+<ul>
+<li>
+<p><strong>Use REST when your domain is made of things</strong> — users, orders, documents,
+datasets.</p>
+</li>
+<li>
+<p><strong>Use query parameters to filter, sort and page</strong>, rather than inventing an endpoint
+per variation.</p>
+</li>
+<li>
+<p><strong>Return <code>201</code> with a <code>Location</code> header</strong> when you create something. It costs
+nothing and saves the client a request.</p>
+</li>
+<li>
+<p><strong>Do not put verbs in paths.</strong> If you find yourself wanting to, the operation
+probably deserves to be a resource of its own — a “job”, a “run”, a “search”.</p>
+</li>
+<li>
+<p><strong>Do not use <code>GET</code> for anything that changes state.</strong> A crawler or a prefetcher will
+find it eventually.</p>
+</li>
+<li>
+<p><strong>Do not force genuinely non-CRUD operations into REST.</strong> “Send this email”,
+“translate this text” — model these as resources you create, or accept that the
+style does not fit.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="the-ai-connection">The AI connection</h2>
+<ul>
+<li>
+<p><strong>Model APIs are barely REST</strong>, and knowingly so: <code>POST /v1/messages</code> creates a
+completion, which is a resource in only the loosest sense.</p>
+</li>
+<li>
+<p><strong>That is the right call.</strong> Generation is an operation, not a CRUD action on a
+stored thing, and pretending otherwise would help nobody.</p>
+</li>
+<li>
+<p><strong>The non-idempotent <code>POST</code> matters more here than almost anywhere</strong>, because a
+retried generation is billed again and may return something different.</p>
+</li>
+<li>
+<p><strong>Fine-tuning APIs are properly RESTful</strong>, because a training job genuinely is a
+resource: create it, poll it, list them, cancel one.</p>
+</li>
+<li>
+<p><strong>Vector databases expose REST too</strong> — collections of documents, items by id — and
+the pattern from today transfers directly.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="knowledge-check">Knowledge check</h2>
-<p>Try these from memory before looking back:</p>
-<ol>
-<li>Explain, in one sentence each, why <code>/users/1</code> is a good REST URL and <code>/getUser?id=1</code> is not.</li>
-<li>Give the HTTP verb for each CRUD operation, and say which verb targets a <em>collection</em> rather than an <em>item</em> — and why.</li>
-<li>Your code <code>POST</code>s an order, the network times out, and your retry fires. Why is that riskier than retrying a <code>GET</code> or a <code>DELETE</code>? Name the property at stake.</li>
-<li>A resource and its representation are not the same thing. Explain the difference using <code>GET /users/1</code>.</li>
-<li>Someone says “our REST server keeps you logged in across requests.” What REST constraint does that violate, and how should identity actually travel?</li>
-</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">quiz</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  question</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;A client updates a user&#39;s email with `PUT /users/1` sending only `{</span><span style="color:#79B8FF">\&quot;</span><span style="color:#9ECBFF">email</span><span style="color:#79B8FF">\&quot;</span><span style="color:#9ECBFF">: </span><span style="color:#79B8FF">\&quot;</span><span style="color:#9ECBFF">new@example.org</span><span style="color:#79B8FF">\&quot;</span><span style="color:#9ECBFF">}`. Afterwards the user&#39;s name and role are empty. What went wrong?&quot;</span></span>
+<span class="line"><span style="color:#85E89D">  options</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;PUT replaces the entire resource, so fields omitted from the body were cleared&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;The server rejected the partial body and reset the record to defaults&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;PUT is not idempotent, so the repeated request overwrote the other fields&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;The Content-Type header was missing, so the body was parsed incorrectly&quot;</span></span>
+<span class="line"><span style="color:#85E89D">  answer_index</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span></span>
+<span class="line"><span style="color:#85E89D">  explanation</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;PUT means </span><span style="color:#79B8FF">\&quot;</span><span style="color:#9ECBFF">make the resource be exactly this</span><span style="color:#79B8FF">\&quot;</span><span style="color:#9ECBFF">. A body containing only the email describes a user with no name and no role, and the server complied. PATCH is the verb that merges rather than replaces.&quot;</span></span></code></pre>
+<hr/>
 <h2 id="hands-on-exercise">Hands-on exercise</h2>
-<p>Time to run REST with your own hands. In this exercise — worked through in full in the Day 23 lab directory — you will use <code>curl</code> to perform a complete CRUD cycle against <strong>JSONPlaceholder</strong>, a free public REST API that accepts create, update, and delete requests and responds realistically (it <em>fakes</em> the writes — more on that below — which is perfect for practice). Every command is copy-pasteable, hits a free endpoint, and needs no account or key.</p>
-<p>First, <strong>read</strong> a single item and see its JSON representation:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#9ECBFF"> https://jsonplaceholder.typicode.com/posts/1</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> python3</span><span style="color:#79B8FF"> -m</span><span style="color:#9ECBFF"> json.tool</span></span></code></pre>
-<p><code>-s</code> silences the progress meter, and piping to <code>python3 -m json.tool</code> pretty-prints the JSON so it is easy to read. You should see a post with <code>id</code>, <code>title</code>, <code>body</code>, and <code>userId</code>. Next, <strong>read the collection</strong> and count how many posts there are:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#9ECBFF"> https://jsonplaceholder.typicode.com/posts</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> python3</span><span style="color:#79B8FF"> -m</span><span style="color:#9ECBFF"> json.tool</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> head</span><span style="color:#79B8FF"> -20</span></span></code></pre>
-<p>Now <strong>create</strong> a post by <code>POST</code>ing a JSON body to the <em>collection</em>, printing the status code so you can confirm you got a <code>201</code>:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#79B8FF"> -w</span><span style="color:#9ECBFF"> &quot;\nHTTP %{http_code}\n&quot;</span><span style="color:#79B8FF"> -X</span><span style="color:#9ECBFF"> POST</span><span style="color:#79B8FF"> \</span></span>
-<span class="line"><span style="color:#79B8FF">  -H</span><span style="color:#9ECBFF"> &quot;Content-Type: application/json&quot;</span><span style="color:#79B8FF"> \</span></span>
-<span class="line"><span style="color:#79B8FF">  -d</span><span style="color:#9ECBFF"> &#39;{&quot;title&quot;:&quot;my post&quot;,&quot;body&quot;:&quot;hello&quot;,&quot;userId&quot;:1}&#39;</span><span style="color:#79B8FF"> \</span></span>
-<span class="line"><span style="color:#9ECBFF">  https://jsonplaceholder.typicode.com/posts</span></span></code></pre>
-<p>The response echoes your post back with a freshly assigned <code>id</code> (JSONPlaceholder returns <code>101</code>), and the status line reads <code>HTTP 201</code>. Then <strong>update</strong> post 1 by replacing it with <code>PUT</code>:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#79B8FF"> -w</span><span style="color:#9ECBFF"> &quot;\nHTTP %{http_code}\n&quot;</span><span style="color:#79B8FF"> -X</span><span style="color:#9ECBFF"> PUT</span><span style="color:#79B8FF"> \</span></span>
-<span class="line"><span style="color:#79B8FF">  -H</span><span style="color:#9ECBFF"> &quot;Content-Type: application/json&quot;</span><span style="color:#79B8FF"> \</span></span>
-<span class="line"><span style="color:#79B8FF">  -d</span><span style="color:#9ECBFF"> &#39;{&quot;id&quot;:1,&quot;title&quot;:&quot;edited&quot;,&quot;body&quot;:&quot;changed&quot;,&quot;userId&quot;:1}&#39;</span><span style="color:#79B8FF"> \</span></span>
-<span class="line"><span style="color:#9ECBFF">  https://jsonplaceholder.typicode.com/posts/1</span></span></code></pre>
-<p>Finally, <strong>delete</strong> post 1 and read the status code:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -s</span><span style="color:#79B8FF"> -w</span><span style="color:#9ECBFF"> &quot;\nHTTP %{http_code}\n&quot;</span><span style="color:#79B8FF"> -X</span><span style="color:#9ECBFF"> DELETE</span><span style="color:#79B8FF"> \</span></span>
-<span class="line"><span style="color:#9ECBFF">  https://jsonplaceholder.typicode.com/posts/1</span></span></code></pre>
-<p>You have now driven a full create-read-update-delete lifecycle against a real REST API using nothing but verbs and addresses.</p>
+<p>Exercise all five verbs against a real API and watch the status codes. Worked
+through fully in the Day 23 lab directory.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>What you are doing</th><th>Command</th></tr></thead><tbody><tr><td>Read a collection</td><td><code>curl &#39;https://jsonplaceholder.typicode.com/posts?_limit=3&#39;</code></td></tr><tr><td>Read one item</td><td><code>curl https://jsonplaceholder.typicode.com/posts/1</code></td></tr><tr><td>Create</td><td><code>curl -i -X POST -H &#39;Content-Type: application/json&#39; -d &#39;{&quot;title&quot;:&quot;hi&quot;,&quot;userId&quot;:1}&#39; .../posts</code></td></tr><tr><td>Replace</td><td><code>curl -i -X PUT -H &#39;Content-Type: application/json&#39; -d &#39;{&quot;id&quot;:1,&quot;title&quot;:&quot;new&quot;,&quot;userId&quot;:1}&#39; .../posts/1</code></td></tr><tr><td>Merge</td><td><code>curl -i -X PATCH -H &#39;Content-Type: application/json&#39; -d &#39;{&quot;title&quot;:&quot;just this&quot;}&#39; .../posts/1</code></td></tr><tr><td>Delete</td><td><code>curl -i -X DELETE .../posts/1</code></td></tr><tr><td>Nested collection</td><td><code>curl &#39;.../posts/1/comments?_limit=2&#39;</code></td></tr></tbody></table>
 <h3 id="expected-output">Expected output</h3>
-<p>The <code>GET /posts/1</code> prints a JSON representation like this (the exact text is fixed by the service):</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>{</span></span>
-<span class="line"><span>    &quot;userId&quot;: 1,</span></span>
-<span class="line"><span>    &quot;id&quot;: 1,</span></span>
-<span class="line"><span>    &quot;title&quot;: &quot;sunt aut facere repellat provident occaecati excepturi optio reprehenderit&quot;,</span></span>
-<span class="line"><span>    &quot;body&quot;: &quot;quia et suscipit\nsuscipit recusandae...&quot;</span></span>
-<span class="line"><span>}</span></span></code></pre>
-<p>The <code>POST</code> returns your submitted fields plus a new id and a created status:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>{</span></span>
-<span class="line"><span>    &quot;title&quot;: &quot;my post&quot;,</span></span>
-<span class="line"><span>    &quot;body&quot;: &quot;hello&quot;,</span></span>
-<span class="line"><span>    &quot;userId&quot;: 1,</span></span>
-<span class="line"><span>    &quot;id&quot;: 101</span></span>
-<span class="line"><span>}</span></span>
-<span class="line"><span>HTTP 201</span></span></code></pre>
-<p>The <code>PUT</code> returns the replaced representation with <code>HTTP 200</code>, and the <code>DELETE</code> returns an empty (or <code>{}</code>) body with <code>HTTP 200</code>. Seeing <code>201</code> on create and <code>200</code> on read/update/delete confirms each verb did its job.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>HTTP/1.1 201 Created</span></span>
+<span class="line"><span>{&quot;title&quot;:&quot;hi&quot;,&quot;userId&quot;:1,&quot;id&quot;:101}</span></span>
+<span class="line"><span>HTTP/1.1 200 OK</span></span>
+<span class="line"><span>{&quot;id&quot;:1,&quot;title&quot;:&quot;just this&quot;,&quot;body&quot;:&quot;...&quot;,&quot;userId&quot;:1}</span></span></code></pre>
+<ul>
+<li><strong><code>201</code> for the create</strong>, with a server-assigned <code>id</code> you did not choose.</li>
+<li><strong>The <code>PATCH</code> kept <code>body</code> and <code>userId</code>.</strong> A <code>PUT</code> with the same partial body would
+not have.</li>
+</ul>
 <h3 id="validate-your-work">Validate your work</h3>
-<p>You are done when you can check every box:</p>
 <ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" disabled/> Your <code>GET /posts/1</code> returned a JSON object with <code>id</code>, <code>title</code>, <code>body</code>, and <code>userId</code>.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> Your <code>GET /posts</code> returned a JSON array of many posts.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> Your <code>POST</code> returned status <code>201</code> and a body containing a new <code>id</code> (JSONPlaceholder assigns <code>101</code>).</li>
-<li class="task-list-item"><input type="checkbox" disabled/> Your <code>PUT</code> returned status <code>200</code> and the edited representation.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> Your <code>DELETE</code> returned status <code>200</code>.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You can state which verb targeted the collection (<code>POST /posts</code>) and which targeted items (the rest).</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You used all five verbs and recorded the status code each returned</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can explain why <code>POST</code> went to the collection and <code>PUT</code> to the item</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You demonstrated the difference between <code>PUT</code> and <code>PATCH</code> on the same resource</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You fetched a nested collection</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can state which verbs are safe and which are idempotent, without looking</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>bash tests/run_tests.sh</code> reports 0 failures</li>
 </ul>
 <h3 id="troubleshooting">Troubleshooting</h3>
 <ul>
-<li><strong>The <code>POST</code> returned <code>201</code> but a later <code>GET /posts/101</code> gives <code>404</code>.</strong> That is expected: JSONPlaceholder <em>fakes</em> writes. It responds as if it created the resource (<code>201</code> and the id <code>101</code>), but nothing is actually stored, so the new post does not persist. The status codes and bodies are real; the persistence is simulated — perfect for safe practice.</li>
-<li><strong><code>python3: command not found</code>.</strong> Use <code>python</code> instead, or drop the pretty-printer entirely — <code>curl -s .../posts/1</code> still prints valid JSON, just unformatted.</li>
-<li><strong>The status code prints stuck to the JSON.</strong> Keep the <code>\n</code> in <code>-w &quot;\nHTTP %{http_code}\n&quot;</code> so the code lands on its own line below the body.</li>
-<li><strong>A <code>POST</code> behaved like a <code>GET</code>.</strong> You dropped <code>-X POST</code> or the <code>-d</code> body; <code>-d</code> supplies the body and, on its own, already implies <code>POST</code>.</li>
-<li><strong>No network.</strong> The lab scripts and tests detect this and skip the live steps with a clear message rather than failing — reconnect to see real output.</li>
+<li>
+<p><strong><code>POST</code> returns the object with no id.</strong> Missing <code>Content-Type</code>, so the body was
+ignored.</p>
+</li>
+<li>
+<p><strong><code>PUT</code> returns only the fields you sent.</strong> That is <code>PUT</code> working correctly. Use
+<code>PATCH</code> if you meant to merge.</p>
+</li>
+<li>
+<p><strong>A query string does nothing.</strong> The shell ate the <code>?</code> and <code>&amp;</code>. Quote the URL.</p>
+</li>
+<li>
+<p><strong><code>DELETE</code> returns <code>200</code> and the resource is still there.</strong> Test APIs often fake
+writes. Read their documentation.</p>
+</li>
 </ul>
 <h3 id="common-mistakes">Common mistakes</h3>
 <ul>
-<li><strong>Putting the verb in the URL.</strong> Writing <code>POST /createPost</code> or <code>GET /getPosts</code> defeats REST; the address is a noun (<code>/posts</code>), and the HTTP method is the verb.</li>
-<li><strong><code>POST</code>ing to an item instead of the collection.</strong> You create by <code>POST</code>ing to the <em>collection</em> (<code>/posts</code>), not to an item (<code>/posts/1</code>); the server assigns the new id.</li>
-<li><strong>Expecting fake writes to persist.</strong> On a practice API like JSONPlaceholder, your <code>POST</code>/<code>PUT</code>/<code>DELETE</code> return realistic responses but change nothing on the server — do not treat the returned <code>101</code> as a real, re-fetchable resource.</li>
-<li><strong>Confusing <code>PUT</code> and <code>PATCH</code>.</strong> <code>PUT</code> replaces the whole resource (omit a field and you may erase it); <code>PATCH</code> changes only the fields you send.</li>
+<li><strong>Verbs in paths.</strong> <code>/createUser</code> is the tell.</li>
+<li><strong><code>POST</code> to an item</strong> rather than to the collection.</li>
+<li><strong>Retrying a <code>POST</code> blindly</strong> after a timeout.</li>
+<li><strong>Using <code>PUT</code> for a partial update</strong> and clearing fields you never mentioned.</li>
 </ul>
+<hr/>
 <h2 id="practice-assignment">Practice assignment</h2>
-<p>Open the REST worksheet in the starter directory of the Day 23 lab and complete it using <code>curl</code> against JSONPlaceholder. Record three status codes you observed directly: (1) the code returned by a <code>GET /posts/1</code>; (2) the code returned when you <code>POST</code> a new post to <code>/posts</code>; and (3) the code returned by a <code>DELETE /posts/1</code>. Also record the <code>id</code> that JSONPlaceholder assigns to the post you created. Then write one short paragraph (4–6 sentences) explaining, in your own words, why you can safely retry a failed <code>GET</code> or <code>DELETE</code> but must be careful retrying a failed <code>POST</code>, naming the property that makes the difference. Keep the worksheet; the Week 4 project builds a real API client on exactly these skills.</p>
+<ul>
+<li>
+<p><strong>Design the endpoints for a small domain</strong> — a library, a task tracker, a dataset
+registry — writing out every path and verb, with no verbs in any path.</p>
+</li>
+<li>
+<p><strong>Find a real API that violates the pattern</strong> and write down which rule it breaks
+and whether the break was justified.</p>
+</li>
+<li>
+<p><strong>Prove the <code>PUT</code> field-clearing behaviour</strong> on a test API, then fix the same change
+with <code>PATCH</code>.</p>
+</li>
+<li>
+<p><strong>Write the retry rule</strong> you would put in a client: which verbs, which status codes,
+and what backoff.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="extension-challenge">Extension challenge</h2>
-<p>Go one layer deeper into REST’s finer distinctions. First, try a <strong><code>PATCH</code></strong> against <code>/posts/1</code> sending only <code>{&quot;title&quot;:&quot;just the title&quot;}</code>, and compare the returned representation to what a full <code>PUT</code> returned — notice that <code>PATCH</code> leaves the other fields in place while <code>PUT</code> would have required the whole object. Second, explore <strong>nested collections</strong>: JSONPlaceholder exposes <code>/posts/1/comments</code> (the comments belonging to post 1) and <code>/users/1/todos</code>; fetch each with <code>GET</code>, and write one sentence explaining how the URL structure reads as a path through related resources. Third, prove <strong>idempotency</strong> to yourself: run the same <code>DELETE /posts/1</code> twice and observe that the outcome is identical both times, then reason in two or three sentences about why the same experiment with <code>POST /posts</code> would instead create two resources on a real server. You have now exercised every REST verb, seen the collection-versus-item distinction from both sides, and felt idempotency in your hands — the exact literacy that makes any new API predictable.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
-Q1. What does REST stand for, and what kind of thing is it? </strong> </p> <ol type="A"> <li>Reliable Encrypted Server Transport — a security protocol</li><li>Representational State Transfer — an architectural style for networked software</li><li>Remote Execution of Server Tasks — a programming language</li><li>Resource Exchange Standard Table — a data format</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Representational State Transfer — an architectural style for networked software </p> <p>REST stands for Representational State Transfer, the architectural style Roy Fielding named in 2000. It is a set of design constraints — not a protocol, a format, or a piece of software — that a system usually applies on top of HTTP.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q2. Which URL is the well-designed REST way to address a single user, and why? </strong> </p> <ol type="A"> <li>/getUser?id=1, because it says exactly what to do</li><li>/user/fetch/1, because it lists the steps in order</li><li>/users/1, because the address names the resource and the HTTP verb carries the action</li><li>/deleteUser/1, because it names the operation and the target together</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> /users/1, because the address names the resource and the HTTP verb carries the action </p> <p>In REST the address is a noun that names the resource (/users/1), and the HTTP method (GET, DELETE, and so on) says what to do with it. Baking a verb into the path, like /getUser, throws away the predictability that is the whole point of REST.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q3. You want to CREATE a new post. Which request is correct? </strong> </p> <ol type="A"> <li>POST to the collection: POST /posts with the new post in the body</li><li>POST to an item: POST /posts/1</li><li>PUT to the collection: PUT /posts</li><li>GET the collection: GET /posts</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> POST to the collection: POST /posts with the new post in the body </p> <p>Create maps to POST against the collection (/posts). The server assigns the new id and typically returns 201 Created with the new resource. You POST to the collection, not to an item, because the item does not exist yet.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q4. Which HTTP verb corresponds to the &quot;Read&quot; operation in CRUD, and what property does it have? </strong> </p> <ol type="A"> <li>DELETE — it is safe and never changes anything</li><li>POST — it is idempotent</li><li>GET — it is safe (changes nothing) and idempotent, so it can be cached and retried freely</li><li>PATCH — it is safe but not idempotent</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> GET — it is safe (changes nothing) and idempotent, so it can be cached and retried freely </p> <p>Read maps to GET, which is safe (it only reads and never changes server state) and idempotent. Because GET changes nothing, caches and clients can store and repeat it freely — the basis of REST caching.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q5. Why must you be careful about blindly retrying a failed POST, but not a failed GET or DELETE? </strong> </p> <ol type="A"> <li>POST requests are slower, so retrying wastes time</li><li>POST is not idempotent — repeating it may create a second resource — while GET and DELETE are idempotent and safe to repeat</li><li>POST requests cannot carry a body on the second attempt</li><li>GET and DELETE are encrypted but POST is not</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> POST is not idempotent — repeating it may create a second resource — while GET and DELETE are idempotent and safe to repeat </p> <p>POST is not idempotent: two identical POSTs may create two resources (for example, two orders and a double charge). GET is safe, and both GET and DELETE are idempotent, so repeating them leaves the server in the same state — which is why retry logic must know which verb it is retrying.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q6. What is the difference between PUT and PATCH? </strong> </p> <ol type="A"> <li>PUT reads a resource; PATCH writes one</li><li>PUT works on collections; PATCH works on items</li><li>PUT replaces the entire resource with the body you send; PATCH changes only the fields you send</li><li>They are identical; the name is just a preference</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> PUT replaces the entire resource with the body you send; PATCH changes only the fields you send </p> <p>PUT replaces the whole resource — omit a field and you may erase it — while PATCH merges only the fields you send, leaving the rest untouched. Use PATCH to change one attribute and PUT when you have the complete new version.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q7. What does it mean that REST is &quot;stateless,&quot; and why does it matter for scaling? </strong> </p> <ol type="A"> <li>The server saves your session so later requests are faster</li><li>Each request carries everything the server needs and the server keeps no memory of you between requests, so any request can go to any identical server copy</li><li>The server has no database and stores nothing at all</li><li>Only one client can talk to the server at a time</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Each request carries everything the server needs and the server keeps no memory of you between requests, so any request can go to any identical server copy </p> <p>Statelessness means every request is self-contained (identity travels in a token on each request) and the server remembers nothing between requests. That lets a provider run many identical copies behind a load balancer and send any request to any copy — the property that makes REST scale horizontally.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q8. What is the difference between a resource and its representation? </strong> </p> <ol type="A"> <li>They are the same thing with two names</li><li>A resource is the JSON; a representation is the URL</li><li>A resource is the thing itself (user 1); a representation is a serialized snapshot of its state, usually JSON, that is transferred over the wire</li><li>A representation is stored on disk; a resource is only in memory</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> A resource is the thing itself (user 1); a representation is a serialized snapshot of its state, usually JSON, that is transferred over the wire </p> <p>The resource is the underlying thing (user 1); the representation is a document describing its current state — typically JSON — that the server sends you. The same resource can be represented as JSON, XML, or HTML; &quot;Representational State Transfer&quot; names exactly this exchange of representations.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>REST</strong> </dt> <dd data-astro-cid-whrtx2kk>Representational State Transfer — an architectural style for networked software that models a service as resources at addresses, acted on by a fixed set of standard verbs, with a stateless client-server exchange.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>resource</strong> </dt> <dd data-astro-cid-whrtx2kk>Any thing a service exposes and names, such as a user, order, or post; the noun that a REST URL addresses.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>collection</strong> </dt> <dd data-astro-cid-whrtx2kk>A resource that contains many others, addressed by a plural path such as /users; you create a new member by POSTing to it.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>endpoint</strong> </dt> <dd data-astro-cid-whrtx2kk>A specific addressable URL through which a client acts on a resource, such as /users/1.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>CRUD</strong> </dt> <dd data-astro-cid-whrtx2kk>The four basic operations on stored data — Create, Read, Update, Delete — which REST maps onto the HTTP verbs POST, GET, PUT/PATCH, and DELETE.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>stateless</strong> </dt> <dd data-astro-cid-whrtx2kk>A design in which each request carries everything the server needs and the server keeps no memory of the client between requests, so any request can be handled by any server copy.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>representation</strong> </dt> <dd data-astro-cid-whrtx2kk>A serialized snapshot of a resource&#39;s state that is transferred between client and server, most commonly as JSON; distinct from the resource itself.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>idempotent</strong> </dt> <dd data-astro-cid-whrtx2kk>A property of a request such that making it many times leaves the server in the same state as making it once; GET, PUT, and DELETE are idempotent, while POST is not.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>safe</strong> </dt> <dd data-astro-cid-whrtx2kk>A property of a request that only reads and never changes server state; GET is safe, which is why it can be cached and retried freely.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>HATEOAS</strong> </dt> <dd data-astro-cid-whrtx2kk>Hypermedia As The Engine Of Application State — the REST constraint that a resource&#39;s representation includes links telling the client what it can do next and where.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>RPC</strong> </dt> <dd data-astro-cid-whrtx2kk>Remote Procedure Call — an API style that models operations as named functions to invoke (e.g. createUser) rather than resources to act on; gRPC is a modern high-performance form.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>GraphQL</strong> </dt> <dd data-astro-cid-whrtx2kk>An API style exposing a single endpoint where the client asks for exactly the fields it wants in one query, addressing REST&#39;s tendency toward many round trips or over- and under-fetching.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/REST" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Representational state transfer</a> — Wikipedia (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://restfulapi.net/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>What is REST</a> — RESTful API (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>HTTP request methods</a> — MDN Web Docs (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Architectural Styles and the Design of Network-based Software Architectures (Ch. 5: REST)</a> — Roy Fielding (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://jsonplaceholder.typicode.com/guide/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>JSONPlaceholder — Guide</a> — JSONPlaceholder (accessed 2026-07-12) </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="23" data-astro-cid-whrtx2kk>
+<ul>
+<li>
+<p><strong>Build a five-endpoint REST API</strong> for one resource and exercise it with <code>curl</code>.
+Implementing the server side makes the constraints obvious in a way reading cannot.</p>
+</li>
+<li>
+<p><strong>Add an idempotency key</strong> to your create endpoint so a repeated <code>POST</code> returns the
+original result rather than creating a second resource. This is the standard fix and
+worth implementing once.</p>
+</li>
+<li>
+<p><strong>Write an OpenAPI document</strong> for your API and generate documentation from it.</p>
+</li>
+<li>
+<p><strong>Add <code>_links</code> to one response</strong> and write a client that navigates by following them
+rather than constructing URLs. Then change a URL on the server and watch the client
+keep working.</p>
+</li>
+</ul>
+<hr/>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. What does REST stand for, and what kind of thing is it? </strong> </p> <ol type="A"> <li>Representational State Transfer — an architectural style for networked software</li><li>Reliable Encrypted Server Transport — a security protocol</li><li>Remote Execution of Server Tasks — a programming language</li><li>Resource Exchange Standard Table — a data format</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> Representational State Transfer — an architectural style for networked software </p> <p>REST stands for Representational State Transfer, the architectural style Roy Fielding named in 2000. It is a set of design constraints — not a protocol, a format, or a piece of software — that a system usually applies on top of HTTP.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. Which URL is the well-designed REST way to address a single user, and why? </strong> </p> <ol type="A"> <li>/getUser?id=1, because it says exactly what to do</li><li>/users/1, because the address names the resource and the HTTP verb carries the action</li><li>/user/fetch/1, because it lists the steps in order</li><li>/deleteUser/1, because it names the operation and the target together</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> /users/1, because the address names the resource and the HTTP verb carries the action </p> <p>In REST the address is a noun that names the resource (/users/1), and the HTTP method (GET, DELETE, and so on) says what to do with it. Baking a verb into the path, like /getUser, throws away the predictability that is the whole point of REST.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. You want to CREATE a new post. Which request is correct? </strong> </p> <ol type="A"> <li>PUT to the collection: PUT /posts with the new body</li><li>POST to an item: POST /posts/1 with the body</li><li>POST to the collection: POST /posts with the body</li><li>GET the collection: GET /posts and read it</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> POST to the collection: POST /posts with the body </p> <p>Create maps to POST against the collection (/posts). The server assigns the new id and typically returns 201 Created with the new resource. You POST to the collection, not to an item, because the item does not exist yet.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. Which HTTP verb corresponds to the &quot;Read&quot; operation in CRUD, and what property does it have? </strong> </p> <ol type="A"> <li>DELETE — it is safe and never changes anything</li><li>POST — it is idempotent</li><li>PATCH — it is safe but not idempotent</li><li>GET — safe and idempotent, so cacheable</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> GET — safe and idempotent, so cacheable </p> <p>Read maps to GET, which is safe (it only reads and never changes server state) and idempotent. Because GET changes nothing, caches and clients can store and repeat it freely — the basis of REST caching.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. Why must you be careful about blindly retrying a failed POST, but not a failed GET or DELETE? </strong> </p> <ol type="A"> <li>POST is not idempotent; GET and DELETE are</li><li>POST requests are slower, so retrying wastes time</li><li>POST requests cannot carry a body on the second attempt</li><li>GET and DELETE are encrypted but POST is not</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> POST is not idempotent; GET and DELETE are </p> <p>POST is not idempotent: two identical POSTs may create two resources (for example, two orders and a double charge). GET is safe, and both GET and DELETE are idempotent, so repeating them leaves the server in the same state — which is why retry logic must know which verb it is retrying.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. What is the difference between PUT and PATCH? </strong> </p> <ol type="A"> <li>PUT reads a resource; PATCH writes one</li><li>PUT replaces the whole resource; PATCH only the fields sent</li><li>PUT works on collections; PATCH works on items</li><li>They are identical; the name is just a preference</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> PUT replaces the whole resource; PATCH only the fields sent </p> <p>PUT replaces the whole resource — omit a field and you may erase it — while PATCH merges only the fields you send, leaving the rest untouched. Use PATCH to change one attribute and PUT when you have the complete new version.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. What does it mean that REST is &quot;stateless,&quot; and why does it matter for scaling? </strong> </p> <ol type="A"> <li>The server saves your session so later requests are faster</li><li>The server has no database and stores nothing at all</li><li>Each request carries all it needs, so any server copy can answer</li><li>Only one client can talk to the server at a time</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Each request carries all it needs, so any server copy can answer </p> <p>Statelessness means every request is self-contained (identity travels in a token on each request) and the server remembers nothing between requests. That lets a provider run many identical copies behind a load balancer and send any request to any copy — the property that makes REST scale horizontally.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. What is the difference between a resource and its representation? </strong> </p> <ol type="A"> <li>They are the same thing with two names</li><li>A resource is the JSON; a representation is the URL</li><li>A representation is stored on disk; a resource exists only in memory</li><li>A resource is the thing; a representation is a JSON snapshot of it</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> A resource is the thing; a representation is a JSON snapshot of it </p> <p>The resource is the underlying thing (user 1); the representation is a document describing its current state — typically JSON — that the server sends you. The same resource can be represented as JSON, XML, or HTML; &quot;Representational State Transfer&quot; names exactly this exchange of representations.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>REST</strong> </dt> <dd data-astro-cid-whrtx2kk>Representational State Transfer — an architectural style for networked software that models a service as resources at addresses, acted on by a fixed set of standard verbs, with a stateless client-server exchange.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>resource</strong> </dt> <dd data-astro-cid-whrtx2kk>Any thing a service exposes and names, such as a user, order, or post; the noun that a REST URL addresses.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>collection</strong> </dt> <dd data-astro-cid-whrtx2kk>A resource that contains many others, addressed by a plural path such as /users; you create a new member by POSTing to it.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>endpoint</strong> </dt> <dd data-astro-cid-whrtx2kk>A specific addressable URL through which a client acts on a resource, such as /users/1.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>CRUD</strong> </dt> <dd data-astro-cid-whrtx2kk>The four basic operations on stored data — Create, Read, Update, Delete — which REST maps onto the HTTP verbs POST, GET, PUT/PATCH, and DELETE.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>stateless</strong> </dt> <dd data-astro-cid-whrtx2kk>A design in which each request carries everything the server needs and the server keeps no memory of the client between requests, so any request can be handled by any server copy.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>representation</strong> </dt> <dd data-astro-cid-whrtx2kk>A serialized snapshot of a resource&#39;s state that is transferred between client and server, most commonly as JSON; distinct from the resource itself.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>idempotent</strong> </dt> <dd data-astro-cid-whrtx2kk>A property of a request such that making it many times leaves the server in the same state as making it once; GET, PUT, and DELETE are idempotent, while POST is not.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>safe</strong> </dt> <dd data-astro-cid-whrtx2kk>A property of a request that only reads and never changes server state; GET is safe, which is why it can be cached and retried freely.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>HATEOAS</strong> </dt> <dd data-astro-cid-whrtx2kk>Hypermedia As The Engine Of Application State — the REST constraint that a resource&#39;s representation includes links telling the client what it can do next and where.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>RPC</strong> </dt> <dd data-astro-cid-whrtx2kk>Remote Procedure Call — an API style that models operations as named functions to invoke (e.g. createUser) rather than resources to act on; gRPC is a modern high-performance form.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>GraphQL</strong> </dt> <dd data-astro-cid-whrtx2kk>An API style exposing a single endpoint where the client asks for exactly the fields it wants in one query, addressing REST&#39;s tendency toward many round trips or over- and under-fetching.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/REST" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Representational state transfer</a> — Wikipedia (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://restfulapi.net/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>What is REST</a> — RESTful API (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>HTTP request methods</a> — MDN Web Docs (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Architectural Styles and the Design of Network-based Software Architectures (Ch. 5: REST)</a> — Roy Fielding (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://jsonplaceholder.typicode.com/guide/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>JSONPlaceholder — Guide</a> — JSONPlaceholder (accessed 2026-07-12) </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="23" data-astro-cid-whrtx2kk>
 Mark Day 23 as read
-</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
       surfaces for someone searching for one — it costs you a click and it is genuinely how people
-      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/ai-roadmap-365/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
 ★ Star on GitHub
-</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-022-what-an-api-is-and-why" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 22</span> <span class="pn__title" data-astro-cid-oerjsknp>What an API Is and Why Everything Has One</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-024-json-and-data-serialization" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 24 →</span> <span class="pn__title" data-astro-cid-oerjsknp>JSON and Data Serialization</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
-</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/day-022-what-an-api-is-and-why" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 22</span> <span class="pn__title" data-astro-cid-oerjsknp>What an API Is and Why Everything Has One</span> </a> <a class="pn__card pn__card--next" href="/day-024-json-and-data-serialization" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 24 →</span> <span class="pn__title" data-astro-cid-oerjsknp>JSON and Data Serialization</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://ocm-mcp-server.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener">LinkedIn</a> </nav> </div> </footer> <script>
       // Progressive enhancement only: the theme falls back to dark and every
       // .reveal element is visible by default (the hidden start state exists
       // only inside a prefers-reduced-motion: no-preference query).

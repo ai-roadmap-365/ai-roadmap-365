@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 38: Regular Expressions · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to read and write regular expressions with confidence — describing the shape of text with literals, character classes, anchors, quantifiers, groups, and alternation — and use them from the command line to search, extract, and reformat real data."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-038-regular-expressions/"><meta property="og:title" content="Day 38: Regular Expressions · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to read and write regular expressions with confidence — describing the shape of text with literals, character classes, anchors, quantifiers, groups, and alternation — and use them from the command line to search, extract, and reformat real data."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-038-regular-expressions/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-038-regular-expressions.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 38: Regular Expressions · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 38: Regular Expressions · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to read and write regular expressions with confidence — describing the shape of text with literals, character classes, anchors, quantifiers, groups, and alternation — and use them from the command line to search, extract, and reformat real data."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-038-regular-expressions.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 38: Regular Expressions · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to read and write regular expressions with confidence — describing the shape of text with literals, character classes, anchors, quantifiers, groups, and alternation — and use them from the command line to search, extract, and reformat real data."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://ai-roadmap-365.github.io/day-038-regular-expressions/"><meta property="og:title" content="Day 38: Regular Expressions · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to read and write regular expressions with confidence — describing the shape of text with literals, character classes, anchors, quantifiers, groups, and alternation — and use them from the command line to search, extract, and reformat real data."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://ai-roadmap-365.github.io/day-038-regular-expressions/"><meta property="og:image" content="https://ai-roadmap-365.github.io/social/day-038-regular-expressions.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 38: Regular Expressions · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 38: Regular Expressions · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to read and write regular expressions with confidence — describing the shape of text with literals, character classes, anchors, quantifiers, groups, and alternation — and use them from the command line to search, extract, and reformat real data."><meta name="twitter:image" content="https://ai-roadmap-365.github.io/social/day-038-regular-expressions.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
       // Dark is the default regardless of OS preference - this is a dark-first
       // design. A visitor who picks light with the toggle keeps it. Applied
       // before first paint so there is no flash of the wrong theme.
@@ -11,75 +11,188 @@
         }
         document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
       })();
-    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+    </script><link rel="stylesheet" href="/_astro/_day_.CiF6NwwU.css">
 <style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
 .starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
-</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="site-home" href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener"> <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M15 5l-7 7 7 7"></path> </svg>
+Sandeep Bazar
+</a> <a class="brand" href="/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
 365 Days of AI
-</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
-Labs
-</a> </header> <main id="main">  <article data-day="38" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>Systems Foundations: Storage, Observability, and Tooling</span>  › 
-Day 38 </p> <h1 data-astro-cid-whrtx2kk>Day 38: Regular Expressions</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-038-regular-expressions.png" width="1200" height="630" alt="Day 38 of 365 — Regular Expressions" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to read and write regular expressions with confidence — describing the shape of text with literals, character classes, anchors, quantifiers, groups, and alternation — and use them from the command line to search, extract, and reformat real data.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Systems Foundations: Storage, Observability, and Tooling</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-038-regular-expressions" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-038-regular-expressions</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
-cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-038-regular-expressions</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
-You can also <a href="/ai-roadmap-365/labs/day-038-regular-expressions" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
-</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Explain what a regular expression is: a compact language that describes a set of strings by their shape, not one literal string</li><li data-astro-cid-whrtx2kk>Read and write the core syntax — literals, character classes ([abc], \d \w \s), anchors (^ $ \b), quantifiers (* + ? {n,m}), groups, and alternation (|) — and combine them into working patterns</li><li data-astro-cid-whrtx2kk>Use capture groups and backreferences to extract fields and reformat text, and explain the difference between greedy and lazy matching</li><li data-astro-cid-whrtx2kk>Write practical patterns for emails, dates, IP addresses, and log lines, and state honestly what each pattern does and does not verify</li><li data-astro-cid-whrtx2kk>Distinguish the common regex flavors (POSIX basic vs extended vs PCRE) and know why a pattern that works in Python may need adjusting for grep or sed</li><li data-astro-cid-whrtx2kk>Choose the right tool for a text job — string method, regex, or a real parser — and recognize when regex is the wrong choice (nested formats like HTML or JSON)</li><li data-astro-cid-whrtx2kk>Search, extract, and reformat text from the command line with grep -E and sed -E, verifying results against known counts</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>A terminal with grep and sed (preinstalled on macOS and Linux)</li><li data-astro-cid-whrtx2kk>Comfort running basic shell commands and reading command output (Days 8–14)</li></ul> <h2 id="why-this-matters">Why this matters</h2>
-<p>Almost everything you will do with data begins as text you did not get to choose the shape of: a log file with a million lines, a spreadsheet someone exported badly, the raw output a program printed to your terminal, a folder of files named by five different conventions. Before any of it becomes clean columns or tidy records, someone has to describe the patterns hiding inside the mess — “pull out every email address,” “find the lines with a timestamp,” “keep only the ones that look like a valid postal code.” A regular expression, or regex, is the small, dense language for writing exactly those descriptions, and once you can write them you stop doing by hand what the machine will do in a millisecond.</p>
-<p>This matters to your goal directly. Preparing data is the unglamorous majority of real machine-learning and data work, and a huge fraction of it is pattern matching over text: stripping junk out of scraped web pages, splitting a raw string into tokens, validating that a field really is a date, extracting the one number you need from a wall of output, or scanning gigabytes of server logs for the requests that failed. The people who move fastest are not the ones who write the cleverest models; they are the ones who can reach for a five-character pattern and reshape a file instead of editing it line by line. A regex that takes thirty seconds to write can replace an afternoon of manual cleanup — and, just as often, catch the one malformed row that would have quietly poisoned everything downstream.</p>
-<p>There is a cost to learning it: regex is famously terse, and a pattern like <code>^\d{4}-\d{2}-\d{2}$</code> looks like a cat walked across the keyboard. Today we defuse that. We build the syntax up one piece at a time, from plain letters to the full toolkit, so that by the end you can read a pattern the way you read a sentence — and write your own with confidence about what it will and will not match.</p>
+</a> <nav aria-label="Primary"> <a href="/sections">Courses</a> <a href="/labs">Labs</a> <a href="/catalog">Catalogs</a> <a href="/search">Search</a> <a href="/glossary">Glossary</a> <a href="/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+GitHub
+</a> </header> <main id="main">  <article data-day="38" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/sections/computing-foundations">Computing Foundations</a>  ›  <span>Systems Foundations: Storage, Observability, and Tooling</span>  › 
+Day 38 </p> <h1 data-astro-cid-whrtx2kk>Day 38: Regular Expressions</h1>  <img class="day-hero" src="/social/day-038-regular-expressions.png" width="1200" height="630" alt="Day 38 of 365 — Regular Expressions" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to read and write regular expressions with confidence — describing the shape of text with literals, character classes, anchors, quantifiers, groups, and alternation — and use them from the command line to search, extract, and reformat real data.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Systems Foundations: Storage, Observability, and Tooling</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/computing-foundations/day-038-regular-expressions" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/computing-foundations/day-038-regular-expressions</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/ai-roadmap-365/ai-roadmap-365.github.io.git
+cd ai-roadmap-365.github.io</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-038-regular-expressions</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/labs/day-038-regular-expressions" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Explain what a regular expression is: a compact language that describes a set of strings by their shape, not one literal string</li><li data-astro-cid-whrtx2kk>Read and write the core syntax — literals, character classes ([abc], \d \w \s), anchors (^ $ \b), quantifiers (* + ? {n,m}), groups, and alternation (|) — and combine them into working patterns</li><li data-astro-cid-whrtx2kk>Use capture groups and backreferences to extract fields and reformat text, and explain the difference between greedy and lazy matching</li><li data-astro-cid-whrtx2kk>Write practical patterns for emails, dates, IP addresses, and log lines, and state honestly what each pattern does and does not verify</li><li data-astro-cid-whrtx2kk>Distinguish the common regex flavors (POSIX basic vs extended vs PCRE) and know why a pattern that works in Python may need adjusting for grep or sed</li><li data-astro-cid-whrtx2kk>Choose the right tool for a text job — string method, regex, or a real parser — and recognize when regex is the wrong choice (nested formats like HTML or JSON)</li><li data-astro-cid-whrtx2kk>Search, extract, and reformat text from the command line with grep -E and sed -E, verifying results against known counts</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk>A terminal with grep and sed (preinstalled on macOS and Linux)</li><li data-astro-cid-whrtx2kk>Comfort running basic shell commands and reading command output (Days 8–14)</li> </ul> <h2 id="why-this-matters">Why this matters</h2>
+<ul>
+<li>
+<p><strong>Regex is the pattern language embedded in everything</strong> — <code>grep</code>, <code>sed</code>, your
+editor, every programming language, log tools, and validation everywhere.</p>
+</li>
+<li>
+<p><strong>Data cleaning is mostly pattern matching</strong>, and that is most of the work before any
+model sees anything.</p>
+</li>
+<li>
+<p><strong>The greedy-versus-lazy trap catches everyone once</strong>, and knowing it saves the same
+hour repeatedly.</p>
+</li>
+<li>
+<p><strong>Catastrophic backtracking is a real denial-of-service vector</strong>, and a regex on
+untrusted input is a security decision.</p>
+</li>
+<li>
+<p><strong>Day 10 gave you a taste.</strong> Today is the whole thing.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="the-idea-in-plain-language">The idea in plain language</h2>
-<p>A regular expression is a pattern that describes a <em>set</em> of strings rather than one specific string. When you search for the literal word <code>cat</code>, you find exactly <code>cat</code>. When you write a regex, you are instead describing a shape: “a <code>c</code>, then an <code>a</code>, then a <code>t</code>” is the boring case, but “any digit, repeated four times, then a dash” is where the power appears. The pattern does not name the text you want; it names the <em>rules</em> the text must satisfy.</p>
-<p>A tool called a regex <em>engine</em> takes your pattern and a piece of text and answers one question: does the text (or some part of it) fit the pattern? If it does, the engine reports <em>where</em> the match is, and — if you asked it to remember certain pieces — hands back those captured pieces too. Every search box that supports “advanced” matching, every <code>grep</code> on the command line, and the text-processing library of nearly every programming language is running an engine like this underneath.</p>
-<p>Here is the mental model to carry through the day. Imagine handing a description to a tireless, hyper-literal assistant and asking them to scan a page. You say “find me anything that is four digits, a dash, two digits, a dash, two digits.” The assistant starts at the first character and drags a finger along the line, checking at each position whether the description fits starting <em>there</em>. Where it fits, they underline it; if you bracketed part of your description, they also photocopy that bracketed part for you. That is the whole game. The syntax we are about to learn is simply the vocabulary you use to write the description — what counts as “a digit,” what “four times” looks like, how to say “at the start of the line,” and how to mark the part you want photocopied.</p>
+<p><img src="/_astro/regex-pieces.DorOQIrq_Z16hImP.svg" alt="Diagram: the five kinds of component in a regular expression" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<ul>
+<li>
+<p><strong>A regular expression describes a shape that text might have</strong>, rather than the text
+itself.</p>
+</li>
+<li>
+<p><strong>You build patterns from a few kinds of piece</strong>: literals, character classes,
+anchors, quantifiers and groups.</p>
+</li>
+<li>
+<p><strong>The engine scans left to right</strong>, trying the whole pattern at each position until
+something fits.</p>
+</li>
+<li>
+<p><strong>Groups capture</strong>, which is how you extract parts rather than merely detect a match.</p>
+</li>
+<li>
+<p><strong>Quantifiers are greedy by default</strong> — they take as much as they can — and that
+single fact explains most surprising results.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="historical-background">Historical background</h2>
-<p>Regular expressions did not begin with programming. In 1951 the mathematician Stephen Cole Kleene, working on models of neural events, formalized “regular sets” — a way of describing which sequences of symbols a simple machine could recognize. His notation gave us the star operator still called the <em>Kleene star</em> today: <code>a*</code> means “zero or more <code>a</code>s.” This was pure theory, part of the mathematics of what abstract machines can and cannot compute.</p>
-<p>The idea crossed into practical software in the mid-1960s. Ken Thompson, later a co-creator of Unix, built Kleene’s notation into a text editor and described, in a 1968 paper, how to compile a regular expression into code that searches text efficiently. That work flowed directly into Unix tools. The command <code>grep</code> — whose name comes from an old editor command, <code>g/re/p</code>, meaning “globally search for a regular expression and print” — shipped in the early 1970s and made regex a daily tool for anyone using the system.</p>
-<p>For years different tools spoke slightly different regex dialects, which made patterns frustratingly non-portable. Two developments organized the landscape. The POSIX standard, in the 1980s and 1990s, defined “basic” and “extended” regular expressions so that command-line tools could agree on a baseline. Separately, Larry Wall’s Perl language, first released in 1987, grew an especially rich and expressive regex syntax; it became so influential that a widely used C library, PCRE (Perl Compatible Regular Expressions), was created in 1997 to bring Perl’s style everywhere. Today most programming languages — Python, JavaScript, Java, and others — use engines in the PCRE-influenced tradition, while the classic Unix tools follow the POSIX lineage. Knowing which family you are in explains most of the small syntax surprises you will hit.</p>
+<ul>
+<li>
+<p><strong>Regular expressions come from mathematics</strong>, formalised by Stephen Kleene in the
+1950s as a way of describing sets of strings.</p>
+</li>
+<li>
+<p><strong>Ken Thompson put them into a text editor in 1968</strong>, and the notation has barely
+changed since.</p>
+</li>
+<li>
+<p><strong><code>grep</code> is named after the editor command</strong> <code>g/re/p</code> — globally search a regular
+expression and print.</p>
+</li>
+<li>
+<p><strong>Perl extended the syntax substantially in the 1980s and 90s</strong>, adding lookahead,
+backreferences and lazy quantifiers.</p>
+</li>
+<li>
+<p><strong>Those extensions are why “regex” now means two different things</strong>: the
+mathematical regular languages, and the far more powerful engines everyone actually
+uses.</p>
+</li>
+<li>
+<p><strong>The extra power came at a cost</strong>: backreferences in particular make the worst case
+exponential, which is where catastrophic backtracking comes from.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
-<p>A regular expression is a compact string of characters that specifies a pattern for matching text. Most characters in a pattern are <em>literals</em> that match themselves — in the pattern <code>dog</code>, each letter matches that exact letter. The power comes from <em>metacharacters</em>: characters like <code>.</code>, <code>*</code>, <code>+</code>, <code>?</code>, <code>[</code>, <code>]</code>, <code>(</code>, <code>)</code>, <code>^</code>, <code>$</code>, <code>|</code>, and <code>\</code> that have special meaning and let you describe classes of characters, repetition, position, and structure. Learning regex is mostly learning what each metacharacter does and how they combine.</p>
-<p>It is just as important to be clear about what a regex is <em>not</em>. A regex is not a parser for nested or recursive structure. The classic regular expressions of theory provably cannot match arbitrarily nested brackets or the full grammar of HTML, JSON, or a programming language — those need a real parser that understands hierarchy. Modern engines add features that bend this rule, but the lesson stands: reaching for a regex to “parse HTML” or validate deeply nested data is a well-known trap that produces patterns that are fragile, unreadable, and wrong on the cases you did not think of. A regex is a scalpel for finding and extracting <em>flat</em> patterns in text; it is not a substitute for a format-aware library when one exists.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Common misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”A regex matches one specific string.”</td><td>It describes a whole set of strings that share a shape; <code>\d+</code> matches <code>7</code>, <code>42</code>, and <code>1000000</code> alike.</td></tr><tr><td>”You can validate any format with enough regex.”</td><td>Nested or recursive formats (HTML, JSON, source code) need a real parser; regex handles flat patterns.</td></tr><tr><td>”One pattern works in every tool.”</td><td>Dialects differ — grep, sed, Python, and JavaScript disagree on small but real details.</td></tr><tr><td>”<code>.</code> matches any character.”</td><td>It matches any character <em>except a newline</em> by default, which surprises people scanning multi-line text.</td></tr><tr><td>”Regex is only for programmers.”</td><td>It lives in editors, search boxes, spreadsheets, and log tools — anyone who wrangles text can use it.</td></tr></tbody></table>
+<p><img src="/_astro/regex-or-parser.D6SQ9WqB_ZIALX.svg" alt="Diagram: text regex handles well compared with structures that need a parser" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<p><strong>A regex is:</strong></p>
+<ul>
+<li>A compact language for describing text patterns.</li>
+<li>Available in essentially every tool and language you will use.</li>
+<li>Excellent at line-oriented, locally-structured text.</li>
+</ul>
+<p><strong>It is not:</strong></p>
+<ul>
+<li>
+<p><strong>Not a parser.</strong> Nested structure — HTML, JSON, source code — is beyond what it can
+reliably do, and attempts produce something that works on your examples and fails on
+real data.</p>
+</li>
+<li>
+<p><strong>Not the same everywhere.</strong> Flavours differ in escaping, lookahead support and
+shorthand meanings; the differences bite exactly when you copy a pattern between
+tools.</p>
+</li>
+<li>
+<p><strong>Not free.</strong> A badly formed pattern on hostile input can take exponential time.</p>
+</li>
+<li>
+<p><strong>Not self-documenting.</strong> A regex you wrote three months ago is a puzzle unless you
+commented it.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
-<p>The problem regex solves is old and constant: text almost never arrives in the shape you need. A program logs “user 4821 failed login from 192.168.1.44 at 08:31:02” as a sentence, but you want just the failed-login IP addresses. A dataset has phone numbers written five ways. A colleague sends a file where every date is <code>2026/07/12</code> and your tool wants <code>2026-07-12</code>. Doing this by hand does not scale past a few dozen rows, and writing a custom loop for each little transformation is slow and error-prone.</p>
-<p>Regex was created so you can describe the <em>shape</em> of what you want once, precisely, and let an engine apply that description across any amount of text in an instant. Its three core jobs are <strong>searching</strong> (does this text contain something matching the pattern, and where?), <strong>extracting</strong> (pull out the parts that match, or the sub-parts you bracketed), and <strong>replacing</strong> (find everything matching the pattern and substitute something else, often built from the captured pieces). Those three verbs — search, extract, replace — cover an enormous share of everyday text work.</p>
-<p>The deeper reason it endures is leverage. A regex is a tiny, declarative specification: you say <em>what</em> the text looks like, not <em>how</em> to scan for it character by character, and the engine handles the how. That is the same trade you make every time you climb an abstraction layer, and it is why a fluent regex user can reshape a file with a one-line command while someone without it opens the file and starts editing by hand.</p>
+<ul>
+<li>
+<p><strong>Describing a class of strings</strong> rather than enumerating them.</p>
+</li>
+<li>
+<p><strong>Search beyond exact text.</strong> “Any date”, “any address”, “any line starting with
+Error” are not literals.</p>
+</li>
+<li>
+<p><strong>Extraction.</strong> Capture groups pull structured fields out of unstructured text.</p>
+</li>
+<li>
+<p><strong>Validation.</strong> A single expression can state what a well-formed input looks like.</p>
+</li>
+<li>
+<p><strong>Portability of the idea.</strong> Learn it once and it works in your editor, your shell,
+your language, and your log tool.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="how-it-works">How it works</h2>
-<p>Let’s build the syntax up in the order you would actually learn it, each piece adding one new power, then see how the engine puts them together.</p>
-<h3 id="building-blocks-literals-character-classes-and-shorthands">Building blocks: literals, character classes, and shorthands</h3>
-<p>The simplest pattern is a run of <strong>literals</strong>: <code>cat</code> matches the three letters <code>c</code>, <code>a</code>, <code>t</code> in a row, anywhere they appear. To match “any one of several characters” you use a <strong>character class</strong>, written in square brackets: <code>[abc]</code> matches a single <code>a</code>, <code>b</code>, or <code>c</code>. Inside a class a hyphen makes a range, so <code>[a-z]</code> is any lowercase letter, <code>[0-9]</code> any digit, and <code>[A-Za-z0-9]</code> any letter or digit. Put a caret first to <em>negate</em> the class: <code>[^0-9]</code> matches any single character that is <em>not</em> a digit.</p>
-<p>Because a few classes come up constantly, regex provides <strong>shorthands</strong>: <code>\d</code> means “a digit” (the same as <code>[0-9]</code>), <code>\w</code> means “a word character” (letters, digits, or underscore), and <code>\s</code> means “whitespace” (space, tab, newline). Their capitalized forms invert them: <code>\D</code> is “not a digit,” <code>\W</code> “not a word character,” <code>\S</code> “not whitespace.” A lone <code>.</code> (dot) matches <em>any single character except a newline</em> — the widest net there is, and a common source of over-matching.</p>
-<h3 id="anchors-matching-by-position">Anchors: matching by position</h3>
-<p>The tools above match characters; <strong>anchors</strong> match <em>positions</em> between characters, and match nothing themselves. <code>^</code> means “the start of the line” and <code>$</code> means “the end of the line.” So <code>^cat</code> matches <code>cat</code> only when it begins a line, <code>cat$</code> only when it ends one, and <code>^cat$</code> only on a line that is exactly <code>cat</code> and nothing else. A subtler anchor is <code>\b</code>, a <strong>word boundary</strong>: the position between a word character and a non-word character. The pattern <code>\bcat\b</code> matches the word <code>cat</code> but not the <code>cat</code> inside <code>category</code> or <code>concatenate</code>, which is exactly what you want when searching for whole words.</p>
-<h3 id="quantifiers-matching-repetition">Quantifiers: matching repetition</h3>
-<p><strong>Quantifiers</strong> say how many times the thing before them may repeat. There are four you must know cold, shown in full in the table below: <code>*</code> (zero or more), <code>+</code> (one or more), <code>?</code> (zero or one — “optional”), and <code>{n,m}</code> (between <code>n</code> and <code>m</code> times). So <code>\d+</code> is “one or more digits,” <code>colou?r</code> matches both <code>color</code> and <code>colour</code>, and <code>\d{4}</code> is “exactly four digits.” A quantifier attaches to whatever immediately precedes it — a single character, a character class, or a group.</p>
+<h3 id="building-blocks">Building blocks</h3>
+<ul>
+<li>
+<p><strong>Literals</strong> match themselves: <code>cat</code> matches those three letters in a row.</p>
+</li>
+<li>
+<p><strong>A character class</strong> matches any one of several: <code>[abc]</code> is one <code>a</code>, <code>b</code> or <code>c</code>.</p>
+</li>
+<li>
+<p><strong>A hyphen makes a range</strong>: <code>[a-z]</code>, <code>[0-9]</code>, <code>[A-Za-z0-9]</code>.</p>
+</li>
+<li>
+<p><strong>A leading caret negates</strong>: <code>[^0-9]</code> is any single character that is <em>not</em> a digit.</p>
+</li>
+<li>
+<p><strong>Shorthands</strong>: <code>\d</code> is a digit, <code>\w</code> a word character (letters, digits,
+underscore), <code>\s</code> whitespace. Capitals invert them — <code>\D</code>, <code>\W</code>, <code>\S</code>.</p>
+</li>
+<li>
+<p><strong>A lone <code>.</code> matches any character except a newline</strong> — the widest net there is, and
+a common source of over-matching.</p>
+</li>
+</ul>
+<h3 id="anchors">Anchors</h3>
+<ul>
+<li>
+<p><strong>Anchors match positions, not characters</strong>, and consume nothing.</p>
+</li>
+<li>
+<p><strong><code>^</code> is the start of the line; <code>$</code> is the end.</strong> So <code>^cat</code> matches only at the start,
+<code>cat$</code> only at the end, and <code>^cat$</code> only on a line that is exactly <code>cat</code>.</p>
+</li>
+<li>
+<p><strong><code>\b</code> is a word boundary</strong> — the position between a word character and a non-word
+character.</p>
+</li>
+<li>
+<p><strong><code>\bcat\b</code> matches the word <code>cat</code></strong> but not the <code>cat</code> inside <code>category</code> or
+<code>concatenate</code>, which is exactly what whole-word search means.</p>
+</li>
+</ul>
+<h3 id="quantifiers">Quantifiers</h3>
 
 
 
@@ -134,36 +247,190 @@ You can also <a href="/ai-roadmap-365/labs/day-038-regular-expressions" target="
 
 
 
-<table><thead><tr><th>Quantifier</th><th>Meaning</th><th>Example pattern</th><th>Matches</th><th>Does not match</th></tr></thead><tbody><tr><td><code>*</code></td><td>zero or more</td><td><code>ab*c</code></td><td><code>ac</code>, <code>abc</code>, <code>abbbc</code></td><td><code>adc</code></td></tr><tr><td><code>+</code></td><td>one or more</td><td><code>ab+c</code></td><td><code>abc</code>, <code>abbc</code></td><td><code>ac</code></td></tr><tr><td><code>?</code></td><td>zero or one (optional)</td><td><code>ab?c</code></td><td><code>ac</code>, <code>abc</code></td><td><code>abbc</code></td></tr><tr><td><code>{n}</code></td><td>exactly n</td><td><code>a{3}</code></td><td><code>aaa</code></td><td><code>aa</code>, <code>aaaa</code> (as a whole match)</td></tr><tr><td><code>{n,}</code></td><td>n or more</td><td><code>a{2,}</code></td><td><code>aa</code>, <code>aaaa</code></td><td><code>a</code></td></tr><tr><td><code>{n,m}</code></td><td>between n and m</td><td><code>a{2,4}</code></td><td><code>aa</code>, <code>aaa</code>, <code>aaaa</code></td><td><code>a</code>, <code>aaaaa</code> (as a whole match)</td></tr></tbody></table>
-<h3 id="groups-alternation-capturing-and-backreferences">Groups, alternation, capturing, and backreferences</h3>
-<p>Parentheses <code>( )</code> create a <strong>group</strong>, which does two jobs. First, it lets a quantifier apply to a whole sub-pattern: <code>(ab)+</code> matches <code>ab</code>, <code>abab</code>, <code>ababab</code>. Second, a plain group is a <strong>capture group</strong> — the engine remembers the exact text that the group matched so you can retrieve it afterward, numbered left to right by opening parenthesis (<code>\1</code>, <code>\2</code>, and so on). Capturing is how you <em>extract</em>: match a whole date but capture the year, month, and day separately, and you can pull each field out.</p>
-<p>Inside or across groups, the pipe <code>|</code> means <strong>alternation</strong> — “this or that.” <code>cat|dog</code> matches <code>cat</code> or <code>dog</code>; <code>gr(a|e)y</code> matches <code>gray</code> or <code>grey</code>. A <strong>backreference</strong> lets a later part of the pattern refer to what an earlier group captured: <code>(\w+) \1</code> matches a doubled word, because <code>\1</code> demands the <em>same</em> text the first group matched — it turns <code>the the</code> into a match but leaves <code>the cat</code> alone.</p>
-<p><img src="/ai-roadmap-365/_astro/regex-anatomy.qkv0-CTs_120Pm.svg" alt="Diagram: the anatomy of a regular expression, with each part of a date pattern labelled" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="440"></p>
-<p>Read the diagram above as a labelled specimen. The pattern <code>^(\d{4})-(\d{2})-(\d{2})$</code> describes an ISO date: the <code>^</code> and <code>$</code> anchors pin it to a whole line, each <code>(\d{...})</code> is a capture group holding a run of digits of a fixed length, the <code>{4}</code> and <code>{2}</code> are quantifiers, and the <code>-</code> between them is a literal hyphen. Every regex you meet is some assembly of these same parts.</p>
-<h3 id="greedy-versus-lazy-matching">Greedy versus lazy matching</h3>
-<p>One behavior trips up nearly everyone. By default quantifiers are <strong>greedy</strong>: they match as much text as they possibly can while still letting the overall pattern succeed. Suppose the text is <code>&lt;a&gt;&lt;b&gt;</code> and your pattern is <code>&lt;.*&gt;</code>. You might expect it to match just <code>&lt;a&gt;</code>, but <code>.*</code> is greedy, so it swallows everything up to the <em>last</em> <code>&gt;</code> and matches the entire <code>&lt;a&gt;&lt;b&gt;</code>. Adding a <code>?</code> after a quantifier makes it <strong>lazy</strong> (also called non-greedy): it matches as <em>little</em> as possible. So <code>&lt;.*?&gt;</code> matches just <code>&lt;a&gt;</code>, then <code>&lt;b&gt;</code> on the next attempt. Greedy-versus-lazy is the single most common reason a pattern “matches too much,” and knowing the fix — add a <code>?</code>, or use a more specific class like <code>[^&gt;]*</code> instead of <code>.*</code> — will save you repeatedly.</p>
-<h3 id="how-the-engine-actually-scans">How the engine actually scans</h3>
-<p>Put it together and the engine’s job is mechanical. It starts at the first position in the text and tries to match your whole pattern beginning there. If the pattern includes a quantifier that could match different amounts, the engine tries the greedy (or lazy) choice and, when a later part of the pattern fails, <em>backtracks</em> — undoes its last choice and tries a different amount — until either the whole pattern fits or every option is exhausted. If nothing fits at position one, it advances to position two and tries again, and so on to the end of the text. When it succeeds, it records the span of the overall match and the span of each capture group. That underlining-and-photocopying assistant from earlier is doing exactly this, just very fast.</p>
-<p><img src="/ai-roadmap-365/_astro/regex-match.SQtdzoBU_2toCsU.svg" alt="Diagram: a regex engine scanning a string left to right, finding a date match and handing back three captured groups" loading="lazy" decoding="async" fetchpriority="auto" width="720" height="470"></p>
-<p>The diagram traces one scan. The engine tries the pattern at each position, fails at the leading characters, and succeeds where the date begins; it then reports the whole matched span and hands back the three parenthesised groups — <code>2026</code>, <code>07</code>, and <code>12</code> — ready to extract or reassemble.</p>
+<table><thead><tr><th>Quantifier</th><th>Meaning</th><th>Example</th><th>Matches</th><th>Does not match</th></tr></thead><tbody><tr><td><code>*</code></td><td>zero or more</td><td><code>ab*c</code></td><td><code>ac</code>, <code>abc</code>, <code>abbbc</code></td><td><code>adc</code></td></tr><tr><td><code>+</code></td><td>one or more</td><td><code>ab+c</code></td><td><code>abc</code>, <code>abbc</code></td><td><code>ac</code></td></tr><tr><td><code>?</code></td><td>zero or one</td><td><code>ab?c</code></td><td><code>ac</code>, <code>abc</code></td><td><code>abbc</code></td></tr><tr><td><code>{n}</code></td><td>exactly n</td><td><code>a{3}</code></td><td><code>aaa</code></td><td><code>aa</code></td></tr><tr><td><code>{n,}</code></td><td>n or more</td><td><code>a{2,}</code></td><td><code>aa</code>, <code>aaaa</code></td><td><code>a</code></td></tr><tr><td><code>{n,m}</code></td><td>between n and m</td><td><code>a{2,4}</code></td><td><code>aa</code>, <code>aaa</code>, <code>aaaa</code></td><td><code>a</code></td></tr></tbody></table>
+<ul>
+<li>
+<p><strong>A quantifier attaches to whatever immediately precedes it</strong> — a character, a class,
+or a group.</p>
+</li>
+<li>
+<p><strong><code>colou?r</code> matches both spellings</strong>; <code>\d{4}</code> is exactly four digits.</p>
+</li>
+</ul>
+<h3 id="groups-alternation-and-backreferences">Groups, alternation and backreferences</h3>
+<p><img src="/_astro/capture-to-extract.BdEyMfRV_Z16hImP.svg" alt="Diagram: how capture groups extract fields from a match" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<ul>
+<li>
+<p><strong>Parentheses create a group</strong>, which does two jobs.</p>
+</li>
+<li>
+<p><strong>First, a quantifier can apply to a whole sub-pattern</strong>: <code>(ab)+</code> matches <code>ab</code>,
+<code>abab</code>, <code>ababab</code>.</p>
+</li>
+<li>
+<p><strong>Second, a group captures.</strong> The engine remembers what it matched, numbered left to
+right by opening parenthesis.</p>
+</li>
+<li>
+<p><strong>Capturing is how you extract</strong>: match a whole date, capture year, month and day
+separately.</p>
+</li>
+<li>
+<p><strong><code>|</code> is alternation</strong> — <code>cat|dog</code>, or <code>gr(a|e)y</code>.</p>
+</li>
+<li>
+<p><strong>A backreference demands the same text again</strong>: <code>(\w+) \1</code> matches a doubled word,
+turning <code>the the</code> into a match and leaving <code>the cat</code> alone.</p>
+</li>
+</ul>
+<p><img src="/_astro/regex-anatomy.qkv0-CTs_120Pm.svg" alt="Diagram: the anatomy of a regular expression, with each part of a date pattern labelled" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="440"></p>
+<ul>
+<li><strong>Read <code>^(\d{4})-(\d{2})-(\d{2})$</code> as a labelled specimen</strong>: anchors pin it to a
+whole line, each <code>(\d{...})</code> is a capture group of fixed length, and the <code>-</code> is a
+literal hyphen. Every regex is some assembly of these same parts.</li>
+</ul>
+<h3 id="greedy-versus-lazy">Greedy versus lazy</h3>
+<p><img src="/_astro/greedy-trap.DGo_Hyh9_Z16hImP.svg" alt="Diagram: how a greedy quantifier over-matches and how to fix it" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<ul>
+<li>
+<p><strong>Quantifiers are greedy by default</strong>: they match as much as they can while still
+letting the whole pattern succeed.</p>
+</li>
+<li>
+<p><strong>Given <code>&lt;a&gt;&lt;b&gt;</code> and the pattern <code>&lt;.*&gt;</code></strong>, you might expect <code>&lt;a&gt;</code>. You get the whole
+<code>&lt;a&gt;&lt;b&gt;</code>, because <code>.*</code> swallowed everything up to the <em>last</em> <code>&gt;</code>.</p>
+</li>
+<li>
+<p><strong>Adding <code>?</code> makes a quantifier lazy</strong>: <code>&lt;.*?&gt;</code> matches just <code>&lt;a&gt;</code>.</p>
+</li>
+<li>
+<p><strong>This is the single most common reason a pattern matches too much</strong>, and the fix is
+either a <code>?</code> or a more specific class — <code>[^&gt;]*</code> instead of <code>.*</code>.</p>
+</li>
+</ul>
+<h3 id="how-the-engine-scans">How the engine scans</h3>
+<p><img src="/_astro/regex-match.SQtdzoBU_2toCsU.svg" alt="Diagram: a regex engine scanning a string left to right, finding a date match and handing back three captured groups" loading="lazy" decoding="async" fetchpriority="auto" width="720" height="470"></p>
+<ul>
+<li>
+<p><strong>It tries the whole pattern starting at position one.</strong></p>
+</li>
+<li>
+<p><strong>When a quantifier could match different amounts</strong>, it tries the greedy or lazy
+choice and, if a later part fails, <strong>backtracks</strong> — undoing that choice and trying a
+different amount.</p>
+</li>
+<li>
+<p><strong>If nothing fits at position one, it advances</strong> and tries again, to the end of the
+text.</p>
+</li>
+<li>
+<p><strong>On success it records the span of the whole match</strong> and the span of each capture
+group.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="an-everyday-analogy">An everyday analogy</h2>
-<p>Keep the tireless, hyper-literal library assistant in mind and every piece of syntax has a plain meaning. You hand the assistant a written description of what to underline on each page, and they scan strictly left to right, checking at every position whether your description fits <em>starting there</em>.</p>
-<p>A <strong>literal</strong> is you writing an exact word: “underline the word <em>invoice</em>.” A <strong>character class</strong> is you offering choices: “underline any single vowel” is <code>[aeiou]</code>; “any character that is <em>not</em> a space” is <code>[^ ]</code>. A <strong>shorthand</strong> is a common instruction with a short name — “a digit” is <code>\d</code>, the way a proofreader has agreed shorthand marks. An <strong>anchor</strong> is an instruction about <em>where</em> on the line rather than <em>what</em>: “only if it is at the very start of the line” is <code>^</code>, and “only if it stands as a whole word, not buried inside a longer one” is <code>\b</code>. A <strong>quantifier</strong> tells the assistant how many of the previous thing to expect: “exactly four digits” is <code>\d{4}</code>, “one or more” is <code>+</code>, “optional” is <code>?</code>.</p>
-<p>Parentheses are you drawing a box around part of the description and saying “and photocopy whatever lands in this box” — that is a <strong>capture group</strong>. <strong>Alternation</strong>, the <code>|</code>, is you saying “either this wording or that one is fine.” <strong>Greedy</strong> matching is an eager assistant who, told to underline “from a quote mark to a quote mark,” grabs everything up to the last quote on the line; adding the lazy <code>?</code> is you telling them “stop at the <em>first</em> closing quote.” The analogy holds all the way down because a regex really is just a precise description handed to a mechanical reader — the syntax is only the agreed vocabulary for writing that description unambiguously.</p>
+<p><img src="/_astro/lookahead.DIUA0sG1_Z16hImP.svg" alt="Diagram: how regex lookahead asserts without consuming characters" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<p>Describing a person to someone meeting them at a station.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>The description</th><th>The regex</th></tr></thead><tbody><tr><td>”Wearing a red coat”</td><td>A literal</td></tr><tr><td>”Red, blue or green”</td><td>A character class</td></tr><tr><td>”First person off the train”</td><td>An anchor</td></tr><tr><td>”Carrying one or more bags”</td><td>A quantifier</td></tr><tr><td>”Note their name and their platform”</td><td>Capture groups</td></tr><tr><td>”As many bags as they can hold”</td><td>Greedy</td></tr><tr><td>”At least one bag, no more”</td><td>Lazy</td></tr></tbody></table>
+<ul>
+<li><strong>You are describing a shape</strong>, not naming a person. Anyone matching it will do.</li>
+<li><strong>“As many as possible” is the default</strong>, and it is why you sometimes collect the
+wrong person entirely.</li>
+</ul>
+<hr/>
 <h2 id="examples-in-practice">Examples in practice</h2>
-<p>Let’s write real patterns against text you would actually meet, with the honest caveats each one deserves.</p>
-<p><strong>An email-ish address.</strong> A pattern that works well for everyday extraction is <code>[\w.+-]+@[\w-]+\.[\w.-]+</code>. Read it left to right: one or more word characters, dots, plus, or hyphens (the local part); a literal <code>@</code>; one or more word characters or hyphens (the domain name); a literal dot (note the <code>\.</code> — an unescaped <code>.</code> would match <em>any</em> character); and one or more word, dot, or hyphen characters (the rest of the domain). The honest caveat: the official specification for what counts as a valid email address is famously baroque, and no short regex captures it exactly. That is fine — for pulling addresses out of a log or a form, a practical pattern like this is the right tool; for guaranteeing deliverability, sending a confirmation message is the only real validation.</p>
-<p><strong>A <code>YYYY-MM-DD</code> date.</strong> The pattern <code>\b\d{4}-\d{2}-\d{2}\b</code> finds ISO-style dates: a word boundary, four digits, a hyphen, two digits, a hyphen, two digits, a word boundary. It happily matches <code>2026-07-12</code>. Note what it does <em>not</em> check: <code>2026-19-45</code> matches the shape even though month 19 and day 45 are impossible. Regex describes <em>format</em>, not <em>meaning</em>; enforcing that a month is 01–12 is possible but ugly, and validating a real calendar date (leap years, days per month) is a job for a date library, not a pattern.</p>
-<p><strong>A log line, extracting fields.</strong> Suppose lines look like <code>192.168.1.44 - - [12/Jul/2026:08:31:02] &quot;GET /health&quot; 200</code>. To capture the IP address and the status code, you write a pattern with two groups: <code>^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) .* (\d{3})$</code>. Group 1 is four one-to-three-digit numbers joined by <em>escaped</em> dots — an IP-ish shape; the <code>.*</code> skips the middle; group 2 is the trailing three-digit status code anchored to the end of the line. Run this over a log and you can pull out, for every line, the client IP and whether the request succeeded. The caveat again: <code>\d{1,3}</code> also matches <code>999</code>, which is not a valid IP octet — good enough to extract from logs you trust, not good enough to validate untrusted input.</p>
-<p><strong>Reformatting with a backreference.</strong> Say a file has dates as <code>2026/07/12</code> and you want <code>2026-07-12</code>. In a search-and-replace tool you match <code>(\d{4})/(\d{2})/(\d{2})</code> and replace with <code>\1-\2-\3</code>: capture the three numbers, then rebuild them with hyphens. This is the single most useful everyday regex move — capture the pieces you want to keep, throw away the punctuation, and reassemble. You will do it constantly, and you will do it in the lab today.</p>
+<p><img src="/_astro/regex-flavours.CKjJ3O4a_ZIALX.svg" alt="Diagram: differences between regular expression flavours" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<p><img src="/_astro/greedy-versus-lazy.BxR0gLwh_ZIALX.svg" alt="Diagram: greedy quantifiers compared with lazy ones" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong><code>grep -E &#39;^Error&#39; app.log</code></strong> — lines beginning with Error, and not the ones
+mentioning it midway.</p>
+</li>
+<li>
+<p><strong><code>\b\d{4}-\d{2}-\d{2}\b</code></strong> — ISO dates anywhere in a line, without matching the
+digits inside a longer number.</p>
+</li>
+<li>
+<p><strong><code>&lt;.*&gt;</code> swallowing an entire line of HTML</strong>, which is the greedy trap in its most
+common form.</p>
+</li>
+<li>
+<p><strong>An email-validating regex that rejects valid addresses</strong>, because the real
+specification is far more permissive than anyone expects.</p>
+</li>
+<li>
+<p><strong>A pattern that works in your editor and fails in <code>grep</code></strong>, because one supports
+<code>\d</code> and the other needs <code>[0-9]</code> without <code>-E</code>.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
-<p><strong>Security.</strong> The headline risk has a name: <em>catastrophic backtracking</em>, sometimes called a regular-expression denial of service (ReDoS). Certain patterns with nested quantifiers — a classic shape is <code>(a+)+$</code> run against a long string of <code>a</code>s followed by a non-matching character — force a backtracking engine to try an exponential number of combinations, and a single request can pin a CPU for seconds or minutes. If you ever run user-supplied text through a regex, or run a user-supplied pattern, this is a real attack surface. The defenses are practical: avoid nested quantifiers over overlapping classes, prefer specific classes (<code>[^&quot;]*</code>) to broad ones (<code>.*</code>), test patterns against long adversarial inputs, and use an engine with a timeout or a non-backtracking design where available.</p>
-<p><strong>Privacy.</strong> Regex is a double-edged tool for personal data. It is superb for <em>finding</em> sensitive strings — sweeping logs for anything shaped like an email address, a credit-card number, or a national ID so you can redact them before sharing a dataset. But precisely because format is not meaning, a redaction regex that is too loose will miss real cases and too tight will leak them, so redaction patterns deserve careful testing against real examples. Treat “we scrub it with a regex” as a starting point that must be verified, not a guarantee.</p>
-<p><strong>Performance.</strong> For the everyday case, regex is fast — a well-written pattern scans large files in linear time, which is why command-line tools handle multi-gigabyte logs comfortably. The performance cliffs are specific: broad <code>.*</code> with backtracking, alternations with many overlapping options, and the ReDoS shapes above. The practical habit is to make patterns as specific as the data allows; a narrow class matches faster and more safely than a wide one.</p>
-<p><strong>Scalability.</strong> Because a regex is a small string, it scales trivially in one sense — the same pattern runs over one line or a billion, and streaming tools apply it line by line without loading the whole file into memory. The thing that does not scale is <em>pattern complexity</em>: a monster regex that tries to handle every edge case in one expression becomes unmaintainable. At that scale the right move is to split the work into several simple, testable patterns, or step up to a real parser.</p>
-<p><strong>Cost.</strong> Regex is free — the engines ship with your operating system and every programming language — and its cost is entirely human: the time to write a pattern and the risk of a subtle bug. A pattern that is too loose silently lets bad data through; one that is too tight silently drops good data. The cheapest insurance is to test every non-trivial pattern against known inputs, including the tricky ones, which is exactly what a test suite in a data pipeline does.</p>
+<p><img src="/_astro/catastrophic-backtracking.B7v0mw53_Z16hImP.svg" alt="Diagram: how nested quantifiers cause catastrophic backtracking" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<ul>
+<li>
+<p><strong>Security: catastrophic backtracking is a real denial-of-service vector.</strong> A pattern
+like <code>(a+)+$</code> against a long non-matching string takes exponential time.</p>
+</li>
+<li>
+<p><strong>Never run a user-supplied regex</strong> without a timeout and a length limit. Some engines
+offer neither.</p>
+</li>
+<li>
+<p><strong>Prefer specific classes to <code>.</code></strong>, which reduces both over-matching and backtracking.</p>
+</li>
+<li>
+<p><strong>Privacy: a regex is how personal data gets found</strong>, and also how it gets redacted.
+Both uses are common and neither is reliable alone.</p>
+</li>
+<li>
+<p><strong>Performance: a well-formed pattern is fast</strong>, often faster than the string
+operations people write to avoid it.</p>
+</li>
+<li>
+<p><strong>Cost: an unreadable regex is a maintenance liability.</strong> The one you cannot read in
+three months will be rewritten from scratch, wrongly.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
-<p>For most flat-text jobs, regex is the right tool, but it has neighbors worth knowing — and the “alternatives” here are also the different engines you will actually type patterns into.</p>
 
 
 
@@ -204,21 +471,18 @@ You can also <a href="/ai-roadmap-365/labs/day-038-regular-expressions" target="
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Tool or approach</th><th>Type</th><th>What it offers</th><th>Cost</th></tr></thead><tbody><tr><td><code>grep</code> / <code>grep -E</code> (GNU or BSD)</td><td>Free, preinstalled</td><td>Search files and streams for lines matching a pattern; the daily workhorse</td><td>Free</td></tr><tr><td><code>sed -E</code></td><td>Free, preinstalled</td><td>Stream editor: match and <em>replace</em> with backreferences, transform text in place</td><td>Free</td></tr><tr><td>Python <code>re</code> module</td><td>Free, open source</td><td>Full PCRE-style regex inside a real programming language, for extraction into data structures</td><td>Free</td></tr><tr><td>JavaScript <code>RegExp</code></td><td>Free, built in</td><td>Regex in the browser and in server-side runtimes; slightly different flavor</td><td>Free</td></tr><tr><td>regex101 and similar testers</td><td>Free web tool</td><td>Interactive pattern building with a live explanation of every token and match</td><td>Free tier; optional paid features</td></tr><tr><td>A format-specific parser (JSON, CSV, HTML libraries)</td><td>Free, open source</td><td>Understands nested structure a regex cannot — the correct tool for those formats</td><td>Free</td></tr><tr><td>String methods (<code>split</code>, <code>replace</code>, <code>contains</code>)</td><td>Free, built in</td><td>For fixed, simple substrings, often clearer and faster than a regex</td><td>Free</td></tr></tbody></table>
-<p>The judgment call is this: reach for a <strong>string method</strong> when the target is a fixed literal (splitting on a known comma is not a regex job). Reach for a <strong>regex</strong> when the target has a <em>shape</em> — variable digits, optional pieces, alternatives. Reach for a <strong>real parser</strong> the moment the format is nested or recursive. And whenever a pattern is non-trivial, build it in a <strong>tester</strong> first, where a tool like regex101 explains each token and shows matches live, before you commit it to a script.</p>
+<table><thead><tr><th>Approach</th><th>Type</th><th>Where it fits</th></tr></thead><tbody><tr><td>Regex</td><td>Built in everywhere</td><td>Line-oriented, locally structured text</td></tr><tr><td><code>jq</code></td><td>Free, open source</td><td>JSON — where regex should never be used</td></tr><tr><td>An HTML or XML parser</td><td>Free, open source</td><td>Nested markup, which regex genuinely cannot do</td></tr><tr><td><code>str.split</code> / <code>startswith</code></td><td>Built in</td><td>Simple cases; often clearer than a pattern</td></tr><tr><td>A proper parser or grammar</td><td>Free, open source</td><td>Anything with nesting or recursion</td></tr><tr><td>regex101 and similar</td><td>Free</td><td>Explaining a pattern piece by piece as you build it</td></tr></tbody></table>
+<ul>
+<li>
+<p><strong>Use a visualiser while learning.</strong> Seeing which part of the pattern matched which
+part of the text collapses the learning curve.</p>
+</li>
+<li>
+<p><strong>Reach for the simpler tool when it fits.</strong> <code>line.startswith(&quot;Error&quot;)</code> is clearer
+than <code>^Error</code> to most readers, and clarity is the scarce resource.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
 
 
@@ -257,94 +521,230 @@ You can also <a href="/ai-roadmap-365/labs/day-038-regular-expressions" target="
 
 
 
-
-
-
-<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>Regular expression</td><td>Glob (shell wildcard)</td><td>Globs (<code>*.txt</code>, <code>file?.log</code>) are a much simpler pattern language for <em>filenames</em>; <code>*</code> in a glob means “any characters,” not “zero or more of the previous”</td></tr><tr><td>Regex</td><td>Literal string search</td><td>A literal search finds one exact substring; a regex finds a whole family of strings matching a shape</td></tr><tr><td>Basic (POSIX BRE)</td><td>Extended (POSIX ERE)</td><td>In BRE (<code>grep</code>), <code>+</code>, <code>?</code>, `</td></tr><tr><td>Greedy quantifier</td><td>Lazy quantifier</td><td>Greedy (<code>.*</code>) matches as much as possible; lazy (<code>.*?</code>) matches as little as possible</td></tr><tr><td>Capturing group <code>( )</code></td><td>Non-capturing group <code>(?: )</code></td><td>Both group for quantifiers; only the capturing form remembers its text for extraction or backreference</td></tr><tr><td>Regex matching</td><td>Parsing</td><td>Matching finds flat patterns; parsing understands nested, hierarchical structure (and is what HTML/JSON require)</td></tr></tbody></table>
+<table><thead><tr><th>Term</th><th>What it actually is</th></tr></thead><tbody><tr><td><strong>Literal</strong></td><td>A character matching itself</td></tr><tr><td><strong>Character class</strong></td><td>Any one of a set</td></tr><tr><td><strong>Anchor</strong></td><td>A position, matching no characters</td></tr><tr><td><strong>Quantifier</strong></td><td>How many times the previous thing repeats</td></tr><tr><td><strong>Group</strong></td><td>A sub-pattern, usually capturing what it matched</td></tr><tr><td><strong>Greedy</strong></td><td>Takes as much as possible; the default</td></tr><tr><td><strong>Backtracking</strong></td><td>Undoing a choice to try another</td></tr></tbody></table>
+<hr/>
 <h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
-<p>Reach for a regex when your target has a <em>shape</em> rather than a fixed value: extracting fields from log lines, validating that a string looks like an email or a date, finding and replacing a punctuation pattern, splitting on a variable delimiter, or sweeping a large body of text for anything matching a description. These are the jobs regex was built for, and a short pattern will beat any amount of hand-editing. It shines especially in the command line, where <code>grep -E</code> and <code>sed -E</code> turn a pipeline into a text-transformation assembly line.</p>
-<p>Know equally when to put it down. Do not parse nested or recursive formats with regex — use a JSON, XML, HTML, or CSV library, which understands the structure and will not break on the first edge case. Do not use a regex for a fixed substring when a plain <code>contains</code> or <code>split</code> is clearer. Be wary of running untrusted patterns or untrusted input through a backtracking engine without a timeout. And when a pattern grows into an unreadable monster that you patch every time new data breaks it, that is the signal to split it into smaller patterns or move up to a parser. The professional instinct is the same as with any sharp tool: reach for it deliberately for the jobs it fits, and recognize the jobs it does not.</p>
-<p>Here is where the thread ties to your goal. Preparing data for any modeling task is, in large part, text pattern work: tokenizing raw strings into pieces, cleaning scraped or logged text, validating that fields have the right format, redacting sensitive values, and pulling structured fields out of the semi-structured output that programs and services emit. You will write regex constantly in that work, often dozens of small patterns in a single cleaning script. The engineers who prepare data quickly are the ones fluent in this language — able to describe a shape in five characters, test it against real examples, and reshape a file in one line. Today you started building that fluency; the lab makes it muscle memory.</p>
+<p><img src="/_astro/readable-regex.BQtSaEoD_ZIALX.svg" alt="Diagram: an unreadable regex compared with a documented one" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong>Use regex for line-oriented text with local structure</strong> — logs, CSV fields,
+identifiers, dates.</p>
+</li>
+<li>
+<p><strong>Use capture groups to extract</strong>, not just to detect.</p>
+</li>
+<li>
+<p><strong>Use <code>[^x]*</code> rather than <code>.*?</code></strong> where you can. It is clearer and it backtracks less.</p>
+</li>
+<li>
+<p><strong>Comment any pattern longer than about thirty characters</strong>, or use your language’s
+verbose mode.</p>
+</li>
+<li>
+<p><strong>Do not parse nested structures.</strong> HTML, JSON and source code need parsers, and the
+regex will work on your examples and fail on real input.</p>
+</li>
+<li>
+<p><strong>Do not write a regex to validate an email address.</strong> Check for an <code>@</code>, then send a
+confirmation. That is what everyone who has tried the alternative concludes.</p>
+</li>
+<li>
+<p><strong>Do not run untrusted patterns</strong> without a timeout.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="the-ai-connection">The AI connection</h2>
+<p><img src="/_astro/model-output-parsing.DJyN8mmU_ZIALX.svg" alt="Diagram: extracting model output with regex compared with requesting JSON" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong>Data cleaning is mostly pattern matching</strong>: stripping markup, normalising
+whitespace, finding malformed rows, extracting fields.</p>
+</li>
+<li>
+<p><strong>Redaction before training is a regex problem</strong> — and an imperfect one, which is
+exactly why it needs review rather than trust.</p>
+</li>
+<li>
+<p><strong>Parsing model output with regex is common and fragile.</strong> Ask for JSON and validate
+it, as Day 24 argued, rather than pattern-matching prose.</p>
+</li>
+<li>
+<p><strong>Stripping markdown fences from a model response</strong> is the one regex you will write
+most often in AI work.</p>
+</li>
+<li>
+<p><strong>Tokenizers use regex for pre-tokenisation</strong>, which is one reason whitespace and
+punctuation handling differs subtly between models.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="knowledge-check">Knowledge check</h2>
-<p>Try these from memory before looking back:</p>
-<ol>
-<li>Explain, in one sentence each, the difference between a literal, a character class, an anchor, and a quantifier, giving one example of each.</li>
-<li>The pattern <code>&lt;.*&gt;</code> matches too much on the text <code>&lt;a&gt;&lt;b&gt;</code>. Explain why, and give two different fixes.</li>
-<li>What does a capture group do that a non-capturing group does not, and why would you use each?</li>
-<li>Why can a regex not reliably parse HTML, and what should you use instead?</li>
-<li>Write a pattern that matches a <code>YYYY-MM-DD</code> date as a whole word, and state one thing about dates it does <em>not</em> verify.</li>
-</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">quiz</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  question</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;The pattern `&lt;.*&gt;` applied to the text `&lt;a&gt;&lt;b&gt;` matches the whole string rather than just `&lt;a&gt;`. Why?&quot;</span></span>
+<span class="line"><span style="color:#85E89D">  options</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;Quantifiers are greedy by default, so `.*` consumes as much as possible while still allowing a final `&gt;`&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;The dot matches the angle brackets, so the pattern cannot distinguish them&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;The engine scans right to left and finds the last `&gt;` first&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;Without anchors the pattern is applied to the whole string as a single unit&quot;</span></span>
+<span class="line"><span style="color:#85E89D">  answer_index</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span></span>
+<span class="line"><span style="color:#85E89D">  explanation</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;`.*` first takes everything to the end, then backtracks only as far as it must to let the final `&gt;` match — which lands on the last one. Making it lazy with `&lt;.*?&gt;`, or specific with `&lt;[^&gt;]*&gt;`, matches just `&lt;a&gt;`.&quot;</span></span></code></pre>
+<hr/>
 <h2 id="hands-on-exercise">Hands-on exercise</h2>
-<p>Time to run patterns against real text. In the Day 38 lab directory you will use <code>grep -E</code> and <code>sed -E</code> on a small, clearly synthetic sample file that mixes emails, dates, phone-ish numbers, and log lines with IP addresses and status codes. Everything runs offline with tools already on your machine.</p>
-<p>Open a terminal in the lab directory and try these against the committed sample:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">grep</span><span style="color:#79B8FF"> -E</span><span style="color:#79B8FF"> -o</span><span style="color:#9ECBFF"> &#39;[[:alnum:]._%+-]+@[[:alnum:].-]+\.[[:alpha:]]{2,}&#39;</span><span style="color:#9ECBFF"> examples/samples/data.txt</span></span></code></pre>
-<p><code>grep -E</code> turns on extended regex; <code>-o</code> prints only the matched part of each line rather than the whole line. The pattern extracts every email-ish address. (On the command line the POSIX class <code>[[:alnum:]]</code> is the portable way to say “a letter or digit,” since <code>\d</code> and <code>\w</code> are not supported by every <code>grep</code>.)</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">grep</span><span style="color:#79B8FF"> -E</span><span style="color:#79B8FF"> -c</span><span style="color:#9ECBFF"> &#39;[0-9]{4}-[0-9]{2}-[0-9]{2}&#39;</span><span style="color:#9ECBFF"> examples/samples/data.txt</span></span></code></pre>
-<p><code>-c</code> counts matching <em>lines</em> instead of printing them — here, how many lines contain a <code>YYYY-MM-DD</code> date.</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">grep</span><span style="color:#79B8FF"> -E</span><span style="color:#79B8FF"> -o</span><span style="color:#9ECBFF"> &#39;([0-9]{1,3}\.){3}[0-9]{1,3}&#39;</span><span style="color:#9ECBFF"> examples/samples/data.txt</span></span></code></pre>
-<p>This pulls out IP-ish addresses: a group of “one to three digits then a dot” repeated three times, followed by a final one-to-three-digit number.</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &#39;2026/07/12&#39;</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> sed</span><span style="color:#79B8FF"> -E</span><span style="color:#9ECBFF"> &#39;s#([0-9]{4})/([0-9]{2})/([0-9]{2})#\1-\2-\3#&#39;</span></span></code></pre>
-<p><code>sed -E &#39;s#pattern#replacement#&#39;</code> finds the pattern and substitutes the replacement; the three capture groups are rebuilt as <code>\1-\2-\3</code>, turning slashes into hyphens. (Using <code>#</code> as the delimiter instead of the usual <code>/</code> keeps the slashes in the date from clashing with <code>sed</code>’s syntax.)</p>
+<p>Build one pattern piece by piece, then fall into the greedy trap deliberately. Worked
+through fully in the Day 38 lab directory.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>What you are doing</th><th>Command</th></tr></thead><tbody><tr><td>Match literally</td><td><code>grep -E &#39;error&#39; app.log</code></td></tr><tr><td>Anchor it</td><td><code>grep -E &#39;^Error&#39; app.log</code></td></tr><tr><td>Whole words only</td><td><code>grep -E &#39;\bcat\b&#39; words.txt</code></td></tr><tr><td>Match a date</td><td><code>grep -Eo &#39;\d{4}-\d{2}-\d{2}&#39; app.log</code></td></tr><tr><td>Capture and reorder</td><td><code>sed -E &#39;s/(\d{4})-(\d{2})-(\d{2})/\3\/\2\/\1/&#39;</code></td></tr><tr><td>Fall into the greedy trap</td><td><code>echo &#39;&lt;a&gt;&lt;b&gt;&#39; | grep -Eo &#39;&lt;.*&gt;&#39;</code></td></tr><tr><td>Then fix it</td><td><code>echo &#39;&lt;a&gt;&lt;b&gt;&#39; | grep -Eo &#39;&lt;[^&gt;]*&gt;&#39;</code></td></tr></tbody></table>
 <h3 id="expected-output">Expected output</h3>
-<p>Running the four commands above on the committed sample produces output of this shape (your sample’s exact addresses are synthetic and fixed in the file):</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ grep -E -o &#39;[[:alnum:]._%+-]+@[[:alnum:].-]+\.[[:alpha:]]{2,}&#39; examples/samples/data.txt</span></span>
-<span class="line"><span>ada.lovelace@example.com</span></span>
-<span class="line"><span>grace.hopper@example.org</span></span>
-<span class="line"><span>alan.turing@example.net</span></span>
-<span class="line"><span>...</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>$ grep -E -c &#39;[0-9]{4}-[0-9]{2}-[0-9]{2}&#39; examples/samples/data.txt</span></span>
-<span class="line"><span>6</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>$ grep -E -o &#39;([0-9]{1,3}\.){3}[0-9]{1,3}&#39; examples/samples/data.txt</span></span>
-<span class="line"><span>192.168.1.44</span></span>
-<span class="line"><span>10.0.0.7</span></span>
-<span class="line"><span>...</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>$ echo &#39;2026/07/12&#39; | sed -E &#39;s#([0-9]{4})/([0-9]{2})/([0-9]{2})#\1-\2-\3#&#39;</span></span>
-<span class="line"><span>2026-07-12</span></span></code></pre>
-<p>The exact counts (how many emails, how many dated lines, how many IPs) are fixed by the sample file and checked by the lab’s test script, so you can confirm your patterns are right by matching those numbers.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>2026-07-12</span></span>
+<span class="line"><span>12/07/2026</span></span>
+<span class="line"><span>&lt;a&gt;&lt;b&gt;</span></span>
+<span class="line"><span>&lt;a&gt;</span></span>
+<span class="line"><span>&lt;b&gt;</span></span></code></pre>
+<ul>
+<li>
+<p><strong>The capture groups let <code>sed</code> reorder the parts</strong>, which is extraction rather than
+detection.</p>
+</li>
+<li>
+<p><strong>The greedy pattern took both tags</strong>; the specific class took each one separately.</p>
+</li>
+</ul>
 <h3 id="validate-your-work">Validate your work</h3>
-<p>You are done when you can check every box:</p>
 <ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" disabled/> You extracted every email address from the sample with <code>grep -E -o</code>.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You counted the lines containing a <code>YYYY-MM-DD</code> date and got the number the tests expect.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You pulled out every IP-ish address.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You reformatted a <code>YYYY/MM/DD</code> date to <code>YYYY-MM-DD</code> using a <code>sed -E</code> backreference.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You can explain, for each pattern, what every metacharacter in it does.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You built a pattern incrementally, checking each addition</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You used anchors and word boundaries and can say how they differ</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You extracted three fields with capture groups</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You reproduced the greedy trap and fixed it two ways</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can explain what backtracking is doing</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>bash tests/run_tests.sh</code> reports 0 failures</li>
 </ul>
 <h3 id="troubleshooting">Troubleshooting</h3>
 <ul>
-<li><strong><code>grep: invalid option</code> or the pattern is treated literally.</strong> You omitted <code>-E</code>. Basic <code>grep</code> needs backslashes before <code>+</code>, <code>?</code>, <code>{</code>, <code>(</code>, and <code>|</code>; <code>grep -E</code> (extended) treats them as special directly. Use <code>-E</code> for the patterns in this lab.</li>
-<li><strong><code>sed</code> complains about the expression on macOS.</strong> BSD <code>sed</code> (macOS) and GNU <code>sed</code> (Linux) differ. Both accept <code>-E</code> for extended regex, but some GNU-only shorthands (<code>\+</code>, <code>\d</code>) do not work in BSD <code>sed</code>. Stick to <code>[0-9]</code> and explicit <code>{n}</code> counts, as this lab does, and both behave the same.</li>
-<li><strong><code>\d</code> matches nothing.</strong> Many command-line tools do not support <code>\d</code>; use <code>[0-9]</code> (or <code>[[:digit:]]</code>) instead. The PCRE shorthands live in Python and JavaScript, not in every <code>grep</code>/<code>sed</code>.</li>
-<li><strong>The email pattern grabs a trailing dot or bracket.</strong> Character classes are greedy about what you let in; tighten the trailing class or add an anchor. This is the “too loose” failure mode — test against your real sample.</li>
+<li>
+<p><strong><code>\d</code> does not work in <code>grep</code>.</strong> Basic <code>grep</code> does not support it. Use <code>grep -E</code>
+with <code>[0-9]</code>, or <code>grep -P</code> where available.</p>
+</li>
+<li>
+<p><strong>Your pattern works in a tester and not in your shell.</strong> The shell is consuming
+backslashes. Single-quote the pattern.</p>
+</li>
+<li>
+<p><strong><code>+</code> and <code>?</code> are treated literally.</strong> You are in basic regex mode. Add <code>-E</code>.</p>
+</li>
+<li>
+<p><strong>The pattern matches far too much.</strong> Greedy quantifier. Add <code>?</code>, or use a negated
+class.</p>
+</li>
 </ul>
 <h3 id="common-mistakes">Common mistakes</h3>
 <ul>
-<li><strong>Forgetting to escape the dot.</strong> In <code>192.168.1.44</code>, an unescaped <code>.</code> matches <em>any</em> character, so <code>192.168</code> also matches <code>192x168</code>. Write <code>\.</code> when you mean a literal dot.</li>
-<li><strong>Greedy <code>.*</code> swallowing too much.</strong> On a line with several fields, <code>.*</code> grabs as much as it can; use a specific class like <code>[^ ]*</code> or make the quantifier lazy with <code>.*?</code>.</li>
-<li><strong>Assuming one dialect works everywhere.</strong> A pattern that runs in Python may need adjustment for <code>grep</code>. When in doubt, prefer POSIX classes (<code>[[:digit:]]</code>) and explicit counts on the command line.</li>
+<li>
+<p><strong><code>.</code> where you meant a specific class.</strong></p>
+</li>
+<li>
+<p><strong>Forgetting that <code>*</code> allows zero</strong>, so a pattern matches an empty string
+unexpectedly.</p>
+</li>
+<li>
+<p><strong>Not anchoring a validation pattern</strong>, so it matches somewhere inside a longer
+string.</p>
+</li>
+<li>
+<p><strong>Writing one enormous pattern</strong> instead of two readable ones.</p>
+</li>
 </ul>
+<hr/>
 <h2 id="practice-assignment">Practice assignment</h2>
-<p>Open <code>starter/regex_drills.sh</code> and <code>starter/regex-worksheet.md</code> in the Day 38 lab. The drills file has four numbered exercises: write a pattern to match all phone-ish numbers in the sample, extract just the status codes from the log lines, count how many lines are <em>not</em> comments, and reformat one field with a capture group. Fill each in using <code>grep -E</code> or <code>sed -E</code>, run the script, and confirm the counts. Then complete the worksheet: write the pattern for an email address, the pattern for a <code>YYYY-MM-DD</code> date, and — using <code>grep -E -c</code> — record how many lines of the sample match a pattern you choose. Keep the worksheet; a later data-cleaning lesson builds on it.</p>
+<ul>
+<li>
+<p><strong>Extract every date, address and identifier</strong> from a real log file, one pattern at a
+time.</p>
+</li>
+<li>
+<p><strong>Write the same pattern in three tools</strong> — <code>grep</code>, your editor, and Python — and note
+every difference in escaping.</p>
+</li>
+<li>
+<p><strong>Take a regex you did not write</strong> and explain each part of it in plain words. This
+is the skill that matters most in practice.</p>
+</li>
+<li>
+<p><strong>Deliberately write a pattern that over-matches</strong>, then fix it two different ways.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="extension-challenge">Extension challenge</h2>
-<p>Go one level deeper into the greedy-versus-lazy distinction, because it is the concept that most often bites in real work. Create a one-line file containing <code>&lt;a href=&quot;one&quot;&gt; and &lt;b href=&quot;two&quot;&gt;</code> and run two patterns against it with <code>grep -E -o</code>: first <code>&lt;.*&gt;</code>, then <code>&lt;[^&gt;]*&gt;</code>. Observe that the first grabs the whole line as one match (greedy <code>.*</code> runs to the final <code>&gt;</code>) while the second yields two separate tag matches (the negated class refuses to cross a <code>&gt;</code>). Write two or three sentences explaining, in terms of how the engine scans and backtracks, why the negated character class is both safer and faster than the broad <code>.*</code> here. Then find one pattern in your own drills where a <code>.*</code> could be replaced by a narrower class, make the change, and confirm the counts still match. You have just practiced the single most valuable habit in writing robust patterns: make them as specific as the data allows.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
-Q1. What does a regular expression describe? </strong> </p> <ol type="A"> <li>One specific, literal string of characters</li><li>A set of strings that all share the same shape or pattern</li><li>The physical layout of characters on a keyboard</li><li>A compressed version of a text file</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> A set of strings that all share the same shape or pattern </p> <p>A regex names the rules text must satisfy, so a single pattern like \d+ matches a whole family of strings (7, 42, 1000000) rather than one fixed value.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q2. Which quantifier means &quot;one or more of the preceding item&quot;? </strong> </p> <ol type="A"> <li>*</li><li>?</li><li>+</li><li>{0,1}</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> + </p> <p>The + quantifier matches one or more repetitions. In contrast, * means zero or more, and ? means zero or one (optional).</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q3. In the pattern ^cat$, what do the ^ and $ do? </strong> </p> <ol type="A"> <li>They match a literal caret and dollar sign in the text</li><li>They capture the matched text into groups 1 and 2</li><li>They are anchors: ^ matches the start of the line and $ the end, so the line must be exactly &quot;cat&quot;</li><li>They make the match case-insensitive</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> They are anchors: ^ matches the start of the line and $ the end, so the line must be exactly &quot;cat&quot; </p> <p>Anchors match positions, not characters. ^ is the start of the line and $ is the end, so ^cat$ matches only a line containing exactly cat and nothing else.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q4. Why does the pattern &lt;.*&gt; match the entire string &lt;a&gt;&lt;b&gt; instead of just &lt;a&gt;? </strong> </p> <ol type="A"> <li>Because .* is greedy and matches as much as possible, running to the last &gt;</li><li>Because . cannot match the letters a or b</li><li>Because &lt;.*&gt; is invalid and matches everything by default</li><li>Because anchors force it to match the whole line</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> Because .* is greedy and matches as much as possible, running to the last &gt; </p> <p>Quantifiers are greedy by default, so .* consumes as much text as it can while the pattern still succeeds — here, everything up to the final &gt;. Making it lazy with .*? or using [^&gt;]* fixes it.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q5. What is the purpose of a capture group written with parentheses, such as (\d{4})? </strong> </p> <ol type="A"> <li>It makes the pattern run faster</li><li>It matches text literally, ignoring any metacharacters inside</li><li>It groups a sub-pattern and remembers the exact text it matched, so you can extract or reuse it</li><li>It marks the end of the regular expression</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> It groups a sub-pattern and remembers the exact text it matched, so you can extract or reuse it </p> <p>A capturing group both applies quantifiers to a sub-pattern and stores the matched text (as \1, \2, and so on) for extraction, reformatting, or backreferences.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q6. You need to reliably parse deeply nested HTML. Why is a regex the wrong tool? </strong> </p> <ol type="A"> <li>Regex is too slow to read HTML files</li><li>Regex cannot match arbitrarily nested or recursive structure; a real HTML parser understands the hierarchy</li><li>Regex only works on numbers, not tags</li><li>HTML files are too large for any regex engine</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Regex cannot match arbitrarily nested or recursive structure; a real HTML parser understands the hierarchy </p> <p>Classic regular expressions provably cannot match arbitrarily nested structure. HTML, JSON, and source code need a format-aware parser; using regex for them produces fragile patterns that break on edge cases.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q7. On the command line, why do many patterns use [0-9] instead of \d? </strong> </p> <ol type="A"> <li>\d matches letters as well as digits</li><li>[0-9] is faster in every engine</li><li>\d is not supported by every grep and sed dialect, while [0-9] and [[:digit:]] are portable</li><li>They mean completely different things</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> \d is not supported by every grep and sed dialect, while [0-9] and [[:digit:]] are portable </p> <p>The \d shorthand comes from the PCRE tradition (Python, JavaScript) and is not available in every command-line tool. [0-9] or the POSIX class [[:digit:]] works portably across grep and sed.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q8. What is catastrophic backtracking (ReDoS) a risk of? </strong> </p> <ol type="A"> <li>A pattern accidentally deleting the file it searches</li><li>Certain patterns with nested quantifiers forcing an engine into near-exponential work, letting one input freeze the CPU</li><li>Regex leaking memory to other programs</li><li>A pattern matching the wrong file on disk</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Certain patterns with nested quantifiers forcing an engine into near-exponential work, letting one input freeze the CPU </p> <p>Patterns like (a+)+$ against adversarial input can force a backtracking engine to try an exponential number of paths, so a single request can pin a CPU. Prefer specific classes, avoid nested quantifiers over overlapping classes, and use timeouts.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>regular expression</strong> </dt> <dd data-astro-cid-whrtx2kk>A compact string of characters that describes a pattern for matching text — a whole set of strings that share a shape, rather than one literal string.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>metacharacter</strong> </dt> <dd data-astro-cid-whrtx2kk>A character with special meaning in a pattern rather than its literal value, such as . * + ? [ ] ( ) ^ $ | and \, which express classes, repetition, position, and structure.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>literal</strong> </dt> <dd data-astro-cid-whrtx2kk>A character in a pattern that matches itself, such as the a, b, and c in the pattern abc.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>character class</strong> </dt> <dd data-astro-cid-whrtx2kk>A set of characters written in square brackets, any one of which may match; [abc] matches a, b, or c, [a-z] any lowercase letter, and [^0-9] any non-digit.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>anchor</strong> </dt> <dd data-astro-cid-whrtx2kk>A pattern element that matches a position rather than a character: ^ marks the start of a line, $ the end, and \b a word boundary.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>quantifier</strong> </dt> <dd data-astro-cid-whrtx2kk>A symbol that says how many times the preceding item may repeat: * (zero or more), + (one or more), ? (zero or one), and {n,m} (between n and m times).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>group</strong> </dt> <dd data-astro-cid-whrtx2kk>A sub-pattern enclosed in parentheses, which lets a quantifier apply to the whole sub-pattern and, unless made non-capturing, remembers the text it matched.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>capture group</strong> </dt> <dd data-astro-cid-whrtx2kk>A parenthesised group whose matched text the engine stores, numbered left to right (\1, \2, ...), so it can be extracted, reformatted, or referenced later.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>alternation</strong> </dt> <dd data-astro-cid-whrtx2kk>The | operator meaning &quot;this or that&quot;; cat|dog matches either cat or dog, and gr(a|e)y matches gray or grey.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>backreference</strong> </dt> <dd data-astro-cid-whrtx2kk>A reference in a pattern to text an earlier group captured; \1 demands the same text the first group matched, so (\w+) \1 matches a doubled word.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>greedy</strong> </dt> <dd data-astro-cid-whrtx2kk>The default behavior of a quantifier, which matches as much text as possible while still letting the overall pattern succeed — the reason .* often matches too much.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>lazy</strong> </dt> <dd data-astro-cid-whrtx2kk>A quantifier made non-greedy by adding ?, which matches as little text as possible; .*? stops at the first point that lets the rest of the pattern succeed.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>PCRE</strong> </dt> <dd data-astro-cid-whrtx2kk>Perl Compatible Regular Expressions, a widely used C library from 1997 that spread Perl&#39;s rich regex syntax to many tools and languages, shaping the modern PCRE-style flavor.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>regex engine</strong> </dt> <dd data-astro-cid-whrtx2kk>The program that takes a pattern and some text and reports whether, and where, the text matches — scanning left to right and backtracking when a choice fails.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://www.regular-expressions.info/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Regular Expressions — Info</a> — Jan Goyvaerts (accessed 2026-07-12) — A thorough, tool-by-tool reference for regex syntax and behaviour across flavors. </li><li data-astro-cid-whrtx2kk> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Regular expressions</a> — MDN Web Docs (accessed 2026-07-12) — Clear, example-driven guide to the JavaScript regex flavor and the core concepts. </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Regular_expression" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Regular expression</a> — Wikipedia (accessed 2026-07-12) — Overview of the history, theory, and dialects, from Kleene through POSIX and PCRE. </li><li data-astro-cid-whrtx2kk> <a href="https://www.gnu.org/software/grep/manual/grep.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>GNU Grep Manual — Regular Expressions</a> — GNU (accessed 2026-07-12) — The authoritative reference for basic vs extended regex on the command line. </li><li data-astro-cid-whrtx2kk> <a href="https://missing.csail.mit.edu/2020/data-wrangling/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Missing Semester of Your CS Education — Data Wrangling</a> — MIT (accessed 2026-07-12) — A practical lecture on using regex with grep, sed, and pipelines to reshape data. </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="38" data-astro-cid-whrtx2kk>
+<ul>
+<li>
+<p><strong>Demonstrate catastrophic backtracking.</strong> Time <code>(a+)+$</code> against strings of <code>a</code>
+characters of increasing length, ending with one that cannot match. The curve is the
+argument for timeouts.</p>
+</li>
+<li>
+<p><strong>Write a pattern with named groups</strong> and use them in your language of choice; named
+groups are what make a long pattern readable months later.</p>
+</li>
+<li>
+<p><strong>Try to parse nested HTML with a regex</strong>, then find the input that breaks it. Doing
+this once ends the temptation permanently.</p>
+</li>
+<li>
+<p><strong>Use verbose mode</strong> to write a genuinely complex pattern across several commented
+lines, and compare its readability with the one-line version.</p>
+</li>
+</ul>
+<hr/>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. What does a regular expression describe? </strong> </p> <ol type="A"> <li>One specific, literal string of characters</li><li>The physical layout of characters on a keyboard</li><li>A set of strings that all share the same shape or pattern</li><li>A compressed version of a text file</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> A set of strings that all share the same shape or pattern </p> <p>A regex names the rules text must satisfy, so a single pattern like \d+ matches a whole family of strings (7, 42, 1000000) rather than one fixed value.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. Which quantifier means &quot;one or more of the preceding item&quot;? </strong> </p> <ol type="A"> <li>*</li><li>?</li><li>{0,1}</li><li>+</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> + </p> <p>The + quantifier matches one or more repetitions. In contrast, * means zero or more, and ? means zero or one (optional).</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. In the pattern ^cat$, what do the ^ and $ do? </strong> </p> <ol type="A"> <li>They are anchors: ^ is line start, $ is line end</li><li>They capture the matched text into groups 1 and 2</li><li>They match a literal caret and dollar sign in the text</li><li>They make the match case-insensitive</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> They are anchors: ^ is line start, $ is line end </p> <p>Anchors match positions, not characters. ^ is the start of the line and $ is the end, so ^cat$ matches only a line containing exactly cat and nothing else.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. Why does the pattern &lt;.*&gt; match the entire string &lt;a&gt;&lt;b&gt; instead of just &lt;a&gt;? </strong> </p> <ol type="A"> <li>Because . cannot match the letters a or b</li><li>Because .* is greedy and matches as much as possible, running to the last &gt;</li><li>Because &lt;.*&gt; is invalid and matches everything by default</li><li>Because anchors force it to match the whole line</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Because .* is greedy and matches as much as possible, running to the last &gt; </p> <p>Quantifiers are greedy by default, so .* consumes as much text as it can while the pattern still succeeds — here, everything up to the final &gt;. Making it lazy with .*? or using [^&gt;]* fixes it.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. What is the purpose of a capture group written with parentheses, such as (\d{4})? </strong> </p> <ol type="A"> <li>It makes the pattern run faster</li><li>It matches text literally, ignoring any metacharacters inside</li><li>It groups a sub-pattern and remembers the text it matched</li><li>It marks the end of the regular expression</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> It groups a sub-pattern and remembers the text it matched </p> <p>A capturing group both applies quantifiers to a sub-pattern and stores the matched text (as \1, \2, and so on) for extraction, reformatting, or backreferences.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. You need to reliably parse deeply nested HTML. Why is a regex the wrong tool? </strong> </p> <ol type="A"> <li>Regex is too slow to read HTML files</li><li>HTML files are too large for any regex engine</li><li>Regex only works on numbers, not tags</li><li>Regex cannot match nested structure</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> Regex cannot match nested structure </p> <p>Classic regular expressions provably cannot match arbitrarily nested structure. HTML, JSON, and source code need a format-aware parser; using regex for them produces fragile patterns that break on edge cases.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. On the command line, why do many patterns use [0-9] instead of \d? </strong> </p> <ol type="A"> <li>\d is not portable across grep and sed dialects</li><li>[0-9] is faster in every engine</li><li>\d matches letters as well as digits</li><li>They mean completely different things</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> \d is not portable across grep and sed dialects </p> <p>The \d shorthand comes from the PCRE tradition (Python, JavaScript) and is not available in every command-line tool. [0-9] or the POSIX class [[:digit:]] works portably across grep and sed.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. What is catastrophic backtracking (ReDoS) a risk of? </strong> </p> <ol type="A"> <li>A pattern accidentally deleting the file it searches</li><li>Nested quantifiers can force near-exponential work</li><li>Regex leaking memory to other programs</li><li>A pattern matching the wrong file on disk</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Nested quantifiers can force near-exponential work </p> <p>Patterns like (a+)+$ against adversarial input can force a backtracking engine to try an exponential number of paths, so a single request can pin a CPU. Prefer specific classes, avoid nested quantifiers over overlapping classes, and use timeouts.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>regular expression</strong> </dt> <dd data-astro-cid-whrtx2kk>A compact string of characters that describes a pattern for matching text — a whole set of strings that share a shape, rather than one literal string.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>metacharacter</strong> </dt> <dd data-astro-cid-whrtx2kk>A character with special meaning in a pattern rather than its literal value, such as . * + ? [ ] ( ) ^ $ | and \, which express classes, repetition, position, and structure.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>literal</strong> </dt> <dd data-astro-cid-whrtx2kk>A character in a pattern that matches itself, such as the a, b, and c in the pattern abc.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>character class</strong> </dt> <dd data-astro-cid-whrtx2kk>A set of characters written in square brackets, any one of which may match; [abc] matches a, b, or c, [a-z] any lowercase letter, and [^0-9] any non-digit.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>anchor</strong> </dt> <dd data-astro-cid-whrtx2kk>A pattern element that matches a position rather than a character: ^ marks the start of a line, $ the end, and \b a word boundary.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>quantifier</strong> </dt> <dd data-astro-cid-whrtx2kk>A symbol that says how many times the preceding item may repeat: * (zero or more), + (one or more), ? (zero or one), and {n,m} (between n and m times).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>group</strong> </dt> <dd data-astro-cid-whrtx2kk>A sub-pattern enclosed in parentheses, which lets a quantifier apply to the whole sub-pattern and, unless made non-capturing, remembers the text it matched.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>capture group</strong> </dt> <dd data-astro-cid-whrtx2kk>A parenthesised group whose matched text the engine stores, numbered left to right (\1, \2, ...), so it can be extracted, reformatted, or referenced later.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>alternation</strong> </dt> <dd data-astro-cid-whrtx2kk>The | operator meaning &quot;this or that&quot;; cat|dog matches either cat or dog, and gr(a|e)y matches gray or grey.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>backreference</strong> </dt> <dd data-astro-cid-whrtx2kk>A reference in a pattern to text an earlier group captured; \1 demands the same text the first group matched, so (\w+) \1 matches a doubled word.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>greedy</strong> </dt> <dd data-astro-cid-whrtx2kk>The default behavior of a quantifier, which matches as much text as possible while still letting the overall pattern succeed — the reason .* often matches too much.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>lazy</strong> </dt> <dd data-astro-cid-whrtx2kk>A quantifier made non-greedy by adding ?, which matches as little text as possible; .*? stops at the first point that lets the rest of the pattern succeed.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>PCRE</strong> </dt> <dd data-astro-cid-whrtx2kk>Perl Compatible Regular Expressions, a widely used C library from 1997 that spread Perl&#39;s rich regex syntax to many tools and languages, shaping the modern PCRE-style flavor.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>regex engine</strong> </dt> <dd data-astro-cid-whrtx2kk>The program that takes a pattern and some text and reports whether, and where, the text matches — scanning left to right and backtracking when a choice fails.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://www.regular-expressions.info/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Regular Expressions — Info</a> — Jan Goyvaerts (accessed 2026-07-12) — A thorough, tool-by-tool reference for regex syntax and behaviour across flavors. </li><li data-astro-cid-whrtx2kk> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Regular expressions</a> — MDN Web Docs (accessed 2026-07-12) — Clear, example-driven guide to the JavaScript regex flavor and the core concepts. </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Regular_expression" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Regular expression</a> — Wikipedia (accessed 2026-07-12) — Overview of the history, theory, and dialects, from Kleene through POSIX and PCRE. </li><li data-astro-cid-whrtx2kk> <a href="https://www.gnu.org/software/grep/manual/grep.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>GNU Grep Manual — Regular Expressions</a> — GNU (accessed 2026-07-12) — The authoritative reference for basic vs extended regex on the command line. </li><li data-astro-cid-whrtx2kk> <a href="https://missing.csail.mit.edu/2020/data-wrangling/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Missing Semester of Your CS Education — Data Wrangling</a> — MIT (accessed 2026-07-12) — A practical lecture on using regex with grep, sed, and pipelines to reshape data. </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="38" data-astro-cid-whrtx2kk>
 Mark Day 38 as read
-</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
       surfaces for someone searching for one — it costs you a click and it is genuinely how people
-      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/ai-roadmap-365/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
 ★ Star on GitHub
-</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-037-debuggers-linters-and-formatters" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 37</span> <span class="pn__title" data-astro-cid-oerjsknp>Debuggers, Linters, and Formatters</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-039-data-storage-files-databases-object-storage" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 39 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Data Storage: Files, Databases, Object Storage, and Caches</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
-</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/day-037-debuggers-linters-and-formatters" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 37</span> <span class="pn__title" data-astro-cid-oerjsknp>Debuggers, Linters, and Formatters</span> </a> <a class="pn__card pn__card--next" href="/day-039-data-storage-files-databases-object-storage" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 39 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Data Storage: Files, Databases, Object Storage, and Caches</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://ocm-mcp-server.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener">LinkedIn</a> </nav> </div> </footer> <script>
       // Progressive enhancement only: the theme falls back to dark and every
       // .reveal element is visible by default (the hidden start state exists
       // only inside a prefers-reduced-motion: no-preference query).

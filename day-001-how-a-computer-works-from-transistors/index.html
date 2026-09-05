@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 1: How a Computer Works: From Transistors to Programs · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to explain, layer by layer, how billions of on/off switches become running programs — and use that mental model to reason about AI hardware, memory limits, and cost."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-001-how-a-computer-works-from-transistors/"><meta property="og:title" content="Day 1: How a Computer Works: From Transistors to Programs · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to explain, layer by layer, how billions of on/off switches become running programs — and use that mental model to reason about AI hardware, memory limits, and cost."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-001-how-a-computer-works-from-transistors/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-001-how-a-computer-works-from-transistors.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 1: How a Computer Works: From Transistors to Programs · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 1: How a Computer Works: From Transistors to Programs · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to explain, layer by layer, how billions of on/off switches become running programs — and use that mental model to reason about AI hardware, memory limits, and cost."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-001-how-a-computer-works-from-transistors.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 1: How a Computer Works: From Transistors to Programs · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to explain, layer by layer, how billions of on/off switches become running programs — and use that mental model to reason about AI hardware, memory limits, and cost."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://ai-roadmap-365.github.io/day-001-how-a-computer-works-from-transistors/"><meta property="og:title" content="Day 1: How a Computer Works: From Transistors to Programs · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to explain, layer by layer, how billions of on/off switches become running programs — and use that mental model to reason about AI hardware, memory limits, and cost."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://ai-roadmap-365.github.io/day-001-how-a-computer-works-from-transistors/"><meta property="og:image" content="https://ai-roadmap-365.github.io/social/day-001-how-a-computer-works-from-transistors.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 1: How a Computer Works: From Transistors to Programs · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 1: How a Computer Works: From Transistors to Programs · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to explain, layer by layer, how billions of on/off switches become running programs — and use that mental model to reason about AI hardware, memory limits, and cost."><meta name="twitter:image" content="https://ai-roadmap-365.github.io/social/day-001-how-a-computer-works-from-transistors.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
       // Dark is the default regardless of OS preference - this is a dark-first
       // design. A visitor who picks light with the toggle keeps it. Applied
       // before first paint so there is no flash of the wrong theme.
@@ -11,74 +11,153 @@
         }
         document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
       })();
-    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+    </script><link rel="stylesheet" href="/_astro/_day_.CiF6NwwU.css">
 <style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
 .starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
-</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="site-home" href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener"> <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M15 5l-7 7 7 7"></path> </svg>
+Sandeep Bazar
+</a> <a class="brand" href="/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
 365 Days of AI
-</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
-Labs
-</a> </header> <main id="main">  <article data-day="1" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>Inside the Machine</span>  › 
-Day 1 </p> <h1 data-astro-cid-whrtx2kk>Day 1: How a Computer Works: From Transistors to Programs</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-001-how-a-computer-works-from-transistors.png" width="1200" height="630" alt="Day 1 of 365 — How a Computer Works: From Transistors to Programs" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to explain, layer by layer, how billions of on/off switches become running programs — and use that mental model to reason about AI hardware, memory limits, and cost.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Inside the Machine</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-001-how-a-computer-works-from-transistors" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-001-how-a-computer-works-from-transistors</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
-cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-001-how-a-computer-works-from-transistors</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
-You can also <a href="/ai-roadmap-365/labs/day-001-how-a-computer-works-from-transistors" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
-</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Explain how transistors combine into logic gates, and logic gates into circuits that add and remember, without appealing to any &quot;magic&quot; layer</li><li data-astro-cid-whrtx2kk>Describe the von Neumann architecture and why the stored-program idea makes one machine general-purpose</li><li data-astro-cid-whrtx2kk>Trace the fetch-decode-execute cycle step by step for a concrete ADD instruction, including the role of the program counter</li><li data-astro-cid-whrtx2kk>Rank the levels of the memory hierarchy by approximate latency and state the speed/size/cost trade-off that creates it</li><li data-astro-cid-whrtx2kk>Measure your own machine&#39;s CPU model, core count, RAM, disk space, and OS version from the terminal and place each in the layered stack</li><li data-astro-cid-whrtx2kk>Connect the memory hierarchy to AI practice: explain why model weights must fit in GPU memory and why quantization reduces memory footprint</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>A computer running macOS, Linux, or Windows with permission to open a terminal</li><li data-astro-cid-whrtx2kk>No prior programming or hardware knowledge — this is Day 1</li></ul> <h2 id="why-this-matters">Why this matters</h2>
-<p>Every AI system you will ever train, fine-tune, deploy, or debug — from a spam filter to a frontier language model — is, in the end, a very long sequence of simple arithmetic operations running on physical hardware. There is no layer where “intelligence” floats free of the machine, and that fact explains a great deal of what lies ahead.</p>
-<p>Why do companies spend fortunes on GPUs? Because AI workloads are mostly multiplication and addition in massive parallel batches, and GPUs are built for exactly that. Why can’t you run the largest models on your laptop? Because a model’s parameters must physically sit in fast memory while it runs, and your laptop has only so much. Why “quantize” models, storing each number with fewer bits? Because fewer bits mean less memory and less data movement — and data movement, not arithmetic, is often the real bottleneck. Why does training burn so much electricity? Because flipping billions of transistors billions of times per second dissipates real heat.</p>
-<p>When something later goes wrong — a model out of memory, code mysteriously slow, a cloud bill triple what you expected — the engineers who fix it fastest have a mental model of the machine underneath. Today you build the first version of that model: not hardware engineering, just a clear picture of the layered stack that turns physics into programs, so nothing above it ever feels like magic again.</p>
+</a> <nav aria-label="Primary"> <a href="/sections">Courses</a> <a href="/labs">Labs</a> <a href="/catalog">Catalogs</a> <a href="/search">Search</a> <a href="/glossary">Glossary</a> <a href="/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+GitHub
+</a> </header> <main id="main">  <article data-day="1" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/sections/computing-foundations">Computing Foundations</a>  ›  <span>Inside the Machine</span>  › 
+Day 1 </p> <h1 data-astro-cid-whrtx2kk>Day 1: How a Computer Works: From Transistors to Programs</h1>  <img class="day-hero" src="/social/day-001-how-a-computer-works-from-transistors.png" width="1200" height="630" alt="Day 1 of 365 — How a Computer Works: From Transistors to Programs" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to explain, layer by layer, how billions of on/off switches become running programs — and use that mental model to reason about AI hardware, memory limits, and cost.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Inside the Machine</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/computing-foundations/day-001-how-a-computer-works-from-transistors" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/computing-foundations/day-001-how-a-computer-works-from-transistors</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/ai-roadmap-365/ai-roadmap-365.github.io.git
+cd ai-roadmap-365.github.io</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-001-how-a-computer-works-from-transistors</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/labs/day-001-how-a-computer-works-from-transistors" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Explain how transistors combine into logic gates, and logic gates into circuits that add and remember, without appealing to any &quot;magic&quot; layer</li><li data-astro-cid-whrtx2kk>Describe the von Neumann architecture and why the stored-program idea makes one machine general-purpose</li><li data-astro-cid-whrtx2kk>Trace the fetch-decode-execute cycle step by step for a concrete ADD instruction, including the role of the program counter</li><li data-astro-cid-whrtx2kk>Rank the levels of the memory hierarchy by approximate latency and state the speed/size/cost trade-off that creates it</li><li data-astro-cid-whrtx2kk>Measure your own machine&#39;s CPU model, core count, RAM, disk space, and OS version from the terminal and place each in the layered stack</li><li data-astro-cid-whrtx2kk>Connect the memory hierarchy to AI practice: explain why model weights must fit in GPU memory and why quantization reduces memory footprint</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk>A computer running macOS, Linux, or Windows with permission to open a terminal</li><li data-astro-cid-whrtx2kk>No prior programming or hardware knowledge — this is Day 1</li> </ul> <h2 id="why-this-matters">Why this matters</h2>
+<p><img src="/_astro/three-resources.CeJQqEot_Z16hImP.svg" alt="Diagram: the three hardware resources every program competes for" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<p>Everything you build in this course runs on the machine described here, and the
+parts you meet today decide what is possible later.</p>
+<ul>
+<li>
+<p><strong>A model is arithmetic on numbers held in memory.</strong> Nothing more exotic.</p>
+</li>
+<li>
+<p><strong>When training is slow, the cause is the processor, the memory, or the
+storage.</strong> Knowing which is the difference between a fix and a guess.</p>
+</li>
+<li>
+<p><strong>Nothing here is metaphor.</strong> Every claim in this lesson is something you can
+measure on your own machine, and the lab does.</p>
+</li>
+</ul>
+<p>The lesson has one destination: understanding <em>why</em> AI runs on GPUs, and why that
+is a fact about hardware rather than a fashion in software.</p>
+<hr/>
 <h2 id="the-idea-in-plain-language">The idea in plain language</h2>
-<p>A computer is a machine built from billions of microscopic electrical switches called transistors. Each switch is either on or off — that is all it can do. But switches can be wired into small circuits called logic gates that make simple decisions, such as “output on only if both inputs are on.” Gates combine into bigger circuits that add numbers, compare them, and store them. Stack enough of these together in a careful design and you get a processor: a machine that reads an instruction, carries it out, and moves to the next, billions of times per second.</p>
-<p>Everything the computer works with — numbers, text, images, sound, the weights of a neural network — is represented as patterns of ons and offs, written as 1s and 0s and called binary. A program is nothing more than a long list of binary instructions stored in memory. The processor fetches each instruction, decodes what it means, executes it, and repeats. This loop, the fetch-decode-execute cycle, is the heartbeat of every computer ever built.</p>
-<p>The genius of computing is layering. Physics gives us transistors; transistors give us gates; gates give us processors and memory; processors run machine code, generated from human-friendly programming languages; the operating system coordinates everything; and applications — including AI — sit on top. Each layer hides the complexity of the one below, which is why you can write software without thinking about electrons. Today we walk the whole stack once.</p>
+<p>A computer is a machine that does one tiny thing, extremely fast, and is built in
+layers so that tiny thing adds up to everything else.</p>
+<p><img src="/_astro/abstraction-ladder.BCMhdxTQ_Z16hImP.svg" alt="Diagram: the ladder of abstraction from transistor to running program" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<ul>
+<li>
+<p><strong>The tiny thing is a switch.</strong> On or off. One bit.</p>
+</li>
+<li>
+<p><strong>Each rung is built only from the rung below it.</strong> Nothing is added from
+outside — gates are switches, adders are gates, a processor is adders and
+registers with a clock.</p>
+</li>
+<li>
+<p><strong>The jump that matters is the last one.</strong> Instructions live in memory <em>as
+data</em>, so loading different instructions changes what the machine does. That is
+why one machine can do any job.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="historical-background">Historical background</h2>
-<p>Machines that calculate by themselves are surprisingly recent. In the 1600s, Blaise Pascal and Gottfried Leibniz built mechanical calculators from gears and wheels, but each did one kind of arithmetic and nothing else. The conceptual leap came in the 1830s, when Charles Babbage designed the Analytical Engine — a mechanical, general-purpose computer with a “mill” (processor), a “store” (memory), and programs on punched cards. Never completed in his lifetime, it contained the modern architecture a century early. Ada Lovelace, writing extensive notes on it in 1843, described how it could be programmed and saw that such a machine might manipulate symbols of any kind, not just numbers — she is often celebrated as the first programmer.</p>
-<p>In 1936, Alan Turing supplied the theory: his paper on computable numbers described an abstract machine reading and writing symbols on a tape by simple rules, and showed that one universal machine could simulate any other, given the right instructions — the mathematical foundation for a single computer that runs any program.</p>
-<p>War accelerated the engineering. Codebreaking at Bletchley Park produced early electronic computing machinery, and ENIAC — completed in 1945 at the University of Pennsylvania to compute artillery firing tables — became the first general-purpose electronic digital computer, programmed by physically rewiring it, which could take days. That same year John von Neumann circulated the “First Draft of a Report on the EDVAC,” describing a machine whose program is stored in the same memory as its data. This stored-program design — the von Neumann architecture — meant a computer could switch tasks just by loading different instructions, and it remains the blueprint today.</p>
-<p>Then the hardware shrank. In December 1947, John Bardeen, Walter Brattain, and William Shockley at Bell Labs demonstrated the transistor: a solid-state switch with no fragile vacuum tube, tiny and frugal with power. In the late 1950s, Jack Kilby and Robert Noyce independently developed the integrated circuit, putting many transistors on one chip. In 1965, Gordon Moore observed that the number of components that could economically fit on a chip was doubling roughly every year (later revised to about every two) — Moore’s law, an industry roadmap for decades. In 1971 Intel shipped the 4004, the first commercial single-chip microprocessor, with about 2,300 transistors. Today a chip holds tens of billions, and GPUs — thousands of small cores doing arithmetic in parallel, originally for graphics — have become the workhorses of AI. From Babbage’s brass gears to a GPU cluster, the layered idea is unbroken; only the switches got smaller and faster.</p>
+<p>The ideas arrived long before the hardware could carry them.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>When</th><th>What changed</th><th>Why it mattered</th></tr></thead><tbody><tr><td>1936</td><td>Turing’s universal machine</td><td>One machine, reprogrammed, computes anything computable</td></tr><tr><td>1945</td><td>Von Neumann’s stored-program design</td><td>Instructions live in the same memory as data</td></tr><tr><td>Dec 1947</td><td>The transistor</td><td>The switch becomes small, cheap and reliable</td></tr><tr><td>1958</td><td>The integrated circuit</td><td>Many switches on one piece of silicon</td></tr><tr><td>1965</td><td>Moore’s observation</td><td>Transistor counts double roughly every two years</td></tr><tr><td>2007–</td><td>GPUs turned to general computing</td><td>Thousands of simple cores — the shape of a network</td></tr></tbody></table>
+<ul>
+<li><strong>The 1945 design is the one in front of you</strong>, shrunk and repeated.</li>
+<li><strong>Moore’s law was an observation, and it has slowed</strong> — which is exactly why
+parallel hardware became the way forward.</li>
+</ul>
+<hr/>
 <h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
-<p>A computer is a machine that mechanically executes stored instructions over binary data. Every word matters. <em>Mechanically</em>: it follows rules with no judgment or intent. <em>Stored instructions</em>: the program lives in memory as data, which makes the machine general-purpose. <em>Binary data</em>: everything it touches is bit patterns, whose meaning exists in conventions humans impose, not in the machine.</p>
-<p>Equally important is what a computer is not. It is not intelligent and does not understand anything. When it “adds,” charge flows through an adder circuit whose wiring happens to implement binary arithmetic. Even running a language model that produces fluent text, the hardware does exactly what it does for a spreadsheet: fetch, decode, execute. Whatever “understanding” turns out to mean for AI systems, it is a property of software organization and training — never of silicon waking up. Keeping this straight will make you a clearer thinker about AI than most headlines.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Common misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”The computer knows what I mean.”</td><td>It executes literal instructions; intent is handled (or not) by software, never the machine.</td></tr><tr><td>”Computers are good at math, so they’re smart.”</td><td>An adder circuit computes by physical arrangement, the way a vending machine vends — no insight involved.</td></tr><tr><td>”More gigahertz always means faster.”</td><td>Clock speed is one factor; cores, memory speed, and software design often matter more.</td></tr><tr><td>”Memory (RAM) and storage (disk) are the same.”</td><td>RAM is fast temporary workspace that empties at power-off; storage is slower and permanent.</td></tr><tr><td>”AI runs on special hardware logic.”</td><td>AI runs on the same transistors and instructions as everything else — mostly bulk multiplication and addition.</td></tr></tbody></table>
+<p><img src="/_astro/layers-of-computing.D5__c0pQ_ZsOOql.svg" alt="Diagram: the layers of computing, from transistors to applications" loading="lazy" decoding="async" fetchpriority="auto" width="700" height="520"></p>
+<p><strong>It is</strong> a stack of layers, each built only from the one below.</p>
+<ul>
+<li>Transistors form logic gates.</li>
+<li>Gates form the processor and memory.</li>
+<li>The processor executes machine code — raw binary instructions.</li>
+<li>The operating system is <em>itself</em> machine code, sharing the hardware out.</li>
+<li>Applications, including the models you will train, sit at the top.</li>
+</ul>
+<p><strong>It is not</strong> magic at any layer, and three misconceptions are worth naming:</p>
+<ul>
+<li><strong>A computer does not “understand” anything.</strong> It moves and combines bits.</li>
+<li><strong>Memory is not storage.</strong> RAM empties at power-off; the disk does not.</li>
+<li><strong>The processor does not do many things at once.</strong> It takes very fast turns,
+which Day 7 measures.</li>
+</ul>
+<hr/>
 <h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
-<p>Computers were created to automate calculation that humans found slow, costly, and error-prone. Before the machines, “computer” was a job title: rooms of people calculating by hand. The driving problems were concrete. Artillery firing tables needed thousands of trajectory calculations per gun, each taking a skilled human many hours — ENIAC was funded precisely to produce them. The 1880 US census took years to tabulate by hand, prompting Herman Hollerith’s punched-card tabulating machines for 1890 (his company eventually became part of IBM). Wartime codebreaking demanded searching astronomical numbers of key combinations, far beyond any human team’s speed.</p>
-<p>Those early machines, though, were largely one machine, one job. The deep problem the modern computer solves is generality: the stored-program insight — program as data, held in the same memory the machine reads — means one device can become a typewriter, calculator, jukebox, or neural network simply by loading different instructions. That is why computing ate the world, and why your path into AI runs through programming rather than soldering: the machine is settled; the instructions are where the leverage is.</p>
+<p><img src="/_astro/rewiring-to-programming.CBiZuAbz_ZIALX.svg" alt="Diagram: rewiring a machine compared with loading a stored program" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<p>Every layer exists because the one below it was too hard to use directly.</p>
+<ul>
+<li>
+<p><strong>Rewiring was the original problem.</strong> Early machines were reconfigured
+physically for each job; the stored-program design replaced hours of cabling
+with loading a different file.</p>
+</li>
+<li>
+<p><strong>Vacuum tubes were unreliable and enormous.</strong> The transistor made switches
+small, cool and durable enough to use by the billion.</p>
+</li>
+<li>
+<p><strong>Machine code is unusable at scale.</strong> Languages, and then operating systems,
+exist so a person can express intent without naming registers.</p>
+</li>
+</ul>
+<p>The pattern repeats all the way up: each layer hides the one beneath it well
+enough that you can forget it — until performance makes you remember.</p>
+<hr/>
 <h2 id="how-it-works">How it works</h2>
-<p>Let’s walk the stack from the bottom up, then watch the processor in action.</p>
-<h3 id="internal-architecture">Internal architecture</h3>
-<p>Start with the transistor: a microscopic switch with three terminals, where a voltage on one controls whether current flows between the other two. On or off — one bit of possibility. Wire a few together and you get a logic gate, a circuit computing a simple rule: AND outputs 1 only if both inputs are 1; OR outputs 1 if at least one is; NOT flips its input. From these parts engineers compose real machinery: chains of gates that add binary numbers (adders), compare them, and — when gates are looped back so a circuit holds its own state — remember bits (memory cells). This is the crucial mental jump of the lesson: arithmetic and memory are not abilities the computer “has”; they are shapes that gates are arranged into.</p>
-<p>Above the gates sits the von Neumann architecture, the organization of essentially every general-purpose computer. The central processing unit (CPU) contains an arithmetic logic unit (ALU) that calculates, a control unit that orchestrates each step, and a small set of registers — ultra-fast slots holding the values in use right now. Memory (RAM) holds both instructions and data, each byte at a numbered address. Input/output (I/O) devices connect the machine to the world, and buses are the shared wiring among them all.</p>
-<p><img src="/ai-roadmap-365/_astro/layers-of-computing.D5__c0pQ_ZsOOql.svg" alt="Diagram: the layers of computing, from transistors to applications" loading="lazy" decoding="async" fetchpriority="auto" width="700" height="520"></p>
-<p>Read the diagram from the bottom: transistors form logic gates; gates form the CPU and memory; the CPU executes machine code — raw binary instructions; the operating system is itself a machine-code program that manages the hardware and shares it among other programs; and applications, including the AI models you will train, live at the top. Every action at the top eventually becomes switching activity at the bottom.</p>
-<h3 id="important-components">Important components</h3>
+<h3 id="from-switch-to-arithmetic">From switch to arithmetic</h3>
+<p><img src="/_astro/transistor-to-arithmetic.Cl5-Ws-v_Z16hImP.svg" alt="Diagram: how switches become gates, gates become adders, and loops become memory" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<p><strong>Arithmetic and memory are not abilities the machine has. They are shapes that
+gates are arranged into.</strong></p>
+<h3 id="the-parts-and-what-each-is-for">The parts, and what each is for</h3>
 
 
 
@@ -114,62 +193,128 @@ You can also <a href="/ai-roadmap-365/labs/day-001-how-a-computer-works-from-tra
 
 
 
-
-
-
-
-
-<table><thead><tr><th>Component</th><th>What it does</th><th>Everyday analogue</th></tr></thead><tbody><tr><td>CPU (processor)</td><td>Executes instructions one after another, very fast</td><td>The chef actively cooking</td></tr><tr><td>RAM (memory)</td><td>Fast temporary workspace for running programs; empties at power-off</td><td>The kitchen counter and pantry</td></tr><tr><td>Storage (SSD/disk)</td><td>Slow but permanent home for files, apps, and the OS</td><td>The warehouse across town</td></tr><tr><td>GPU</td><td>Thousands of simple cores doing arithmetic in parallel; ideal for AI</td><td>A hall of line cooks all chopping at once</td></tr><tr><td>Motherboard &amp; bus</td><td>The board and wiring connecting everything</td><td>The kitchen’s layout and corridors</td></tr><tr><td>Power supply</td><td>Converts wall power to the steady low voltages chips need</td><td>The gas and electricity feeding the kitchen</td></tr></tbody></table>
-<h3 id="step-by-step-executing-one-instruction">Step by step: executing one instruction</h3>
-<p>Suppose registers R1 and R2 hold 5 and 3, and the next instruction is, in human-readable form, <code>ADD R1, R2 -&gt; R3</code> — in memory just a bit pattern like <code>0001 0001 0010 0011</code>, where in our toy encoding the first field means “add” and the rest name registers.</p>
-<ol>
-<li><strong>Fetch.</strong> The program counter — a special register — holds the address of the next instruction. The control unit puts that address on the bus, memory returns the instruction’s bits, and the program counter advances.</li>
-<li><strong>Decode.</strong> The control unit reads the pattern: opcode <code>0001</code> activates the addition circuitry; the operand fields route R1 and R2 into the ALU and aim the output at R3.</li>
-<li><strong>Execute.</strong> The ALU’s adder — that cascade of gates — combines the inputs: binary 0101 (5) and 0011 (3) flow in; 1000 (8) flows out. Pure physics.</li>
-<li><strong>Write back.</strong> The result lands in R3, and status flags — single bits noting facts like “result was zero” — are updated for later instructions to consult.</li>
-</ol>
-<p>Then the cycle repeats. That is all a CPU ever does.</p>
-<p><img src="/ai-roadmap-365/_astro/fetch-decode-execute.Ch1fbMBf_Z1U8bIk.svg" alt="Flowchart: the fetch-decode-execute cycle" loading="lazy" decoding="async" fetchpriority="auto" width="700" height="420"></p>
-<p>A 3 GHz CPU completes roughly three billion cycles per second, and real chips overlap many instructions at once, but the logical story stays this loop. One more idea hides in step 1: because the program counter is just a register, an instruction can change it — jumping backward creates loops, and jumping conditionally (on those flags) creates decisions. Loops plus decisions plus arithmetic over stored data is everything software is made of.</p>
-<h3 id="the-memory-hierarchy">The memory hierarchy</h3>
-<p>If registers are so fast, why not build all memory that way? Cost and physics: fast memory needs more transistors per bit, more chip area, more power, and must sit close to the ALU. So computers layer a tiny amount of fast memory over progressively larger, slower, cheaper tiers.</p>
-<p>Hold onto orders of magnitude, not exact figures. Registers respond within about one CPU cycle — a fraction of a nanosecond. Cache (small fast memory on the CPU chip, in levels L1–L3) takes roughly one to a few tens of nanoseconds. RAM takes on the order of 100 nanoseconds. An SSD takes on the order of 100 microseconds — about a thousand times slower than RAM — and spinning disks and networks take milliseconds or more. Register to SSD is very roughly a factor of a million: if a register access were one second, the SSD trip would take on the order of a week. The hierarchy works because programs reuse recently touched data and march through data in order — locality — letting hardware keep hot data in the fast tiers automatically.</p>
-<p><img src="/ai-roadmap-365/_astro/memory-hierarchy.DcZOzqAV_Z1N33Ko.svg" alt="Diagram: the memory hierarchy trade-off between speed, size, and cost" loading="lazy" decoding="async" fetchpriority="auto" width="700" height="480"></p>
-<p>Here is the payoff for your AI career. A neural network’s weights are numbers in memory, and essentially every weight must be read for every token generated. If a model does not fit in a GPU’s fast on-board memory, weights must stream in from slower tiers and performance collapses — hence “does it fit in GPU memory?” is the first question practitioners ask of any model. Even when it fits, each token means moving billions of numbers into compute units, so inference speed is often bounded by memory bandwidth — bytes per second delivered — rather than arithmetic. That is why quantization exists: storing each weight in 8 or 4 bits instead of 32 shrinks the footprint and slashes the bytes moved per token. When you meet these topics later, they will be the memory hierarchy wearing an AI costume.</p>
+<table><thead><tr><th>Component</th><th>What it does</th><th>Everyday analogue</th></tr></thead><tbody><tr><td>CPU</td><td>Executes instructions one after another, very fast</td><td>The chef cooking</td></tr><tr><td>RAM</td><td>Fast temporary workspace; empties at power-off</td><td>The counter and pantry</td></tr><tr><td>Storage</td><td>Slow but permanent home for files and the OS</td><td>The warehouse across town</td></tr><tr><td>GPU</td><td>Thousands of simple cores doing the same arithmetic at once</td><td>A hall of cooks chopping</td></tr><tr><td>Bus</td><td>The wiring connecting them</td><td>The corridors</td></tr></tbody></table>
+<h3 id="one-instruction-four-stages">One instruction, four stages</h3>
+<p><img src="/_astro/fetch-decode-execute.Ch1fbMBf_Z1U8bIk.svg" alt="Flowchart: the fetch-decode-execute cycle" loading="lazy" decoding="async" fetchpriority="auto" width="700" height="420"></p>
+<p>Registers R1 and R2 hold 5 and 3. The instruction is <code>ADD R1, R2 -&gt; R3</code>.</p>
+<ul>
+<li><strong>Fetch</strong> — the program counter names an address; memory returns the bits.</li>
+<li><strong>Decode</strong> — the control unit routes R1 and R2 into the ALU.</li>
+<li><strong>Execute</strong> — binary 0101 and 0011 go in, 1000 comes out. Pure physics.</li>
+<li><strong>Write back</strong> — the result lands in R3; status flags update.</li>
+</ul>
+<p>About three billion times a second. <strong>That is all a CPU ever does.</strong></p>
+<p>Because the program counter is just a register, an instruction can change it.
+Jumping backward is a loop; jumping conditionally is a decision. <strong>Loops plus
+decisions plus arithmetic is everything software is made of.</strong></p>
+<h3 id="why-memory-is-a-pyramid">Why memory is a pyramid</h3>
+<p><img src="/_astro/memory-hierarchy.DcZOzqAV_Z1N33Ko.svg" alt="Diagram: the memory hierarchy trade-off between speed, size, and cost" loading="lazy" decoding="async" fetchpriority="auto" width="700" height="480"></p>
+<p>Fast memory needs more transistors per bit and must sit close to the ALU, so
+machines layer a little of it over larger, slower, cheaper tiers.</p>
+<ul>
+<li><strong>Registers</strong> — about one cycle, a fraction of a nanosecond</li>
+<li><strong>Cache</strong> — one to a few tens of nanoseconds</li>
+<li><strong>RAM</strong> — about 100 nanoseconds</li>
+<li><strong>SSD</strong> — about 100 microseconds, a thousand times slower than RAM</li>
+<li><strong>Register to SSD is roughly a factor of a million.</strong> At one second per
+register access, the SSD trip takes about a week.</li>
+</ul>
+<p>It works because programs reuse recent data and march through it in order —
+<em>locality</em> — so hardware keeps hot data in the fast tiers by itself.</p>
+<hr/>
 <h2 id="an-everyday-analogy">An everyday analogy</h2>
-<p>Picture a restaurant kitchen. The chef is the CPU: the only one who transforms ingredients, one step of one recipe at a time, blindingly fast. The recipe is the program — precise instructions followed literally, a finger on the current line the way the program counter tracks the current instruction.</p>
-<p>The counter under the chef’s hands holds the two or three ingredients in use this second — the registers: instantly reachable, room for almost nothing. A few steps away is the pantry — the RAM — holding everything needed for tonight’s service: slower to reach, vastly bigger. Across town sits the warehouse — the disk — with everything the restaurant owns; a warehouse run takes so long that a good kitchen hauls tonight’s ingredients into the pantry before service begins. That is exactly what “loading a program” means: copying it from disk into RAM so the chef never waits on the warehouse mid-dish. A clever kitchen also keeps a small tray beside the chef with the ingredients used again and again — the cache.</p>
-<p>Presiding over it all is the kitchen manager: the operating system. The manager decides which dishes (programs) get the chef’s attention, switching rapidly between orders so every table feels continuously served; assigns pantry shelves so dishes never collide; and alone deals with deliveries and waiters (I/O). When the pantry overflows and ingredients shuttle to and from the warehouse mid-service, the whole kitchen grinds. Keep this kitchen in mind and most performance mysteries become intuitive.</p>
+<p>A restaurant kitchen, where every part maps onto something real.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Kitchen</th><th>Machine</th></tr></thead><tbody><tr><td>The chef’s hands</td><td>The ALU — where work actually happens</td></tr><tr><td>The cutting board</td><td>Registers — a few items, instantly reachable</td></tr><tr><td>The counter and pantry</td><td>RAM — today’s ingredients</td></tr><tr><td>The warehouse across town</td><td>Storage — everything, but a trip away</td></tr><tr><td>The recipe card</td><td>The program, held in memory as data</td></tr><tr><td>A hall of prep cooks</td><td>The GPU — many hands, one repeated task</td></tr></tbody></table>
+<ul>
+<li>
+<p><strong>The chef is fast; the trip to the warehouse is not.</strong> That single asymmetry is
+the memory hierarchy.</p>
+</li>
+<li>
+<p><strong>Swap the recipe card and the kitchen makes something else.</strong> That is the
+stored-program idea.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="examples-in-practice">Examples in practice</h2>
-<p>First, a technical example — let’s do what the ALU does. Binary uses two digits, with place values that are powers of 2 (1, 2, 4, 8, …): <code>0101</code> is 4 + 1 = 5 and <code>0011</code> is 2 + 1 = 3. Add column by column from the right, carrying as in decimal:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>  carries:   1 1</span></span>
-<span class="line"><span>             0 1 0 1   (5)</span></span>
-<span class="line"><span>           + 0 0 1 1   (3)</span></span>
-<span class="line"><span>           ---------</span></span>
-<span class="line"><span>             1 0 0 0   (8)</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>right column: 1 + 1 = 10 in binary -&gt; write 0, carry 1</span></span>
-<span class="line"><span>next column:  0 + 1 + carry 1     -&gt; write 0, carry 1</span></span>
-<span class="line"><span>next column:  1 + 0 + carry 1     -&gt; write 0, carry 1</span></span>
-<span class="line"><span>left column:  0 + 0 + carry 1     -&gt; write 1</span></span></code></pre>
-<p>A hardware adder is a chain of gate circuits, one per column, each taking two bits plus a carry and producing a sum bit plus a carry — the arithmetic above, frozen into wiring. Text works by convention: ASCII assigns the number 65 to capital A, so wherever your machine stores an ‘A’, it physically stores:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>&#39;A&#39;  =  65 (decimal)  =  01000001 (binary)</span></span>
-<span class="line"><span>        one byte: 0·128 + 1·64 + 0·32 + 0·16 + 0·8 + 0·4 + 0·2 + 1·1 = 65</span></span></code></pre>
-<p>Numbers, text, pixels, audio, model weights — all agreed-upon interpretations of bit patterns.</p>
-<p>Now the real world. When you double-click an app, the OS reads its machine code from the SSD (the warehouse run), copies it into RAM (the pantry), points the program counter at the first instruction, and the loop begins — the launch pause is mostly storage latency, not “thinking.” When your laptop gets hot, you are feeling physics: billions of transistors switching billions of times per second each leak a whisker of energy as heat — hence datacenter cooling bills, and laptops throttling when they cannot shed it. When adding RAM revives an old machine, the system had been swapping working data to disk at that thousand-fold latency penalty. And GPUs power AI because a CPU has a few powerful cores for doing <em>different</em> complicated things in sequence, while a GPU has thousands of simple cores doing the <em>same</em> arithmetic on different data simultaneously — and neural networks are almost entirely huge uniform grids of multiplications and additions, exactly the work a GPU devours.</p>
+<p><img src="/_astro/launching-an-application.DDPz7uyM_Z16hImP.svg" alt="Diagram: the stages of launching an application from storage to running" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<p><strong>Where this becomes AI:</strong></p>
+<ul>
+<li>
+<p>A 7-billion-parameter model at 16 bits is about <strong>14 GB of weights</strong>.</p>
+</li>
+<li>
+<p>Each token read costs <strong>one full pass over all of them</strong>.</p>
+</li>
+<li>
+<p>So a 400 GB/s bus caps output near <strong>30 tokens per second</strong>, however fast the
+arithmetic units are.</p>
+</li>
+<li>
+<p>At 4 bits instead of 16 the model is <strong>3.5 GB</strong> and the ceiling roughly
+<strong>quadruples</strong>.</p>
+</li>
+</ul>
+<p>Day 3 measures this properly. Today it is enough to see that it is the pyramid.</p>
+<hr/>
 <h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
-<h3 id="security">Security</h3>
-<p>Because a computer executes whatever instructions it is given, security is ultimately about controlling which instructions run. Malware is ordinary machine code an attacker persuaded the machine to fetch and execute — the hardware doing what it always does. That is why physical access is treated as game over: whoever controls the hardware controls what executes. More subtly, computation’s physical nature leaks information — timing, cache behavior, and power draw can reveal the secrets being processed. Such side-channel attacks show that security problems reach all the way down the stack.</p>
-<h3 id="privacy">Privacy</h3>
-<p>Data lives in physical states with different protections. Data at rest sits on storage, persists after power-off, and can be encrypted so a stolen drive reads as noise. Data in memory is generally there in usable, unencrypted form, because the CPU must compute on it. And “deleting” a file typically just marks its blocks reusable — the bits often linger until overwritten, so secure erasure is a deliberate act. For AI work this is concrete: training data, prompts, and model outputs all pass through memory, disks, and networks, and everywhere those bits travel or rest, privacy must be engineered, not assumed.</p>
-<h3 id="performance">Performance</h3>
-<p>Two levers move performance: doing each step faster, and doing more steps at once. For decades shrinking transistors delivered rising clock speeds almost for free; in the mid-2000s that stopped scaling gracefully — chiefly heat — and the industry pivoted to more cores rather than faster ones. Serial software stopped speeding up automatically; the big wins now go to work that splits across many cores, and AI’s rise is entangled with this shift because neural networks are almost perfectly parallelizable. The other great truth is the memory hierarchy: much slow software is not compute-bound but waiting on memory or disk. “Where is the time actually going?” — measured, not guessed — is the first question of performance work.</p>
-<h3 id="scalability">Scalability</h3>
-<p>When one machine is not enough, there are two directions to grow. Vertical scaling means a bigger machine — more cores, RAM, GPUs in one box — simple, but with hard physical and economic ceilings. Horizontal scaling means more machines cooperating over a network — nearly unlimited, but taxed by slow networks (the bottom of the memory hierarchy), independent failures, and software redesign. Modern AI does both: servers stuffed with GPUs, networked by the thousand into clusters, with much of the engineering devoted to keeping expensive processors fed with data across a hierarchy that slows at every hop outward.</p>
-<h3 id="cost">Cost</h3>
-<p>Hardware costs trace directly to the physics in this lesson. Faster memory costs more per byte than slower memory — that gradient is why the hierarchy exists at all. Datacenter-grade hardware (GPUs with large high-bandwidth memory, error-correcting RAM, redundant power) commands far higher prices than consumer gear because it is built for sustained, reliable, parallel throughput. Beyond purchase price sits energy: busy chips consume significant electricity and then require more for cooling — a continuous operating cost and real environmental consideration at datacenter scale. Weighing a local model against rented cloud GPUs against a paid API is reasoning about exactly these trade-offs.</p>
+<ul>
+<li>
+<p><strong>Performance.</strong> Most slow programs are waiting for data, not computing. Look
+at the hierarchy before optimising arithmetic.</p>
+</li>
+<li>
+<p><strong>Scalability.</strong> More cores help only work that can be split.</p>
+</li>
+<li>
+<p><strong>Cost.</strong> Each step down the pyramid is roughly an order of magnitude cheaper
+per byte — which is why the pyramid exists.</p>
+</li>
+<li>
+<p><strong>Security.</strong> Isolation is enforced by hardware, not good manners.</p>
+</li>
+<li>
+<p><strong>Privacy.</strong> Deleting a file usually removes the pointer, not the bytes.</p>
+</li>
+<li>
+<p><strong>Energy.</strong> Moving data costs far more than computing on it.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
-<p>For a concepts lesson, “alternatives” means other excellent ways to learn this material — differing in depth, format, and cost.</p>
 
 
 
@@ -210,22 +355,20 @@ You can also <a href="/ai-roadmap-365/labs/day-001-how-a-computer-works-from-tra
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Resource</th><th>Type</th><th>What it offers</th><th>Cost</th></tr></thead><tbody><tr><td>The Day 1 lab in this course</td><td>Free</td><td>Hands-on inspection of your own machine, tied to this lesson</td><td>Free</td></tr><tr><td>Crash Course Computer Science (PBS Digital Studios)</td><td>Free video series</td><td>40 short, visual episodes from transistors through operating systems</td><td>Free</td></tr><tr><td>Wikipedia’s article on the von Neumann architecture</td><td>Free reference</td><td>Well-cited overview of the stored-program design and its history</td><td>Free</td></tr><tr><td>From Nand to Tetris (Schocken &amp; Nisan)</td><td>Open course materials</td><td>You build a working computer yourself, starting from NAND gates</td><td>Free materials; optional companion book purchase</td></tr><tr><td>Logisim Evolution</td><td>Open source software</td><td>Visual circuit simulator: wire up gates, build an adder, watch signals flow</td><td>Free</td></tr><tr><td>”Code” by Charles Petzold (2nd ed.)</td><td>Book (commercial)</td><td>The classic book-length telling of this exact story</td><td>Book purchase</td></tr><tr><td>CS50: Introduction to Computer Science (Harvard)</td><td>University course</td><td>Broad, rigorous introduction to computer science</td><td>Free to audit; certificate cost varies</td></tr></tbody></table>
-<p>Read one thing beyond this course? Petzold’s <em>Code</em>. Want to build your understanding with your hands? Nand to Tetris, after this section.</p>
+<table><thead><tr><th>Resource</th><th>Type</th><th>What it gives you</th></tr></thead><tbody><tr><td>The Day 1 lab</td><td>Free</td><td>Your own machine’s real numbers</td></tr><tr><td>Crash Course Computer Science</td><td>Free video series</td><td>Short visual episodes from transistors upward</td></tr><tr><td>Nand2Tetris</td><td>Free course</td><td>Build a working computer from NAND gates</td></tr><tr><td>Ben Eater’s breadboard CPU</td><td>Free video series</td><td>A processor built by hand, one wire at a time</td></tr><tr><td>Petzold, <em>Code</em></td><td>Book</td><td>The clearest prose account of the whole ladder</td></tr><tr><td>Patterson &amp; Hennessy</td><td>Textbook</td><td>The standard university treatment</td></tr></tbody></table>
+<ul>
+<li>
+<p><strong>Nand2Tetris is the one to do</strong> if today’s abstraction ladder felt like a claim
+rather than a fact — you build every rung yourself.</p>
+</li>
+<li>
+<p><strong>Everything above is free except the books</strong>, and the free options are not the
+lesser ones.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+<p><img src="/_astro/ram-versus-storage.CPn_6kJ2_ZIALX.svg" alt="Diagram: RAM compared with storage" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
 
 
 
@@ -251,20 +394,40 @@ You can also <a href="/ai-roadmap-365/labs/day-001-how-a-computer-works-from-tra
 
 
 
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>Computer</td><td>Calculator</td><td>A calculator runs fixed operations; a computer executes stored programs, so one machine can do unlimited jobs</td></tr><tr><td>Hardware</td><td>Software</td><td>Hardware is the physical machine; software is the changeable instructions the hardware executes</td></tr><tr><td>CPU</td><td>GPU</td><td>A CPU has a few powerful cores for fast sequential, varied work; a GPU has thousands of simple cores applying the same operation across masses of data</td></tr><tr><td>Memory (RAM)</td><td>Storage (SSD/disk)</td><td>RAM is fast, temporary, wiped at power-off; storage is slower and survives shutdown</td></tr><tr><td>Compiler</td><td>Interpreter</td><td>A compiler translates a whole program to machine code before it runs; an interpreter translates and executes piece by piece while it runs</td></tr></tbody></table>
+<table><thead><tr><th>Often confused</th><th>The actual difference</th></tr></thead><tbody><tr><td>CPU vs GPU</td><td>Few clever cores vs thousands of simple ones doing the same thing</td></tr><tr><td>Core vs thread</td><td>A physical unit vs a stream of instructions it can interleave</td></tr><tr><td>Memory vs storage</td><td>Volatile and fast vs permanent and slow</td></tr><tr><td>Machine code vs source</td><td>What the CPU executes vs what a person writes</td></tr></tbody></table>
+<hr/>
 <h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
-<p>Reach for today’s mental model when performance surprises you — slow code, exhausted memory, and stalled training jobs almost always trace to the layers below your code (cache misses, swapping, memory bandwidth, too little parallelism). Reach for it when choosing hardware for AI: how much GPU memory, how fast, how many cores are memory-hierarchy and parallelism questions. Reach for it when you meet quantization, mixed precision, batch sizes, and out-of-memory errors later in this course; each is this lesson in disguise. And reach for it when evaluating claims about AI, because knowing everything reduces to arithmetic over bits inoculates against both hype and panic.</p>
-<p>Know equally when to leave it in the toolbox. Day-to-day, high-level code should be written for clarity and correctness first — the abstraction layers exist so you need not think about registers, and modern compilers optimize better than most hand-tuning by instinct. Premature optimization — contorting code for imagined hardware gains before measuring where time goes — is a classic mistake: write clearly, measure honestly, then descend the stack only where the measurement points. The professional habit is layered thinking: work at the highest layer that solves your problem, and descend deliberately when the problem demands it.</p>
+<p><img src="/_astro/which-layer-to-work-at.Thgs9Gqp_ZIALX.svg" alt="Diagram: when to reason about hardware and when to ignore it" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<p><strong>Reach for this model when</strong> something is slower than it should be, a program
+will not fit in memory, you are choosing hardware, or you need to explain why a
+model runs on one machine and not another.</p>
+<p><strong>Do not reach for it when</strong> you are writing ordinary application code. The
+layers exist so you can ignore them, and reasoning about cache lines while
+writing a data-loading script is a way to write it badly and slowly.</p>
+<p><strong>The rule:</strong> work at the highest layer that solves your problem, and go down one
+level only when a measurement tells you to.</p>
+<hr/>
+<h2 id="the-ai-connection">The AI connection</h2>
+<p><img src="/_astro/why-gpus-run-ai.Br_MXotU_ZIALX.svg" alt="Diagram: how a CPU and a GPU spend the same transistor budget differently" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong>A model is arithmetic on numbers held in memory</strong>, executed by a processor,
+loaded from storage. When a training run is slow, it is one of those three.</p>
+</li>
+<li>
+<p><strong>A neural network is almost entirely matrix multiplication</strong> — the same
+multiply-accumulate repeated across millions of values.</p>
+</li>
+<li>
+<p><strong>That is exactly the shape a GPU was built for</strong>, which is why the field moved
+onto graphics hardware. A hardware fact, not a software preference.</p>
+</li>
+<li>
+<p><strong>Everything later is downstream of this.</strong> Batch sizes, memory limits and
+inference cost all trace back to the switching elements you met today.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="knowledge-check">Knowledge check</h2>
 <p>Try these from memory before looking back:</p>
 <ol>
@@ -275,96 +438,154 @@ You can also <a href="/ai-roadmap-365/labs/day-001-how-a-computer-works-from-tra
 <li>In three sentences or fewer, explain to a non-technical person why AI companies buy GPUs instead of simply faster CPUs.</li>
 </ol>
 <h2 id="hands-on-exercise">Hands-on exercise</h2>
-<p>Time to touch the real machine. In this exercise — worked through in full in the Day 1 lab directory — you will use the terminal to ask your computer what hardware it has, then place each answer in the layers diagram. The terminal is a program that runs typed commands; you will live in it throughout this course.</p>
-<p>On macOS, open Terminal (Cmd+Space, type “Terminal”, press Return) and run each command by typing it and pressing Return:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sysctl</span><span style="color:#79B8FF"> -n</span><span style="color:#9ECBFF"> machdep.cpu.brand_string</span></span></code></pre>
-<p>Prints your CPU’s model name — the identity of your machine’s “chef.” (On Apple Silicon it prints the chip name, such as an M-series chip.)</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sysctl</span><span style="color:#9ECBFF"> hw.memsize</span></span></code></pre>
-<p>Prints total RAM in bytes — the size of your pantry. You will convert to gigabytes shortly.</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sysctl</span><span style="color:#79B8FF"> -n</span><span style="color:#9ECBFF"> hw.ncpu</span></span></code></pre>
-<p>Prints the number of logical CPU cores — how many streams of instructions can run at once.</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">df</span><span style="color:#79B8FF"> -h</span><span style="color:#9ECBFF"> /</span></span></code></pre>
-<p>Shows the size and free space of your main disk (<code>/</code> is the filesystem root; <code>-h</code> means human-readable units) — the warehouse inventory.</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sw_vers</span></span></code></pre>
-<p>Prints your operating system’s name and version — the identity of your kitchen manager.</p>
-<p>On Linux, the equivalents are:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">lscpu</span></span></code></pre>
-<p>Detailed CPU information: model name, core count, and (useful for the extension challenge) cache sizes.</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">free</span><span style="color:#79B8FF"> -h</span></span></code></pre>
-<p>Total and available RAM in human-readable units.</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">nproc</span></span></code></pre>
-<p>The number of processing units available.</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">df</span><span style="color:#79B8FF"> -h</span><span style="color:#9ECBFF"> /</span></span></code></pre>
-<p>Size and free space of the root filesystem, as on macOS.</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">cat</span><span style="color:#9ECBFF"> /etc/os-release</span></span></code></pre>
-<p>Your distribution’s name and version.</p>
-<p>On Windows, open PowerShell and run <code>Get-ComputerInfo</code>, which reports processor, total physical memory, and OS version in one long listing — or, better, install WSL (Windows Subsystem for Linux) and use the Linux commands, since later lessons assume a Unix-style terminal.</p>
+<p>Ask your own machine what hardware it has, then place each answer in the layers
+diagram. Full instructions are in the Day 1 lab directory.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>What you want</th><th>macOS</th><th>Linux</th></tr></thead><tbody><tr><td>CPU model</td><td><code>sysctl -n machdep.cpu.brand_string</code></td><td><code>lscpu</code></td></tr><tr><td>RAM in bytes</td><td><code>sysctl hw.memsize</code></td><td><code>free -h</code></td></tr><tr><td>Logical cores</td><td><code>sysctl -n hw.ncpu</code></td><td><code>nproc</code></td></tr><tr><td>Disk size and free</td><td><code>df -h /</code></td><td><code>df -h /</code></td></tr><tr><td>OS version</td><td><code>sw_vers</code></td><td><code>cat /etc/os-release</code></td></tr></tbody></table>
+<p>On Windows, use <code>Get-ComputerInfo</code> in PowerShell — or install WSL, since later
+lessons assume a Unix-style terminal.</p>
 <h3 id="expected-output">Expected output</h3>
-<p>A typical run on an Apple Silicon Mac (your values will differ — that is the point):</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ sysctl -n machdep.cpu.brand_string</span></span>
 <span class="line"><span>Apple M2</span></span>
-<span class="line"><span></span></span>
 <span class="line"><span>$ sysctl hw.memsize</span></span>
 <span class="line"><span>hw.memsize: 17179869184</span></span>
-<span class="line"><span></span></span>
 <span class="line"><span>$ sysctl -n hw.ncpu</span></span>
 <span class="line"><span>8</span></span>
-<span class="line"><span></span></span>
 <span class="line"><span>$ df -h /</span></span>
-<span class="line"><span>Filesystem      Size    Used   Avail Capacity  Mounted on</span></span>
-<span class="line"><span>/dev/disk3s1s1  460Gi   9.8Gi  180Gi     6%    /</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>$ sw_vers</span></span>
-<span class="line"><span>ProductName:        macOS</span></span>
-<span class="line"><span>ProductVersion:     14.5</span></span>
-<span class="line"><span>BuildVersion:       23F79</span></span></code></pre>
-<p>Line by line: the CPU is an Apple M2 — the chip doing every fetch-decode-execute cycle. <code>hw.memsize</code> reports 17179869184 bytes; divide by 1073741824 (bytes per GiB) to get 16 GiB of RAM. <code>hw.ncpu</code> reports 8 logical cores. The <code>df</code> row says the main disk holds 460 GiB with 180 GiB available (the figures need not sum, because macOS splits the disk across system volumes). And <code>sw_vers</code> identifies the OS build — the layer that managed every command you just ran.</p>
+<span class="line"><span>/dev/disk3s1s1  460Gi  9.8Gi  180Gi  6%  /</span></span></code></pre>
+<ul>
+<li><strong>17179869184 bytes ÷ 1073741824 = 16 GiB</strong> of RAM.</li>
+<li><strong>8 logical cores</strong> — streams that can run at once, not necessarily 8 chips.</li>
+<li><strong>460 GiB disk</strong> — the figures need not sum, because macOS splits the disk
+across system volumes.</li>
+</ul>
 <h3 id="validate-your-work">Validate your work</h3>
-<p>You are done when you can check every box:</p>
+<p>You are done when you can state, from your own machine:</p>
 <ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" disabled/> You can state your CPU’s model name.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You can state how many logical cores it has.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You can state your RAM in GB (converted from bytes if necessary).</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You can state roughly how much free disk space you have.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You can state your OS name and version.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You can place each fact in the layers diagram (CPU and RAM in “CPU &amp; memory”; the disk as storage feeding that layer; the OS in “Operating system”).</li>
+<li class="task-list-item"><input type="checkbox" disabled/> The CPU model and its logical core count</li>
+<li class="task-list-item"><input type="checkbox" disabled/> RAM in GB, converted from bytes</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Roughly how much free disk space you have</li>
+<li class="task-list-item"><input type="checkbox" disabled/> The OS name and version</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Where each of those sits in the layers diagram</li>
 </ul>
 <h3 id="troubleshooting">Troubleshooting</h3>
 <ul>
-<li><strong>“command not found.”</strong> You are running a command from the wrong OS section — <code>sysctl machdep.cpu.brand_string</code> is macOS-specific; <code>lscpu</code>, <code>free</code>, and <code>nproc</code> are Linux-specific.</li>
-<li><strong>Permission or “Operation not permitted” errors.</strong> None of these commands need administrator rights, so do not reach for <code>sudo</code>; the usual fix is a typo — retype exactly, including spaces.</li>
-<li><strong>A giant number where you expected gigabytes.</strong> <code>sysctl hw.memsize</code> reports bytes; divide by 1073741824 for GiB: 17179869184 ÷ 1073741824 = 16. (Marketing “GB” uses powers of ten, so the sticker may differ slightly.)</li>
-<li><strong><code>df</code> shows several rows or odd volume names.</strong> On macOS the filesystem is split across system volumes; read the row mounted on <code>/</code> and ignore the rest for now.</li>
+<li>
+<p><strong><code>command not found</code></strong> — you used the other operating system’s command.
+<code>sysctl</code> is macOS; <code>lscpu</code>, <code>free</code> and <code>nproc</code> are Linux.</p>
+</li>
+<li>
+<p><strong>Permission errors</strong> — none of these need <code>sudo</code>. The cause is almost always a
+typo; retype exactly, including spaces.</p>
+</li>
+<li>
+<p><strong>A giant number instead of gigabytes</strong> — <code>hw.memsize</code> reports bytes. Divide by
+1073741824.</p>
+</li>
+<li>
+<p><strong><code>df</code> shows several rows</strong> — read the one mounted on <code>/</code>.</p>
+</li>
 </ul>
 <h3 id="common-mistakes">Common mistakes</h3>
 <ul>
-<li><strong>Confusing RAM with disk.</strong> “512 GB” on a laptop box is almost always storage, not memory. RAM (often 8–32 GB) is the fast workspace; storage (256 GB–2 TB) is the permanent warehouse. Mixing them up means buying the wrong upgrade.</li>
-<li><strong>Confusing cores with threads.</strong> Many CPUs run two instruction streams per physical core, so tools may report “8 CPUs” on a 4-core chip. Read the number as “streams that can run at once,” not “how many chefs.”</li>
-<li><strong>Reading “memory used” as “memory needed.”</strong> Operating systems deliberately keep RAM full, using spare capacity as disk cache — full memory is the OS doing its job. Real pressure shows up as swap usage or a memory-pressure indicator, not “used.”</li>
+<li>
+<p><strong>Confusing RAM with disk.</strong> “512 GB” on a laptop box is storage. RAM is
+usually 8–32 GB. Mixing them up means buying the wrong upgrade.</p>
+</li>
+<li>
+<p><strong>Confusing cores with threads.</strong> Many CPUs run two streams per physical core,
+so “8 CPUs” may be a 4-core chip.</p>
+</li>
+<li>
+<p><strong>Reading “memory used” as “memory needed.”</strong> The OS keeps RAM full on purpose,
+using the spare as disk cache. Pressure shows up as swap, not as “used”.</p>
+</li>
 </ul>
+<hr/>
 <h2 id="practice-assignment">Practice assignment</h2>
-<p>Open the machine-profile worksheet in the starter directory of the Day 1 lab and fill it in completely for your machine — CPU model, logical core count, total RAM, total and free disk space, OS name and version — using the commands above. Then write one paragraph (5–8 sentences) telling the story of <em>your</em> machine’s memory hierarchy with its real numbers, from registers through cache and your actual gigabytes of RAM to your actual disk, and explain which layer would become the bottleneck on a dataset larger than your RAM. Keep the worksheet; a later lesson extends it.</p>
+<p>Find the real numbers for the machine in front of you.</p>
+<ol>
+<li>
+<p><strong>Record the specification.</strong> Processor model, core count, RAM, storage type
+and size, and whether there is a discrete GPU.</p>
+</li>
+<li>
+<p><strong>Place them on the pyramid.</strong> Attach an approximate latency to each tier from
+the lesson, and note which ones your machine actually has.</p>
+</li>
+<li>
+<p><strong>Answer one question in two sentences.</strong> What is the largest model, at 2 bytes
+per weight, that could theoretically sit in your RAM — and what would you
+expect to happen if you tried to run one twice that size?</p>
+</li>
+</ol>
+<hr/>
 <h2 id="extension-challenge">Extension challenge</h2>
-<p>Go one layer deeper and find your machine’s cache sizes — the tier we could not see with the basic commands. On macOS:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sysctl</span><span style="color:#9ECBFF"> hw.l1dcachesize</span><span style="color:#9ECBFF"> hw.l2cachesize</span></span></code></pre>
-<p>On Linux:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">lscpu</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> grep</span><span style="color:#79B8FF"> -i</span><span style="color:#9ECBFF"> cache</span></span></code></pre>
-<p>Add the numbers to your worksheet (macOS reports bytes — convert as needed) and note how they slot between registers and RAM. Then do a calculation working AI engineers do constantly: a float32 number occupies 4 bytes, so divide your RAM in bytes by 4 to estimate how many float32 parameters could theoretically fit in memory. For 16 GiB that is about 4 billion parameters — before subtracting what the OS, other programs, and the computation itself need. Write two or three sentences on which sizes of AI model your machine could plausibly hold, and why practitioners shrink each parameter to 1 or 2 bytes (quantization) to fit bigger models into the same hardware. You have just reasoned about AI deployment from first principles — on Day 1.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
-Q1. What is the fundamental role of a transistor in a computer? </strong> </p> <ol type="A"> <li>It stores a complete file permanently</li><li>It acts as a tiny electrical switch that is either on or off</li><li>It converts binary numbers into decimal numbers</li><li>It cools the processor while it runs</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> It acts as a tiny electrical switch that is either on or off </p> <p>A transistor is a microscopic switch whose on/off state represents one bit of possibility; billions of them wired into logic gates form all of a computer&#39;s processing and memory circuitry.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q2. Which sequence correctly orders the steps a CPU repeats for every instruction? </strong> </p> <ol type="A"> <li>Decode, fetch, execute, write back</li><li>Execute, decode, fetch, write back</li><li>Fetch, decode, execute, write back</li><li>Fetch, execute, decode, write back</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Fetch, decode, execute, write back </p> <p>The CPU first fetches the instruction from memory, then the control unit decodes its bit pattern, the ALU executes the operation, and the result is written back to a register or memory before the cycle repeats.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q3. What is the key difference between RAM and storage (SSD/disk)? </strong> </p> <ol type="A"> <li>RAM is fast temporary working space that empties at power-off; storage is slower but keeps data permanently</li><li>RAM holds programs while storage holds only pictures and documents</li><li>RAM is measured in terabytes while storage is measured in gigabytes</li><li>Storage is faster than RAM but more expensive per byte</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> RAM is fast temporary working space that empties at power-off; storage is slower but keeps data permanently </p> <p>RAM is the machine&#39;s fast, volatile workspace for running programs, while storage is the slower, persistent layer that survives shutdown — roughly a thousand times slower than RAM for an SSD.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q4. The capital letter A is stored in a computer using ASCII as which of the following? </strong> </p> <ol type="A"> <li>The binary pattern 01000001, which is the number 65</li><li>A miniature photograph of the letter shape</li><li>The binary pattern 00000001, which is the number 1</li><li>A special letter-transistor distinct from number-transistors</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> The binary pattern 01000001, which is the number 65 </p> <p>ASCII assigns the number 65 to capital A, and 65 in binary is 01000001; text, like everything else in a computer, is bit patterns given meaning by convention.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q5. What was the central insight of the von Neumann architecture described in the 1945 EDVAC report? </strong> </p> <ol type="A"> <li>Computers should use decimal arithmetic instead of binary</li><li>Every computer needs a separate machine for each task it performs</li><li>Processors should be built from vacuum tubes rather than relays</li><li>Programs can be stored in the same memory as data, so one machine becomes general-purpose</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> Programs can be stored in the same memory as data, so one machine becomes general-purpose </p> <p>Storing instructions in memory alongside data means a computer can switch tasks just by loading different instructions, instead of being physically rewired like ENIAC.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q6. Why do computers use a memory hierarchy instead of building all memory as fast as registers? </strong> </p> <ol type="A"> <li>Slow memory produces more accurate results than fast memory</li><li>Fast memory costs more per byte and must be small and close to the CPU, so systems layer small fast memory over large slow memory</li><li>Operating systems cannot address more than a few kilobytes of fast memory</li><li>Registers wear out quickly, so they are kept scarce as spare parts</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Fast memory costs more per byte and must be small and close to the CPU, so systems layer small fast memory over large slow memory </p> <p>Speed, size, and cost trade off against each other: register-speed memory is expensive and must sit near the ALU, so machines pair tiny fast layers with progressively larger, slower, cheaper ones and rely on locality to make it work.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q7. Why are GPUs better suited than CPUs for running neural networks? </strong> </p> <ol type="A"> <li>GPUs have higher clock speeds than any CPU</li><li>GPUs store model weights permanently even when powered off</li><li>GPUs have thousands of simple cores that perform the same arithmetic on many data values in parallel, matching the uniform math of neural networks</li><li>GPUs understand the meaning of the data they process</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> GPUs have thousands of simple cores that perform the same arithmetic on many data values in parallel, matching the uniform math of neural networks </p> <p>Neural networks consist mostly of huge uniform grids of multiplications and additions, which map naturally onto a GPU&#39;s thousands of parallel arithmetic cores rather than a CPU&#39;s few powerful sequential cores.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q8. What does it mean to say a computer is a &quot;stored-program&quot; machine? </strong> </p> <ol type="A"> <li>Its programs are permanently burned into the processor at the factory</li><li>It keeps a backup of every program it has ever run</li><li>Programs can only be loaded from external punched cards</li><li>The instructions it executes are held in memory as data, so loading different instructions changes what the machine does</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> The instructions it executes are held in memory as data, so loading different instructions changes what the machine does </p> <p>Because the program lives in memory just like data, the same hardware can become a calculator, a text editor, or a neural network simply by loading different instructions — the foundation of general-purpose computing.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>transistor</strong> </dt> <dd data-astro-cid-whrtx2kk>A microscopic electrical switch with no moving parts whose on/off state is the physical basis of all digital computing.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>logic gate</strong> </dt> <dd data-astro-cid-whrtx2kk>A small circuit built from transistors that computes a simple rule, such as AND (output on only if both inputs are on), OR, or NOT.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>binary</strong> </dt> <dd data-astro-cid-whrtx2kk>A way of writing numbers and encoding all data using only two digits, 0 and 1, which map directly onto a switch&#39;s off and on states.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>bit</strong> </dt> <dd data-astro-cid-whrtx2kk>The smallest unit of information, a single 0 or 1.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>byte</strong> </dt> <dd data-astro-cid-whrtx2kk>A group of 8 bits, enough to store one of 256 possible values, such as a single ASCII character.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>CPU</strong> </dt> <dd data-astro-cid-whrtx2kk>The central processing unit, the chip that executes program instructions one after another by repeating the fetch-decode-execute cycle.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>register</strong> </dt> <dd data-astro-cid-whrtx2kk>One of a small set of ultra-fast storage slots inside the CPU that hold the values being worked on at this instant.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>RAM</strong> </dt> <dd data-astro-cid-whrtx2kk>Random-access memory, the computer&#39;s fast temporary workspace that holds running programs and their data and is emptied when power is cut.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>cache</strong> </dt> <dd data-astro-cid-whrtx2kk>Small, very fast memory on the CPU chip that keeps recently used data close to the processor so it rarely has to wait on slower RAM.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>machine code</strong> </dt> <dd data-astro-cid-whrtx2kk>The raw binary instructions a CPU executes directly, the lowest-level form of any program.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>operating system</strong> </dt> <dd data-astro-cid-whrtx2kk>The master program that manages the hardware, shares the CPU and memory among running programs, and handles all input and output.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>memory hierarchy</strong> </dt> <dd data-astro-cid-whrtx2kk>The layered arrangement of storage from registers through cache and RAM to disk, trading speed against size and cost per byte at each level.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://www.charlespetzold.com/code/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Code: The Hidden Language of Computer Hardware and Software (2nd ed.)</a> — Charles Petzold / Microsoft Press (accessed 2026-07-12) — The classic book-length treatment of this lesson’s layered story. </li><li data-astro-cid-whrtx2kk> <a href="https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Crash Course Computer Science</a> — PBS Digital Studios (accessed 2026-07-12) — Free 40-episode video series covering transistors through operating systems. </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Von_Neumann_architecture" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Von Neumann architecture</a> — Wikipedia (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://www.nand2tetris.org/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>From Nand to Tetris</a> — Shimon Schocken and Noam Nisan (accessed 2026-07-12) — Free course where you build a computer from logic gates up. </li><li data-astro-cid-whrtx2kk> <a href="https://cs50.harvard.edu/x/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>CS50: Introduction to Computer Science</a> — Harvard University (accessed 2026-07-12) </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="1" data-astro-cid-whrtx2kk>
+<p>Go one level deeper into the hierarchy you have just placed your machine on.</p>
+<ol>
+<li>
+<p><strong>Find your cache sizes.</strong> <code>sysctl -a | grep cachesize</code> on macOS, <code>lscpu</code> on
+Linux. Record L1, L2 and L3.</p>
+</li>
+<li>
+<p><strong>Compare the tiers.</strong> Write the ratio of L1 to L3, and of L3 to your RAM.</p>
+</li>
+<li>
+<p><strong>Predict, then check.</strong> Which is the bigger jump in <em>size</em>, and which in
+<em>latency</em>? They are not the same tier, and the reason is the whole point of
+the pyramid.</p>
+</li>
+</ol>
+<hr/>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. What is the fundamental role of a transistor in a computer? </strong> </p> <ol type="A"> <li>It stores a complete file permanently</li><li>It cools the processor while it runs</li><li>It converts binary numbers into decimal numbers</li><li>It acts as a switch that is either on or off</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> It acts as a switch that is either on or off </p> <p>A transistor is a microscopic switch whose on/off state represents one bit of possibility; billions of them wired into logic gates form all of a computer&#39;s processing and memory circuitry.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. Which sequence correctly orders the steps a CPU repeats for every instruction? </strong> </p> <ol type="A"> <li>Fetch, decode, execute, write back</li><li>Execute, decode, fetch, write back</li><li>Decode, fetch, execute, write back</li><li>Fetch, execute, decode, write back</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> Fetch, decode, execute, write back </p> <p>The CPU first fetches the instruction from memory, then the control unit decodes its bit pattern, the ALU executes the operation, and the result is written back to a register or memory before the cycle repeats.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. What is the key difference between RAM and storage (SSD/disk)? </strong> </p> <ol type="A"> <li>RAM holds programs while storage holds only pictures and documents</li><li>RAM is fast but empties at power-off; storage is slower but permanent</li><li>RAM is measured in terabytes while storage is measured in gigabytes</li><li>Storage is faster than RAM but more expensive per byte</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> RAM is fast but empties at power-off; storage is slower but permanent </p> <p>RAM is the machine&#39;s fast, volatile workspace for running programs, while storage is the slower, persistent layer that survives shutdown — roughly a thousand times slower than RAM for an SSD.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. The capital letter A is stored in a computer using ASCII as which of the following? </strong> </p> <ol type="A"> <li>The binary pattern 00000001, which is the number 1</li><li>A miniature photograph of the letter shape</li><li>The binary pattern 01000001, which is the number 65</li><li>A special letter-transistor distinct from number-transistors</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> The binary pattern 01000001, which is the number 65 </p> <p>ASCII assigns the number 65 to capital A, and 65 in binary is 01000001; text, like everything else in a computer, is bit patterns given meaning by convention.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. What was the central insight of the von Neumann architecture described in the 1945 EDVAC report? </strong> </p> <ol type="A"> <li>Computers should use decimal arithmetic instead of binary</li><li>Every computer needs a separate machine for each task it performs</li><li>Processors should be built from vacuum tubes rather than relays</li><li>Programs live in the same memory as data, making one machine general-purpose</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> Programs live in the same memory as data, making one machine general-purpose </p> <p>Storing instructions in memory alongside data means a computer can switch tasks just by loading different instructions, instead of being physically rewired like ENIAC.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. Why do computers use a memory hierarchy instead of building all memory as fast as registers? </strong> </p> <ol type="A"> <li>Fast memory costs more per byte and must sit close to the CPU</li><li>Slow memory produces more accurate results than fast memory</li><li>Operating systems cannot address more than a few kilobytes of fast memory</li><li>Registers wear out quickly, so they are kept scarce as spare parts</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> Fast memory costs more per byte and must sit close to the CPU </p> <p>Speed, size, and cost trade off against each other: register-speed memory is expensive and must sit near the ALU, so machines pair tiny fast layers with progressively larger, slower, cheaper ones and rely on locality to make it work.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. Why are GPUs better suited than CPUs for running neural networks? </strong> </p> <ol type="A"> <li>GPUs have higher clock speeds than any CPU</li><li>Thousands of simple cores do the same math on many values at once</li><li>GPUs store model weights permanently even when powered off</li><li>GPUs understand the meaning of the data they process</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Thousands of simple cores do the same math on many values at once </p> <p>Neural networks consist mostly of huge uniform grids of multiplications and additions, which map naturally onto a GPU&#39;s thousands of parallel arithmetic cores rather than a CPU&#39;s few powerful sequential cores.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. What does it mean to say a computer is a &quot;stored-program&quot; machine? </strong> </p> <ol type="A"> <li>Its programs are permanently burned into the processor at the factory</li><li>It keeps a backup of every program it has ever run</li><li>Its instructions live in memory as data, so loading new ones changes its job</li><li>Programs can only be loaded from external punched cards</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Its instructions live in memory as data, so loading new ones changes its job </p> <p>Because the program lives in memory just like data, the same hardware can become a calculator, a text editor, or a neural network simply by loading different instructions — the foundation of general-purpose computing.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>transistor</strong> </dt> <dd data-astro-cid-whrtx2kk>A microscopic electrical switch with no moving parts whose on/off state is the physical basis of all digital computing.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>logic gate</strong> </dt> <dd data-astro-cid-whrtx2kk>A small circuit built from transistors that computes a simple rule, such as AND (output on only if both inputs are on), OR, or NOT.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>binary</strong> </dt> <dd data-astro-cid-whrtx2kk>A way of writing numbers and encoding all data using only two digits, 0 and 1, which map directly onto a switch&#39;s off and on states.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>bit</strong> </dt> <dd data-astro-cid-whrtx2kk>The smallest unit of information, a single 0 or 1.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>byte</strong> </dt> <dd data-astro-cid-whrtx2kk>A group of 8 bits, enough to store one of 256 possible values, such as a single ASCII character.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>CPU</strong> </dt> <dd data-astro-cid-whrtx2kk>The central processing unit, the chip that executes program instructions one after another by repeating the fetch-decode-execute cycle.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>register</strong> </dt> <dd data-astro-cid-whrtx2kk>One of a small set of ultra-fast storage slots inside the CPU that hold the values being worked on at this instant.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>RAM</strong> </dt> <dd data-astro-cid-whrtx2kk>Random-access memory, the computer&#39;s fast temporary workspace that holds running programs and their data and is emptied when power is cut.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>cache</strong> </dt> <dd data-astro-cid-whrtx2kk>Small, very fast memory on the CPU chip that keeps recently used data close to the processor so it rarely has to wait on slower RAM.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>machine code</strong> </dt> <dd data-astro-cid-whrtx2kk>The raw binary instructions a CPU executes directly, the lowest-level form of any program.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>operating system</strong> </dt> <dd data-astro-cid-whrtx2kk>The master program that manages the hardware, shares the CPU and memory among running programs, and handles all input and output.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>memory hierarchy</strong> </dt> <dd data-astro-cid-whrtx2kk>The layered arrangement of storage from registers through cache and RAM to disk, trading speed against size and cost per byte at each level.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://www.charlespetzold.com/code/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Code: The Hidden Language of Computer Hardware and Software (2nd ed.)</a> — Charles Petzold / Microsoft Press (accessed 2026-07-12) — The classic book-length treatment of this lesson’s layered story. </li><li data-astro-cid-whrtx2kk> <a href="https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Crash Course Computer Science</a> — PBS Digital Studios (accessed 2026-07-12) — Free 40-episode video series covering transistors through operating systems. </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Von_Neumann_architecture" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Von Neumann architecture</a> — Wikipedia (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://www.nand2tetris.org/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>From Nand to Tetris</a> — Shimon Schocken and Noam Nisan (accessed 2026-07-12) — Free course where you build a computer from logic gates up. </li><li data-astro-cid-whrtx2kk> <a href="https://cs50.harvard.edu/x/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>CS50: Introduction to Computer Science</a> — Harvard University (accessed 2026-07-12) </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="1" data-astro-cid-whrtx2kk>
 Mark Day 1 as read
-</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
       surfaces for someone searching for one — it costs you a click and it is genuinely how people
-      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/ai-roadmap-365/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
 ★ Star on GitHub
-</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <span class="pn__spacer" data-astro-cid-oerjsknp></span> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-002-the-cpu-fetch-decode-execute" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 2 →</span> <span class="pn__title" data-astro-cid-oerjsknp>The CPU: Fetch, Decode, Execute</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
-</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <span class="pn__spacer" data-astro-cid-oerjsknp></span> <a class="pn__card pn__card--next" href="/day-002-the-cpu-fetch-decode-execute" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 2 →</span> <span class="pn__title" data-astro-cid-oerjsknp>The CPU: Fetch, Decode, Execute</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://ocm-mcp-server.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener">LinkedIn</a> </nav> </div> </footer> <script>
       // Progressive enhancement only: the theme falls back to dark and every
       // .reveal element is visible by default (the hidden start state exists
       // only inside a prefers-reduced-motion: no-preference query).

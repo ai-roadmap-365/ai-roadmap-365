@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 13: Package Managers: Homebrew, apt, and winget · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to explain what a package manager does, use Homebrew, apt, or winget to install and manage software, and understand how manifests and version pinning make an environment reproducible on any machine."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-013-package-managers-homebrew-apt-and-winget/"><meta property="og:title" content="Day 13: Package Managers: Homebrew, apt, and winget · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to explain what a package manager does, use Homebrew, apt, or winget to install and manage software, and understand how manifests and version pinning make an environment reproducible on any machine."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-013-package-managers-homebrew-apt-and-winget/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-013-package-managers-homebrew-apt-and-winget.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 13: Package Managers: Homebrew, apt, and winget · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 13: Package Managers: Homebrew, apt, and winget · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to explain what a package manager does, use Homebrew, apt, or winget to install and manage software, and understand how manifests and version pinning make an environment reproducible on any machine."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-013-package-managers-homebrew-apt-and-winget.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 13: Package Managers: Homebrew, apt, and winget · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to explain what a package manager does, use Homebrew, apt, or winget to install and manage software, and understand how manifests and version pinning make an environment reproducible on any machine."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://ai-roadmap-365.github.io/day-013-package-managers-homebrew-apt-and-winget/"><meta property="og:title" content="Day 13: Package Managers: Homebrew, apt, and winget · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to explain what a package manager does, use Homebrew, apt, or winget to install and manage software, and understand how manifests and version pinning make an environment reproducible on any machine."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://ai-roadmap-365.github.io/day-013-package-managers-homebrew-apt-and-winget/"><meta property="og:image" content="https://ai-roadmap-365.github.io/social/day-013-package-managers-homebrew-apt-and-winget.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 13: Package Managers: Homebrew, apt, and winget · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 13: Package Managers: Homebrew, apt, and winget · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to explain what a package manager does, use Homebrew, apt, or winget to install and manage software, and understand how manifests and version pinning make an environment reproducible on any machine."><meta name="twitter:image" content="https://ai-roadmap-365.github.io/social/day-013-package-managers-homebrew-apt-and-winget.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
       // Dark is the default regardless of OS preference - this is a dark-first
       // design. A visitor who picks light with the toggle keeps it. Applied
       // before first paint so there is no flash of the wrong theme.
@@ -11,184 +11,327 @@
         }
         document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
       })();
-    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+    </script><link rel="stylesheet" href="/_astro/_day_.CiF6NwwU.css">
 <style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
 .starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
-</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="site-home" href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener"> <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M15 5l-7 7 7 7"></path> </svg>
+Sandeep Bazar
+</a> <a class="brand" href="/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
 365 Days of AI
-</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
-Labs
-</a> </header> <main id="main">  <article data-day="13" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>The Command Line</span>  › 
-Day 13 </p> <h1 data-astro-cid-whrtx2kk>Day 13: Package Managers: Homebrew, apt, and winget</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-013-package-managers-homebrew-apt-and-winget.png" width="1200" height="630" alt="Day 13 of 365 — Package Managers: Homebrew, apt, and winget" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to explain what a package manager does, use Homebrew, apt, or winget to install and manage software, and understand how manifests and version pinning make an environment reproducible on any machine.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>The Command Line</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-013-package-managers-homebrew-apt-and-winget" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-013-package-managers-homebrew-apt-and-winget</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
-cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-013-package-managers-homebrew-apt-and-winget</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
-You can also <a href="/ai-roadmap-365/labs/day-013-package-managers-homebrew-apt-and-winget" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
-</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Define package, dependency, repository, and dependency resolution, and explain why installing software by hand fails as dependencies grow</li><li data-astro-cid-whrtx2kk>Describe the four parts of a package manager (client, repository and index, local database, cache) and trace the five stages of a single install: resolve, download, verify, install, record</li><li data-astro-cid-whrtx2kk>Choose the right default package manager for macOS, Debian/Ubuntu, and Windows, and run install, search, list, and upgrade commands with each</li><li data-astro-cid-whrtx2kk>Explain the difference between a manifest and a lock file and why committing both makes a project reproducible</li><li data-astro-cid-whrtx2kk>Explain version pinning and why reproducible environments depend on recording exact versions rather than &quot;the latest&quot;</li><li data-astro-cid-whrtx2kk>Inspect which package managers are present on your own machine with safe, read-only commands, installing nothing</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>A computer running macOS, Linux, or Windows with permission to open a terminal</li><li data-astro-cid-whrtx2kk>Comfort running basic terminal commands (Days 8–12 of this course)</li></ul> <h2 id="why-this-matters">Why this matters</h2>
-<p>Sooner or later, your work will depend on software you did not write. A tool to convert images, a database engine, a language runtime, a library that reads spreadsheets — you will need to install dozens of these, and then keep them working together for months. The difference between an afternoon of frustration and a five-second command is almost always one thing: whether you install software with a package manager or by hand.</p>
-<p>Here is the concrete stakes. Software rarely stands alone; a single tool may need ten other pieces of software installed first, and each of those needs its own. Install one thing by downloading it from a website and you have signed up to hunt down all of those pieces yourself, in the right versions, and to repeat the hunt every time something updates. Get one version wrong and the tool crashes with a message you have never seen. Move to a new laptop and you must rebuild the whole tangle from memory. This is the notorious “it works on my machine” problem, and it has cost more engineering hours than almost any bug.</p>
-<p>A package manager makes that problem mostly disappear. You type one line — <code>brew install</code>, <code>apt install</code>, or <code>winget install</code> — and a program fetches the software, figures out everything it depends on, installs all of it in the correct order from a trusted source, and writes down exactly what it did so the whole set can be updated or removed cleanly later. For anyone building serious projects, this is not a convenience; it is the foundation that makes every project after it reproducible. Today you learn what a package manager actually does, meet the three that run the desktop world, and see why the ability to pin an exact set of versions is the quiet secret behind software that behaves the same on every machine.</p>
+</a> <nav aria-label="Primary"> <a href="/sections">Courses</a> <a href="/labs">Labs</a> <a href="/catalog">Catalogs</a> <a href="/search">Search</a> <a href="/glossary">Glossary</a> <a href="/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+GitHub
+</a> </header> <main id="main">  <article data-day="13" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/sections/computing-foundations">Computing Foundations</a>  ›  <span>The Command Line</span>  › 
+Day 13 </p> <h1 data-astro-cid-whrtx2kk>Day 13: Package Managers: Homebrew, apt, and winget</h1>  <img class="day-hero" src="/social/day-013-package-managers-homebrew-apt-and-winget.png" width="1200" height="630" alt="Day 13 of 365 — Package Managers: Homebrew, apt, and winget" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to explain what a package manager does, use Homebrew, apt, or winget to install and manage software, and understand how manifests and version pinning make an environment reproducible on any machine.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>The Command Line</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/computing-foundations/day-013-package-managers-homebrew-apt-and-winget" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/computing-foundations/day-013-package-managers-homebrew-apt-and-winget</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/ai-roadmap-365/ai-roadmap-365.github.io.git
+cd ai-roadmap-365.github.io</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-013-package-managers-homebrew-apt-and-winget</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/labs/day-013-package-managers-homebrew-apt-and-winget" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Define package, dependency, repository, and dependency resolution, and explain why installing software by hand fails as dependencies grow</li><li data-astro-cid-whrtx2kk>Describe the four parts of a package manager (client, repository and index, local database, cache) and trace the five stages of a single install: resolve, download, verify, install, record</li><li data-astro-cid-whrtx2kk>Choose the right default package manager for macOS, Debian/Ubuntu, and Windows, and run install, search, list, and upgrade commands with each</li><li data-astro-cid-whrtx2kk>Explain the difference between a manifest and a lock file and why committing both makes a project reproducible</li><li data-astro-cid-whrtx2kk>Explain version pinning and why reproducible environments depend on recording exact versions rather than &quot;the latest&quot;</li><li data-astro-cid-whrtx2kk>Inspect which package managers are present on your own machine with safe, read-only commands, installing nothing</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk>A computer running macOS, Linux, or Windows with permission to open a terminal</li><li data-astro-cid-whrtx2kk>Comfort running basic terminal commands (Days 8–12 of this course)</li> </ul> <h2 id="why-this-matters">Why this matters</h2>
+<ul>
+<li>
+<p><strong>Every AI tool arrives through a package manager.</strong> PyTorch, CUDA libraries,
+<code>ffmpeg</code>, <code>git</code> — one command each, or an afternoon each.</p>
+</li>
+<li>
+<p><strong>Dependency conflicts are the most common setup failure in machine learning</strong>, and
+today explains why they happen at all.</p>
+</li>
+<li>
+<p><strong>A lock file is what makes a result reproducible.</strong> Without one, “it worked last
+month” is not a claim you can check.</p>
+</li>
+<li>
+<p><strong>A supply-chain attack reaches you through this door</strong>, which is why the trust
+model is part of the lesson and not a footnote.</p>
+</li>
+<li>
+<p><strong>Everything here repeats one layer down</strong> with <code>pip</code> and <code>npm</code>, which you will use
+daily.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="the-idea-in-plain-language">The idea in plain language</h2>
-<p>A <strong>package</strong> is a bundle of software prepared for installation: the program’s files, plus a small description of what it is, what version it is, and what else it needs to run. A <strong>package manager</strong> is a program whose whole job is to install, update, and remove packages for you, correctly and repeatably.</p>
-<p>The key word is <em>correctly</em>. Almost no useful program is self-contained. A photo tool leans on a library that decodes JPEGs; that library leans on one that handles compression; that one leans on the basic math library everything uses. These “needed-first” pieces are called <strong>dependencies</strong>, and they form a chain — often a whole branching tree. Installing software by hand means walking that tree yourself. A package manager reads each package’s description, works out the full tree automatically, and installs every piece in an order where nothing is missing when it is needed. This is called <strong>dependency resolution</strong>, and it is the single hardest thing a package manager does for you.</p>
-<p>Where do the packages come from? From a <strong>repository</strong>: a curated online collection of packages that the package manager knows how to reach. When you ask for a package by name, the manager looks it up in the repository’s index, downloads the right file, checks that it arrived intact and untampered, unpacks it into the correct place on your system, and records the installation in a local database so it can find and manage that software forever after. One name, one command, and a small trusted machine does all of the tedious, error-prone work that used to be yours.</p>
+<p><img src="/_astro/manual-versus-managed.BehAelG0_eplKw.svg" alt="Diagram: installing software manually compared with using a package manager" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="424"></p>
+<ul>
+<li>
+<p><strong>A package manager installs software and everything that software needs</strong>, from a
+curated source, in one command.</p>
+</li>
+<li>
+<p><strong>It keeps a database of what it installed</strong>, so it can update or remove things
+precisely.</p>
+</li>
+<li>
+<p><strong>It verifies what it downloads</strong> against a published checksum before unpacking
+anything.</p>
+</li>
+<li>
+<p><strong>A manifest is your shopping list.</strong> A lock file is the receipt showing exactly
+what you got.</p>
+</li>
+<li>
+<p><strong>The alternative is a folder of downloaded installers</strong> and no record of what is
+on your machine.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="historical-background">Historical background</h2>
-<p>Early software installation was entirely manual: you received a tape, a floppy, or later a downloaded archive, and you copied files into place and hoped. As programs grew to depend on shared libraries, this broke down badly. The turning point came from the free-software operating systems of the 1990s, where hundreds of independent programs had to coexist on one machine.</p>
-<p>Debian, a Linux distribution first released by Ian Murdock in 1993, introduced the <code>.deb</code> package format and the tooling to manage it. The lower-level tool <code>dpkg</code> installed and removed individual packages; above it, the Advanced Package Tool — <strong>apt</strong>, introduced in the late 1990s — added the crucial layer: it could reach out to online repositories, resolve dependencies across all of them, and download and install everything needed with a single command. Around the same time, Red Hat created the RPM package format and its own managers. For the first time, “install this program and everything it needs” was one instruction.</p>
-<p>The Mac world lacked a built-in equivalent for the open-source command-line tools developers wanted. <strong>Homebrew</strong>, created by Max Howell and released in 2009, filled that gap for macOS. It leaned on the fact that macOS is a Unix system underneath and made installing developer tools as easy as <code>brew install</code>. Its packages are called “formulae,” its collections “taps,” and its friendly design won it enormous popularity among programmers.</p>
-<p>Windows was the last of the three major desktops to get a first-party command-line package manager. Microsoft announced <strong>winget</strong>, the Windows Package Manager, in 2020 and shipped it as a supported part of Windows thereafter. Before it, Windows users installed software by downloading installers and clicking through wizards, or used community tools. winget brought the one-command model — install, upgrade, list, search — natively to Windows. Meanwhile, programming-language ecosystems built their own managers on the same principles for code libraries rather than whole applications, and those, too, became indispensable. The idea proved so useful that it now exists at every layer of the software world.</p>
+<ul>
+<li>
+<p><strong>Early Unix software arrived as source code</strong> you compiled yourself, resolving
+dependencies by reading error messages.</p>
+</li>
+<li>
+<p><strong>Debian’s <code>dpkg</code> and the RPM format, both 1994-95</strong>, introduced the package as a
+unit with metadata — name, version, dependencies.</p>
+</li>
+<li>
+<p><strong><code>apt</code> arrived in 1998</strong> and added the part that mattered: automatic dependency
+resolution against a remote index.</p>
+</li>
+<li>
+<p><strong>Homebrew, 2009</strong>, brought the model to macOS in a form that did not require
+administrator rights for everyday use.</p>
+</li>
+<li>
+<p><strong><code>winget</code> shipped in 2020</strong>, making Windows the last major platform to get a
+first-party command-line manager.</p>
+</li>
+<li>
+<p><strong>The idea then went down a layer</strong>, to language libraries: CPAN, then <code>pip</code>,
+<code>npm</code>, <code>cargo</code> and the rest.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
-<p>A package manager is a program that installs, upgrades, and removes software from curated repositories while automatically resolving and managing dependencies, and that keeps a local record of everything it has done. Each part of that sentence carries weight. <em>From curated repositories</em>: it pulls from known, maintained sources, not random websites. <em>Automatically resolving dependencies</em>: you name one package; it works out the rest. <em>Keeps a local record</em>: it always knows what is installed and can undo it cleanly.</p>
-<p>It is equally important to be clear about what a package manager is <em>not</em>. It is not the software you are installing — it is the delivery and bookkeeping system around it. It is not a guarantee that a program is safe or bug-free; it is a guarantee about <em>where the program came from and how it was installed</em>. It is not an app store with payments and ratings, though the two share DNA. And it does not write your project’s code or make your project reproducible by itself — reproducibility comes from you <em>recording</em> the exact set of packages and versions, which the manager makes possible but does not force.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Common misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”A package manager is just a fancy download button.”</td><td>It resolves a whole dependency tree, verifies integrity, and tracks every file so software can be updated or removed cleanly.</td></tr><tr><td>”Installing by hand from a website is basically the same.”</td><td>Manual installs skip dependency resolution and record-keeping, which is exactly where things break later.</td></tr><tr><td>”The package manager writes the software.”</td><td>It only packages, delivers, and manages software that other people wrote.</td></tr><tr><td>”If it installed, it must be safe.”</td><td>The manager vouches for the source and integrity, not for the program’s quality or intentions.</td></tr><tr><td>”Homebrew, apt, and winget are interchangeable commands.”</td><td>They follow the same model but differ by operating system, command syntax, and the repositories they draw from.</td></tr></tbody></table>
+<p><img src="/_astro/package-manager-architecture.YOayv00b_1JMqKY.svg" alt="Diagram: how a package manager connects you to a remote repository and installs software locally with its dependencies" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="460"></p>
+<p>Four parts do the work:</p>
+<ul>
+<li>
+<p><strong>The client</strong> — the command you run: <code>brew</code>, <code>apt</code>, <code>winget</code>.</p>
+</li>
+<li>
+<p><strong>The repository</strong> — the remote collection, plus an <strong>index</strong> listing every
+package, its versions and its dependencies.</p>
+</li>
+<li>
+<p><strong>The local database</strong> — the private record of what is installed on <em>your</em> machine
+and which files belong to what.</p>
+</li>
+<li>
+<p><strong>The cache</strong> — local copies of downloads and the index, so repeated work is fast.</p>
+</li>
+</ul>
+<p><strong>It is not:</strong></p>
+<ul>
+<li>
+<p><strong>Not an app store.</strong> There is no payment, no review process in most cases, and
+frequently no company behind a package.</p>
+</li>
+<li>
+<p><strong>Not a sandbox.</strong> Installed software runs with your privileges.</p>
+</li>
+<li>
+<p><strong>Not a guarantee of quality.</strong> It guarantees the bytes are what the publisher
+published — nothing about whether they should be trusted.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
-<p>Package managers exist to solve a cluster of problems that all grow out of one fact: real software is a web of interdependent parts that change over time.</p>
-<p>The first problem is <strong>dependency hell</strong>. Install program A that needs library X version 2, then program B that needs library X version 1, and by hand you are stuck: whichever version you put down, one program breaks. Package managers track these relationships explicitly and either find a set of versions that satisfies everyone or tell you plainly that no such set exists — instead of leaving you to discover it through mysterious crashes.</p>
-<p>The second is <strong>reproducibility</strong>. A project that works today must still work next month, on a colleague’s laptop, and on the server it will run on. If installation is a sequence of manual downloads no one wrote down, it cannot be reliably repeated. Package managers turn “install everything this needs” into a command, and — with a manifest, described below — into an exact, shareable specification.</p>
-<p>The third is <strong>updates and removal</strong>. Software has security fixes and improvements; you need to move to new versions without breaking the tree, and to remove software completely when you are done, including files you would never think to hunt down. Because the manager recorded every file it placed, it can upgrade or uninstall precisely. The fourth is <strong>trust and integrity</strong>: fetching software from curated repositories over verified channels, and checking that what arrived is exactly what was published, protects you from tampered or corrupted downloads in a way that clicking a link on an unknown site never can.</p>
-<h2 id="how-it-works">How it works</h2>
-<p>Let us walk the machinery, from the pieces involved to the exact steps of a single install.</p>
-<h3 id="internal-architecture">Internal architecture</h3>
-<p>A package manager sits between you and a remote repository, with a local database in the middle. Four parts do the work. The <strong>client</strong> is the command you run (<code>brew</code>, <code>apt</code>, <code>winget</code>). The <strong>repository</strong> is the remote collection of packages plus an <strong>index</strong> — a catalog listing every available package, its versions, and, crucially, its dependencies. The <strong>local database</strong> is the manager’s private record of what is installed on <em>your</em> machine and which files belong to what. And the <strong>cache</strong> is a local copy of downloaded package files and the index, so repeated work is fast and offline-friendly.</p>
-<p><img src="/ai-roadmap-365/_astro/package-manager-architecture.YOayv00b_1JMqKY.svg" alt="Diagram: how a package manager connects you to a remote repository and installs software locally with its dependencies" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="460"></p>
-<p>Read the diagram left to right. You issue a command to the client. The client consults its copy of the repository index to find the package and, by reading the dependency information there, to compute the full set of packages actually required. It downloads each one from the repository (or reuses the cache), verifies it, installs it into the correct system location, and updates the local database. The dependency graph on the right is the heart of it: asking for one package at the top pulls in everything below it, in the right order, with no piece requested twice even when several parents share it.</p>
-<h3 id="key-concepts">Key concepts</h3>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Concept</th><th>What it means</th><th>Why it matters</th></tr></thead><tbody><tr><td>Package</td><td>A bundle of a program’s files plus metadata (name, version, dependencies)</td><td>The unit the manager installs, updates, and removes</td></tr><tr><td>Repository</td><td>A curated online collection of packages the manager can reach</td><td>Where trusted software comes from, instead of random sites</td></tr><tr><td>Index / metadata</td><td>The repository’s catalog of packages, versions, and dependencies</td><td>Lets the client resolve dependencies without downloading everything</td></tr><tr><td>Dependency</td><td>Other software a package needs in order to run</td><td>The reason manual installs fail; resolved automatically here</td></tr><tr><td>Manifest</td><td>A file you write listing the packages a project needs</td><td>Turns “install everything” into one shareable, repeatable command</td></tr><tr><td>Lock file</td><td>A file recording the <em>exact</em> versions that were installed</td><td>Makes an install reproducible down to the version</td></tr><tr><td>Version pinning</td><td>Requesting a specific version rather than “the latest”</td><td>Stops silent upgrades from changing your project’s behavior</td></tr><tr><td>Mirror</td><td>A duplicate of a repository hosted elsewhere</td><td>Faster, more reliable downloads and redundancy</td></tr></tbody></table>
-<h3 id="manifests-and-lock-files">Manifests and lock files</h3>
-<p>Two files turn a package manager from a convenience into a reproducibility engine. A <strong>manifest</strong> is a short file <em>you</em> write that lists the packages a project needs — think of it as the project’s shopping list. A <strong>lock file</strong> is written by the manager and records the <em>exact</em> versions it actually installed, including the versions of every dependency it pulled in. The manifest says “I need a spreadsheet library”; the lock file says “and here are the precise versions of it and the eleven things underneath it that made this project work.” Hand both files to another machine and the manager can recreate the identical set of software. This distinction — human intent in the manifest, exact resolved reality in the lock file — is what <strong>version pinning</strong> is built on, and it is why professional projects commit both files alongside their code.</p>
-<h3 id="step-by-step-one-install">Step by step: one install</h3>
-<p>Suppose you run a single install command for a tool called <code>wget</code> (a small program that downloads files). The manager moves through five stages.</p>
+<p><img src="/_astro/dependency-graph.B-ufugg0_Z16hImP.svg" alt="Diagram: how requesting one package pulls in its dependency tree" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<ul>
+<li>
+<p><strong>Dependency hell.</strong> Program A needs library X version 2; program B needs version</p>
 <ol>
-<li><strong>Resolve.</strong> It looks up <code>wget</code> in the repository index, reads its dependencies, and computes the complete set of packages required — <code>wget</code> plus anything it needs that is not already present — refusing to proceed if no compatible set exists.</li>
-<li><strong>Download.</strong> It fetches each required package file from the repository, skipping any already sitting in the cache.</li>
-<li><strong>Verify.</strong> It checks each downloaded file’s integrity against a checksum or signature published by the repository, so corrupted or tampered files are rejected before anything is installed.</li>
-<li><strong>Install.</strong> It unpacks each package into the correct system locations, in dependency order, so nothing is ever placed before the pieces it relies on.</li>
-<li><strong>Record.</strong> It writes the installation into the local database — every file, every version — so the software can be listed, upgraded, or removed precisely later.</li>
+<li>A resolver finds a set that works, or tells you none exists.</li>
 </ol>
-<p><img src="/ai-roadmap-365/_astro/install-flow.Bvr0u0Pe_iu4t0.svg" alt="Flowchart: the five stages of installing one package — resolve, download, verify, install, record" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="360"></p>
-<p>Those five stages are the same whether you type <code>brew install wget</code>, <code>sudo apt install wget</code>, or <code>winget install wget</code>. The commands and the repositories differ; the underlying dance does not.</p>
-<h3 id="the-leading-package-managers">The leading package managers</h3>
-<p>Each of the three desktop managers follows the model above; you choose by operating system, not preference.</p>
-<p><strong>Homebrew (macOS, and Linux).</strong> Choose Homebrew when you are on a Mac and want command-line tools and open-source software. It installs into your user space and needs no administrator password for everyday use. How to use it:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">brew</span><span style="color:#9ECBFF"> search</span><span style="color:#9ECBFF"> wget</span><span style="color:#6A737D">       # find a package by name</span></span>
-<span class="line"><span style="color:#B392F0">brew</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> wget</span><span style="color:#6A737D">      # install it and its dependencies</span></span>
-<span class="line"><span style="color:#B392F0">brew</span><span style="color:#9ECBFF"> list</span><span style="color:#6A737D">              # show everything Homebrew has installed</span></span>
-<span class="line"><span style="color:#B392F0">brew</span><span style="color:#9ECBFF"> upgrade</span><span style="color:#6A737D">           # update all installed packages to newer versions</span></span>
-<span class="line"><span style="color:#B392F0">brew</span><span style="color:#9ECBFF"> uninstall</span><span style="color:#9ECBFF"> wget</span><span style="color:#6A737D">    # remove it cleanly</span></span></code></pre>
-<p>A worked example: running <code>brew install wget</code> resolves wget’s dependencies, downloads the prepared bottles, verifies them, links the files into place, and records the result — after which <code>wget --version</code> runs. Homebrew is free and fully open-source.</p>
-<p><strong>apt (Debian, Ubuntu, and relatives).</strong> Choose apt when you are on a Debian-based Linux system; it is the built-in manager and the standard way to install almost anything. It installs system-wide, so its changing commands need administrator rights via <code>sudo</code>. How to use it:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> apt</span><span style="color:#9ECBFF"> update</span><span style="color:#6A737D">            # refresh the local copy of the repository index</span></span>
-<span class="line"><span style="color:#B392F0">apt</span><span style="color:#9ECBFF"> search</span><span style="color:#9ECBFF"> wget</span><span style="color:#6A737D">            # find a package</span></span>
-<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> apt</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> wget</span><span style="color:#6A737D">      # install it and its dependencies</span></span>
-<span class="line"><span style="color:#B392F0">apt</span><span style="color:#9ECBFF"> list</span><span style="color:#79B8FF"> --installed</span><span style="color:#6A737D">       # show installed packages</span></span>
-<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> apt</span><span style="color:#9ECBFF"> upgrade</span><span style="color:#6A737D">           # update installed packages</span></span>
-<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> apt</span><span style="color:#9ECBFF"> remove</span><span style="color:#9ECBFF"> wget</span><span style="color:#6A737D">       # remove it</span></span></code></pre>
-<p>The <code>apt update</code> step matters: apt resolves against its <em>local</em> copy of the index, so you refresh that copy first to see current versions. apt and everything it installs from the main repositories are free and open-source.</p>
-<p><strong>winget (Windows).</strong> Choose winget on Windows 10 and 11, where it ships as the supported first-party command-line package manager. How to use it, in PowerShell or Command Prompt:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:#E1E4E8">winget search wget         </span><span style="color:#6A737D"># find a package</span></span>
-<span class="line"><span style="color:#E1E4E8">winget install wget        </span><span style="color:#6A737D"># install it</span></span>
-<span class="line"><span style="color:#E1E4E8">winget list                </span><span style="color:#6A737D"># show installed packages</span></span>
-<span class="line"><span style="color:#E1E4E8">winget upgrade </span><span style="color:#F97583">--</span><span style="color:#E1E4E8">all       </span><span style="color:#6A737D"># update installed packages</span></span>
-<span class="line"><span style="color:#E1E4E8">winget uninstall wget      </span><span style="color:#6A737D"># remove it</span></span></code></pre>
-<p>winget itself is free, drawing on a community-curated repository of installers alongside Microsoft’s own.</p>
-<p><strong>Language package managers (a preview).</strong> The same idea runs one layer down, for code libraries rather than whole applications. <strong>pip</strong> installs Python libraries (<code>pip install &lt;name&gt;</code>); <strong>npm</strong> installs Node.js/JavaScript libraries (<code>npm install &lt;name&gt;</code>). These are what you will use most as you build projects, and they lean even harder on manifests and lock files. Because a project’s behavior can hinge on the exact version of a library, this world takes version pinning very seriously — a manifest names what you want, a lock file freezes exactly what you got, and both travel with the code so every machine rebuilds the identical stack. You will meet pip and npm in depth later; for now, know that the desktop managers you learn today are the same concept scaled up to whole programs.</p>
+</li>
+<li>
+<p><strong>Untracked installations.</strong> Without a database, nobody knows what is on the
+machine or what may safely be deleted.</p>
+</li>
+<li>
+<p><strong>Integrity.</strong> A checksum catches a corrupted download and a tampered mirror alike.</p>
+</li>
+<li>
+<p><strong>Updates.</strong> One command updates everything, rather than visiting forty websites.</p>
+</li>
+<li>
+<p><strong>Reproducibility.</strong> A manifest and a lock file rebuild the same environment on
+another machine, which is the whole basis of “it works everywhere”.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="how-it-works">How it works</h2>
+<p><img src="/_astro/update-versus-upgrade.J26og8W2_ZIALX.svg" alt="Diagram: refreshing the package index compared with upgrading installed packages" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<h3 id="manifests-and-lock-files">Manifests and lock files</h3>
+<p><img src="/_astro/manifest-versus-lock.DKY5ccLM_ZIALX.svg" alt="Diagram: a dependency manifest compared with a lock file" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong>A manifest is written by you.</strong> It lists what the project needs, loosely: “a
+spreadsheet library”.</p>
+</li>
+<li>
+<p><strong>A lock file is written by the manager.</strong> It records exactly what was installed —
+that library <em>and</em> the eleven things underneath it, at precise versions.</p>
+</li>
+<li>
+<p><strong>Human intent in one, resolved reality in the other.</strong> That is the distinction.</p>
+</li>
+<li>
+<p><strong>Commit both.</strong> The manifest explains the intent; the lock file makes the install
+repeatable.</p>
+</li>
+<li>
+<p><strong>This is what version pinning is built on</strong>, and why a project without a lock file
+cannot promise reproducibility.</p>
+</li>
+</ul>
+<h3 id="the-commands-per-manager">The commands, per manager</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># macOS — Homebrew</span></span>
+<span class="line"><span style="color:#B392F0">brew</span><span style="color:#9ECBFF"> search</span><span style="color:#9ECBFF"> wget</span><span style="color:#E1E4E8"> &amp;&amp; </span><span style="color:#B392F0">brew</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> wget</span></span>
+<span class="line"><span style="color:#B392F0">brew</span><span style="color:#9ECBFF"> list</span><span style="color:#E1E4E8"> &amp;&amp; </span><span style="color:#B392F0">brew</span><span style="color:#9ECBFF"> upgrade</span><span style="color:#E1E4E8"> &amp;&amp; </span><span style="color:#B392F0">brew</span><span style="color:#9ECBFF"> uninstall</span><span style="color:#9ECBFF"> wget</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Debian, Ubuntu — apt</span></span>
+<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> apt</span><span style="color:#9ECBFF"> update</span><span style="color:#6A737D">              # refresh the LOCAL copy of the index first</span></span>
+<span class="line"><span style="color:#B392F0">apt</span><span style="color:#9ECBFF"> search</span><span style="color:#9ECBFF"> wget</span><span style="color:#E1E4E8"> &amp;&amp; </span><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> apt</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> wget</span></span>
+<span class="line"><span style="color:#B392F0">apt</span><span style="color:#9ECBFF"> list</span><span style="color:#79B8FF"> --installed</span><span style="color:#E1E4E8"> &amp;&amp; </span><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> apt</span><span style="color:#9ECBFF"> upgrade</span><span style="color:#E1E4E8"> &amp;&amp; </span><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> apt</span><span style="color:#9ECBFF"> remove</span><span style="color:#9ECBFF"> wget</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="powershell"><code><span class="line"><span style="color:#6A737D"># Windows — winget</span></span>
+<span class="line"><span style="color:#E1E4E8">winget search wget</span></span>
+<span class="line"><span style="color:#E1E4E8">winget install wget</span></span>
+<span class="line"><span style="color:#E1E4E8">winget list; winget upgrade </span><span style="color:#F97583">--</span><span style="color:#E1E4E8">all; winget uninstall wget</span></span></code></pre>
+<ul>
+<li>
+<p><strong><code>apt update</code> refreshes the index, not the software.</strong> <code>apt upgrade</code> is the one
+that changes what is installed. Confusing them is near-universal.</p>
+</li>
+<li>
+<p><strong>apt installs system-wide</strong> and so needs <code>sudo</code> for anything that changes.
+Homebrew installs into your user space and does not.</p>
+</li>
+</ul>
+<h3 id="one-layer-down-pip-and-npm">One layer down: pip and npm</h3>
+<ul>
+<li>
+<p><strong><code>pip</code> installs Python libraries; <code>npm</code> installs JavaScript ones.</strong> Same model,
+smaller units.</p>
+</li>
+<li>
+<p><strong>They lean harder on pinning</strong>, because a project’s behaviour can hinge on one
+library’s exact version.</p>
+</li>
+<li>
+<p><strong>You will use these daily.</strong> The desktop managers you learn today are the same
+concept, scaled up to whole programs.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="an-everyday-analogy">An everyday analogy</h2>
-<p>Think of a well-run town library and its librarian. The <strong>repository</strong> is the library’s collection and its central catalog; a <strong>package</strong> is a book. When you request one book, a good librarian notices that to understand it you also need the three books it constantly references, and those in turn cite two more — so the librarian quietly fetches the whole set and checks them all out under your card at once. That is <strong>dependency resolution</strong>: you asked for one thing and received, in the right order, everything that thing depends on.</p>
-<p>The librarian keeps a record of every book on your card — that is the <strong>local database</strong>, the reason the library can later take the whole stack back cleanly or swap in newer editions when they arrive (an <strong>upgrade</strong>). If you write down the reading list you want the library to assemble for a study group, that list is a <strong>manifest</strong>: your stated intent. The stamped checkout slip the librarian prints, naming the exact edition and printing of every book you actually received, is the <strong>lock file</strong>: the precise reality, so another group at another branch can be handed the identical editions. Insisting on a specific edition rather than “whatever is newest” is <strong>version pinning</strong> — sometimes an old edition is the one your notes refer to, and a surprise new edition would renumber every page. And a <strong>mirror</strong> is a nearby branch library holding copies of the same collection, so you need not travel to the central building for every book. Keep this library in mind and the whole machinery of package managers stays intuitive.</p>
+<p><img src="/_astro/sudo-pip.Ki8mc05B_ZIALX.svg" alt="Diagram: installing language packages system-wide compared with in an environment" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<p>A well-run library.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>The library</th><th>The package manager</th></tr></thead><tbody><tr><td>The catalogue</td><td>The repository index</td></tr><tr><td>The shelves</td><td>The repository</td></tr><tr><td>Your borrowing record</td><td>The local database</td></tr><tr><td>”This book cites three others”</td><td>Dependencies</td></tr><tr><td>A reading list you wrote</td><td>The manifest</td></tr><tr><td>The stamped record of what you took</td><td>The lock file</td></tr><tr><td>The returns desk</td><td>Clean uninstallation</td></tr></tbody></table>
+<ul>
+<li>
+<p><strong>You ask for one title and the librarian brings the three it depends on</strong>, in an
+order that makes sense.</p>
+</li>
+<li>
+<p><strong>The record is the point.</strong> Without it, nobody knows what is out on loan, and
+nothing can be returned properly.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="examples-in-practice">Examples in practice</h2>
-<p>Consider installing that spreadsheet-reading tool by hand versus with a manager. By hand: you find the project’s site, download an archive, discover it needs a compression library, find and install that, discover <em>it</em> needs the base math library, install that, get the versions subtly wrong, watch the tool crash, and repeat until it works — with no record of what you did. With a manager: you type one install command and the five stages above run to completion, dependencies and all, with a record kept. The second path is not merely faster; it is <em>repeatable</em>, because the manager knows exactly what it placed.</p>
-<p>Now watch reproducibility do real work. You build a project on your laptop, listing what it needs in a manifest and letting the manager write a lock file of exact versions. A teammate clones the project onto a fresh machine and runs one install command; the manager reads the lock file and recreates the identical set of packages, down to the version of every buried dependency. The project that ran on your machine now runs on theirs — not by luck, but because the exact stack was written down and reproduced. When it <em>doesn’t</em> work, the failure is almost always a version that drifted: someone installed “the latest” instead of the pinned version, one dependency moved, and behavior changed. The fix is nearly always to compare the two lock files and reconcile the versions.</p>
-<p>Finally, a small concrete session. On a Mac, <code>brew search image</code> lists image-related packages; <code>brew install imagemagick</code> pulls in ImageMagick and its dependency tree; <code>brew list</code> then shows it among your installed software; and <code>brew upgrade</code> later moves everything forward together. Each command is the same conceptual operation you would run as <code>apt search</code> / <code>sudo apt install</code> / <code>apt list --installed</code> / <code>sudo apt upgrade</code> on Ubuntu, or <code>winget search</code> / <code>winget install</code> / <code>winget list</code> / <code>winget upgrade</code> on Windows. Learn the model once and you can drive any of the three.</p>
+<p><img src="/_astro/install-flow.Bvr0u0Pe_iu4t0.svg" alt="Flowchart: the five stages of installing one package — resolve, download, verify, install, record" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="360"></p>
+<ul>
+<li>
+<p><strong><code>brew install ffmpeg</code></strong> — one command, roughly forty dependencies, all verified.</p>
+</li>
+<li>
+<p><strong><code>pip install torch</code> picking the wrong build</strong> — a CPU-only wheel on a GPU
+machine, because the index resolved against the platform it detected.</p>
+</li>
+<li>
+<p><strong><code>apt install</code> failing with held packages</strong> — the resolver found no compatible
+set, and stopped rather than half-installing.</p>
+</li>
+<li>
+<p><strong>A <code>requirements.txt</code> without pinned versions</strong>, which installed fine in March and
+broke in April when a dependency released a major version.</p>
+</li>
+<li>
+<p><strong>A typosquatted package name</strong> one character from the real one, which is why you
+copy names rather than type them.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
-<h3 id="security">Security</h3>
-<p>Package managers are a major security <em>improvement</em> over manual installation, precisely because they fetch from curated repositories over verified channels and check integrity with checksums or signatures before installing. That closes off a whole class of attacks where a tampered or corrupted download slips onto your machine. But the trust chain is only as strong as its links: adding an untrusted third-party repository, or installing a package whose name is a near-miss of a popular one (a “typosquat”), can invite in malicious code the manager will faithfully install. The discipline is to prefer official repositories, read package names carefully, and treat any instruction to install from an unknown source the way you would treat a stranger’s USB stick.</p>
-<h3 id="privacy">Privacy</h3>
-<p>Installing packages contacts the repository’s servers, which necessarily learn that some machine requested certain packages at a certain time. For most work this is unremarkable, but the set of software you install is mildly revealing, and organizations with strict requirements sometimes run internal mirrors so that installation traffic never leaves their network. Manifests and lock files, being plain text you may share publicly, also quietly disclose your project’s exact dependency stack — usually harmless and often helpful, but worth a moment’s thought before publishing.</p>
-<h3 id="performance">Performance</h3>
-<p>The manager’s cache and local index make repeated operations fast, and mirrors put downloads geographically close to you. The slow steps are refreshing a large index and resolving a complicated dependency tree; both are one-time costs amortized over many quick installs. The real performance win, though, is human: minutes of one command replace hours of manual hunting, and that compounds across a career.</p>
-<h3 id="scalability">Scalability</h3>
-<p>This model scales from one laptop to thousands of servers. Because a manifest and lock file capture an entire environment as text, the same specification can provision one machine or an entire fleet identically and automatically. Version pinning is what makes that safe at scale: without it, “install the latest” run across a thousand machines on different days yields a thousand slightly different environments and a debugging nightmare. With it, every machine converges on exactly the recorded stack.</p>
-<h3 id="cost">Cost</h3>
-<p>Homebrew and apt are free and fully open-source, as are the packages in their main repositories; winget is free and draws on free and open-source software alongside other installers. So the direct cost is essentially zero. The real cost is <em>hidden</em> and paid by <em>not</em> using them: the engineering hours lost to dependency conflicts, unreproducible setups, and “it works on my machine” investigations. Adopting a package manager and committing your manifest and lock file is one of the cheapest, highest-return habits in all of software.</p>
+<ul>
+<li>
+<p><strong>Security: installing a package runs someone else’s code with your privileges.</strong>
+Many packages execute install scripts.</p>
+</li>
+<li>
+<p><strong>The default repositories are curated; anything you add is not.</strong> Adding a third-party
+repository is a trust decision, and it applies to everything you install
+afterwards.</p>
+</li>
+<li>
+<p><strong>Privacy: package managers report what you install</strong> to the repository operator,
+by necessity — the index request says what you asked for.</p>
+</li>
+<li>
+<p><strong>Performance: the cache is why the second install is instant</strong>, and why a clean CI
+build is slow. Caching that directory is usually the single biggest CI speed-up
+available.</p>
+</li>
+<li>
+<p><strong>Cost: disk fills quietly.</strong> Old versions, caches and unused dependencies
+accumulate; <code>brew cleanup</code> and <code>apt autoremove</code> exist for exactly this.</p>
+</li>
+<li>
+<p><strong>Cost: an unpinned dependency is a future outage</strong> you have already scheduled and
+not yet noticed.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
-<p>“Alternatives” here means other ways to get software onto a machine, and other managers in the family.</p>
+<p><img src="/_astro/cache-cold-warm.BW90KZa0_Z16hImP.svg" alt="Diagram: a cold install compared with one served from cache" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
 
 
 
@@ -229,15 +372,18 @@ You can also <a href="/ai-roadmap-365/labs/day-013-package-managers-homebrew-apt
 
 
 
-
-
-
-
-
-
-
-<table><thead><tr><th>Approach</th><th>Type</th><th>What it offers</th><th>Cost</th></tr></thead><tbody><tr><td>Homebrew (macOS/Linux)</td><td>Free, open-source</td><td>One-command installs of developer tools and open-source software</td><td>Free</td></tr><tr><td>apt (Debian/Ubuntu)</td><td>Free, open-source</td><td>Built-in system manager with vast official repositories</td><td>Free</td></tr><tr><td>winget (Windows)</td><td>Free, first-party</td><td>Native one-command installs on Windows 10 and 11</td><td>Free</td></tr><tr><td>Manual download and install</td><td>Built into every OS</td><td>Direct control; sometimes the only option for niche software</td><td>Free, but no dependency resolution or record-keeping</td></tr><tr><td>Language managers (pip, npm, and peers)</td><td>Free, open-source</td><td>Install code libraries with the same model, for building projects</td><td>Free</td></tr><tr><td>Container images</td><td>Free tooling; some hosting paid</td><td>Ship an entire pre-built environment, packages and all</td><td>Tooling free; registries may charge</td></tr></tbody></table>
-<p>For desktop software on your own machine, the built-in manager for your operating system is almost always the right default: Homebrew on macOS, apt on Debian-based Linux, winget on Windows. Reach past it only for software genuinely not in any repository, and then install manually with care.</p>
+<table><thead><tr><th>Tool</th><th>Type</th><th>Where it fits</th></tr></thead><tbody><tr><td>Homebrew / apt / winget</td><td>Free</td><td>Whole programs, per operating system</td></tr><tr><td>pip, npm, cargo</td><td>Free</td><td>Language libraries, per ecosystem</td></tr><tr><td>conda / mamba</td><td>Free</td><td>Scientific stacks, including non-Python dependencies</td></tr><tr><td>uv, poetry</td><td>Free, open source</td><td>Faster, stricter Python dependency resolution</td></tr><tr><td>Docker</td><td>Free, open source</td><td>When the environment itself must travel</td></tr><tr><td>Nix</td><td>Free, open source</td><td>Fully reproducible builds, at a real learning cost</td></tr></tbody></table>
+<ul>
+<li>
+<p><strong><code>conda</code> earns its place in AI work</strong> because it manages CUDA libraries and other
+non-Python pieces that <code>pip</code> cannot.</p>
+</li>
+<li>
+<p><strong><code>uv</code> is worth knowing.</strong> It resolves and installs Python dependencies fast enough
+to change how you work.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
 
 
@@ -276,97 +422,222 @@ You can also <a href="/ai-roadmap-365/labs/day-013-package-managers-homebrew-apt
 
 
 
-
-
-
-<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>Package manager</td><td>App store</td><td>Both deliver software, but a package manager is command-driven, dependency-aware, and built for reproducible, scriptable installs rather than browsing and payments</td></tr><tr><td>Package manager</td><td>Installer / setup wizard</td><td>An installer places one program with manual clicks; a package manager resolves dependencies, records everything, and manages updates and removal across all your software</td></tr><tr><td>Manifest</td><td>Lock file</td><td>A manifest states what you <em>want</em> (often loosely); a lock file records the exact versions you <em>got</em>, making installs reproducible</td></tr><tr><td>Repository</td><td>Mirror</td><td>A repository is the authoritative collection; a mirror is a synchronized copy hosted elsewhere for speed and redundancy</td></tr><tr><td>System package manager (apt, brew, winget)</td><td>Language package manager (pip, npm)</td><td>System managers install whole applications for the OS; language managers install code libraries for a specific programming ecosystem</td></tr><tr><td>Upgrade</td><td>Reinstall</td><td>An upgrade moves installed software to a newer version while preserving the dependency tree; a reinstall replaces the same version’s files</td></tr></tbody></table>
+<table><thead><tr><th>Term</th><th>What it actually is</th></tr></thead><tbody><tr><td><strong>Package</strong></td><td>A program’s files plus metadata about them</td></tr><tr><td><strong>Repository</strong></td><td>A curated collection the manager can reach</td></tr><tr><td><strong>Index</strong></td><td>The catalogue of packages, versions and dependencies</td></tr><tr><td><strong>Dependency</strong></td><td>Something a package needs to run</td></tr><tr><td><strong>Manifest</strong></td><td>What you asked for</td></tr><tr><td><strong>Lock file</strong></td><td>What you actually got, exactly</td></tr><tr><td><strong>Mirror</strong></td><td>A duplicate repository, hosted nearer you</td></tr></tbody></table>
+<hr/>
 <h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
-<p>Reach for a package manager as your default whenever you need to install, update, or remove software — which, in a technical career, is constantly. Use it especially when a tool has dependencies (nearly all do), when you will need the same software on more than one machine, and when a project must be reproducible: commit a manifest and lock file and let the manager rebuild the exact stack anywhere. Use it, too, whenever you would otherwise be tempted to download an installer from a search result, because the curated repository and integrity checks are a real security upgrade.</p>
-<p>Know the few cases where you step outside it. Some software genuinely is not in any repository — a vendor’s proprietary tool, a brand-new project, something you are building yourself — and then a careful manual install is legitimate; do it deliberately, from the official source, and record what you did. Be cautious about mixing managers for the same software (installing one tool through two different managers invites confusion over which copy is in charge). And resist adding unofficial third-party repositories for a single convenient package, since each one you trust widens your exposure. The professional habit is simple: default to your system’s package manager, pin and record versions for anything that must be reproducible, and take a manual, official-source install only when no repository offers what you need.</p>
+<p><img src="/_astro/three-managers.DM1nfrQT_ZIALX.svg" alt="Diagram: Homebrew compared with apt and winget" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong>Use the manager for everything it offers.</strong> The exceptions should be rare and
+deliberate.</p>
+</li>
+<li>
+<p><strong>Use your operating system’s default manager</strong>, not a second one alongside it.
+Two managers owning the same file is a genuinely hard problem to unpick.</p>
+</li>
+<li>
+<p><strong>Pin versions in any project someone else will run</strong>, including future you.</p>
+</li>
+<li>
+<p><strong>Do not install from a website</strong> when the package exists in the repository.</p>
+</li>
+<li>
+<p><strong>Do not add third-party repositories casually.</strong> Each one is permanent trust.</p>
+</li>
+<li>
+<p><strong>Do not use <code>sudo</code> with <code>pip</code>.</strong> It mixes a language manager into system
+directories the system manager believes it owns.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="the-ai-connection">The AI connection</h2>
+<p><img src="/_astro/gpu-stack-versions.NbCKMjXn_Z16hImP.svg" alt="Diagram: the layered version dependencies of a GPU machine learning stack" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<p><img src="/_astro/supply-chain-risk.PNOylhez_ZIALX.svg" alt="Diagram: the trust risks of installing packages and the habits that reduce them" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong>The GPU stack is a dependency graph</strong> — driver, CUDA runtime, cuDNN, framework —
+and every layer has a compatible version range. Most setup pain is here.</p>
+</li>
+<li>
+<p><strong><code>pip install torch</code> resolves against your platform</strong>, which is why the same
+command gives a CPU build on one machine and a CUDA build on another.</p>
+</li>
+<li>
+<p><strong>Lock files are how an experiment stays reproducible.</strong> A result you cannot
+rebuild is a result you cannot defend.</p>
+</li>
+<li>
+<p><strong>Container images are package installs frozen in time</strong>, which is why they solve
+this problem so effectively.</p>
+</li>
+<li>
+<p><strong>A model weight download is not a package.</strong> It has no dependency metadata and
+often no checksum you check — verify it yourself.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="knowledge-check">Knowledge check</h2>
-<p>Try these from memory before looking back:</p>
-<ol>
-<li>In your own words, define a package, a dependency, and a repository, and explain how the three relate when you install one program.</li>
-<li>A teammate says “it works on my machine but crashes on mine.” Using version pinning, manifests, and lock files, explain the most likely cause and the fix.</li>
-<li>List the five stages a package manager moves through to install a single package, and say what could go wrong if the “verify” stage were skipped.</li>
-<li>Name the default package manager for macOS, Debian/Ubuntu, and Windows, and give the install command for a package called <code>wget</code> on each.</li>
-<li>Explain the difference between a manifest and a lock file, and why professional projects commit both.</li>
-</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">quiz</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  question</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;A project installs cleanly today and fails on a colleague&#39;s machine next week, with no code changes in between. Which file, if committed, would most likely have prevented this?&quot;</span></span>
+<span class="line"><span style="color:#85E89D">  options</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;The lock file, which records the exact resolved versions of every dependency&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;The manifest, which lists the packages the project needs&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;The repository index, which catalogues available versions&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;The local package database, which records what is installed on the machine&quot;</span></span>
+<span class="line"><span style="color:#85E89D">  answer_index</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span></span>
+<span class="line"><span style="color:#85E89D">  explanation</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;The manifest was already there — it says what is needed, loosely. Between the two installs a dependency released a new version that still satisfied the manifest, and only the lock file pins the exact versions that were known to work.&quot;</span></span></code></pre>
+<hr/>
 <h2 id="hands-on-exercise">Hands-on exercise</h2>
-<p>Time to look at your own machine. In this exercise — worked through in full in the Day 13 lab directory — you will use the terminal to discover which package managers are already installed, and run a safe, read-only query against each one. You will install nothing: the goal is to <em>see</em> what manages software on your system before you ever change it.</p>
-<p>Open your terminal and check whether each common manager exists. The <code>command -v</code> builtin prints a program’s location if it is available and stays silent if it is not:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">command</span><span style="color:#79B8FF"> -v</span><span style="color:#9ECBFF"> brew</span><span style="color:#9ECBFF"> apt</span><span style="color:#9ECBFF"> apt-get</span><span style="color:#9ECBFF"> winget</span><span style="color:#9ECBFF"> pip</span><span style="color:#9ECBFF"> pip3</span><span style="color:#9ECBFF"> npm</span></span></code></pre>
-<p>Every line it prints is a package manager (or language manager) present on your machine. Now query the ones you have, read-only. If Homebrew is present:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">brew</span><span style="color:#79B8FF"> --version</span></span>
-<span class="line"><span style="color:#B392F0">brew</span><span style="color:#9ECBFF"> list</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> head</span></span></code></pre>
-<p><code>brew --version</code> prints Homebrew’s version; <code>brew list | head</code> shows the first several packages Homebrew has installed — a peek at your machine’s managed software. On a Debian-based Linux system you would instead run a read-only query like:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">apt-cache</span><span style="color:#9ECBFF"> policy</span></span></code></pre>
-<p>which reports the configured repositories without changing anything. Notice that you have not installed or removed a single thing — you have only <em>inspected</em>, which is exactly how to explore an unfamiliar system safely.</p>
+<p>Install something, inspect what came with it, then remove it cleanly. Worked
+through fully in the Day 13 lab directory.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>What you are doing</th><th>Command (macOS / Debian)</th></tr></thead><tbody><tr><td>Refresh the index</td><td><code>brew update</code> / <code>sudo apt update</code></td></tr><tr><td>Search for a package</td><td><code>brew search jq</code> / <code>apt search jq</code></td></tr><tr><td>See what it will pull in</td><td><code>brew deps jq</code> / <code>apt-cache depends jq</code></td></tr><tr><td>Install it</td><td><code>brew install jq</code> / <code>sudo apt install jq</code></td></tr><tr><td>Find where it landed</td><td><code>command -v jq</code></td></tr><tr><td>List what is installed</td><td><code>brew list</code> / <code>apt list --installed | head</code></td></tr><tr><td>Remove it</td><td><code>brew uninstall jq</code> / <code>sudo apt remove jq</code></td></tr></tbody></table>
 <h3 id="expected-output">Expected output</h3>
-<p>A typical run on a Mac with Homebrew installed (your values will differ — that is the point):</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ command -v brew apt apt-get winget pip pip3 npm</span></span>
-<span class="line"><span>/opt/homebrew/bin/brew</span></span>
-<span class="line"><span>/opt/homebrew/bin/pip3</span></span>
-<span class="line"><span>/opt/homebrew/bin/npm</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>$ brew --version</span></span>
-<span class="line"><span>Homebrew 6.0.9</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>$ brew list | head</span></span>
-<span class="line"><span>abseil</span></span>
-<span class="line"><span>ada-url</span></span>
-<span class="line"><span>aom</span></span>
-<span class="line"><span>apr</span></span>
-<span class="line"><span>apr-util</span></span>
-<span class="line"><span>argon2</span></span>
-<span class="line"><span>autoconf</span></span>
-<span class="line"><span>brotli</span></span></code></pre>
-<p>Line by line: <code>command -v</code> found <code>brew</code>, <code>pip3</code>, and <code>npm</code> on this machine and printed their locations; <code>apt</code>, <code>apt-get</code>, and <code>winget</code> printed nothing because they are not present on macOS. <code>brew --version</code> identifies the Homebrew release. <code>brew list | head</code> shows the first several installed packages — many of them dependencies pulled in automatically by other tools, exactly as the lesson describes.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>==&gt; Fetching dependencies for jq: oniguruma</span></span>
+<span class="line"><span>==&gt; Installing jq</span></span>
+<span class="line"><span>/opt/homebrew/bin/jq</span></span>
+<span class="line"><span>jq-1.7.1</span></span></code></pre>
+<ul>
+<li><strong><code>oniguruma</code> was never requested.</strong> The resolver found it and installed it first.</li>
+<li><strong><code>command -v</code> proves the PATH story from Day 11</strong> — the manager put it somewhere
+already on your PATH.</li>
+</ul>
 <h3 id="validate-your-work">Validate your work</h3>
-<p>You are done when you can check every box:</p>
 <ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" disabled/> You ran <code>command -v</code> and can name every package manager it found on your machine.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You ran at least one read-only query against a manager you have (for example <code>brew --version</code> or <code>apt-cache policy</code>).</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You can state which is your machine’s <em>default</em> system package manager, given its operating system.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You installed and removed nothing during the exercise.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You can write down (without running it) the command to install <code>wget</code> on your operating system.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You inspected a package’s dependencies <em>before</em> installing it</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can name one package that was installed without you asking for it</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You found the installed binary with <code>command -v</code></li>
+<li class="task-list-item"><input type="checkbox" disabled/> You removed the package and confirmed the command no longer resolves</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can explain the difference between <code>apt update</code> and <code>apt upgrade</code></li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>bash tests/run_tests.sh</code> reports 0 failures</li>
 </ul>
 <h3 id="troubleshooting">Troubleshooting</h3>
 <ul>
-<li><strong><code>command -v</code> printed nothing at all.</strong> That means none of those managers are on your <code>PATH</code>. On macOS, Homebrew may not be installed yet; on minimal Linux, <code>apt</code> should exist — try <code>command -v apt</code> alone to confirm.</li>
-<li><strong><code>brew: command not found</code>.</strong> Homebrew is not installed or not on your <code>PATH</code>. That is a valid result to record — this exercise never installs anything, so simply note that brew is absent and query whatever manager you do have.</li>
-<li><strong><code>pip</code> is missing but <code>pip3</code> is present.</strong> On many systems the Python manager is named <code>pip3</code>; that is why the check lists both. Treat a hit on either as “pip is available.”</li>
-<li><strong>You are on Windows.</strong> Run <code>winget --version</code> and <code>winget list</code> in PowerShell. If winget is missing, it can be added from the Microsoft Store’s “App Installer,” but you do not need to install anything for this exercise — recording “winget absent” is a valid outcome.</li>
+<li>
+<p><strong><code>Unable to locate package</code>.</strong> Refresh the index first; apt resolves against its
+local copy.</p>
+</li>
+<li>
+<p><strong><code>brew</code> not found on a new Mac.</strong> Homebrew is not preinstalled, and its installer
+prints a line you must add to <code>~/.zshrc</code>.</p>
+</li>
+<li>
+<p><strong>Held back packages on apt.</strong> The resolver found a conflict. Read what it says
+before forcing anything.</p>
+</li>
+<li>
+<p><strong>The command still works after uninstalling.</strong> Your shell cached its location;
+run <code>hash -r</code>.</p>
+</li>
 </ul>
 <h3 id="common-mistakes">Common mistakes</h3>
 <ul>
-<li><strong>Reaching for <code>sudo</code>.</strong> None of these inspection commands need administrator rights. If you find yourself typing <code>sudo</code>, stop — this lab is strictly read-only, and real installs are a separate, deliberate act.</li>
-<li><strong>Confusing “not found” with “broken.”</strong> A manager printing nothing from <code>command -v</code> simply is not installed on this machine; that is information, not an error. macOS has no <code>apt</code>; a fresh Linux box has no <code>brew</code>.</li>
-<li><strong>Actually installing something.</strong> The temptation to “just try <code>brew install</code>” defeats the purpose. Today you inspect; you write the install command down but do not run it, so you can reason about your system before you alter it.</li>
+<li>
+<p><strong>Running <code>apt upgrade</code> without <code>apt update</code></strong>, then wondering why nothing is new.</p>
+</li>
+<li>
+<p><strong>Installing with <code>sudo pip</code></strong>, which puts language packages where the system
+manager thinks it is in charge.</p>
+</li>
+<li>
+<p><strong>Adding a repository from a forum post</strong> without reading what it contains.</p>
+</li>
+<li>
+<p><strong>Treating <code>install</code> as free.</strong> Every package is code you now run.</p>
+</li>
 </ul>
+<hr/>
 <h2 id="practice-assignment">Practice assignment</h2>
-<p>Open the package-manager worksheet in the starter directory of the Day 13 lab and fill it in completely for your machine: which package manager(s) <code>command -v</code> found; which one is your operating system’s <em>default</em> system manager; the exact command you <em>would</em> run to install <code>wget</code> on your OS (write it — do not run it); and the name of one package you already have installed (from <code>brew list</code>, <code>apt list --installed</code>, or <code>winget list</code>). Then write one short paragraph (4–6 sentences) explaining, in your own words, why installing that one package with a manager was safer and more repeatable than downloading it by hand — naming dependency resolution, integrity verification, and record-keeping explicitly. Keep the worksheet; later lessons on language managers will build on it.</p>
+<ul>
+<li>
+<p><strong>Pick a tool you use daily</strong> and map its full dependency tree with <code>brew deps --tree</code> or <code>apt-cache depends --recurse</code>. Count the packages.</p>
+</li>
+<li>
+<p><strong>Write a manifest</strong> for your machine — a plain list of everything you would
+reinstall — and turn it into a one-line setup command.</p>
+</li>
+<li>
+<p><strong>Find the largest thing your package manager has cached</strong>, and reclaim the space
+deliberately.</p>
+</li>
+<li>
+<p><strong>Compare two versions of the same package</strong>, and read the changelog for the
+difference. This is the habit that makes upgrades safe.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="extension-challenge">Extension challenge</h2>
-<p>Go one layer deeper into the idea of pinning. Pick any one package your machine already has and find out what it <em>depends on</em>. On macOS with Homebrew:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">brew</span><span style="color:#9ECBFF"> deps</span><span style="color:#79B8FF"> --tree</span><span style="color:#9ECBFF"> wget</span></span></code></pre>
-<p>which prints the dependency tree for <code>wget</code> — every package it needs, and what those need, exactly the tree the lesson described. On Debian-based Linux the equivalent read-only query is:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">apt-cache</span><span style="color:#9ECBFF"> depends</span><span style="color:#9ECBFF"> wget</span></span></code></pre>
-<p>Study the output and count how many packages one small tool actually rests on. Then, in two or three sentences, explain why recording only the <em>top-level</em> name (<code>wget</code>) in a manifest is not enough for true reproducibility, and how a lock file that pins every version in that tree — not just the one you asked for — is what lets another machine rebuild an identical environment. You have just reasoned about reproducible environments from first principles, which is the same discipline behind every serious project you will build from here on.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
-Q1. What is the single hardest job a package manager does for you? </strong> </p> <ol type="A"> <li>Downloading a file faster than a web browser can</li><li>Resolving dependencies — working out the full tree of other software a package needs and installing it in the right order</li><li>Writing the source code of the program being installed</li><li>Displaying user ratings and reviews before you install</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Resolving dependencies — working out the full tree of other software a package needs and installing it in the right order </p> <p>Almost no program is self-contained; each package lists what it depends on, and the manager reads those descriptions to compute and install the complete dependency tree in a valid order — the work that manual installation gets wrong.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q2. Which sequence correctly orders the five stages of installing one package? </strong> </p> <ol type="A"> <li>Download, resolve, install, verify, record</li><li>Resolve, download, verify, install, record</li><li>Verify, download, resolve, record, install</li><li>Install, resolve, download, record, verify</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Resolve, download, verify, install, record </p> <p>The manager first resolves the full set of required packages from the index, downloads them, verifies their integrity, installs them in dependency order, and finally records the installation in its local database.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q3. What is the difference between a manifest and a lock file? </strong> </p> <ol type="A"> <li>A manifest is written by the manager; a lock file is written by you</li><li>They are two names for the same file</li><li>A manifest states which packages you want; a lock file records the exact versions that were actually installed</li><li>A manifest is for macOS and a lock file is for Windows</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> A manifest states which packages you want; a lock file records the exact versions that were actually installed </p> <p>The manifest captures human intent (often loosely, e.g. &quot;a spreadsheet library&quot;), while the lock file records the precise resolved versions of everything installed, which is what makes an install reproducible on another machine.</p> </details> </div><div class="quiz-question"> <p> <strong>
+<ul>
+<li>
+<p><strong>Reproduce a dependency conflict on purpose.</strong> Create a project requiring two
+packages with incompatible version ranges, and read what the resolver says.</p>
+</li>
+<li>
+<p><strong>Verify a download by hand.</strong> Fetch a package file, compute its checksum, and
+compare it with the published value. Do it once and you will never dismiss stage
+three again.</p>
+</li>
+<li>
+<p><strong>Time a cold install against a warm one</strong> and quantify what the cache is worth.
+That number is the argument for caching it in CI.</p>
+</li>
+<li>
+<p><strong>Read your lock file.</strong> Pick any project with one, count the transitive
+dependencies, and count how many you had heard of.</p>
+</li>
+</ul>
+<hr/>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. What is the single hardest job a package manager does for you? </strong> </p> <ol type="A"> <li>Downloading a file faster than a web browser can</li><li>Displaying user ratings and written reviews before you install anything</li><li>Writing the source code of the program being installed</li><li>Resolving dependencies and installing them in the right order</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> Resolving dependencies and installing them in the right order </p> <p>Almost no program is self-contained; each package lists what it depends on, and the manager reads those descriptions to compute and install the complete dependency tree in a valid order — the work that manual installation gets wrong.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. Which sequence correctly orders the five stages of installing one package? </strong> </p> <ol type="A"> <li>Resolve, download, verify, install, record</li><li>Download, resolve, install, verify, record</li><li>Verify, download, resolve, record, install</li><li>Install, resolve, download, record, verify</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> Resolve, download, verify, install, record </p> <p>The manager first resolves the full set of required packages from the index, downloads them, verifies their integrity, installs them in dependency order, and finally records the installation in its local database.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. What is the difference between a manifest and a lock file? </strong> </p> <ol type="A"> <li>A manifest is written by the manager; a lock file is written by you</li><li>A manifest says what you want; a lock file says what you got</li><li>They are two names for the same file</li><li>A manifest is for macOS and a lock file is for Windows</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> A manifest says what you want; a lock file says what you got </p> <p>The manifest captures human intent (often loosely, e.g. &quot;a spreadsheet library&quot;), while the lock file records the precise resolved versions of everything installed, which is what makes an install reproducible on another machine.</p> </details> </div><div class="quiz-question"> <p> <strong>
 Q4. Which is the correct default command to install a package called wget on Debian/Ubuntu? </strong> </p> <ol type="A"> <li>brew install wget</li><li>winget install wget</li><li>sudo apt install wget</li><li>pip install wget</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> sudo apt install wget </p> <p>apt is the default system package manager on Debian-based Linux, and because it installs system-wide its changing commands need administrator rights via sudo. Homebrew (brew) is for macOS and winget is for Windows.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q5. Why does apt ask you to run &quot;apt update&quot; before installing? </strong> </p> <ol type="A"> <li>It upgrades every installed package to a newer version</li><li>It refreshes the local copy of the repository index so apt resolves against current package information</li><li>It creates a manifest file for your project</li><li>It is required to give the terminal administrator rights</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> It refreshes the local copy of the repository index so apt resolves against current package information </p> <p>apt resolves against its local copy of the repository index; &quot;apt update&quot; refreshes that copy so you install current versions. (Note that &quot;apt upgrade&quot;, a different command, is the one that actually upgrades installed packages.)</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q6. What does version pinning protect you from? </strong> </p> <ol type="A"> <li>Downloading packages over a slow network connection</li><li>Running out of disk space during installation</li><li>Silent upgrades that change a project&#39;s behavior by swapping in a different version than the one it was built with</li><li>Installing software without administrator rights</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Silent upgrades that change a project&#39;s behavior by swapping in a different version than the one it was built with </p> <p>Pinning requests a specific version rather than &quot;the latest,&quot; so a dependency cannot quietly move to a new version and change how your project behaves — the usual cause of &quot;it works on my machine&quot; failures.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q7. Why is installing from a package manager&#39;s official repository generally safer than downloading an installer from a search result? </strong> </p> <ol type="A"> <li>The manager scans your whole hard drive for viruses first</li><li>Official repositories are curated and the manager verifies each download&#39;s integrity against a checksum or signature before installing</li><li>Package managers make software run faster once installed</li><li>Downloaded installers can never contain useful software</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Official repositories are curated and the manager verifies each download&#39;s integrity against a checksum or signature before installing </p> <p>Managers fetch from curated repositories over verified channels and check integrity before installing, closing off tampered or corrupted downloads — a real security improvement, though the trust chain weakens if you add untrusted third-party repositories.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q8. How does a lock file support reproducibility at scale, across many machines? </strong> </p> <ol type="A"> <li>It stores a compressed backup of the operating system</li><li>It records the exact versions of every package, so any machine can rebuild the identical environment instead of getting &quot;the latest&quot; on different days</li><li>It automatically buys more servers when needed</li><li>It prevents any software from ever being upgraded again</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> It records the exact versions of every package, so any machine can rebuild the identical environment instead of getting &quot;the latest&quot; on different days </p> <p>Because the lock file freezes exact versions as plain text, the same specification provisions one machine or a whole fleet identically; without it, &quot;install the latest&quot; run on different days yields many slightly different, hard-to-debug environments.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>package</strong> </dt> <dd data-astro-cid-whrtx2kk>A bundle of a program&#39;s files together with metadata describing what it is, its version, and what other software it depends on — the unit a package manager installs, updates, and removes.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>package manager</strong> </dt> <dd data-astro-cid-whrtx2kk>A program whose job is to install, upgrade, and remove software from curated repositories, automatically resolving dependencies and keeping a local record of everything it has done.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>repository</strong> </dt> <dd data-astro-cid-whrtx2kk>A curated online collection of packages, plus an index of their versions and dependencies, that a package manager knows how to reach and trust.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>dependency</strong> </dt> <dd data-astro-cid-whrtx2kk>Other software a package needs installed first in order to run; the branching chain of these is what a package manager resolves automatically.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>dependency resolution</strong> </dt> <dd data-astro-cid-whrtx2kk>The process of reading each package&#39;s requirements and computing the complete set of packages needed, in an order where nothing is missing when it is used.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Homebrew</strong> </dt> <dd data-astro-cid-whrtx2kk>The popular free, open-source package manager for macOS (and Linux), driven by the brew command; its packages are called formulae.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>apt</strong> </dt> <dd data-astro-cid-whrtx2kk>The Advanced Package Tool, the default package manager on Debian and Ubuntu Linux, which resolves dependencies and installs system-wide packages (usually run with sudo).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>winget</strong> </dt> <dd data-astro-cid-whrtx2kk>The Windows Package Manager, Microsoft&#39;s first-party command-line tool for installing, upgrading, and removing software on Windows 10 and 11.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>manifest</strong> </dt> <dd data-astro-cid-whrtx2kk>A file you write that lists the packages a project needs — its stated intent — turning &quot;install everything this needs&quot; into one shareable, repeatable command.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>lock file</strong> </dt> <dd data-astro-cid-whrtx2kk>A file written by the manager recording the exact versions of every package actually installed, so another machine can rebuild the identical environment.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>version pinning</strong> </dt> <dd data-astro-cid-whrtx2kk>Requesting a specific version of a package rather than &quot;the latest,&quot; so a silent upgrade cannot change a project&#39;s behavior.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>upgrade</strong> </dt> <dd data-astro-cid-whrtx2kk>Moving installed software to a newer version while preserving the surrounding dependency tree, as opposed to reinstalling the same version.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>mirror</strong> </dt> <dd data-astro-cid-whrtx2kk>A synchronized duplicate of a repository hosted elsewhere, providing faster and more reliable downloads and redundancy.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://docs.brew.sh/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Homebrew Documentation</a> — Homebrew (accessed 2026-07-12) — Official documentation for the macOS/Linux package manager, its commands, and formulae. </li><li data-astro-cid-whrtx2kk> <a href="https://manpages.debian.org/bookworm/apt/apt.8.en.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>apt(8) — Debian</a> — Debian (accessed 2026-07-12) — The official manual page for apt, the Advanced Package Tool. </li><li data-astro-cid-whrtx2kk> <a href="https://learn.microsoft.com/en-us/windows/package-manager/winget/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>winget documentation</a> — Microsoft (accessed 2026-07-12) — Microsoft&#39;s reference for the Windows Package Manager and its commands. </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Package_manager" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Package manager</a> — Wikipedia (accessed 2026-07-12) — Well-cited overview of package managers, their history, and their concepts. </li><li data-astro-cid-whrtx2kk> <a href="https://linuxcommand.org/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Linux Command Line</a> — William Shotts (accessed 2026-07-12) — Free, beginner-friendly resource on the command line and managing software from it. </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="13" data-astro-cid-whrtx2kk>
+Q5. Why does apt ask you to run &quot;apt update&quot; before installing? </strong> </p> <ol type="A"> <li>It upgrades every installed package to a newer version</li><li>It is required to give the terminal full administrator rights on the system</li><li>It creates a manifest file for your project</li><li>It refreshes the local repository index so apt sees current versions</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> It refreshes the local repository index so apt sees current versions </p> <p>apt resolves against its local copy of the repository index; &quot;apt update&quot; refreshes that copy so you install current versions. (Note that &quot;apt upgrade&quot;, a different command, is the one that actually upgrades installed packages.)</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. What does version pinning protect you from? </strong> </p> <ol type="A"> <li>Silent upgrades that change which version a project runs</li><li>Running out of disk space during installation</li><li>Downloading packages over a slow network connection</li><li>Installing software without administrator rights</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> Silent upgrades that change which version a project runs </p> <p>Pinning requests a specific version rather than &quot;the latest,&quot; so a dependency cannot quietly move to a new version and change how your project behaves — the usual cause of &quot;it works on my machine&quot; failures.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. Why is installing from a package manager&#39;s official repository generally safer than downloading an installer from a search result? </strong> </p> <ol type="A"> <li>The manager scans your entire hard drive for viruses before installing</li><li>Repositories are curated and each download&#39;s checksum is verified</li><li>Package managers make software run faster once installed</li><li>Downloaded installers can never contain useful software</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Repositories are curated and each download&#39;s checksum is verified </p> <p>Managers fetch from curated repositories over verified channels and check integrity before installing, closing off tampered or corrupted downloads — a real security improvement, though the trust chain weakens if you add untrusted third-party repositories.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. How does a lock file support reproducibility at scale, across many machines? </strong> </p> <ol type="A"> <li>It stores a compressed backup of the operating system</li><li>It automatically buys more servers when needed</li><li>It records exact versions so the environment can be rebuilt</li><li>It prevents any software from ever being upgraded again</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> It records exact versions so the environment can be rebuilt </p> <p>Because the lock file freezes exact versions as plain text, the same specification provisions one machine or a whole fleet identically; without it, &quot;install the latest&quot; run on different days yields many slightly different, hard-to-debug environments.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>package</strong> </dt> <dd data-astro-cid-whrtx2kk>A bundle of a program&#39;s files together with metadata describing what it is, its version, and what other software it depends on — the unit a package manager installs, updates, and removes.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>package manager</strong> </dt> <dd data-astro-cid-whrtx2kk>A program whose job is to install, upgrade, and remove software from curated repositories, automatically resolving dependencies and keeping a local record of everything it has done.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>repository</strong> </dt> <dd data-astro-cid-whrtx2kk>A curated online collection of packages, plus an index of their versions and dependencies, that a package manager knows how to reach and trust.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>dependency</strong> </dt> <dd data-astro-cid-whrtx2kk>Other software a package needs installed first in order to run; the branching chain of these is what a package manager resolves automatically.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>dependency resolution</strong> </dt> <dd data-astro-cid-whrtx2kk>The process of reading each package&#39;s requirements and computing the complete set of packages needed, in an order where nothing is missing when it is used.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Homebrew</strong> </dt> <dd data-astro-cid-whrtx2kk>The popular free, open-source package manager for macOS (and Linux), driven by the brew command; its packages are called formulae.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>apt</strong> </dt> <dd data-astro-cid-whrtx2kk>The Advanced Package Tool, the default package manager on Debian and Ubuntu Linux, which resolves dependencies and installs system-wide packages (usually run with sudo).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>winget</strong> </dt> <dd data-astro-cid-whrtx2kk>The Windows Package Manager, Microsoft&#39;s first-party command-line tool for installing, upgrading, and removing software on Windows 10 and 11.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>manifest</strong> </dt> <dd data-astro-cid-whrtx2kk>A file you write that lists the packages a project needs — its stated intent — turning &quot;install everything this needs&quot; into one shareable, repeatable command.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>lock file</strong> </dt> <dd data-astro-cid-whrtx2kk>A file written by the manager recording the exact versions of every package actually installed, so another machine can rebuild the identical environment.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>version pinning</strong> </dt> <dd data-astro-cid-whrtx2kk>Requesting a specific version of a package rather than &quot;the latest,&quot; so a silent upgrade cannot change a project&#39;s behavior.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>upgrade</strong> </dt> <dd data-astro-cid-whrtx2kk>Moving installed software to a newer version while preserving the surrounding dependency tree, as opposed to reinstalling the same version.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>mirror</strong> </dt> <dd data-astro-cid-whrtx2kk>A synchronized duplicate of a repository hosted elsewhere, providing faster and more reliable downloads and redundancy.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://docs.brew.sh/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Homebrew Documentation</a> — Homebrew (accessed 2026-07-12) — Official documentation for the macOS/Linux package manager, its commands, and formulae. </li><li data-astro-cid-whrtx2kk> <a href="https://manpages.debian.org/bookworm/apt/apt.8.en.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>apt(8) — Debian</a> — Debian (accessed 2026-07-12) — The official manual page for apt, the Advanced Package Tool. </li><li data-astro-cid-whrtx2kk> <a href="https://learn.microsoft.com/en-us/windows/package-manager/winget/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>winget documentation</a> — Microsoft (accessed 2026-07-12) — Microsoft&#39;s reference for the Windows Package Manager and its commands. </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Package_manager" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Package manager</a> — Wikipedia (accessed 2026-07-12) — Well-cited overview of package managers, their history, and their concepts. </li><li data-astro-cid-whrtx2kk> <a href="https://linuxcommand.org/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Linux Command Line</a> — William Shotts (accessed 2026-07-12) — Free, beginner-friendly resource on the command line and managing software from it. </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="13" data-astro-cid-whrtx2kk>
 Mark Day 13 as read
-</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
       surfaces for someone searching for one — it costs you a click and it is genuinely how people
-      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/ai-roadmap-365/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
 ★ Star on GitHub
-</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-012-shell-scripting-variables-loops-and-conditionals" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 12</span> <span class="pn__title" data-astro-cid-oerjsknp>Shell Scripting: Variables, Loops, and Conditionals</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-014-automating-tasks-with-shell-scripts-and" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 14 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Automating Tasks with Shell Scripts and cron</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
-</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/day-012-shell-scripting-variables-loops-and-conditionals" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 12</span> <span class="pn__title" data-astro-cid-oerjsknp>Shell Scripting: Variables, Loops, and Conditionals</span> </a> <a class="pn__card pn__card--next" href="/day-014-automating-tasks-with-shell-scripts-and" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 14 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Automating Tasks with Shell Scripts and cron</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://ocm-mcp-server.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener">LinkedIn</a> </nav> </div> </footer> <script>
       // Progressive enhancement only: the theme falls back to dark and every
       // .reveal element is visible by default (the hidden start state exists
       // only inside a prefers-reduced-motion: no-preference query).

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 12: Shell Scripting: Variables, Loops, and Conditionals · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to turn a sequence of commands into a reliable shell script — using variables, quoting, command substitution, arguments, conditionals, loops, and functions under strict mode — so your work runs the same way every time and is genuinely reproducible."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-012-shell-scripting-variables-loops-and-conditionals/"><meta property="og:title" content="Day 12: Shell Scripting: Variables, Loops, and Conditionals · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to turn a sequence of commands into a reliable shell script — using variables, quoting, command substitution, arguments, conditionals, loops, and functions under strict mode — so your work runs the same way every time and is genuinely reproducible."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-012-shell-scripting-variables-loops-and-conditionals/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-012-shell-scripting-variables-loops-and-conditionals.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 12: Shell Scripting: Variables, Loops, and Conditionals · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 12: Shell Scripting: Variables, Loops, and Conditionals · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to turn a sequence of commands into a reliable shell script — using variables, quoting, command substitution, arguments, conditionals, loops, and functions under strict mode — so your work runs the same way every time and is genuinely reproducible."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-012-shell-scripting-variables-loops-and-conditionals.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 12: Shell Scripting: Variables, Loops, and Conditionals · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to turn a sequence of commands into a reliable shell script — using variables, quoting, command substitution, arguments, conditionals, loops, and functions under strict mode — so your work runs the same way every time and is genuinely reproducible."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://ai-roadmap-365.github.io/day-012-shell-scripting-variables-loops-and-conditionals/"><meta property="og:title" content="Day 12: Shell Scripting: Variables, Loops, and Conditionals · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to turn a sequence of commands into a reliable shell script — using variables, quoting, command substitution, arguments, conditionals, loops, and functions under strict mode — so your work runs the same way every time and is genuinely reproducible."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://ai-roadmap-365.github.io/day-012-shell-scripting-variables-loops-and-conditionals/"><meta property="og:image" content="https://ai-roadmap-365.github.io/social/day-012-shell-scripting-variables-loops-and-conditionals.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 12: Shell Scripting: Variables, Loops, and Conditionals · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 12: Shell Scripting: Variables, Loops, and Conditionals · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to turn a sequence of commands into a reliable shell script — using variables, quoting, command substitution, arguments, conditionals, loops, and functions under strict mode — so your work runs the same way every time and is genuinely reproducible."><meta name="twitter:image" content="https://ai-roadmap-365.github.io/social/day-012-shell-scripting-variables-loops-and-conditionals.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
       // Dark is the default regardless of OS preference - this is a dark-first
       // design. A visitor who picks light with the toggle keeps it. Applied
       // before first paint so there is no flash of the wrong theme.
@@ -11,282 +11,416 @@
         }
         document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
       })();
-    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+    </script><link rel="stylesheet" href="/_astro/_day_.CiF6NwwU.css">
 <style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
 .starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
-</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="site-home" href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener"> <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M15 5l-7 7 7 7"></path> </svg>
+Sandeep Bazar
+</a> <a class="brand" href="/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
 365 Days of AI
-</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
-Labs
-</a> </header> <main id="main">  <article data-day="12" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>The Command Line</span>  › 
-Day 12 </p> <h1 data-astro-cid-whrtx2kk>Day 12: Shell Scripting: Variables, Loops, and Conditionals</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-012-shell-scripting-variables-loops-and-conditionals.png" width="1200" height="630" alt="Day 12 of 365 — Shell Scripting: Variables, Loops, and Conditionals" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to turn a sequence of commands into a reliable shell script — using variables, quoting, command substitution, arguments, conditionals, loops, and functions under strict mode — so your work runs the same way every time and is genuinely reproducible.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>The Command Line</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-012-shell-scripting-variables-loops-and-conditionals" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-012-shell-scripting-variables-loops-and-conditionals</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
-cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-012-shell-scripting-variables-loops-and-conditionals</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
-You can also <a href="/ai-roadmap-365/labs/day-012-shell-scripting-variables-loops-and-conditionals" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
-</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Save a sequence of commands as a script, add the shebang #!/usr/bin/env bash, and make it executable or run it with bash</li><li data-astro-cid-whrtx2kk>Assign and read variables, and explain why quoting every expansion (&quot;$var&quot;) prevents word-splitting and globbing bugs</li><li data-astro-cid-whrtx2kk>Use command substitution $(...) to turn a command&#39;s output into a value, and read positional parameters $1, $@, and $# with a sensible default</li><li data-astro-cid-whrtx2kk>Write conditionals with if, test/[ ], and [[ ]], and explain how exit codes drive the branch, including the difference between string and integer comparisons</li><li data-astro-cid-whrtx2kk>Write for and while loops and package reusable steps into functions with local variables</li><li data-astro-cid-whrtx2kk>Add set -euo pipefail to make a script stop on errors, catch unset variables, and detect pipeline failures, and connect this discipline to reproducible AI pipelines</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Days 8–11: comfort in the terminal, navigating the filesystem, working with text, and setting environment variables</li><li data-astro-cid-whrtx2kk>A computer running macOS or Linux (or Windows with WSL) and a text editor</li></ul> <h2 id="why-this-matters">Why this matters</h2>
-<p>You have spent the last few days typing commands one at a time — listing files, searching text, setting environment variables. That works, but it does not scale, and it does not last. Type a five-command sequence today and by next week you will misremember one of them; run it by hand ten times and you will fumble at least once. The moment a task is worth doing twice, it is worth writing down so a machine can do it the same way every time. That written-down form is a shell script: a plain text file of commands the shell reads from top to bottom.</p>
-<p>This matters enormously for the work ahead. Almost nothing in modern machine learning is a single command. Downloading a dataset means fetching files, checking their sizes, unpacking archives, and verifying nothing was corrupted. Launching a training run means setting environment variables, activating the right tools, pointing at the right data, and recording what you did. Evaluating a model means running it over hundreds of inputs and tallying the results. Every one of those pipelines is glued together by shell scripts, and the quality of the glue decides whether your results are reproducible or a mystery. A reliable script is not a convenience on top of the real work — for a practitioner, a reliable script <em>is</em> the reproducibility. When a colleague asks “how did you get that number?”, the honest and useful answer is “run this script,” not “I think I typed some things last Tuesday.”</p>
-<p>The concrete consequences are money, time, and trust. A script that silently keeps going after a failed download will happily train on half a dataset and waste hours of compute — real money on a rented machine. A script with an unquoted variable will do the wrong thing the first time a filename contains a space, and you will lose an afternoon finding out why. Today you learn to write scripts that stop when something breaks, handle names safely, make decisions, and repeat work without complaint — the difference between automation you can trust and automation that quietly lies to you.</p>
+</a> <nav aria-label="Primary"> <a href="/sections">Courses</a> <a href="/labs">Labs</a> <a href="/catalog">Catalogs</a> <a href="/search">Search</a> <a href="/glossary">Glossary</a> <a href="/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+GitHub
+</a> </header> <main id="main">  <article data-day="12" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/sections/computing-foundations">Computing Foundations</a>  ›  <span>The Command Line</span>  › 
+Day 12 </p> <h1 data-astro-cid-whrtx2kk>Day 12: Shell Scripting: Variables, Loops, and Conditionals</h1>  <img class="day-hero" src="/social/day-012-shell-scripting-variables-loops-and-conditionals.png" width="1200" height="630" alt="Day 12 of 365 — Shell Scripting: Variables, Loops, and Conditionals" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to turn a sequence of commands into a reliable shell script — using variables, quoting, command substitution, arguments, conditionals, loops, and functions under strict mode — so your work runs the same way every time and is genuinely reproducible.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>The Command Line</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/computing-foundations/day-012-shell-scripting-variables-loops-and-conditionals" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/computing-foundations/day-012-shell-scripting-variables-loops-and-conditionals</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/ai-roadmap-365/ai-roadmap-365.github.io.git
+cd ai-roadmap-365.github.io</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-012-shell-scripting-variables-loops-and-conditionals</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/labs/day-012-shell-scripting-variables-loops-and-conditionals" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Save a sequence of commands as a script, add the shebang #!/usr/bin/env bash, and make it executable or run it with bash</li><li data-astro-cid-whrtx2kk>Assign and read variables, and explain why quoting every expansion (&quot;$var&quot;) prevents word-splitting and globbing bugs</li><li data-astro-cid-whrtx2kk>Use command substitution $(...) to turn a command&#39;s output into a value, and read positional parameters $1, $@, and $# with a sensible default</li><li data-astro-cid-whrtx2kk>Write conditionals with if, test/[ ], and [[ ]], and explain how exit codes drive the branch, including the difference between string and integer comparisons</li><li data-astro-cid-whrtx2kk>Write for and while loops and package reusable steps into functions with local variables</li><li data-astro-cid-whrtx2kk>Add set -euo pipefail to make a script stop on errors, catch unset variables, and detect pipeline failures, and connect this discipline to reproducible AI pipelines</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk>Days 8–11: comfort in the terminal, navigating the filesystem, working with text, and setting environment variables</li><li data-astro-cid-whrtx2kk>A computer running macOS or Linux (or Windows with WSL) and a text editor</li> </ul> <h2 id="why-this-matters">Why this matters</h2>
+<ul>
+<li>
+<p><strong>Every AI project accumulates scripts</strong> — fetch the data, preprocess it, launch
+the run, collect the results — and they are almost always shell scripts.</p>
+</li>
+<li>
+<p><strong>A script is a decision written down.</strong> It runs the same way tomorrow, on a
+server, without you awake.</p>
+</li>
+<li>
+<p><strong>Everything you learned this week becomes reusable today.</strong> Pipelines, paths,
+variables and permissions all combine here.</p>
+</li>
+<li>
+<p><strong>Strict mode is the difference between a failed run that tells you</strong> and one that
+quietly produces a corrupt dataset.</p>
+</li>
+<li>
+<p><strong>You will read far more shell than you write.</strong> Every Dockerfile, CI config and
+install guide is made of it.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="the-idea-in-plain-language">The idea in plain language</h2>
-<p>A shell script is a text file whose lines are shell commands. When you run the file, the shell executes each line exactly as if you had typed it, in order, without improvising. That literalness is the whole point: the machine does precisely what the file says, the same way today, tomorrow, and on your teammate’s laptop.</p>
-<p>Four ideas turn a flat list of commands into something powerful. <strong>Variables</strong> are named boxes that hold a value — a filename, a count, a directory — so you can write it once and reuse it everywhere, and change it in one place. <strong>Command substitution</strong> lets a command’s output become a value, so a script can react to what it finds rather than to what you guessed in advance. <strong>Conditionals</strong> let the script make decisions: <em>if</em> the directory exists, proceed; otherwise, stop and complain. <strong>Loops</strong> let the script repeat work: <em>for each</em> file in a folder, do the same thing. Wrap a chunk of these into a named <strong>function</strong> and you have a reusable sub-recipe you can call as easily as any command.</p>
-<p>The last ingredient is discipline. By default the shell is forgiving to a fault: it shrugs off failed commands, treats undefined variables as empty, and hides errors in the middle of a pipeline. For interactive typing that is convenient; for a script that must be trusted, it is dangerous. A single line near the top, <code>set -euo pipefail</code>, flips the shell into a strict mode that stops at the first sign of trouble. Learn these six ideas — variables, substitution, conditionals, loops, functions, and strict mode — and you can automate almost anything you can type.</p>
+<ul>
+<li>
+<p><strong>Anything you can type, you can save.</strong> A script is a file of commands, run top
+to bottom.</p>
+</li>
+<li>
+<p><strong>Variables hold values</strong>, and <code>$name</code> reads them back.</p>
+</li>
+<li>
+<p><strong>Conditionals branch on whether a command succeeded</strong>, not on a boolean value.</p>
+</li>
+<li>
+<p><strong>Loops repeat a block</strong> — once per item, or until something stops being true.</p>
+</li>
+<li>
+<p><strong>Functions name a useful sequence</strong> so you write it once and call it anywhere.</p>
+</li>
+<li>
+<p><strong>The shell is a real programming language</strong>, with one unusual property: every
+statement can be a program.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="historical-background">Historical background</h2>
-<p>The shell is nearly as old as Unix itself. When Ken Thompson and Dennis Ritchie built Unix at Bell Labs around 1969–1971, the command interpreter was a separate program rather than part of the kernel — a deliberate design choice that let it be replaced and improved independently. Thompson wrote the earliest version, which could run commands and redirect their input and output but had only rudimentary control flow.</p>
-<p>The shell that made scripting a real programming activity arrived in 1979. Stephen Bourne, also at Bell Labs, wrote the Bourne shell — the program still known by the filename <code>sh</code> — and it shipped with Version 7 Unix. Bourne’s shell introduced the constructs this lesson is built on: variables, <code>if</code>/<code>then</code>/<code>else</code>, <code>for</code> and <code>while</code> loops, <code>case</code> statements, and functions. Its syntax is the ancestor of everything you will write today. Around the same time at the University of California, Berkeley, Bill Joy wrote the C shell (<code>csh</code>), whose syntax borrowed from the C language and which added interactive conveniences like command history. A few years later, in 1983, David Korn at Bell Labs released the KornShell (<code>ksh</code>), which combined Bourne-compatible scripting with better interactive features.</p>
-<p>In 1989 the shell you will use most was born. Brian Fox wrote Bash — the Bourne-Again Shell — for the GNU Project, a free-software reimplementation and extension of the Bourne shell; Chet Ramey has maintained it for decades since. Because it is both free and Bourne-compatible, Bash became the default shell on most Linux distributions and the lingua franca of scripting. To keep the core language portable across all these shells, the POSIX standard (part of IEEE 1003, developed through the late 1980s and 1990s) defined a common “shell command language” that every compliant shell must support. Meanwhile, in 1990, Paul Falstad wrote the Z shell (<code>zsh</code>), which extended the Korn and Bourne lineage with powerful interactive features; in 2019, Apple made <code>zsh</code> the default login shell in macOS Catalina, though the older Bash 3.2 still ships with the system. The through-line across forty years is unbroken: the vocabulary Bourne chose in 1979 is the vocabulary you are about to learn.</p>
+<ul>
+<li>
+<p><strong>The Thompson shell of 1971 could not script.</strong> It ran commands and little else.</p>
+</li>
+<li>
+<p><strong>The Bourne shell, 1979, added the language</strong> — variables, conditionals, loops,
+functions — and its syntax is what you will type today.</p>
+</li>
+<li>
+<p><strong><code>bash</code> arrived in 1989</strong> as the GNU project’s free replacement, mostly compatible
+and considerably more capable. The name is a joke: Bourne-again shell.</p>
+</li>
+<li>
+<p><strong>POSIX standardised the core in 1992</strong>, which is why a careful script runs
+unchanged on machines decades and vendors apart.</p>
+</li>
+<li>
+<p><strong>macOS moved its default shell to zsh in 2019</strong> for licensing reasons, which is
+why your laptop and your servers may disagree — and why the shebang matters.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
-<p>A shell script is a text file containing shell commands, marked as a program to run rather than a document to read. It is interpreted, not compiled: there is no separate build step, and the shell reads and executes it line by line each time. It is a <em>glue</em> language, superb at orchestrating other programs — copying files, running tools, wiring one command’s output into another’s input — and at making simple decisions and repetitions around them.</p>
-<p>It is not a general-purpose programming language, and pretending otherwise leads to pain. The shell has no real numbers beyond integers, awkward handling of complex data, and error-prone rules around spaces and special characters. Heavy data processing, anything with nested data structures, and anything needing careful arithmetic belong in a language like Python, which you will meet later in the course. The professional rule of thumb is a length test: if a script grows past roughly a hundred lines, or starts manipulating data rather than orchestrating commands, it has outgrown the shell. A script is also not automatically safe or portable — it does exactly what its text says on the shell it runs under, which is why the strict-mode line and the choice of interpreter, both covered below, matter so much.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Common misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”A script is a different kind of thing than commands.”</td><td>It is the exact same commands you type, saved in a file and run top to bottom.</td></tr><tr><td>”The shell warns me about mistakes.”</td><td>By default it silently continues after failures and treats typos in variable names as empty strings — you must opt into strictness.</td></tr><tr><td>”Quotes around variables are optional style.”</td><td>Quoting changes behavior: an unquoted value containing a space or <code>*</code> is split or expanded, often doing the wrong thing.</td></tr><tr><td>”Bash and sh and zsh are basically the same.”</td><td>They share a POSIX core but differ in features and defaults; a script that works in one can silently misbehave in another.</td></tr><tr><td>”If it printed output, it worked.”</td><td>A script can print a partial result and still have failed halfway — only the exit code and strict mode tell you the truth.</td></tr></tbody></table>
+<p><strong>It is:</strong></p>
+<ul>
+<li>A file of commands with a shebang line naming its interpreter.</li>
+<li>A real language: variables, branches, loops, functions, arguments, return codes.</li>
+<li>The glue layer that starts and connects other programs.</li>
+</ul>
+<p><strong>It is not:</strong></p>
+<ul>
+<li>
+<p><strong>Not a general-purpose programming language.</strong> It has no real data structures, its
+arithmetic is awkward, and its error handling is primitive.</p>
+</li>
+<li>
+<p><strong>Not fast at computation.</strong> Every loop iteration may launch a process.</p>
+</li>
+<li>
+<p><strong>Not safe by default.</strong> Unquoted variables and ignored failures are the defaults,
+which is why strict mode exists.</p>
+</li>
+<li>
+<p><strong>Not the right tool past a hundred lines or so.</strong> At that point, reach for Python.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
-<p>The shell script solves the oldest problem in computing: humans are slow and inconsistent at repetition, and machines are fast and perfect at it. Before scripts, an operator ran the same sequence of commands by hand every day, and every day was a fresh chance to skip a step, mistype a path, or run things in the wrong order. Writing the sequence into a file once removes the human from the loop for everything except deciding <em>when</em> to run it.</p>
-<p>Three problems in particular melt away. The first is <strong>repeatability</strong>: a script runs identically every time, so the result no longer depends on whether you remembered the exact flags. The second is <strong>transferability</strong>: a script is documentation that executes, so a teammate can reproduce your work by running your file instead of interrogating your memory. The third is <strong>composition</strong>: because the shell’s job is to launch and connect other programs, a script can stitch dozens of specialized tools into one pipeline that would be tedious and error-prone to drive by hand. For anyone building machine-learning systems, these three add up to reproducibility — the property that lets you, or an auditor, or a future version of yourself, get the same answer from the same inputs. That is why the shell script, a technology from the 1970s, sits underneath the most modern AI pipelines: the problem it solves never went away.</p>
+<ul>
+<li>
+<p><strong>Repetition.</strong> A sequence you typed twice should be a file you run.</p>
+</li>
+<li>
+<p><strong>Reliability.</strong> Typing seven commands in order, correctly, at 2am, is not a plan.</p>
+</li>
+<li>
+<p><strong>Documentation.</strong> A script is an executable description of how something is done.</p>
+</li>
+<li>
+<p><strong>Composition.</strong> It is the layer that wires together programs written in every
+other language.</p>
+</li>
+<li>
+<p><strong>Automation.</strong> Anything in a script can be scheduled, triggered by a hook, or run
+in a container — the subject of Day 14.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="how-it-works">How it works</h2>
-<p>Let’s build up a real script from nothing, one concept at a time, so that by the end no line looks like magic.</p>
 <h3 id="from-a-command-to-a-script">From a command to a script</h3>
-<p>Anything you can type, you can save. Put a few commands in a file called <code>hello.sh</code>:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D">#!/usr/bin/env bash</span></span>
+<span class="line"><span style="color:#79B8FF">set</span><span style="color:#79B8FF"> -euo</span><span style="color:#9ECBFF"> pipefail</span></span>
+<span class="line"></span>
 <span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;Starting up&quot;</span></span>
 <span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;Today is $(</span><span style="color:#B392F0">date</span><span style="color:#9ECBFF"> &#39;+%Y-%m-%d&#39;)&quot;</span></span></code></pre>
-<p>The first line is the <strong>shebang</strong> — the two characters <code>#!</code> followed by the path to the interpreter that should run the file. Writing <code>#!/usr/bin/env bash</code> rather than a hard path like <code>/bin/bash</code> asks the system to find <code>bash</code> on the user’s <code>PATH</code>, which is more portable across macOS and Linux, where Bash lives in different places. The shebang only takes effect when you run the file as a program; the shell reads it, launches that interpreter, and feeds it the rest of the file.</p>
-<h3 id="making-a-script-executable">Making a script executable</h3>
-<p>A fresh text file is not yet a runnable program. Two ways exist to run it. You can hand it to the shell explicitly, which ignores the executable bit entirely:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">bash</span><span style="color:#9ECBFF"> hello.sh</span></span></code></pre>
-<p>Or you can mark the file executable and run it directly, at which point the shebang chooses the interpreter:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">chmod</span><span style="color:#9ECBFF"> +x</span><span style="color:#9ECBFF"> hello.sh</span></span>
-<span class="line"><span style="color:#B392F0">./hello.sh</span></span></code></pre>
-<p><code>chmod +x</code> adds the “executable” permission bit; the <code>./</code> says “the file here in this directory,” because for safety the shell does not search the current directory for programs. Throughout this course we often run scripts with <code>bash script.sh</code> so you never have to think about permissions, but real tools ship as executables you invoke by name.</p>
+<p><img src="/_astro/shebang-and-exec.BWb91uZR_Z16hImP.svg" alt="Diagram: running a script with bash compared with running it directly" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<ul>
+<li>
+<p><strong>The shebang is <code>#!</code> plus the interpreter path</strong>, and only matters when the file
+is run as a program.</p>
+</li>
+<li>
+<p><strong><code>#!/usr/bin/env bash</code> finds bash on <code>PATH</code></strong>, which is portable; <code>/bin/bash</code> is
+not, across macOS and Linux.</p>
+</li>
+</ul>
 <h3 id="variables-and-quoting">Variables and quoting</h3>
-<p>A variable stores a value under a name. Assign with no spaces around the <code>=</code>, and read the value by putting <code>$</code> in front of the name:</p>
+<p><img src="/_astro/quote-your-variables.DAgmQs89_ZIALX.svg" alt="Diagram: an unquoted variable compared with a quoted one" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#E1E4E8">name</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;Ada&quot;</span></span>
 <span class="line"><span style="color:#E1E4E8">greeting</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;Hello, ${</span><span style="color:#E1E4E8">name</span><span style="color:#9ECBFF">}&quot;</span></span>
-<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;${</span><span style="color:#E1E4E8">greeting</span><span style="color:#9ECBFF">}&quot;</span><span style="color:#6A737D">        # Hello, Ada</span></span></code></pre>
-<p>The braces in <code>${name}</code> are optional here but are a good habit: they mark exactly where the name ends, so <code>${name}_backup</code> is unambiguous. Now the single most important rule in all of shell scripting: <strong>quote your variables</strong>. Consider a filename with a space in it:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#E1E4E8">file</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;my notes.txt&quot;</span></span>
-<span class="line"><span style="color:#B392F0">rm</span><span style="color:#E1E4E8"> $file        </span><span style="color:#6A737D"># WRONG: runs rm with two arguments, &quot;my&quot; and &quot;notes.txt&quot;</span></span>
-<span class="line"><span style="color:#B392F0">rm</span><span style="color:#9ECBFF"> &quot;</span><span style="color:#E1E4E8">$file</span><span style="color:#9ECBFF">&quot;</span><span style="color:#6A737D">      # RIGHT: runs rm with one argument, &quot;my notes.txt&quot;</span></span></code></pre>
-<p>Unquoted, the shell performs <em>word splitting</em> — it breaks the value at spaces — and <em>globbing</em> — it expands characters like <code>*</code>. So an unquoted variable holding <code>my notes.txt</code> becomes two arguments, and one holding <code>*</code> becomes every file in the directory. Quoting the variable with <code>&quot;$file&quot;</code> turns off both, passing the value through untouched. Almost every shell-scripting disaster you will read about traces back to a missing pair of quotes. Quote every variable expansion unless you have a specific, deliberate reason not to.</p>
+<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;${</span><span style="color:#E1E4E8">greeting</span><span style="color:#9ECBFF">}&quot;</span></span></code></pre>
+<ul>
+<li><strong>No spaces around the <code>=</code>.</strong> With spaces, the shell reads a command name.</li>
+<li><strong>Braces mark where the name ends</strong>, so <code>${name}_backup</code> is unambiguous.</li>
+<li><strong>Unquoted expansion does two things you rarely want</strong>: word splitting at spaces,
+and globbing of <code>*</code> and <code>?</code>.</li>
+</ul>
 <h3 id="command-substitution">Command substitution</h3>
-<p>Command substitution captures the output of a command and uses it as a value, with the <code>$(...)</code> form:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#E1E4E8">today</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;$(</span><span style="color:#B392F0">date</span><span style="color:#9ECBFF"> &#39;+%Y-%m-%d&#39;)&quot;</span></span>
-<span class="line"><span style="color:#E1E4E8">count</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;$(</span><span style="color:#B392F0">ls</span><span style="color:#79B8FF"> -1</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> wc</span><span style="color:#79B8FF"> -l</span><span style="color:#9ECBFF">)&quot;</span></span>
-<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;There are ${</span><span style="color:#E1E4E8">count</span><span style="color:#9ECBFF">} entries as of ${</span><span style="color:#E1E4E8">today</span><span style="color:#9ECBFF">}&quot;</span></span></code></pre>
-<p>The shell runs the command inside <code>$(...)</code>, grabs everything it prints, trims the trailing newline, and substitutes the result. This is how a script reacts to reality: instead of hard-coding “there are 12 files,” it asks the system and stores the answer. An older backtick syntax, <code>`date`</code>, does the same thing, but <code>$(...)</code> is clearer, nests cleanly, and is what you should always write.</p>
+<span class="line"><span style="color:#E1E4E8">count</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;$(</span><span style="color:#B392F0">ls</span><span style="color:#79B8FF"> -1</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> wc</span><span style="color:#79B8FF"> -l</span><span style="color:#9ECBFF">)&quot;</span></span></code></pre>
+<ul>
+<li>
+<p><strong><code>$(...)</code> runs the command and substitutes what it printed</strong>, trailing newline
+trimmed.</p>
+</li>
+<li>
+<p><strong>This is how a script reacts to reality</strong> rather than hard-coding an answer.</p>
+</li>
+<li>
+<p><strong>Prefer <code>$(...)</code> to backticks.</strong> It nests cleanly and reads better.</p>
+</li>
+</ul>
 <h3 id="reading-arguments">Reading arguments</h3>
-<p>A script becomes a real tool when it accepts inputs. The values you pass on the command line appear as numbered <strong>positional parameters</strong>: <code>$1</code> is the first argument, <code>$2</code> the second, and so on. Two more are indispensable: <code>$#</code> is the number of arguments, and <code>$@</code> is all of them (quote it as <code>&quot;$@&quot;</code> to keep each one intact). A sensible default fills in when the caller supplies nothing, using the <code>${1:-default}</code> form:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#E1E4E8">target</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;</span><span style="color:#79B8FF">${1</span><span style="color:#F97583">:-</span><span style="color:#9ECBFF">.</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">&quot;</span><span style="color:#6A737D">          # first argument, or &quot;.&quot; if none was given</span></span>
-<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;Working on: ${</span><span style="color:#E1E4E8">target</span><span style="color:#9ECBFF">}&quot;</span></span>
-<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;You passed </span><span style="color:#79B8FF">$#</span><span style="color:#9ECBFF"> argument(s)&quot;</span></span></code></pre>
-<p>Run <code>./tool.sh reports</code> and <code>target</code> becomes <code>reports</code>; run <code>./tool.sh</code> with nothing and it falls back to the current directory, <code>.</code>. This one line — take an argument, but default sensibly — makes a script both flexible and forgiving.</p>
-<h3 id="conditionals-and-exit-codes">Conditionals and exit codes</h3>
-<p>Every command reports whether it succeeded through an <strong>exit code</strong>: an integer the command returns when it finishes, where <code>0</code> means success and anything else means some kind of failure. Conditionals are built on this. The <code>if</code> statement runs a command and branches on its exit code:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#F97583">if</span><span style="color:#E1E4E8"> [ </span><span style="color:#F97583">-d</span><span style="color:#9ECBFF"> &quot;${</span><span style="color:#E1E4E8">target</span><span style="color:#9ECBFF">}&quot;</span><span style="color:#E1E4E8"> ]; </span><span style="color:#F97583">then</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#E1E4E8">target</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;</span><span style="color:#79B8FF">${1</span><span style="color:#F97583">:-</span><span style="color:#9ECBFF">.</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">&quot;</span></span>
+<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;Working on: ${</span><span style="color:#E1E4E8">target</span><span style="color:#9ECBFF">}, with </span><span style="color:#79B8FF">$#</span><span style="color:#9ECBFF"> argument(s)&quot;</span></span></code></pre>
+<ul>
+<li><strong><code>$1</code>, <code>$2</code></strong> are the positional parameters; <strong><code>$#</code></strong> is how many there were.</li>
+<li><strong><code>&quot;$@&quot;</code></strong> is all of them, each kept intact — quote it, always.</li>
+<li><strong><code>${1:-default}</code></strong> supplies a fallback, which makes a script both flexible and
+forgiving.</li>
+</ul>
+<h3 id="conditionals">Conditionals</h3>
+<p><img src="/_astro/exit-codes-drive-everything.DmSnGdOu_Z16hImP.svg" alt="Diagram: how exit codes drive conditionals and pipelines" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#F97583">if</span><span style="color:#E1E4E8"> [[ </span><span style="color:#F97583">-d</span><span style="color:#9ECBFF"> &quot;${</span><span style="color:#E1E4E8">target</span><span style="color:#9ECBFF">}&quot;</span><span style="color:#E1E4E8"> ]]; </span><span style="color:#F97583">then</span></span>
 <span class="line"><span style="color:#79B8FF">  echo</span><span style="color:#9ECBFF"> &quot;It is a directory&quot;</span></span>
 <span class="line"><span style="color:#F97583">else</span></span>
 <span class="line"><span style="color:#79B8FF">  echo</span><span style="color:#9ECBFF"> &quot;No such directory: ${</span><span style="color:#E1E4E8">target</span><span style="color:#9ECBFF">}&quot;</span></span>
 <span class="line"><span style="color:#F97583">fi</span></span></code></pre>
-<p>Here <code>[</code> is itself a command — the <strong>test</strong> command, whose alternate name is literally <code>[</code> — and it exits <code>0</code> when its condition is true. <code>[ -d &quot;${target}&quot; ]</code> tests whether the path is a directory. Bash also offers <code>[[ ... ]]</code>, a newer built-in test with the same spirit but safer behavior: it does not word-split its operands and supports pattern matching and <code>&amp;&amp;</code>/<code>||</code> inside the brackets. Prefer <code>[[ ... ]]</code> in Bash scripts; use <code>[ ... ]</code> when you need to run under a plain POSIX <code>sh</code>. These are the test operators you will reach for constantly:</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Test</th><th>True when</th><th>Example</th></tr></thead><tbody><tr><td><code>-e path</code></td><td>the path exists</td><td><code>[ -e &quot;$f&quot; ]</code></td></tr><tr><td><code>-f path</code></td><td>it exists and is a regular file</td><td><code>[ -f &quot;$f&quot; ]</code></td></tr><tr><td><code>-d path</code></td><td>it exists and is a directory</td><td><code>[ -d &quot;$f&quot; ]</code></td></tr><tr><td><code>-z string</code></td><td>the string is empty</td><td><code>[ -z &quot;$name&quot; ]</code></td></tr><tr><td><code>-n string</code></td><td>the string is non-empty</td><td><code>[ -n &quot;$name&quot; ]</code></td></tr><tr><td><code>str1 = str2</code></td><td>the strings are equal</td><td><code>[ &quot;$a&quot; = &quot;$b&quot; ]</code></td></tr><tr><td><code>int1 -eq int2</code></td><td>the integers are equal</td><td><code>[ &quot;$n&quot; -eq 0 ]</code></td></tr><tr><td><code>int1 -gt int2</code></td><td>the first integer is greater</td><td><code>[ &quot;$n&quot; -gt 10 ]</code></td></tr></tbody></table>
-<p>Note that strings compare with <code>=</code> while numbers use <code>-eq</code>, <code>-gt</code>, <code>-lt</code>, and friends — mixing them up is a classic beginner error. You can also test the success of any command directly: <code>if grep -q &quot;error&quot; log.txt; then ...</code> branches on whether <code>grep</code> found a match, because <code>grep</code>’s exit code says so.</p>
-<h3 id="loops">Loops</h3>
-<p>A loop repeats a block of commands. The <code>for</code> loop walks over a list of items:</p>
+<p><img src="/_astro/test-operators.DsxjiPZg_ZIALX.svg" alt="Diagram: string test operators compared with numeric ones" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong>Prefer <code>[[ ... ]]</code> in bash.</strong> It does not word-split its operands and supports
+pattern matching.</p>
+</li>
+<li>
+<p><strong>Use <code>[ ... ]</code> when the script must run under plain POSIX <code>sh</code>.</strong></p>
+</li>
+</ul>
+<h3 id="loops-and-functions">Loops and functions</h3>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#F97583">for</span><span style="color:#E1E4E8"> f </span><span style="color:#F97583">in</span><span style="color:#9ECBFF"> *.txt</span><span style="color:#E1E4E8">; </span><span style="color:#F97583">do</span></span>
 <span class="line"><span style="color:#79B8FF">  echo</span><span style="color:#9ECBFF"> &quot;Found: ${</span><span style="color:#E1E4E8">f</span><span style="color:#9ECBFF">}&quot;</span></span>
-<span class="line"><span style="color:#F97583">done</span></span></code></pre>
-<p>The <code>while</code> loop repeats as long as a command keeps succeeding, which is how you read input line by line:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#F97583">while</span><span style="color:#79B8FF"> read</span><span style="color:#79B8FF"> -r</span><span style="color:#9ECBFF"> line</span><span style="color:#E1E4E8">; </span><span style="color:#F97583">do</span></span>
+<span class="line"><span style="color:#F97583">done</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">while</span><span style="color:#79B8FF"> read</span><span style="color:#79B8FF"> -r</span><span style="color:#9ECBFF"> line</span><span style="color:#E1E4E8">; </span><span style="color:#F97583">do</span></span>
 <span class="line"><span style="color:#79B8FF">  echo</span><span style="color:#9ECBFF"> &quot;Line: ${</span><span style="color:#E1E4E8">line</span><span style="color:#9ECBFF">}&quot;</span></span>
-<span class="line"><span style="color:#F97583">done</span><span style="color:#F97583"> &lt;</span><span style="color:#E1E4E8"> notes.txt</span></span></code></pre>
-<p>The two forms suit different jobs, summarized here:</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Loop form</th><th>Repeats</th><th>Best for</th></tr></thead><tbody><tr><td><code>for item in list; do … done</code></td><td>once per item in a known list</td><td>files matching a pattern, a fixed set of names, arguments <code>&quot;$@&quot;</code></td></tr><tr><td><code>while command; do … done</code></td><td>as long as the command succeeds</td><td>reading a file line by line, retrying until something is ready, counting down</td></tr><tr><td><code>until command; do … done</code></td><td>as long as the command <em>fails</em></td><td>waiting for a condition to become true</td></tr></tbody></table>
-<p>The <code>-r</code> flag on <code>read</code> tells it not to mangle backslashes, and redirecting the file into the loop with <code>&lt; notes.txt</code> feeds it one line per iteration. Between <code>for</code> and <code>while</code> you can express nearly any repetition a script needs.</p>
-<h3 id="functions">Functions</h3>
-<p>A function bundles commands under a name so you can call them like any other command, which keeps a script readable and avoids repeating yourself:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">log</span><span style="color:#E1E4E8">() {</span></span>
-<span class="line"><span style="color:#79B8FF">  echo</span><span style="color:#9ECBFF"> &quot;[$(</span><span style="color:#B392F0">date</span><span style="color:#9ECBFF"> &#39;+%H:%M:%S&#39;)] </span><span style="color:#79B8FF">$*</span><span style="color:#9ECBFF">&quot;</span></span>
-<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#F97583">done</span><span style="color:#F97583"> &lt;</span><span style="color:#E1E4E8"> notes.txt</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#B392F0">log</span><span style="color:#9ECBFF"> &quot;Starting&quot;</span></span>
-<span class="line"><span style="color:#B392F0">log</span><span style="color:#9ECBFF"> &quot;Halfway done&quot;</span></span></code></pre>
-<p>Inside a function, <code>$1</code>, <code>$2</code>, and <code>$*</code> refer to the arguments passed <em>to the function</em>, not to the script. Declare working variables <code>local</code> so they do not leak into the rest of the script. A function is exactly the “sub-recipe” idea: name a useful sequence once, then call it wherever you need it.</p>
-<p><img src="/ai-roadmap-365/_astro/script-anatomy.D0c-1bGm_Z21mQvl.svg" alt="Diagram: the anatomy of a shell script, labelling the shebang, strict-mode line, variables, a function, a conditional, and a loop" loading="lazy" decoding="async" fetchpriority="auto" width="720" height="560"></p>
-<h3 id="strict-mode-set--euo-pipefail">Strict mode: <code>set -euo pipefail</code></h3>
-<p>Everything above works, but a default shell is too forgiving to trust. One line near the top of every serious script fixes that:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">set</span><span style="color:#79B8FF"> -euo</span><span style="color:#9ECBFF"> pipefail</span></span></code></pre>
-<p>It bundles three protections. <code>-e</code> makes the script exit the moment any command fails, instead of blundering onward. <code>-u</code> makes it an error to use a variable that was never set, catching typos in variable names before they cause silent damage. <code>-o pipefail</code> makes a pipeline fail if <em>any</em> command in it fails, not just the last one, so <code>download | unpack</code> is reported as failed when the download dies. (The <code>u</code> and the <code>o pipefail</code> are what turn a common mistyped <code>${targett}</code> from a silent empty string into an immediate, loud error.) Adopt this line as a reflex. It is the difference between a script that stops and tells you when something is wrong, and one that cheerfully produces garbage.</p>
-<h3 id="reading-input">Reading input</h3>
-<p>Sometimes a script must ask the person running it a question. The <code>read</code> command pauses, reads a line the user types, and stores it in a variable:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">read</span><span style="color:#79B8FF"> -r</span><span style="color:#79B8FF"> -p</span><span style="color:#9ECBFF"> &quot;Delete these files? [y/N] &quot;</span><span style="color:#9ECBFF"> answer</span></span>
-<span class="line"><span style="color:#F97583">if</span><span style="color:#E1E4E8"> [ </span><span style="color:#9ECBFF">&quot;${</span><span style="color:#E1E4E8">answer</span><span style="color:#9ECBFF">}&quot;</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> &quot;y&quot;</span><span style="color:#E1E4E8"> ]; </span><span style="color:#F97583">then</span></span>
-<span class="line"><span style="color:#79B8FF">  echo</span><span style="color:#9ECBFF"> &quot;Deleting...&quot;</span></span>
-<span class="line"><span style="color:#F97583">else</span></span>
-<span class="line"><span style="color:#79B8FF">  echo</span><span style="color:#9ECBFF"> &quot;Cancelled&quot;</span></span>
-<span class="line"><span style="color:#F97583">fi</span></span></code></pre>
-<p>The <code>-p</code> flag prints a prompt; the <code>-r</code> flag protects backslashes as before. This is how interactive scripts confirm dangerous actions — though for automated pipelines you usually pass inputs as arguments instead, so the script can run unattended.</p>
-<p><img src="/ai-roadmap-365/_astro/control-flow.CFhUrcNi_Z21mQvl.svg" alt="Flowchart: an if/else decision and a for loop drawn as a control-flow diagram" loading="lazy" decoding="async" fetchpriority="auto" width="720" height="560"></p>
-<h2 id="an-everyday-analogy">An everyday analogy</h2>
-<p>Think of a shell script as a <strong>recipe card</strong> handed to an extremely literal line cook. The cook — the shell — never improvises, never guesses what you meant, and does exactly what each line says, in order. That literalness is a feature: follow the same card twice and you get the same dish twice.</p>
-<p>The pieces map cleanly. <strong>Variables</strong> are the labelled prep bowls of <em>mise en place</em> — “the onions,” “the stock” — set out once so the recipe can say “add the stock” without repeating where it came from. <strong>Command substitution</strong> is a step that says “taste the sauce and use <em>that</em> as the amount of salt” — the value comes from checking reality, not from a number written in advance. A <strong>conditional</strong> is the line “if the sauce is too thin, simmer five more minutes” — a decision the cook makes based on what is actually in the pan. A <strong>loop</strong> is “for each plate on the pass, add a sprig of garnish” — the same action repeated across a set. A <strong>function</strong> is a named sub-recipe like “make the roux” that the main recipe can invoke without spelling out every step again. And <code>set -euo pipefail</code> is the head chef’s standing order: <em>if any step fails, stop immediately and call me — never plate a half-cooked dish and pretend service went fine.</em> A kitchen that follows that order serves consistent food; a script that follows it produces trustworthy results. Keep this recipe card in mind and every construct below has an obvious purpose.</p>
-<h2 id="examples-in-practice">Examples in practice</h2>
-<p>Let’s build a genuinely useful script the way you would in real life: start with the smallest thing that runs, then grow it. The goal is a tool that summarizes a directory of notes — how many files, broken down by type — the kind of inventory you would generate before archiving a folder.</p>
-<p><strong>Step 1 — the skeleton.</strong> Every script starts with a shebang and strict mode:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D">#!/usr/bin/env bash</span></span>
-<span class="line"><span style="color:#79B8FF">set</span><span style="color:#79B8FF"> -euo</span><span style="color:#9ECBFF"> pipefail</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#E1E4E8">target</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;</span><span style="color:#79B8FF">${1</span><span style="color:#F97583">:-</span><span style="color:#9ECBFF">.</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">&quot;</span></span>
-<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;Summary for: ${</span><span style="color:#E1E4E8">target</span><span style="color:#9ECBFF">}&quot;</span></span></code></pre>
-<p><strong>Step 2 — validate the input.</strong> A tool that silently accepts nonsense is a trap. Check the directory exists, and fail loudly if not:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#F97583">if</span><span style="color:#E1E4E8"> [ </span><span style="color:#F97583">!</span><span style="color:#F97583"> -d</span><span style="color:#9ECBFF"> &quot;${</span><span style="color:#E1E4E8">target</span><span style="color:#9ECBFF">}&quot;</span><span style="color:#E1E4E8"> ]; </span><span style="color:#F97583">then</span></span>
-<span class="line"><span style="color:#79B8FF">  echo</span><span style="color:#9ECBFF"> &quot;Error: &#39;${</span><span style="color:#E1E4E8">target</span><span style="color:#9ECBFF">}&#39; is not a directory&quot;</span><span style="color:#F97583"> &gt;&amp;2</span></span>
-<span class="line"><span style="color:#79B8FF">  exit</span><span style="color:#79B8FF"> 1</span></span>
-<span class="line"><span style="color:#F97583">fi</span></span></code></pre>
-<p>The <code>&gt;&amp;2</code> sends the message to standard error, the stream reserved for diagnostics, and <code>exit 1</code> returns a non-zero exit code so any script <em>calling</em> this one knows it failed.</p>
-<p><strong>Step 3 — a function to classify a file.</strong> Extracting a file’s extension is a small, reusable job — perfect for a function:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">extension_of</span><span style="color:#E1E4E8">() {</span></span>
-<span class="line"><span style="color:#F97583">  local</span><span style="color:#E1E4E8"> name</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;</span><span style="color:#79B8FF">$1</span><span style="color:#9ECBFF">&quot;</span></span>
-<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> [ </span><span style="color:#9ECBFF">&quot;${</span><span style="color:#E1E4E8">name</span><span style="color:#9ECBFF">}&quot;</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> &quot;${</span><span style="color:#E1E4E8">name</span><span style="color:#F97583">%</span><span style="color:#9ECBFF">.</span><span style="color:#F97583">*</span><span style="color:#9ECBFF">}&quot;</span><span style="color:#E1E4E8"> ]; </span><span style="color:#F97583">then</span></span>
-<span class="line"><span style="color:#79B8FF">    echo</span><span style="color:#9ECBFF"> &quot;(no extension)&quot;</span></span>
-<span class="line"><span style="color:#F97583">  else</span></span>
-<span class="line"><span style="color:#79B8FF">    echo</span><span style="color:#9ECBFF"> &quot;${</span><span style="color:#E1E4E8">name</span><span style="color:#F97583">##*</span><span style="color:#9ECBFF">.}&quot;</span></span>
-<span class="line"><span style="color:#F97583">  fi</span></span>
+<span class="line"><span style="color:#B392F0">log</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  local</span><span style="color:#E1E4E8"> msg</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;</span><span style="color:#79B8FF">$*</span><span style="color:#9ECBFF">&quot;</span></span>
+<span class="line"><span style="color:#79B8FF">  echo</span><span style="color:#9ECBFF"> &quot;[$(</span><span style="color:#B392F0">date</span><span style="color:#9ECBFF"> &#39;+%H:%M:%S&#39;)] ${</span><span style="color:#E1E4E8">msg</span><span style="color:#9ECBFF">}&quot;</span></span>
 <span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
-<p><code>${name##*.}</code> strips everything up to and including the last dot, leaving the extension; the conditional catches files like <code>README</code> that have no dot at all.</p>
-<p><strong>Step 4 — loop and count.</strong> Walk the files, tally the total, and collect one extension per line:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#E1E4E8">total</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">0</span></span>
-<span class="line"><span style="color:#E1E4E8">extensions</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;&quot;</span></span>
-<span class="line"><span style="color:#F97583">for</span><span style="color:#E1E4E8"> path </span><span style="color:#F97583">in</span><span style="color:#9ECBFF"> &quot;${</span><span style="color:#E1E4E8">target</span><span style="color:#9ECBFF">}&quot;/*</span><span style="color:#E1E4E8">; </span><span style="color:#F97583">do</span></span>
-<span class="line"><span style="color:#E1E4E8">  [ </span><span style="color:#F97583">-f</span><span style="color:#9ECBFF"> &quot;${</span><span style="color:#E1E4E8">path</span><span style="color:#9ECBFF">}&quot;</span><span style="color:#E1E4E8"> ] </span><span style="color:#F97583">||</span><span style="color:#F97583"> continue</span></span>
-<span class="line"><span style="color:#E1E4E8">  total</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">$((</span><span style="color:#B392F0">total</span><span style="color:#9ECBFF"> +</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">))</span></span>
-<span class="line"><span style="color:#E1E4E8">  extensions</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;${</span><span style="color:#E1E4E8">extensions</span><span style="color:#9ECBFF">}$(</span><span style="color:#B392F0">extension_of</span><span style="color:#9ECBFF"> &quot;$(</span><span style="color:#B392F0">basename</span><span style="color:#9ECBFF"> &quot;${</span><span style="color:#E1E4E8">path</span><span style="color:#9ECBFF">}&quot;)&quot;)</span></span>
-<span class="line"><span style="color:#9ECBFF">&quot;</span></span>
-<span class="line"><span style="color:#F97583">done</span></span></code></pre>
-<p>The <code>[ -f &quot;${path}&quot; ] || continue</code> skips anything that is not a regular file, and <code>$((total + 1))</code> does integer arithmetic. <strong>Step 5 — report.</strong> Turn the collected extensions into a sorted count and print it:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;Total files: ${</span><span style="color:#E1E4E8">total</span><span style="color:#9ECBFF">}&quot;</span></span>
-<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;By extension:&quot;</span></span>
-<span class="line"><span style="color:#79B8FF">printf</span><span style="color:#9ECBFF"> &#39;%s&#39;</span><span style="color:#9ECBFF"> &quot;${</span><span style="color:#E1E4E8">extensions</span><span style="color:#9ECBFF">}&quot;</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> sort</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> uniq</span><span style="color:#79B8FF"> -c</span><span style="color:#F97583"> |</span><span style="color:#F97583"> while</span><span style="color:#79B8FF"> read</span><span style="color:#79B8FF"> -r</span><span style="color:#9ECBFF"> n</span><span style="color:#9ECBFF"> ext</span><span style="color:#E1E4E8">; </span><span style="color:#F97583">do</span></span>
-<span class="line"><span style="color:#79B8FF">  echo</span><span style="color:#9ECBFF"> &quot;  ${</span><span style="color:#E1E4E8">ext</span><span style="color:#9ECBFF">}: ${</span><span style="color:#E1E4E8">n</span><span style="color:#9ECBFF">}&quot;</span></span>
-<span class="line"><span style="color:#F97583">done</span></span></code></pre>
-<p><code>sort | uniq -c</code> is the classic idiom for counting duplicates: sort groups identical lines together, and <code>uniq -c</code> collapses each group into a single line prefixed by its count. Run this on a folder with two <code>.txt</code> files, one <code>.md</code>, and a <code>README</code>, and it prints a total of four and a tidy per-extension breakdown. You have just written a real tool — validated input, a function, a loop, a conditional, integer math, and strict mode — in about twenty lines. The Day 12 lab has you build exactly this script, one exercise per step.</p>
+<ul>
+<li><strong><code>read -r</code></strong> stops it mangling backslashes.</li>
+<li><strong>Inside a function, <code>$1</code> is the function’s argument</strong>, not the script’s.</li>
+<li><strong>Declare working variables <code>local</code></strong> so they do not leak into the rest of the
+script.</li>
+</ul>
+<p><img src="/_astro/script-anatomy.D0c-1bGm_Z21mQvl.svg" alt="Diagram: the anatomy of a shell script, labelling the shebang, strict-mode line, variables, a function, a conditional, and a loop" loading="lazy" decoding="async" fetchpriority="auto" width="720" height="560"></p>
+<h3 id="strict-mode-set--euo-pipefail">Strict mode: set -euo pipefail</h3>
+<p><img src="/_astro/strict-mode-three-flags.BRoYu2rJ_Z16hImP.svg" alt="Diagram: the three protections in shell strict mode" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<ul>
+<li>
+<p><strong>A default shell is too forgiving to trust.</strong> One line near the top of every
+serious script fixes that, and it belongs there before anything else.</p>
+</li>
+<li>
+<p><strong><code>-e</code> stops at the first failing command</strong>, instead of blundering onward through
+steps whose inputs never arrived.</p>
+</li>
+<li>
+<p><strong><code>-u</code> turns a mistyped <code>${targett}</code></strong> from a silent empty string into an immediate,
+loud error — which is the single most valuable of the three.</p>
+</li>
+<li>
+<p><strong><code>-o pipefail</code> reports a pipeline as failed</strong> when any stage failed, not only the
+last one.</p>
+</li>
+<li>
+<p><strong>Adopt the line as a reflex.</strong> Typing it should cost you no thought at all.</p>
+</li>
+</ul>
+<h3 id="asking-a-question">Asking a question</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">read</span><span style="color:#79B8FF"> -r</span><span style="color:#79B8FF"> -p</span><span style="color:#9ECBFF"> &quot;Delete these files? [y/N] &quot;</span><span style="color:#9ECBFF"> answer</span></span>
+<span class="line"><span style="color:#E1E4E8">[[ </span><span style="color:#9ECBFF">&quot;${</span><span style="color:#E1E4E8">answer</span><span style="color:#9ECBFF">}&quot;</span><span style="color:#F97583"> ==</span><span style="color:#9ECBFF"> &quot;y&quot;</span><span style="color:#E1E4E8"> ]] &amp;&amp; </span><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;Deleting...&quot;</span><span style="color:#F97583"> ||</span><span style="color:#79B8FF"> echo</span><span style="color:#9ECBFF"> &quot;Cancelled&quot;</span></span></code></pre>
+<ul>
+<li><strong><code>-p</code> prints a prompt.</strong> This is how interactive scripts confirm dangerous actions.</li>
+<li><strong>Automated pipelines pass arguments instead</strong>, so the script can run unattended.</li>
+</ul>
+<p><img src="/_astro/control-flow.CFhUrcNi_Z21mQvl.svg" alt="Flowchart: an if/else decision and a for loop drawn as a control-flow diagram" loading="lazy" decoding="async" fetchpriority="auto" width="720" height="560"></p>
+<hr/>
+<h2 id="an-everyday-analogy">An everyday analogy</h2>
+<p><img src="/_astro/trap-cleanup.DZK3Muw5_Z16hImP.svg" alt="Diagram: how a trap guarantees cleanup on exit" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<p>A recipe card.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>The kitchen</th><th>The script</th></tr></thead><tbody><tr><td>The recipe card</td><td>The script file</td></tr><tr><td>”Serves 4” at the top</td><td>The shebang and strict mode</td></tr><tr><td>Ingredients list</td><td>Variables</td></tr><tr><td>”If the sauce is thin, simmer”</td><td>A conditional</td></tr><tr><td>”Repeat for each portion”</td><td>A loop</td></tr><tr><td>”Make the roux (see page 12)“</td><td>A function</td></tr><tr><td>Taste before serving</td><td>Checking exit codes</td></tr></tbody></table>
+<ul>
+<li>
+<p><strong>A recipe you follow twice should be written down</strong>, or you will get it slightly
+different each time.</p>
+</li>
+<li>
+<p><strong>A good recipe says what to do when something goes wrong.</strong> A script without
+strict mode is a recipe that ignores a burnt pan and carries on.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="examples-in-practice">Examples in practice</h2>
+<p><img src="/_astro/strict-mode-difference.Dut5tEgV_ZIALX.svg" alt="Diagram: a script failing with and without set -euo pipefail" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong>A backup script</strong> that names its output with <code>$(date)</code> so runs never overwrite
+each other.</p>
+</li>
+<li>
+<p><strong>A preprocessing loop</strong> over every file in a directory, skipping ones already
+done.</p>
+</li>
+<li>
+<p><strong>A launcher</strong> that reads <code>$1</code> as the config file and defaults to <code>config.yml</code>.</p>
+</li>
+<li>
+<p><strong>A retry loop</strong> that waits until a service answers before starting the real work.</p>
+</li>
+<li>
+<p><strong>A cleanup function</strong> that runs on exit via <code>trap</code>, so temporary files go away
+even when the script fails.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
-<h3 id="security">Security</h3>
-<p>A shell script is executable code, so running one is exactly as dangerous as trusting its author. The infamous pattern of piping a downloaded script straight into the shell — fetching a URL and executing whatever comes back — hands a stranger the power to run any command as you. Read scripts before you run them, and never run one you cannot read. Inside your own scripts, the biggest hazard is unquoted or unvalidated input: a filename or argument that contains spaces, <code>*</code>, or shell metacharacters can, unquoted, turn a harmless-looking line into a destructive one. Quoting every expansion and validating inputs is not just correctness hygiene; it is the security boundary.</p>
-<h3 id="privacy">Privacy</h3>
-<p>Scripts routinely handle sensitive values — API keys, tokens, paths that reveal a project’s structure. Two habits protect you. Never hard-code a secret into a script that might be shared or committed to version control; read it from an environment variable instead, as you learned on Day 11. And be careful with logging: a script that echoes its full environment or command line for debugging can splash a secret across a log file that outlives the run. What a script prints is data that leaks as easily as any other.</p>
-<h3 id="performance">Performance</h3>
-<p>The shell is a launcher, and launching a program is comparatively expensive. A loop that starts a new process on every one of ten thousand iterations will crawl, not because the shell is slow at looping but because spawning processes has real overhead. The fix is usually to let a single tool do the bulk work — passing many files to one command rather than calling the command once per file. For the orchestration scripts do best, performance is rarely the issue; when it becomes one, it is almost always too many process launches, and the cure is to lean on the specialized tools the shell exists to connect.</p>
-<h3 id="scalability">Scalability</h3>
-<p>Scripts scale well in breadth and poorly in depth. Wrapping more tools, handling more files, gluing more steps — the shell absorbs this happily. But growing <em>logic</em> — nested data, intricate conditionals, real arithmetic — is where a script buckles, becoming fragile and unreadable. The scaling discipline is to recognize the ceiling: when a script’s complexity is in its data and logic rather than in the commands it orchestrates, it is time to move that part into a proper program and let the script keep doing what it is good at.</p>
-<h3 id="cost">Cost</h3>
-<p>In machine-learning work, a shell script often stands between you and an expensive resource — a rented GPU, a metered API, a large data transfer. Here strict mode pays for itself directly. A script without <code>set -e</code> that fails to download a dataset but keeps going will spend an hour of paid compute training on nothing; one that stops at the failure costs you seconds. The cheapest possible outcome of a broken pipeline is that it stops immediately and tells you — and that outcome costs exactly one line of code.</p>
+<ul>
+<li>
+<p><strong>Security: unquoted variables are an injection vector.</strong> A filename containing a
+space or a semicolon can change what your script does.</p>
+</li>
+<li>
+<p><strong>Never build a command by string concatenation</strong> from untrusted input. The shell
+will happily execute what you accidentally assembled.</p>
+</li>
+<li>
+<p><strong>Secrets belong in the environment</strong>, not in the script and not in its arguments —
+<code>ps</code> shows arguments to everyone.</p>
+</li>
+<li>
+<p><strong>Performance: a loop that launches a process per item is slow.</strong> Ten thousand
+iterations means ten thousand process creations. Prefer one pipeline over a loop
+where you can.</p>
+</li>
+<li>
+<p><strong>Scalability: shell scales badly past a few hundred lines.</strong> No types, no modules,
+no test framework worth the name.</p>
+</li>
+<li>
+<p><strong>Cost: a script without <code>set -e</code> can burn hours of compute</strong> producing output from
+a step that already failed.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
-<p>The first “alternative” is a choice of shell to write for, and it genuinely matters. <strong>POSIX <code>sh</code></strong> is the portable common denominator: a script whose shebang is <code>#!/bin/sh</code> and which avoids Bash extras will run almost anywhere, which is why system and installation scripts target it — at the cost of missing conveniences like <code>[[ ... ]]</code> and arrays. <strong>Bash</strong> is the pragmatic default for scripts you control: ubiquitous on Linux, present on macOS, and rich enough for real work, with <code>#!/usr/bin/env bash</code>. <strong>Zsh</strong> is a superb <em>interactive</em> shell and the macOS default login shell since 2019, but it is a poor target for portable scripts because its differences from Bash trip people up; use it as your prompt, write your scripts for Bash or POSIX <code>sh</code>. The practical rule: write scripts in Bash unless they must run on minimal systems, in which case restrict yourself to POSIX <code>sh</code>.</p>
-<p>Beyond the shell itself, two free, open-source tools should be part of every scripter’s routine, and they are the standard of the field. <strong>ShellCheck</strong> is a static analyzer — a linter — that reads your script and points out bugs before you run them: unquoted variables, misused test brackets, portability traps. It is free and open source, runs offline, and integrates into most editors. Run it on a file like this:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">shellcheck</span><span style="color:#9ECBFF"> backup_notes.sh</span></span></code></pre>
-<p>On a script with a bug like <code>echo Backing up $dest</code>, ShellCheck responds with precise, teachable warnings — for that line, <code>SC2086: Double quote to prevent globbing and word splitting</code>, and if <code>dest</code> is never assigned, <code>SC2154: dest is referenced but not assigned</code>. Each warning carries a code you can look up. <strong>shfmt</strong> is the companion formatter: it rewrites a script into a consistent style — uniform indentation and spacing — so that formatting is never something you argue about or do by hand. Both are free; there is no paid tier to consider, and they are the tools professionals actually use. For tasks that have outgrown the shell, the alternative is a different language entirely — <strong>Python</strong> for data and logic, or <strong>Make</strong> for expressing dependencies between build steps — each free and open source, each the right tool once your script stops being glue and starts being a program.</p>
+<p><img src="/_astro/shell-or-python.COzUJjGq_ZIALX.svg" alt="Diagram: the point at which a shell script should become a Python program" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool</th><th>Type</th><th>When to use it instead</th></tr></thead><tbody><tr><td>bash</td><td>Free, built in</td><td>Glue, automation, anything under ~100 lines</td></tr><tr><td>POSIX <code>sh</code></td><td>Free, built in</td><td>Maximum portability, minimum features</td></tr><tr><td>Python</td><td>Free, open source</td><td>Data structures, real error handling, tests</td></tr><tr><td><code>make</code></td><td>Free, built in</td><td>Dependency graphs — rebuild only what changed</td></tr><tr><td><code>just</code></td><td>Free, open source</td><td>A friendlier task runner, without make’s traps</td></tr><tr><td><code>shellcheck</code></td><td>Free, open source</td><td>Not an alternative — a linter you should always run</td></tr></tbody></table>
+<ul>
+<li>
+<p><strong><code>shellcheck</code> is not optional.</strong> It catches unquoted variables, useless <code>cat</code>,
+and a dozen subtle traps, and it takes a second.</p>
+</li>
+<li>
+<p><strong>The switch to Python</strong> comes when you need a dictionary, a real test, or an
+exception. Those three are the signal.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
 
 
@@ -321,104 +455,213 @@ You can also <a href="/ai-roadmap-365/labs/day-012-shell-scripting-variables-loo
 
 
 
-
-
-
-
-
-
-
-<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>Shell script</td><td>Compiled program (C, Rust)</td><td>A script is interpreted line by line each run with no build step; a compiled program is translated to machine code once, then run — faster but less immediate</td></tr><tr><td>Shell script</td><td>Python program</td><td>Shell excels at launching and connecting other programs; Python excels at data, logic, and arithmetic. Reach for shell as glue, Python once logic dominates</td></tr><tr><td><code>[ ... ]</code> (test)</td><td><code>[[ ... ]]</code></td><td><code>[</code> is a POSIX command that word-splits its operands; <code>[[ ]]</code> is a Bash built-in that is safer with unquoted values and supports pattern matching — prefer it in Bash</td></tr><tr><td><code>$(command)</code></td><td><code>&quot;$variable&quot;</code></td><td>Command substitution runs a command and yields its <em>output</em>; a variable expansion yields a <em>stored</em> value — both are ways to produce text, from different sources</td></tr><tr><td>Running <code>bash script.sh</code></td><td>Running <code>./script.sh</code></td><td>The first ignores permissions and the shebang; the second requires the executable bit and uses the shebang to pick the interpreter</td></tr><tr><td><code>set -e</code> on</td><td><code>set -e</code> off (default)</td><td>With it, the script stops at the first failed command; without it, the script ignores failures and marches on, often producing partial, wrong results</td></tr></tbody></table>
+<table><thead><tr><th>Term</th><th>What it actually is</th></tr></thead><tbody><tr><td><strong>Script</strong></td><td>A file of commands for an interpreter</td></tr><tr><td><strong>Shebang</strong></td><td>The first line naming that interpreter</td></tr><tr><td><strong>Exit code</strong></td><td>The integer a command returns; 0 is success</td></tr><tr><td><strong>Positional parameter</strong></td><td><code>$1</code>, <code>$2</code> — an argument by position</td></tr><tr><td><strong>Command substitution</strong></td><td><code>$(...)</code> — a command’s output used as a value</td></tr><tr><td><strong>Strict mode</strong></td><td><code>set -euo pipefail</code>, the safety line</td></tr></tbody></table>
+<hr/>
 <h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
-<p>Reach for a shell script whenever a task is a sequence of commands you will run more than once, or that a teammate must be able to reproduce: setting up an environment, downloading and unpacking data, launching a job with the right flags, running a batch of evaluations, moving and renaming files in bulk. Whenever the work is <em>orchestration</em> — pointing existing tools at the right inputs in the right order — the shell is not just adequate, it is the natural home, and writing it down turns a fragile manual ritual into a dependable artifact.</p>
-<p>Leave the shell in the drawer when the work is <em>computation</em> rather than orchestration. If your script is accumulating nested data, doing anything beyond simple integer arithmetic, parsing structured formats like JSON by hand, or sprawling past roughly a hundred lines of its own logic, it has outgrown the tool, and every further line will be more fragile than the last. That is the moment to move the heavy part into Python and keep the shell script as a thin wrapper that calls it. And never use a script — or any automation — as a substitute for understanding: a script encodes a decision you already know how to make correctly, so that the machine can make it the same way a thousand times. The professional habit is to automate the parts you have mastered and keep your judgment for the parts you have not.</p>
+<p><img src="/_astro/for-versus-while.Y7uCv5wn_ZIALX.svg" alt="Diagram: a for loop compared with a while loop" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong>Use shell when the job is running other programs</strong> in order, with a little logic
+between them.</p>
+</li>
+<li>
+<p><strong>Use it when the script must run anywhere</strong> with nothing installed.</p>
+</li>
+<li>
+<p><strong>Use it for anything you have typed twice.</strong></p>
+</li>
+<li>
+<p><strong>Switch to Python when you need a data structure</strong>, real error handling, or tests.</p>
+</li>
+<li>
+<p><strong>Switch when the script passes a hundred lines</strong>, or when you find yourself
+parsing anything structured.</p>
+</li>
+<li>
+<p><strong>Do not write shell that generates shell.</strong> That is the point where the next
+person cannot debug it, and the next person is you.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="the-ai-connection">The AI connection</h2>
-<p>Every machine-learning result you will ever produce rests on a stack of shell scripts, whether you write them or inherit them. The pipeline is the same everywhere: a script downloads and verifies the dataset, a script sets the environment variables and launches training with a recorded set of hyperparameters, a script runs the trained model over an evaluation set and tallies the metrics. Each is glue — orchestration of specialized tools — which is exactly what the shell is for. And each depends on the discipline from this lesson. Strict mode is what stops a failed download from quietly corrupting a training run and burning paid compute. Quoting is what keeps a dataset path with a space in it from silently processing the wrong files. Command substitution and conditionals are what let a script check that a checkpoint exists before resuming from it. When someone asks whether your result is reproducible, the real question is whether the scripts that produced it are reliable, readable, and version-controlled. A clear, strict, well-quoted script is not a side skill for an AI practitioner — it is the medium in which reproducible work is written.</p>
+<ul>
+<li>
+<p><strong>Every training run starts from a script</strong>: set the environment, check the data
+exists, launch, capture the log.</p>
+</li>
+<li>
+<p><strong>Dataset preparation is loops and pipelines</strong> long before it is Python.</p>
+</li>
+<li>
+<p><strong>Container entrypoints are shell scripts</strong>, and a missing <code>set -e</code> there means a
+container that reports success while doing nothing.</p>
+</li>
+<li>
+<p><strong>Sweep launchers are <code>for</code> loops</strong> over hyperparameter values, which is the
+simplest experiment framework there is and often enough.</p>
+</li>
+<li>
+<p><strong>Reproducibility means the commands are written down.</strong> A script is the cheapest
+form of that promise.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="knowledge-check">Knowledge check</h2>
-<p>Try these from memory before looking back:</p>
-<ol>
-<li>Explain why <code>rm $file</code> and <code>rm &quot;$file&quot;</code> can behave differently, and give a concrete filename that makes them differ.</li>
-<li>What does each of the three parts of <code>set -euo pipefail</code> do, and why does a serious script want all three?</li>
-<li>You write <code>if [ $count = 5 ]</code> to compare a number, and it sometimes misbehaves. What is the correct operator for comparing integers, and why does the string comparison bite you?</li>
-<li>Describe, in your own words, what command substitution <code>$(...)</code> does and give one reason a script would use it instead of a hard-coded value.</li>
-<li>When would you choose a <code>for</code> loop over a <code>while</code> loop, and vice versa? Give one realistic example of each.</li>
-</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">quiz</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  question</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;A script runs `download_data | unpack` and reports success, but the output directory is empty. Which strict-mode option would have caught this?&quot;</span></span>
+<span class="line"><span style="color:#85E89D">  options</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;-o pipefail, because a pipeline&#39;s exit code otherwise comes only from its last command&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;-e, because the script would have exited at the first failing command&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;-u, because the output path variable was never set&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;-x, because tracing would have shown which command failed&quot;</span></span>
+<span class="line"><span style="color:#85E89D">  answer_index</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span></span>
+<span class="line"><span style="color:#85E89D">  explanation</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;Without pipefail, a pipeline reports whatever its final command returned. unpack succeeded at unpacking nothing, so the pipeline looked fine even though the download had already failed.&quot;</span></span></code></pre>
+<hr/>
 <h2 id="hands-on-exercise">Hands-on exercise</h2>
-<p>Time to write a real script. In the Day 12 lab you will build <code>backup_notes.sh</code> — a tool that takes a directory, counts its files by extension, and prints a summary — completing it through five numbered exercises that add one concept each: the argument with a default, the validation conditional, the extension function, the counting loop, and the report. Here, warm up by writing the smallest useful script yourself.</p>
-<p>Create a file called <code>count_here.sh</code> with this content, then run it:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D">#!/usr/bin/env bash</span></span>
-<span class="line"><span style="color:#79B8FF">set</span><span style="color:#79B8FF"> -euo</span><span style="color:#9ECBFF"> pipefail</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#E1E4E8">target</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;</span><span style="color:#79B8FF">${1</span><span style="color:#F97583">:-</span><span style="color:#9ECBFF">.</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">&quot;</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#F97583">if</span><span style="color:#E1E4E8"> [ </span><span style="color:#F97583">!</span><span style="color:#F97583"> -d</span><span style="color:#9ECBFF"> &quot;${</span><span style="color:#E1E4E8">target</span><span style="color:#9ECBFF">}&quot;</span><span style="color:#E1E4E8"> ]; </span><span style="color:#F97583">then</span></span>
-<span class="line"><span style="color:#79B8FF">  echo</span><span style="color:#9ECBFF"> &quot;Not a directory: ${</span><span style="color:#E1E4E8">target</span><span style="color:#9ECBFF">}&quot;</span><span style="color:#F97583"> &gt;&amp;2</span></span>
-<span class="line"><span style="color:#79B8FF">  exit</span><span style="color:#79B8FF"> 1</span></span>
-<span class="line"><span style="color:#F97583">fi</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#E1E4E8">count</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">0</span></span>
-<span class="line"><span style="color:#F97583">for</span><span style="color:#E1E4E8"> path </span><span style="color:#F97583">in</span><span style="color:#9ECBFF"> &quot;${</span><span style="color:#E1E4E8">target</span><span style="color:#9ECBFF">}&quot;/*</span><span style="color:#E1E4E8">; </span><span style="color:#F97583">do</span></span>
-<span class="line"><span style="color:#E1E4E8">  [ </span><span style="color:#F97583">-f</span><span style="color:#9ECBFF"> &quot;${</span><span style="color:#E1E4E8">path</span><span style="color:#9ECBFF">}&quot;</span><span style="color:#E1E4E8"> ] </span><span style="color:#F97583">||</span><span style="color:#F97583"> continue</span></span>
-<span class="line"><span style="color:#E1E4E8">  count</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">$((</span><span style="color:#B392F0">count</span><span style="color:#9ECBFF"> +</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">))</span></span>
-<span class="line"><span style="color:#F97583">done</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> &quot;Regular files in ${</span><span style="color:#E1E4E8">target</span><span style="color:#9ECBFF">}: ${</span><span style="color:#E1E4E8">count</span><span style="color:#9ECBFF">}&quot;</span></span></code></pre>
-<p>Run it two ways and watch the argument-with-default in action:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">bash</span><span style="color:#9ECBFF"> count_here.sh</span></span>
-<span class="line"><span style="color:#B392F0">bash</span><span style="color:#9ECBFF"> count_here.sh</span><span style="color:#9ECBFF"> /etc</span></span></code></pre>
-<p>The first counts files in the current directory (the default <code>.</code>); the second counts them in <code>/etc</code>.</p>
+<p>Write a script that takes an argument, loops over files, and fails loudly. Worked
+through fully in the Day 12 lab directory.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>What you are doing</th><th>Command or line</th></tr></thead><tbody><tr><td>Start the file properly</td><td><code>#!/usr/bin/env bash</code> then <code>set -euo pipefail</code></td></tr><tr><td>Take an argument with a default</td><td><code>target=&quot;${1:-.}&quot;</code></td></tr><tr><td>Guard against a bad input</td><td><code>[[ -d &quot;$target&quot; ]] || { echo &quot;no such dir&quot; &gt;&amp;2; exit 1; }</code></td></tr><tr><td>Loop over matching files</td><td><code>for f in &quot;$target&quot;/*.txt; do ... done</code></td></tr><tr><td>Capture a value</td><td><code>count=&quot;$(ls -1 &quot;$target&quot; | wc -l)&quot;</code></td></tr><tr><td>Run it</td><td><code>chmod +x tool.sh</code> then <code>./tool.sh reports</code></td></tr><tr><td>Lint it</td><td><code>shellcheck tool.sh</code></td></tr></tbody></table>
 <h3 id="expected-output">Expected output</h3>
-<p>Exact numbers depend on your machine, but the shape is fixed. Run in a directory containing, say, three files:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>$ bash count_here.sh</span></span>
-<span class="line"><span>Regular files in .: 3</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>$ bash count_here.sh /etc</span></span>
-<span class="line"><span>Regular files in /etc: 118</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>$ bash count_here.sh /no/such/place</span></span>
-<span class="line"><span>Not a directory: /no/such/place</span></span></code></pre>
-<p>The first two lines report a count; the third shows the validation conditional firing, printing to standard error and exiting non-zero. Confirm the failure with <code>echo $?</code> immediately after the third run — it prints <code>1</code>, the exit code your script returned.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>[14:02:11] Working on: reports</span></span>
+<span class="line"><span>[14:02:11] Found: reports/summary.txt</span></span>
+<span class="line"><span>[14:02:11] 3 entries</span></span>
+<span class="line"><span>./tool.sh: line 9: nosuchcmd: command not found</span></span></code></pre>
+<ul>
+<li><strong>The script stops at the failing line</strong> rather than continuing — that is <code>-e</code>.</li>
+<li><strong>The error went to stderr</strong>, so it stays out of any pipeline reading the output.</li>
+</ul>
 <h3 id="validate-your-work">Validate your work</h3>
-<p>You are done when you can check every box:</p>
 <ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" disabled/> The script runs without errors when given no argument, counting the current directory.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> Passing a real directory as <code>$1</code> counts that directory instead.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> Passing a path that is not a directory prints an error to standard error and exits with code <code>1</code> (verify with <code>echo $?</code>).</li>
-<li class="task-list-item"><input type="checkbox" disabled/> Every variable in your script is quoted as <code>&quot;${target}&quot;</code> and <code>&quot;${path}&quot;</code>.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> The first line is exactly <code>#!/usr/bin/env bash</code> and the second is <code>set -euo pipefail</code>.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Your script has a shebang and a strict-mode line</li>
+<li class="task-list-item"><input type="checkbox" disabled/> It accepts an argument and defaults sensibly when given none</li>
+<li class="task-list-item"><input type="checkbox" disabled/> It exits non-zero with a message on stderr for a bad input</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Every variable expansion is quoted</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>shellcheck</code> reports no warnings</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>bash tests/run_tests.sh</code> reports 0 failures</li>
 </ul>
 <h3 id="troubleshooting">Troubleshooting</h3>
 <ul>
-<li><strong><code>command not found</code> or the script does nothing.</strong> You saved the file but ran the wrong name, or you are in the wrong directory. Run <code>bash count_here.sh</code> from the folder where you saved it.</li>
-<li><strong><code>unbound variable</code> error.</strong> With <code>set -u</code>, referencing a variable you never set is a hard error — check for a typo in a variable name (<code>${targett}</code> instead of <code>${target}</code>).</li>
-<li><strong>The count is <code>0</code> in a folder you know has files.</strong> The <code>for</code> loop counts only regular files at the top level, skipping subdirectories; that is <code>[ -f ]</code> doing its job, not a bug.</li>
-<li><strong><code>syntax error near unexpected token &#39;done&#39;</code>.</strong> A missing <code>; then</code> after an <code>if</code> condition, or a missing <code>do</code> after the loop header. Compare your file against the example line by line.</li>
+<li>
+<p><strong><code>command not found</code> on your own script.</strong> Use <code>./tool.sh</code>; the current directory
+is not on <code>PATH</code>.</p>
+</li>
+<li>
+<p><strong><code>Permission denied</code>.</strong> <code>chmod +x</code>, or run it as <code>bash tool.sh</code>.</p>
+</li>
+<li>
+<p><strong><code>unbound variable</code> after adding <code>set -u</code>.</strong> That is the flag working. Find the
+typo it caught.</p>
+</li>
+<li>
+<p><strong>A loop over <code>*.txt</code> runs once with a literal <code>*.txt</code>.</strong> Nothing matched, and the
+pattern was passed through unchanged. Guard with a test.</p>
+</li>
+<li>
+<p><strong><code>[: too many arguments</code>.</strong> An unquoted variable split into several words.</p>
+</li>
 </ul>
 <h3 id="common-mistakes">Common mistakes</h3>
 <ul>
-<li><strong>Forgetting to quote variables.</strong> <code>for path in ${target}/*</code> unquoted breaks the moment <code>target</code> contains a space. Always write <code>&quot;${target}&quot;/*</code>.</li>
-<li><strong>Spaces around <code>=</code> in an assignment.</strong> <code>count = 0</code> is read as running a command called <code>count</code>; assignment must be <code>count=0</code> with no spaces.</li>
-<li><strong>Comparing numbers with <code>=</code>.</strong> Use <code>-eq</code>, <code>-gt</code>, <code>-lt</code> for integers and reserve <code>=</code> for strings; <code>[ &quot;$n&quot; -eq 0 ]</code>, not <code>[ &quot;$n&quot; = 0 ]</code>.</li>
+<li><strong>Spaces around <code>=</code> in an assignment.</strong></li>
+<li><strong>Comparing numbers with <code>=</code></strong> or strings with <code>-eq</code>.</li>
+<li><strong>Forgetting quotes</strong>, which works until the first filename with a space.</li>
+<li><strong>Omitting <code>set -euo pipefail</code></strong> and then trusting the output.</li>
+<li><strong>Writing errors to stdout</strong>, where they contaminate whatever reads the script.</li>
 </ul>
+<hr/>
 <h2 id="practice-assignment">Practice assignment</h2>
-<p>Complete the five exercises in <code>starter/backup_notes.sh</code> in the Day 12 lab so that the finished script matches the reference in <code>examples/</code>, then run the lab’s test suite and confirm it passes. Before you run the tests, open <code>starter/scripting-worksheet.md</code> and do the prediction exercise: given the listed sample directory, write down — by hand, before running anything — how many total files the script should report and the count you expect for each extension. Then run your completed script against that directory and compare. Getting a prediction wrong and understanding why is worth more than getting it right by luck; note in the worksheet any place your mental model of the loop or the counting differed from what the script actually did.</p>
+<ul>
+<li>
+<p><strong>Convert three commands you typed this week</strong> into a script with an argument and a
+default.</p>
+</li>
+<li>
+<p><strong>Add a <code>trap</code> that cleans up a temporary directory</strong> on exit, and prove it runs
+even when the script fails halfway.</p>
+</li>
+<li>
+<p><strong>Break your script deliberately</strong> in three ways — a typo’d variable, a failing
+command mid-pipeline, an unquoted filename with a space — and confirm strict mode
+catches each.</p>
+</li>
+<li>
+<p><strong>Run <code>shellcheck</code> on every script you have ever written</strong> and fix what it finds.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="extension-challenge">Extension challenge</h2>
-<p>Extend <code>backup_notes.sh</code> with a feature real inventory tools have: reporting the total size of the files, not just their count. Inside your counting loop, use command substitution and a size-reporting command to add each file’s size to a running total — on macOS, <code>stat -f%z &quot;${path}&quot;</code> prints a file’s size in bytes; on Linux, <code>stat -c%s &quot;${path}&quot;</code>. Detect the platform with <code>uname -s</code> and a conditional, exactly as you would in a portable pipeline, then print a final line like <code>Total size: N bytes</code>. For a harder version, convert the byte total to a human-readable figure in mebibytes by integer division (<code>$((bytes / 1048576))</code>), and add a conditional that prints a warning if the directory holds more than, say, a hundred files — the kind of guardrail a real backup script uses to catch a mistakenly enormous folder before it wastes time and disk. You will have turned a counting toy into something you would genuinely run before archiving a project.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
-Q1. What is the purpose of the first line `#!/usr/bin/env bash` in a script? </strong> </p> <ol type="A"> <li>It is a comment the shell ignores completely</li><li>It is the shebang, telling the system to run the file with bash found on the PATH</li><li>It imports a library of extra shell commands</li><li>It makes the file executable automatically</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> It is the shebang, telling the system to run the file with bash found on the PATH </p> <p>The shebang `#!` followed by an interpreter path tells the system which program should run the file. Using `/usr/bin/env bash` finds bash on the user&#39;s PATH, which is more portable than a hard-coded path. It does not, by itself, set the executable permission bit.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q2. Why should you almost always quote a variable expansion, writing `rm &quot;$file&quot;` instead of `rm $file`? </strong> </p> <ol type="A"> <li>Quoting makes the script run faster</li><li>Unquoted, the value is subject to word-splitting and globbing, so a filename with a space or a `*` becomes multiple arguments or expands unexpectedly</li><li>Unquoted variables are a syntax error in bash</li><li>Quotes convert the value to uppercase</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Unquoted, the value is subject to word-splitting and globbing, so a filename with a space or a `*` becomes multiple arguments or expands unexpectedly </p> <p>Without quotes the shell splits the value at spaces and expands glob characters like `*`. A value such as `my notes.txt` becomes two arguments, and `*` becomes every file in the directory. Quoting passes the value through as a single, literal argument.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q3. What does `set -euo pipefail` do? </strong> </p> <ol type="A"> <li>Turns on verbose logging of every command</li><li>Exits on the first failed command, errors on unset variables, and fails a pipeline if any stage fails</li><li>Disables all error checking so the script never stops</li><li>Sets three environment variables named e, u, and o</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Exits on the first failed command, errors on unset variables, and fails a pipeline if any stage fails </p> <p>`-e` exits on the first command that fails, `-u` treats use of an unset variable as an error (catching typos), and `-o pipefail` makes a pipeline report failure if any command in it fails, not just the last. Together they turn a forgiving shell into a strict one that stops when something is wrong.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q4. What does command substitution `$(date +%Y)` produce? </strong> </p> <ol type="A"> <li>The literal text &quot;date +%Y&quot;</li><li>The output of running the `date +%Y` command, substituted in place</li><li>An error, because commands cannot appear inside scripts</li><li>The exit code of the date command</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> The output of running the `date +%Y` command, substituted in place </p> <p>Command substitution runs the command inside `$(...)`, captures what it prints, trims the trailing newline, and substitutes the result as a value. It lets a script react to real information rather than a hard-coded guess.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q5. A script uses `if [ $count = 5 ]` to compare a number and behaves oddly. What is the correct integer comparison? </strong> </p> <ol type="A"> <li>`if [ $count == 5 ]`</li><li>`if [ $count -eq 5 ]`</li><li>`if [ $count -is 5 ]`</li><li>`if ( count = 5 )`</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> `if [ $count -eq 5 ]` </p> <p>In test expressions, `=` compares strings while `-eq`, `-gt`, `-lt`, and similar operators compare integers. Use `[ &quot;$count&quot; -eq 5 ]` for numbers. Quoting the variable also avoids an error when the value is empty.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q6. Which loop is the natural choice for reading a file one line at a time? </strong> </p> <ol type="A"> <li>A `for` loop over `*.txt`</li><li>A `while read -r line; do ... done &lt; file` loop</li><li>A `case` statement</li><li>Recursion, since shells have no loops</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> A `while read -r line; do ... done &lt; file` loop </p> <p>A `while read -r line` loop reading from a redirected file processes one line per iteration and stops at end of file, which is exactly the &quot;repeat while the command succeeds&quot; pattern `while` is built for. A `for` loop suits iterating over a known list such as files matching a pattern.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q7. What is the difference between `$1` and `$@` in a script? </strong> </p> <ol type="A"> <li>They are identical</li><li>`$1` is the first positional argument; `$@` is all of the positional arguments</li><li>`$1` is the exit code; `$@` is the script name</li><li>`$1` is the number of arguments; `$@` is the first one</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> `$1` is the first positional argument; `$@` is all of the positional arguments </p> <p>`$1` is the first argument passed to the script, `$2` the second, and so on. `$@` expands to all the arguments (quote it as `&quot;$@&quot;` to keep each one intact), and `$#` is the count of arguments.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q8. Why is `[[ ... ]]` generally preferred over `[ ... ]` in a bash script? </strong> </p> <ol type="A"> <li>It runs on every shell including minimal POSIX sh</li><li>It is a bash built-in that does not word-split its operands and supports pattern matching, making it safer</li><li>It is required for the shebang to work</li><li>It automatically quotes every variable for you regardless of shell</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> It is a bash built-in that does not word-split its operands and supports pattern matching, making it safer </p> <p>`[[ ]]` is a bash keyword that avoids the word-splitting and globbing pitfalls of the older `[` command and adds pattern matching and logical operators inside the brackets. Use `[ ]` only when a script must run under plain POSIX `sh`, which lacks `[[ ]]`.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>shebang</strong> </dt> <dd data-astro-cid-whrtx2kk>The `#!` characters on a script&#39;s first line, followed by the path to an interpreter (e.g. `#!/usr/bin/env bash`), telling the system which program should run the file.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>variable</strong> </dt> <dd data-astro-cid-whrtx2kk>A named holder for a value in a script, assigned with `name=value` (no spaces around `=`) and read with `$name` or `${name}`.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>quoting</strong> </dt> <dd data-astro-cid-whrtx2kk>Wrapping a value in double quotes, as in `&quot;$file&quot;`, to stop the shell from word-splitting it at spaces and expanding glob characters like `*` — the single most important habit for correct scripts.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>command substitution</strong> </dt> <dd data-astro-cid-whrtx2kk>The `$(command)` form, which runs a command and replaces itself with that command&#39;s captured output, letting a script use real results as values.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>exit code</strong> </dt> <dd data-astro-cid-whrtx2kk>The integer a command returns when it finishes — `0` for success and non-zero for failure — which conditionals and loops branch on.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>conditional</strong> </dt> <dd data-astro-cid-whrtx2kk>An `if`/`then`/`else` construct that runs commands based on whether a test succeeds, where the test is any command judged by its exit code.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>loop</strong> </dt> <dd data-astro-cid-whrtx2kk>A construct that repeats a block of commands: `for` iterates over a known list, while `while` (and `until`) repeats based on a command&#39;s exit code.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>function</strong> </dt> <dd data-astro-cid-whrtx2kk>A named, reusable group of commands defined with `name() { ... }` and called like any command; inside it, `$1` and `$2` are the arguments passed to the function.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>positional parameter</strong> </dt> <dd data-astro-cid-whrtx2kk>The numbered inputs a script receives on the command line — `$1`, `$2`, and so on — with `$#` giving their count and `$@` expanding to all of them.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>test command</strong> </dt> <dd data-astro-cid-whrtx2kk>The `[ ... ]` (also spelled `test`) or the bash-only `[[ ... ]]` construct that evaluates a condition, such as `-d` for &quot;is a directory&quot;, and returns an exit code.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>ShellCheck</strong> </dt> <dd data-astro-cid-whrtx2kk>A free, open-source static analyzer (linter) for shell scripts that flags bugs like unquoted variables and misused test brackets before the script is ever run.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>set -e</strong> </dt> <dd data-astro-cid-whrtx2kk>A shell option (part of `set -euo pipefail`) that makes a script exit immediately when any command fails, instead of blindly continuing after an error.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>strict mode</strong> </dt> <dd data-astro-cid-whrtx2kk>The convention of putting `set -euo pipefail` near the top of a script so it stops on errors, errors on unset variables, and detects failures anywhere in a pipeline.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://www.gnu.org/software/bash/manual/bash.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Bash Reference Manual</a> — GNU (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://linuxcommand.org/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Linux Command Line</a> — William Shotts (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://google.github.io/styleguide/shellguide.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Google Shell Style Guide</a> — Google (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://missing.csail.mit.edu/2020/shell-tools/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Missing Semester of Your CS Education — Shell Tools and Scripting</a> — MIT (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Shell_script" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Shell script</a> — Wikipedia (accessed 2026-07-12) </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="12" data-astro-cid-whrtx2kk>
+<ul>
+<li>
+<p><strong>Write a script that retries with backoff</strong> until a URL responds, giving up after
+five attempts, and returns a meaningful exit code either way.</p>
+</li>
+<li>
+<p><strong>Measure the cost of process creation.</strong> Loop ten thousand times calling an
+external command, then do the same work with one pipeline. The ratio is why the
+“prefer a pipeline” advice exists.</p>
+</li>
+<li>
+<p><strong>Add argument parsing</strong> that supports both <code>-v</code> and <code>--verbose</code>, and a <code>--help</code>
+that exits 0.</p>
+</li>
+<li>
+<p><strong>Make one of your scripts pass <code>shellcheck</code> at its strictest setting</strong>, and note
+which warnings you had to think hardest about.</p>
+</li>
+</ul>
+<hr/>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. What is the purpose of the first line `#!/usr/bin/env bash` in a script? </strong> </p> <ol type="A"> <li>It is a comment the shell ignores completely</li><li>It imports a library of extra shell commands</li><li>It is the shebang: run this file with bash</li><li>It makes the file executable automatically</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> It is the shebang: run this file with bash </p> <p>The shebang `#!` followed by an interpreter path tells the system which program should run the file. Using `/usr/bin/env bash` finds bash on the user&#39;s PATH, which is more portable than a hard-coded path. It does not, by itself, set the executable permission bit.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. Why should you almost always quote a variable expansion, writing `rm &quot;$file&quot;` instead of `rm $file`? </strong> </p> <ol type="A"> <li>Quoting makes the script run faster</li><li>Quotes convert the value to uppercase</li><li>Unquoted variables are a syntax error in bash</li><li>Unquoted values are word-split and globbed</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> Unquoted values are word-split and globbed </p> <p>Without quotes the shell splits the value at spaces and expands glob characters like `*`. A value such as `my notes.txt` becomes two arguments, and `*` becomes every file in the directory. Quoting passes the value through as a single, literal argument.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. What does `set -euo pipefail` do? </strong> </p> <ol type="A"> <li>Exit on error, on unset variables, and on pipeline failure</li><li>Turns on verbose logging of every command</li><li>Disables all error checking so the script never stops</li><li>Sets three environment variables named e, u, and o</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> Exit on error, on unset variables, and on pipeline failure </p> <p>`-e` exits on the first command that fails, `-u` treats use of an unset variable as an error (catching typos), and `-o pipefail` makes a pipeline report failure if any command in it fails, not just the last. Together they turn a forgiving shell into a strict one that stops when something is wrong.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. What does command substitution `$(date +%Y)` produce? </strong> </p> <ol type="A"> <li>The literal text &quot;date +%Y&quot;</li><li>The output of `date +%Y`, substituted in place</li><li>An error, because commands cannot appear inside scripts</li><li>The exit code of the date command</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> The output of `date +%Y`, substituted in place </p> <p>Command substitution runs the command inside `$(...)`, captures what it prints, trims the trailing newline, and substitutes the result as a value. It lets a script react to real information rather than a hard-coded guess.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. A script uses `if [ $count = 5 ]` to compare a number and behaves oddly. What is the correct integer comparison? </strong> </p> <ol type="A"> <li>`if [ $count == 5 ]`</li><li>`if [ $count -is 5 ]`</li><li>`if [ $count -eq 5 ]`</li><li>`if ( count = 5 )`</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> `if [ $count -eq 5 ]` </p> <p>In test expressions, `=` compares strings while `-eq`, `-gt`, `-lt`, and similar operators compare integers. Use `[ &quot;$count&quot; -eq 5 ]` for numbers. Quoting the variable also avoids an error when the value is empty.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. Which loop is the natural choice for reading a file one line at a time? </strong> </p> <ol type="A"> <li>A `for` loop over `*.txt`</li><li>Recursion, since shells have no loops</li><li>A `case` statement</li><li>A `while read -r line` loop</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> A `while read -r line` loop </p> <p>A `while read -r line` loop reading from a redirected file processes one line per iteration and stops at end of file, which is exactly the &quot;repeat while the command succeeds&quot; pattern `while` is built for. A `for` loop suits iterating over a known list such as files matching a pattern.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. What is the difference between `$1` and `$@` in a script? </strong> </p> <ol type="A"> <li>`$1` is the first argument; `$@` is all of them</li><li>They are identical</li><li>`$1` is the exit code; `$@` is the script name</li><li>`$1` is the number of arguments; `$@` is the first one</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> `$1` is the first argument; `$@` is all of them </p> <p>`$1` is the first argument passed to the script, `$2` the second, and so on. `$@` expands to all the arguments (quote it as `&quot;$@&quot;` to keep each one intact), and `$#` is the count of arguments.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. Why is `[[ ... ]]` generally preferred over `[ ... ]` in a bash script? </strong> </p> <ol type="A"> <li>It runs on every shell including minimal POSIX sh</li><li>It is a bash built-in that does not word-split and supports patterns</li><li>It is required for the shebang to work</li><li>It automatically quotes every variable for you regardless of shell</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> It is a bash built-in that does not word-split and supports patterns </p> <p>`[[ ]]` is a bash keyword that avoids the word-splitting and globbing pitfalls of the older `[` command and adds pattern matching and logical operators inside the brackets. Use `[ ]` only when a script must run under plain POSIX `sh`, which lacks `[[ ]]`.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>shebang</strong> </dt> <dd data-astro-cid-whrtx2kk>The `#!` characters on a script&#39;s first line, followed by the path to an interpreter (e.g. `#!/usr/bin/env bash`), telling the system which program should run the file.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>variable</strong> </dt> <dd data-astro-cid-whrtx2kk>A named holder for a value in a script, assigned with `name=value` (no spaces around `=`) and read with `$name` or `${name}`.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>quoting</strong> </dt> <dd data-astro-cid-whrtx2kk>Wrapping a value in double quotes, as in `&quot;$file&quot;`, to stop the shell from word-splitting it at spaces and expanding glob characters like `*` — the single most important habit for correct scripts.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>command substitution</strong> </dt> <dd data-astro-cid-whrtx2kk>The `$(command)` form, which runs a command and replaces itself with that command&#39;s captured output, letting a script use real results as values.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>exit code</strong> </dt> <dd data-astro-cid-whrtx2kk>The integer a command returns when it finishes — `0` for success and non-zero for failure — which conditionals and loops branch on.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>conditional</strong> </dt> <dd data-astro-cid-whrtx2kk>An `if`/`then`/`else` construct that runs commands based on whether a test succeeds, where the test is any command judged by its exit code.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>loop</strong> </dt> <dd data-astro-cid-whrtx2kk>A construct that repeats a block of commands: `for` iterates over a known list, while `while` (and `until`) repeats based on a command&#39;s exit code.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>function</strong> </dt> <dd data-astro-cid-whrtx2kk>A named, reusable group of commands defined with `name() { ... }` and called like any command; inside it, `$1` and `$2` are the arguments passed to the function.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>positional parameter</strong> </dt> <dd data-astro-cid-whrtx2kk>The numbered inputs a script receives on the command line — `$1`, `$2`, and so on — with `$#` giving their count and `$@` expanding to all of them.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>test command</strong> </dt> <dd data-astro-cid-whrtx2kk>The `[ ... ]` (also spelled `test`) or the bash-only `[[ ... ]]` construct that evaluates a condition, such as `-d` for &quot;is a directory&quot;, and returns an exit code.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>ShellCheck</strong> </dt> <dd data-astro-cid-whrtx2kk>A free, open-source static analyzer (linter) for shell scripts that flags bugs like unquoted variables and misused test brackets before the script is ever run.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>set -e</strong> </dt> <dd data-astro-cid-whrtx2kk>A shell option (part of `set -euo pipefail`) that makes a script exit immediately when any command fails, instead of blindly continuing after an error.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>strict mode</strong> </dt> <dd data-astro-cid-whrtx2kk>The convention of putting `set -euo pipefail` near the top of a script so it stops on errors, errors on unset variables, and detects failures anywhere in a pipeline.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://www.gnu.org/software/bash/manual/bash.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Bash Reference Manual</a> — GNU (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://linuxcommand.org/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Linux Command Line</a> — William Shotts (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://google.github.io/styleguide/shellguide.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Google Shell Style Guide</a> — Google (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://missing.csail.mit.edu/2020/shell-tools/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>The Missing Semester of Your CS Education — Shell Tools and Scripting</a> — MIT (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Shell_script" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Shell script</a> — Wikipedia (accessed 2026-07-12) </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="12" data-astro-cid-whrtx2kk>
 Mark Day 12 as read
-</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
       surfaces for someone searching for one — it costs you a click and it is genuinely how people
-      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/ai-roadmap-365/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
 ★ Star on GitHub
-</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-011-environment-variables-and-shell-configuration" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 11</span> <span class="pn__title" data-astro-cid-oerjsknp>Environment Variables and Shell Configuration</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-013-package-managers-homebrew-apt-and-winget" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 13 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Package Managers: Homebrew, apt, and winget</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
-</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/day-011-environment-variables-and-shell-configuration" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 11</span> <span class="pn__title" data-astro-cid-oerjsknp>Environment Variables and Shell Configuration</span> </a> <a class="pn__card pn__card--next" href="/day-013-package-managers-homebrew-apt-and-winget" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 13 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Package Managers: Homebrew, apt, and winget</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://ocm-mcp-server.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener">LinkedIn</a> </nav> </div> </footer> <script>
       // Progressive enhancement only: the theme falls back to dark and every
       // .reveal element is visible by default (the hidden start state exists
       // only inside a prefers-reduced-motion: no-preference query).

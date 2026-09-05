@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 44: Variables and Types · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to explain what a Python variable really is — a name bound to an object — name the core built-in types, tell mutable from immutable, and convert between types safely, so type confusion never silently breaks your data or model code."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-044-variables-and-types/"><meta property="og:title" content="Day 44: Variables and Types · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to explain what a Python variable really is — a name bound to an object — name the core built-in types, tell mutable from immutable, and convert between types safely, so type confusion never silently breaks your data or model code."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-044-variables-and-types/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-044-variables-and-types.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 44: Variables and Types · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 44: Variables and Types · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to explain what a Python variable really is — a name bound to an object — name the core built-in types, tell mutable from immutable, and convert between types safely, so type confusion never silently breaks your data or model code."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-044-variables-and-types.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 44: Variables and Types · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to explain what a Python variable really is — a name bound to an object — name the core built-in types, tell mutable from immutable, and convert between types safely, so type confusion never silently breaks your data or model code."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://ai-roadmap-365.github.io/day-044-variables-and-types/"><meta property="og:title" content="Day 44: Variables and Types · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to explain what a Python variable really is — a name bound to an object — name the core built-in types, tell mutable from immutable, and convert between types safely, so type confusion never silently breaks your data or model code."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://ai-roadmap-365.github.io/day-044-variables-and-types/"><meta property="og:image" content="https://ai-roadmap-365.github.io/social/day-044-variables-and-types.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 44: Variables and Types · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 44: Variables and Types · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to explain what a Python variable really is — a name bound to an object — name the core built-in types, tell mutable from immutable, and convert between types safely, so type confusion never silently breaks your data or model code."><meta name="twitter:image" content="https://ai-roadmap-365.github.io/social/day-044-variables-and-types.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
       // Dark is the default regardless of OS preference - this is a dark-first
       // design. A visitor who picks light with the toggle keeps it. Applied
       // before first paint so there is no flash of the wrong theme.
@@ -11,405 +11,736 @@
         }
         document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
       })();
-    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+    </script><link rel="stylesheet" href="/_astro/_day_.CiF6NwwU.css">
 <style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
 .starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
-</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="site-home" href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener"> <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M15 5l-7 7 7 7"></path> </svg>
+Sandeep Bazar
+</a> <a class="brand" href="/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
 365 Days of AI
-</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
-Labs
-</a> </header> <main id="main">  <article data-day="44" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/programming-with-python">Programming with Python</a>  ›  <span>Python Setup and First Programs</span>  › 
-Day 44 </p> <h1 data-astro-cid-whrtx2kk>Day 44: Variables and Types</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-044-variables-and-types.png" width="1200" height="630" alt="Day 44 of 365 — Variables and Types" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to explain what a Python variable really is — a name bound to an object — name the core built-in types, tell mutable from immutable, and convert between types safely, so type confusion never silently breaks your data or model code.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Programming with Python</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Python Setup and First Programs</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/programming-with-python/day-044-variables-and-types" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/programming-with-python/day-044-variables-and-types</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
-cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/programming-with-python/day-044-variables-and-types</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
-You can also <a href="/ai-roadmap-365/labs/day-044-variables-and-types" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
-</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Explain the name-object model of variables (names are tags bound to objects, not boxes that hold values) and connect it to bytes in memory from Day 4</li><li data-astro-cid-whrtx2kk>Identify the core built-in types — int, float, bool, str, NoneType, list, tuple, dict, set — and give a literal and use for each</li><li data-astro-cid-whrtx2kk>Distinguish dynamic typing (types live on objects, checked at run time) from static typing (types declared on names, checked before running)</li><li data-astro-cid-whrtx2kk>Use type() and isinstance() to inspect and test an object&#39;s type, and explain when to prefer isinstance</li><li data-astro-cid-whrtx2kk>Predict truthiness for values including the falsy set (None, False, 0, empty containers) and distinguish absent from present-but-empty with is None</li><li data-astro-cid-whrtx2kk>Distinguish mutable from immutable objects using id(), and convert between types safely with int(), float(), and str() while handling ValueError</li><li data-astro-cid-whrtx2kk>Apply PEP 8 snake_case naming conventions and connect clean typing to reliable data pipelines and typed AI inputs and outputs</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Day 43 — Python installed and runnable (python3 launches the interpreter and REPL)</li><li data-astro-cid-whrtx2kk>Day 4 — data is bytes in memory (this lesson builds the object layer on top of that)</li><li data-astro-cid-whrtx2kk>A terminal and any text editor; no prior Python programming required</li></ul> <h2 id="why-this-matters">Why this matters</h2>
-<p>Every program you will ever write — and every data pipeline that will ever feed an AI model — is a river of typed values moving through named variables. A user’s age is a whole number; a temperature reading is a decimal; a name is text; a “is this account active?” flag is a yes/no. Python has to know which is which, because what <code>+</code> <em>means</em> depends entirely on the types involved: <code>3 + 4</code> is <code>7</code>, but <code>&quot;3&quot; + &quot;4&quot;</code> is <code>&quot;34&quot;</code>. Get the type wrong and your program either crashes loudly or, far worse, computes something plausible and false.</p>
-<p>This is not abstract. When you later load a dataset and every “price” column arrives as text because a spreadsheet exported it with dollar signs, your averages will silently break until you convert the types. When you call a machine-learning library and it complains that it expected a floating-point array but got integers, or a list where it wanted something else, you are staring at a type mismatch. Practitioners will tell you that a large share of the bugs in real data and modelling code are not clever algorithmic errors at all — they are type confusion: a string where a number belonged, <code>None</code> where a value was assumed, a whole number where a fraction was needed.</p>
-<p>Today you build the mental model that prevents those bugs. You will learn what a variable actually is in Python (not what most beginners think it is), the handful of built-in types you will use every day, how Python tracks types at runtime, and how to convert safely between them. This connects directly to Day 4, where you saw that everything in a computer is ultimately bytes in memory — today you learn how Python wraps those bytes in <em>objects</em> that know their own type, and how names in your code point at them.</p>
+</a> <nav aria-label="Primary"> <a href="/sections">Courses</a> <a href="/labs">Labs</a> <a href="/catalog">Catalogs</a> <a href="/search">Search</a> <a href="/glossary">Glossary</a> <a href="/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+GitHub
+</a> </header> <main id="main">  <article data-day="44" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/sections/programming-with-python">Programming with Python</a>  ›  <span>Python Setup and First Programs</span>  › 
+Day 44 </p> <h1 data-astro-cid-whrtx2kk>Day 44: Variables and Types</h1>  <img class="day-hero" src="/social/day-044-variables-and-types.png" width="1200" height="630" alt="Day 44 of 365 — Variables and Types" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to explain what a Python variable really is — a name bound to an object — name the core built-in types, tell mutable from immutable, and convert between types safely, so type confusion never silently breaks your data or model code.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Programming with Python</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Python Setup and First Programs</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/programming-with-python/day-044-variables-and-types" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/programming-with-python/day-044-variables-and-types</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/ai-roadmap-365/ai-roadmap-365.github.io.git
+cd ai-roadmap-365.github.io</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/programming-with-python/day-044-variables-and-types</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/labs/day-044-variables-and-types" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Explain the name-object model of variables (names are tags bound to objects, not boxes that hold values) and connect it to bytes in memory from Day 4</li><li data-astro-cid-whrtx2kk>Identify the core built-in types — int, float, bool, str, NoneType, list, tuple, dict, set — and give a literal and use for each</li><li data-astro-cid-whrtx2kk>Distinguish dynamic typing (types live on objects, checked at run time) from static typing (types declared on names, checked before running)</li><li data-astro-cid-whrtx2kk>Use type() and isinstance() to inspect and test an object&#39;s type, and explain when to prefer isinstance</li><li data-astro-cid-whrtx2kk>Predict truthiness for values including the falsy set (None, False, 0, empty containers) and distinguish absent from present-but-empty with is None</li><li data-astro-cid-whrtx2kk>Distinguish mutable from immutable objects using id(), and convert between types safely with int(), float(), and str() while handling ValueError</li><li data-astro-cid-whrtx2kk>Apply PEP 8 snake_case naming conventions and connect clean typing to reliable data pipelines and typed AI inputs and outputs</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk>Day 43 — Python installed and runnable (python3 launches the interpreter and REPL)</li><li data-astro-cid-whrtx2kk>Day 4 — data is bytes in memory (this lesson builds the object layer on top of that)</li><li data-astro-cid-whrtx2kk>A terminal and any text editor; no prior Python programming required</li> </ul> <h2 id="why-this-matters">Why this matters</h2>
+<ul>
+<li>
+<p><strong>Aliasing surprises every Python beginner exactly once</strong>, and today is that
+once, deliberately.</p>
+</li>
+<li>
+<p><strong>A tensor is an object with a name bound to it</strong>, so every mutation surprise in
+your training code is this lesson.</p>
+</li>
+<li>
+<p><strong>Truthiness has a sharp edge</strong>: <code>0</code> and <code>&quot;&quot;</code> are falsy, so a value that is
+present but empty fails an <code>if value:</code> test.</p>
+</li>
+<li>
+<p><strong>Mutable default arguments</strong> and shared-list bugs both come straight from the
+binding model.</p>
+</li>
+<li>
+<p><strong>Types belong to objects, not to names.</strong> Once that lands, a whole class of
+confusion disappears.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="the-idea-in-plain-language">The idea in plain language</h2>
-<p>A <strong>variable</strong> in Python is a <em>name</em> that refers to an <strong>object</strong>. That is the whole idea, and it is worth slowing down on because it is not how most people first imagine it.</p>
-<p>Many beginners picture a variable as a labelled box: you have a box called <code>x</code>, and you put the number <code>5</code> inside it. That “box” picture comes from other languages and it will mislead you in Python. In Python, the number <code>5</code> is an object that lives in memory on its own, and <code>x</code> is simply a <em>tag</em> — a sticky label — that you attach to it. Writing <code>x = 5</code> does not copy <code>5</code> into a box named <code>x</code>; it ties the tag <code>x</code> to the already-existing object <code>5</code>.</p>
-<p>Why does the difference matter? Because a single object can wear more than one tag. If you write <code>x = 5</code> and then <code>y = x</code>, you now have two tags — <code>x</code> and <code>y</code> — pointing at the <em>same</em> object. For a number this is harmless, but for the kinds of objects that can <em>change</em> (like a list), it has visible consequences: change the object through one tag and every other tag pointing at it sees the change too. Holding the tag picture in your head is the difference between that behaviour feeling like a mystery and feeling obvious.</p>
-<p>An <strong>object</strong> carries three things: a <strong>type</strong> (what kind of thing it is — a whole number, some text, a list), a <strong>value</strong> (the actual data), and an <strong>identity</strong> (a permanent tag-independent “which object is this,” which in the standard Python interpreter is essentially its address in memory). Names have none of these on their own — a name is untyped; only the object it points to has a type. That single fact is the key to everything else in this lesson.</p>
+<p><img src="/_astro/label-not-box.FZf_xb3l_ZIALX.svg" alt="Diagram: variables as boxes compared with variables as labels" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong>A name is a label; the object is the thing.</strong> They are separate, and the
+binding between them can change.</p>
+</li>
+<li>
+<p><strong>Assignment binds a name to an object.</strong> It does not copy the object.</p>
+</li>
+<li>
+<p><strong>So two names can tag one object</strong>, and changing it through either shows
+through both.</p>
+</li>
+<li>
+<p><strong>The type belongs to the object</strong>, checked as the program runs — which is what
+“dynamically typed” means.</p>
+</li>
+<li>
+<p><strong>Mutability decides whether change is visible elsewhere.</strong> That is the property
+worth sorting types by.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="historical-background">Historical background</h2>
-<p>Python was created by the Dutch programmer Guido van Rossum, who began working on it in December 1989 as a holiday project and released the first version, 0.9.0, in February 1991. He named it not after the snake but after the British comedy troupe Monty Python’s Flying Circus — which is why Python documentation and tutorials have a long tradition of whimsical examples. From the start, Python was designed around a simple, consistent object model: <em>everything is an object</em>. A number is an object, a piece of text is an object, a function is an object, even a type is an object. This uniformity is why the rules you learn today apply almost everywhere in the language.</p>
-<p>The “names refer to objects” model Python uses is sometimes called “call by object reference” or “call by sharing,” and it was not invented by Python — it goes back to languages like Lisp (1958) and Smalltalk (1970s), which pioneered the idea that variables hold references to objects rather than the objects themselves. Python’s contribution was to make this model approachable, wrapping it in clean syntax with no pointers to manage by hand and automatic memory management underneath.</p>
-<p>The style rules you will meet at the end of the lesson also have a history. In 2001, Guido van Rossum, Barry Warsaw, and Nick Coghlan wrote <strong>PEP 8</strong>, the Style Guide for Python Code — one of a series of “Python Enhancement Proposals” that steer the language. PEP 8 codified conventions such as <code>snake_case</code> for variable names, and it is now so widely followed that reading un-PEP-8 code feels, to a Python programmer, like reading a paragraph with random capital letters. Type checking arrived later still: <strong>mypy</strong>, the most widely used static type checker for Python, grew out of work by Jukka Lehtosalo in the early 2010s, and the type-annotation syntax it relies on was standardised in PEP 484 in 2014. Python thus grew up dynamically typed, then gained optional static checking on top — a history you can still feel in how the language works today.</p>
+<ul>
+<li>
+<p><strong>Python chose objects for everything</strong>, from the start. Integers, functions,
+classes and modules are all objects with a type and an identity.</p>
+</li>
+<li>
+<p><strong>The name-binding model came from that decision.</strong> A variable is not a box
+holding a value; it is a label attached to an object.</p>
+</li>
+<li>
+<p><strong>Languages that use boxes behave differently.</strong> In C, assigning copies bytes
+into storage; in Python, assigning re-points a label.</p>
+</li>
+<li>
+<p><strong>Neither is more correct</strong>, but confusing the two is the origin of most
+aliasing bugs.</p>
+</li>
+<li>
+<p><strong>Type hints arrived in Python 3.5</strong>, in 2015, as annotations the interpreter
+ignores and external tools check.</p>
+</li>
+<li>
+<p><strong>That was deliberate.</strong> Adding real static typing would have broken the
+language; adding optional annotations gave the benefit without the cost.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
-<p>A variable is a name bound to an object. Assignment (<code>name = object</code>) creates or re-points that binding. It is <em>not</em> a container, <em>not</em> a box, and <em>not</em> a fixed slot of memory that belongs to the name.</p>
-<p>A <strong>type</strong> is a property of the <em>object</em>, not of the name. <code>x</code> is not “an integer variable”; <code>x</code> is a name currently pointing at an integer object. Point it at a string next moment and it points at a string — the name did not change type, because the name never had a type to begin with. This is worth stating three ways because it overturns intuitions carried from other languages.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Common misconception</th><th>The reality in Python</th></tr></thead><tbody><tr><td>”A variable is a box that stores a value.”</td><td>A variable is a name (a tag) that <em>refers</em> to an object living independently in memory.</td></tr><tr><td>”<code>x = 5</code> copies 5 into x.”</td><td>It binds the name <code>x</code> to the existing integer object <code>5</code>; no box is filled.</td></tr><tr><td>”The variable <code>x</code> has a type (int).”</td><td>The <em>object</em> has the type; the name <code>x</code> is untyped and can be re-bound to any type.</td></tr><tr><td>”<code>y = x</code> makes an independent copy.”</td><td>It makes a second name for the <em>same</em> object; for mutable objects, changes show through both names.</td></tr><tr><td>”Assigning a new value changes the old object.”</td><td>For immutable objects it creates a <em>new</em> object and re-points the name; the old object is untouched.</td></tr></tbody></table>
-<p>What a type is <em>not</em>: it is not a label you declare in advance and are then locked into. In statically typed languages such as Java or C, you write <code>int x;</code> and <code>x</code> may only ever hold integers, checked before the program runs. Python does no such thing — types travel with objects at runtime, which is the topic of dynamic typing below.</p>
+<p><strong>A variable is:</strong></p>
+<ul>
+<li>A name in a namespace, bound to an object.</li>
+<li>Rebindable at any time, to an object of any type.</li>
+<li>Untyped itself. The object carries the type.</li>
+</ul>
+<p><strong>It is not:</strong></p>
+<ul>
+<li>
+<p><strong>Not a container.</strong> Nothing is stored “in” a variable; the name points at
+something stored elsewhere.</p>
+</li>
+<li>
+<p><strong>Not a copy.</strong> <code>b = a</code> creates no new object.</p>
+</li>
+<li>
+<p><strong>Not typed.</strong> <code>x: int = 42</code> is a hint for tools, and the interpreter will
+happily let you rebind <code>x</code> to a string.</p>
+</li>
+<li>
+<p><strong>Not the object’s only handle.</strong> Any number of names may point at one object,
+and the object does not know about any of them.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
-<p>The object-and-name model solves a real tension: programs need to <em>share</em> and <em>reshape</em> data efficiently, without the programmer manually tracking memory. If every assignment copied the whole object, passing a million-row dataset into a function would duplicate a million rows — ruinous. By making assignment simply attach another name to the same object, Python keeps assignment instant and cheap regardless of how big the object is. The trade-off (aliasing, which you will see) is a deliberate one, and understanding it is what today buys you.</p>
-<p>Dynamic typing — letting the type live on the object rather than being declared on the name — solves a different problem: developer speed and flexibility. You can write and run code without annotating every variable’s type, prototype quickly, and write functions that naturally work on many types (a <code>total</code> function that sums ints or floats without caring which). This is a large part of why Python became the default language for data work and experimentation. The cost is that some type errors are only discovered when the code runs rather than before — which is exactly why optional type checkers like mypy were later added, to recover some of that safety without giving up the flexibility.</p>
-<p>Finally, having a small, well-defined set of built-in types solves the problem of <em>interoperability</em>. Because everyone’s ints are the same <code>int</code>, everyone’s text is the same <code>str</code>, and every library agrees on what a <code>list</code> or a <code>dict</code> is, code from thousands of authors composes without negotiation. When you feed data into a numerical or machine-learning library later, it can state precisely what types it needs, and you can supply exactly those.</p>
+<ul>
+<li>
+<p><strong>Uniformity.</strong> Everything being an object means one set of rules covers
+integers, functions, classes and modules alike.</p>
+</li>
+<li>
+<p><strong>Cheap assignment.</strong> Binding a name is constant-time whatever the object’s
+size, because nothing is copied.</p>
+</li>
+<li>
+<p><strong>Flexibility.</strong> A name can hold anything, which is what makes Python quick to
+write.</p>
+</li>
+<li>
+<p><strong>The cost is deferred errors.</strong> A type mistake surfaces when the line runs, not
+when the file is read — which is what type hints and mypy exist to claw back.</p>
+</li>
+<li>
+<p><strong>Mutability is the trade-off made explicit.</strong> Immutable objects are safe to
+share; mutable ones are efficient to build up.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="how-it-works">How it works</h2>
 <h3 id="names-objects-and-binding">Names, objects, and binding</h3>
-<p>When Python runs <code>a = [1, 2, 3]</code>, three things happen in order. First, the object on the right — a list containing 1, 2, and 3 — is created in memory, with its own type (<code>list</code>), value (<code>[1, 2, 3]</code>), and identity. Second, the name <code>a</code> is created (if it did not exist) in the current namespace. Third, <code>a</code> is <em>bound</em> to that list object. The name and the object are now connected, but they remain separate things.</p>
-<p>Run <code>b = a</code> next and no new list is made. Python looks up what <code>a</code> points to and binds <code>b</code> to the very same object. Both names now tag one list. You can prove it with the built-in <code>id()</code> function, which returns an object’s identity: <code>id(a)</code> and <code>id(b)</code> come back identical. This is <strong>aliasing</strong> — two names for one object — and it is the single most important consequence of the model.</p>
-<p><img src="/ai-roadmap-365/_astro/name-object.-VTjr6RV_Z7euU1.svg" alt="Diagram: two names bound to the same object in memory, illustrating aliasing in Python" loading="lazy" decoding="async" fetchpriority="auto" width="720" height="440"></p>
-<p>Read the diagram left to right: the names <code>a</code> and <code>b</code> live in your code; the objects live in memory; the arrows are the bindings. Because both arrows land on the same list, appending to the list through <code>b</code> (<code>b.append(4)</code>) mutates the object that <code>a</code> also points at, so <code>a</code> now reads <code>[1, 2, 3, 4]</code> too. Rebinding is different from mutating: <code>b = &quot;hello&quot;</code> does not touch the list at all — it just moves the <code>b</code> tag onto a brand-new string object, leaving <code>a</code> still pointing at <code>[1, 2, 3, 4]</code>.</p>
-<h3 id="the-core-built-in-types">The core built-in types</h3>
-<p>You will meet many types over this section, but a small core covers the vast majority of everyday code:</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Type</th><th>Name</th><th>Example literal</th><th>What it holds</th><th>Mutable?</th></tr></thead><tbody><tr><td>Integer</td><td><code>int</code></td><td><code>42</code>, <code>-7</code>, <code>0</code></td><td>Whole numbers, unlimited size</td><td>No</td></tr><tr><td>Floating-point</td><td><code>float</code></td><td><code>3.14</code>, <code>-0.5</code>, <code>2.0</code></td><td>Real numbers with a fractional part</td><td>No</td></tr><tr><td>Boolean</td><td><code>bool</code></td><td><code>True</code>, <code>False</code></td><td>A truth value (a subtype of <code>int</code>)</td><td>No</td></tr><tr><td>String</td><td><code>str</code></td><td><code>&quot;hello&quot;</code>, <code>&#39;a&#39;</code></td><td>Text, a sequence of characters</td><td>No</td></tr><tr><td>None</td><td><code>NoneType</code></td><td><code>None</code></td><td>The single “no value” object</td><td>No</td></tr><tr><td>List</td><td><code>list</code></td><td><code>[1, 2, 3]</code></td><td>An ordered, changeable sequence</td><td>Yes</td></tr><tr><td>Tuple</td><td><code>tuple</code></td><td><code>(1, 2, 3)</code></td><td>An ordered, fixed sequence</td><td>No</td></tr><tr><td>Dictionary</td><td><code>dict</code></td><td><code>{&quot;a&quot;: 1}</code></td><td>Key-to-value lookups</td><td>Yes</td></tr><tr><td>Set</td><td><code>set</code></td><td><code>{1, 2, 3}</code></td><td>An unordered collection of unique items</td><td>Yes</td></tr></tbody></table>
-<p>A few notes that trip people up. A <code>float</code> is <em>not</em> the same as an <code>int</code> even when it looks whole: <code>2</code> is an <code>int</code> and <code>2.0</code> is a <code>float</code>, and they have different types despite being equal in value. A <code>bool</code> is technically a special kind of <code>int</code> in Python — <code>True</code> behaves as <code>1</code> and <code>False</code> as <code>0</code> in arithmetic, so <code>True + True</code> is <code>2</code> — a quirk worth knowing but not relying on. <code>None</code> is not zero, not an empty string, and not <code>False</code>; it is a distinct object of its own type, <code>NoneType</code>, used to mean “there is deliberately no value here.” The four collection types — <code>list</code>, <code>tuple</code>, <code>dict</code>, <code>set</code> — get full lessons of their own later in this section; today you only need to recognise them and know which can change.</p>
-<p><img src="/ai-roadmap-365/_astro/type-map.BuHHKbYn_Z2svYzD.svg" alt="Diagram: the core Python built-in types grouped by mutability and by category" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="470"></p>
-<p>The type map sorts the core types into two columns by the property that matters most in practice: whether the object can change in place. Everything on the left — numbers, <code>bool</code>, <code>str</code>, <code>None</code>, <code>tuple</code> — is <em>immutable</em>: once created, the object’s value never changes. Everything on the right — <code>list</code>, <code>dict</code>, <code>set</code> — is <em>mutable</em>: you can add, remove, or alter contents without making a new object.</p>
-<h3 id="dynamic-typing-versus-static-typing">Dynamic typing versus static typing</h3>
-<p>Python is <strong>dynamically typed</strong>: the type belongs to the object, checked as the program runs, and a name may be re-bound to a value of any type at any time. This is legal and common:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">x </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 42</span><span style="color:#6A737D">          # x points at an int</span></span>
-<span class="line"><span style="color:#E1E4E8">x </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> &quot;forty-two&quot;</span><span style="color:#6A737D"> # now x points at a str — perfectly fine</span></span>
-<span class="line"><span style="color:#E1E4E8">x </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">]      </span><span style="color:#6A737D"># now a list</span></span></code></pre>
-<p>The name <code>x</code> never had a type; each line just re-points it. Contrast a <strong>statically typed</strong> language such as Java, where you would write <code>int x = 42;</code> and the compiler would <em>refuse to build the program</em> if you later assigned text to <code>x</code>. Static typing catches whole classes of mistakes before the program runs, at the cost of more ceremony and less flexibility; dynamic typing does the reverse. Python lets you have some of both: you can add optional type <em>hints</em> (<code>x: int = 42</code>) that the interpreter ignores but a tool like mypy checks, giving you early warnings without changing how the code runs.</p>
-<h3 id="type-and-isinstance"><code>type()</code> and <code>isinstance()</code></h3>
-<p>Two built-in functions let you ask about types. <code>type(obj)</code> returns the object’s type: <code>type(42)</code> is <code>&lt;class &#39;int&#39;&gt;</code>, <code>type(&quot;hi&quot;)</code> is <code>&lt;class &#39;str&#39;&gt;</code>. <code>isinstance(obj, SomeType)</code> returns <code>True</code> or <code>False</code> for “is this object of that type (or a subtype)?”: <code>isinstance(42, int)</code> is <code>True</code>. Prefer <code>isinstance()</code> for real checks in code, because it understands subtypes (for example <code>isinstance(True, int)</code> is <code>True</code>, since <code>bool</code> is a subtype of <code>int</code>) and accepts a tuple of types to check several at once: <code>isinstance(x, (int, float))</code> asks “is <code>x</code> any kind of number?”. Reserve <code>type()</code> for exploration and printing.</p>
-<h3 id="truthiness">Truthiness</h3>
-<p>Every Python object can be treated as true or false in a condition, even when it is not a <code>bool</code>. This is <strong>truthiness</strong>. The rule is simple: a handful of values are <strong>falsy</strong> — <code>False</code>, <code>None</code>, any zero (<code>0</code>, <code>0.0</code>), and any <em>empty</em> container (<code>&quot;&quot;</code>, <code>[]</code>, <code>{}</code>, <code>()</code>, <code>set()</code>) — and everything else is <strong>truthy</strong>. So <code>if items:</code> reads naturally as “if the list has anything in it,” and <code>if name:</code> as “if the name string is non-empty.” This is idiomatic Python, but it has a sharp edge: because <code>0</code> and <code>&quot;&quot;</code> are falsy, a value that is genuinely present but happens to be zero or empty will fail an <code>if value:</code> test. When you must distinguish “absent” from “present but empty,” test against <code>None</code> explicitly with <code>if value is not None:</code>.</p>
-<h3 id="mutability-and-why-it-matters">Mutability and why it matters</h3>
-<p>An <strong>immutable</strong> object cannot be changed after it is created; a <strong>mutable</strong> object can. <code>int</code>, <code>float</code>, <code>bool</code>, <code>str</code>, and <code>tuple</code> are immutable. <code>list</code>, <code>dict</code>, and <code>set</code> are mutable. This is not a pedantic distinction — it changes program behaviour. Because a string is immutable, “changing” one always produces a <em>new</em> object: <code>s = &quot;cat&quot;; s = s + &quot;s&quot;</code> does not edit the original string; it builds a new string <code>&quot;cats&quot;</code> and re-points <code>s</code>, leaving the old <code>&quot;cat&quot;</code> object untouched (soon to be cleaned up). Because a list is mutable, <code>nums.append(4)</code> changes the existing object, which — through aliasing — every name pointing at that list will see. You can watch the difference directly with <code>id()</code>: after string “modification” the id changes (new object); after list mutation the id stays the same (same object, new contents). Immutability is what makes strings, numbers, and tuples safe to share freely; mutability is what makes lists and dicts efficient to build up and edit in place.</p>
-<h3 id="type-conversion">Type conversion</h3>
-<p>You convert between types by calling the type as a function: <code>int(&quot;42&quot;)</code> gives the integer <code>42</code>, <code>str(42)</code> gives <code>&quot;42&quot;</code>, <code>float(&quot;3.14&quot;)</code> gives <code>3.14</code>, <code>bool(0)</code> gives <code>False</code>. These are essential when data arrives in the wrong shape — for instance, user input from the keyboard always comes in as a string, so <code>int(input())</code> is how you turn typed digits into a number. But conversion has pitfalls. <code>int(&quot;3.5&quot;)</code> does <em>not</em> give <code>3</code>; it raises <code>ValueError</code>, because <code>&quot;3.5&quot;</code> is not a valid <em>integer</em> string — you must go through <code>int(float(&quot;3.5&quot;))</code> if you want truncation. <code>int(3.9)</code> gives <code>3</code>, silently discarding the fraction (it truncates toward zero, it does not round). <code>bool(&quot;False&quot;)</code> is <code>True</code>, not <code>False</code>, because <em>any</em> non-empty string is truthy — the letters inside are irrelevant. Safe conversion means anticipating these: wrap risky conversions in <code>try</code>/<code>except ValueError</code> so a bad input becomes a handled case rather than a crash.</p>
-<h3 id="naming-conventions">Naming conventions</h3>
-<p>PEP 8 asks that variable and function names use <code>snake_case</code>: lowercase words joined by underscores, like <code>total_price</code>, <code>user_name</code>, <code>is_active</code>. Names should say what the value <em>means</em> (<code>elapsed_seconds</code>, not <code>x</code>), constants intended never to change are written in <code>UPPER_SNAKE_CASE</code> (<code>MAX_RETRIES = 5</code>) by convention, and names cannot be Python keywords (you cannot name a variable <code>class</code> or <code>for</code>). These are conventions, not laws the interpreter enforces — but following them makes your code instantly readable to every other Python programmer, and unreadable names are a real and avoidable source of bugs.</p>
-<h2 id="an-everyday-analogy">An everyday analogy</h2>
-<p>Think of a busy storage room full of items — boxes, envelopes, crates — each item sitting on the floor as its own thing. A <strong>variable name</strong> is a sticky luggage tag you tie to an item. Writing <code>a = [1, 2, 3]</code> is like putting a crate on the floor and tying the tag “a” to its handle. The crate exists independently; the tag just tells you how to find it.</p>
-<p>Now tie a second tag to the <em>same</em> crate: <code>b = a</code>. There are two tags — “a” and “b” — hanging from one crate. If you open the crate and drop something in through the “b” tag (<code>b.append(4)</code>), then when someone comes looking by the “a” tag, they find the very same crate with the new item inside. That is aliasing, and the tag picture makes it feel inevitable rather than spooky.</p>
-<p>Some items are sealed and cannot be opened — a shrink-wrapped number, a sealed envelope of text. These are the <strong>immutable</strong> objects: <code>int</code>, <code>str</code>, <code>tuple</code>. If you “change” one, you are not really opening it; you are fetching a <em>different</em> sealed item and moving the tag onto that one. The original sits untouched until the room’s cleaner (Python’s memory manager) hauls away anything with no tags left on it. Other items — crates and filing cabinets — are open and rearrangeable: those are the <strong>mutable</strong> objects, <code>list</code>, <code>dict</code>, <code>set</code>.</p>
-<p>The tags themselves are blank about contents — a tag does not “know” it is on a crate rather than an envelope. That is dynamic typing: the <em>item</em> has a kind (a type), never the tag. Move a tag from a crate to an envelope and nothing about the tag changes; it simply now points at a different kind of thing. Keep this storage room in mind and most of Python’s surprising behaviour turns ordinary.</p>
-<h2 id="examples-in-practice">Examples in practice</h2>
-<p>Start in the REPL — Python’s interactive prompt, which you met when you installed Python on Day 43. Type <code>python3</code>, and you can explore types live:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#E1E4E8"> x </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 7</span></span>
-<span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#79B8FF"> type</span><span style="color:#E1E4E8">(x)</span></span>
-<span class="line"><span style="color:#F97583">&lt;class</span><span style="color:#9ECBFF"> &#39;int&#39;</span><span style="color:#F97583">&gt;</span></span>
-<span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#E1E4E8"> y </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 7</span></span>
-<span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#79B8FF"> id</span><span style="color:#E1E4E8">(x) </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> id</span><span style="color:#E1E4E8">(y)</span></span>
-<span class="line"><span style="color:#79B8FF">True</span></span></code></pre>
-<p>That last line reveals a real detail: small integers like <code>7</code> are so common that the standard interpreter keeps a single shared object for each, so <code>x</code> and <code>y</code> end up tagging the <em>same</em> <code>7</code>. This is safe precisely because integers are immutable — sharing a value nobody can change can never cause surprises.</p>
-<p>Now watch immutability versus mutability through <code>id()</code>:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#E1E4E8"> s </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> &quot;cat&quot;</span></span>
-<span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#E1E4E8"> before </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> id</span><span style="color:#E1E4E8">(s)</span></span>
-<span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#E1E4E8"> s </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> s </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> &quot;s&quot;</span><span style="color:#6A737D">       # &quot;change&quot; the string</span></span>
-<span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#79B8FF"> id</span><span style="color:#E1E4E8">(s) </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> before</span></span>
-<span class="line"><span style="color:#79B8FF">False</span><span style="color:#6A737D">                  # different object — a NEW string was made</span></span>
-<span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#E1E4E8"> nums </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">]</span></span>
-<span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#E1E4E8"> before </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> id</span><span style="color:#E1E4E8">(nums)</span></span>
-<span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#E1E4E8"> nums.append(</span><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">)     </span><span style="color:#6A737D"># change the list</span></span>
-<span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#79B8FF"> id</span><span style="color:#E1E4E8">(nums) </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> before</span></span>
-<span class="line"><span style="color:#79B8FF">True</span><span style="color:#6A737D">                   # SAME object — mutated in place</span></span></code></pre>
-<p>The string operation produced a new object (the id changed); the list operation kept the same object (the id held). Aliasing then makes the consequence concrete:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#E1E4E8"> a </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">]</span></span>
-<span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#E1E4E8"> b </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> a</span></span>
-<span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#E1E4E8"> b.append(</span><span style="color:#79B8FF">99</span><span style="color:#E1E4E8">)</span></span>
-<span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#E1E4E8"> a</span></span>
-<span class="line"><span style="color:#E1E4E8">[</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">99</span><span style="color:#E1E4E8">]          </span><span style="color:#6A737D"># a sees b&#39;s change: one object, two tags</span></span></code></pre>
-<p>Type conversion, done safely, is the everyday workhorse. Suppose you read an age from the keyboard, which always arrives as text:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">raw </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> input</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;Enter your age: &quot;</span><span style="color:#E1E4E8">)   </span><span style="color:#6A737D"># raw is a str, e.g. &quot;30&quot;</span></span>
-<span class="line"><span style="color:#F97583">try</span><span style="color:#E1E4E8">:</span></span>
-<span class="line"><span style="color:#E1E4E8">    age </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> int</span><span style="color:#E1E4E8">(raw)                </span><span style="color:#6A737D"># convert text -&gt; integer</span></span>
-<span class="line"><span style="color:#79B8FF">    print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;Next year you will be&quot;</span><span style="color:#E1E4E8">, age </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">)</span></span>
-<span class="line"><span style="color:#F97583">except</span><span style="color:#79B8FF"> ValueError</span><span style="color:#E1E4E8">:</span></span>
-<span class="line"><span style="color:#79B8FF">    print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;That was not a whole number:&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">repr</span><span style="color:#E1E4E8">(raw))</span></span></code></pre>
-<p>If the user types <code>30</code>, <code>age</code> becomes the integer <code>30</code> and arithmetic works. If they type <code>thirty</code> or <code>30.5</code>, <code>int()</code> raises <code>ValueError</code>, and the <code>except</code> turns a crash into a friendly message. This try/except pattern is the difference between a program that survives bad input and one that dies on it — and real-world data is full of bad input.</p>
-<p>Finally, a truthiness example that shows the sharp edge:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#F97583"> def</span><span style="color:#B392F0"> describe</span><span style="color:#E1E4E8">(value):</span></span>
-<span class="line"><span style="color:#79B8FF">...</span><span style="color:#F97583">     if</span><span style="color:#E1E4E8"> value:</span></span>
-<span class="line"><span style="color:#79B8FF">...</span><span style="color:#79B8FF">         print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;has a value&quot;</span><span style="color:#E1E4E8">)</span></span>
-<span class="line"><span style="color:#79B8FF">...</span><span style="color:#F97583">     else</span><span style="color:#E1E4E8">:</span></span>
-<span class="line"><span style="color:#79B8FF">...</span><span style="color:#79B8FF">         print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;empty or missing&quot;</span><span style="color:#E1E4E8">)</span></span>
-<span class="line"><span style="color:#79B8FF">...</span></span>
-<span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#E1E4E8"> describe([</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">])   </span><span style="color:#6A737D"># has a value</span></span>
-<span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#E1E4E8"> describe([])       </span><span style="color:#6A737D"># empty or missing</span></span>
-<span class="line"><span style="color:#F97583">&gt;&gt;&gt;</span><span style="color:#E1E4E8"> describe(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">)        </span><span style="color:#6A737D"># empty or missing  &lt;- careful: 0 is falsy!</span></span></code></pre>
-<p>The number <code>0</code> is a perfectly real value, but <code>if value:</code> reports it as empty because <code>0</code> is falsy. If <code>0</code> should count as present, test <code>if value is not None:</code> instead.</p>
-<h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
-<p><strong>Security.</strong> The safest habit today’s lesson teaches is to treat all external input as untrusted text and convert it deliberately. Never pass raw input straight into something that will act on it; convert to the exact type you expect, inside a <code>try</code>/<code>except</code>, and reject anything that does not fit. A great many security holes begin with a value that was assumed to be one type (a number, a safe string) but was actually attacker-controlled text of another shape. And never use Python’s <code>eval()</code> to turn a string into a value — it will execute <em>any</em> code the string contains; use the type constructors (<code>int()</code>, <code>float()</code>) or purpose-built parsers instead. The lab’s security note returns to this.</p>
-<p><strong>Privacy.</strong> Types shape how sensitive data flows. A value’s type determines where it can be stored and how it is compared, logged, and serialised — a password held as a plain <code>str</code> may be printed to logs or held in memory longer than intended. Being deliberate about which fields are text, which are numbers, and which should be <code>None</code> when absent is part of not leaking data by accident.</p>
-<p><strong>Performance.</strong> The name-object model is what makes Python assignment cheap: binding a new name to a huge object costs the same as binding one to a small one, because nothing is copied. But immutability has a cost — building a big string by repeated <code>+=</code> creates a new object each time, quietly turning a loop into quadratic work; the idiomatic fix is to collect pieces in a list and <code>&quot;&quot;.join()</code> them once. Knowing which operations mutate in place and which build new objects is direct performance knowledge.</p>
-<p><strong>Scalability.</strong> As programs and datasets grow, aliasing bugs scale from annoying to catastrophic: a shared mutable object modified in one corner of a large codebase can corrupt state everywhere else that aliases it. Teams tame this with clear conventions about who may mutate what, and by preferring immutable types for values that are passed around widely — a <code>tuple</code> cannot be changed out from under you the way a <code>list</code> can.</p>
-<p><strong>Cost.</strong> In data and modelling work, storing values in the right type saves real money at scale: representing a column of whole numbers as text instead of integers can multiply its memory and storage footprint and slow every operation on it. Choosing compact, correct types — the numeric ones especially — is a lever on both speed and the size of the machine you must rent to hold your data.</p>
-<h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
-<p>For a foundational concepts lesson, “alternatives” means the tools you can use to explore and enforce types, and other good ways to learn the material.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Resource</th><th>Type</th><th>What it offers</th><th>Cost</th></tr></thead><tbody><tr><td>The Python REPL (<code>python3</code>)</td><td>Built-in, free</td><td>Live experimentation with <code>type()</code>, <code>id()</code>, and conversions — the fastest way to build intuition</td><td>Free (ships with Python)</td></tr><tr><td>The <code>type()</code> and <code>isinstance()</code> built-ins</td><td>Built-in, free</td><td>Runtime type inspection and checking, no install needed</td><td>Free</td></tr><tr><td>mypy</td><td>Open source</td><td>Static type checker: reads optional type hints and flags mismatches <em>before</em> you run</td><td>Free</td></tr><tr><td>Pyright / Pylance</td><td>Open source (Microsoft)</td><td>Fast static type checker, built into the popular VS Code Python extension</td><td>Free</td></tr><tr><td>The official Python Tutorial</td><td>Free documentation</td><td>The canonical, authoritative introduction to types and the object model</td><td>Free</td></tr><tr><td>Real Python — “Variables in Python”</td><td>Tutorial site</td><td>A clear, example-driven walkthrough of the name-object model</td><td>Free articles; paid membership optional</td></tr></tbody></table>
-<p>For most learners the winning combination is entirely free: explore in the REPL to build intuition, then add mypy (or Pyright inside VS Code) once your programs grow, so a tool catches type mistakes for you. You will preview mypy in this section and adopt it properly later; today, the REPL and the two built-ins are all you need.</p>
-<h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>Variable (name)</td><td>Object (value)</td><td>A name is a tag in your code; the object is the thing in memory that has the type, value, and identity</td></tr><tr><td>Dynamic typing</td><td>Static typing</td><td>Dynamic checks types on objects at run time and allows re-binding to any type; static declares types on names and checks before running</td></tr><tr><td><code>type(x)</code></td><td><code>isinstance(x, T)</code></td><td><code>type</code> returns the exact type; <code>isinstance</code> tests membership including subtypes and accepts several types at once</td></tr><tr><td>Mutable (<code>list</code>)</td><td>Immutable (<code>str</code>, <code>tuple</code>)</td><td>A mutable object can change in place (same identity); “changing” an immutable one makes a new object</td></tr><tr><td><code>==</code> (equality)</td><td><code>is</code> (identity)</td><td><code>==</code> asks “same value?”; <code>is</code> asks “same object?” — two lists can be <code>==</code> yet not <code>is</code></td></tr><tr><td><code>None</code></td><td><code>0</code> / <code>&quot;&quot;</code> / <code>False</code></td><td><code>None</code> means “no value at all”; the others are real values that merely happen to be falsy</td></tr></tbody></table>
-<p>The <code>==</code> versus <code>is</code> distinction deserves a closing word because it flows straight from today’s model. <code>==</code> compares <em>values</em>; <code>is</code> compares <em>identities</em> (what <code>id()</code> reports). Two separate lists with the same contents are <code>==</code> but not <code>is</code>. The only thing you should routinely test with <code>is</code> is <code>None</code> — <code>if x is None:</code> — because there is exactly one <code>None</code> object in the whole program, so identity is the correct and idiomatic test.</p>
-<h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
-<p>You use this model every time you write Python, so the real question is when to think about it <em>consciously</em>. Reach for the name-object picture whenever behaviour surprises you: a value that changed when you did not expect it to is almost always aliasing (two names, one mutable object); a value that did <em>not</em> change when you thought you edited it is almost always immutability (you made a new object and left the old name pointing at the old one). Reach for explicit type checks (<code>isinstance</code>) and conversions when data crosses a boundary into your program — user input, a file, a network response — because that is where types are least trustworthy. Reach for <code>is None</code> whenever “absent” and “present but empty/zero” must be told apart.</p>
-<p>Know when <em>not</em> to over-apply it, too. Do not sprinkle <code>type()</code> checks through code that would work fine on any reasonable input — Python’s flexibility is a feature, and excessive type-guarding makes code rigid and noisy. Do not reach for <code>is</code> to compare ordinary values (<code>x is 5</code> is a bug waiting to happen; use <code>==</code>). And do not fear aliasing everywhere: for immutable objects — the numbers and strings that make up most values — sharing is completely safe, because nothing can change out from under you. The skill is knowing which of your objects are mutable and being careful only there.</p>
-<h2 id="the-ai-connection">The AI connection</h2>
-<p>Everything in modern AI is typed data, and the discipline you practised today is exactly the discipline that keeps AI code from breaking. The text you feed a language model is a <code>str</code>; it gets converted into <strong>tokens</strong>, which are integers; those integers index into arrays of <code>float</code> numbers called <strong>tensors</strong>, which are the model’s inputs, weights, and outputs. Every stage is a type, and every boundary between stages is a place a type can go wrong. When a machine-learning library rejects your data with a message about expecting floating-point values but receiving integers, or wanting one shape of numeric array and getting text, you are meeting the same <code>int</code>-versus-<code>float</code>, number-versus-string distinctions you learned today — just at industrial scale.</p>
-<p>Type confusion is, by wide agreement among practitioners, one of the largest sources of bugs in data and modelling code: a column that should be numbers arriving as strings, a missing value that should be <code>None</code> silently becoming the string <code>&quot;NaN&quot;</code>, a boolean flag stored as the text <code>&quot;True&quot;</code> (which, remember, is <em>truthy</em> no matter what it says). None of these crash immediately; they quietly poison results. The habits from this lesson — check types at the boundaries, convert deliberately and safely, distinguish <code>None</code> from empty, respect mutability — are precisely what make a data pipeline reliable enough to trust an AI system’s output. Clean, correct types are not busywork before the interesting AI part; they <em>are</em> a large part of what makes the interesting AI part work.</p>
-<h2 id="knowledge-check">Knowledge check</h2>
-<p>Try these from memory before looking back:</p>
+<p><img src="/_astro/mutate-or-rebind.DD5gJRJr_ZIALX.svg" alt="Diagram: mutating an object compared with rebinding a name" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<p><img src="/_astro/three-steps-of-assignment.vhVD6rkh_Z16hImP.svg" alt="Diagram: the three steps of a Python assignment" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<p><img src="/_astro/name-object.-VTjr6RV_Z7euU1.svg" alt="Diagram: two names bound to the same object in memory, illustrating aliasing in Python" loading="lazy" decoding="async" fetchpriority="auto" width="720" height="440"></p>
+<p>Running <code>a = [1, 2, 3]</code> does three things in order:</p>
 <ol>
-<li>Explain, using the tag-and-object picture, why <code>b = a</code> followed by <code>b.append(4)</code> changes what <code>a</code> refers to, but only when <code>a</code> is a list — not when <code>a</code> is a number.</li>
-<li><code>x = 5</code> then <code>x = &quot;five&quot;</code>. Did the <em>name</em> <code>x</code> change type? Explain what actually happened in terms of names and objects.</li>
-<li>Predict the result of <code>int(&quot;3.5&quot;)</code>, <code>int(3.9)</code>, and <code>bool(&quot;False&quot;)</code>, and explain each.</li>
-<li>Name the falsy values in Python. Then explain why <code>if count:</code> is a risky test when <code>count</code> might legitimately be <code>0</code>, and what to write instead.</li>
-<li>Give one difference between <code>type(x)</code> and <code>isinstance(x, int)</code>, and one situation where the difference matters.</li>
+<li><strong>The object is created</strong> — a list with its own type, value and identity.</li>
+<li><strong>The name <code>a</code> is created</strong> in the current namespace, if it did not exist.</li>
+<li><strong><code>a</code> is bound to that object.</strong> They are connected, and still separate things.</li>
 </ol>
+<ul>
+<li>
+<p><strong><code>b = a</code> makes no new list.</strong> Python binds <code>b</code> to the same object, and <code>id(a)</code>
+and <code>id(b)</code> come back identical.</p>
+</li>
+<li>
+<p><strong>That is aliasing</strong>, and it is the most important consequence of the model.</p>
+</li>
+<li>
+<p><strong>Mutating through one name shows through the other</strong>: <code>b.append(4)</code> leaves <code>a</code>
+reading <code>[1, 2, 3, 4]</code>.</p>
+</li>
+<li>
+<p><strong>Rebinding is not mutating.</strong> <code>b = &quot;hello&quot;</code> moves the <code>b</code> label to a new string
+and leaves <code>a</code> pointing at the list.</p>
+</li>
+</ul>
+<h3 id="the-core-built-in-types">The core built-in types</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Type</th><th>Example</th><th>What it holds</th><th>Mutable?</th></tr></thead><tbody><tr><td><code>int</code></td><td><code>42</code>, <code>-7</code></td><td>Whole numbers, unlimited size</td><td>No</td></tr><tr><td><code>float</code></td><td><code>3.14</code>, <code>2.0</code></td><td>Real numbers with a fractional part</td><td>No</td></tr><tr><td><code>bool</code></td><td><code>True</code>, <code>False</code></td><td>A truth value; a subtype of <code>int</code></td><td>No</td></tr><tr><td><code>str</code></td><td><code>&quot;hello&quot;</code></td><td>Text</td><td>No</td></tr><tr><td><code>NoneType</code></td><td><code>None</code></td><td>The single “no value” object</td><td>No</td></tr><tr><td><code>list</code></td><td><code>[1, 2, 3]</code></td><td>An ordered, changeable sequence</td><td>Yes</td></tr><tr><td><code>tuple</code></td><td><code>(1, 2, 3)</code></td><td>An ordered, fixed sequence</td><td>No</td></tr><tr><td><code>dict</code></td><td><code>{&quot;a&quot;: 1}</code></td><td>Key-to-value lookups</td><td>Yes</td></tr><tr><td><code>set</code></td><td><code>{1, 2, 3}</code></td><td>Unordered, unique items</td><td>Yes</td></tr></tbody></table>
+<ul>
+<li>
+<p><strong><code>2</code> and <code>2.0</code> are different types</strong> despite being equal in value.</p>
+</li>
+<li>
+<p><strong><code>bool</code> is a subtype of <code>int</code></strong>, so <code>True + True</code> is <code>2</code> — worth knowing, not
+worth relying on.</p>
+</li>
+<li>
+<p><strong><code>None</code> is not zero, not empty, not <code>False</code>.</strong> It is its own object, meaning
+“deliberately no value”.</p>
+</li>
+</ul>
+<p><img src="/_astro/type-map.BuHHKbYn_Z2svYzD.svg" alt="Diagram: the core Python built-in types grouped by mutability and by category" loading="lazy" decoding="async" fetchpriority="auto" width="760" height="470"></p>
+<h3 id="dynamic-typing">Dynamic typing</h3>
+<p><img src="/_astro/hints-are-optional.DK-fCLcL_ZIALX.svg" alt="Diagram: how Python type hints are checked" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">x </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 42</span><span style="color:#6A737D">          # x points at an int</span></span>
+<span class="line"><span style="color:#E1E4E8">x </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> &quot;forty-two&quot;</span><span style="color:#6A737D"> # now at a str — perfectly legal</span></span>
+<span class="line"><span style="color:#E1E4E8">x </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">]      </span><span style="color:#6A737D"># now a list</span></span></code></pre>
+<ul>
+<li>
+<p><strong>The name never had a type.</strong> Each line re-points it.</p>
+</li>
+<li>
+<p><strong>A statically typed language refuses this at compile time</strong>, catching whole
+classes of mistake before the program runs, at the cost of ceremony.</p>
+</li>
+<li>
+<p><strong>Python offers both, optionally.</strong> <code>x: int = 42</code> is ignored by the interpreter
+and checked by a tool like mypy.</p>
+</li>
+</ul>
+<h3 id="asking-about-types">Asking about types</h3>
+<ul>
+<li>
+<p><strong><code>type(obj)</code></strong> returns the type: <code>type(42)</code> is <code>&lt;class &#39;int&#39;&gt;</code>.</p>
+</li>
+<li>
+<p><strong><code>isinstance(obj, T)</code></strong> answers “is this that type, or a subtype?”</p>
+</li>
+<li>
+<p><strong>Prefer <code>isinstance</code> in real code.</strong> It understands subtypes — <code>isinstance(True, int)</code> is <code>True</code> — and accepts a tuple: <code>isinstance(x, (int, float))</code>.</p>
+</li>
+<li>
+<p><strong>Reserve <code>type()</code> for exploring and printing.</strong></p>
+</li>
+</ul>
+<h3 id="truthiness">Truthiness</h3>
+<p><img src="/_astro/truthiness-edge.CSPIlP2i_Z16hImP.svg" alt="Diagram: which Python values are falsy" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<ul>
+<li>
+<p><strong>Every object can be tested as true or false</strong>, not just booleans.</p>
+</li>
+<li>
+<p><strong>Falsy</strong>: <code>False</code>, <code>None</code>, any zero, and any empty container — <code>&quot;&quot;</code>, <code>[]</code>,
+<code>{}</code>, <code>()</code>, <code>set()</code>.</p>
+</li>
+<li>
+<p><strong>Everything else is truthy.</strong></p>
+</li>
+<li>
+<p><strong>So <code>if items:</code> reads as “if the list has anything in it.”</strong></p>
+</li>
+<li>
+<p><strong>The sharp edge</strong>: a value that is genuinely present but zero or empty fails
+that test. When “absent” and “present but empty” differ, write
+<code>if value is not None:</code>.</p>
+</li>
+</ul>
+<h3 id="mutability-and-why-it-matters">Mutability, and why it matters</h3>
+<p><img src="/_astro/immutable-or-mutable.BMIER85j_ZIALX.svg" alt="Diagram: immutable Python types compared with mutable ones" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<ul>
+<li>
+<p><strong>Immutable</strong>: <code>int</code>, <code>float</code>, <code>bool</code>, <code>str</code>, <code>tuple</code>. <strong>Mutable</strong>: <code>list</code>,
+<code>dict</code>, <code>set</code>.</p>
+</li>
+<li>
+<p><strong>“Changing” a string makes a new one.</strong> <code>s = s + &quot;s&quot;</code> builds a new object and
+re-points <code>s</code>; the original is untouched.</p>
+</li>
+<li>
+<p><strong>Changing a list changes the object</strong>, which every name pointing at it sees.</p>
+</li>
+<li>
+<p><strong>Watch it with <code>id()</code></strong>: after string “modification” the id changes; after list
+mutation it stays the same.</p>
+</li>
+<li>
+<p><strong>Immutability is what makes sharing safe</strong>; mutability is what makes building
+up efficient.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="an-everyday-analogy">An everyday analogy</h2>
+<p>Luggage labels at a left-luggage office.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>The office</th><th>Python</th></tr></thead><tbody><tr><td>A bag in the rack</td><td>An object</td></tr><tr><td>A label tied to it</td><td>A name</td></tr><tr><td>Two labels on one bag</td><td>Aliasing</td></tr><tr><td>Adding something to the bag</td><td>Mutating</td></tr><tr><td>Moving a label to another bag</td><td>Rebinding</td></tr><tr><td>A sealed bag that cannot be opened</td><td>An immutable object</td></tr><tr><td>The bag’s rack position</td><td>Its identity, from <code>id()</code></td></tr></tbody></table>
+<ul>
+<li>
+<p><strong>The label is not the bag.</strong> Writing a second label for the same bag does not
+produce a second bag.</p>
+</li>
+<li>
+<p><strong>Putting something in through one label</strong> is visible through the other, because
+there was only ever one bag.</p>
+</li>
+<li>
+<p><strong>Moving your label elsewhere</strong> leaves the other label exactly where it was.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="examples-in-practice">Examples in practice</h2>
+<p><img src="/_astro/mutable-default.Cy6acvOC_Z16hImP.svg" alt="Diagram: how a mutable default argument shares state between calls" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<ul>
+<li>
+<p><strong>A function that appends to a list argument</strong> and surprises the caller, because
+the list was never copied.</p>
+</li>
+<li>
+<p><strong><code>if count:</code> skipping a legitimate zero</strong>, which is truthiness biting.</p>
+</li>
+<li>
+<p><strong><code>a == b</code> true while <code>a is b</code> false</strong>: equal values, different objects.</p>
+</li>
+<li>
+<p><strong>A mutable default argument</strong> shared across every call — the classic Python
+trap, and it is aliasing again.</p>
+</li>
+<li>
+<p><strong><code>x = 0.1 + 0.2</code> not equalling <code>0.3</code></strong>, which is floats, and the subject of the
+next lesson.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
+<ul>
+<li>
+<p><strong>Security: mutable shared state is where concurrency bugs live</strong>, and Day 7’s
+race conditions apply directly once threads share an object.</p>
+</li>
+<li>
+<p><strong>Passing a mutable object to code you do not control</strong> hands it the ability to
+change your data. Pass a copy when that matters.</p>
+</li>
+<li>
+<p><strong>Performance: binding is constant-time</strong>, whatever the object’s size. Copying
+is not, which is why Python avoids copying.</p>
+</li>
+<li>
+<p><strong>Building a string in a loop with <code>+</code> creates a new object each time</strong>, which
+is quadratic. <code>&quot;&quot;.join(parts)</code> is the fix.</p>
+</li>
+<li>
+<p><strong>Memory: aliasing means one object, not several.</strong> A large array passed around
+costs nothing extra until someone copies it.</p>
+</li>
+<li>
+<p><strong>Cost: an aliasing bug is expensive to find</strong> because the symptom appears far
+from the mutation that caused it.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
+<p><img src="/_astro/copy-depth.DzAWi_C3_Z16hImP.svg" alt="Diagram: assignment compared with shallow and deep copying" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool</th><th>Type</th><th>What it gives you</th></tr></thead><tbody><tr><td><code>id()</code>, <code>is</code></td><td>Free, built in</td><td>Identity, as distinct from equality</td></tr><tr><td><code>copy.copy</code> / <code>copy.deepcopy</code></td><td>Free, standard library</td><td>A shallow or a full copy when you need one</td></tr><tr><td><code>dataclasses(frozen=True)</code></td><td>Free, standard library</td><td>Immutable structured objects</td></tr><tr><td><code>tuple</code>, <code>frozenset</code></td><td>Free, built in</td><td>Immutable collections</td></tr><tr><td>mypy, Pyright</td><td>Free, open source</td><td>Checking type hints before the program runs</td></tr><tr><td><code>sys.getsizeof</code></td><td>Free, standard library</td><td>What an object actually costs</td></tr></tbody></table>
+<ul>
+<li><strong>Learn the difference between <code>copy</code> and <code>deepcopy</code> early.</strong> A shallow copy
+duplicates the outer container and still shares what is inside it, which is a
+subtle and common source of the same aliasing surprise.</li>
+</ul>
+<hr/>
+<h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+<p><img src="/_astro/is-or-equals.D5TFLrXM_ZIALX.svg" alt="Diagram: identity comparison compared with equality comparison" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Term</th><th>What it actually is</th></tr></thead><tbody><tr><td><strong>Name</strong></td><td>A label in a namespace</td></tr><tr><td><strong>Object</strong></td><td>The thing in memory, with a type and an identity</td></tr><tr><td><strong>Binding</strong></td><td>The connection between them</td></tr><tr><td><strong>Aliasing</strong></td><td>Two or more names on one object</td></tr><tr><td><strong>Mutating</strong></td><td>Changing the object itself</td></tr><tr><td><strong>Rebinding</strong></td><td>Pointing a name somewhere else</td></tr><tr><td><strong><code>is</code> vs <code>==</code></strong></td><td>Same object, versus equal value</td></tr></tbody></table>
+<hr/>
+<h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
+<ul>
+<li>
+<p><strong>Use <code>is</code> only for <code>None</code></strong> and other singletons. For values, use <code>==</code>.</p>
+</li>
+<li>
+<p><strong>Use <code>isinstance</code> rather than <code>type()</code></strong> whenever the answer drives behaviour.</p>
+</li>
+<li>
+<p><strong>Use immutable types for anything shared</strong>, especially as a default argument or
+a dictionary key.</p>
+</li>
+<li>
+<p><strong>Copy explicitly when you mean to copy.</strong> <code>list(original)</code> or <code>copy.deepcopy</code>,
+depending on how deep the sharing goes.</p>
+</li>
+<li>
+<p><strong>Do not use a mutable default argument.</strong> Use <code>None</code> and create the object
+inside the function.</p>
+</li>
+<li>
+<p><strong>Do not rely on <code>bool</code> being an <code>int</code>.</strong> It is true and it is not something to
+build on.</p>
+</li>
+<li>
+<p><strong>Do not test presence with <code>if value:</code></strong> when zero or empty is a legitimate
+value.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="the-ai-connection">The AI connection</h2>
+<ul>
+<li>
+<p><strong>A tensor is an object</strong>, and passing it to a function passes the label, not a
+copy — which is why in-place operations surprise people.</p>
+</li>
+<li>
+<p><strong>In-place operations are marked with a trailing underscore</strong> in PyTorch —
+<code>add_</code>, <code>clamp_</code> — precisely because mutating a shared tensor is consequential.</p>
+</li>
+<li>
+<p><strong>A mutable default argument in a config function</strong> silently shares state
+between experiments, which is a genuinely hard bug to trace.</p>
+</li>
+<li>
+<p><strong>Truthiness catches people on tensors and arrays</strong>: an empty batch is falsy, and
+so is a tensor of zeros in some libraries.</p>
+</li>
+<li>
+<p><strong><code>None</code> as “not computed yet”</strong> is a common and correct pattern in model code,
+and it needs <code>is None</code> rather than a truthiness test.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="knowledge-check">Knowledge check</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">quiz</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  question</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;A function receives a list, appends an item to it, and returns nothing. The caller&#39;s own list has changed. Why?&quot;</span></span>
+<span class="line"><span style="color:#85E89D">  options</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;The parameter is a second name bound to the same list object, so mutating through it is visible everywhere&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;Python passes arguments by reference only for lists, and by value for other types&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;The function&#39;s local scope was not isolated because it returned nothing&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#9ECBFF">&quot;Lists are copied on assignment but not when passed as arguments&quot;</span></span>
+<span class="line"><span style="color:#85E89D">  answer_index</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span></span>
+<span class="line"><span style="color:#85E89D">  explanation</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;Passing an argument binds a new name to the same object; no copying occurs for any type. Because a list is mutable, appending changes the one object both names point at — while rebinding the parameter inside the function would have changed nothing for the caller.&quot;</span></span></code></pre>
+<hr/>
 <h2 id="hands-on-exercise">Hands-on exercise</h2>
-<p>Time to explore types on your own machine, in the lab directory for Day 44. You will run a working demonstration program, then complete a starter version yourself. Everything runs with the <code>python3</code> you installed on Day 43 — no downloads, no network.</p>
-<p>From the lab directory, first run the finished demonstration to see every idea from this lesson in action:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">python3</span><span style="color:#9ECBFF"> examples/types_demo.py</span></span></code></pre>
-<p>It assigns a value of each core type and prints it with its <code>type()</code>, rebinds one name to a different type to show dynamic typing, mutates a list and “mutates” a string while printing <code>id()</code> so you can see one object change in place and the other become a new object, and finishes with a safe <code>int()</code> conversion wrapped in <code>try</code>/<code>except</code>.</p>
-<p>Then open <code>starter/types_demo.py</code> and complete its four numbered exercises — creating variables of three types and printing their types, converting a string to an integer safely, and demonstrating that a list is mutable. Each exercise names the exact function to use. Run your version the same way:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">python3</span><span style="color:#9ECBFF"> starter/types_demo.py</span></span></code></pre>
+<p><img src="/_astro/id-tells-you.DOGAbFm-_Z16hImP.svg" alt="Diagram: how id() reveals whether an object was mutated or replaced" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<p>Prove aliasing, then prove the difference between mutating and rebinding. Worked
+through fully in the Day 44 lab directory.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>What you are doing</th><th>Command</th></tr></thead><tbody><tr><td>Bind two names to one list</td><td><code>a = [1,2,3]; b = a</code></td></tr><tr><td>Prove it is one object</td><td><code>id(a) == id(b)</code> and <code>a is b</code></td></tr><tr><td>Mutate through one</td><td><code>b.append(4)</code>, then print <code>a</code></td></tr><tr><td>Rebind instead</td><td><code>b = &quot;hello&quot;</code>, then print <code>a</code></td></tr><tr><td>See a string “change”</td><td><code>s = &quot;cat&quot;; print(id(s)); s += &quot;s&quot;; print(id(s))</code></td></tr><tr><td>See a list change</td><td><code>n = [1]; print(id(n)); n.append(2); print(id(n))</code></td></tr><tr><td>Meet truthiness</td><td><code>bool(0)</code>, <code>bool(&quot;&quot;)</code>, <code>bool([])</code>, <code>bool([0])</code></td></tr></tbody></table>
 <h3 id="expected-output">Expected output</h3>
-<p>Running the completed example prints something close to this (identity numbers will differ every run — that is expected, since they reflect memory addresses):</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>--- Core types ---</span></span>
-<span class="line"><span>count      = 42            type = int</span></span>
-<span class="line"><span>price      = 19.99         type = float</span></span>
-<span class="line"><span>is_open    = True          type = bool</span></span>
-<span class="line"><span>label      = widget        type = str</span></span>
-<span class="line"><span>missing    = None          type = NoneType</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>--- Dynamic typing ---</span></span>
-<span class="line"><span>thing = 100 (int)</span></span>
-<span class="line"><span>thing = hello (str)   &lt;- same name, different type</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>--- Mutability ---</span></span>
-<span class="line"><span>list before: [1, 2, 3]  id unchanged after append: True</span></span>
-<span class="line"><span>str  before: cat        id changed after &#39;+&#39;: True</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>--- Safe conversion ---</span></span>
-<span class="line"><span>&#39;30&#39;  -&gt; 30 (int)</span></span>
-<span class="line"><span>&#39;oops&#39; -&gt; could not convert (ValueError handled)</span></span></code></pre>
-<p>The exact id-comparison booleans (<code>True</code>) are the point: the list keeps its identity after <code>.append()</code>, while the string gets a new identity after <code>+</code>.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>True True</span></span>
+<span class="line"><span>[1, 2, 3, 4]</span></span>
+<span class="line"><span>[1, 2, 3, 4]</span></span>
+<span class="line"><span>4404445184  4404589424</span></span>
+<span class="line"><span>4404512320  4404512320</span></span>
+<span class="line"><span>False False False True</span></span></code></pre>
+<ul>
+<li><strong>The string’s id changed</strong>; a new object was made.</li>
+<li><strong>The list’s id did not</strong>; the same object was altered.</li>
+<li><strong><code>[0]</code> is truthy</strong> even though its only element is falsy — the container is not
+empty.</li>
+</ul>
 <h3 id="validate-your-work">Validate your work</h3>
-<p>You are done when you can check every box:</p>
 <ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" disabled/> <code>python3 examples/types_demo.py</code> runs and exits without error.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You can name the type printed for each of the five core values.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You can explain why the list’s id is unchanged after <code>.append()</code> but the string’s id changes after <code>+</code>.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> Your completed <code>starter/types_demo.py</code> prints three types, one safe conversion, and a mutated list.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> <code>bash tests/run_tests.sh</code> prints a passing summary and exits 0.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You demonstrated aliasing with <code>id()</code> and <code>is</code></li>
+<li class="task-list-item"><input type="checkbox" disabled/> You showed that mutating differs from rebinding</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can explain why a string’s id changes and a list’s does not</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You found a value where <code>if x:</code> and <code>if x is not None:</code> disagree</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You used <code>isinstance</code> with a tuple of types</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>bash tests/run_tests.sh</code> reports 0 failures</li>
 </ul>
 <h3 id="troubleshooting">Troubleshooting</h3>
 <ul>
-<li><strong><code>python3: command not found</code>.</strong> Python is not installed or not on your PATH — return to the Day 43 lesson. On some systems the command is <code>python</code>; check with <code>python --version</code> and use whichever reports 3.x.</li>
-<li><strong><code>SyntaxError</code> when you paste REPL lines into a file.</strong> The <code>&gt;&gt;&gt;</code> prompts in the examples are REPL markers, not code. In a <code>.py</code> file, write the code without them.</li>
-<li><strong><code>ValueError: invalid literal for int()</code>.</strong> That is <code>int()</code> refusing a non-integer string — the exercise’s point. Make sure the conversion sits inside the <code>try</code> block.</li>
-<li><strong>Your <code>id()</code> numbers differ from the sample.</strong> They are supposed to; identities are per-run. Only the <em>comparisons</em> (same/different) are stable.</li>
+<li>
+<p><strong>Small integers share ids.</strong> Python caches <code>-5</code> to <code>256</code>, so <code>a is b</code> can be
+<code>True</code> for equal small ints. Do not build on it.</p>
+</li>
+<li>
+<p><strong>Short strings may be interned too.</strong> Same caveat.</p>
+</li>
+<li>
+<p><strong><code>is</code> gives a warning with a literal.</strong> Use <code>==</code> for values; <code>is</code> is for <code>None</code>.</p>
+</li>
+<li>
+<p><strong><code>id()</code> values differ between runs.</strong> They are addresses, not stable
+identifiers.</p>
+</li>
 </ul>
 <h3 id="common-mistakes">Common mistakes</h3>
 <ul>
-<li><strong>Thinking <code>b = a</code> copies the list.</strong> It does not — it makes a second name for one object. If you need an independent copy, that is a later lesson; for now, notice the sharing.</li>
-<li><strong>Expecting <code>int(&quot;3.5&quot;)</code> to give 3.</strong> It raises <code>ValueError</code>; only <code>int(float(&quot;3.5&quot;))</code> truncates. Test both in the REPL.</li>
-<li><strong>Reading <code>if value:</code> as “if value exists”.</strong> It means “if value is truthy” — <code>0</code>, <code>&quot;&quot;</code>, and <code>[]</code> all fail it despite existing. Use <code>is not None</code> to test existence.</li>
+<li><strong>Reading <code>b = a</code> as a copy.</strong></li>
+<li><strong>Using <code>is</code> to compare values.</strong></li>
+<li><strong>A mutable default argument.</strong></li>
+<li><strong>Testing presence with truthiness</strong> when zero is legitimate.</li>
 </ul>
+<hr/>
 <h2 id="practice-assignment">Practice assignment</h2>
-<p>In the starter directory you will find <code>types-worksheet.md</code>. Fill it in completely for values you choose: record the <code>type()</code> of three different values (pick three different types), state in one sentence whether a <code>str</code> is mutable and cite the <code>id()</code> evidence you gathered, and document one type conversion that fails — what you converted, the exact error, and <em>why</em> it fails in terms of this lesson. Then, using the REPL, verify each answer live rather than from memory, and paste the REPL lines that prove each claim into the worksheet. Keep the worksheet; the next lesson on strings builds directly on it.</p>
+<ul>
+<li>
+<p><strong>Write a function that mutates its argument</strong> and one that rebinds it, and
+predict the caller’s result before running either.</p>
+</li>
+<li>
+<p><strong>Build the mutable-default-argument bug on purpose</strong>, observe it across three
+calls, then fix it with <code>None</code>.</p>
+</li>
+<li>
+<p><strong>Find three values</strong> where <code>if x:</code> and <code>if x is not None:</code> disagree.</p>
+</li>
+<li>
+<p><strong>Use <code>copy</code> and <code>deepcopy</code></strong> on a nested list and demonstrate what shallow
+copying still shares.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="extension-challenge">Extension challenge</h2>
-<p>Go one layer deeper into how Python tracks types, using only the REPL and the tools from today. First, confirm the small-integer sharing you read about: check whether <code>a = 256; b = 256; a is b</code> and <code>a = 257; b = 257; a is b</code> give the same answer, and write two sentences on what the difference tells you about how the standard interpreter reuses small immutable objects (and why doing this is safe <em>only</em> because ints are immutable). Second, preview static type checking: add a type hint to a variable, deliberately assign the wrong type (<code>n: int = &quot;hello&quot;</code>), and note that Python runs it anyway — then read one paragraph of the mypy documentation and explain, in your own words, what mypy would say about that line and why catching it <em>before</em> running is valuable. You have now seen both halves of Python’s type story: the dynamic runtime you use every day, and the optional static checking that guards larger programs.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
-Q1. In Python, what is a variable such as x after you write x = 5? </strong> </p> <ol type="A"> <li>A box in memory that stores the value 5 inside it</li><li>A name (a tag) bound to the integer object 5, which lives independently in memory</li><li>A reserved slot that can only ever hold integers from now on</li><li>A copy of the number 5 that is separate from the original</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> A name (a tag) bound to the integer object 5, which lives independently in memory </p> <p>A Python variable is a name bound to an object, not a container. Writing x = 5 ties the name x to the already-existing integer object 5; the object holds the type, value, and identity, while the name is just a tag.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q2. After a = [1, 2, 3] and b = a, you run b.append(4). What does a now refer to? </strong> </p> <ol type="A"> <li>[1, 2, 3] — a is an independent copy and is unaffected</li><li>[4] — appending replaces the contents</li><li>[1, 2, 3, 4] — a and b are two names for the same list object</li><li>It raises an error because you cannot change a shared list</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> [1, 2, 3, 4] — a and b are two names for the same list object </p> <p>b = a makes a second name for the same object (aliasing), it does not copy. Because the list is mutable, appending through b changes the one shared object, so a sees [1, 2, 3, 4] too.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q3. Which statement best describes dynamic typing in Python? </strong> </p> <ol type="A"> <li>Every variable must be declared with its type before use</li><li>The type belongs to the object and is checked at run time, and a name can be re-bound to any type</li><li>Types are checked by the compiler before the program runs</li><li>A variable keeps the type of the first value assigned to it forever</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> The type belongs to the object and is checked at run time, and a name can be re-bound to any type </p> <p>Python is dynamically typed: the type lives on the object, not the name, and is checked as the program runs. A name like x can be re-bound from an int to a str to a list freely — the name itself is untyped.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q4. Which of these groups lists only IMMUTABLE Python types? </strong> </p> <ol type="A"> <li>list, dict, set</li><li>int, str, tuple</li><li>int, list, str</li><li>dict, tuple, float</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> int, str, tuple </p> <p>int, str, and tuple are all immutable — once created, their value cannot change in place. list, dict, and set are mutable. &quot;Changing&quot; an immutable object always produces a new object and re-points the name.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q5. What does int(&quot;3.5&quot;) do in Python? </strong> </p> <ol type="A"> <li>Returns the integer 3 by truncating</li><li>Returns the integer 4 by rounding</li><li>Raises ValueError because &quot;3.5&quot; is not a valid integer string</li><li>Returns the float 3.5 unchanged</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Raises ValueError because &quot;3.5&quot; is not a valid integer string </p> <p>int() on a string only accepts a valid whole-number string, so int(&quot;3.5&quot;) raises ValueError. To truncate you must go through the float first: int(float(&quot;3.5&quot;)) gives 3. (int(3.9) on a float does truncate to 3.)</p> </details> </div><div class="quiz-question"> <p> <strong>
+<ul>
+<li>
+<p><strong>Find Python’s small-integer cache boundary</strong> by comparing <code>is</code> on increasing
+values, and explain why the boundary exists.</p>
+</li>
+<li>
+<p><strong>Measure the cost of string concatenation in a loop</strong> against <code>&quot;&quot;.join</code>, for
+10,000 items. The ratio is the argument for the idiom.</p>
+</li>
+<li>
+<p><strong>Write a function that cannot mutate its argument</strong>, by taking a tuple, and
+discuss what you gave up.</p>
+</li>
+<li>
+<p><strong>Add type hints to a small module and run mypy</strong>, then deliberately violate one
+and confirm the interpreter still runs it while mypy objects.</p>
+</li>
+</ul>
+<hr/>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. In Python, what is a variable such as x after you write x = 5? </strong> </p> <ol type="A"> <li>A name bound to the integer object 5, which lives in memory</li><li>A box in memory that stores the value 5 inside it</li><li>A reserved slot that can only ever hold integers from now on</li><li>A copy of the number 5 that is separate from the original</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> A name bound to the integer object 5, which lives in memory </p> <p>A Python variable is a name bound to an object, not a container. Writing x = 5 ties the name x to the already-existing integer object 5; the object holds the type, value, and identity, while the name is just a tag.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. After a = [1, 2, 3] and b = a, you run b.append(4). What does a now refer to? </strong> </p> <ol type="A"> <li>[1, 2, 3] — a is an independent copy and is unaffected</li><li>[1, 2, 3, 4] — a and b are two names for the same list object</li><li>[4] — appending replaces the contents</li><li>It raises an error because you cannot change a shared list</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> [1, 2, 3, 4] — a and b are two names for the same list object </p> <p>b = a makes a second name for the same object (aliasing), it does not copy. Because the list is mutable, appending through b changes the one shared object, so a sees [1, 2, 3, 4] too.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. Which statement best describes dynamic typing in Python? </strong> </p> <ol type="A"> <li>Every variable must be declared with its type before use</li><li>Types are checked by the compiler before the program runs</li><li>The type belongs to the object and is checked at run time</li><li>A variable keeps the type of the first value assigned to it forever</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> The type belongs to the object and is checked at run time </p> <p>Python is dynamically typed: the type lives on the object, not the name, and is checked as the program runs. A name like x can be re-bound from an int to a str to a list freely — the name itself is untyped.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. Which of these groups lists only IMMUTABLE Python types? </strong> </p> <ol type="A"> <li>list, dict, set</li><li>dict, tuple, float</li><li>int, list, str</li><li>int, str, tuple</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> int, str, tuple </p> <p>int, str, and tuple are all immutable — once created, their value cannot change in place. list, dict, and set are mutable. &quot;Changing&quot; an immutable object always produces a new object and re-points the name.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. What does int(&quot;3.5&quot;) do in Python? </strong> </p> <ol type="A"> <li>Raises ValueError; &quot;3.5&quot; is not an integer string</li><li>Returns the integer 4 by rounding</li><li>Returns the integer 3 by truncating</li><li>Returns the float 3.5 unchanged</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> Raises ValueError; &quot;3.5&quot; is not an integer string </p> <p>int() on a string only accepts a valid whole-number string, so int(&quot;3.5&quot;) raises ValueError. To truncate you must go through the float first: int(float(&quot;3.5&quot;)) gives 3. (int(3.9) on a float does truncate to 3.)</p> </details> </div><div class="quiz-question"> <p> <strong>
 Q6. Which list contains only FALSY values? </strong> </p> <ol type="A"> <li>1, &quot;a&quot;, [0], True</li><li>0, &quot;&quot;, [], None</li><li>&quot;False&quot;, -1, [None], {0: 0}</li><li>0.1, &quot; &quot;, (0,), {None}</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> 0, &quot;&quot;, [], None </p> <p>The falsy values are False, None, any zero (0, 0.0), and any empty container (&quot;&quot;, [], {}, (), set()). Note that &quot;False&quot; is a non-empty string and therefore truthy, and (0,) is a non-empty tuple and also truthy.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q7. Why should you usually prefer isinstance(x, int) over type(x) == int for type checks? </strong> </p> <ol type="A"> <li>isinstance is faster in every case</li><li>type() does not exist in modern Python</li><li>isinstance understands subtypes and can accept a tuple of types to check several at once</li><li>type() returns a string while isinstance returns a real type</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> isinstance understands subtypes and can accept a tuple of types to check several at once </p> <p>isinstance() returns True for subtypes (for example isinstance(True, int) is True because bool is a subtype of int) and accepts a tuple like (int, float) to test several types at once. type() reports only the exact type and is best reserved for exploration and printing.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q8. You need to tell &quot;no value was provided&quot; apart from &quot;the value is zero.&quot; Which test is correct? </strong> </p> <ol type="A"> <li>if value: — because zero counts as no value</li><li>if value is not None: — because None means absent while 0 is a real, present value</li><li>if value == &quot;&quot;: — because absent values are empty strings</li><li>if type(value) == int: — because only integers can be present</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> if value is not None: — because None means absent while 0 is a real, present value </p> <p>Because 0 is falsy, if value: cannot distinguish a genuine 0 from an absent value. None is the object that means &quot;no value,&quot; and there is exactly one of it, so if value is not None: is the correct and idiomatic test for presence.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>variable</strong> </dt> <dd data-astro-cid-whrtx2kk>A name that refers (is bound) to an object. In Python a variable is a tag on an object, not a box that stores a value.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>object</strong> </dt> <dd data-astro-cid-whrtx2kk>A thing in memory that carries a type, a value, and an identity. In Python everything — numbers, text, lists, even types — is an object.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>binding</strong> </dt> <dd data-astro-cid-whrtx2kk>The link between a name and the object it refers to, created by assignment (name = object). Re-binding moves the name to a different object.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>aliasing</strong> </dt> <dd data-astro-cid-whrtx2kk>The situation where two or more names refer to the same object, so a change made through one name is visible through the others (relevant for mutable objects).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>dynamic typing</strong> </dt> <dd data-astro-cid-whrtx2kk>The rule that a value&#39;s type belongs to the object and is checked at run time, so a name may be re-bound to a value of any type at any point.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>static typing</strong> </dt> <dd data-astro-cid-whrtx2kk>The alternative approach, used by languages like Java, where a variable&#39;s type is declared in advance and checked before the program runs.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>int</strong> </dt> <dd data-astro-cid-whrtx2kk>The integer type: whole numbers of unlimited size, such as 42, 0, and -7. Immutable.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>float</strong> </dt> <dd data-astro-cid-whrtx2kk>The floating-point type: real numbers with a fractional part, such as 3.14 and 2.0. Immutable, and distinct from int even when the value looks whole.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>bool</strong> </dt> <dd data-astro-cid-whrtx2kk>The boolean type with the two values True and False. A subtype of int, so True behaves as 1 and False as 0 in arithmetic. Immutable.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>str</strong> </dt> <dd data-astro-cid-whrtx2kk>The string type: text as a sequence of characters, such as &quot;hello&quot;. Immutable, so &quot;changing&quot; a string produces a new object.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>NoneType</strong> </dt> <dd data-astro-cid-whrtx2kk>The type of the single object None, which represents the deliberate absence of a value — distinct from 0, &quot;&quot;, and False.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>mutable</strong> </dt> <dd data-astro-cid-whrtx2kk>Describes an object that can be changed in place after creation, keeping the same identity. list, dict, and set are mutable.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>immutable</strong> </dt> <dd data-astro-cid-whrtx2kk>Describes an object that cannot be changed after creation; &quot;modifying&quot; it creates a new object. int, float, bool, str, and tuple are immutable.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>truthiness</strong> </dt> <dd data-astro-cid-whrtx2kk>The rule that any object can be treated as true or false in a condition. Falsy values are False, None, any zero, and any empty container; everything else is truthy.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>type conversion</strong> </dt> <dd data-astro-cid-whrtx2kk>Turning a value of one type into another by calling the target type, such as int(&quot;42&quot;), float(&quot;3.14&quot;), or str(42). Can raise ValueError on invalid input.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>identity</strong> </dt> <dd data-astro-cid-whrtx2kk>A permanent, per-object marker of &quot;which object is this,&quot; returned by id(). In the standard interpreter it is essentially the object&#39;s memory address; the is operator compares it.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://docs.python.org/3/library/stdtypes.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Built-in Types</a> — Python Software Foundation (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://docs.python.org/3/tutorial/introduction.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>An Informal Introduction to Python</a> — Python Software Foundation (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://realpython.com/python-variables/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Variables in Python</a> — Real Python (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://peps.python.org/pep-0008/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>PEP 8 — Style Guide for Python Code</a> — Python Software Foundation (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Data_type" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Data type</a> — Wikipedia (accessed 2026-07-12) </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="44" data-astro-cid-whrtx2kk>
+Q7. Why should you usually prefer isinstance(x, int) over type(x) == int for type checks? </strong> </p> <ol type="A"> <li>isinstance is faster in every case</li><li>type() does not exist in modern Python</li><li>isinstance understands subtypes and accepts a tuple of types</li><li>type() returns a string while isinstance returns a real type</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> isinstance understands subtypes and accepts a tuple of types </p> <p>isinstance() returns True for subtypes (for example isinstance(True, int) is True because bool is a subtype of int) and accepts a tuple like (int, float) to test several types at once. type() reports only the exact type and is best reserved for exploration and printing.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. You need to tell &quot;no value was provided&quot; apart from &quot;the value is zero.&quot; Which test is correct? </strong> </p> <ol type="A"> <li>if value: — because zero counts as no value</li><li>if type(value) == int: — because only integers can be present</li><li>if value == &quot;&quot;: — because absent values are empty strings</li><li>if value is not None: — None means absent, 0 is present</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> if value is not None: — None means absent, 0 is present </p> <p>Because 0 is falsy, if value: cannot distinguish a genuine 0 from an absent value. None is the object that means &quot;no value,&quot; and there is exactly one of it, so if value is not None: is the correct and idiomatic test for presence.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>variable</strong> </dt> <dd data-astro-cid-whrtx2kk>A name that refers (is bound) to an object. In Python a variable is a tag on an object, not a box that stores a value.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>object</strong> </dt> <dd data-astro-cid-whrtx2kk>A thing in memory that carries a type, a value, and an identity. In Python everything — numbers, text, lists, even types — is an object.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>binding</strong> </dt> <dd data-astro-cid-whrtx2kk>The link between a name and the object it refers to, created by assignment (name = object). Re-binding moves the name to a different object.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>aliasing</strong> </dt> <dd data-astro-cid-whrtx2kk>The situation where two or more names refer to the same object, so a change made through one name is visible through the others (relevant for mutable objects).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>dynamic typing</strong> </dt> <dd data-astro-cid-whrtx2kk>The rule that a value&#39;s type belongs to the object and is checked at run time, so a name may be re-bound to a value of any type at any point.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>static typing</strong> </dt> <dd data-astro-cid-whrtx2kk>The alternative approach, used by languages like Java, where a variable&#39;s type is declared in advance and checked before the program runs.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>int</strong> </dt> <dd data-astro-cid-whrtx2kk>The integer type: whole numbers of unlimited size, such as 42, 0, and -7. Immutable.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>float</strong> </dt> <dd data-astro-cid-whrtx2kk>The floating-point type: real numbers with a fractional part, such as 3.14 and 2.0. Immutable, and distinct from int even when the value looks whole.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>bool</strong> </dt> <dd data-astro-cid-whrtx2kk>The boolean type with the two values True and False. A subtype of int, so True behaves as 1 and False as 0 in arithmetic. Immutable.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>str</strong> </dt> <dd data-astro-cid-whrtx2kk>The string type: text as a sequence of characters, such as &quot;hello&quot;. Immutable, so &quot;changing&quot; a string produces a new object.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>NoneType</strong> </dt> <dd data-astro-cid-whrtx2kk>The type of the single object None, which represents the deliberate absence of a value — distinct from 0, &quot;&quot;, and False.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>mutable</strong> </dt> <dd data-astro-cid-whrtx2kk>Describes an object that can be changed in place after creation, keeping the same identity. list, dict, and set are mutable.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>immutable</strong> </dt> <dd data-astro-cid-whrtx2kk>Describes an object that cannot be changed after creation; &quot;modifying&quot; it creates a new object. int, float, bool, str, and tuple are immutable.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>truthiness</strong> </dt> <dd data-astro-cid-whrtx2kk>The rule that any object can be treated as true or false in a condition. Falsy values are False, None, any zero, and any empty container; everything else is truthy.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>type conversion</strong> </dt> <dd data-astro-cid-whrtx2kk>Turning a value of one type into another by calling the target type, such as int(&quot;42&quot;), float(&quot;3.14&quot;), or str(42). Can raise ValueError on invalid input.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>identity</strong> </dt> <dd data-astro-cid-whrtx2kk>A permanent, per-object marker of &quot;which object is this,&quot; returned by id(). In the standard interpreter it is essentially the object&#39;s memory address; the is operator compares it.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://docs.python.org/3/library/stdtypes.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Built-in Types</a> — Python Software Foundation (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://docs.python.org/3/tutorial/introduction.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>An Informal Introduction to Python</a> — Python Software Foundation (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://realpython.com/python-variables/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Variables in Python</a> — Real Python (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://peps.python.org/pep-0008/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>PEP 8 — Style Guide for Python Code</a> — Python Software Foundation (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Data_type" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Data type</a> — Wikipedia (accessed 2026-07-12) </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="44" data-astro-cid-whrtx2kk>
 Mark Day 44 as read
-</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
       surfaces for someone searching for one — it costs you a click and it is genuinely how people
-      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/ai-roadmap-365/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
 ★ Star on GitHub
-</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-043-installing-python-and-virtual-environments" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 43</span> <span class="pn__title" data-astro-cid-oerjsknp>Installing Python and Virtual Environments</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-045-strings-and-text-processing" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 45 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Strings and Text Processing</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
-</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/day-043-installing-python-and-virtual-environments" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 43</span> <span class="pn__title" data-astro-cid-oerjsknp>Installing Python and Virtual Environments</span> </a> <a class="pn__card pn__card--next" href="/day-045-strings-and-text-processing" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 45 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Strings and Text Processing</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://ocm-mcp-server.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener">LinkedIn</a> </nav> </div> </footer> <script>
       // Progressive enhancement only: the theme falls back to dark and every
       // .reveal element is visible by default (the hidden start state exists
       // only inside a prefers-reduced-motion: no-preference query).

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 3: Memory Hierarchy: Registers, RAM, and Storage · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to place every level of the memory hierarchy — registers, caches, RAM, SSD, HDD, and network storage — in order with approximate sizes and latencies, explain why the hierarchy exists, and use it to reason about swapping, caching, and why model weights must fit in fast memory."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://sandeepbazar.github.io/ai-roadmap-365/day-003-memory-hierarchy-registers-ram-and-storage/"><meta property="og:title" content="Day 3: Memory Hierarchy: Registers, RAM, and Storage · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to place every level of the memory hierarchy — registers, caches, RAM, SSD, HDD, and network storage — in order with approximate sizes and latencies, explain why the hierarchy exists, and use it to reason about swapping, caching, and why model weights must fit in fast memory."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://sandeepbazar.github.io/ai-roadmap-365/day-003-memory-hierarchy-registers-ram-and-storage/"><meta property="og:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-003-memory-hierarchy-registers-ram-and-storage.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 3: Memory Hierarchy: Registers, RAM, and Storage · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 3: Memory Hierarchy: Registers, RAM, and Storage · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to place every level of the memory hierarchy — registers, caches, RAM, SSD, HDD, and network storage — in order with approximate sizes and latencies, explain why the hierarchy exists, and use it to reason about swapping, caching, and why model weights must fit in fast memory."><meta name="twitter:image" content="https://sandeepbazar.github.io/ai-roadmap-365/social/day-003-memory-hierarchy-registers-ram-and-storage.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Day 3: Memory Hierarchy: Registers, RAM, and Storage · 365 Days of AI Mastery</title><meta name="description" content="After this lesson you will be able to place every level of the memory hierarchy — registers, caches, RAM, SSD, HDD, and network storage — in order with approximate sizes and latencies, explain why the hierarchy exists, and use it to reason about swapping, caching, and why model weights must fit in fast memory."><meta name="author" content="Sandeep Bazar"><link rel="canonical" href="https://ai-roadmap-365.github.io/day-003-memory-hierarchy-registers-ram-and-storage/"><meta property="og:title" content="Day 3: Memory Hierarchy: Registers, RAM, and Storage · 365 Days of AI Mastery"><meta property="og:description" content="After this lesson you will be able to place every level of the memory hierarchy — registers, caches, RAM, SSD, HDD, and network storage — in order with approximate sizes and latencies, explain why the hierarchy exists, and use it to reason about swapping, caching, and why model weights must fit in fast memory."><meta property="og:type" content="website"><meta property="og:site_name" content="365 Days of AI Mastery"><meta property="og:url" content="https://ai-roadmap-365.github.io/day-003-memory-hierarchy-registers-ram-and-storage/"><meta property="og:image" content="https://ai-roadmap-365.github.io/social/day-003-memory-hierarchy-registers-ram-and-storage.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Day 3: Memory Hierarchy: Registers, RAM, and Storage · 365 Days of AI Mastery"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Day 3: Memory Hierarchy: Registers, RAM, and Storage · 365 Days of AI Mastery"><meta name="twitter:description" content="After this lesson you will be able to place every level of the memory hierarchy — registers, caches, RAM, SSD, HDD, and network storage — in order with approximate sizes and latencies, explain why the hierarchy exists, and use it to reason about swapping, caching, and why model weights must fit in fast memory."><meta name="twitter:image" content="https://ai-roadmap-365.github.io/social/day-003-memory-hierarchy-registers-ram-and-storage.png"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"><script>
       // Dark is the default regardless of OS preference - this is a dark-first
       // design. A visitor who picks light with the toggle keeps it. Applied
       // before first paint so there is no flash of the wrong theme.
@@ -11,70 +11,135 @@
         }
         document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
       })();
-    </script><link rel="stylesheet" href="/ai-roadmap-365/_astro/_day_.XHgc_OgQ.css">
+    </script><link rel="stylesheet" href="/_astro/_day_.CiF6NwwU.css">
 <style>.pn[data-astro-cid-oerjsknp]{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}@media(max-width:720px){.pn[data-astro-cid-oerjsknp]{grid-template-columns:1fr}}.pn__card[data-astro-cid-oerjsknp]{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}.pn__card[data-astro-cid-oerjsknp]:hover{transform:translateY(-2px)}.pn__card--prev[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--fg, #e2e8f0) 4%,transparent);align-items:flex-start;text-align:left}.pn__card--prev[data-astro-cid-oerjsknp]:hover{border-color:color-mix(in srgb,var(--fg, #e2e8f0) 28%,transparent)}.pn__card--next[data-astro-cid-oerjsknp]{background:color-mix(in srgb,var(--accent, #1d4ed8) 12%,transparent);border-color:color-mix(in srgb,var(--accent, #1d4ed8) 45%,transparent);align-items:flex-end;text-align:right}.pn__card--next[data-astro-cid-oerjsknp]:hover{background:color-mix(in srgb,var(--accent, #1d4ed8) 20%,transparent);border-color:var(--accent, #1d4ed8)}.pn__dir[data-astro-cid-oerjsknp]{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted, #94a3b8)}.pn__card--next[data-astro-cid-oerjsknp] .pn__dir[data-astro-cid-oerjsknp]{color:var(--accent-soft, #7dd3fc)}.pn__title[data-astro-cid-oerjsknp]{font-weight:650;line-height:1.35;color:var(--fg, #e2e8f0)}.pn__card--planned[data-astro-cid-oerjsknp]{opacity:.6;cursor:default}.pn__card--planned[data-astro-cid-oerjsknp]:hover{transform:none}.pn__card--planned[data-astro-cid-oerjsknp] em[data-astro-cid-oerjsknp]{font-style:normal;color:var(--muted, #94a3b8);font-weight:400}.pn__spacer[data-astro-cid-oerjsknp]{display:block}.marknote[data-astro-cid-whrtx2kk]{display:inline-block;margin-top:4px;font-size:13.5px;color:var(--text-faint)}.day-hero[data-astro-cid-whrtx2kk]{width:100%;height:auto;border-radius:12px;border:1px solid var(--border, #1e293b);margin:0 0 1.5rem;display:block}
 .starcta[data-astro-cid-nqc2he3i]{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:40px 0 8px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius, 12px);background:color-mix(in srgb,var(--accent, #1d4ed8) 7%,transparent)}.starcta__text[data-astro-cid-nqc2he3i]{display:flex;flex-direction:column;gap:5px;max-width:62ch}.starcta__text[data-astro-cid-nqc2he3i] span[data-astro-cid-nqc2he3i]{font-size:.92rem;color:var(--muted, #94a3b8)}.starcta__btn[data-astro-cid-nqc2he3i]{flex:none;padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--accent, #1d4ed8);color:#fff;white-space:nowrap}.starcta__btn[data-astro-cid-nqc2he3i]:hover{filter:brightness(1.12)}
-</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="brand" href="/ai-roadmap-365/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
+</style></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="site-header"> <a class="site-home" href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener"> <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M15 5l-7 7 7 7"></path> </svg>
+Sandeep Bazar
+</a> <a class="brand" href="/"> <svg viewBox="0 0 32 32" aria-hidden="true"> <defs> <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"> <stop offset="0" stop-color="#6f6cf6"></stop> <stop offset="1" stop-color="#38bdf8"></stop> </linearGradient> </defs> <circle cx="16" cy="16" r="12.5" fill="url(#bg1)" opacity=".2"></circle> <circle cx="16" cy="16" r="12.5" fill="none" stroke="url(#bg1)" stroke-width="1.8"></circle> <path d="M16 8.5v7.8l5 3" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"></path> </svg>
 365 Days of AI
-</a> <nav aria-label="Primary"> <a href="/ai-roadmap-365/sections">Courses</a> <a href="/ai-roadmap-365/search">Search</a> <a href="/ai-roadmap-365/glossary">Glossary</a> <a href="/ai-roadmap-365/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/sandeepbazar/ai-roadmap-365"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
-Labs
-</a> </header> <main id="main">  <article data-day="3" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/ai-roadmap-365/sections/computing-foundations">Computing Foundations</a>  ›  <span>Inside the Machine</span>  › 
-Day 3 </p> <h1 data-astro-cid-whrtx2kk>Day 3: Memory Hierarchy: Registers, RAM, and Storage</h1>  <img class="day-hero" src="/ai-roadmap-365/social/day-003-memory-hierarchy-registers-ram-and-storage.png" width="1200" height="630" alt="Day 3 of 365 — Memory Hierarchy: Registers, RAM, and Storage" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to place every level of the memory hierarchy — registers, caches, RAM, SSD, HDD, and network storage — in order with approximate sizes and latencies, explain why the hierarchy exists, and use it to reason about swapping, caching, and why model weights must fit in fast memory.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Inside the Machine</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-003-memory-hierarchy-registers-ram-and-storage" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/sandeepbazar/ai-roadmap-365/tree/main/labs/sections/computing-foundations/day-003-memory-hierarchy-registers-ram-and-storage</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/sandeepbazar/ai-roadmap-365.git
-cd ai-roadmap-365</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-003-memory-hierarchy-registers-ram-and-storage</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
-You can also <a href="/ai-roadmap-365/labs/day-003-memory-hierarchy-registers-ram-and-storage" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
-</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Order the levels of the memory hierarchy from registers to network storage and attach an approximate order-of-magnitude size and latency to each</li><li data-astro-cid-whrtx2kk>Explain the speed/size/cost trade-off that makes the hierarchy necessary, and why no single memory technology can be fast, large, and cheap at once</li><li data-astro-cid-whrtx2kk>Define temporal and spatial locality of reference and explain how cache lines and prefetching exploit them to make loops run at near-cache speed</li><li data-astro-cid-whrtx2kk>Describe caching as the recurring idea in computing and identify it at three different scales (CPU cache, OS page cache, content delivery network)</li><li data-astro-cid-whrtx2kk>Explain virtual memory, pages, swap, and thrashing in plain language, and diagnose the symptoms of a machine that has run out of RAM</li><li data-astro-cid-whrtx2kk>Measure your own machine&#39;s L1 and L2 cache sizes from the terminal and demonstrate the OS page-cache effect by timing a cold versus warm file read</li><li data-astro-cid-whrtx2kk>Connect the hierarchy to model deployment: compute whether a model fits in GPU or unified memory, estimate the token-rate ceiling set by memory bandwidth, and explain what quantization changes</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Day 1 (the layered stack and your machine profile) and Day 2 (the CPU&#39;s fetch-decode-execute cycle)</li><li data-astro-cid-whrtx2kk>A terminal on macOS or Linux (Windows users: WSL), with your Day 1 worksheet at hand</li></ul> <h2 id="why-this-matters">Why this matters</h2>
-<p>On Day 1 you met the memory hierarchy in one paragraph; on Day 2 you watched the CPU fetch and execute instructions billions of times per second. Today those two threads collide, because there is an uncomfortable truth hiding in that picture: a modern processor can execute an instruction in well under a nanosecond, but fetching one number from RAM takes on the order of a hundred nanoseconds. Left alone, the fastest chip on Earth would spend more than 99% of its life waiting for memory. The memory hierarchy — the layered arrangement of registers, caches, RAM, and storage — is how computers hide that gap, and it is arguably the single most consequential design idea in practical computing.</p>
-<p>It is also the idea that will follow you through this entire course. When your future self asks “why is my data pipeline slow?”, the answer will usually live in this lesson, not in the code’s arithmetic. When you meet large models, the very first question practitioners ask — “does it fit in GPU memory?” — is a memory-hierarchy question. Why does generating text from a large model stress memory bandwidth more than raw compute? Memory hierarchy. Why does quantization (storing each model weight in fewer bits) speed models up, not just shrink them? Memory hierarchy. Why did Apple’s unified-memory Macs become weirdly popular machines for running models locally? Memory hierarchy. Even the price differences between cloud machine types mostly trace back to how much fast memory sits how close to the processors.</p>
-<p>Engineers have a name for the widening gap between processor speed and memory speed: the memory wall. Understanding it now, on Day 3, with nothing but a terminal and a stopwatch, will make dozens of later topics feel obvious instead of mysterious.</p>
+</a> <nav aria-label="Primary"> <a href="/sections">Courses</a> <a href="/labs">Labs</a> <a href="/catalog">Catalogs</a> <a href="/search">Search</a> <a href="/glossary">Glossary</a> <a href="/progress">Progress</a> </nav> <div class="spacer"></div> <button class="iconbtn" id="theme" type="button" aria-label="Toggle colour theme"> <svg class="theme-light-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path> </svg> <svg class="theme-dark-only" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8"></path> </svg> </button> <a class="ghlink" href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io"> <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path> </svg>
+GitHub
+</a> </header> <main id="main">  <article data-day="3" data-astro-cid-whrtx2kk> <p class="crumbs" aria-label="Breadcrumb"> <a href="/sections/computing-foundations">Computing Foundations</a>  ›  <span>Inside the Machine</span>  › 
+Day 3 </p> <h1 data-astro-cid-whrtx2kk>Day 3: Memory Hierarchy: Registers, RAM, and Storage</h1>  <img class="day-hero" src="/social/day-003-memory-hierarchy-registers-ram-and-storage.png" width="1200" height="630" alt="Day 3 of 365 — Memory Hierarchy: Registers, RAM, and Storage" data-astro-cid-whrtx2kk> <p data-astro-cid-whrtx2kk><em data-astro-cid-whrtx2kk>After this lesson you will be able to place every level of the memory hierarchy — registers, caches, RAM, SSD, HDD, and network storage — in order with approximate sizes and latencies, explain why the hierarchy exists, and use it to reason about swapping, caching, and why model weights must fit in fast memory.</em></p> <div class="meta-grid" data-astro-cid-whrtx2kk> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Course</span><br data-astro-cid-whrtx2kk>Computing Foundations</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Category</span><br data-astro-cid-whrtx2kk>Inside the Machine</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Reading time</span><br data-astro-cid-whrtx2kk>≈ 40 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Practical time</span><br data-astro-cid-whrtx2kk>≈ 30 min</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Lesson duration</span><br data-astro-cid-whrtx2kk>1h 10m</div> <div data-astro-cid-whrtx2kk><span class="label" data-astro-cid-whrtx2kk>Last verified</span><br data-astro-cid-whrtx2kk>2026-07-12</div> </div>  <div class="callout" data-astro-cid-whrtx2kk> <h2 id="hands-on-lab" style="margin-top:0" data-astro-cid-whrtx2kk>Hands-on lab for this lesson</h2> <p data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Lab files on GitHub:</strong>  <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/computing-foundations/day-003-memory-hierarchy-registers-ram-and-storage" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>https://github.com/ai-roadmap-365/ai-roadmap-365.github.io/tree/main/labs/sections/computing-foundations/day-003-memory-hierarchy-registers-ram-and-storage</a> </p> <ol data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Get the hands-on files.</strong> Clone the labs repository once (you can reuse this clone for every lesson). This works on macOS, Linux, and Windows (PowerShell or WSL): <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>git clone https://github.com/ai-roadmap-365/ai-roadmap-365.github.io.git
+cd ai-roadmap-365.github.io</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Open this lesson&#39;s lab.</strong> Move into the directory for this specific day. Every lab lives at the same predictable path — section / subsection / week / day: <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>cd labs/sections/computing-foundations/day-003-memory-hierarchy-registers-ram-and-storage</code></pre> </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Read the lab guide.</strong> Open `README.md` in that directory. It lists the exact commands, what each does, the expected output, and how to check your work — read it before running anything.  </li><li data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>Run it and check your work.</strong> Follow the README&#39;s &quot;How to run&quot; section: run the example first to see the finished result, then complete the numbered exercises in `starter/`, then run the tests. The tests pass (exit 0) only when your work is correct. <pre data-astro-cid-whrtx2kk><code data-astro-cid-whrtx2kk>bash tests/run_tests.sh   # or the test command named in the lab README</code></pre> </li> </ol> <p class="no-print" data-astro-cid-whrtx2kk>
+You can also <a href="/labs/day-003-memory-hierarchy-registers-ram-and-storage" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>open the lab as a local page</a> (works offline, shows the file tree and expected output).
+</p> </div> <h2 id="learning-objectives" data-astro-cid-whrtx2kk>Learning objectives</h2> <p data-astro-cid-whrtx2kk>By the end of this lesson you will be able to:</p> <ul data-astro-cid-whrtx2kk><li data-astro-cid-whrtx2kk>Order the levels of the memory hierarchy from registers to network storage and attach an approximate order-of-magnitude size and latency to each</li><li data-astro-cid-whrtx2kk>Explain the speed/size/cost trade-off that makes the hierarchy necessary, and why no single memory technology can be fast, large, and cheap at once</li><li data-astro-cid-whrtx2kk>Define temporal and spatial locality of reference and explain how cache lines and prefetching exploit them to make loops run at near-cache speed</li><li data-astro-cid-whrtx2kk>Describe caching as the recurring idea in computing and identify it at three different scales (CPU cache, OS page cache, content delivery network)</li><li data-astro-cid-whrtx2kk>Explain virtual memory, pages, swap, and thrashing in plain language, and diagnose the symptoms of a machine that has run out of RAM</li><li data-astro-cid-whrtx2kk>Measure your own machine&#39;s L1 and L2 cache sizes from the terminal and demonstrate the OS page-cache effect by timing a cold versus warm file read</li><li data-astro-cid-whrtx2kk>Connect the hierarchy to model deployment: compute whether a model fits in GPU or unified memory, estimate the token-rate ceiling set by memory bandwidth, and explain what quantization changes</li></ul> <h2 id="prerequisites" data-astro-cid-whrtx2kk>Prerequisites</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk>Day 1 (the layered stack and your machine profile) and Day 2 (the CPU&#39;s fetch-decode-execute cycle)</li><li data-astro-cid-whrtx2kk>A terminal on macOS or Linux (Windows users: WSL), with your Day 1 worksheet at hand</li> </ul> <h2 id="why-this-matters">Why this matters</h2>
+<p><img src="/_astro/latency-at-human-scale.D6Rm_3pv_Z16hImP.svg" alt="Diagram: memory latencies rescaled to human time" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<p>Every number a model touches lives somewhere, and where it lives decides how fast
+it can be reached.</p>
+<ul>
+<li><strong>The gap between the fastest and slowest tier is about a million to one.</strong></li>
+<li><strong>Almost every slow program is waiting for data</strong>, not computing on it.</li>
+<li><strong>“Does it fit in GPU memory?”</strong> is the first question practitioners ask of any
+model, and this lesson is why.</li>
+</ul>
+<hr/>
 <h2 id="the-idea-in-plain-language">The idea in plain language</h2>
-<p>Here is the whole lesson in four sentences. Fast memory is expensive and must be tiny; big memory is cheap but slow — physics and economics allow no single memory that is fast, huge, and affordable at once. So computers stack several kinds of memory in layers: a handful of registers inside the CPU, small caches next to the cores, gigabytes of RAM on the memory bus, terabytes of persistent storage below that, and effectively unlimited network storage at the bottom. Each layer is roughly 10 to 1000 times bigger and 10 to 1000 times slower than the one above it. The system works because programs don’t touch their data randomly: they reuse what they touched recently and march through data in order, so a small fast layer can hold “the data of the moment” and satisfy most requests at top speed.</p>
-<p>That tendency of programs is called locality of reference, and it comes in two flavors. Temporal locality: what you used a moment ago, you will probably use again soon (think of a loop reusing the same counter). Spatial locality: near what you just used sits what you will need next (think of reading an array element by element). Hardware exploits both automatically — when RAM is asked for one number, it hands over the whole neighboring chunk (a cache line) on the bet that neighbors will be wanted next, and caches keep recently used lines around on the bet that they will be reused.</p>
-<p>Keeping a small fast copy of something in front of a large slow source is called caching, and once you can see it, you will find it everywhere: CPU caches in front of RAM, RAM (as the operating system’s page cache) in front of the disk, your browser’s cache in front of the internet, a content delivery network in front of a distant server. Different layers, one identical trick. Today you learn the trick once, deeply, so every later appearance is a reunion rather than an introduction.</p>
+<p>No memory technology is fast, large and cheap at the same time, so machines layer
+several of them.</p>
+<p><img src="/_astro/memory-pyramid-detailed.B1vu-ojK_hN94G.svg" alt="Diagram: the memory hierarchy pyramid with approximate sizes and latencies at every level" loading="lazy" decoding="async" fetchpriority="auto" width="800" height="600"></p>
+<ul>
+<li><strong>Up the pyramid:</strong> faster, smaller, more expensive per byte.</li>
+<li><strong>Down the pyramid:</strong> larger, slower, cheaper.</li>
+<li><strong>It works because of locality.</strong> Programs reuse what they just touched and
+march through data in order, so hardware keeps hot data near the top by itself.</li>
+</ul>
+<hr/>
 <h2 id="historical-background">Historical background</h2>
-<p>The hierarchy is as old as the stored-program computer itself. In their 1946 design papers for the machine that became the blueprint for modern computers, Burks, Goldstine, and von Neumann already noted that they would ideally want a memory both very large and very fast, that no such memory could be built, and that a hierarchy of memories — each larger and slower than the last — was the practical answer. The earliest machines made do with exotic devices: mercury delay lines that stored bits as sound pulses traveling through tubes of liquid, and cathode-ray tubes that stored bits as spots of charge on a screen. In the early 1950s magnetic-core memory — tiny ferrite rings threaded on wires, each ring holding one bit — became the workhorse RAM of the industry for two decades, which is why old-timers still call a memory dump a “core dump.”</p>
-<p>Two inventions in the 1960s created the modern shape of the hierarchy. In 1962, the Atlas computer at the University of Manchester introduced virtual memory: it automatically shuttled data between small fast core memory and a large slow drum, letting programmers pretend they had one big memory while the machine handled the layers behind the scenes. And in 1968 IBM announced the System/360 Model 85, the first commercial computer with a cache — a small fast buffer memory that automatically kept recently used data close to the processor. Both ideas were about the same thing: making a hierarchy look like a single simple memory.</p>
-<p>Then the layers themselves changed material. In 1970 Intel shipped the 1103, the first commercially successful DRAM chip, and semiconductor memory swiftly killed magnetic core. Hard disk drives — invented by IBM in 1956 as a refrigerator-sized unit storing a few megabytes — became the persistent layer for half a century. Flash-memory SSDs went mainstream in the 2000s and were transformative precisely in hierarchy terms: an SSD answers a random read in about a tenth of a millisecond where a spinning disk needs several milliseconds, closing part of the enormous gap between RAM and storage.</p>
-<p>Meanwhile the top and bottom of the hierarchy drifted apart. Processor speeds roughly doubled every couple of years through the 1980s and 1990s; DRAM latency improved far more slowly. In a famous 1995 note, Wulf and McKee projected the consequences of that divergence and popularized the term “memory wall.” The industry’s response was more hierarchy: two, then three levels of cache on the CPU die, smarter prefetching, and — in the machine-learning era — high-bandwidth memory stacked directly on top of GPU packages, plus designs like Apple’s unified memory that put one large pool close to CPU and GPU alike. Sixty years on, the answer to the memory problem is still the one from 1946: layers.</p>
+<p><img src="/_astro/memory-wall.whajlMQu_Z16hImP.svg" alt="Diagram: the widening gap between processor speed and memory latency" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>When</th><th>What changed</th><th>Why it mattered</th></tr></thead><tbody><tr><td>1946</td><td>Burks, Goldstine and von Neumann propose a hierarchy</td><td>The idea predates the hardware by decades</td></tr><tr><td>1965</td><td>Wilkes describes the cache</td><td>A small fast memory that fills itself</td></tr><tr><td>1970s</td><td>DRAM becomes the standard for main memory</td><td>Cheap capacity, at a latency cost</td></tr><tr><td>1980s</td><td>Processors outpace memory</td><td>The “memory wall” opens and never closes</td></tr><tr><td>2000s</td><td>Multi-level caches, L1 to L3</td><td>One tier was no longer enough</td></tr><tr><td>2010s</td><td>SSDs replace spinning disks</td><td>A thousandfold latency improvement, one tier down</td></tr><tr><td>2016–</td><td>High-bandwidth memory on accelerators</td><td>Stacked memory, terabytes per second</td></tr></tbody></table>
+<ul>
+<li><strong>The memory wall is the whole story.</strong> Processors got fast much quicker than
+memory got close, and every tier since exists to hide that gap.</li>
+</ul>
+<hr/>
 <h2 id="what-it-is--and-what-it-is-not">What it is — and what it is not</h2>
-<p>The memory hierarchy is the organization of all the places a computer can keep data, arranged by speed, size, and cost: registers, then L1, L2, and (usually) L3 caches on the CPU chip, then RAM, then persistent storage (SSD or HDD), then storage reached over a network. Two properties define the arrangement. Going down, each level is larger, slower, and cheaper per byte — order-of-magnitude jumps, not small steps. And the levels cooperate: each fast level holds a subset of what the level below holds, refreshed continuously so that the subset is, with luck, exactly the data the program needs right now.</p>
-<p>It is worth being precise about what the hierarchy is not. It is not one component you can point at on a motherboard — it is a relationship among many components. Cache is not “extra RAM”: it is a different, faster kind of memory (SRAM, roughly six transistors per bit) physically located on the CPU die, invisible to your programs and managed entirely by hardware. Virtual memory is not “using disk as RAM” in any pleasant sense: it is an addressing illusion the OS maintains, and leaning on the disk portion of that illusion (swapping) is a performance disaster precisely because of the latencies in today’s tables. And the hierarchy is not optional or ignorable: every program that has ever run on your machine lives inside it, whether its author knew or not.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Common misconception</th><th>The reality</th></tr></thead><tbody><tr><td>”Cache is a small amount of bonus RAM.”</td><td>Cache is a different memory technology on the CPU die itself, roughly 100 times faster than RAM and managed by hardware, not by your code.</td></tr><tr><td>”My machine has 36 GB of memory, so a 36 GB file fits.”</td><td>The OS, other programs, and the program’s own working structures share that RAM; the usable slice is always smaller.</td></tr><tr><td>”An SSD is about as fast as RAM now.”</td><td>A fast SSD is still roughly a thousand times slower than RAM for a random access — the gap is smaller than with spinning disks, but still enormous.</td></tr><tr><td>”Virtual memory means I never run out of memory.”</td><td>You run out of <em>fast</em> memory just the same; the system merely degrades (swapping) instead of stopping.</td></tr><tr><td>”Doubling CPU speed doubles program speed.”</td><td>Programs that wait on memory — most programs — speed up far less, because the wait, not the arithmetic, dominates.</td></tr></tbody></table>
+<p><strong>It is</strong> a set of tiers, each roughly an order of magnitude slower, larger and
+cheaper per byte than the one above.</p>
+<p><strong>It is not:</strong></p>
+<ul>
+<li>
+<p><strong>Not something you configure.</strong> Hardware moves data between tiers
+automatically, using locality. You influence it by how you access data.</p>
+</li>
+<li>
+<p><strong>Not the same as memory versus storage.</strong> That is one boundary in the pyramid,
+not the whole of it.</p>
+</li>
+<li>
+<p><strong>Not a set of exact numbers.</strong> Carry the orders of magnitude, not the digits —
+they differ per machine and per year.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="why-it-was-created-and-what-problems-it-solves">Why it was created and what problems it solves</h2>
-<p>The hierarchy exists because three desirable properties of memory — fast, large, cheap — form a triangle you cannot have all of. The physics is unforgiving: fast memory (SRAM) needs about six transistors per bit and must sit millimeters from the compute circuits, so it is expensive and small; dense memory (DRAM) uses one transistor and one capacitor per bit and sits centimeters away across a bus, so it is big, cheaper, and slower; flash storage packs bits densest and cheapest of all and remembers without power, but answering a read takes microseconds; magnetic disks and network storage are cheaper and bigger still, and slower again. These are order-of-magnitude gaps baked into the technologies, not engineering sloppiness awaiting a fix.</p>
-<p>The problem the hierarchy solves is making a machine that <em>feels</em> like it has memory that is simultaneously register-fast and disk-huge, at a price people will pay. The solution leans entirely on locality of reference: since programs concentrate their attention on a small working set of data at any moment, a machine that keeps the working set in the small fast levels delivers nearly the speed of its fastest memory at nearly the price of its cheapest. When the bet pays off — a cache hit — the data is already upstairs. When it fails — a cache miss — the hardware fetches the data from below, pays the latency once, and keeps a copy in case it is wanted again.</p>
-<p>The same reasoning was rediscovered at every scale. The OS caches disk contents in spare RAM (the page cache) because disk is to RAM what RAM is to cache. Databases cache query results; websites cache pages near users. Whenever two storage layers differ wildly in speed and access patterns show locality, someone inserts a cache between them — it is the single most reused idea in systems design.</p>
+<p><img src="/_astro/why-the-pyramid-exists.DEvyz0H1_ZIALX.svg" alt="Diagram: a machine built entirely of fast memory compared with one built entirely of slow memory" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<p>Fast memory needs more transistors per bit, more area, more power, and must sit
+physically close to the processor. All four are expensive.</p>
+<ul>
+<li>
+<p><strong>If all memory were register-speed</strong>, a laptop would cost more than a house and
+hold a few megabytes.</p>
+</li>
+<li>
+<p><strong>If all memory were disk-speed</strong>, a modern processor would spend essentially
+all its time waiting.</p>
+</li>
+<li>
+<p><strong>The pyramid buys nearly the speed of the fastest at nearly the price of the
+cheapest</strong> — and it only works because of locality.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="how-it-works">How it works</h2>
+<p><img src="/_astro/page-fault-stall.BNjJJrqk_Z16hImP.svg" alt="Diagram: the sequence of a page fault when memory is oversubscribed" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
 <h3 id="the-levels-one-by-one">The levels, one by one</h3>
-<p>Hold onto orders of magnitude, not exact figures — every number here is an honest approximation, and real hardware varies by vendor and generation. The far-right column rescales everything to human time: imagine a register access stretched to one second.</p>
 
 
 
@@ -128,53 +193,134 @@ You can also <a href="/ai-roadmap-365/labs/day-003-memory-hierarchy-registers-ra
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Level</th><th>Typical size</th><th>Approximate latency</th><th>If a register access took 1 second</th></tr></thead><tbody><tr><td>Registers</td><td>~1 KB total per core</td><td>~0.5 ns (a CPU cycle)</td><td>1 second</td></tr><tr><td>L1 cache</td><td>32–192 KB per core</td><td>~1 ns</td><td>~2 seconds</td></tr><tr><td>L2 cache</td><td>0.25–16 MB</td><td>~4 ns</td><td>~8 seconds</td></tr><tr><td>L3 cache</td><td>8–128 MB, shared</td><td>~15 ns</td><td>~30 seconds</td></tr><tr><td>RAM</td><td>8–192 GB</td><td>~100 ns</td><td>~3 minutes</td></tr><tr><td>SSD (random read)</td><td>0.25–8 TB</td><td>~100 µs</td><td>~2 days</td></tr><tr><td>Datacenter network hop</td><td>—</td><td>~0.5 ms</td><td>~12 days</td></tr><tr><td>Hard disk seek</td><td>up to ~20 TB</td><td>~5–10 ms</td><td>~6 months</td></tr><tr><td>Internet round trip</td><td>effectively unlimited</td><td>~100 ms</td><td>~6 years</td></tr></tbody></table>
-<p>Read that last column twice. From the CPU’s point of view, RAM is a three-minute errand, an SSD is a two-day trip, and a spinning disk is half a year away. This is why a single design goal shapes so much of computing: <em>stay high in the pyramid</em>.</p>
-<p><img src="/ai-roadmap-365/_astro/memory-pyramid-detailed.B1vu-ojK_hN94G.svg" alt="Diagram: the memory hierarchy pyramid with approximate sizes and latencies at every level" loading="lazy" decoding="async" fetchpriority="auto" width="800" height="600"></p>
-<p>A few notes on the individual levels. Registers you met on Day 2 — the few dozen named slots the ALU computes on directly; the compiler decides what lives there. The L1 cache is split per core, usually into an instruction half and a data half, and is the hardware’s first stop for every memory access. L2 is bigger and slightly farther; L3, where present, is bigger again and typically shared among all cores (Apple’s chips skip a classic L3 and instead use large L2 caches plus a shared system-level cache — same idea, different labels). RAM (DRAM) is the first level off the CPU chip, reached over the memory bus; it is volatile, meaning contents vanish at power-off. SSDs and hard disks are persistent; they are where files actually live. And network storage — a file server, cloud object storage — bottoms out the pyramid: effectively unlimited, but every access is a round trip through cables and switches.</p>
-<p>Two different figures of merit matter at every level, and beginners often blur them. Latency is how long one access takes — the numbers above. Bandwidth is how many bytes per second the level can stream once transfers are flowing — RAM in a laptop might sustain on the order of 100 GB/s, a fast SSD several GB/s, a home internet connection a few hundred MB/s at best. A level can have decent bandwidth and terrible latency (network storage is the classic case). Latency punishes scattered small accesses; bandwidth limits big sequential ones. Keep both words; you will need them within weeks.</p>
-<h3 id="locality-and-cache-lines-why-the-bet-pays-off">Locality and cache lines: why the bet pays off</h3>
-<p>When your program reads one 8-byte number from RAM, the hardware does not fetch 8 bytes — it fetches the entire 64-byte cache line containing it and parks the line in cache. That is spatial locality made mechanical: if you are reading element 0 of an array, elements 1 through 7 arrive in the same line for free, and reading them costs a nanosecond each instead of a hundred.</p>
-<p><img src="/ai-roadmap-365/_astro/cache-locality.So0B4kdZ_Z19uddi.svg" alt="Diagram: a loop reading data from cache versus reaching out to RAM" loading="lazy" decoding="async" fetchpriority="auto" width="800" height="500"></p>
-<p>Follow the diagram’s loop summing a million-element array. The first access misses: the line is copied from RAM, ~100 ns. The next seven accesses hit: ~1 ns each. Then the pattern repeats — one miss buys seven hits, and the hardware’s prefetcher, noticing the regular march, starts fetching the <em>next</em> line before it is asked. The result is that a well-behaved sequential loop runs at nearly cache speed even though the data lives in RAM. Now imagine visiting the same million elements in random order: nearly every access misses, nearly every access pays the full trip, and the identical arithmetic can run an order of magnitude slower or worse. Same data, same instructions, different order — vastly different speed. That is the memory hierarchy asserting itself, and it is why data layout and access order are performance topics in every serious computing field, very much including machine learning, where “keep the processors fed” is half the game.</p>
-<h3 id="virtual-memory-and-swapping-in-plain-language">Virtual memory and swapping, in plain language</h3>
-<p>One more illusion completes the picture. Programs do not use real RAM addresses. Each program is handed its own private make-believe address space, and the OS plus a piece of hardware (the memory management unit) translate make-believe addresses to real RAM locations, in chunks called pages (commonly 4 or 16 KB). This is virtual memory, and it buys three things: programs cannot read or corrupt each other’s memory (protection — a security cornerstone); every program can be written as if it owned a simple private memory (convenience); and the OS gains freedom to place, share, and shuffle pages behind everyone’s back (flexibility).</p>
-<p>That third freedom has a sharp edge. When programs collectively want more pages than RAM can hold, the OS evicts the least-recently-used pages to a reserved area of disk — swap — and brings them back on demand. Touching a swapped-out page triggers a page fault: the program simply freezes until the page returns from the SSD, a ~hundred-microsecond stall repeated thousands of times. A machine “thrashing” — swapping pages in and out continuously — has effectively demoted its RAM to SSD speed: the beach-ball cursor, the unresponsive window, the training job that mysteriously runs fifty times slower than yesterday. The cure is always the same: shrink the working set (process data in chunks, close the browser with 90 tabs) or buy more RAM.</p>
-<p>The OS also runs the trick in the opposite, happy direction: any RAM not otherwise needed becomes the page cache, a cache of recently read disk contents. Read a big file twice and the second read often runs many times faster — it never touches the disk at all. Today’s lab measures exactly this on your machine.</p>
+<table><thead><tr><th>Level</th><th>Typical latency</th><th>Typical size</th><th>What it holds</th></tr></thead><tbody><tr><td>Registers</td><td>~0.3 ns (1 cycle)</td><td>~1 KB</td><td>The values in play right now</td></tr><tr><td>L1 cache</td><td>~1 ns</td><td>32–128 KB</td><td>The hottest recent data</td></tr><tr><td>L2 cache</td><td>~4 ns</td><td>0.5–2 MB</td><td>Slightly cooler data</td></tr><tr><td>L3 cache</td><td>~10–40 ns</td><td>8–64 MB</td><td>Shared across cores</td></tr><tr><td>RAM</td><td>~100 ns</td><td>8–128 GB</td><td>Everything currently running</td></tr><tr><td>SSD</td><td>~100 µs</td><td>256 GB–4 TB</td><td>Files, and anything swapped out</td></tr><tr><td>Network storage</td><td>~1–100 ms</td><td>Effectively unlimited</td><td>Datasets, checkpoints, archives</td></tr></tbody></table>
+<p><strong>At human scale</strong>, if a register access took one second: L1 is about three
+seconds, RAM is about five minutes, an SSD is about four days, and network
+storage is somewhere between a month and years.</p>
+<h3 id="locality-and-why-loops-are-fast">Locality, and why loops are fast</h3>
+<p><img src="/_astro/cache-locality.So0B4kdZ_Z19uddi.svg" alt="Diagram: a loop reading data from cache versus reaching out to RAM" loading="lazy" decoding="async" fetchpriority="auto" width="800" height="500"></p>
+<ul>
+<li><strong>A miss loads a whole 64-byte cache line</strong>, not one value.</li>
+<li><strong>So the neighbouring elements arrive free</strong>, and the next seven reads are hits.</li>
+<li><strong>The prefetcher notices the pattern</strong> and fetches upcoming lines early.</li>
+<li><strong>That is why sequential access runs at nearly cache speed</strong> even over data far
+larger than the cache.</li>
+</ul>
+<p>Access the same array in random order and every read is a miss. Same data, same
+loop, an order of magnitude slower.</p>
+<h3 id="virtual-memory-and-swapping">Virtual memory and swapping</h3>
+<ul>
+<li>
+<p><strong>Each process sees its own private address space</strong>, mapped to real memory by
+the hardware.</p>
+</li>
+<li>
+<p><strong>When RAM fills, the OS moves least-recently-used pages to disk.</strong></p>
+</li>
+<li>
+<p><strong>Touching a swapped-out page causes a page fault</strong>, and the program stalls for
+an SSD access — roughly a thousand times a RAM access.</p>
+</li>
+<li>
+<p><strong>A machine that is swapping heavily feels broken</strong> rather than slow, and this
+is why.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="an-everyday-analogy">An everyday analogy</h2>
-<p>Return to the Day 1 kitchen, now with the full staff. The chef’s two hands are the registers — whatever they hold is being worked on <em>right now</em>, and there is room for almost nothing. The tray beside the cutting board is L1: a dozen ingredients, reachable without looking up. The counter behind the chef is L2, and the kitchen’s shared shelf is L3 — bigger, a few steps away, shared by all the cooks. The pantry downstairs is RAM: everything for tonight’s service, a minute’s round trip. The warehouse across town is the SSD — you send a runner and plan around the delay — and the supplier in another city, reachable only by placing orders, is network storage.</p>
-<p>A good kitchen runs on locality. The chef preps tonight’s tray before service (prefetching), keeps the salt within arm’s reach because it is used constantly (temporal locality), and when the runner goes to the pantry for one onion, he brings the whole bag, because whoever wanted one onion will want another (a cache line). Watch a bad kitchen for contrast: the chef needs items in no predictable order, the tray holds all the wrong things, and every second dish sends the runner downstairs — the chef, the most expensive resource in the building, stands idle. That kitchen is your program with poor locality.</p>
-<p>And swapping? The pantry is full, so the staff starts shuttling tonight’s ingredients back and forth to the warehouse across town <em>mid-service</em>. Technically the kitchen still functions — the manager’s ledger (virtual memory) tracks where everything is, and every dish eventually goes out. But service has slowed from minutes to hours, and no one in the dining room knows why. When your laptop thrashes, this is the scene inside.</p>
+<p>A chef, a counter, a pantry and a warehouse across town.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>The kitchen</th><th>The machine</th><th>The cost of a trip</th></tr></thead><tbody><tr><td>In your hands</td><td>Registers</td><td>Instant</td></tr><tr><td>The cutting board</td><td>L1 cache</td><td>A turn of the head</td></tr><tr><td>The counter</td><td>L2 and L3</td><td>A step</td></tr><tr><td>The pantry</td><td>RAM</td><td>A walk to the next room</td></tr><tr><td>The warehouse across town</td><td>SSD</td><td>A drive</td></tr><tr><td>A supplier in another city</td><td>Network storage</td><td>A delivery, tomorrow</td></tr></tbody></table>
+<ul>
+<li><strong>Good cooks stage ingredients before starting.</strong> That is locality.</li>
+<li><strong>A recipe that sends you to the warehouse for each ingredient</strong> is a program
+with poor access patterns, and no amount of knife skill saves it.</li>
+</ul>
+<hr/>
 <h2 id="examples-in-practice">Examples in practice</h2>
-<p>Start with a machine on the author’s desk, measured with the same commands you will run in the lab. An Apple M4 Max laptop reports 128 KB of L1 data cache per performance core, a 16 MB L2 cache shared by a performance-core cluster (the efficiency cores have 64 KB and 4 MB respectively), and 36 GB of RAM — with a 926 GB SSD below. Notice the shape: each level roughly a hundred times bigger than the one above, exactly the pyramid, sitting on your desk. Your numbers will differ; the shape will not.</p>
-<p>Second, the loop-order classic. Summing a large two-dimensional table row by row visits memory sequentially — cache lines and the prefetcher do their best work. Summing the same table column by column skips through memory in big strides, wasting most of every cache line it fetches. Identical arithmetic, identical result, and the second version is commonly several times slower on large data. Libraries you will use later handle their loops in cache-friendly order internally — one big reason the standard numerical tools are so much faster than naive hand-written loops.</p>
-<p>Third, the page cache in everyday life. The first launch of a big application after reboot is slow (its files come from the SSD); the second launch is snappy (they come from RAM). Photo apps feel instant while browsing recent pictures and stutter on a years-old album. Your own lab measurement of a cold versus warm file read is this exact effect, quantified.</p>
-<p>Now the connection this course cares most about: models. A neural network’s weights are just numbers, and at fp16 precision each weight is 2 bytes — a 7-billion-parameter model is about 14 GB of weights. Rule one of deployment is the pyramid’s rule: those 14 GB must sit in the fast memory attached to the processor doing the math (a GPU’s onboard memory, or a unified pool). Spill out of it, and weights stream from the level below at a catastrophic discount, exactly like a chef cooking from the warehouse. Rule two is bandwidth: generating each token of text requires reading essentially <em>all</em> the weights once, so a machine with (order of magnitude) 400 GB/s of memory bandwidth can read a 14 GB model at most roughly 30 times per second — an approximate ceiling of ~30 tokens per second no matter how fast the arithmetic units are. Inference is usually a memory-bandwidth problem wearing a math costume. And that explains rule three: quantization, storing each weight in 8 or 4 bits instead of 16, shrinks the same model to 7 or 3.5 GB — it now fits where it didn’t, <em>and</em> each token needs a quarter of the bytes moved, so the bandwidth ceiling roughly quadruples. This is also why Apple’s unified-memory machines punch above their weight for running models locally: CPU and GPU share one large pool (up to 128 GB or more on high-end configurations) with respectable bandwidth, so mid-sized models fit entirely in fast memory on a laptop — while a typical discrete gaming GPU, despite ferocious compute, offers only 8–16 GB of onboard memory and simply cannot seat larger models at all. Dedicated datacenter GPUs answer with stacked high-bandwidth memory delivering terabytes per second — the memory hierarchy, as ever, is where the money goes.</p>
+<p><img src="/_astro/sequential-versus-random.EzEClDF9_ZIALX.svg" alt="Diagram: sequential access compared with random access" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<p>Two measurements you will make in today’s lab:</p>
+<ul>
+<li>
+<p><strong>A warm read</strong> — the file is already in the page cache, so the number you get
+is RAM speed, not disk speed.</p>
+</li>
+<li>
+<p><strong>A cold read</strong> — the file is larger than RAM, so the cache cannot hold it and
+you see the SSD.</p>
+</li>
+</ul>
+<p>The gap between them is the pyramid, measured on your own machine.</p>
+<p><strong>Where the money goes:</strong> per byte, each step down is roughly an order of
+magnitude cheaper. Registers are the most expensive memory ever built and there
+are about a kilobyte of them. Network storage is nearly free and is a thousand
+times further away than RAM.</p>
+<hr/>
 <h2 id="implications-security-privacy-performance-scalability-and-cost">Implications: security, privacy, performance, scalability, and cost</h2>
-<h3 id="security">Security</h3>
-<p>The hierarchy’s speed differences are measurable — and anything measurable leaks information. Cache-timing attacks infer secrets (like encryption keys) by observing which memory accesses are fast (cached) versus slow (evicted), without ever reading the secret directly. The Spectre and Meltdown class of vulnerabilities disclosed in 2018 turned this into headline news: processors speculatively execute instructions ahead of time, speculation leaves footprints in the cache, and attackers learned to read those footprints. Mitigations cost real performance and are still being refined years later. The deeper lesson generalizes: shared levels of the hierarchy (caches shared between programs, RAM shared between virtual machines) are shared surfaces, and isolation there is a security boundary someone is always probing.</p>
-<h3 id="privacy">Privacy</h3>
-<p>Data changes protection as it moves down the pyramid. Registers, caches, and RAM are volatile and hold data in usable, unencrypted form because the CPU must compute on it. Below RAM, data persists — and so do secrets. Swapping quietly writes whatever was in memory, passwords included, onto disk, where it can outlive the program by years unless swap is encrypted (modern macOS and most full-disk-encryption setups handle this — verify before assuming). “Deleted” files usually persist until overwritten. Caches at every scale retain copies their owners forget: browser caches, CDN caches, page caches on shared servers. A useful professional habit begins today: for any sensitive data, ask <em>which levels of which hierarchies has this touched, and who can read them?</em></p>
-<h3 id="performance">Performance</h3>
-<p>Most slow software is not compute-bound; it is waiting on some level of the hierarchy. The practical toolkit follows directly from today’s tables. Measure before guessing — is time going to arithmetic, RAM, disk, or network? Improve locality — process data in chunks that fit in cache, visit memory sequentially, reuse rather than refetch. Stay above the cliffs — the working set exceeding cache is a slowdown; exceeding RAM (swapping) is a catastrophe; a per-item network round trip in a loop is a six-year errand run a million times. And respect the difference between latency and bandwidth: batching many small accesses into fewer large ones is often the single biggest win available, at every level from cache lines to cloud storage requests.</p>
-<h3 id="scalability">Scalability</h3>
-<p>Scaling out means adding hierarchy levels, not escaping them. A cluster is a memory hierarchy whose bottom levels happen to be other computers: a node’s own RAM, then a neighbor’s RAM over the datacenter network, then shared storage. Distributed caches (an in-memory tier in front of a database) are the page-cache idea at building scale. Content delivery networks are caches placed near users, converting a 100 ms intercontinental round trip into a 10 ms local one. And when a model is too large for one GPU’s memory, practitioners shard it across many GPUs — whereupon the interconnect between GPUs becomes the new critical level, which is why datacenter GPU systems advertise their inter-chip links as loudly as their compute. Every scaling story is a hierarchy story with bigger boxes.</p>
-<h3 id="cost">Cost</h3>
-<p>The pyramid is drawn in dollars as much as nanoseconds: per byte, each step down is roughly an order of magnitude cheaper, which is why your laptop has gigabytes of RAM but terabytes of SSD, and why no vendor sells a terabyte of L1 cache. Cloud pricing mirrors this directly — machines are priced substantially by how much RAM and how much accelerator memory they carry, and high-memory or GPU instances command steep premiums because fast memory close to compute is the scarce good. The engineering trade-off is honest on both sides: renting more fast memory is expensive, but so are engineer-hours spent squeezing a working set, and idle processors waiting on slow tiers burn money too. Knowing the hierarchy lets you buy exactly the level you need — the recurring cost question of a machine-learning career, “which GPU and how much memory?”, is settled by the arithmetic you did two sections ago.</p>
+<p><img src="/_astro/why-caches-work.CTgASoRv_Z16hImP.svg" alt="Diagram: temporal and spatial locality and why caching works" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="322"></p>
+<ul>
+<li>
+<p><strong>Performance.</strong> Look at the hierarchy before optimising arithmetic. A cache
+miss costs more than hundreds of instructions.</p>
+</li>
+<li>
+<p><strong>Access order is a design decision.</strong> Row-major versus column-major traversal
+of the same array can differ by an order of magnitude.</p>
+</li>
+<li>
+<p><strong>Security.</strong> Cache timing leaks information across boundaries — Spectre and
+Meltdown both used it. Shared hardware means a shared cache.</p>
+</li>
+<li>
+<p><strong>Privacy.</strong> Data swapped to disk outlives the process, and is not erased when
+the program exits.</p>
+</li>
+<li>
+<p><strong>Cost.</strong> Renting a machine with more RAM is often cheaper than the engineering
+time spent making a job fit in less.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="alternatives-free-open-source-and-commercial">Alternatives: free, open source, and commercial</h2>
-<p>As on Day 1, “alternatives” for a concepts lesson means other excellent routes into the same material.</p>
 
 
 
@@ -215,22 +361,14 @@ You can also <a href="/ai-roadmap-365/labs/day-003-memory-hierarchy-registers-ra
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Resource</th><th>Type</th><th>What it offers</th><th>Cost</th></tr></thead><tbody><tr><td>The Day 3 lab in this course</td><td>Free</td><td>Measure your own machine’s cache sizes and page-cache effect</td><td>Free</td></tr><tr><td>Operating Systems: Three Easy Pieces (Arpaci-Dusseau)</td><td>Free book</td><td>Superb plain-English chapters on caching, virtual memory, and swapping</td><td>Free online</td></tr><tr><td>Colin Scott’s interactive latency page</td><td>Free visualization</td><td>”Latency numbers every programmer should know,” animated year by year</td><td>Free</td></tr><tr><td>Crash Course Computer Science (PBS Digital Studios)</td><td>Free video series</td><td>Short visual episodes on memory, caches, and storage technologies</td><td>Free</td></tr><tr><td>Wikipedia: memory hierarchy and CPU cache articles</td><td>Free reference</td><td>Well-cited overviews with real chip parameters</td><td>Free</td></tr><tr><td>Computer Systems: A Programmer’s Perspective (Bryant &amp; O’Hallaron)</td><td>Book (commercial)</td><td>The standard university treatment; its memory-hierarchy chapter is famous</td><td>Book purchase</td></tr><tr><td>Every Programmer Should Know About Memory (Drepper)</td><td>Free paper</td><td>Deep, canonical, and dense — keep for a second pass in a later month</td><td>Free</td></tr></tbody></table>
-<p>If you read one thing beyond this course today, make it the virtual-memory chapters of <em>Operating Systems: Three Easy Pieces</em> — free, funny, and rigorous.</p>
+<table><thead><tr><th>Resource</th><th>Type</th><th>What it gives you</th></tr></thead><tbody><tr><td>The Day 3 lab</td><td>Free</td><td>Your own cache sizes and read timings</td></tr><tr><td>Colin Scott’s latency page</td><td>Free tool</td><td>”Latency numbers every programmer should know”, animated by year</td></tr><tr><td>Crash Course Computer Science</td><td>Free video series</td><td>Short visual episodes on memory and storage</td></tr><tr><td>Drepper, <em>What Every Programmer Should Know About Memory</em></td><td>Free paper</td><td>The deep treatment, still the reference</td></tr><tr><td><code>perf</code> / Instruments</td><td>Free tools</td><td>Measure real cache misses on real programs</td></tr><tr><td>Hennessy &amp; Patterson</td><td>Textbook</td><td>The standard academic account</td></tr></tbody></table>
+<ul>
+<li><strong>Colin Scott’s page is the one to bookmark.</strong> Watching the numbers move by
+year makes the memory wall visible in a way prose does not.</li>
+</ul>
+<hr/>
 <h2 id="comparison-with-related-concepts">Comparison with related concepts</h2>
+<p><img src="/_astro/latency-versus-bandwidth.chn1u6dA_ZIALX.svg" alt="Diagram: latency compared with bandwidth" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
 
 
 
@@ -260,26 +398,39 @@ You can also <a href="/ai-roadmap-365/labs/day-003-memory-hierarchy-registers-ra
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Concept A</th><th>Concept B</th><th>Key difference</th></tr></thead><tbody><tr><td>Cache</td><td>RAM</td><td>Cache is small, on the CPU die, ~100× faster, managed by hardware; RAM is the large off-chip main memory programs actually address</td></tr><tr><td>RAM</td><td>Storage (SSD/HDD)</td><td>RAM is volatile working memory (~100 ns); storage is persistent (~100 µs for SSD, ~ms for HDD) and holds data across power-off</td></tr><tr><td>SSD</td><td>HDD</td><td>An SSD is silent flash memory with ~100 µs random reads; an HDD has moving heads on spinning platters, ~ms seeks, but cheaper per byte</td></tr><tr><td>Latency</td><td>Bandwidth</td><td>Latency is how long one access takes; bandwidth is bytes per second once flowing — a truck of disks has huge bandwidth and terrible latency</td></tr><tr><td>Virtual memory</td><td>Physical memory</td><td>Physical memory is the actual RAM chips; virtual memory is the per-program illusion of a private address space, translated page by page</td></tr><tr><td>Swap</td><td>Page cache</td><td>Swap uses disk to back overflowing RAM (slow, a symptom of pressure); the page cache uses spare RAM to front the disk (fast, a gift)</td></tr><tr><td>Unified memory</td><td>Discrete GPU memory</td><td>Unified: one pool shared by CPU and GPU, large but moderate bandwidth; discrete: a separate on-card pool, smaller but often far faster</td></tr></tbody></table>
+<table><thead><tr><th>Often confused</th><th>The actual difference</th></tr></thead><tbody><tr><td>Memory vs storage</td><td>Volatile and ~100 ns vs permanent and ~100 µs</td></tr><tr><td>Cache vs RAM</td><td>Automatic, small, on-chip vs addressed, large, off-chip</td></tr><tr><td>Latency vs bandwidth</td><td>How long one access takes vs bytes per second once flowing</td></tr><tr><td>Page cache vs cache</td><td>An OS use of spare RAM vs hardware between CPU and RAM</td></tr><tr><td>Swap vs storage</td><td>Storage borrowed to stand in for RAM vs storage used as itself</td></tr></tbody></table>
+<p><strong>Latency and bandwidth are the pair to keep straight.</strong> A model’s <em>size</em> is
+bounded by capacity; its <em>speed</em> is usually bounded by bandwidth; and a single
+random access is bounded by latency.</p>
+<hr/>
 <h2 id="when-to-use-it--and-when-not-to">When to use it — and when not to</h2>
-<p>Reach for hierarchy thinking whenever performance surprises you: a program fast on small inputs and disproportionately slow on large ones has almost certainly crossed a level boundary (out of cache, out of RAM, into per-item network calls). Reach for it when sizing hardware — laptop RAM, GPU memory, cloud instance type — because “will the working set fit in the fast level?” is the entire question. Reach for it when you design anything with repeated access to slow data: the answer is nearly always a cache, plus honest thought about staleness. And reach for it throughout this course: batch sizes, quantization, model sharding, embedding stores, and data-loading pipelines are all hierarchy problems in domain clothing.</p>
-<p>Know when to put it away, too. Do not contort readable code for imagined cache effects before measuring — modern compilers, libraries, and prefetchers are excellent, and the professional order of operations is correct first, measured second, optimized third, exactly where the measurement points. Do not hand-roll caching where the platform already provides it: the OS page cache, database buffer pools, and HTTP caching are mature; adding an amateur cache on top often adds bugs (stale data, memory bloat) faster than speed. A famous industry joke says there are only two hard things in computer science: cache invalidation and naming things. The joke is a warning label — caching is <em>the</em> recurring idea in computing, and knowing when the trick is already being done for you is as valuable as knowing the trick.</p>
+<p><img src="/_astro/choosing-where-data-lives.DcLroMX7_ZIALX.svg" alt="Diagram: when to reason about the memory hierarchy" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="390"></p>
+<p><strong>Reason at this level when</strong> something is slower than its arithmetic can explain,
+a job will not fit in memory, you are choosing hardware, or a program is fast on
+one machine and slow on another.</p>
+<p><strong>Ignore it when</strong> the data is small, the job is fast enough, or you have not
+measured yet. Optimising access patterns before profiling is how people spend a
+day to save a millisecond.</p>
+<p><strong>The tell:</strong> the processor is busy but the work is not progressing — or the same
+code is dramatically slower on a larger input than the size increase explains.</p>
+<hr/>
+<h2 id="the-ai-connection">The AI connection</h2>
+<p><img src="/_astro/weights-bandwidth-ceiling.CGUhdXHX_ZibEpB.svg" alt="Diagram: how model size and memory bandwidth set a token-per-second ceiling" loading="lazy" decoding="async" fetchpriority="auto" width="980" height="470"></p>
+<ul>
+<li>
+<p><strong>Bandwidth divided by model size is the token rate.</strong> That is the whole
+connection, and it is arithmetic rather than intuition.</p>
+</li>
+<li>
+<p><strong>Quantisation moves both terms in your favour</strong> — a smaller model fits where it
+did not, and moves fewer bytes per token.</p>
+</li>
+<li>
+<p><strong>Spilling out of fast memory is not a small penalty.</strong> It is a step down the
+pyramid, and each step is an order of magnitude.</p>
+</li>
+</ul>
+<hr/>
 <h2 id="knowledge-check">Knowledge check</h2>
 <p>Try these from memory before looking back:</p>
 <ol>
@@ -290,74 +441,158 @@ You can also <a href="/ai-roadmap-365/labs/day-003-memory-hierarchy-registers-ra
 <li>A 7-billion-parameter model is stored at 2 bytes per weight on a machine with roughly 400 GB/s of memory bandwidth. Estimate the ceiling on tokens generated per second, and explain what 4-bit quantization does to both the model’s footprint and that ceiling.</li>
 </ol>
 <h2 id="hands-on-exercise">Hands-on exercise</h2>
-<p>Time to measure your own pyramid. This exercise is worked through fully in the Day 3 lab directory; here is the core of it. First, ask your machine for its cache sizes. On macOS:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sysctl</span><span style="color:#9ECBFF"> hw.l1dcachesize</span><span style="color:#9ECBFF"> hw.l2cachesize</span></span></code></pre>
-<p>Prints the L1 data cache and L2 cache sizes in bytes. On Apple Silicon Macs, performance and efficiency cores have different caches, so also try:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sysctl</span><span style="color:#9ECBFF"> hw.perflevel0.l1dcachesize</span><span style="color:#9ECBFF"> hw.perflevel0.l2cachesize</span></span></code></pre>
-<p><code>perflevel0</code> is the performance-core cluster (the plain names above typically report the efficiency cores’ figures). On Linux:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">lscpu</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> grep</span><span style="color:#79B8FF"> -i</span><span style="color:#9ECBFF"> cache</span></span></code></pre>
-<p>Lists L1d, L1i, L2, and (if present) L3 sizes. Convert bytes to KiB or MiB by dividing by 1024 once or twice, and note how each level slots between the ones above and below it in size.</p>
-<p>Second, feel the page cache. The lab provides <code>measure_read_speed.sh</code>, which creates a ~200 MB test file inside the lab directory with <code>dd</code>, then times reading it twice with the shell’s built-in timer:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">bash</span><span style="color:#9ECBFF"> examples/measure_read_speed.sh</span></span></code></pre>
-<p>The first (cold) read may come from the SSD; the second (warm) read is served from RAM by the OS page cache. The script prints both times and the speed-up, then deletes the test file. Your task in the starter version is to fill in four numbered exercises — the cache-size queries and the two timed reads — each of which names the exact command to use.</p>
+<p>Measure your own pyramid. Worked through fully in the Day 3 lab directory.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>What you want</th><th>macOS</th><th>Linux</th></tr></thead><tbody><tr><td>L1 and L2 sizes</td><td><code>sysctl hw.l1dcachesize hw.l2cachesize</code></td><td><code>lscpu | grep -i cache</code></td></tr><tr><td>Performance-core caches</td><td><code>sysctl hw.perflevel0.l1dcachesize</code></td><td>—</td></tr><tr><td>Timed cold and warm reads</td><td><code>bash examples/measure_read_speed.sh</code></td><td>same</td></tr></tbody></table>
+<p>On Apple Silicon the plain names usually report the <em>efficiency</em> cores;
+<code>perflevel0</code> is the performance cluster and is typically twice as large.</p>
 <h3 id="expected-output">Expected output</h3>
-<p>A real run on an Apple Silicon Mac (your numbers will differ — that is the point):</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>=== Memory Hierarchy Measurements ===</span></span>
-<span class="line"><span>Generated on: 2026-07-12</span></span>
-<span class="line"><span>Operating system kernel: Darwin</span></span>
 <span class="line"><span>L1 data cache: 131072 bytes (128 KiB)</span></span>
 <span class="line"><span>L2 cache: 16777216 bytes (16 MiB)</span></span>
 <span class="line"><span>RAM: 38654705664 bytes (36 GiB)</span></span>
-<span class="line"><span>Creating a 200 MB test file with dd (inside this lab directory) ...</span></span>
 <span class="line"><span>Cold read (first pass):  0.023 s (8695 MB/s)</span></span>
 <span class="line"><span>Warm read (second pass): 0.022 s (9090 MB/s)</span></span>
-<span class="line"><span>Warm read speed-up over cold: 1.0x</span></span>
-<span class="line"><span>=== End of measurements ===</span></span>
-<span class="line"><span>Test file removed.</span></span></code></pre>
-<p>Read the shape, not the digits: L1 in the hundreds of KiB, L2 in the MiB, RAM in the GiB — three jumps of roughly a hundred-fold each. And notice what this particular machine just taught us: both reads ran at multi-GB/s — RAM speed, not SSD speed — because on a machine with ample free RAM the file was <em>still in the page cache from being written</em>, so even the “cold” read never touched the SSD. A speed-up near 1.0x is therefore itself evidence of the page cache at work; on a memory-constrained machine (or with a file much larger than RAM) the cold read drops to storage speed and the gap opens wide. The lab’s troubleshooting file shows how to observe a truly cold read.</p>
+<span class="line"><span>Warm read speed-up over cold: 1.0x</span></span></code></pre>
+<ul>
+<li>
+<p><strong>Read the shape, not the digits.</strong> L1 in hundreds of KiB, L2 in MiB, RAM in
+GiB — three jumps of roughly a hundredfold.</p>
+</li>
+<li>
+<p><strong>A speed-up near 1.0x is itself evidence of the page cache.</strong> Both reads ran at
+RAM speed because the file was still cached from being written, so the “cold”
+read never touched the SSD.</p>
+</li>
+<li>
+<p><strong>To see a truly cold read</strong>, use a file much larger than RAM. The lab’s
+troubleshooting file shows how.</p>
+</li>
+</ul>
 <h3 id="validate-your-work">Validate your work</h3>
-<p>You are done when you can check every box:</p>
 <ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" disabled/> You can state your L1 data cache size and convert it to KiB.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You can state your L2 (and L3, if present) cache size and convert to MiB.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You can place both between registers and RAM in the pyramid, with sizes ordered correctly.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> Your <code>measure_read_speed.sh</code> run printed both a cold and a warm read time, and the warm read was at least as fast as the cold one.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> You can explain, in one sentence, <em>which</em> level of the hierarchy served the warm read.</li>
-<li class="task-list-item"><input type="checkbox" disabled/> The lab’s automated tests pass (<code>bash tests/run_tests.sh</code> reports 0 failures).</li>
+<li class="task-list-item"><input type="checkbox" disabled/> L1 size stated and converted to KiB</li>
+<li class="task-list-item"><input type="checkbox" disabled/> L2 (and L3, if present) stated and converted to MiB</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Both placed between registers and RAM, sizes ordered correctly</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Both a cold and a warm read time recorded</li>
+<li class="task-list-item"><input type="checkbox" disabled/> You can say in one sentence <em>which</em> level served the warm read</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <code>bash tests/run_tests.sh</code> reports 0 failures</li>
 </ul>
 <h3 id="troubleshooting">Troubleshooting</h3>
 <ul>
-<li><strong><code>sysctl: unknown oid &#39;hw.perflevel0.l1dcachesize&#39;</code>.</strong> You are on an Intel Mac or an older macOS — the plain <code>hw.l1dcachesize</code>/<code>hw.l2cachesize</code> names are the right ones there. On Linux, use <code>lscpu</code>.</li>
-<li><strong><code>lscpu</code> shows totals, not per-core sizes.</strong> Some versions sum caches across cores (e.g. “L1d: 512 KiB (8 instances)”) — divide by the instance count for the per-core figure.</li>
-<li><strong>Cold and warm reads take the same time.</strong> Almost always the file was still in the page cache from being written. This is the page cache working, not the lab failing. The troubleshooting file shows options: use a larger test file, or on Linux drop caches via the documented (privileged) interface — the lab itself deliberately never requires elevated privileges.</li>
-<li><strong><code>dd: operation not permitted</code> or a permissions error.</strong> You are probably running from a directory you cannot write to. Run from inside the lab directory, which the script requires precisely so it only ever writes there.</li>
+<li>
+<p><strong><code>unknown oid &#39;hw.perflevel0...&#39;</code></strong> — you are on an Intel Mac or older macOS.
+Use the plain <code>hw.l1dcachesize</code> names.</p>
+</li>
+<li>
+<p><strong><code>lscpu</code> shows totals, not per-core sizes.</strong> Some versions sum across cores
+(“L1d: 512 KiB (8 instances)”); divide by the instance count.</p>
+</li>
+<li>
+<p><strong>Cold and warm reads take the same time.</strong> The file was still in the page
+cache. That is the page cache working, not the lab failing.</p>
+</li>
+<li>
+<p><strong><code>dd: operation not permitted</code></strong> — run from inside the lab directory, which the
+script requires precisely so it only ever writes there.</p>
+</li>
 </ul>
 <h3 id="common-mistakes">Common mistakes</h3>
 <ul>
-<li><strong>Comparing your L1 to a friend’s L3 and concluding one machine is “broken.”</strong> Levels only compare like for like; different vendors also split and label levels differently (Apple’s shared system-level cache plays L3’s role without the name).</li>
-<li><strong>Reading <code>hw.l1dcachesize</code> on Apple Silicon and reporting it as “the” L1.</strong> That figure is typically the efficiency cores’; the performance cores (<code>hw.perflevel0.…</code>) are usually twice as large. State which cores you measured.</li>
-<li><strong>Treating the measured MB/s as a property of the SSD alone.</strong> The cold read mixes SSD speed, page-cache effects, and file-system behavior; it is a demonstration of the hierarchy, not a certified disk benchmark.</li>
-<li><strong>Forgetting the units.</strong> Cache sizes print in bytes: 131072 bytes is 128 KiB (divide by 1024), 16777216 bytes is 16 MiB (divide by 1024 twice). Mixing KiB and KB (1000) muddles comparisons.</li>
+<li>
+<p><strong>Comparing your L1 to a friend’s L3.</strong> Levels compare like for like, and
+vendors split and label them differently.</p>
+</li>
+<li>
+<p><strong>Reporting the efficiency cores’ L1 as “the” L1.</strong> State which cores you
+measured.</p>
+</li>
+<li>
+<p><strong>Treating the measured MB/s as a property of the SSD.</strong> The cold read mixes
+SSD speed, page-cache effects and filesystem behaviour. It demonstrates the
+hierarchy; it is not a disk benchmark.</p>
+</li>
+<li>
+<p><strong>Forgetting the units.</strong> 131072 bytes is 128 KiB. Mixing KiB with KB muddles
+every comparison.</p>
+</li>
 </ul>
+<hr/>
 <h2 id="practice-assignment">Practice assignment</h2>
-<p>Open <code>starter/hierarchy-worksheet.md</code> in the Day 3 lab and complete it with your machine’s real numbers: L1, L2 (and L3 or system-level cache if reported), RAM from your Day 1 profile, free disk, and your measured cold and warm read times. Then write the story paragraph at the bottom: starting at the registers and descending to your SSD, describe <em>your</em> pyramid using your measured sizes, an approximate latency for each level from today’s table, and one sentence on where a dataset bigger than your RAM would force the system to operate. Keep the worksheet with your Day 1 machine profile — Week 1’s project assembles both into your annotated machine teardown.</p>
+<ol>
+<li>
+<p><strong>Measure both reads.</strong> Time a warm read and a cold read of the same file on
+your machine, and record both numbers.</p>
+</li>
+<li>
+<p><strong>Explain the gap</strong> in one sentence, using only the words cache, page cache and
+latency.</p>
+</li>
+<li>
+<p><strong>Predict, then check.</strong> Before running it, write down what you expect a second
+cold read to cost, and why. Then run it.</p>
+</li>
+</ol>
+<hr/>
 <h2 id="extension-challenge">Extension challenge</h2>
-<p>Three ascents, in increasing order of effort. First, rescale today’s human-time table for your own machine: assuming a register access is one second, compute how long your measured warm read (RAM) and cold read (SSD-ish) would take at human scale, and write the two sentences that make your machine’s pyramid visceral. Second, do the deployment arithmetic for hardware you actually own: your RAM size divided by 2 bytes per weight gives the largest fp16 model that could theoretically sit in memory; divide by 4 for the practical answer after the OS and the computation take their share, then redo it at 4 bits per weight and note the difference quantization makes. Third, make the cold read honestly cold: grow the test file to several times your RAM (mind free disk space — and delete it afterward) so the page cache cannot hold it, rerun the measurement, and compare the gap with your first run. If you can explain every difference you see using only today’s vocabulary — cache, page cache, locality, latency, bandwidth — you have genuinely internalized the hierarchy, and you are three days into the course.</p>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
-Q1. Why do computers use a hierarchy of memories instead of one single memory? </strong> </p> <ol type="A"> <li>Because no memory technology is simultaneously fast, large, and cheap, so systems layer small fast memories over large slow ones</li><li>Because operating systems can only address one type of memory at a time</li><li>Because older computers had many memory types and modern ones keep them for compatibility</li><li>Because programs must be stored separately from the data they use</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> Because no memory technology is simultaneously fast, large, and cheap, so systems layer small fast memories over large slow ones </p> <p>Speed, size, and cost form a triangle: SRAM is fast but expensive and small, DRAM is bigger and slower, storage is bigger and slower again. Layering them — and relying on locality of reference — delivers nearly the speed of the fastest at nearly the price of the cheapest.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q2. Which sequence orders the levels from fastest (lowest latency) to slowest? </strong> </p> <ol type="A"> <li>Registers, RAM, L1 cache, SSD, HDD</li><li>L1 cache, registers, RAM, HDD, SSD</li><li>Registers, L1 cache, RAM, SSD, HDD</li><li>RAM, registers, L1 cache, SSD, HDD</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Registers, L1 cache, RAM, SSD, HDD </p> <p>Registers respond in about a CPU cycle (~0.5 ns), L1 cache in ~1 ns, RAM in ~100 ns, an SSD random read in ~100 µs, and a hard disk seek in several milliseconds — each step roughly an order of magnitude or more.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q3. A loop reads a large array element by element and runs at nearly cache speed even though the array lives in RAM. What best explains this? </strong> </p> <ol type="A"> <li>RAM automatically becomes as fast as cache when accessed by a loop</li><li>Each miss loads a whole 64-byte cache line, so one slow RAM trip pays for several fast cache hits on the neighboring elements, and the prefetcher fetches upcoming lines early</li><li>The compiler moves the entire array into the CPU&#39;s registers before the loop starts</li><li>The operating system pauses all other programs so the loop gets the full memory bus</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Each miss loads a whole 64-byte cache line, so one slow RAM trip pays for several fast cache hits on the neighboring elements, and the prefetcher fetches upcoming lines early </p> <p>Sequential access has strong spatial locality: a miss on a[0] brings a[1]..a[7] along in the same cache line, and hardware prefetching notices the regular pattern and stays ahead of the loop. Random access defeats both and can be many times slower.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q4. What is the difference between latency and bandwidth for a memory or storage level? </strong> </p> <ol type="A"> <li>They are two names for the same measurement</li><li>Latency applies only to disks, while bandwidth applies only to RAM</li><li>Latency is measured in bytes and bandwidth in seconds</li><li>Latency is how long one access takes; bandwidth is how many bytes per second the level can stream once transfers are flowing</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> Latency is how long one access takes; bandwidth is how many bytes per second the level can stream once transfers are flowing </p> <p>A level can pair high bandwidth with poor latency (network storage is the classic case). Latency punishes many small scattered accesses; bandwidth caps large sequential transfers — which is why batching small accesses into large ones is such a common optimization.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q5. What actually happens when a machine starts swapping (thrashing)? </strong> </p> <ol type="A"> <li>The CPU overheats and reduces its clock speed until memory cools down</li><li>The operating system compresses the CPU caches to make room for more programs</li><li>RAM is full, so the OS moves least-recently-used memory pages to disk and stalls programs with page faults whenever they touch a page that must be fetched back</li><li>The SSD takes over executing instructions while RAM is cleared</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> RAM is full, so the OS moves least-recently-used memory pages to disk and stalls programs with page faults whenever they touch a page that must be fetched back </p> <p>Virtual memory lets the OS back overflowing RAM with disk, but every touched-and-missing page costs a ~hundred-microsecond (or worse) trip. Sustained swapping effectively demotes RAM to SSD speed, which users feel as the machine becoming unresponsive.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q6. Why is the second read of a large file often several times faster than the first? </strong> </p> <ol type="A"> <li>The SSD physically speeds up once its circuits warm to operating temperature</li><li>The operating system kept the file&#39;s contents in spare RAM (the page cache), so the second read never touches the disk</li><li>The file becomes smaller after it has been read once</li><li>The first read defragments the file so later reads are sequential</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> The operating system kept the file&#39;s contents in spare RAM (the page cache), so the second read never touches the disk </p> <p>The OS uses otherwise-idle RAM as a cache of recently read disk contents. A warm read is served at RAM speed — the same caching trick as CPU caches, applied one level down the pyramid. Today&#39;s lab measures this directly.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q7. A 7-billion-parameter model stored at 2 bytes per weight runs on hardware with roughly 400 GB/s of memory bandwidth. Why does 4-bit quantization speed up token generation? </strong> </p> <ol type="A"> <li>Quantization increases the memory bandwidth of the hardware</li><li>Quantized weights are stored in the CPU&#39;s registers permanently</li><li>Quantization lets the model skip reading most of its weights for each token</li><li>Generating each token reads essentially all the weights, so shrinking the model from ~14 GB to ~3.5 GB moves a quarter of the bytes per token, roughly quadrupling the bandwidth-set ceiling</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> Generating each token reads essentially all the weights, so shrinking the model from ~14 GB to ~3.5 GB moves a quarter of the bytes per token, roughly quadrupling the bandwidth-set ceiling </p> <p>Token generation is usually memory-bandwidth-bound: the ceiling is approximately bandwidth divided by model size. Quantization shrinks the bytes that must stream through memory for every token — and also lets larger models fit in fast memory at all.</p> </details> </div><div class="quiz-question"> <p> <strong>
-Q8. What makes unified memory (as on Apple Silicon Macs) interesting for running models locally? </strong> </p> <ol type="A"> <li>The CPU and GPU share one large memory pool, so models that exceed a typical discrete GPU&#39;s 8–16 GB of onboard memory can still sit entirely in fast memory</li><li>Unified memory is faster than the high-bandwidth memory used in datacenter GPUs</li><li>Unified memory is persistent, so models stay loaded after the machine powers off</li><li>Unified memory eliminates the need for caches on the CPU</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> The CPU and GPU share one large memory pool, so models that exceed a typical discrete GPU&#39;s 8–16 GB of onboard memory can still sit entirely in fast memory </p> <p>Unified memory trades the raw bandwidth of dedicated GPU memory for one large shared pool — often far larger than a consumer GPU&#39;s onboard memory — so mid-sized models fit in fast memory on a laptop instead of spilling to a slower tier.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>memory hierarchy</strong> </dt> <dd data-astro-cid-whrtx2kk>The layered arrangement of all the places a computer keeps data — registers, caches, RAM, storage, network — with each level larger, slower, and cheaper per byte than the one above.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>cache</strong> </dt> <dd data-astro-cid-whrtx2kk>A small, fast memory that holds copies of recently or soon-to-be-used data from a larger, slower level so most accesses are served at the fast level&#39;s speed.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>L1 cache</strong> </dt> <dd data-astro-cid-whrtx2kk>The smallest, fastest cache, private to each CPU core and usually split into instruction and data halves; typically tens to a couple of hundred KB, reached in about a nanosecond.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>L2 cache</strong> </dt> <dd data-astro-cid-whrtx2kk>The second cache level — larger and slightly slower than L1 (typically hundreds of KB to several MB), private to a core or shared by a cluster of cores.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>L3 cache</strong> </dt> <dd data-astro-cid-whrtx2kk>The largest on-chip cache level, typically shared by all cores; some designs (such as Apple&#39;s) use a shared system-level cache in the same role under a different name.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>cache line</strong> </dt> <dd data-astro-cid-whrtx2kk>The fixed-size chunk (commonly 64 bytes) that moves between RAM and cache: a miss on one byte loads the whole line, so neighboring data arrives for free.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>latency</strong> </dt> <dd data-astro-cid-whrtx2kk>The time one access takes to complete, from request to first data — about 1 ns for L1 cache, ~100 ns for RAM, ~100 µs for an SSD random read (approximate orders of magnitude).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>bandwidth</strong> </dt> <dd data-astro-cid-whrtx2kk>The rate at which a memory or storage level can move data once transfers are flowing, measured in bytes per second — distinct from latency, which measures a single access.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>locality of reference</strong> </dt> <dd data-astro-cid-whrtx2kk>The tendency of programs to reuse recently touched data (temporal locality) and to touch data near recently touched data (spatial locality) — the property that makes caching work.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>virtual memory</strong> </dt> <dd data-astro-cid-whrtx2kk>The illusion, maintained by the OS and the memory management unit, that each program has its own private address space, translated to real RAM in fixed-size pages.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>page</strong> </dt> <dd data-astro-cid-whrtx2kk>The fixed-size unit (commonly 4 or 16 KB) in which virtual memory is mapped, protected, and, when necessary, moved between RAM and disk.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>swap</strong> </dt> <dd data-astro-cid-whrtx2kk>Disk space the OS uses to hold memory pages evicted from full RAM; heavy, sustained swapping (thrashing) makes a machine crawl because disk is thousands of times slower than RAM.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>page cache</strong> </dt> <dd data-astro-cid-whrtx2kk>The OS&#39;s use of otherwise-free RAM to keep copies of recently read disk contents, so repeated file reads are served at RAM speed instead of storage speed.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>SSD</strong> </dt> <dd data-astro-cid-whrtx2kk>A solid-state drive: persistent storage built from flash memory with no moving parts, answering random reads in roughly a tenth of a millisecond.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>HDD</strong> </dt> <dd data-astro-cid-whrtx2kk>A hard disk drive: persistent storage on spinning magnetic platters read by a moving head, cheap per byte but needing several milliseconds per seek.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>unified memory</strong> </dt> <dd data-astro-cid-whrtx2kk>A design in which CPU and GPU share one physical memory pool, so a model or dataset can be large without being copied between separate CPU and GPU memories.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>memory wall</strong> </dt> <dd data-astro-cid-whrtx2kk>The long-running growth gap between processor speed and memory speed, which makes data movement — not arithmetic — the bottleneck for much of modern computing.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Memory_hierarchy" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Memory hierarchy</a> — Wikipedia (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/CPU_cache" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>CPU cache</a> — Wikipedia (accessed 2026-07-12) — Well-cited reference for cache levels, cache lines, and real chip parameters. </li><li data-astro-cid-whrtx2kk> <a href="https://colin-scott.github.io/personal_website/research/interactive_latency.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Interactive latency numbers</a> — Colin Scott (accessed 2026-07-12) — The classic &quot;latency numbers every programmer should know,&quot; animated year by year. </li><li data-astro-cid-whrtx2kk> <a href="https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Crash Course Computer Science</a> — PBS Digital Studios (accessed 2026-07-12) — Free video series; the memory, storage, and files episodes complement this lesson. </li><li data-astro-cid-whrtx2kk> <a href="https://pages.cs.wisc.edu/~remzi/OSTEP/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Operating Systems: Three Easy Pieces</a> — Arpaci-Dusseau (free book) (accessed 2026-07-12) — Free textbook; its virtual-memory chapters are the recommended further reading for this day. </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="3" data-astro-cid-whrtx2kk>
+<p>Make the cold read honestly cold, then reason about what you measured.</p>
+<ol>
+<li>
+<p><strong>Grow the file past RAM.</strong> Several times your memory, so the page cache
+cannot hold it. Mind free disk space, and delete it afterwards.</p>
+</li>
+<li>
+<p><strong>Re-measure.</strong> Record the new cold and warm times and the ratio between them.</p>
+</li>
+<li>
+<p><strong>Explain the difference</strong> from your first run, using only cache, page cache,
+locality, latency and bandwidth.</p>
+</li>
+<li>
+<p><strong>Predict one more.</strong> What would a third read cost, and why? Write it down
+before running it.</p>
+</li>
+</ol>
+<hr/>  <h2 id="quiz" data-astro-cid-whrtx2kk>Quiz</h2> <section aria-label="Quiz"> <div class="quiz-question"> <p> <strong>
+Q1. Why do computers use a hierarchy of memories instead of one single memory? </strong> </p> <ol type="A"> <li>Because programs must be stored separately from the data they use</li><li>Because operating systems can only address one type of memory at a time</li><li>Because older computers had many memory types and modern ones keep them for compatibility</li><li>Because no memory technology is fast, large, and cheap at the same time</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> Because no memory technology is fast, large, and cheap at the same time </p> <p>Speed, size, and cost form a triangle: SRAM is fast but expensive and small, DRAM is bigger and slower, storage is bigger and slower again. Layering them — and relying on locality of reference — delivers nearly the speed of the fastest at nearly the price of the cheapest.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q2. Which sequence orders the levels from fastest (lowest latency) to slowest? </strong> </p> <ol type="A"> <li>Registers, L1 cache, RAM, SSD, HDD</li><li>L1 cache, registers, RAM, HDD, SSD</li><li>Registers, RAM, L1 cache, SSD, HDD</li><li>RAM, registers, L1 cache, SSD, HDD</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> Registers, L1 cache, RAM, SSD, HDD </p> <p>Registers respond in about a CPU cycle (~0.5 ns), L1 cache in ~1 ns, RAM in ~100 ns, an SSD random read in ~100 µs, and a hard disk seek in several milliseconds — each step roughly an order of magnitude or more.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q3. A loop reads a large array element by element and runs at nearly cache speed even though the array lives in RAM. What best explains this? </strong> </p> <ol type="A"> <li>RAM automatically becomes as fast as cache when accessed by a loop</li><li>A miss loads a whole 64-byte cache line, so the neighboring elements come free</li><li>The compiler moves the entire array into the CPU&#39;s registers before the loop starts</li><li>The operating system pauses all other programs so the loop gets the full memory bus</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> A miss loads a whole 64-byte cache line, so the neighboring elements come free </p> <p>Sequential access has strong spatial locality: a miss on a[0] brings a[1]..a[7] along in the same cache line, and hardware prefetching notices the regular pattern and stays ahead of the loop. Random access defeats both and can be many times slower.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q4. What is the difference between latency and bandwidth for a memory or storage level? </strong> </p> <ol type="A"> <li>They are two names for the same measurement</li><li>Latency applies only to disks, while bandwidth applies only to RAM</li><li>Latency is how long one access takes; bandwidth is bytes per second once flowing</li><li>Latency is measured in bytes and bandwidth in seconds</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> Latency is how long one access takes; bandwidth is bytes per second once flowing </p> <p>A level can pair high bandwidth with poor latency (network storage is the classic case). Latency punishes many small scattered accesses; bandwidth caps large sequential transfers — which is why batching small accesses into large ones is such a common optimization.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q5. What actually happens when a machine starts swapping (thrashing)? </strong> </p> <ol type="A"> <li>The CPU overheats and reduces its clock speed until memory cools down</li><li>The operating system compresses the CPU caches to make room for more programs</li><li>The SSD takes over executing instructions while RAM is cleared</li><li>RAM is full, so the OS pages memory out to disk and stalls on page faults</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: D.</strong> RAM is full, so the OS pages memory out to disk and stalls on page faults </p> <p>Virtual memory lets the OS back overflowing RAM with disk, but every touched-and-missing page costs a ~hundred-microsecond (or worse) trip. Sustained swapping effectively demotes RAM to SSD speed, which users feel as the machine becoming unresponsive.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q6. Why is the second read of a large file often several times faster than the first? </strong> </p> <ol type="A"> <li>The OS kept the file in its page cache, so the second read never touched the disk</li><li>The SSD physically speeds up once its circuits warm to operating temperature</li><li>The file becomes smaller after it has been read once</li><li>The first read defragments the file so later reads are sequential</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: A.</strong> The OS kept the file in its page cache, so the second read never touched the disk </p> <p>The OS uses otherwise-idle RAM as a cache of recently read disk contents. A warm read is served at RAM speed — the same caching trick as CPU caches, applied one level down the pyramid. Today&#39;s lab measures this directly.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q7. A 7-billion-parameter model stored at 2 bytes per weight runs on hardware with roughly 400 GB/s of memory bandwidth. Why does 4-bit quantization speed up token generation? </strong> </p> <ol type="A"> <li>Quantization increases the memory bandwidth of the hardware</li><li>Each token reads every weight, so a 4x smaller model moves a quarter of the bytes</li><li>Quantization lets the model skip reading most of its weights for each token</li><li>Quantized weights are stored in the CPU&#39;s registers permanently</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: B.</strong> Each token reads every weight, so a 4x smaller model moves a quarter of the bytes </p> <p>Token generation is usually memory-bandwidth-bound: the ceiling is approximately bandwidth divided by model size. Quantization shrinks the bytes that must stream through memory for every token — and also lets larger models fit in fast memory at all.</p> </details> </div><div class="quiz-question"> <p> <strong>
+Q8. What makes unified memory (as on Apple Silicon Macs) interesting for running models locally? </strong> </p> <ol type="A"> <li>Unified memory is persistent, so models stay loaded after the machine powers off</li><li>Unified memory is faster than the high-bandwidth memory used in datacenter GPUs</li><li>CPU and GPU share one pool, so models too big for a discrete GPU still fit</li><li>Unified memory eliminates the need for caches on the CPU</li> </ol> <details> <summary>Show answer</summary> <p> <strong>Answer: C.</strong> CPU and GPU share one pool, so models too big for a discrete GPU still fit </p> <p>Unified memory trades the raw bandwidth of dedicated GPU memory for one large shared pool — often far larger than a consumer GPU&#39;s onboard memory — so mid-sized models fit in fast memory on a laptop instead of spilling to a slower tier.</p> </details> </div> </section>   <h2 id="glossary" data-astro-cid-whrtx2kk>Glossary</h2> <dl data-astro-cid-whrtx2kk>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>memory hierarchy</strong> </dt> <dd data-astro-cid-whrtx2kk>The layered arrangement of all the places a computer keeps data — registers, caches, RAM, storage, network — with each level larger, slower, and cheaper per byte than the one above.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>cache</strong> </dt> <dd data-astro-cid-whrtx2kk>A small, fast memory that holds copies of recently or soon-to-be-used data from a larger, slower level so most accesses are served at the fast level&#39;s speed.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>L1 cache</strong> </dt> <dd data-astro-cid-whrtx2kk>The smallest, fastest cache, private to each CPU core and usually split into instruction and data halves; typically tens to a couple of hundred KB, reached in about a nanosecond.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>L2 cache</strong> </dt> <dd data-astro-cid-whrtx2kk>The second cache level — larger and slightly slower than L1 (typically hundreds of KB to several MB), private to a core or shared by a cluster of cores.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>L3 cache</strong> </dt> <dd data-astro-cid-whrtx2kk>The largest on-chip cache level, typically shared by all cores; some designs (such as Apple&#39;s) use a shared system-level cache in the same role under a different name.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>cache line</strong> </dt> <dd data-astro-cid-whrtx2kk>The fixed-size chunk (commonly 64 bytes) that moves between RAM and cache: a miss on one byte loads the whole line, so neighboring data arrives for free.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>latency</strong> </dt> <dd data-astro-cid-whrtx2kk>The time one access takes to complete, from request to first data — about 1 ns for L1 cache, ~100 ns for RAM, ~100 µs for an SSD random read (approximate orders of magnitude).</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>bandwidth</strong> </dt> <dd data-astro-cid-whrtx2kk>The rate at which a memory or storage level can move data once transfers are flowing, measured in bytes per second — distinct from latency, which measures a single access.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>locality of reference</strong> </dt> <dd data-astro-cid-whrtx2kk>The tendency of programs to reuse recently touched data (temporal locality) and to touch data near recently touched data (spatial locality) — the property that makes caching work.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>virtual memory</strong> </dt> <dd data-astro-cid-whrtx2kk>The illusion, maintained by the OS and the memory management unit, that each program has its own private address space, translated to real RAM in fixed-size pages.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>page</strong> </dt> <dd data-astro-cid-whrtx2kk>The fixed-size unit (commonly 4 or 16 KB) in which virtual memory is mapped, protected, and, when necessary, moved between RAM and disk.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>swap</strong> </dt> <dd data-astro-cid-whrtx2kk>Disk space the OS uses to hold memory pages evicted from full RAM; heavy, sustained swapping (thrashing) makes a machine crawl because disk is thousands of times slower than RAM.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>page cache</strong> </dt> <dd data-astro-cid-whrtx2kk>The OS&#39;s use of otherwise-free RAM to keep copies of recently read disk contents, so repeated file reads are served at RAM speed instead of storage speed.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>SSD</strong> </dt> <dd data-astro-cid-whrtx2kk>A solid-state drive: persistent storage built from flash memory with no moving parts, answering random reads in roughly a tenth of a millisecond.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>HDD</strong> </dt> <dd data-astro-cid-whrtx2kk>A hard disk drive: persistent storage on spinning magnetic platters read by a moving head, cheap per byte but needing several milliseconds per seek.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>unified memory</strong> </dt> <dd data-astro-cid-whrtx2kk>A design in which CPU and GPU share one physical memory pool, so a model or dataset can be large without being copied between separate CPU and GPU memories.</dd>  <dt data-astro-cid-whrtx2kk> <strong data-astro-cid-whrtx2kk>memory wall</strong> </dt> <dd data-astro-cid-whrtx2kk>The long-running growth gap between processor speed and memory speed, which makes data movement — not arithmetic — the bottleneck for much of modern computing.</dd>  </dl>   <h2 id="sources" data-astro-cid-whrtx2kk>Sources and further reading</h2> <ul data-astro-cid-whrtx2kk> <li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/Memory_hierarchy" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Memory hierarchy</a> — Wikipedia (accessed 2026-07-12) </li><li data-astro-cid-whrtx2kk> <a href="https://en.wikipedia.org/wiki/CPU_cache" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>CPU cache</a> — Wikipedia (accessed 2026-07-12) — Well-cited reference for cache levels, cache lines, and real chip parameters. </li><li data-astro-cid-whrtx2kk> <a href="https://colin-scott.github.io/personal_website/research/interactive_latency.html" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Interactive latency numbers</a> — Colin Scott (accessed 2026-07-12) — The classic &quot;latency numbers every programmer should know,&quot; animated year by year. </li><li data-astro-cid-whrtx2kk> <a href="https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Crash Course Computer Science</a> — PBS Digital Studios (accessed 2026-07-12) — Free video series; the memory, storage, and files episodes complement this lesson. </li><li data-astro-cid-whrtx2kk> <a href="https://pages.cs.wisc.edu/~remzi/OSTEP/" target="_blank" rel="noopener noreferrer" data-astro-cid-whrtx2kk>Operating Systems: Three Easy Pieces</a> — Arpaci-Dusseau (free book) (accessed 2026-07-12) — Free textbook; its virtual-memory chapters are the recommended further reading for this day. </li> </ul>  <p class="no-print" data-astro-cid-whrtx2kk> <label data-astro-cid-whrtx2kk> <input type="checkbox" id="mark-complete" data-day="3" data-astro-cid-whrtx2kk>
 Mark Day 3 as read
-</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/ai-roadmap-365/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
+</label> <br data-astro-cid-whrtx2kk> <span class="marknote" data-astro-cid-whrtx2kk>Kept in this browser, no account needed. <a href="/progress" data-astro-cid-whrtx2kk>Your progress page</a> turns the whole record into one link you can bookmark or open on another device.</span> </p> <aside class="starcta" data-astro-cid-nqc2he3i> <div class="starcta__text" data-astro-cid-nqc2he3i> <strong data-astro-cid-nqc2he3i>If this lesson was useful, a star helps the next person find it.</strong> <span data-astro-cid-nqc2he3i>The whole course is free and open source. Starring the repository is the only way it
       surfaces for someone searching for one — it costs you a click and it is genuinely how people
-      find this.</span> </div> <a class="starcta__btn" href="https://github.com/sandeepbazar/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
+      find this.</span> </div> <a class="starcta__btn" href="https://github.com/ai-roadmap-365/ai-roadmap-365" target="_blank" rel="noopener noreferrer" data-astro-cid-nqc2he3i>
 ★ Star on GitHub
-</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/ai-roadmap-365/day-002-the-cpu-fetch-decode-execute" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 2</span> <span class="pn__title" data-astro-cid-oerjsknp>The CPU: Fetch, Decode, Execute</span> </a> <a class="pn__card pn__card--next" href="/ai-roadmap-365/day-004-binary-and-data-representation-bits-bytes" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 4 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Binary and Data Representation: Bits, Bytes, and Numbers</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
-</span> <nav> <a href="https://github.com/sandeepbazar/ai-roadmap-365">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://sandeepbazar.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/">LinkedIn</a> </nav> </div> </footer> <script>
+</a> </aside>  <nav class="pn" aria-label="Lesson navigation" data-astro-cid-oerjsknp> <a class="pn__card pn__card--prev" href="/day-002-the-cpu-fetch-decode-execute" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>← Previous · Day 2</span> <span class="pn__title" data-astro-cid-oerjsknp>The CPU: Fetch, Decode, Execute</span> </a> <a class="pn__card pn__card--next" href="/day-004-binary-and-data-representation-bits-bytes" data-astro-cid-oerjsknp> <span class="pn__dir" data-astro-cid-oerjsknp>Next · Day 4 →</span> <span class="pn__title" data-astro-cid-oerjsknp>Binary and Data Representation: Bits, Bytes, and Numbers</span> </a> </nav>  </article> <script type="module">const e=document.getElementById("mark-complete");if(e){const d="ai-roadmap-read-days",t=new Set(JSON.parse(localStorage.getItem(d)??"[]")),a=Number(e.dataset.day);e.checked=t.has(a),e.addEventListener("change",()=>{e.checked?t.add(a):t.delete(a),localStorage.setItem(d,JSON.stringify([...t].sort((s,c)=>s-c))),navigator.storage?.persist?.().catch(()=>{})})}</script>   </main> <footer class="site-footer"> <div class="inner"> <span> 365 Days of AI Mastery · by Sandeep Bazar · lessons and labs are free to use
+</span> <nav> <a href="https://github.com/ai-roadmap-365/ai-roadmap-365.github.io">Labs on GitHub</a> <a href="https://sandeepbazar.github.io/blogs/">Writing</a> <a href="https://ocm-mcp-server.github.io/ocm-mcp-server/">ocm-mcp-server</a> <a href="https://www.linkedin.com/in/sandeepbazar/" target="_blank" rel="noopener">LinkedIn</a> </nav> </div> </footer> <script>
       // Progressive enhancement only: the theme falls back to dark and every
       // .reveal element is visible by default (the hidden start state exists
       // only inside a prefers-reduced-motion: no-preference query).
